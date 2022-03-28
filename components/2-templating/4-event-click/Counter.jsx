@@ -1,0 +1,16 @@
+import { useState } from "react"
+
+export default function Name(){
+    const [count, setCount] = useState(0);
+
+    function incrementCount(){
+        setCount(count + 1)
+    }
+    
+    return (
+        <>
+            <p>Counter: {count}</p>
+            <button onClick={incrementCount}>+1</button>
+        </>
+    )
+}
