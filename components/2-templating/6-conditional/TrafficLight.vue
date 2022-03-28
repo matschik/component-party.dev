@@ -11,7 +11,6 @@
         } else {
             lightIndex.value++
         }
-        
     }
 
 </script>

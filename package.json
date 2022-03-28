@@ -2,9 +2,10 @@
   "name": "component-party",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "create-section": "node scripts/createSection.js"
   },
   "repository": {
     "type": "git",
