@@ -6,6 +6,7 @@
 	"main": "index.js",
 	"scripts": {
 		"create-section": "node scripts/createSection.js",
+		"doc": "node scripts/generateDoc.js",
 		"lint": "eslint .",
 		"lint:fix": "npm run lint -- --fix",
 		"prettier": "prettier . --check",
