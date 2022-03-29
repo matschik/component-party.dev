@@ -7,22 +7,22 @@
 Vue
 
 ```jsx
-const name = ref("John")
-name.value = "Jane"
+const name = ref('John');
+name.value = 'Jane';
 ```
 
 Svelte
 
 ```jsx
-let name = "John"
-name = "Jane"
+let name = 'John';
+name = 'Jane';
 ```
 
 React
 
 ```jsx
 const [name, setName] = useState(0);
-setName("Jane")
+setName('Jane');
 ```
 
 ### Computed
@@ -30,15 +30,15 @@ setName("Jane")
 Vue
 
 ```jsx
-const count = ref(10)
-const doubleCount = computed(() => count.value * 2)
+const count = ref(10);
+const doubleCount = computed(() => count.value * 2);
 ```
 
 Svelte
 
 ```jsx
-let count = 10
-$: doubleCount = count * 2
+let count = 10;
+$: doubleCount = count * 2;
 ```
 
 React
@@ -74,8 +74,8 @@ React
 
 ```jsx
 // HelloWorld.jsx
-export default function HelloWorld(){
-	return <h1>Hello world</h1>
+export default function HelloWorld() {
+	return <h1>Hello world</h1>;
 }
 ```
 
@@ -106,9 +106,9 @@ Svelte
 React
 
 ```jsx
-export default function HelloUser(){
-	const username = "John"
-	return <h1>My name is {username}</h1>
+export default function HelloUser() {
+	const username = 'John';
+	return <h1>My name is {username}</h1>;
 }
 ```
 

@@ -1,21 +1,43 @@
 {
-  "name": "component-party",
-  "version": "1.0.0",
-  "description": "",
-  "type": "module",
-  "main": "index.js",
-  "scripts": {
-    "create-section": "node scripts/createSection.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/matschik/component-party.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/matschik/component-party/issues"
-  },
-  "homepage": "https://github.com/matschik/component-party#readme"
+	"name": "component-party",
+	"version": "1.0.0",
+	"description": "",
+	"type": "module",
+	"main": "index.js",
+	"scripts": {
+		"create-section": "node scripts/createSection.js",
+		"lint": "eslint .",
+		"lint:fix": "npm run lint -- --fix",
+		"prettier": "prettier . --check",
+		"prettier:fix": "npm run prettier -- --write",
+		"format": "npm run prettier:fix && npm run lint:fix",
+		"prepare": "husky install"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/matschik/component-party.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/matschik/component-party/issues"
+	},
+	"homepage": "https://github.com/matschik/component-party#readme",
+	"devDependencies": {
+		"eslint": "^8.12.0",
+		"eslint-config-prettier": "^8.5.0",
+		"eslint-plugin-prettier": "^4.0.0",
+		"eslint-plugin-react": "^7.29.4",
+		"eslint-plugin-svelte3": "^3.4.1",
+		"eslint-plugin-vue": "^8.5.0",
+		"prettier": "^2.6.1",
+		"prop-types": "^15.8.1",
+		"react": "^17.0.2",
+		"svelte": "^3.46.4"
+	},
+	"lint-staged": {
+		"*.js": "eslint --cache --fix",
+		"*.lint:fix": "prettier --write"
+	}
 }
