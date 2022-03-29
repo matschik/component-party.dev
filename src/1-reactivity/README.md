@@ -1,9 +1,6 @@
 # Reactivity
-
 ## Variable assignment
-
 ### React
-
 ```jsx
 import { useState } from 'react';
 
@@ -13,10 +10,10 @@ export default function Name() {
 
 	console.log(name);
 }
+
 ```
 
 ### Svelte
-
 ```svelte
 <script>
     let name = "John"
@@ -26,7 +23,6 @@ export default function Name() {
 ```
 
 ### Vue 3
-
 ```vue
 <script setup>
 import { ref } from 'vue';
@@ -34,12 +30,11 @@ const name = ref('John');
 name.value = 'Jane';
 console.log(name.value);
 </script>
+
 ```
 
 ## Computed
-
 ### React
-
 ```jsx
 import { useState, useMemo } from 'react';
 
@@ -49,10 +44,10 @@ export default function DoubleCount() {
 	console.log(doubleCount);
 	return <div />;
 }
+
 ```
 
 ### Svelte
-
 ```svelte
 <script>
     let count = 10
@@ -63,7 +58,6 @@ export default function DoubleCount() {
 ```
 
 ### Vue 3
-
 ```vue
 <script setup>
 import { ref, computed } from 'vue';
@@ -73,4 +67,6 @@ console.log(doubleCount.value);
 </script>
 
 <div />
+
 ```
+

@@ -1,7 +1,4 @@
 # Lifecycle
-
 ## OnMount
-
 ## OnUnmount
-
 ## Watcher

@@ -4,6 +4,8 @@ import { FRAMEWORKS } from './_constants.js';
 async function main() {
 	const srcDirs = fs.readdirSync('src');
 
+	let rootReadmeContent = '# Component Party\n\n';
+
 	for (const srcDir of srcDirs) {
 		const sectionDir = `src/${srcDir}`;
 		const subSectionDirs = fs.readdirSync(sectionDir).filter((path) => !path.includes('.'));
@@ -30,7 +32,11 @@ async function main() {
 		}
 
 		fs.writeFileSync(`${sectionDir}/README.md`, fileContent, 'utf-8');
+
+		rootReadmeContent += `${fileContent.split("\n").map(line => line.startsWith("#") ? `#${line}` : `${line}`).join("\n")}\n`;
 	}
+
+	fs.writeFileSync(`README.md`, rootReadmeContent, 'utf-8');
 }
 
 main().catch(console.error);
