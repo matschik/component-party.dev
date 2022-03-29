@@ -18,9 +18,11 @@ async function main() {
 			const frameworkDirs = fs
 				.readdirSync(`${sectionDir}/${subSectionDir}`)
 				.filter((path) => !path.includes('.'));
+			console.log(frameworkDirs);
 			for (const frameworkDir of frameworkDirs) {
 				fileContent += `### ${FRAMEWORKS.find((f) => f.id === frameworkDir).title}\n`;
 				const files = fs.readdirSync(`${sectionDir}/${subSectionDir}/${frameworkDir}`);
+
 				for (const file of files) {
 					fileContent += `\`\`\`${
 						FRAMEWORKS.find((f) => f.id === frameworkDir).ext
