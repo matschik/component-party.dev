@@ -33,7 +33,10 @@ async function main() {
 
 		fs.writeFileSync(`${sectionDir}/README.md`, fileContent, 'utf-8');
 
-		rootReadmeContent += `${fileContent.split("\n").map(line => line.startsWith("#") ? `#${line}` : `${line}`).join("\n")}\n`;
+		rootReadmeContent += `${fileContent
+			.split('\n')
+			.map((line) => (line.startsWith('#') ? `#${line}` : `${line}`))
+			.join('\n')}\n`;
 	}
 
 	fs.writeFileSync(`README.md`, rootReadmeContent, 'utf-8');

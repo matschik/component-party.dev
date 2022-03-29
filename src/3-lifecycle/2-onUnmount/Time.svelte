@@ -1,16 +1,15 @@
-
 <script>
-    import { onDestroy } from "svelte"
+	import { onDestroy } from 'svelte';
 
-    let time = new Date().toLocaleTimeString()
+	let time = new Date().toLocaleTimeString();
 
-    const timer = setInterval( () => {
-        time = new Date().toLocaleTimeString()
-     }, 1000);
+	const timer = setInterval(() => {
+		time = new Date().toLocaleTimeString();
+	}, 1000);
 
-     onDestroy(() => {
-        clearInterval(timer)
-     })
+	onDestroy(() => {
+		clearInterval(timer);
+	});
 </script>
 
 <p>Current time: {time}</p>

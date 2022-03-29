@@ -1,11 +1,11 @@
 <script>
-    import { onMount } from "svelte"
-    
-    let inputElement
+	import { onMount } from 'svelte';
 
-    onMount(() => {
-        inputElement.focus()
-    })
+	let inputElement;
+
+	onMount(() => {
+		inputElement.focus();
+	});
 </script>
 
 <input bind:this={inputElement} />

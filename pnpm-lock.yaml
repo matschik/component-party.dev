@@ -8,6 +8,7 @@ specifiers:
   eslint-plugin-svelte3: ^3.4.1
   eslint-plugin-vue: ^8.5.0
   prettier: ^2.6.1
+  prettier-plugin-svelte: ^2.6.0
   prop-types: ^15.8.1
   react: ^17.0.2
   svelte: ^3.46.4
@@ -20,6 +21,7 @@ devDependencies:
   eslint-plugin-svelte3: 3.4.1_eslint@8.12.0+svelte@3.46.4
   eslint-plugin-vue: 8.5.0_eslint@8.12.0
   prettier: 2.6.1
+  prettier-plugin-svelte: 2.6.0_prettier@2.6.1+svelte@3.46.4
   prop-types: 15.8.1
   react: 17.0.2
   svelte: 3.46.4
@@ -1152,6 +1154,19 @@ packages:
     engines: { node: '>=6.0.0' }
     dependencies:
       fast-diff: 1.2.0
+    dev: true
+
+  /prettier-plugin-svelte/2.6.0_prettier@2.6.1+svelte@3.46.4:
+    resolution:
+      {
+        integrity: sha512-NPSRf6Y5rufRlBleok/pqg4+1FyGsL0zYhkYP6hnueeL1J/uCm3OfOZPsLX4zqD9VAdcXfyEL2PYqGv8ZoOSfA==
+      }
+    peerDependencies:
+      prettier: ^1.16.4 || ^2.0.0
+      svelte: ^3.2.0
+    dependencies:
+      prettier: 2.6.1
+      svelte: 3.46.4
     dev: true
 
   /prettier/2.6.1:

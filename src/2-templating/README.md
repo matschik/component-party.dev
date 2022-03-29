@@ -1,28 +1,33 @@
 # Templating
+
 ## Minimal
+
 ### React
+
 ```jsx
 export default function HelloWorld() {
 	return <h1>Hello world</h1>;
 }
-
 ```
 
 ### Svelte
+
 ```svelte
 <h1>Hello world</h1>
 ```
 
 ### Vue 3
+
 ```vue
 <template>
-  <h1>Hello world</h1>
+	<h1>Hello world</h1>
 </template>
-
 ```
 
 ## Styling
+
 ### React
+
 ```jsx
 export default function HelloWorld() {
 	// how do you declare title class ??
@@ -34,10 +39,10 @@ export default function HelloWorld() {
 		</>
 	);
 }
-
 ```
 
 ### Svelte
+
 ```svelte
 <template>
 	<h1 class="title">Hello world</h1>
@@ -52,14 +57,11 @@ export default function HelloWorld() {
 ```
 
 ### Vue 3
+
 ```vue
 <template>
-  <h1 class="title">
-    Hello world
-  </h1>
-  <button style="font-size: 10rem">
-    I am a button
-  </button>
+	<h1 class="title">Hello world</h1>
+	<button style="font-size: 10rem">I am a button</button>
 </template>
 
 <style scoped>
@@ -67,11 +69,12 @@ export default function HelloWorld() {
 	color: red;
 }
 </style>
-
 ```
 
 ## Loop
+
 ### React
+
 ```jsx
 export default function Countries() {
 	const countries = ['France', 'United States', 'Spain'];
@@ -83,47 +86,42 @@ export default function Countries() {
 		</ul>
 	);
 }
-
 ```
 
 ### Svelte
+
 ```svelte
 <script>
-    const countries = [
-		"France",
-		"United States",
-		"Spain"
-	]
+	const countries = ['France', 'United States', 'Spain'];
 </script>
 
 <ul>
-    {#each countries as country}
-        <li>{country}</li>
-    {/each}
+	{#each countries as country}
+		<li>{country}</li>
+	{/each}
 </ul>
 ```
 
 ### Vue 3
+
 ```vue
 <script setup>
 const countries = ['France', 'United States', 'Spain'];
 </script>
 
 <template>
-  <ul>
-    <li
-      v-for="country in countries"
-      :key="country"
-    >
-      {{ country }}
-    </li>
-  </ul>
+	<ul>
+		<li v-for="country in countries" :key="country">
+			{{ country }}
+		</li>
+	</ul>
 </template>
-
 ```
 
 ## Event click
+
 ### React
+
 ```jsx
 import { useState } from 'react';
 
@@ -141,17 +139,17 @@ export default function Name() {
 		</>
 	);
 }
-
 ```
 
 ### Svelte
+
 ```svelte
 <script>
-    let count = 0
+	let count = 0;
 
-    function incrementCount(){
-        count += 1
-    }
+	function incrementCount() {
+		count += 1;
+	}
 </script>
 
 <p>Counter: {count}</p>
@@ -159,6 +157,7 @@ export default function Name() {
 ```
 
 ### Vue 3
+
 ```vue
 <script setup>
 import { ref } from 'vue';
@@ -170,15 +169,15 @@ function incrementCount() {
 </script>
 
 <template>
-  <p>Counter: {{ count }}</p>
-  <button @click="incrementCount">
-    +1
-  </button>
+	<p>Counter: {{ count }}</p>
+	<button @click="incrementCount">+1</button>
 </template>
-
 ```
 
 ## Dom ref
+
 ## Conditional
+
 ## Input binding
+
 ## Event modifier
