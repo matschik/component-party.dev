@@ -5,4 +5,6 @@ const doubleCount = computed(() => count.value * 2);
 console.log(doubleCount.value);
 </script>
 
-<div />
+<template>
+  <div />
+</template>

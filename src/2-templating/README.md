@@ -1,33 +1,29 @@
 # Templating
-
 ## Minimal
-
 ### React
-
 ```jsx
 export default function HelloWorld() {
 	return <h1>Hello world</h1>;
 }
+
 ```
 
 ### Svelte
-
 ```svelte
 <h1>Hello world</h1>
+
 ```
 
 ### Vue 3
-
 ```vue
 <template>
-	<h1>Hello world</h1>
+  <h1>Hello world</h1>
 </template>
+
 ```
 
 ## Styling
-
 ### React
-
 ```jsx
 export default function HelloWorld() {
 	// how do you declare title class ??
@@ -39,10 +35,10 @@ export default function HelloWorld() {
 		</>
 	);
 }
+
 ```
 
 ### Svelte
-
 ```svelte
 <template>
 	<h1 class="title">Hello world</h1>
@@ -54,14 +50,18 @@ export default function HelloWorld() {
 		color: red;
 	}
 </style>
+
 ```
 
 ### Vue 3
-
 ```vue
 <template>
-	<h1 class="title">Hello world</h1>
-	<button style="font-size: 10rem">I am a button</button>
+  <h1 class="title">
+    Hello world
+  </h1>
+  <button style="font-size: 10rem">
+    I am a button
+  </button>
 </template>
 
 <style scoped>
@@ -69,12 +69,11 @@ export default function HelloWorld() {
 	color: red;
 }
 </style>
+
 ```
 
 ## Loop
-
 ### React
-
 ```jsx
 export default function Countries() {
 	const countries = ['France', 'United States', 'Spain'];
@@ -86,10 +85,10 @@ export default function Countries() {
 		</ul>
 	);
 }
+
 ```
 
 ### Svelte
-
 ```svelte
 <script>
 	const countries = ['France', 'United States', 'Spain'];
@@ -100,28 +99,30 @@ export default function Countries() {
 		<li>{country}</li>
 	{/each}
 </ul>
+
 ```
 
 ### Vue 3
-
 ```vue
 <script setup>
 const countries = ['France', 'United States', 'Spain'];
 </script>
 
 <template>
-	<ul>
-		<li v-for="country in countries" :key="country">
-			{{ country }}
-		</li>
-	</ul>
+  <ul>
+    <li
+      v-for="country in countries"
+      :key="country"
+    >
+      {{ country }}
+    </li>
+  </ul>
 </template>
+
 ```
 
 ## Event click
-
 ### React
-
 ```jsx
 import { useState } from 'react';
 
@@ -139,10 +140,10 @@ export default function Name() {
 		</>
 	);
 }
+
 ```
 
 ### Svelte
-
 ```svelte
 <script>
 	let count = 0;
@@ -154,10 +155,10 @@ export default function Name() {
 
 <p>Counter: {count}</p>
 <button on:click={incrementCount}>+1</button>
+
 ```
 
 ### Vue 3
-
 ```vue
 <script setup>
 import { ref } from 'vue';
@@ -169,15 +170,16 @@ function incrementCount() {
 </script>
 
 <template>
-	<p>Counter: {{ count }}</p>
-	<button @click="incrementCount">+1</button>
+  <p>Counter: {{ count }}</p>
+  <button @click="incrementCount">
+    +1
+  </button>
 </template>
+
 ```
 
 ## Dom ref
-
 ### React
-
 ```jsx
 import { useState, useEffect } from 'react';
 
@@ -190,10 +192,10 @@ export default function PageTitle() {
 
 	return <p>Page title is {pageTitle}</p>;
 }
+
 ```
 
 ### Svelte
-
 ```svelte
 <script>
 	import { onMount } from 'svelte';
@@ -206,10 +208,10 @@ export default function PageTitle() {
 </script>
 
 <input bind:this={inputElement} />
+
 ```
 
 ### Vue 3
-
 ```vue
 <script setup>
 import { ref, onMounted } from 'vue';
@@ -222,12 +224,11 @@ onMounted(() => {
 </script>
 
 <input ref="inputElement" />
+
 ```
 
 ## Conditional
-
 ### React
-
 ```jsx
 import { useState, useMemo } from 'react';
 
@@ -259,10 +260,10 @@ export default function TrafficLight() {
 		</>
 	);
 }
+
 ```
 
 ### Svelte
-
 ```svelte
 <script>
 	const TRAFFIC_LIGHTS = ['red', 'orange', 'green'];
@@ -291,10 +292,10 @@ export default function TrafficLight() {
 		GO
 	{/if}
 </p>
+
 ```
 
 ### Vue 3
-
 ```vue
 <script setup>
 import { ref, computed } from 'vue';
@@ -313,21 +314,22 @@ function nextLight() {
 </script>
 
 <template>
-	<button @click="nextLight">Next light</button>
-	<p>Light is: {{ light }}</p>
-	<p>
-		You must
-		<span v-if="light === 'red'">STOP</span>
-		<span v-else-if="light === 'orange'">SLOW DOWN</span>
-		<span v-else-if="light === 'green'">GO</span>
-	</p>
+  <button @click="nextLight">
+    Next light
+  </button>
+  <p>Light is: {{ light }}</p>
+  <p>
+    You must
+    <span v-if="light === 'red'">STOP</span>
+    <span v-else-if="light === 'orange'">SLOW DOWN</span>
+    <span v-else-if="light === 'green'">GO</span>
+  </p>
 </template>
+
 ```
 
 ## Input binding
-
 ### React
-
 ```jsx
 import { useState } from 'react';
 
@@ -345,10 +347,10 @@ export default function InputHello() {
 		</>
 	);
 }
+
 ```
 
 ### Svelte
-
 ```svelte
 <script>
 	let text = 'Hello World';
@@ -357,10 +359,10 @@ export default function InputHello() {
 <p>{text}</p>
 
 <input bind:value={text} />
+
 ```
 
 ### Vue 3
-
 ```vue
 <script setup>
 import { ref } from 'vue';
@@ -368,9 +370,10 @@ const text = ref('Hello World');
 </script>
 
 <template>
-	<p>{{ text }}</p>
-	<input v-model="text" />
+  <p>{{ text }}</p>
+  <input v-model="text">
 </template>
+
 ```
 
 ## Event modifier

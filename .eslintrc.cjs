@@ -17,7 +17,7 @@ module.exports = {
 			plugins: ['svelte3']
 		},
 		{
-			files: ['*.jsx'],
+			files: ['*.jsx', '*.tsx'],
 			extends: ['eslint:recommended', 'plugin:react/recommended', 'plugin:react/jsx-runtime'],
 			settings: {
 				react: {

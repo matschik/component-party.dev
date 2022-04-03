@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import Hello from './Hello.vue';
+import Hello from './UserProfile.vue';
 
 const username = ref('John');
 </script>

@@ -1,8 +1,5 @@
 <script>
-	import Hello from './Hello.svelte';
-	let username = 'John';
+	import UserProfile from './UserProfile.svelte';
 </script>
 
-<input bind:value={username} />
-
-<Hello name={username} />
+<UserProfile name="John" age={20} favouriteColors={['green', 'blue', 'red']} isAvailable />

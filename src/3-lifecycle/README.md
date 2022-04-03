@@ -1,9 +1,6 @@
 # Lifecycle
-
 ## OnMount
-
 ### React
-
 ```jsx
 import { useState, useEffect } from 'react';
 
@@ -16,10 +13,10 @@ export default function PageTitle() {
 
 	return <p>Page title: {pageTitle}</p>;
 }
+
 ```
 
 ### Svelte
-
 ```svelte
 <script>
 	import { onMount } from 'svelte';
@@ -30,10 +27,10 @@ export default function PageTitle() {
 </script>
 
 <p>Page title is: {pageTitle}</p>
+
 ```
 
 ### Vue 3
-
 ```vue
 <script setup>
 import { ref, onMounted } from 'vue';
@@ -44,14 +41,13 @@ onMounted(() => {
 </script>
 
 <template>
-	<p>Page title: {{ pageTitle }}</p>
+  <p>Page title: {{ pageTitle }}</p>
 </template>
+
 ```
 
 ## OnUnmount
-
 ### React
-
 ```jsx
 import { useState, useEffect } from 'react';
 
@@ -70,10 +66,10 @@ export default function Time() {
 
 	return <p>Current time: {time}</p>;
 }
+
 ```
 
 ### Svelte
-
 ```svelte
 <script>
 	import { onDestroy } from 'svelte';
@@ -90,10 +86,10 @@ export default function Time() {
 </script>
 
 <p>Current time: {time}</p>
+
 ```
 
 ### Vue 3
-
 ```vue
 <script setup>
 import { ref, onUnmounted } from 'svelte';
@@ -110,6 +106,7 @@ onUnmounted(() => {
 </script>
 
 <p>Current time: {time}</p>
+
 ```
 
 ## Watcher

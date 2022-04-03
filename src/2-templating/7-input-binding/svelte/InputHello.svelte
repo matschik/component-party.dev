@@ -3,5 +3,4 @@
 </script>
 
 <p>{text}</p>
-
 <input bind:value={text} />
