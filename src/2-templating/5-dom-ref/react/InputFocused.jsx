@@ -1,11 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
-export default function PageTitle() {
-	const [pageTitle, setPageTitle] = useState('');
+export default function InputFocused() {
+	const inputElement = useRef(null);
 
-	useEffect(() => {
-		setPageTitle(document.title);
-	});
+	useEffect(() => inputElement.current.focus())
 
-	return <p>Page title is {pageTitle}</p>;
+	return <input type="text" ref={inputElement} />;
 }
