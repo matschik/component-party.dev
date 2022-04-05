@@ -1,7 +1,16 @@
 # Component Party for Svelte
 
 # Reactivity
-## Variable assignment
+## Declare state
+```svelte
+<script>
+	let name = 'John';
+	console.log(name);
+</script>
+
+```
+
+## Update state
 ```svelte
 <script>
 	let name = 'John';
@@ -11,7 +20,7 @@
 
 ```
 
-## Computed
+## Computed state
 ```svelte
 <script>
 	let count = 10;
@@ -21,8 +30,9 @@
 
 ```
 
+## Watch state
 # Templating
-## Minimal
+## Minimal template
 ```svelte
 <h1>Hello world</h1>
 
@@ -46,12 +56,12 @@
 ## Loop
 ```svelte
 <script>
-	const countries = ['France', 'United States', 'Spain'];
+	const colors = ['red', 'green', 'blue'];
 </script>
 
 <ul>
-	{#each countries as country}
-		<li>{country}</li>
+	{#each colors as color}
+		<li>{color}</li>
 	{/each}
 </ul>
 
@@ -120,19 +130,6 @@
 
 ```
 
-## Input binding
-```svelte
-<script>
-	let text = 'Hello World';
-</script>
-
-<p>{text}</p>
-
-<input bind:value={text} />
-
-```
-
-## Event modifier
 # Lifecycle
 ## OnMount
 ```svelte
@@ -168,37 +165,50 @@
 
 ```
 
-## Watcher
 # Component composition
 ## Props
 ```svelte
 <script>
-	import Hello from './Hello.svelte';
-	let username = 'John';
+	import UserProfile from './UserProfile.svelte';
 </script>
 
-<input bind:value={username} />
-
-<Hello name={username} />
+<UserProfile name="John" age={20} favouriteColors={['green', 'blue', 'red']} isAvailable />
 
 ```
 
 ```svelte
 <script>
-	export let name;
+	export let name = ""
+	export let age = null
+	export let favouriteColors = []
+	export let isAvailable = false
 </script>
 
-<p>Hello {name} !</p>
+<p>My name is {name} !</p>
+<p>My age is {age} !</p>
+<p>My favourite colors are {favouriteColors.split(', ')} !</p>
+<p>I am {isAvailable ? 'available' : 'not available'}</p>
 
 ```
 
-## Event
+## Event custom
 ## Slot
 ## Slot named
 ## Slot props
 ## Event dom forwarding
 # Store context
-# Form inputs
+# Form input
+## Input binding
+```svelte
+<script>
+	let text = 'Hello World';
+</script>
+
+<p>{text}</p>
+<input bind:value={text} />
+
+```
+
 # Real usecase
 ## Todolist
 ## Fetch

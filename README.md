@@ -1,13 +1,44 @@
 # Component Party
 
 ## Reactivity
-### Variable assignment
+### Declare state
 #### React
 ```jsx
 import { useState } from 'react';
 
 export default function Name() {
-	const [name, setName] = useState(0);
+	const [name] = useState("John");
+	console.log(name);
+}
+
+```
+
+#### Svelte
+```svelte
+<script>
+	let name = 'John';
+	console.log(name);
+</script>
+
+```
+
+#### Vue 3
+```vue
+<script setup>
+import { ref } from 'vue';
+const name = ref('John');
+console.log(name.value);
+</script>
+
+```
+
+### Update state
+#### React
+```jsx
+import { useState } from 'react';
+
+export default function Name() {
+	const [name, setName] = useState("John");
 	setName('Jane');
 
 	console.log(name);
@@ -36,7 +67,7 @@ console.log(name.value);
 
 ```
 
-### Computed
+### Computed state
 #### React
 ```jsx
 import { useState, useMemo } from 'react';
@@ -69,13 +100,15 @@ const doubleCount = computed(() => count.value * 2);
 console.log(doubleCount.value);
 </script>
 
-<div />
-
+<template>
+  <div />
+</template>
 ```
 
+### Watch state
 
 ## Templating
-### Minimal
+### Minimal template
 #### React
 ```jsx
 export default function HelloWorld() {
@@ -151,12 +184,12 @@ export default function HelloWorld() {
 ### Loop
 #### React
 ```jsx
-export default function Countries() {
-	const countries = ['France', 'United States', 'Spain'];
+export default function Colors() {
+	const colors = ['red', 'green', 'blue'];
 	return (
 		<ul>
-			{countries.map((country) => (
-				<li key={country}>{country}</li>
+			{colors.map((color) => (
+				<li key={color}>{color}</li>
 			))}
 		</ul>
 	);
@@ -167,12 +200,12 @@ export default function Countries() {
 #### Svelte
 ```svelte
 <script>
-	const countries = ['France', 'United States', 'Spain'];
+	const colors = ['red', 'green', 'blue'];
 </script>
 
 <ul>
-	{#each countries as country}
-		<li>{country}</li>
+	{#each colors as color}
+		<li>{color}</li>
 	{/each}
 </ul>
 
@@ -181,16 +214,16 @@ export default function Countries() {
 #### Vue 3
 ```vue
 <script setup>
-const countries = ['France', 'United States', 'Spain'];
+const colors = ['red', 'green', 'blue'];
 </script>
 
 <template>
   <ul>
     <li
-      v-for="country in countries"
-      :key="country"
+      v-for="color in colors"
+      :key="color"
     >
-      {{ country }}
+      {{ color }}
     </li>
   </ul>
 </template>
@@ -257,16 +290,14 @@ function incrementCount() {
 ### Dom ref
 #### React
 ```jsx
-import { useState, useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
-export default function PageTitle() {
-	const [pageTitle, setPageTitle] = useState('');
+export default function InputFocused() {
+	const inputElement = useRef(null);
 
-	useEffect(() => {
-		setPageTitle(document.title);
-	});
+	useEffect(() => inputElement.current.focus())
 
-	return <p>Page title is {pageTitle}</p>;
+	return <input type="text" ref={inputElement} />;
 }
 
 ```
@@ -404,55 +435,6 @@ function nextLight() {
 
 ```
 
-### Input binding
-#### React
-```jsx
-import { useState } from 'react';
-
-export default function InputHello() {
-	const [text, setText] = useState('Hello world');
-
-	function handleChange(event) {
-		setText(event.target.value);
-	}
-
-	return (
-		<>
-			<p>{text}</p>
-			<input value={text} onChange={handleChange} />
-		</>
-	);
-}
-
-```
-
-#### Svelte
-```svelte
-<script>
-	let text = 'Hello World';
-</script>
-
-<p>{text}</p>
-
-<input bind:value={text} />
-
-```
-
-#### Vue 3
-```vue
-<script setup>
-import { ref } from 'vue';
-const text = ref('Hello World');
-</script>
-
-<template>
-  <p>{{ text }}</p>
-  <input v-model="text">
-</template>
-
-```
-
-### Event modifier
 
 ## Lifecycle
 ### OnMount
@@ -565,28 +547,15 @@ onUnmounted(() => {
 
 ```
 
-### Watcher
 
 ## Component composition
 ### Props
 #### React
 ```jsx
-import { useState } from 'react';
-import Hello from './Hello.jsx';
+import UserProfile from './UserProfile.jsx';
 
 export default function App() {
-	const [username, setUsername] = useState('John');
-
-	function handleChange(event) {
-		setUsername(event.target.value);
-	}
-
-	return (
-		<>
-			<input value={username} onChange={handleChange} />
-			<Hello name={username} />
-		</>
-	);
+	return <UserProfile name="John" age={20} favouriteColors={['green', 'blue', 'red']} isAvailable />;
 }
 
 ```
@@ -594,11 +563,22 @@ export default function App() {
 ```jsx
 import PropTypes from 'prop-types';
 
-export default function Hello({ name }) {
-	return <p>Hello {name} !</p>;
+export default function UserProfile({ name = '', age = null, favouriteColors = [], isAvailable = false }) {
+	return (
+		<>
+			<p>My name is {name} !</p>
+			<p>My age is {age} !</p>
+			<p>My favourite colors are {favouriteColors.split(', ')} !</p>
+			<p>I am {isAvailable ? 'available' : 'not available'}</p>
+		</>
+	);
 }
-Hello.propTypes = {
-	name: PropTypes.string.isRequired
+
+UserProfile.propTypes = {
+	name: PropTypes.string.isRequired,
+	age: PropTypes.number.isRequired,
+	favouriteColors: PropTypes.arrayOf(PropTypes.string).isRequired,
+	isAvailable: PropTypes.bool.isRequired
 };
 
 ```
@@ -606,22 +586,25 @@ Hello.propTypes = {
 #### Svelte
 ```svelte
 <script>
-	import Hello from './Hello.svelte';
-	let username = 'John';
+	import UserProfile from './UserProfile.svelte';
 </script>
 
-<input bind:value={username} />
-
-<Hello name={username} />
+<UserProfile name="John" age={20} favouriteColors={['green', 'blue', 'red']} isAvailable />
 
 ```
 
 ```svelte
 <script>
-	export let name;
+	export let name = ""
+	export let age = null
+	export let favouriteColors = []
+	export let isAvailable = false
 </script>
 
-<p>Hello {name} !</p>
+<p>My name is {name} !</p>
+<p>My age is {age} !</p>
+<p>My favourite colors are {favouriteColors.split(', ')} !</p>
+<p>I am {isAvailable ? 'available' : 'not available'}</p>
 
 ```
 
@@ -629,7 +612,7 @@ Hello.propTypes = {
 ```vue
 <script setup>
 import { ref } from 'vue';
-import Hello from './Hello.vue';
+import Hello from './UserProfile.vue';
 
 const username = ref('John');
 </script>
@@ -646,18 +629,36 @@ const username = ref('John');
 const props = defineProps({
 	name: {
 		type: String,
-		required: true
+		required: true,
+		default: ""
+	},
+	age: {
+		type: Number,
+		required: true,
+		default: null
+	},
+	favouriteColors: {
+		type: Array,
+		required: true,
+		default: () => []
+	},
+	isAvailable: {
+		type: Boolean,
+		required: true,
+		default: false
 	}
 });
 </script>
 
 <template>
-  <p>Hello {{ props.name }} !</p>
+  <p>My name is {{ props.name }} !</p>
+  <p>My age is {{ props.age }} !</p>
+  <p>My favourite colors are {{ props.favouriteColors.split(', ') }} !</p>
+  <p>I am {{ props.isAvailable ? 'available' : 'not available' }}</p>
 </template>
-
 ```
 
-### Event
+### Event custom
 ### Slot
 ### Slot named
 ### Slot props
@@ -665,7 +666,54 @@ const props = defineProps({
 
 ## Store context
 
-## Form inputs
+## Form input
+### Input binding
+#### React
+```jsx
+import { useState } from 'react';
+
+export default function InputHello() {
+	const [text, setText] = useState('Hello world');
+
+	function handleChange(event) {
+		setText(event.target.value);
+	}
+
+	return (
+		<>
+			<p>{text}</p>
+			<input value={text} onChange={handleChange} />
+		</>
+	);
+}
+
+```
+
+#### Svelte
+```svelte
+<script>
+	let text = 'Hello World';
+</script>
+
+<p>{text}</p>
+<input bind:value={text} />
+
+```
+
+#### Vue 3
+```vue
+<script setup>
+import { ref } from 'vue';
+const text = ref('Hello World');
+</script>
+
+<template>
+  <p>{{ text }}</p>
+  <input v-model="text">
+</template>
+
+```
+
 
 ## Real usecase
 ### Todolist

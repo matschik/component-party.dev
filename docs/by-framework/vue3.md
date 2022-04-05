@@ -1,7 +1,17 @@
 # Component Party for Vue 3
 
 # Reactivity
-## Variable assignment
+## Declare state
+```vue
+<script setup>
+import { ref } from 'vue';
+const name = ref('John');
+console.log(name.value);
+</script>
+
+```
+
+## Update state
 ```vue
 <script setup>
 import { ref } from 'vue';
@@ -12,7 +22,7 @@ console.log(name.value);
 
 ```
 
-## Computed
+## Computed state
 ```vue
 <script setup>
 import { ref, computed } from 'vue';
@@ -21,12 +31,14 @@ const doubleCount = computed(() => count.value * 2);
 console.log(doubleCount.value);
 </script>
 
-<div />
-
+<template>
+  <div />
+</template>
 ```
 
+## Watch state
 # Templating
-## Minimal
+## Minimal template
 ```vue
 <template>
   <h1>Hello world</h1>
@@ -56,16 +68,16 @@ console.log(doubleCount.value);
 ## Loop
 ```vue
 <script setup>
-const countries = ['France', 'United States', 'Spain'];
+const colors = ['red', 'green', 'blue'];
 </script>
 
 <template>
   <ul>
     <li
-      v-for="country in countries"
-      :key="country"
+      v-for="color in colors"
+      :key="color"
     >
-      {{ country }}
+      {{ color }}
     </li>
   </ul>
 </template>
@@ -141,21 +153,6 @@ function nextLight() {
 
 ```
 
-## Input binding
-```vue
-<script setup>
-import { ref } from 'vue';
-const text = ref('Hello World');
-</script>
-
-<template>
-  <p>{{ text }}</p>
-  <input v-model="text">
-</template>
-
-```
-
-## Event modifier
 # Lifecycle
 ## OnMount
 ```vue
@@ -193,13 +190,12 @@ onUnmounted(() => {
 
 ```
 
-## Watcher
 # Component composition
 ## Props
 ```vue
 <script setup>
 import { ref } from 'vue';
-import Hello from './Hello.vue';
+import Hello from './UserProfile.vue';
 
 const username = ref('John');
 </script>
@@ -216,24 +212,56 @@ const username = ref('John');
 const props = defineProps({
 	name: {
 		type: String,
-		required: true
+		required: true,
+		default: ""
+	},
+	age: {
+		type: Number,
+		required: true,
+		default: null
+	},
+	favouriteColors: {
+		type: Array,
+		required: true,
+		default: () => []
+	},
+	isAvailable: {
+		type: Boolean,
+		required: true,
+		default: false
 	}
 });
 </script>
 
 <template>
-  <p>Hello {{ props.name }} !</p>
+  <p>My name is {{ props.name }} !</p>
+  <p>My age is {{ props.age }} !</p>
+  <p>My favourite colors are {{ props.favouriteColors.split(', ') }} !</p>
+  <p>I am {{ props.isAvailable ? 'available' : 'not available' }}</p>
 </template>
-
 ```
 
-## Event
+## Event custom
 ## Slot
 ## Slot named
 ## Slot props
 ## Event dom forwarding
 # Store context
-# Form inputs
+# Form input
+## Input binding
+```vue
+<script setup>
+import { ref } from 'vue';
+const text = ref('Hello World');
+</script>
+
+<template>
+  <p>{{ text }}</p>
+  <input v-model="text">
+</template>
+
+```
+
 # Real usecase
 ## Todolist
 ## Fetch

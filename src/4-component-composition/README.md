@@ -2,22 +2,10 @@
 ## Props
 ### React
 ```jsx
-import { useState } from 'react';
-import Hello from './Hello.jsx';
+import UserProfile from './UserProfile.jsx';
 
 export default function App() {
-	const [username, setUsername] = useState('John');
-
-	function handleChange(event) {
-		setUsername(event.target.value);
-	}
-
-	return (
-		<>
-			<input value={username} onChange={handleChange} />
-			<Hello name={username} />
-		</>
-	);
+	return <UserProfile name="John" age={20} favouriteColors={['green', 'blue', 'red']} isAvailable />;
 }
 
 ```
@@ -25,11 +13,22 @@ export default function App() {
 ```jsx
 import PropTypes from 'prop-types';
 
-export default function Hello({ name }) {
-	return <p>Hello {name} !</p>;
+export default function UserProfile({ name = '', age = null, favouriteColors = [], isAvailable = false }) {
+	return (
+		<>
+			<p>My name is {name} !</p>
+			<p>My age is {age} !</p>
+			<p>My favourite colors are {favouriteColors.split(', ')} !</p>
+			<p>I am {isAvailable ? 'available' : 'not available'}</p>
+		</>
+	);
 }
-Hello.propTypes = {
-	name: PropTypes.string.isRequired
+
+UserProfile.propTypes = {
+	name: PropTypes.string.isRequired,
+	age: PropTypes.number.isRequired,
+	favouriteColors: PropTypes.arrayOf(PropTypes.string).isRequired,
+	isAvailable: PropTypes.bool.isRequired
 };
 
 ```
@@ -37,22 +36,25 @@ Hello.propTypes = {
 ### Svelte
 ```svelte
 <script>
-	import Hello from './Hello.svelte';
-	let username = 'John';
+	import UserProfile from './UserProfile.svelte';
 </script>
 
-<input bind:value={username} />
-
-<Hello name={username} />
+<UserProfile name="John" age={20} favouriteColors={['green', 'blue', 'red']} isAvailable />
 
 ```
 
 ```svelte
 <script>
-	export let name;
+	export let name = ""
+	export let age = null
+	export let favouriteColors = []
+	export let isAvailable = false
 </script>
 
-<p>Hello {name} !</p>
+<p>My name is {name} !</p>
+<p>My age is {age} !</p>
+<p>My favourite colors are {favouriteColors.split(', ')} !</p>
+<p>I am {isAvailable ? 'available' : 'not available'}</p>
 
 ```
 
@@ -60,7 +62,7 @@ Hello.propTypes = {
 ```vue
 <script setup>
 import { ref } from 'vue';
-import Hello from './Hello.vue';
+import Hello from './UserProfile.vue';
 
 const username = ref('John');
 </script>
@@ -77,18 +79,36 @@ const username = ref('John');
 const props = defineProps({
 	name: {
 		type: String,
-		required: true
+		required: true,
+		default: ""
+	},
+	age: {
+		type: Number,
+		required: true,
+		default: null
+	},
+	favouriteColors: {
+		type: Array,
+		required: true,
+		default: () => []
+	},
+	isAvailable: {
+		type: Boolean,
+		required: true,
+		default: false
 	}
 });
 </script>
 
 <template>
-  <p>Hello {{ props.name }} !</p>
+  <p>My name is {{ props.name }} !</p>
+  <p>My age is {{ props.age }} !</p>
+  <p>My favourite colors are {{ props.favouriteColors.split(', ') }} !</p>
+  <p>I am {{ props.isAvailable ? 'available' : 'not available' }}</p>
 </template>
-
 ```
 
-## Event
+## Event custom
 ## Slot
 ## Slot named
 ## Slot props

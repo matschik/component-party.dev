@@ -1,5 +1,5 @@
 # Templating
-## Minimal
+## Minimal template
 ### React
 ```jsx
 export default function HelloWorld() {
@@ -75,12 +75,12 @@ export default function HelloWorld() {
 ## Loop
 ### React
 ```jsx
-export default function Countries() {
-	const countries = ['France', 'United States', 'Spain'];
+export default function Colors() {
+	const colors = ['red', 'green', 'blue'];
 	return (
 		<ul>
-			{countries.map((country) => (
-				<li key={country}>{country}</li>
+			{colors.map((color) => (
+				<li key={color}>{color}</li>
 			))}
 		</ul>
 	);
@@ -91,12 +91,12 @@ export default function Countries() {
 ### Svelte
 ```svelte
 <script>
-	const countries = ['France', 'United States', 'Spain'];
+	const colors = ['red', 'green', 'blue'];
 </script>
 
 <ul>
-	{#each countries as country}
-		<li>{country}</li>
+	{#each colors as color}
+		<li>{color}</li>
 	{/each}
 </ul>
 
@@ -105,16 +105,16 @@ export default function Countries() {
 ### Vue 3
 ```vue
 <script setup>
-const countries = ['France', 'United States', 'Spain'];
+const colors = ['red', 'green', 'blue'];
 </script>
 
 <template>
   <ul>
     <li
-      v-for="country in countries"
-      :key="country"
+      v-for="color in colors"
+      :key="color"
     >
-      {{ country }}
+      {{ color }}
     </li>
   </ul>
 </template>
@@ -181,16 +181,14 @@ function incrementCount() {
 ## Dom ref
 ### React
 ```jsx
-import { useState, useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
-export default function PageTitle() {
-	const [pageTitle, setPageTitle] = useState('');
+export default function InputFocused() {
+	const inputElement = useRef(null);
 
-	useEffect(() => {
-		setPageTitle(document.title);
-	});
+	useEffect(() => inputElement.current.focus())
 
-	return <p>Page title is {pageTitle}</p>;
+	return <input type="text" ref={inputElement} />;
 }
 
 ```
@@ -328,52 +326,3 @@ function nextLight() {
 
 ```
 
-## Input binding
-### React
-```jsx
-import { useState } from 'react';
-
-export default function InputHello() {
-	const [text, setText] = useState('Hello world');
-
-	function handleChange(event) {
-		setText(event.target.value);
-	}
-
-	return (
-		<>
-			<p>{text}</p>
-			<input value={text} onChange={handleChange} />
-		</>
-	);
-}
-
-```
-
-### Svelte
-```svelte
-<script>
-	let text = 'Hello World';
-</script>
-
-<p>{text}</p>
-
-<input bind:value={text} />
-
-```
-
-### Vue 3
-```vue
-<script setup>
-import { ref } from 'vue';
-const text = ref('Hello World');
-</script>
-
-<template>
-  <p>{{ text }}</p>
-  <input v-model="text">
-</template>
-
-```
-
-## Event modifier

@@ -1,11 +1,42 @@
 # Reactivity
-## Variable assignment
+## Declare state
 ### React
 ```jsx
 import { useState } from 'react';
 
 export default function Name() {
-	const [name, setName] = useState(0);
+	const [name] = useState("John");
+	console.log(name);
+}
+
+```
+
+### Svelte
+```svelte
+<script>
+	let name = 'John';
+	console.log(name);
+</script>
+
+```
+
+### Vue 3
+```vue
+<script setup>
+import { ref } from 'vue';
+const name = ref('John');
+console.log(name.value);
+</script>
+
+```
+
+## Update state
+### React
+```jsx
+import { useState } from 'react';
+
+export default function Name() {
+	const [name, setName] = useState("John");
 	setName('Jane');
 
 	console.log(name);
@@ -34,7 +65,7 @@ console.log(name.value);
 
 ```
 
-## Computed
+## Computed state
 ### React
 ```jsx
 import { useState, useMemo } from 'react';
@@ -67,7 +98,9 @@ const doubleCount = computed(() => count.value * 2);
 console.log(doubleCount.value);
 </script>
 
-<div />
-
+<template>
+  <div />
+</template>
 ```
 
+## Watch state

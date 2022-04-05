@@ -1,12 +1,23 @@
 # Component Party for React
 
 # Reactivity
-## Variable assignment
+## Declare state
 ```jsx
 import { useState } from 'react';
 
 export default function Name() {
-	const [name, setName] = useState(0);
+	const [name] = useState("John");
+	console.log(name);
+}
+
+```
+
+## Update state
+```jsx
+import { useState } from 'react';
+
+export default function Name() {
+	const [name, setName] = useState("John");
 	setName('Jane');
 
 	console.log(name);
@@ -14,7 +25,7 @@ export default function Name() {
 
 ```
 
-## Computed
+## Computed state
 ```jsx
 import { useState, useMemo } from 'react';
 
@@ -27,8 +38,9 @@ export default function DoubleCount() {
 
 ```
 
+## Watch state
 # Templating
-## Minimal
+## Minimal template
 ```jsx
 export default function HelloWorld() {
 	return <h1>Hello world</h1>;
@@ -53,12 +65,12 @@ export default function HelloWorld() {
 
 ## Loop
 ```jsx
-export default function Countries() {
-	const countries = ['France', 'United States', 'Spain'];
+export default function Colors() {
+	const colors = ['red', 'green', 'blue'];
 	return (
 		<ul>
-			{countries.map((country) => (
-				<li key={country}>{country}</li>
+			{colors.map((color) => (
+				<li key={color}>{color}</li>
 			))}
 		</ul>
 	);
@@ -89,16 +101,14 @@ export default function Name() {
 
 ## Dom ref
 ```jsx
-import { useState, useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
-export default function PageTitle() {
-	const [pageTitle, setPageTitle] = useState('');
+export default function InputFocused() {
+	const inputElement = useRef(null);
 
-	useEffect(() => {
-		setPageTitle(document.title);
-	});
+	useEffect(() => inputElement.current.focus())
 
-	return <p>Page title is {pageTitle}</p>;
+	return <input type="text" ref={inputElement} />;
 }
 
 ```
@@ -138,28 +148,6 @@ export default function TrafficLight() {
 
 ```
 
-## Input binding
-```jsx
-import { useState } from 'react';
-
-export default function InputHello() {
-	const [text, setText] = useState('Hello world');
-
-	function handleChange(event) {
-		setText(event.target.value);
-	}
-
-	return (
-		<>
-			<p>{text}</p>
-			<input value={text} onChange={handleChange} />
-		</>
-	);
-}
-
-```
-
-## Event modifier
 # Lifecycle
 ## OnMount
 ```jsx
@@ -199,26 +187,13 @@ export default function Time() {
 
 ```
 
-## Watcher
 # Component composition
 ## Props
 ```jsx
-import { useState } from 'react';
-import Hello from './Hello.jsx';
+import UserProfile from './UserProfile.jsx';
 
 export default function App() {
-	const [username, setUsername] = useState('John');
-
-	function handleChange(event) {
-		setUsername(event.target.value);
-	}
-
-	return (
-		<>
-			<input value={username} onChange={handleChange} />
-			<Hello name={username} />
-		</>
-	);
+	return <UserProfile name="John" age={20} favouriteColors={['green', 'blue', 'red']} isAvailable />;
 }
 
 ```
@@ -226,22 +201,54 @@ export default function App() {
 ```jsx
 import PropTypes from 'prop-types';
 
-export default function Hello({ name }) {
-	return <p>Hello {name} !</p>;
+export default function UserProfile({ name = '', age = null, favouriteColors = [], isAvailable = false }) {
+	return (
+		<>
+			<p>My name is {name} !</p>
+			<p>My age is {age} !</p>
+			<p>My favourite colors are {favouriteColors.split(', ')} !</p>
+			<p>I am {isAvailable ? 'available' : 'not available'}</p>
+		</>
+	);
 }
-Hello.propTypes = {
-	name: PropTypes.string.isRequired
+
+UserProfile.propTypes = {
+	name: PropTypes.string.isRequired,
+	age: PropTypes.number.isRequired,
+	favouriteColors: PropTypes.arrayOf(PropTypes.string).isRequired,
+	isAvailable: PropTypes.bool.isRequired
 };
 
 ```
 
-## Event
+## Event custom
 ## Slot
 ## Slot named
 ## Slot props
 ## Event dom forwarding
 # Store context
-# Form inputs
+# Form input
+## Input binding
+```jsx
+import { useState } from 'react';
+
+export default function InputHello() {
+	const [text, setText] = useState('Hello world');
+
+	function handleChange(event) {
+		setText(event.target.value);
+	}
+
+	return (
+		<>
+			<p>{text}</p>
+			<input value={text} onChange={handleChange} />
+		</>
+	);
+}
+
+```
+
 # Real usecase
 ## Todolist
 ## Fetch
