@@ -173,7 +173,7 @@ onMounted(() => {
 ## On unmount
 ```vue
 <script setup>
-import { ref, onUnmounted } from 'svelte';
+import { ref, onUnmounted } from 'vue';
 
 const time = ref(new Date().toLocaleTimeString());
 
@@ -262,6 +262,20 @@ const text = ref('Hello World');
 
 ```
 
+# Webapp features
+## Routing
+```vue
+```
+|-- pages/
+    |-- index.vue // index page "/"
+    |-- about.vue // about page "/about"
+```
+
+```
+
+## Layouts
+## Ssr
 # Real usecase
+## Showcases
 ## Todolist
 ## Fetch
