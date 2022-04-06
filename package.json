@@ -8,10 +8,10 @@
     "create-section": "node scripts/createSection.js",
     "doc": "node scripts/generateDoc.js",
     "lint": "eslint .",
-    "lint:fix": "npm run lint -- --fix",
+    "lint:fix": "pnpm run lint -- --fix",
     "prettier": "prettier --plugin-search-dir=. . --check",
-    "prettier:fix": "npm run prettier -- --write",
-    "format": "npm run prettier:fix && npm run lint:fix",
+    "prettier:fix": "pnpm run prettier -- --write",
+    "format": "pnpm run prettier:fix && pnpm run lint:fix",
     "prepare": "husky install"
   },
   "repository": {
