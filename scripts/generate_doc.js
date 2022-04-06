@@ -3,7 +3,7 @@ import path from 'path';
 import { FRAMEWORKS } from '../config.cjs';
 
 async function main() {
-	const srcDirs = fs.readdirSync('src');
+	const contentDirs = fs.readdirSync('content');
 
 	let rootReadmeContent = fs.readFileSync('README.base.md') + '\n\n';
 
@@ -14,15 +14,15 @@ async function main() {
 	// 		);
 	// 	}
 
-	for (const srcDir of srcDirs) {
-		const sectionDir = `src/${srcDir}`;
+	for (const contentDir of contentDirs) {
+		const sectionDir = `content/${contentDir}`;
 		const subSectionDirs = fs.readdirSync(sectionDir).filter((path) => !path.includes('.'));
 		let fileContent = '';
 
 		// write section title
-		fileContent += `# ${dirNameToTitle(srcDir)}\n`;
+		fileContent += `# ${dirNameToTitle(contentDir)}\n`;
 		// for (const framework of FRAMEWORKS) {
-		//     fs.appendFileSync(`docs/by-framework/${framework.id}.md`, `# ${dirNameToTitle(srcDir)}\n`);
+		//     fs.appendFileSync(`docs/by-framework/${framework.id}.md`, `# ${dirNameToTitle(contentDir)}\n`);
 		// }
 
 		for (const subSectionDir of subSectionDirs) {
