@@ -11,11 +11,13 @@ module.exports = {
 	},
 	plugins: ['prettier'],
 	overrides: [
+		// Svelte
 		{
 			files: ['*.svelte'],
 			processor: 'svelte3/svelte3',
 			plugins: ['svelte3']
 		},
+		// React
 		{
 			files: ['*.jsx', '*.tsx'],
 			extends: ['eslint:recommended', 'plugin:react/recommended', 'plugin:react/jsx-runtime'],
@@ -25,6 +27,7 @@ module.exports = {
 				}
 			}
 		},
+		// Vue 3
 		{
 			files: ['*.vue'],
 			env: {

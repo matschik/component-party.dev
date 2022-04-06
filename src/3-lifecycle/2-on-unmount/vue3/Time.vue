@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onUnmounted } from 'svelte';
+import { ref, onUnmounted } from 'vue';
 
 const time = ref(new Date().toLocaleTimeString());
 

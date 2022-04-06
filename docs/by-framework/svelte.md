@@ -131,7 +131,7 @@
 ```
 
 # Lifecycle
-## OnMount
+## On mount
 ```svelte
 <script>
 	import { onMount } from 'svelte';
@@ -145,7 +145,7 @@
 
 ```
 
-## OnUnmount
+## On unmount
 ```svelte
 <script>
 	import { onDestroy } from 'svelte';

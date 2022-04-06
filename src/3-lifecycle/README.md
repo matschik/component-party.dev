@@ -1,5 +1,5 @@
 # Lifecycle
-## OnMount
+## On mount
 ### React
 ```jsx
 import { useState, useEffect } from 'react';
@@ -46,7 +46,7 @@ onMounted(() => {
 
 ```
 
-## OnUnmount
+## On unmount
 ### React
 ```jsx
 import { useState, useEffect } from 'react';
@@ -92,7 +92,7 @@ export default function Time() {
 ### Vue 3
 ```vue
 <script setup>
-import { ref, onUnmounted } from 'svelte';
+import { ref, onUnmounted } from 'vue';
 
 const time = ref(new Date().toLocaleTimeString());
 

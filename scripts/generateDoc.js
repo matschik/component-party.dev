@@ -1,23 +1,10 @@
 import fs from 'fs';
 import { FRAMEWORKS } from './_constants.js';
 
-const sections = [{
-	dirName: "",
-	path: "",
-	title: "",
-	subsections: [
-		{
-			dirName: "",
-			path: "",
-			title: "",
-		}
-	]
-}]
-
 async function main() {
 	const srcDirs = fs.readdirSync('src');
 
-	let rootReadmeContent = '# Component Party\n\n';
+	let rootReadmeContent = fs.readFileSync("README.base.md") + "\n\n";
 
 	for(const framework of FRAMEWORKS){
 		fs.writeFileSync(`docs/by-framework/${framework.id}.md`, `# Component Party for ${framework.title}\n\n`)

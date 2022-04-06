@@ -154,7 +154,7 @@ function nextLight() {
 ```
 
 # Lifecycle
-## OnMount
+## On mount
 ```vue
 <script setup>
 import { ref, onMounted } from 'vue';
@@ -170,7 +170,7 @@ onMounted(() => {
 
 ```
 
-## OnUnmount
+## On unmount
 ```vue
 <script setup>
 import { ref, onUnmounted } from 'svelte';

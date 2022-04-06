@@ -149,7 +149,7 @@ export default function TrafficLight() {
 ```
 
 # Lifecycle
-## OnMount
+## On mount
 ```jsx
 import { useState, useEffect } from 'react';
 
@@ -165,7 +165,7 @@ export default function PageTitle() {
 
 ```
 
-## OnUnmount
+## On unmount
 ```jsx
 import { useState, useEffect } from 'react';
 

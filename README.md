@@ -1,5 +1,16 @@
 # Component Party
 
+> Web component JS frameworks overview by their syntax and features
+
+## Roadmap
+- [ ] Website (built with Astro)
+- [ ] Add SolidJS support
+- [ ] Add Angular support
+
+
+--------------------------------------
+--------------------------------------
+
 ## Reactivity
 ### Declare state
 #### React
@@ -437,7 +448,7 @@ function nextLight() {
 
 
 ## Lifecycle
-### OnMount
+### On mount
 #### React
 ```jsx
 import { useState, useEffect } from 'react';
@@ -484,7 +495,7 @@ onMounted(() => {
 
 ```
 
-### OnUnmount
+### On unmount
 #### React
 ```jsx
 import { useState, useEffect } from 'react';
