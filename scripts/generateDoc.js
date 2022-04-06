@@ -34,9 +34,7 @@ async function main() {
 			//         `## ${dirNameToTitle(subSectionDir)}\n`
 			//     );
 			// }
-			const frameworkDirs = fs
-				.readdirSync(`${sectionDir}/${subSectionDir}`)
-				.filter((path) => !path.includes('.'));
+			const frameworkDirs = fs.readdirSync(`${sectionDir}/${subSectionDir}`).filter((path) => !path.includes('.'));
 
 			for (const frameworkDir of frameworkDirs) {
 				fileContent += `### ${FRAMEWORKS.find((f) => f.id === frameworkDir).title}\n`;
@@ -45,16 +43,11 @@ async function main() {
 				for (const file of files) {
 					const parsedFile = path.parse(file);
 					function addSnippetWrap(content) {
-						return `\`\`\`${
-							FRAMEWORKS.find((f) => f.id === frameworkDir).ext
-						}\n${content}\n\`\`\`\n\n`;
+						return `\`\`\`${FRAMEWORKS.find((f) => f.id === frameworkDir).ext}\n${content}\n\`\`\`\n\n`;
 					}
-					const currentFileContent = fs.readFileSync(
-						`${sectionDir}/${subSectionDir}/${frameworkDir}/${file}`
-					);
+					const currentFileContent = fs.readFileSync(`${sectionDir}/${subSectionDir}/${frameworkDir}/${file}`);
 
-					const frameworkFileContent =
-						parsedFile.ext === '.md' ? `${currentFileContent}\n` : addSnippetWrap(currentFileContent);
+					const frameworkFileContent = parsedFile.ext === '.md' ? `${currentFileContent}\n` : addSnippetWrap(currentFileContent);
 
 					fileContent += frameworkFileContent;
 

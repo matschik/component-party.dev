@@ -5,10 +5,12 @@
 > Web component JS frameworks quick overview by their syntax and features
 
 ## Why ?
-Many JS developers don't have a good overview of every existing JS framework with their own syntax and features. 
+
+Many JS developers don't have a good overview of every existing JS framework with their own syntax and features.
 How do we solve this ? Developers love having framework overview by examples. It's a quick introduction before going deeper.
 
 ## Roadmap
+
 - [ ] Website (built with Astro)
 - [ ] Add SolidJS support
 - [ ] Add Angular support
@@ -26,10 +28,7 @@ How do we solve this ? Developers love having framework overview by examples. It
 4. Push to the branch: `git push origin my-new-feature`
 5. Submit a pull request :D
 
-
-
-
---------------------------------------
+---
 
 # Documentation
 
@@ -41,7 +40,7 @@ How do we solve this ? Developers love having framework overview by examples. It
 import { useState } from 'react';
 
 export default function Name() {
-	const [name] = useState("John");
+	const [name] = useState('John');
 	console.log(name);
 }
 
@@ -72,7 +71,7 @@ console.log(name.value);
 import { useState } from 'react';
 
 export default function Name() {
-	const [name, setName] = useState("John");
+	const [name, setName] = useState('John');
 	setName('Jane');
 
 	console.log(name);
@@ -137,9 +136,9 @@ console.log(doubleCount.value);
 <template>
   <div />
 </template>
+
 ```
 
-### Watch state
 
 ## Templating
 ### Minimal template
@@ -329,7 +328,7 @@ import { useEffect, useRef } from 'react';
 export default function InputFocused() {
 	const inputElement = useRef(null);
 
-	useEffect(() => inputElement.current.focus())
+	useEffect(() => inputElement.current.focus());
 
 	return <input type="text" ref={inputElement} />;
 }
@@ -612,7 +611,7 @@ UserProfile.propTypes = {
 	name: PropTypes.string.isRequired,
 	age: PropTypes.number.isRequired,
 	favouriteColors: PropTypes.arrayOf(PropTypes.string).isRequired,
-	isAvailable: PropTypes.bool.isRequired
+	isAvailable: PropTypes.bool.isRequired,
 };
 
 ```
@@ -629,10 +628,10 @@ UserProfile.propTypes = {
 
 ```svelte
 <script>
-	export let name = ""
-	export let age = null
-	export let favouriteColors = []
-	export let isAvailable = false
+	export let name = '';
+	export let age = null;
+	export let favouriteColors = [];
+	export let isAvailable = false;
 </script>
 
 <p>My name is {name} !</p>
@@ -664,23 +663,23 @@ const props = defineProps({
 	name: {
 		type: String,
 		required: true,
-		default: ""
+		default: '',
 	},
 	age: {
 		type: Number,
 		required: true,
-		default: null
+		default: null,
 	},
 	favouriteColors: {
 		type: Array,
 		required: true,
-		default: () => []
+		default: () => [],
 	},
 	isAvailable: {
 		type: Boolean,
 		required: true,
-		default: false
-	}
+		default: false,
+	},
 });
 </script>
 
@@ -690,15 +689,9 @@ const props = defineProps({
   <p>My favourite colors are {{ props.favouriteColors.split(', ') }} !</p>
   <p>I am {{ props.isAvailable ? 'available' : 'not available' }}</p>
 </template>
+
 ```
 
-### Event custom
-### Slot
-### Slot named
-### Slot props
-### Event dom forwarding
-
-## Store context
 
 ## Form input
 ### Input binding
@@ -758,9 +751,11 @@ const text = ref('Hello World');
     |-- about.js // about page "/about"
     |-- 404.js // handle error HTTP 404 page not found
     |-- 500.js // handle error HTTP 500
+    |-- _app.js // global app layout
 ```
 
 https://remix.run/docs/en/v1/guides/routing
+
 #### Svelte
 ```
 |-- routes/
@@ -777,11 +772,4 @@ https://remix.run/docs/en/v1/guides/routing
     |-- about.vue // about page "/about"
 ```
 
-### Layouts
-### Ssr
-
-## Real usecase
-### Showcases
-### Todolist
-### Fetch
 

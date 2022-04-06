@@ -15,5 +15,5 @@ UserProfile.propTypes = {
 	name: PropTypes.string.isRequired,
 	age: PropTypes.number.isRequired,
 	favouriteColors: PropTypes.arrayOf(PropTypes.string).isRequired,
-	isAvailable: PropTypes.bool.isRequired
+	isAvailable: PropTypes.bool.isRequired,
 };

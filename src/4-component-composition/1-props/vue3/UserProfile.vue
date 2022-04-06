@@ -3,23 +3,23 @@ const props = defineProps({
 	name: {
 		type: String,
 		required: true,
-		default: ""
+		default: '',
 	},
 	age: {
 		type: Number,
 		required: true,
-		default: null
+		default: null,
 	},
 	favouriteColors: {
 		type: Array,
 		required: true,
-		default: () => []
+		default: () => [],
 	},
 	isAvailable: {
 		type: Boolean,
 		required: true,
-		default: false
-	}
+		default: false,
+	},
 });
 </script>
 

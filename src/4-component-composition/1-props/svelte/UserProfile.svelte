@@ -1,8 +1,8 @@
 <script>
-	export let name = ""
-	export let age = null
-	export let favouriteColors = []
-	export let isAvailable = false
+	export let name = '';
+	export let age = null;
+	export let favouriteColors = [];
+	export let isAvailable = false;
 </script>
 
 <p>My name is {name} !</p>
