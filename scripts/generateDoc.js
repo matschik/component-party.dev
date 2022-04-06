@@ -43,14 +43,12 @@ async function main() {
 				const files = fs.readdirSync(`${sectionDir}/${subSectionDir}/${frameworkDir}`);
 
 				for (const file of files) {
-				
 					const parsedFile = path.parse(file);
 					function addSnippetWrap(content) {
 						return `\`\`\`${
 							FRAMEWORKS.find((f) => f.id === frameworkDir).ext
 						}\n${content}\n\`\`\`\n\n`;
 					}
-					console.log(parsedFile)
 					const currentFileContent = fs.readFileSync(
 						`${sectionDir}/${subSectionDir}/${frameworkDir}/${file}`
 					);
