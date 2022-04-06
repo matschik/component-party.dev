@@ -742,7 +742,6 @@ const text = ref('Hello World');
 ## Webapp features
 ### Routing
 #### React
-```jsx
 ```
 |-- pages/
     |-- index.js // index page "/"
@@ -751,10 +750,8 @@ const text = ref('Hello World');
     |-- 500.js // handle error HTTP 500
 ```
 
-```
-
+https://remix.run/docs/en/v1/guides/routing
 #### Svelte
-```svelte
 ```
 |-- routes/
     |-- index.svelte // index page "/"
@@ -763,16 +760,11 @@ const text = ref('Hello World');
     |-- __layout.svelte // global app layout
 ```
 
-```
-
 #### Vue 3
-```vue
 ```
 |-- pages/
     |-- index.vue // index page "/"
     |-- about.vue // about page "/about"
-```
-
 ```
 
 ### Layouts
