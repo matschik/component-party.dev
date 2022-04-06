@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { FRAMEWORKS } from './_constants.js';
+import { FRAMEWORKS } from '../config.cjs';
 
 async function main() {
 	const srcDirs = fs.readdirSync('src');

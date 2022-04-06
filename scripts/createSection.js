@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { FRAMEWORKS } from './_constants.js';
+import { FRAMEWORKS } from '../config.cjs';
 
 function getArgs() {
 	const [componentName] = process.argv.slice(2);
