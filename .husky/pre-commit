@@ -1,4 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-pnpm run doc && git add README.md && pnpx lint-staged
+pnpm run build:readme && git add README.md && pnpx lint-staged

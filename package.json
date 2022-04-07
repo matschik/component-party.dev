@@ -5,8 +5,11 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
     "create-section": "node scripts/create_section.js",
-    "doc": "node scripts/generate_doc.js",
+    "build:readme": "node scripts/generate_readme.js",
     "lint": "eslint .",
     "lint:fix": "pnpm run lint -- --fix",
     "prettier": "prettier --plugin-search-dir=. . --check",
@@ -26,6 +29,7 @@
   },
   "homepage": "https://github.com/matschik/component-party#readme",
   "devDependencies": {
+    "astro": "^1.0.0-beta.2",
     "eslint": "^8.12.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
