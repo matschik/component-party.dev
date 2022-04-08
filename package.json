@@ -6,10 +6,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "astro dev",
-    "build": "pnpm run build:readme && astro build",
+    "build": "pnpm run build:content && astro build",
     "preview": "astro preview",
-    "create-section": "node scripts/create_section.js",
-    "build:readme": "node scripts/generate_readme.js",
+    "build:content": "node scripts/generate_readme.js && node scripts/generate_index_page.js",
     "lint": "eslint .",
     "lint:fix": "pnpm run lint -- --fix",
     "prettier": "prettier --plugin-search-dir=. . --check",

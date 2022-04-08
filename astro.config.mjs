@@ -1,17 +1,7 @@
-// astro.config.mjs
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import svelte from '@astrojs/svelte';
-import getDocContent from './scripts/utils/getDocContent.js';
-
-import fs from 'fs';
-
-const DOC_PREFIX = 
-`---
-layout: ../layouts/BaseLayout.astro
----
-
-`;
+import generateIndexPage from './scripts/utils/generateIndexPage.js';
 
 // https://astro.build/config
 export default defineConfig({
@@ -22,8 +12,7 @@ export default defineConfig({
 			{
 				handleHotUpdate({ file }) {
 					if (file.includes('/content')) {
-						console.log('generate doc');
-						fs.writeFileSync('src/pages/index.md', DOC_PREFIX + getDocContent(), 'utf-8');
+						generateIndexPage();
 					}
 				},
 			},

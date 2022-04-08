@@ -1,4 +1,4 @@
-# Component Party
+# Component Party 🎉
 
 [![Open in Gitpod](https://shields.io/badge/Open%20in-Gitpod-green?logo=Gitpod)](https://gitpod.io/#https://github.com/matschik/component-party)
 
@@ -31,7 +31,6 @@ How do we solve this ? Developers love having framework overview by examples. It
 ---
 
 # Documentation
-
 
 ## Reactivity
 ### Declare state

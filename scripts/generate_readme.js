@@ -1,14 +1,7 @@
-import fs from 'fs';
-import getDocContent from './utils/getDocContent.js';
+import generateREADME from './utils/generateREADME.js';
 
 async function main() {
-	let readmeContent = fs.readFileSync('README.base.md') + '\n\n';
-	
-	readmeContent += getDocContent()
-
-	// create /README.md
-	fs.writeFileSync('README.md', readmeContent, 'utf-8');
+	generateREADME();
 }
 
 main().catch(console.error);
-

@@ -2,13 +2,15 @@ import fs from 'fs';
 import path from 'path';
 import { FRAMEWORKS } from '../../config.cjs';
 
+const CONTENT_DIR = "content"
+
 export default function getDocContent() {
 	let content = '';
 
-	const contentDirs = fs.readdirSync('content');
+	const contentDirs = fs.readdirSync(CONTENT_DIR);
 
 	for (const contentDir of contentDirs) {
-		const sectionDir = `content/${contentDir}`;
+		const sectionDir = `${CONTENT_DIR}/${contentDir}`;
 		const subSectionDirs = fs.readdirSync(sectionDir).filter((path) => !path.includes('.'));
 
 		let fileContent = `# ${dirNameToTitle(contentDir)}\n`;

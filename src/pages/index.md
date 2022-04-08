@@ -2,8 +2,6 @@
 layout: ../layouts/BaseLayout.astro
 ---
 
-
-
 ## Reactivity
 ### Declare state
 #### React

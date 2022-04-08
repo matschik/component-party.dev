@@ -3,5 +3,5 @@
 ## Building
 
 ```bash
-pnpm run build:readme
+pnpm run build
 ```
