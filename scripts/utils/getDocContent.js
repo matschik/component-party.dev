@@ -2,22 +2,35 @@ import fs from 'fs';
 import path from 'path';
 import { FRAMEWORKS } from '../../config.cjs';
 
-const CONTENT_DIR = "content"
+const CONTENT_DIR = 'content';
 
 export default function getDocContent() {
 	let content = '';
+
+	const tree = [];
 
 	const contentDirs = fs.readdirSync(CONTENT_DIR);
 
 	for (const contentDir of contentDirs) {
 		const sectionDir = `${CONTENT_DIR}/${contentDir}`;
 		const subSectionDirs = fs.readdirSync(sectionDir).filter((path) => !path.includes('.'));
+		const contentDirTitle = dirNameToTitle(contentDir);
+		const treeNode = {
+			id: contentDir.split('-').splice(1).join('-'),
+			title: contentDirTitle,
+			sections: [],
+		};
 
-		let fileContent = `# ${dirNameToTitle(contentDir)}\n`;
+		let fileContent = `# ${contentDirTitle}\n`;
 
 		for (const subSectionDir of subSectionDirs) {
+			const subSectionDirTitle = dirNameToTitle(subSectionDir);
+			treeNode.sections.push({
+				id: subSectionDir.split('-').splice(1).join('-'),
+				title: subSectionDirTitle,
+			});
 			// write subsection title
-			fileContent += `## ${dirNameToTitle(subSectionDir)}\n`;
+			fileContent += `## ${subSectionDirTitle}\n`;
 
 			const frameworkDirs = fs.readdirSync(`${sectionDir}/${subSectionDir}`).filter((path) => !path.includes('.'));
 
@@ -40,9 +53,12 @@ export default function getDocContent() {
 		}
 
 		content += addHashOnEachLine(fileContent);
+		tree.push(treeNode);
 	}
 
-	return content
+	fs.writeFileSync("src/tree.js", `export default ${JSON.stringify(tree, null, 2)}`, "utf8")
+
+	return content;
 }
 
 function dirNameToTitle(dirName) {
