@@ -1,4 +1,4 @@
-# Component Party 🎉
+# Component Party
 
 [![Open in Gitpod](https://shields.io/badge/Open%20in-Gitpod-green?logo=Gitpod)](https://gitpod.io/#https://github.com/matschik/component-party)
 
