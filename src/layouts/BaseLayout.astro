@@ -6,10 +6,12 @@ const { content } = Astro.props;
 
 <html>
   <head>
+  <meta name="viewport" content="width=device-width">
     <!-- Add other Head elements here, like styles and meta tags. -->
-    <title>{content.title}</title>
+    <title>Component Party</title>
+    <meta name="description" content="Web component JS frameworks overview by their syntax and features.">
   </head>
-  <body class="prose w-full mx-auto"> 
+  <body class="prose w-full mx-auto py-20"> 
     <slot />
   </body>
 </html>

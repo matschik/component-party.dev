@@ -1,0 +1,4 @@
+# I, for one, welcome our new robotic overlords
+
+User-agent: *
+Allow: /
