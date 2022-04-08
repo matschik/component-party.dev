@@ -2,18 +2,23 @@ lockfileVersion: 5.3
 
 specifiers:
   astro: ^1.0.0-beta.2
+  component-party: 'link:'
   eslint: ^8.12.0
   eslint-config-prettier: ^8.5.0
   eslint-plugin-prettier: ^4.0.0
   eslint-plugin-react: ^7.29.4
   eslint-plugin-svelte3: ^3.4.1
   eslint-plugin-vue: ^8.5.0
+  husky: ^7.0.4
   lint-staged: ^12.3.7
   prettier: ^2.6.1
   prettier-plugin-svelte: ^2.6.0
   prop-types: ^15.8.1
   react: ^17.0.2
   svelte: ^3.46.4
+
+dependencies:
+  component-party: 'link:'
 
 devDependencies:
   astro: 1.0.0-beta.2
@@ -23,6 +28,7 @@ devDependencies:
   eslint-plugin-react: 7.29.4_eslint@8.12.0
   eslint-plugin-svelte3: 3.4.1_eslint@8.12.0+svelte@3.46.6
   eslint-plugin-vue: 8.5.0_eslint@8.12.0
+  husky: 7.0.4
   lint-staged: 12.3.7
   prettier: 2.6.2
   prettier-plugin-svelte: 2.6.0_prettier@2.6.2+svelte@3.46.6
@@ -2185,6 +2191,12 @@ packages:
   /human-signals/3.0.1:
     resolution: {integrity: sha512-rQLskxnM/5OCldHo+wNXbpVgDn5A17CUoKX+7Sokwaknlq7CdSnphy0W39GU8dw59XiCXmFXDg4fRuckQRKewQ==}
     engines: {node: '>=12.20.0'}
+    dev: true
+
+  /husky/7.0.4:
+    resolution: {integrity: sha512-vbaCKN2QLtP/vD4yvs6iz6hBEo6wkSzs8HpRah1Z6aGmF2KW5PdYuAd7uX5a+OyBZHBhd+TFLqgjUgytQr4RvQ==}
+    engines: {node: '>=12'}
+    hasBin: true
     dev: true
 
   /ieee754/1.2.1:
