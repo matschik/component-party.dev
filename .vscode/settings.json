@@ -4,5 +4,8 @@
   "editor.formatOnSave": false,
   // Runs Prettier, then ESLint
   "editor.codeActionsOnSave": ["source.formatDocument", "source.fixAll.eslint"],
-  "vetur.validation.template": false
+  "vetur.validation.template": false,
+  "[svelte]": {
+    "editor.defaultFormatter": "svelte.svelte-vscode"
+  },
 }
