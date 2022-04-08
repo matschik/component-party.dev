@@ -3,3 +3,4 @@ new-section
 .eslintcache
 yarn.lock
 package-lock.json
+dist

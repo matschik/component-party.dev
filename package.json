@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "pnpm run build:readme && astro build",
     "preview": "astro preview",
     "create-section": "node scripts/create_section.js",
     "build:readme": "node scripts/generate_readme.js",
@@ -29,7 +29,10 @@
   },
   "homepage": "https://github.com/matschik/component-party#readme",
   "devDependencies": {
-    "astro": "^1.0.0-beta.2",
+    "@astrojs/svelte": "^0.0.2",
+    "@astrojs/tailwind": "^0.1.0",
+    "@tailwindcss/typography": "^0.5.2",
+    "astro": "^1.0.0-beta.2", 
     "eslint": "^8.12.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
@@ -47,8 +50,5 @@
   "lint-staged": {
     "*.js": "eslint --cache --fix",
     "*.lint:fix": "prettier --write"
-  },
-  "dependencies": {
-    "component-party": "link:"
   }
 }

@@ -1,0 +1,15 @@
+---
+// src/layouts/BaseLayout.astro
+// 1. The content prop gives access to frontmatter data
+const { content } = Astro.props;
+---
+
+<html>
+  <head>
+    <!-- Add other Head elements here, like styles and meta tags. -->
+    <title>{content.title}</title>
+  </head>
+  <body class="prose w-full mx-auto"> 
+    <slot />
+  </body>
+</html>
