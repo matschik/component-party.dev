@@ -75,7 +75,7 @@ console.log(name.value);
 import { useState, useMemo } from 'react';
 
 export default function DoubleCount() {
-	const [count] = useState(0);
+	const [count] = useState(10);
 	const doubleCount = useMemo(() => count * 2, [count]);
 	console.log(doubleCount);
 	return <div />;
@@ -151,10 +151,8 @@ export default function HelloWorld() {
 
 #### Svelte
 ```svelte
-<template>
-	<h1 class="title">Hello world</h1>
-	<button style="font-size: 10rem;">I am a button</button>
-</template>
+<h1 class="title">Hello world</h1>
+<button style="font-size: 10rem;">I am a button</button>
 
 <style>
 	.title {
@@ -260,7 +258,7 @@ export default function Name() {
 	let count = 0;
 
 	function incrementCount() {
-		count += 1;
+		count++;
 	}
 </script>
 
@@ -276,7 +274,7 @@ import { ref } from 'vue';
 const count = ref(0);
 
 function incrementCount() {
-	count.value = count.value + 1;
+	count.value++;
 }
 </script>
 
@@ -332,7 +330,9 @@ onMounted(() => {
 });
 </script>
 
-<input ref="inputElement" />
+<template>
+	<input ref="inputElement" />
+</template>
 
 ```
 

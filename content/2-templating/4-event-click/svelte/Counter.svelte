@@ -2,7 +2,7 @@
 	let count = 0;
 
 	function incrementCount() {
-		count += 1;
+		count++;
 	}
 </script>
 

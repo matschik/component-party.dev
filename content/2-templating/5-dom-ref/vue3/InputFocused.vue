@@ -8,4 +8,6 @@ onMounted(() => {
 });
 </script>
 
-<input ref="inputElement" />
+<template>
+	<input ref="inputElement" />
+</template>
