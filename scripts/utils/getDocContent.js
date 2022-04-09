@@ -20,7 +20,7 @@ export default function getDocContent() {
 			title: contentDirTitle,
 			sections: [],
 		};
-
+		
 		let fileContent = `# ${contentDirTitle}\n`;
 
 		for (const subSectionDir of subSectionDirs) {
