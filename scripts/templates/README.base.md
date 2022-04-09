@@ -30,6 +30,4 @@ How do we solve this ? Developers love having framework overview by examples. It
 
 ---
 
-# Documentation
-
 <slot/>

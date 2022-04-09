@@ -52,7 +52,7 @@ export default function getDocContent() {
 			}
 		}
 
-		content += addHashOnEachLine(fileContent);
+		content += fileContent
 		tree.push(treeNode);
 	}
 

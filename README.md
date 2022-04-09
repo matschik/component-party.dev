@@ -30,42 +30,40 @@ How do we solve this ? Developers love having framework overview by examples. It
 
 ---
 
-# Documentation
-
-## Reactivity
-### Declare state
-#### React
+# Reactivity
+## Declare state
+### React
 ```jsx
 import { useState } from 'react';
 
 export default function Name() {
 	const [name] = useState('John');
-	console.log(name);
+	console.log(name); // John
 }
 
 ```
 
-#### Svelte
+### Svelte
 ```svelte
 <script>
 	let name = 'John';
-	console.log(name);
+	console.log(name); // John
 </script>
 
 ```
 
-#### Vue 3
+### Vue 3
 ```vue
 <script setup>
 import { ref } from 'vue';
 const name = ref('John');
-console.log(name.value);
+console.log(name.value); // John
 </script>
 
 ```
 
-### Update state
-#### React
+## Update state
+### React
 ```jsx
 import { useState } from 'react';
 
@@ -73,63 +71,63 @@ export default function Name() {
 	const [name, setName] = useState('John');
 	setName('Jane');
 
-	console.log(name);
+	console.log(name); // Jane
 }
 
 ```
 
-#### Svelte
+### Svelte
 ```svelte
 <script>
 	let name = 'John';
 	name = 'Jane';
-	console.log(name);
+	console.log(name); // Jane
 </script>
 
 ```
 
-#### Vue 3
+### Vue 3
 ```vue
 <script setup>
 import { ref } from 'vue';
 const name = ref('John');
 name.value = 'Jane';
-console.log(name.value);
+console.log(name.value); // Jane
 </script>
 
 ```
 
-### Computed state
-#### React
+## Computed state
+### React
 ```jsx
 import { useState, useMemo } from 'react';
 
 export default function DoubleCount() {
 	const [count] = useState(10);
 	const doubleCount = useMemo(() => count * 2, [count]);
-	console.log(doubleCount);
+	console.log(doubleCount); // 20
 	return <div />;
 }
 
 ```
 
-#### Svelte
+### Svelte
 ```svelte
 <script>
 	let count = 10;
 	$: doubleCount = count * 2;
-	console.log(doubleCount);
+	console.log(doubleCount); // 20
 </script>
 
 ```
 
-#### Vue 3
+### Vue 3
 ```vue
 <script setup>
 import { ref, computed } from 'vue';
 const count = ref(10);
 const doubleCount = computed(() => count.value * 2);
-console.log(doubleCount.value);
+console.log(doubleCount.value); // 20
 </script>
 
 <template>
@@ -138,10 +136,9 @@ console.log(doubleCount.value);
 
 ```
 
-
-## Templating
-### Minimal template
-#### React
+# Templating
+## Minimal template
+### React
 ```jsx
 export default function HelloWorld() {
 	return <h1>Hello world</h1>;
@@ -149,13 +146,13 @@ export default function HelloWorld() {
 
 ```
 
-#### Svelte
+### Svelte
 ```svelte
 <h1>Hello world</h1>
 
 ```
 
-#### Vue 3
+### Vue 3
 ```vue
 <template>
   <h1>Hello world</h1>
@@ -163,8 +160,8 @@ export default function HelloWorld() {
 
 ```
 
-### Styling
-#### React
+## Styling
+### React
 ```jsx
 export default function HelloWorld() {
 	// how do you declare title class ??
@@ -179,7 +176,7 @@ export default function HelloWorld() {
 
 ```
 
-#### Svelte
+### Svelte
 ```svelte
 <h1 class="title">Hello world</h1>
 <button style="font-size: 10rem;">I am a button</button>
@@ -192,7 +189,7 @@ export default function HelloWorld() {
 
 ```
 
-#### Vue 3
+### Vue 3
 ```vue
 <template>
   <h1 class="title">
@@ -211,8 +208,8 @@ export default function HelloWorld() {
 
 ```
 
-### Loop
-#### React
+## Loop
+### React
 ```jsx
 export default function Colors() {
 	const colors = ['red', 'green', 'blue'];
@@ -227,7 +224,7 @@ export default function Colors() {
 
 ```
 
-#### Svelte
+### Svelte
 ```svelte
 <script>
 	const colors = ['red', 'green', 'blue'];
@@ -241,7 +238,7 @@ export default function Colors() {
 
 ```
 
-#### Vue 3
+### Vue 3
 ```vue
 <script setup>
 const colors = ['red', 'green', 'blue'];
@@ -260,8 +257,8 @@ const colors = ['red', 'green', 'blue'];
 
 ```
 
-### Event click
-#### React
+## Event click
+### React
 ```jsx
 import { useState } from 'react';
 
@@ -282,7 +279,7 @@ export default function Name() {
 
 ```
 
-#### Svelte
+### Svelte
 ```svelte
 <script>
 	let count = 0;
@@ -297,7 +294,7 @@ export default function Name() {
 
 ```
 
-#### Vue 3
+### Vue 3
 ```vue
 <script setup>
 import { ref } from 'vue';
@@ -317,8 +314,8 @@ function incrementCount() {
 
 ```
 
-### Dom ref
-#### React
+## Dom ref
+### React
 ```jsx
 import { useEffect, useRef } from 'react';
 
@@ -332,7 +329,7 @@ export default function InputFocused() {
 
 ```
 
-#### Svelte
+### Svelte
 ```svelte
 <script>
 	import { onMount } from 'svelte';
@@ -348,7 +345,7 @@ export default function InputFocused() {
 
 ```
 
-#### Vue 3
+### Vue 3
 ```vue
 <script setup>
 import { ref, onMounted } from 'vue';
@@ -366,8 +363,8 @@ onMounted(() => {
 
 ```
 
-### Conditional
-#### React
+## Conditional
+### React
 ```jsx
 import { useState, useMemo } from 'react';
 
@@ -402,7 +399,7 @@ export default function TrafficLight() {
 
 ```
 
-#### Svelte
+### Svelte
 ```svelte
 <script>
 	const TRAFFIC_LIGHTS = ['red', 'orange', 'green'];
@@ -434,7 +431,7 @@ export default function TrafficLight() {
 
 ```
 
-#### Vue 3
+### Vue 3
 ```vue
 <script setup>
 import { ref, computed } from 'vue';
@@ -467,11 +464,10 @@ function nextLight() {
 
 ```
 
-### Render
-
-## Lifecycle
-### On mount
-#### React
+## Render
+# Lifecycle
+## On mount
+### React
 ```jsx
 import { useState, useEffect } from 'react';
 
@@ -487,7 +483,7 @@ export default function PageTitle() {
 
 ```
 
-#### Svelte
+### Svelte
 ```svelte
 <script>
 	import { onMount } from 'svelte';
@@ -501,7 +497,7 @@ export default function PageTitle() {
 
 ```
 
-#### Vue 3
+### Vue 3
 ```vue
 <script setup>
 import { ref, onMounted } from 'vue';
@@ -517,8 +513,8 @@ onMounted(() => {
 
 ```
 
-### On unmount
-#### React
+## On unmount
+### React
 ```jsx
 import { useState, useEffect } from 'react';
 
@@ -540,7 +536,7 @@ export default function Time() {
 
 ```
 
-#### Svelte
+### Svelte
 ```svelte
 <script>
 	import { onDestroy } from 'svelte';
@@ -560,7 +556,7 @@ export default function Time() {
 
 ```
 
-#### Vue 3
+### Vue 3
 ```vue
 <script setup>
 import { ref, onUnmounted } from 'vue';
@@ -580,10 +576,9 @@ onUnmounted(() => {
 
 ```
 
-
-## Component composition
-### Props
-#### React
+# Component composition
+## Props
+### React
 ```jsx
 import UserProfile from './UserProfile.jsx';
 
@@ -616,7 +611,7 @@ UserProfile.propTypes = {
 
 ```
 
-#### Svelte
+### Svelte
 ```svelte
 <script>
 	import UserProfile from './UserProfile.svelte';
@@ -641,7 +636,7 @@ UserProfile.propTypes = {
 
 ```
 
-#### Vue 3
+### Vue 3
 ```vue
 <script setup>
 import { ref } from 'vue';
@@ -692,10 +687,9 @@ const props = defineProps({
 
 ```
 
-
-## Form input
-### Input text
-#### React
+# Form input
+## Input text
+### React
 ```jsx
 import { useState } from 'react';
 
@@ -716,7 +710,7 @@ export default function InputHello() {
 
 ```
 
-#### Svelte
+### Svelte
 ```svelte
 <script>
 	let text = 'Hello World';
@@ -727,7 +721,7 @@ export default function InputHello() {
 
 ```
 
-#### Vue 3
+### Vue 3
 ```vue
 <script setup>
 import { ref } from 'vue';
@@ -741,8 +735,8 @@ const text = ref('Hello World');
 
 ```
 
-### Checkbox
-#### React
+## Checkbox
+### React
 ```jsx
 import { useState } from 'react';
 
@@ -763,7 +757,7 @@ export default function IsAvailable() {
 
 ```
 
-#### Svelte
+### Svelte
 ```svelte
 <script>
     let isAvailable = false
@@ -774,7 +768,7 @@ export default function IsAvailable() {
 <label for="is-available">Is available</label>
 ```
 
-#### Vue 3
+### Vue 3
 ```vue
 <script setup>
 import { ref } from 'vue';
@@ -793,8 +787,8 @@ const isAvailable = ref(true);
 
 ```
 
-### Radio
-#### React
+## Radio
+### React
 ```jsx
 import { useState } from 'react';
 
@@ -818,7 +812,7 @@ export default function PickPill() {
 
 ```
 
-#### Svelte
+### Svelte
 ```svelte
 <script>
 	let picked = 'red';
@@ -834,7 +828,7 @@ export default function PickPill() {
 
 ```
 
-#### Vue 3
+### Vue 3
 ```vue
 <script setup>
 import { ref } from 'vue';
@@ -864,8 +858,8 @@ const picked = ref('red');
 
 ```
 
-### Select
-#### React
+## Select
+### React
 ```jsx
 import { useState } from 'react';
 
@@ -896,7 +890,7 @@ export default function ColorSelect() {
 
 ```
 
-#### Svelte
+### Svelte
 ```svelte
 <script>
 	let selectedColorId = 2;
@@ -919,7 +913,7 @@ export default function ColorSelect() {
 
 ```
 
-#### Vue 3
+### Vue 3
 ```vue
 <script setup>
 import { ref } from 'vue';
@@ -948,10 +942,9 @@ const colors = [
 
 ```
 
-
-## Webapp features
-### Routing
-#### React
+# Webapp features
+## Routing
+### React
 ```
 |-- pages/
     |-- index.js // index page "/"
@@ -963,7 +956,7 @@ const colors = [
 
 https://remix.run/docs/en/v1/guides/routing
 
-#### Svelte
+### Svelte
 ```
 |-- routes/
     |-- index.svelte // index page "/"
@@ -972,11 +965,10 @@ https://remix.run/docs/en/v1/guides/routing
     |-- __layout.svelte // global app layout
 ```
 
-#### Vue 3
+### Vue 3
 ```
 |-- pages/
     |-- index.vue // index page "/"
     |-- about.vue // about page "/about"
 ```
-
 

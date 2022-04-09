@@ -1,5 +1,5 @@
 <script>
 	let name = 'John';
 	name = 'Jane';
-	console.log(name);
+	console.log(name); // Jane
 </script>

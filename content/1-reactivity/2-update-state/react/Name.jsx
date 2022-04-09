@@ -4,5 +4,5 @@ export default function Name() {
 	const [name, setName] = useState('John');
 	setName('Jane');
 
-	console.log(name);
+	console.log(name); // Jane
 }

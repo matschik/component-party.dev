@@ -1,4 +1,4 @@
 <script>
 	let name = 'John';
-	console.log(name);
+	console.log(name); // John
 </script>
