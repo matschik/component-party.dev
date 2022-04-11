@@ -497,7 +497,6 @@ function nextLight() {
 
 ```
 
-## Render
 # Lifecycle
 ## On mount
 ### React

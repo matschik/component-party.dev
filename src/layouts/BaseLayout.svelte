@@ -10,7 +10,7 @@
 		<meta name="description" content="Web component JS frameworks overview by their syntax and features." />
 	</head>
 	<body class="bg-gray-900 text-white">
-		<header class="border-b border-gray-700 fixed w-full top-0 bg-gray-900">
+		<header class="border-b border-gray-700 bg-gray-900 fixed top-0 w-full">
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div class="flex justify-between items-center py-3">
 					<div>
@@ -31,14 +31,16 @@
 			</div>
 		</header>
 
-		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
 			<div class="flex">
-				<aside class="py-8 fixed mt-10">
+				<aside class="fixed mt-10 hidden lg:block">
 					<nav class="font-semibold text-sm space-y-4">
 						{#each tree as treeNode}
 							<ul>
 								<li>
-									{treeNode.title}
+									<a href={`#${treeNode.id}`} class="inline-block py-1">
+										{treeNode.title}
+									</a>
 									<ul>
 										{#each treeNode.sections as section}
 											<li>
@@ -53,7 +55,7 @@
 						{/each}
 					</nav>
 				</aside>
-				<main class="prose prose-invert w-full mx-auto py-8 mt-10">
+				<main class="prose prose-invert prose-h1:scroll-mt-20 prose-h2:scroll-mt-20 w-full mx-auto pb-8 mt-10">
 					<slot />
 				</main>
 			</div>

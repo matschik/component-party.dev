@@ -44,10 +44,6 @@ export default [
       {
         "id": "conditional",
         "title": "Conditional"
-      },
-      {
-        "id": "render",
-        "title": "Render"
       }
     ]
   },
