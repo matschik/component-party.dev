@@ -3,7 +3,7 @@ const FRAMEWORKS = [
 		id: 'svelte',
 		title: 'Svelte',
 		ext: 'svelte',
-		img: "https://raw.githubusercontent.com/sveltejs/branding/master/svelte-logo.svg",
+		img: "https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg",
 		eslint: {
 			files: ['*.svelte'],
 			processor: 'svelte3/svelte3',
@@ -14,7 +14,7 @@ const FRAMEWORKS = [
 		id: 'react',
 		title: 'React',
 		ext: 'jsx',
-		img: "https://raw.githubusercontent.com/facebook/react/main/fixtures/dom/public/react-logo.svg",
+		img: "https://raw.githubusercontent.com/matschik/component-party/main/public/framework/react.svg",
 		eslint: {
 			files: ['*.jsx', '*.tsx'],
 			extends: ['eslint:recommended', 'plugin:react/recommended', 'plugin:react/jsx-runtime'],
@@ -29,7 +29,7 @@ const FRAMEWORKS = [
 		id: 'vue3',
 		title: 'Vue 3',
 		ext: 'vue',
-		img: "https://camo.githubusercontent.com/c8f91d18976e27123643a926a2588b8d931a0292fd0b6532c3155379e8591629/68747470733a2f2f7675656a732e6f72672f696d616765732f6c6f676f2e706e67",
+		img: "https://raw.githubusercontent.com/matschik/component-party/main/public/framework/vue.svg",
 		eslint: {
 			files: ['*.vue'],
 			env: {
@@ -42,7 +42,7 @@ const FRAMEWORKS = [
 		id: 'angular',
 		title: 'Angular',
 		ext: 'ts',
-		img: "https://github.com/angular/angular/raw/master/aio/src/assets/images/logos/angular/angular.png",
+		img: "https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg",
 		eslint: [
 			{
 				files: ['**/angular/*.ts'],
