@@ -15,6 +15,20 @@
 				margin-bottom: 0px;
 				margin-top: 0px;
 			}
+
+			h1:hover .header-anchor, h2:hover .header-anchor {
+				opacity: 100;
+			}
+
+			.header-anchor {
+				float: left;
+				margin-left: -0.87em;
+				padding-right: 0.23em;
+				font-weight: 500;
+				transition: color .25s,opacity .25s;
+				opacity: 0;
+				text-decoration: none;
+			}
 		</style>
 	</head>
 	<body class="bg-gray-900 text-white">
@@ -46,13 +60,13 @@
 						{#each tree as treeNode}
 							<ul>
 								<li>
-									<a href={`#${treeNode.id}`} class="inline-block py-1 text-white opacity-90 hover:opacity-100">
+									<a href={`#${treeNode.id}`} class="inline-block py-1 text-white opacity-90 hover:opacity-100 transition-opacity">
 										{treeNode.title}
 									</a>
 									<ul>
 										{#each treeNode.sections as section}
 											<li>
-												<a href={`#${section.id}`} class="inline-block py-1 text-white opacity-50 hover:opacity-90">
+												<a href={`#${section.id}`} class="inline-block py-1 text-white opacity-50 hover:opacity-90 transition-opacity">
 													{section.title}
 												</a>
 											</li>

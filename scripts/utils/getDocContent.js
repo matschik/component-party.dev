@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { FRAMEWORKS } from '../../config.cjs';
+import kebabCase from 'lodash.kebabcase';
 
 const CONTENT_DIR = 'content';
 
@@ -21,7 +22,7 @@ export default function getDocContent() {
 			sections: [],
 		};
 
-		let fileContent = `# ${contentDirTitle}\n`;
+		let fileContent = `# ${contentDirTitle}${addHeaderAnchor(contentDirTitle)}\n`;
 
 		for (const subSectionDir of subSectionDirs) {
 			const subSectionDirTitle = dirNameToTitle(subSectionDir);
@@ -30,7 +31,7 @@ export default function getDocContent() {
 				title: subSectionDirTitle,
 			});
 			// write subsection title
-			fileContent += `## ${subSectionDirTitle}\n`;
+			fileContent += `## ${subSectionDirTitle}${addHeaderAnchor(subSectionDirTitle)}\n`;
 
 			for (const framework of FRAMEWORKS) {
 				function addSnippetWrap(content) {
@@ -79,4 +80,8 @@ function addHashOnEachLine(content) {
 			.map((line) => (line.startsWith('#') ? `#${line}` : `${line}`))
 			.join('\n') + '\n'
 	);
+}
+
+function addHeaderAnchor(id){
+	return `<a class="header-anchor" href="#${kebabCase(id)}" aria-hidden="true">#</a>`
 }
