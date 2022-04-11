@@ -20,7 +20,7 @@ export default function getDocContent() {
 			title: contentDirTitle,
 			sections: [],
 		};
-		
+
 		let fileContent = `# ${contentDirTitle}\n`;
 
 		for (const subSectionDir of subSectionDirs) {
@@ -52,11 +52,11 @@ export default function getDocContent() {
 			}
 		}
 
-		content += fileContent
+		content += fileContent;
 		tree.push(treeNode);
 	}
 
-	fs.writeFileSync("src/tree.js", `export default ${JSON.stringify(tree, null, 2)}`, "utf8")
+	fs.writeFileSync('src/tree.js', `export default ${JSON.stringify(tree, null, 2)}`, 'utf8');
 
 	return content;
 }

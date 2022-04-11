@@ -2,7 +2,7 @@
 	let picked = 'red';
 </script>
 
-<div>Picked: { picked }</div>
+<div>Picked: {picked}</div>
 
 <input id="blue-pill" bind:group={picked} type="radio" value="blue" />
 <label for="blue-pill">Blue pill</label>

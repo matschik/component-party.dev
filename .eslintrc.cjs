@@ -12,5 +12,13 @@ module.exports = {
     browser: true,
   },
   plugins: ['prettier'],
-  overrides: FRAMEWORKS.map(({ eslint }) => eslint),
+  overrides: FRAMEWORKS.reduce((acc, { eslint }) => {
+    if (Array.isArray(eslint)) {
+      acc.push(...eslint);
+    } else {
+      acc.push(eslint);
+    }
+
+    return acc;
+  }, []),
 };

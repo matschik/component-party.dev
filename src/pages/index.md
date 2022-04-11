@@ -4,6 +4,23 @@ layout: ../layouts/BaseLayout.astro
 
 # Reactivity
 ## Declare state
+### Angular
+```ts
+import { Component, Input } from '@angular/core';
+
+@Component({
+	selector: 'app-name',
+})
+export class NameComponent {
+	@Input() name: string = 'John';
+
+	constructor() {
+		console.log(this.name);
+	}
+}
+
+```
+
 ### React
 ```jsx
 import { useState } from 'react';
@@ -35,6 +52,24 @@ console.log(name.value); // John
 ```
 
 ## Update state
+### Angular
+```ts
+import { Component, Input } from '@angular/core';
+
+@Component({
+	selector: 'app-name',
+})
+export class NameComponent {
+	@Input() name: string = 'John';
+
+	constructor() {
+		this.name = 'Jane';
+		console.log(this.name);
+	}
+}
+
+```
+
 ### React
 ```jsx
 import { useState } from 'react';
@@ -70,6 +105,32 @@ console.log(name.value); // Jane
 ```
 
 ## Computed state
+### Angular
+```ts
+import { Component, OnInit, Input, Pipe, PipeTransform, ChangeDetectionStrategy } from '@angular/core';
+
+@Pipe({
+	name: 'double',
+})
+export class DoubleCountPipe implements PipeTransform {
+	transform(value: number): number {
+		return value * 2;
+	}
+}
+
+@Component({
+	selector: 'app-doublecount',
+	template: ' <div></div>',
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class DoublecountComponent implements OnInit {
+	@Input() count: number = 10;
+
+	constructor() {}
+}
+
+```
+
 ### React
 ```jsx
 import { useState, useMemo } from 'react';
@@ -330,7 +391,7 @@ onMounted(() => {
 </script>
 
 <template>
-	<input ref="inputElement" />
+  <input ref="inputElement">
 </template>
 
 ```
@@ -732,12 +793,12 @@ export default function IsAvailable() {
 ### Svelte
 ```svelte
 <script>
-    let isAvailable = false
+	let isAvailable = false;
 </script>
 
-
-<input id="is-available" type=checkbox bind:checked={isAvailable}>
+<input id="is-available" type="checkbox" bind:checked={isAvailable} />
 <label for="is-available">Is available</label>
+
 ```
 
 ### Vue 3
@@ -790,7 +851,7 @@ export default function PickPill() {
 	let picked = 'red';
 </script>
 
-<div>Picked: { picked }</div>
+<div>Picked: {picked}</div>
 
 <input id="blue-pill" bind:group={picked} type="radio" value="blue" />
 <label for="blue-pill">Blue pill</label>
@@ -943,4 +1004,5 @@ https://remix.run/docs/en/v1/guides/routing
     |-- index.vue // index page "/"
     |-- about.vue // about page "/about"
 ```
+
 

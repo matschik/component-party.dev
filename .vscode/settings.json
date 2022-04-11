@@ -7,5 +7,5 @@
   "vetur.validation.template": false,
   "[svelte]": {
     "editor.defaultFormatter": "svelte.svelte-vscode"
-  },
+  }
 }
