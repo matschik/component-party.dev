@@ -11,7 +11,7 @@ export default defineConfig({
 		plugins: [
 			{
 				handleHotUpdate({ file }) {
-					if (file.includes('/content')) {
+					if (file.includes('/content') || file.includes('/scripts/utils')) {
 						generateIndexPage();
 					}
 				},

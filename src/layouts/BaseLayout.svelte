@@ -8,6 +8,14 @@
 		<title>Component Party 🎉</title>
 		<link rel="icon" href="/favicon.png" />
 		<meta name="description" content="Web component JS frameworks overview by their syntax and features." />
+		<style>
+			#main-content .framework-logo {
+				display: inline;
+				margin-right: 5px;
+				margin-bottom: 0px;
+				margin-top: 0px;
+			}
+		</style>
 	</head>
 	<body class="bg-gray-900 text-white">
 		<header class="border-b border-gray-700 bg-gray-900 fixed top-0 w-full">
@@ -38,13 +46,13 @@
 						{#each tree as treeNode}
 							<ul>
 								<li>
-									<a href={`#${treeNode.id}`} class="inline-block py-1">
+									<a href={`#${treeNode.id}`} class="inline-block py-1 text-white opacity-90 hover:opacity-100">
 										{treeNode.title}
 									</a>
 									<ul>
 										{#each treeNode.sections as section}
 											<li>
-												<a href={`#${section.id}`} class="inline-block py-1 text-gray-500 hover:text-gray-300">
+												<a href={`#${section.id}`} class="inline-block py-1 text-white opacity-50 hover:opacity-90">
 													{section.title}
 												</a>
 											</li>
@@ -55,7 +63,7 @@
 						{/each}
 					</nav>
 				</aside>
-				<main class="prose prose-invert prose-h1:scroll-mt-20 prose-h2:scroll-mt-20 w-full mx-auto pb-8 mt-10">
+				<main id="main-content" class="prose prose-invert prose-h1:scroll-mt-20 prose-h2:scroll-mt-20 w-full mx-auto pb-8 mt-10">
 					<slot />
 				</main>
 			</div>

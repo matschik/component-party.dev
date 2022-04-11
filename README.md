@@ -32,7 +32,37 @@ How do we solve this ? Developers love having framework overview by examples. It
 
 # Reactivity
 ## Declare state
-### Angular
+### <img src="https://raw.githubusercontent.com/sveltejs/branding/master/svelte-logo.svg" width="20" height="20" class="framework-logo" /> Svelte
+```svelte
+<script>
+	let name = 'John';
+	console.log(name); // John
+</script>
+
+```
+
+### <img src="https://raw.githubusercontent.com/facebook/react/main/fixtures/dom/public/react-logo.svg" width="20" height="20" class="framework-logo" /> React
+```jsx
+import { useState } from 'react';
+
+export default function Name() {
+	const [name] = useState('John');
+	console.log(name); // John
+}
+
+```
+
+### <img src="https://camo.githubusercontent.com/c8f91d18976e27123643a926a2588b8d931a0292fd0b6532c3155379e8591629/68747470733a2f2f7675656a732e6f72672f696d616765732f6c6f676f2e706e67" width="20" height="20" class="framework-logo" /> Vue 3
+```vue
+<script setup>
+import { ref } from 'vue';
+const name = ref('John');
+console.log(name.value); // John
+</script>
+
+```
+
+### <img src="https://github.com/angular/angular/raw/master/aio/src/assets/images/logos/angular/angular.png" width="20" height="20" class="framework-logo" /> Angular
 ```ts
 import { Component, Input } from '@angular/core';
 
@@ -49,38 +79,42 @@ export class NameComponent {
 
 ```
 
-### React
+## Update state
+### <img src="https://raw.githubusercontent.com/sveltejs/branding/master/svelte-logo.svg" width="20" height="20" class="framework-logo" /> Svelte
+```svelte
+<script>
+	let name = 'John';
+	name = 'Jane';
+	console.log(name); // Jane
+</script>
+
+```
+
+### <img src="https://raw.githubusercontent.com/facebook/react/main/fixtures/dom/public/react-logo.svg" width="20" height="20" class="framework-logo" /> React
 ```jsx
 import { useState } from 'react';
 
 export default function Name() {
-	const [name] = useState('John');
-	console.log(name); // John
+	const [name, setName] = useState('John');
+	setName('Jane');
+
+	console.log(name); // Jane
 }
 
 ```
 
-### Svelte
-```svelte
-<script>
-	let name = 'John';
-	console.log(name); // John
-</script>
-
-```
-
-### Vue 3
+### <img src="https://camo.githubusercontent.com/c8f91d18976e27123643a926a2588b8d931a0292fd0b6532c3155379e8591629/68747470733a2f2f7675656a732e6f72672f696d616765732f6c6f676f2e706e67" width="20" height="20" class="framework-logo" /> Vue 3
 ```vue
 <script setup>
 import { ref } from 'vue';
 const name = ref('John');
-console.log(name.value); // John
+name.value = 'Jane';
+console.log(name.value); // Jane
 </script>
 
 ```
 
-## Update state
-### Angular
+### <img src="https://github.com/angular/angular/raw/master/aio/src/assets/images/logos/angular/angular.png" width="20" height="20" class="framework-logo" /> Angular
 ```ts
 import { Component, Input } from '@angular/core';
 
@@ -98,42 +132,46 @@ export class NameComponent {
 
 ```
 
-### React
+## Computed state
+### <img src="https://raw.githubusercontent.com/sveltejs/branding/master/svelte-logo.svg" width="20" height="20" class="framework-logo" /> Svelte
+```svelte
+<script>
+	let count = 10;
+	$: doubleCount = count * 2;
+	console.log(doubleCount); // 20
+</script>
+
+```
+
+### <img src="https://raw.githubusercontent.com/facebook/react/main/fixtures/dom/public/react-logo.svg" width="20" height="20" class="framework-logo" /> React
 ```jsx
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
-export default function Name() {
-	const [name, setName] = useState('John');
-	setName('Jane');
-
-	console.log(name); // Jane
+export default function DoubleCount() {
+	const [count] = useState(10);
+	const doubleCount = useMemo(() => count * 2, [count]);
+	console.log(doubleCount); // 20
+	return <div />;
 }
 
 ```
 
-### Svelte
-```svelte
-<script>
-	let name = 'John';
-	name = 'Jane';
-	console.log(name); // Jane
-</script>
-
-```
-
-### Vue 3
+### <img src="https://camo.githubusercontent.com/c8f91d18976e27123643a926a2588b8d931a0292fd0b6532c3155379e8591629/68747470733a2f2f7675656a732e6f72672f696d616765732f6c6f676f2e706e67" width="20" height="20" class="framework-logo" /> Vue 3
 ```vue
 <script setup>
-import { ref } from 'vue';
-const name = ref('John');
-name.value = 'Jane';
-console.log(name.value); // Jane
+import { ref, computed } from 'vue';
+const count = ref(10);
+const doubleCount = computed(() => count.value * 2);
+console.log(doubleCount.value); // 20
 </script>
+
+<template>
+  <div />
+</template>
 
 ```
 
-## Computed state
-### Angular
+### <img src="https://github.com/angular/angular/raw/master/aio/src/assets/images/logos/angular/angular.png" width="20" height="20" class="framework-logo" /> Angular
 ```ts
 import { Component, OnInit, Input, Pipe, PipeTransform, ChangeDetectionStrategy } from '@angular/core';
 
@@ -159,47 +197,15 @@ export class DoublecountComponent implements OnInit {
 
 ```
 
-### React
-```jsx
-import { useState, useMemo } from 'react';
-
-export default function DoubleCount() {
-	const [count] = useState(10);
-	const doubleCount = useMemo(() => count * 2, [count]);
-	console.log(doubleCount); // 20
-	return <div />;
-}
-
-```
-
-### Svelte
-```svelte
-<script>
-	let count = 10;
-	$: doubleCount = count * 2;
-	console.log(doubleCount); // 20
-</script>
-
-```
-
-### Vue 3
-```vue
-<script setup>
-import { ref, computed } from 'vue';
-const count = ref(10);
-const doubleCount = computed(() => count.value * 2);
-console.log(doubleCount.value); // 20
-</script>
-
-<template>
-  <div />
-</template>
-
-```
-
 # Templating
 ## Minimal template
-### React
+### <img src="https://raw.githubusercontent.com/sveltejs/branding/master/svelte-logo.svg" width="20" height="20" class="framework-logo" /> Svelte
+```svelte
+<h1>Hello world</h1>
+
+```
+
+### <img src="https://raw.githubusercontent.com/facebook/react/main/fixtures/dom/public/react-logo.svg" width="20" height="20" class="framework-logo" /> React
 ```jsx
 export default function HelloWorld() {
 	return <h1>Hello world</h1>;
@@ -207,13 +213,7 @@ export default function HelloWorld() {
 
 ```
 
-### Svelte
-```svelte
-<h1>Hello world</h1>
-
-```
-
-### Vue 3
+### <img src="https://camo.githubusercontent.com/c8f91d18976e27123643a926a2588b8d931a0292fd0b6532c3155379e8591629/68747470733a2f2f7675656a732e6f72672f696d616765732f6c6f676f2e706e67" width="20" height="20" class="framework-logo" /> Vue 3
 ```vue
 <template>
   <h1>Hello world</h1>
@@ -221,8 +221,23 @@ export default function HelloWorld() {
 
 ```
 
+### <img src="https://github.com/angular/angular/raw/master/aio/src/assets/images/logos/angular/angular.png" width="20" height="20" class="framework-logo" /> Angular
+<pre>Oops, missing snippet ! You can contribute <a href="https://github.com/matschik/component-party/tree/main/content/2-templating/1-minimal-template">here</a> to fill this snippet.</pre>
 ## Styling
-### React
+### <img src="https://raw.githubusercontent.com/sveltejs/branding/master/svelte-logo.svg" width="20" height="20" class="framework-logo" /> Svelte
+```svelte
+<h1 class="title">Hello world</h1>
+<button style="font-size: 10rem;">I am a button</button>
+
+<style>
+	.title {
+		color: red;
+	}
+</style>
+
+```
+
+### <img src="https://raw.githubusercontent.com/facebook/react/main/fixtures/dom/public/react-logo.svg" width="20" height="20" class="framework-logo" /> React
 ```jsx
 export default function HelloWorld() {
 	// how do you declare title class ??
@@ -237,20 +252,7 @@ export default function HelloWorld() {
 
 ```
 
-### Svelte
-```svelte
-<h1 class="title">Hello world</h1>
-<button style="font-size: 10rem;">I am a button</button>
-
-<style>
-	.title {
-		color: red;
-	}
-</style>
-
-```
-
-### Vue 3
+### <img src="https://camo.githubusercontent.com/c8f91d18976e27123643a926a2588b8d931a0292fd0b6532c3155379e8591629/68747470733a2f2f7675656a732e6f72672f696d616765732f6c6f676f2e706e67" width="20" height="20" class="framework-logo" /> Vue 3
 ```vue
 <template>
   <h1 class="title">
@@ -269,8 +271,24 @@ export default function HelloWorld() {
 
 ```
 
+### <img src="https://github.com/angular/angular/raw/master/aio/src/assets/images/logos/angular/angular.png" width="20" height="20" class="framework-logo" /> Angular
+<pre>Oops, missing snippet ! You can contribute <a href="https://github.com/matschik/component-party/tree/main/content/2-templating/2-styling">here</a> to fill this snippet.</pre>
 ## Loop
-### React
+### <img src="https://raw.githubusercontent.com/sveltejs/branding/master/svelte-logo.svg" width="20" height="20" class="framework-logo" /> Svelte
+```svelte
+<script>
+	const colors = ['red', 'green', 'blue'];
+</script>
+
+<ul>
+	{#each colors as color}
+		<li>{color}</li>
+	{/each}
+</ul>
+
+```
+
+### <img src="https://raw.githubusercontent.com/facebook/react/main/fixtures/dom/public/react-logo.svg" width="20" height="20" class="framework-logo" /> React
 ```jsx
 export default function Colors() {
 	const colors = ['red', 'green', 'blue'];
@@ -285,21 +303,7 @@ export default function Colors() {
 
 ```
 
-### Svelte
-```svelte
-<script>
-	const colors = ['red', 'green', 'blue'];
-</script>
-
-<ul>
-	{#each colors as color}
-		<li>{color}</li>
-	{/each}
-</ul>
-
-```
-
-### Vue 3
+### <img src="https://camo.githubusercontent.com/c8f91d18976e27123643a926a2588b8d931a0292fd0b6532c3155379e8591629/68747470733a2f2f7675656a732e6f72672f696d616765732f6c6f676f2e706e67" width="20" height="20" class="framework-logo" /> Vue 3
 ```vue
 <script setup>
 const colors = ['red', 'green', 'blue'];
@@ -318,8 +322,25 @@ const colors = ['red', 'green', 'blue'];
 
 ```
 
+### <img src="https://github.com/angular/angular/raw/master/aio/src/assets/images/logos/angular/angular.png" width="20" height="20" class="framework-logo" /> Angular
+<pre>Oops, missing snippet ! You can contribute <a href="https://github.com/matschik/component-party/tree/main/content/2-templating/3-loop">here</a> to fill this snippet.</pre>
 ## Event click
-### React
+### <img src="https://raw.githubusercontent.com/sveltejs/branding/master/svelte-logo.svg" width="20" height="20" class="framework-logo" /> Svelte
+```svelte
+<script>
+	let count = 0;
+
+	function incrementCount() {
+		count++;
+	}
+</script>
+
+<p>Counter: {count}</p>
+<button on:click={incrementCount}>+1</button>
+
+```
+
+### <img src="https://raw.githubusercontent.com/facebook/react/main/fixtures/dom/public/react-logo.svg" width="20" height="20" class="framework-logo" /> React
 ```jsx
 import { useState } from 'react';
 
@@ -340,22 +361,7 @@ export default function Name() {
 
 ```
 
-### Svelte
-```svelte
-<script>
-	let count = 0;
-
-	function incrementCount() {
-		count++;
-	}
-</script>
-
-<p>Counter: {count}</p>
-<button on:click={incrementCount}>+1</button>
-
-```
-
-### Vue 3
+### <img src="https://camo.githubusercontent.com/c8f91d18976e27123643a926a2588b8d931a0292fd0b6532c3155379e8591629/68747470733a2f2f7675656a732e6f72672f696d616765732f6c6f676f2e706e67" width="20" height="20" class="framework-logo" /> Vue 3
 ```vue
 <script setup>
 import { ref } from 'vue';
@@ -375,22 +381,10 @@ function incrementCount() {
 
 ```
 
+### <img src="https://github.com/angular/angular/raw/master/aio/src/assets/images/logos/angular/angular.png" width="20" height="20" class="framework-logo" /> Angular
+<pre>Oops, missing snippet ! You can contribute <a href="https://github.com/matschik/component-party/tree/main/content/2-templating/4-event-click">here</a> to fill this snippet.</pre>
 ## Dom ref
-### React
-```jsx
-import { useEffect, useRef } from 'react';
-
-export default function InputFocused() {
-	const inputElement = useRef(null);
-
-	useEffect(() => inputElement.current.focus());
-
-	return <input type="text" ref={inputElement} />;
-}
-
-```
-
-### Svelte
+### <img src="https://raw.githubusercontent.com/sveltejs/branding/master/svelte-logo.svg" width="20" height="20" class="framework-logo" /> Svelte
 ```svelte
 <script>
 	import { onMount } from 'svelte';
@@ -406,7 +400,21 @@ export default function InputFocused() {
 
 ```
 
-### Vue 3
+### <img src="https://raw.githubusercontent.com/facebook/react/main/fixtures/dom/public/react-logo.svg" width="20" height="20" class="framework-logo" /> React
+```jsx
+import { useEffect, useRef } from 'react';
+
+export default function InputFocused() {
+	const inputElement = useRef(null);
+
+	useEffect(() => inputElement.current.focus());
+
+	return <input type="text" ref={inputElement} />;
+}
+
+```
+
+### <img src="https://camo.githubusercontent.com/c8f91d18976e27123643a926a2588b8d931a0292fd0b6532c3155379e8591629/68747470733a2f2f7675656a732e6f72672f696d616765732f6c6f676f2e706e67" width="20" height="20" class="framework-logo" /> Vue 3
 ```vue
 <script setup>
 import { ref, onMounted } from 'vue';
@@ -424,8 +432,42 @@ onMounted(() => {
 
 ```
 
+### <img src="https://github.com/angular/angular/raw/master/aio/src/assets/images/logos/angular/angular.png" width="20" height="20" class="framework-logo" /> Angular
+<pre>Oops, missing snippet ! You can contribute <a href="https://github.com/matschik/component-party/tree/main/content/2-templating/5-dom-ref">here</a> to fill this snippet.</pre>
 ## Conditional
-### React
+### <img src="https://raw.githubusercontent.com/sveltejs/branding/master/svelte-logo.svg" width="20" height="20" class="framework-logo" /> Svelte
+```svelte
+<script>
+	const TRAFFIC_LIGHTS = ['red', 'orange', 'green'];
+	let lightIndex = 0;
+
+	$: light = TRAFFIC_LIGHTS[lightIndex];
+
+	function nextLight() {
+		if (lightIndex + 1 > TRAFFIC_LIGHTS.length - 1) {
+			lightIndex = 0;
+		} else {
+			lightIndex++;
+		}
+	}
+</script>
+
+<button on:click={nextLight}>Next light</button>
+<p>Light is: {light}</p>
+<p>
+	You must
+	{#if light === 'red'}
+		STOP
+	{:else if light === 'orange'}
+		SLOW DOWN
+	{:else if light === 'green'}
+		GO
+	{/if}
+</p>
+
+```
+
+### <img src="https://raw.githubusercontent.com/facebook/react/main/fixtures/dom/public/react-logo.svg" width="20" height="20" class="framework-logo" /> React
 ```jsx
 import { useState, useMemo } from 'react';
 
@@ -460,39 +502,7 @@ export default function TrafficLight() {
 
 ```
 
-### Svelte
-```svelte
-<script>
-	const TRAFFIC_LIGHTS = ['red', 'orange', 'green'];
-	let lightIndex = 0;
-
-	$: light = TRAFFIC_LIGHTS[lightIndex];
-
-	function nextLight() {
-		if (lightIndex + 1 > TRAFFIC_LIGHTS.length - 1) {
-			lightIndex = 0;
-		} else {
-			lightIndex++;
-		}
-	}
-</script>
-
-<button on:click={nextLight}>Next light</button>
-<p>Light is: {light}</p>
-<p>
-	You must
-	{#if light === 'red'}
-		STOP
-	{:else if light === 'orange'}
-		SLOW DOWN
-	{:else if light === 'green'}
-		GO
-	{/if}
-</p>
-
-```
-
-### Vue 3
+### <img src="https://camo.githubusercontent.com/c8f91d18976e27123643a926a2588b8d931a0292fd0b6532c3155379e8591629/68747470733a2f2f7675656a732e6f72672f696d616765732f6c6f676f2e706e67" width="20" height="20" class="framework-logo" /> Vue 3
 ```vue
 <script setup>
 import { ref, computed } from 'vue';
@@ -525,9 +535,25 @@ function nextLight() {
 
 ```
 
+### <img src="https://github.com/angular/angular/raw/master/aio/src/assets/images/logos/angular/angular.png" width="20" height="20" class="framework-logo" /> Angular
+<pre>Oops, missing snippet ! You can contribute <a href="https://github.com/matschik/component-party/tree/main/content/2-templating/6-conditional">here</a> to fill this snippet.</pre>
 # Lifecycle
 ## On mount
-### React
+### <img src="https://raw.githubusercontent.com/sveltejs/branding/master/svelte-logo.svg" width="20" height="20" class="framework-logo" /> Svelte
+```svelte
+<script>
+	import { onMount } from 'svelte';
+	let pageTitle = '';
+	onMount(() => {
+		pageTitle = document.title;
+	});
+</script>
+
+<p>Page title is: {pageTitle}</p>
+
+```
+
+### <img src="https://raw.githubusercontent.com/facebook/react/main/fixtures/dom/public/react-logo.svg" width="20" height="20" class="framework-logo" /> React
 ```jsx
 import { useState, useEffect } from 'react';
 
@@ -543,21 +569,7 @@ export default function PageTitle() {
 
 ```
 
-### Svelte
-```svelte
-<script>
-	import { onMount } from 'svelte';
-	let pageTitle = '';
-	onMount(() => {
-		pageTitle = document.title;
-	});
-</script>
-
-<p>Page title is: {pageTitle}</p>
-
-```
-
-### Vue 3
+### <img src="https://camo.githubusercontent.com/c8f91d18976e27123643a926a2588b8d931a0292fd0b6532c3155379e8591629/68747470733a2f2f7675656a732e6f72672f696d616765732f6c6f676f2e706e67" width="20" height="20" class="framework-logo" /> Vue 3
 ```vue
 <script setup>
 import { ref, onMounted } from 'vue';
@@ -573,8 +585,30 @@ onMounted(() => {
 
 ```
 
+### <img src="https://github.com/angular/angular/raw/master/aio/src/assets/images/logos/angular/angular.png" width="20" height="20" class="framework-logo" /> Angular
+<pre>Oops, missing snippet ! You can contribute <a href="https://github.com/matschik/component-party/tree/main/content/3-lifecycle/1-on-mount">here</a> to fill this snippet.</pre>
 ## On unmount
-### React
+### <img src="https://raw.githubusercontent.com/sveltejs/branding/master/svelte-logo.svg" width="20" height="20" class="framework-logo" /> Svelte
+```svelte
+<script>
+	import { onDestroy } from 'svelte';
+
+	let time = new Date().toLocaleTimeString();
+
+	const timer = setInterval(() => {
+		time = new Date().toLocaleTimeString();
+	}, 1000);
+
+	onDestroy(() => {
+		clearInterval(timer);
+	});
+</script>
+
+<p>Current time: {time}</p>
+
+```
+
+### <img src="https://raw.githubusercontent.com/facebook/react/main/fixtures/dom/public/react-logo.svg" width="20" height="20" class="framework-logo" /> React
 ```jsx
 import { useState, useEffect } from 'react';
 
@@ -596,27 +630,7 @@ export default function Time() {
 
 ```
 
-### Svelte
-```svelte
-<script>
-	import { onDestroy } from 'svelte';
-
-	let time = new Date().toLocaleTimeString();
-
-	const timer = setInterval(() => {
-		time = new Date().toLocaleTimeString();
-	}, 1000);
-
-	onDestroy(() => {
-		clearInterval(timer);
-	});
-</script>
-
-<p>Current time: {time}</p>
-
-```
-
-### Vue 3
+### <img src="https://camo.githubusercontent.com/c8f91d18976e27123643a926a2588b8d931a0292fd0b6532c3155379e8591629/68747470733a2f2f7675656a732e6f72672f696d616765732f6c6f676f2e706e67" width="20" height="20" class="framework-logo" /> Vue 3
 ```vue
 <script setup>
 import { ref, onUnmounted } from 'vue';
@@ -636,9 +650,36 @@ onUnmounted(() => {
 
 ```
 
+### <img src="https://github.com/angular/angular/raw/master/aio/src/assets/images/logos/angular/angular.png" width="20" height="20" class="framework-logo" /> Angular
+<pre>Oops, missing snippet ! You can contribute <a href="https://github.com/matschik/component-party/tree/main/content/3-lifecycle/2-on-unmount">here</a> to fill this snippet.</pre>
 # Component composition
 ## Props
-### React
+### <img src="https://raw.githubusercontent.com/sveltejs/branding/master/svelte-logo.svg" width="20" height="20" class="framework-logo" /> Svelte
+```svelte
+<script>
+	import UserProfile from './UserProfile.svelte';
+</script>
+
+<UserProfile name="John" age={20} favouriteColors={['green', 'blue', 'red']} isAvailable />
+
+```
+
+```svelte
+<script>
+	export let name = '';
+	export let age = null;
+	export let favouriteColors = [];
+	export let isAvailable = false;
+</script>
+
+<p>My name is {name} !</p>
+<p>My age is {age} !</p>
+<p>My favourite colors are {favouriteColors.split(', ')} !</p>
+<p>I am {isAvailable ? 'available' : 'not available'}</p>
+
+```
+
+### <img src="https://raw.githubusercontent.com/facebook/react/main/fixtures/dom/public/react-logo.svg" width="20" height="20" class="framework-logo" /> React
 ```jsx
 import UserProfile from './UserProfile.jsx';
 
@@ -671,32 +712,7 @@ UserProfile.propTypes = {
 
 ```
 
-### Svelte
-```svelte
-<script>
-	import UserProfile from './UserProfile.svelte';
-</script>
-
-<UserProfile name="John" age={20} favouriteColors={['green', 'blue', 'red']} isAvailable />
-
-```
-
-```svelte
-<script>
-	export let name = '';
-	export let age = null;
-	export let favouriteColors = [];
-	export let isAvailable = false;
-</script>
-
-<p>My name is {name} !</p>
-<p>My age is {age} !</p>
-<p>My favourite colors are {favouriteColors.split(', ')} !</p>
-<p>I am {isAvailable ? 'available' : 'not available'}</p>
-
-```
-
-### Vue 3
+### <img src="https://camo.githubusercontent.com/c8f91d18976e27123643a926a2588b8d931a0292fd0b6532c3155379e8591629/68747470733a2f2f7675656a732e6f72672f696d616765732f6c6f676f2e706e67" width="20" height="20" class="framework-logo" /> Vue 3
 ```vue
 <script setup>
 import { ref } from 'vue';
@@ -747,9 +763,22 @@ const props = defineProps({
 
 ```
 
+### <img src="https://github.com/angular/angular/raw/master/aio/src/assets/images/logos/angular/angular.png" width="20" height="20" class="framework-logo" /> Angular
+<pre>Oops, missing snippet ! You can contribute <a href="https://github.com/matschik/component-party/tree/main/content/4-component-composition/1-props">here</a> to fill this snippet.</pre>
 # Form input
 ## Input text
-### React
+### <img src="https://raw.githubusercontent.com/sveltejs/branding/master/svelte-logo.svg" width="20" height="20" class="framework-logo" /> Svelte
+```svelte
+<script>
+	let text = 'Hello World';
+</script>
+
+<p>{text}</p>
+<input bind:value={text} />
+
+```
+
+### <img src="https://raw.githubusercontent.com/facebook/react/main/fixtures/dom/public/react-logo.svg" width="20" height="20" class="framework-logo" /> React
 ```jsx
 import { useState } from 'react';
 
@@ -770,18 +799,7 @@ export default function InputHello() {
 
 ```
 
-### Svelte
-```svelte
-<script>
-	let text = 'Hello World';
-</script>
-
-<p>{text}</p>
-<input bind:value={text} />
-
-```
-
-### Vue 3
+### <img src="https://camo.githubusercontent.com/c8f91d18976e27123643a926a2588b8d931a0292fd0b6532c3155379e8591629/68747470733a2f2f7675656a732e6f72672f696d616765732f6c6f676f2e706e67" width="20" height="20" class="framework-logo" /> Vue 3
 ```vue
 <script setup>
 import { ref } from 'vue';
@@ -795,8 +813,21 @@ const text = ref('Hello World');
 
 ```
 
+### <img src="https://github.com/angular/angular/raw/master/aio/src/assets/images/logos/angular/angular.png" width="20" height="20" class="framework-logo" /> Angular
+<pre>Oops, missing snippet ! You can contribute <a href="https://github.com/matschik/component-party/tree/main/content/6-form-input/1-input-text">here</a> to fill this snippet.</pre>
 ## Checkbox
-### React
+### <img src="https://raw.githubusercontent.com/sveltejs/branding/master/svelte-logo.svg" width="20" height="20" class="framework-logo" /> Svelte
+```svelte
+<script>
+	let isAvailable = false;
+</script>
+
+<input id="is-available" type="checkbox" bind:checked={isAvailable} />
+<label for="is-available">Is available</label>
+
+```
+
+### <img src="https://raw.githubusercontent.com/facebook/react/main/fixtures/dom/public/react-logo.svg" width="20" height="20" class="framework-logo" /> React
 ```jsx
 import { useState } from 'react';
 
@@ -817,18 +848,7 @@ export default function IsAvailable() {
 
 ```
 
-### Svelte
-```svelte
-<script>
-	let isAvailable = false;
-</script>
-
-<input id="is-available" type="checkbox" bind:checked={isAvailable} />
-<label for="is-available">Is available</label>
-
-```
-
-### Vue 3
+### <img src="https://camo.githubusercontent.com/c8f91d18976e27123643a926a2588b8d931a0292fd0b6532c3155379e8591629/68747470733a2f2f7675656a732e6f72672f696d616765732f6c6f676f2e706e67" width="20" height="20" class="framework-logo" /> Vue 3
 ```vue
 <script setup>
 import { ref } from 'vue';
@@ -847,8 +867,26 @@ const isAvailable = ref(true);
 
 ```
 
+### <img src="https://github.com/angular/angular/raw/master/aio/src/assets/images/logos/angular/angular.png" width="20" height="20" class="framework-logo" /> Angular
+<pre>Oops, missing snippet ! You can contribute <a href="https://github.com/matschik/component-party/tree/main/content/6-form-input/2-checkbox">here</a> to fill this snippet.</pre>
 ## Radio
-### React
+### <img src="https://raw.githubusercontent.com/sveltejs/branding/master/svelte-logo.svg" width="20" height="20" class="framework-logo" /> Svelte
+```svelte
+<script>
+	let picked = 'red';
+</script>
+
+<div>Picked: {picked}</div>
+
+<input id="blue-pill" bind:group={picked} type="radio" value="blue" />
+<label for="blue-pill">Blue pill</label>
+
+<input id="red-pill" bind:group={picked} type="radio" value="red" />
+<label for="red-pill">Red pill</label>
+
+```
+
+### <img src="https://raw.githubusercontent.com/facebook/react/main/fixtures/dom/public/react-logo.svg" width="20" height="20" class="framework-logo" /> React
 ```jsx
 import { useState } from 'react';
 
@@ -872,23 +910,7 @@ export default function PickPill() {
 
 ```
 
-### Svelte
-```svelte
-<script>
-	let picked = 'red';
-</script>
-
-<div>Picked: {picked}</div>
-
-<input id="blue-pill" bind:group={picked} type="radio" value="blue" />
-<label for="blue-pill">Blue pill</label>
-
-<input id="red-pill" bind:group={picked} type="radio" value="red" />
-<label for="red-pill">Red pill</label>
-
-```
-
-### Vue 3
+### <img src="https://camo.githubusercontent.com/c8f91d18976e27123643a926a2588b8d931a0292fd0b6532c3155379e8591629/68747470733a2f2f7675656a732e6f72672f696d616765732f6c6f676f2e706e67" width="20" height="20" class="framework-logo" /> Vue 3
 ```vue
 <script setup>
 import { ref } from 'vue';
@@ -918,8 +940,33 @@ const picked = ref('red');
 
 ```
 
+### <img src="https://github.com/angular/angular/raw/master/aio/src/assets/images/logos/angular/angular.png" width="20" height="20" class="framework-logo" /> Angular
+<pre>Oops, missing snippet ! You can contribute <a href="https://github.com/matschik/component-party/tree/main/content/6-form-input/3-radio">here</a> to fill this snippet.</pre>
 ## Select
-### React
+### <img src="https://raw.githubusercontent.com/sveltejs/branding/master/svelte-logo.svg" width="20" height="20" class="framework-logo" /> Svelte
+```svelte
+<script>
+	let selectedColorId = 2;
+
+	const colors = [
+		{ id: 1, text: 'red' },
+		{ id: 2, text: 'blue' },
+		{ id: 3, text: 'green' },
+		{ id: 4, text: 'gray', isDisabled: true },
+	];
+</script>
+
+<select bind:value={selectedColorId}>
+	{#each colors as color}
+		<option value={color.id} disabled={color.isDisabled}>
+			{color.text}
+		</option>
+	{/each}
+</select>
+
+```
+
+### <img src="https://raw.githubusercontent.com/facebook/react/main/fixtures/dom/public/react-logo.svg" width="20" height="20" class="framework-logo" /> React
 ```jsx
 import { useState } from 'react';
 
@@ -950,30 +997,7 @@ export default function ColorSelect() {
 
 ```
 
-### Svelte
-```svelte
-<script>
-	let selectedColorId = 2;
-
-	const colors = [
-		{ id: 1, text: 'red' },
-		{ id: 2, text: 'blue' },
-		{ id: 3, text: 'green' },
-		{ id: 4, text: 'gray', isDisabled: true },
-	];
-</script>
-
-<select bind:value={selectedColorId}>
-	{#each colors as color}
-		<option value={color.id} disabled={color.isDisabled}>
-			{color.text}
-		</option>
-	{/each}
-</select>
-
-```
-
-### Vue 3
+### <img src="https://camo.githubusercontent.com/c8f91d18976e27123643a926a2588b8d931a0292fd0b6532c3155379e8591629/68747470733a2f2f7675656a732e6f72672f696d616765732f6c6f676f2e706e67" width="20" height="20" class="framework-logo" /> Vue 3
 ```vue
 <script setup>
 import { ref } from 'vue';
@@ -1002,9 +1026,20 @@ const colors = [
 
 ```
 
+### <img src="https://github.com/angular/angular/raw/master/aio/src/assets/images/logos/angular/angular.png" width="20" height="20" class="framework-logo" /> Angular
+<pre>Oops, missing snippet ! You can contribute <a href="https://github.com/matschik/component-party/tree/main/content/6-form-input/4-select">here</a> to fill this snippet.</pre>
 # Webapp features
 ## Routing
-### React
+### <img src="https://raw.githubusercontent.com/sveltejs/branding/master/svelte-logo.svg" width="20" height="20" class="framework-logo" /> Svelte
+```
+|-- routes/
+    |-- index.svelte // index page "/"
+    |-- about.svelte // about page "/about"
+    |-- __error.svelte // handle HTTP errors 404, 500,...
+    |-- __layout.svelte // global app layout
+```
+
+### <img src="https://raw.githubusercontent.com/facebook/react/main/fixtures/dom/public/react-logo.svg" width="20" height="20" class="framework-logo" /> React
 ```
 |-- pages/
     |-- index.js // index page "/"
@@ -1016,20 +1051,13 @@ const colors = [
 
 https://remix.run/docs/en/v1/guides/routing
 
-### Svelte
-```
-|-- routes/
-    |-- index.svelte // index page "/"
-    |-- about.svelte // about page "/about"
-    |-- __error.svelte // handle HTTP errors 404, 500,...
-    |-- __layout.svelte // global app layout
-```
-
-### Vue 3
+### <img src="https://camo.githubusercontent.com/c8f91d18976e27123643a926a2588b8d931a0292fd0b6532c3155379e8591629/68747470733a2f2f7675656a732e6f72672f696d616765732f6c6f676f2e706e67" width="20" height="20" class="framework-logo" /> Vue 3
 ```
 |-- pages/
     |-- index.vue // index page "/"
     |-- about.vue // about page "/about"
 ```
 
+### <img src="https://github.com/angular/angular/raw/master/aio/src/assets/images/logos/angular/angular.png" width="20" height="20" class="framework-logo" /> Angular
+<pre>Oops, missing snippet ! You can contribute <a href="https://github.com/matschik/component-party/tree/main/content/7-webapp-features/1-routing">here</a> to fill this snippet.</pre>
 

@@ -32,22 +32,25 @@ export default function getDocContent() {
 			// write subsection title
 			fileContent += `## ${subSectionDirTitle}\n`;
 
-			const frameworkDirs = fs.readdirSync(`${sectionDir}/${subSectionDir}`).filter((path) => !path.includes('.'));
-
-			for (const frameworkDir of frameworkDirs) {
-				const framework = FRAMEWORKS.find((f) => f.id === frameworkDir);
-				fileContent += `### ${framework.title}\n`;
-				const files = fs.readdirSync(`${sectionDir}/${subSectionDir}/${frameworkDir}`);
-
+			for (const framework of FRAMEWORKS) {
 				function addSnippetWrap(content) {
 					return `\`\`\`${framework.ext}\n${content}\n\`\`\`\n\n`;
 				}
+				const imgTag = framework.img ? `<img src="${framework.img}" width="20" height="20" class="framework-logo" />` : '';
+				fileContent += `### ${imgTag} ${framework.title}\n`;
 
-				for (const file of files) {
-					const parsedFile = path.parse(file);
-					const currentFileContent = fs.readFileSync(`${sectionDir}/${subSectionDir}/${frameworkDir}/${file}`);
-					const frameworkFileContent = parsedFile.ext === '.md' ? `${currentFileContent}\n` : addSnippetWrap(currentFileContent);
-					fileContent += frameworkFileContent;
+				const frameworkDirPath = `${sectionDir}/${subSectionDir}/${framework.id}`;
+				if (fs.existsSync(frameworkDirPath)) {
+					const files = fs.readdirSync(frameworkDirPath);
+
+					for (const file of files) {
+						const parsedFile = path.parse(file);
+						const currentFileContent = fs.readFileSync(`${frameworkDirPath}/${file}`);
+						const frameworkFileContent = parsedFile.ext === '.md' ? `${currentFileContent}\n` : addSnippetWrap(currentFileContent);
+						fileContent += frameworkFileContent;
+					}
+				} else {
+					fileContent += `<pre>Oops, missing snippet ! You can contribute <a href="https://github.com/matschik/component-party/tree/main/${sectionDir}/${subSectionDir}">here</a> to fill this snippet.</pre>\n`;
 				}
 			}
 		}
