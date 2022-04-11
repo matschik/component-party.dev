@@ -16,7 +16,7 @@ const FRAMEWORKS = [
 		ext: 'jsx',
 		img: "https://raw.githubusercontent.com/matschik/component-party/main/public/framework/react.svg",
 		eslint: {
-			files: ['*.jsx', '*.tsx'],
+			files: ['**/react/*.jsx', '**/react/*.tsx'],
 			extends: ['eslint:recommended', 'plugin:react/recommended', 'plugin:react/jsx-runtime'],
 			settings: {
 				react: {

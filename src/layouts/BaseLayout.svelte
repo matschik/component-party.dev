@@ -16,7 +16,8 @@
 				margin-top: 0px;
 			}
 
-			h1:hover .header-anchor, h2:hover .header-anchor {
+			h1:hover .header-anchor,
+			h2:hover .header-anchor {
 				opacity: 100;
 			}
 
@@ -25,11 +26,12 @@
 				margin-left: -0.87em;
 				padding-right: 0.23em;
 				font-weight: 500;
-				transition: color .25s,opacity .25s;
+				transition: color 0.25s, opacity 0.25s;
 				opacity: 0;
 				text-decoration: none;
 			}
 		</style>
+		<script src="/hash-change-on-headings.js"></script>
 	</head>
 	<body class="bg-gray-900 text-white">
 		<header class="border-b border-gray-700 bg-gray-900 fixed top-0 w-full">
