@@ -9,13 +9,13 @@ export default defineConfig({
 	integrations: [tailwind(), svelte()],
 	vite: {
 		plugins: [
-			{
-				handleHotUpdate({ file }) {
-					if (file.includes('/content') || file.includes('/scripts/utils')) {
-						generateIndexPage();
-					}
-				},
-			},
+			// {
+			// 	handleHotUpdate({ file }) {
+			// 		if (file.includes('/content') || file.includes('/scripts/utils')) {
+			// 			generateIndexPage();
+			// 		}
+			// 	},
+			// },
 		],
 	},
 });

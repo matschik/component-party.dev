@@ -1,0 +1,13 @@
+---
+import Layout from "../layouts/BaseLayout.svelte"
+import fs from 'node:fs/promises';
+import Section from "../components/Section.astro"
+const contentURL = new URL(`../../content`, import.meta.url);
+const sectionNames = await fs.readdir(contentURL)
+---
+
+<Layout>
+    {sectionNames.map((sectionName) => 
+        <Section id={sectionName} />
+    )}
+</Layout>

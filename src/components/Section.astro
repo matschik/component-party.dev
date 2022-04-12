@@ -1,0 +1,82 @@
+---
+import Title from "../components/Title.svelte"
+import FrameworkLabel from "../components/FrameworkLabel.svelte"
+import fs from 'node:fs/promises';
+import kebabCase from 'lodash.kebabcase';
+import { Code, Markdown} from "astro/components"
+import nodePath from "node:path"
+
+const { id } = Astro.props
+
+const sections = []
+
+function dirNameToTitle(dirName) {
+	return capitalize(dirName.split('-').splice(1).join(' '));
+}
+
+function capitalize(string) {
+	return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+const contentURL = new URL(`../../content/${id}`, import.meta.url);
+const subSectionDirNames = await fs.readdir(contentURL)
+
+for(const dirName of subSectionDirNames){
+    const path = `${contentURL.pathname}/${dirName}`
+    const title = dirNameToTitle(dirName)
+
+    const frameworkDirs = await fs.readdir(path)
+    const frameworkSections = []
+    for(const frameworkDir of frameworkDirs){
+        const frameworkPath = `${path}/${frameworkDir}`
+        const files = []
+        const fileNames = await fs.readdir(`${frameworkPath}`)
+
+        for(const fileName of fileNames){
+            const filePath = `${frameworkPath}/${fileName}`
+            files.push({
+                path: filePath,
+                fileName: fileName,
+                ext: nodePath.parse(filePath).ext.split(".").pop(),
+                content: (await fs.readFile(filePath, "utf-8"))
+            })
+        }
+
+        frameworkSections.push({
+            dirName: frameworkDir,
+            path: frameworkPath,
+            files
+        })
+    }
+
+    
+    sections.push({
+        id: kebabCase(title),
+        path,
+        dirName,
+        title,
+        frameworkSections
+    })
+}
+---
+
+<Title as="h1" content={dirNameToTitle(id)} />
+{sections.map((section) => 
+    (
+        <>
+            <Title as="h2" content={section.title}/>
+            {section.frameworkSections.map((frameworkSection) => (
+                <>
+                    <h3><FrameworkLabel id={frameworkSection.dirName}  /></h3>
+                    
+                    {frameworkSection.files.map((file) => (
+                        file.ext === 'md'
+                        ? <Markdown set:html={file.content} />
+                        :
+                        <Code code={file.content} lang={file.ext} />
+                    ))}
+                </>
+            ))}
+        </>
+    )
+)}
