@@ -29,4 +29,5 @@ jobs:
       # uses: pnpm/action-setup@35ab4267a1a21c8e8cb1c087cf1642e891ff57bd
       uses: pnpm/action-setup@v2.2.1
     - run: pnpm install --frozen-lockfile
+    - run: pnpm run lint
     - run: pnpm run build
