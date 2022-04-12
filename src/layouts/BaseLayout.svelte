@@ -37,9 +37,7 @@
 		<header class="border-b border-gray-700 z-10 fixed w-full top-0 backdrop-blur">
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div class="flex justify-between items-center py-3">
-					<div>
-						<span class="font-semibold text-lg">Component party</span>
-					</div>
+					<a class="font-semibold text-lg" href="#reactivity">Component party</a>
 
 					<div>
 						<a href="https://github.com/matschik/component-party" title="github" target="_blank" rel="noopener noreferrer">

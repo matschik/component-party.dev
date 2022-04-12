@@ -100,6 +100,10 @@ export default [
       {
         "id": "routing",
         "title": "Routing"
+      },
+      {
+        "id": "router-link",
+        "title": "Router link"
       }
     ]
   }

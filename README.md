@@ -1038,6 +1038,8 @@ const colors = [
 # Webapp features<a class="header-anchor" href="#webapp-features" aria-hidden="true" tabindex="-1">#</a>
 ## Routing<a class="header-anchor" href="#routing" aria-hidden="true" tabindex="-1">#</a>
 ### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" alt="svelte" width="20" height="20" class="framework-logo" /> Svelte
+With <a href="https://kit.svelte.dev/docs/routing#pages">SvelteKit</a>
+
 ```
 |-- routes/
     |-- index.svelte // index page "/"
@@ -1047,6 +1049,8 @@ const colors = [
 ```
 
 ### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/react.svg" alt="react" width="20" height="20" class="framework-logo" /> React
+With <a href="https://nextjs.org/docs/basic-features/pages">NextJS</a>
+
 ```
 |-- pages/
     |-- index.js // index page "/"
@@ -1056,9 +1060,13 @@ const colors = [
     |-- _app.js // global app layout
 ```
 
+With <a href="https://remix.run/docs/en/v1/guides/routing">Remix</a>
+
 https://remix.run/docs/en/v1/guides/routing
 
 ### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/vue.svg" alt="vue3" width="20" height="20" class="framework-logo" /> Vue 3
+With <a href="https://v3.nuxtjs.org/guide/directory-structure/pages">Nuxt 3</a>
+
 ```
 |-- pages/
     |-- index.vue // index page "/"
@@ -1067,4 +1075,65 @@ https://remix.run/docs/en/v1/guides/routing
 
 ### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" alt="angular" width="20" height="20" class="framework-logo" /> Angular
 <pre>Oops, missing snippet ! <a href="https://github.com/matschik/component-party/tree/main/content/7-webapp-features/1-routing">You can help us by contributing on Github.</a></pre>
+## Router link<a class="header-anchor" href="#router-link" aria-hidden="true" tabindex="-1">#</a>
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" alt="svelte" width="20" height="20" class="framework-logo" /> Svelte
+With <a href="https://kit.svelte.dev/docs/routing#pages">SvelteKit</a>
+
+```svelte
+<ul>
+    <li>
+        <a href="/">
+            Home
+        </a>
+    </li>
+    <li>
+        <a href="/about">
+            About us
+        </a>
+    </li>
+</ul>
+```
+
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/react.svg" alt="react" width="20" height="20" class="framework-logo" /> React
+With <a href="https://nextjs.org/docs/api-reference/next/link">NextJS</a>
+
+```jsx
+import Link from 'next/link'
+
+export default function Home() {
+  return (
+    <ul>
+      <li>
+        <Link href="/">
+          <a>Home</a>
+        </Link>
+      </li>
+      <li>
+        <Link href="/about">
+          <a>About us</a>
+        </Link>
+      </li>
+    </ul>
+  )
+}
+```
+
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/vue.svg" alt="vue3" width="20" height="20" class="framework-logo" /> Vue 3
+With <a href="https://v3.nuxtjs.org/guide/directory-structure/pages#navigation">Nuxt 3</a>
+
+```vue
+<template>
+  <ul>
+    <li>
+      <NuxtLink to="/"> Home </NuxtLink>
+    </li>
+    <li>
+      <NuxtLink to="/about"> About us </NuxtLink>
+    </li>
+  </ul>
+</template>
+```
+
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" alt="angular" width="20" height="20" class="framework-logo" /> Angular
+<pre>Oops, missing snippet ! <a href="https://github.com/matschik/component-party/tree/main/content/7-webapp-features/2-router-link">You can help us by contributing on Github.</a></pre>
 
