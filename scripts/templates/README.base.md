@@ -4,6 +4,8 @@
 
 > Web component JS frameworks quick overview by their syntax and features
 
+**Website: https://component-party.pages.dev**
+
 ## Why ?
 
 Many JS developers don't have a good overview of every existing JS framework with their own syntax and features.
@@ -11,11 +13,11 @@ How do we solve this ? Developers love having framework overview by examples. It
 
 ## Roadmap
 
-- [ ] Website (built with Astro)
-- [ ] Add SolidJS support
 - [ ] Add Angular support
+- [ ] Add SolidJS support
 - [ ] Add Preact support
 - [ ] Add Alpine support
+- [x] Website (built with Astro)
 - [x] Add React support
 - [x] Add Svelte support
 - [x] Add Vue 3 support
