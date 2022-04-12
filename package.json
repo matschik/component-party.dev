@@ -4,7 +4,6 @@
   "description": "",
   "type": "module",
   "main": "index.js",
-  "packageManager": "pnpm",
   "scripts": {
     "dev": "astro dev",
     "build": "pnpm run build:content && astro build",
