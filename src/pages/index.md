@@ -2,8 +2,8 @@
 layout: ../layouts/BaseLayout.svelte
 ---
 
-# Reactivity<a class="header-anchor" href="#reactivity" aria-hidden="true">#</a>
-## Declare state<a class="header-anchor" href="#declare-state" aria-hidden="true">#</a>
+# Reactivity<a class="header-anchor" href="#reactivity" aria-hidden="true" tabindex="-1">#</a>
+## Declare state<a class="header-anchor" href="#declare-state" aria-hidden="true" tabindex="-1">#</a>
 ### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" alt="svelte" width="20" height="20" class="framework-logo" /> Svelte
 ```svelte
 <script>
@@ -51,7 +51,7 @@ export class NameComponent {
 
 ```
 
-## Update state<a class="header-anchor" href="#update-state" aria-hidden="true">#</a>
+## Update state<a class="header-anchor" href="#update-state" aria-hidden="true" tabindex="-1">#</a>
 ### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" alt="svelte" width="20" height="20" class="framework-logo" /> Svelte
 ```svelte
 <script>
@@ -104,7 +104,7 @@ export class NameComponent {
 
 ```
 
-## Computed state<a class="header-anchor" href="#computed-state" aria-hidden="true">#</a>
+## Computed state<a class="header-anchor" href="#computed-state" aria-hidden="true" tabindex="-1">#</a>
 ### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" alt="svelte" width="20" height="20" class="framework-logo" /> Svelte
 ```svelte
 <script>
@@ -169,8 +169,8 @@ export class DoublecountComponent implements OnInit {
 
 ```
 
-# Templating<a class="header-anchor" href="#templating" aria-hidden="true">#</a>
-## Minimal template<a class="header-anchor" href="#minimal-template" aria-hidden="true">#</a>
+# Templating<a class="header-anchor" href="#templating" aria-hidden="true" tabindex="-1">#</a>
+## Minimal template<a class="header-anchor" href="#minimal-template" aria-hidden="true" tabindex="-1">#</a>
 ### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" alt="svelte" width="20" height="20" class="framework-logo" /> Svelte
 ```svelte
 <h1>Hello world</h1>
@@ -195,7 +195,7 @@ export default function HelloWorld() {
 
 ### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" alt="angular" width="20" height="20" class="framework-logo" /> Angular
 <pre>Oops, missing snippet ! <a href="https://github.com/matschik/component-party/tree/main/content/2-templating/1-minimal-template">You can help us by contributing on Github.</a></pre>
-## Styling<a class="header-anchor" href="#styling" aria-hidden="true">#</a>
+## Styling<a class="header-anchor" href="#styling" aria-hidden="true" tabindex="-1">#</a>
 ### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" alt="svelte" width="20" height="20" class="framework-logo" /> Svelte
 ```svelte
 <h1 class="title">Hello world</h1>
@@ -245,7 +245,7 @@ export default function HelloWorld() {
 
 ### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" alt="angular" width="20" height="20" class="framework-logo" /> Angular
 <pre>Oops, missing snippet ! <a href="https://github.com/matschik/component-party/tree/main/content/2-templating/2-styling">You can help us by contributing on Github.</a></pre>
-## Loop<a class="header-anchor" href="#loop" aria-hidden="true">#</a>
+## Loop<a class="header-anchor" href="#loop" aria-hidden="true" tabindex="-1">#</a>
 ### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" alt="svelte" width="20" height="20" class="framework-logo" /> Svelte
 ```svelte
 <script>
@@ -296,7 +296,7 @@ const colors = ['red', 'green', 'blue'];
 
 ### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" alt="angular" width="20" height="20" class="framework-logo" /> Angular
 <pre>Oops, missing snippet ! <a href="https://github.com/matschik/component-party/tree/main/content/2-templating/3-loop">You can help us by contributing on Github.</a></pre>
-## Event click<a class="header-anchor" href="#event-click" aria-hidden="true">#</a>
+## Event click<a class="header-anchor" href="#event-click" aria-hidden="true" tabindex="-1">#</a>
 ### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" alt="svelte" width="20" height="20" class="framework-logo" /> Svelte
 ```svelte
 <script>
@@ -355,7 +355,7 @@ function incrementCount() {
 
 ### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" alt="angular" width="20" height="20" class="framework-logo" /> Angular
 <pre>Oops, missing snippet ! <a href="https://github.com/matschik/component-party/tree/main/content/2-templating/4-event-click">You can help us by contributing on Github.</a></pre>
-## Dom ref<a class="header-anchor" href="#dom-ref" aria-hidden="true">#</a>
+## Dom ref<a class="header-anchor" href="#dom-ref" aria-hidden="true" tabindex="-1">#</a>
 ### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" alt="svelte" width="20" height="20" class="framework-logo" /> Svelte
 ```svelte
 <script>
@@ -406,7 +406,7 @@ onMounted(() => {
 
 ### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" alt="angular" width="20" height="20" class="framework-logo" /> Angular
 <pre>Oops, missing snippet ! <a href="https://github.com/matschik/component-party/tree/main/content/2-templating/5-dom-ref">You can help us by contributing on Github.</a></pre>
-## Conditional<a class="header-anchor" href="#conditional" aria-hidden="true">#</a>
+## Conditional<a class="header-anchor" href="#conditional" aria-hidden="true" tabindex="-1">#</a>
 ### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" alt="svelte" width="20" height="20" class="framework-logo" /> Svelte
 ```svelte
 <script>
@@ -509,8 +509,8 @@ function nextLight() {
 
 ### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" alt="angular" width="20" height="20" class="framework-logo" /> Angular
 <pre>Oops, missing snippet ! <a href="https://github.com/matschik/component-party/tree/main/content/2-templating/6-conditional">You can help us by contributing on Github.</a></pre>
-# Lifecycle<a class="header-anchor" href="#lifecycle" aria-hidden="true">#</a>
-## On mount<a class="header-anchor" href="#on-mount" aria-hidden="true">#</a>
+# Lifecycle<a class="header-anchor" href="#lifecycle" aria-hidden="true" tabindex="-1">#</a>
+## On mount<a class="header-anchor" href="#on-mount" aria-hidden="true" tabindex="-1">#</a>
 ### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" alt="svelte" width="20" height="20" class="framework-logo" /> Svelte
 ```svelte
 <script>
@@ -559,7 +559,7 @@ onMounted(() => {
 
 ### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" alt="angular" width="20" height="20" class="framework-logo" /> Angular
 <pre>Oops, missing snippet ! <a href="https://github.com/matschik/component-party/tree/main/content/3-lifecycle/1-on-mount">You can help us by contributing on Github.</a></pre>
-## On unmount<a class="header-anchor" href="#on-unmount" aria-hidden="true">#</a>
+## On unmount<a class="header-anchor" href="#on-unmount" aria-hidden="true" tabindex="-1">#</a>
 ### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" alt="svelte" width="20" height="20" class="framework-logo" /> Svelte
 ```svelte
 <script>
@@ -624,8 +624,8 @@ onUnmounted(() => {
 
 ### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" alt="angular" width="20" height="20" class="framework-logo" /> Angular
 <pre>Oops, missing snippet ! <a href="https://github.com/matschik/component-party/tree/main/content/3-lifecycle/2-on-unmount">You can help us by contributing on Github.</a></pre>
-# Component composition<a class="header-anchor" href="#component-composition" aria-hidden="true">#</a>
-## Props<a class="header-anchor" href="#props" aria-hidden="true">#</a>
+# Component composition<a class="header-anchor" href="#component-composition" aria-hidden="true" tabindex="-1">#</a>
+## Props<a class="header-anchor" href="#props" aria-hidden="true" tabindex="-1">#</a>
 ### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" alt="svelte" width="20" height="20" class="framework-logo" /> Svelte
 ```svelte
 <script>
@@ -737,8 +737,8 @@ const props = defineProps({
 
 ### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" alt="angular" width="20" height="20" class="framework-logo" /> Angular
 <pre>Oops, missing snippet ! <a href="https://github.com/matschik/component-party/tree/main/content/4-component-composition/1-props">You can help us by contributing on Github.</a></pre>
-# Form input<a class="header-anchor" href="#form-input" aria-hidden="true">#</a>
-## Input text<a class="header-anchor" href="#input-text" aria-hidden="true">#</a>
+# Form input<a class="header-anchor" href="#form-input" aria-hidden="true" tabindex="-1">#</a>
+## Input text<a class="header-anchor" href="#input-text" aria-hidden="true" tabindex="-1">#</a>
 ### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" alt="svelte" width="20" height="20" class="framework-logo" /> Svelte
 ```svelte
 <script>
@@ -787,7 +787,7 @@ const text = ref('Hello World');
 
 ### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" alt="angular" width="20" height="20" class="framework-logo" /> Angular
 <pre>Oops, missing snippet ! <a href="https://github.com/matschik/component-party/tree/main/content/6-form-input/1-input-text">You can help us by contributing on Github.</a></pre>
-## Checkbox<a class="header-anchor" href="#checkbox" aria-hidden="true">#</a>
+## Checkbox<a class="header-anchor" href="#checkbox" aria-hidden="true" tabindex="-1">#</a>
 ### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" alt="svelte" width="20" height="20" class="framework-logo" /> Svelte
 ```svelte
 <script>
@@ -841,7 +841,7 @@ const isAvailable = ref(true);
 
 ### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" alt="angular" width="20" height="20" class="framework-logo" /> Angular
 <pre>Oops, missing snippet ! <a href="https://github.com/matschik/component-party/tree/main/content/6-form-input/2-checkbox">You can help us by contributing on Github.</a></pre>
-## Radio<a class="header-anchor" href="#radio" aria-hidden="true">#</a>
+## Radio<a class="header-anchor" href="#radio" aria-hidden="true" tabindex="-1">#</a>
 ### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" alt="svelte" width="20" height="20" class="framework-logo" /> Svelte
 ```svelte
 <script>
@@ -914,7 +914,7 @@ const picked = ref('red');
 
 ### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" alt="angular" width="20" height="20" class="framework-logo" /> Angular
 <pre>Oops, missing snippet ! <a href="https://github.com/matschik/component-party/tree/main/content/6-form-input/3-radio">You can help us by contributing on Github.</a></pre>
-## Select<a class="header-anchor" href="#select" aria-hidden="true">#</a>
+## Select<a class="header-anchor" href="#select" aria-hidden="true" tabindex="-1">#</a>
 ### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" alt="svelte" width="20" height="20" class="framework-logo" /> Svelte
 ```svelte
 <script>
@@ -1000,8 +1000,8 @@ const colors = [
 
 ### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" alt="angular" width="20" height="20" class="framework-logo" /> Angular
 <pre>Oops, missing snippet ! <a href="https://github.com/matschik/component-party/tree/main/content/6-form-input/4-select">You can help us by contributing on Github.</a></pre>
-# Webapp features<a class="header-anchor" href="#webapp-features" aria-hidden="true">#</a>
-## Routing<a class="header-anchor" href="#routing" aria-hidden="true">#</a>
+# Webapp features<a class="header-anchor" href="#webapp-features" aria-hidden="true" tabindex="-1">#</a>
+## Routing<a class="header-anchor" href="#routing" aria-hidden="true" tabindex="-1">#</a>
 ### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" alt="svelte" width="20" height="20" class="framework-logo" /> Svelte
 ```
 |-- routes/

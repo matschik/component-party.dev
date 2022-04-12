@@ -83,5 +83,5 @@ function addHashOnEachLine(content) {
 }
 
 function addHeaderAnchor(id){
-	return `<a class="header-anchor" href="#${kebabCase(id)}" aria-hidden="true">#</a>`
+	return `<a class="header-anchor" href="#${kebabCase(id)}" aria-hidden="true" tabindex="-1">#</a>`
 }
