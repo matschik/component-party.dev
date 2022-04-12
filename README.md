@@ -1062,8 +1062,13 @@ With <a href="https://nextjs.org/docs/basic-features/pages">NextJS</a>
 
 With <a href="https://remix.run/docs/en/v1/guides/routing">Remix</a>
 
-https://remix.run/docs/en/v1/guides/routing
-
+```
+|-- root.jsx // global app layout
+|-- pages/
+    |-- index.jsx // index page "/"
+    |-- about.jsx // about page "/about"
+    |-- $.jsx // fallback page
+```
 ### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/vue.svg" alt="vue3" width="20" height="20" class="framework-logo" /> Vue 3
 With <a href="https://v3.nuxtjs.org/guide/directory-structure/pages">Nuxt 3</a>
 
