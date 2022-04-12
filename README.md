@@ -39,7 +39,7 @@ This project requires Node.js to be `v14.0.0` or higher, because we use new Java
 
 # Reactivity<a class="header-anchor" href="#reactivity" aria-hidden="true">#</a>
 ## Declare state<a class="header-anchor" href="#declare-state" aria-hidden="true">#</a>
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" width="20" height="20" class="framework-logo" /> Svelte
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" alt="svelte" width="20" height="20" class="framework-logo" /> Svelte
 ```svelte
 <script>
 	let name = 'John';
@@ -48,7 +48,7 @@ This project requires Node.js to be `v14.0.0` or higher, because we use new Java
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/react.svg" width="20" height="20" class="framework-logo" /> React
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/react.svg" alt="react" width="20" height="20" class="framework-logo" /> React
 ```jsx
 import { useState } from 'react';
 
@@ -59,7 +59,7 @@ export default function Name() {
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/vue.svg" width="20" height="20" class="framework-logo" /> Vue 3
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/vue.svg" alt="vue3" width="20" height="20" class="framework-logo" /> Vue 3
 ```vue
 <script setup>
 import { ref } from 'vue';
@@ -69,7 +69,7 @@ console.log(name.value); // John
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" width="20" height="20" class="framework-logo" /> Angular
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" alt="angular" width="20" height="20" class="framework-logo" /> Angular
 ```ts
 import { Component, Input } from '@angular/core';
 
@@ -87,7 +87,7 @@ export class NameComponent {
 ```
 
 ## Update state<a class="header-anchor" href="#update-state" aria-hidden="true">#</a>
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" width="20" height="20" class="framework-logo" /> Svelte
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" alt="svelte" width="20" height="20" class="framework-logo" /> Svelte
 ```svelte
 <script>
 	let name = 'John';
@@ -97,7 +97,7 @@ export class NameComponent {
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/react.svg" width="20" height="20" class="framework-logo" /> React
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/react.svg" alt="react" width="20" height="20" class="framework-logo" /> React
 ```jsx
 import { useState } from 'react';
 
@@ -110,7 +110,7 @@ export default function Name() {
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/vue.svg" width="20" height="20" class="framework-logo" /> Vue 3
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/vue.svg" alt="vue3" width="20" height="20" class="framework-logo" /> Vue 3
 ```vue
 <script setup>
 import { ref } from 'vue';
@@ -121,7 +121,7 @@ console.log(name.value); // Jane
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" width="20" height="20" class="framework-logo" /> Angular
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" alt="angular" width="20" height="20" class="framework-logo" /> Angular
 ```ts
 import { Component, Input } from '@angular/core';
 
@@ -140,7 +140,7 @@ export class NameComponent {
 ```
 
 ## Computed state<a class="header-anchor" href="#computed-state" aria-hidden="true">#</a>
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" width="20" height="20" class="framework-logo" /> Svelte
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" alt="svelte" width="20" height="20" class="framework-logo" /> Svelte
 ```svelte
 <script>
 	let count = 10;
@@ -150,7 +150,7 @@ export class NameComponent {
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/react.svg" width="20" height="20" class="framework-logo" /> React
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/react.svg" alt="react" width="20" height="20" class="framework-logo" /> React
 ```jsx
 import { useState, useMemo } from 'react';
 
@@ -163,7 +163,7 @@ export default function DoubleCount() {
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/vue.svg" width="20" height="20" class="framework-logo" /> Vue 3
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/vue.svg" alt="vue3" width="20" height="20" class="framework-logo" /> Vue 3
 ```vue
 <script setup>
 import { ref, computed } from 'vue';
@@ -178,7 +178,7 @@ console.log(doubleCount.value); // 20
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" width="20" height="20" class="framework-logo" /> Angular
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" alt="angular" width="20" height="20" class="framework-logo" /> Angular
 ```ts
 import { Component, OnInit, Input, Pipe, PipeTransform, ChangeDetectionStrategy } from '@angular/core';
 
@@ -206,13 +206,13 @@ export class DoublecountComponent implements OnInit {
 
 # Templating<a class="header-anchor" href="#templating" aria-hidden="true">#</a>
 ## Minimal template<a class="header-anchor" href="#minimal-template" aria-hidden="true">#</a>
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" width="20" height="20" class="framework-logo" /> Svelte
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" alt="svelte" width="20" height="20" class="framework-logo" /> Svelte
 ```svelte
 <h1>Hello world</h1>
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/react.svg" width="20" height="20" class="framework-logo" /> React
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/react.svg" alt="react" width="20" height="20" class="framework-logo" /> React
 ```jsx
 export default function HelloWorld() {
 	return <h1>Hello world</h1>;
@@ -220,7 +220,7 @@ export default function HelloWorld() {
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/vue.svg" width="20" height="20" class="framework-logo" /> Vue 3
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/vue.svg" alt="vue3" width="20" height="20" class="framework-logo" /> Vue 3
 ```vue
 <template>
   <h1>Hello world</h1>
@@ -228,10 +228,10 @@ export default function HelloWorld() {
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" width="20" height="20" class="framework-logo" /> Angular
-<pre>Oops, missing snippet ! You can contribute <a href="https://github.com/matschik/component-party/tree/main/content/2-templating/1-minimal-template">here</a> to fill this snippet.</pre>
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" alt="angular" width="20" height="20" class="framework-logo" /> Angular
+<pre>Oops, missing snippet ! <a href="https://github.com/matschik/component-party/tree/main/content/2-templating/1-minimal-template">You can help us by contributing on Github.</a></pre>
 ## Styling<a class="header-anchor" href="#styling" aria-hidden="true">#</a>
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" width="20" height="20" class="framework-logo" /> Svelte
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" alt="svelte" width="20" height="20" class="framework-logo" /> Svelte
 ```svelte
 <h1 class="title">Hello world</h1>
 <button style="font-size: 10rem;">I am a button</button>
@@ -244,7 +244,7 @@ export default function HelloWorld() {
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/react.svg" width="20" height="20" class="framework-logo" /> React
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/react.svg" alt="react" width="20" height="20" class="framework-logo" /> React
 ```jsx
 export default function HelloWorld() {
 	// how do you declare title class ??
@@ -259,7 +259,7 @@ export default function HelloWorld() {
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/vue.svg" width="20" height="20" class="framework-logo" /> Vue 3
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/vue.svg" alt="vue3" width="20" height="20" class="framework-logo" /> Vue 3
 ```vue
 <template>
   <h1 class="title">
@@ -278,10 +278,10 @@ export default function HelloWorld() {
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" width="20" height="20" class="framework-logo" /> Angular
-<pre>Oops, missing snippet ! You can contribute <a href="https://github.com/matschik/component-party/tree/main/content/2-templating/2-styling">here</a> to fill this snippet.</pre>
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" alt="angular" width="20" height="20" class="framework-logo" /> Angular
+<pre>Oops, missing snippet ! <a href="https://github.com/matschik/component-party/tree/main/content/2-templating/2-styling">You can help us by contributing on Github.</a></pre>
 ## Loop<a class="header-anchor" href="#loop" aria-hidden="true">#</a>
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" width="20" height="20" class="framework-logo" /> Svelte
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" alt="svelte" width="20" height="20" class="framework-logo" /> Svelte
 ```svelte
 <script>
 	const colors = ['red', 'green', 'blue'];
@@ -295,7 +295,7 @@ export default function HelloWorld() {
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/react.svg" width="20" height="20" class="framework-logo" /> React
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/react.svg" alt="react" width="20" height="20" class="framework-logo" /> React
 ```jsx
 export default function Colors() {
 	const colors = ['red', 'green', 'blue'];
@@ -310,7 +310,7 @@ export default function Colors() {
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/vue.svg" width="20" height="20" class="framework-logo" /> Vue 3
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/vue.svg" alt="vue3" width="20" height="20" class="framework-logo" /> Vue 3
 ```vue
 <script setup>
 const colors = ['red', 'green', 'blue'];
@@ -329,10 +329,10 @@ const colors = ['red', 'green', 'blue'];
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" width="20" height="20" class="framework-logo" /> Angular
-<pre>Oops, missing snippet ! You can contribute <a href="https://github.com/matschik/component-party/tree/main/content/2-templating/3-loop">here</a> to fill this snippet.</pre>
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" alt="angular" width="20" height="20" class="framework-logo" /> Angular
+<pre>Oops, missing snippet ! <a href="https://github.com/matschik/component-party/tree/main/content/2-templating/3-loop">You can help us by contributing on Github.</a></pre>
 ## Event click<a class="header-anchor" href="#event-click" aria-hidden="true">#</a>
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" width="20" height="20" class="framework-logo" /> Svelte
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" alt="svelte" width="20" height="20" class="framework-logo" /> Svelte
 ```svelte
 <script>
 	let count = 0;
@@ -347,7 +347,7 @@ const colors = ['red', 'green', 'blue'];
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/react.svg" width="20" height="20" class="framework-logo" /> React
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/react.svg" alt="react" width="20" height="20" class="framework-logo" /> React
 ```jsx
 import { useState } from 'react';
 
@@ -368,7 +368,7 @@ export default function Name() {
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/vue.svg" width="20" height="20" class="framework-logo" /> Vue 3
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/vue.svg" alt="vue3" width="20" height="20" class="framework-logo" /> Vue 3
 ```vue
 <script setup>
 import { ref } from 'vue';
@@ -388,10 +388,10 @@ function incrementCount() {
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" width="20" height="20" class="framework-logo" /> Angular
-<pre>Oops, missing snippet ! You can contribute <a href="https://github.com/matschik/component-party/tree/main/content/2-templating/4-event-click">here</a> to fill this snippet.</pre>
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" alt="angular" width="20" height="20" class="framework-logo" /> Angular
+<pre>Oops, missing snippet ! <a href="https://github.com/matschik/component-party/tree/main/content/2-templating/4-event-click">You can help us by contributing on Github.</a></pre>
 ## Dom ref<a class="header-anchor" href="#dom-ref" aria-hidden="true">#</a>
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" width="20" height="20" class="framework-logo" /> Svelte
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" alt="svelte" width="20" height="20" class="framework-logo" /> Svelte
 ```svelte
 <script>
 	import { onMount } from 'svelte';
@@ -407,7 +407,7 @@ function incrementCount() {
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/react.svg" width="20" height="20" class="framework-logo" /> React
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/react.svg" alt="react" width="20" height="20" class="framework-logo" /> React
 ```jsx
 import { useEffect, useRef } from 'react';
 
@@ -421,7 +421,7 @@ export default function InputFocused() {
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/vue.svg" width="20" height="20" class="framework-logo" /> Vue 3
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/vue.svg" alt="vue3" width="20" height="20" class="framework-logo" /> Vue 3
 ```vue
 <script setup>
 import { ref, onMounted } from 'vue';
@@ -439,10 +439,10 @@ onMounted(() => {
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" width="20" height="20" class="framework-logo" /> Angular
-<pre>Oops, missing snippet ! You can contribute <a href="https://github.com/matschik/component-party/tree/main/content/2-templating/5-dom-ref">here</a> to fill this snippet.</pre>
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" alt="angular" width="20" height="20" class="framework-logo" /> Angular
+<pre>Oops, missing snippet ! <a href="https://github.com/matschik/component-party/tree/main/content/2-templating/5-dom-ref">You can help us by contributing on Github.</a></pre>
 ## Conditional<a class="header-anchor" href="#conditional" aria-hidden="true">#</a>
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" width="20" height="20" class="framework-logo" /> Svelte
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" alt="svelte" width="20" height="20" class="framework-logo" /> Svelte
 ```svelte
 <script>
 	const TRAFFIC_LIGHTS = ['red', 'orange', 'green'];
@@ -474,7 +474,7 @@ onMounted(() => {
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/react.svg" width="20" height="20" class="framework-logo" /> React
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/react.svg" alt="react" width="20" height="20" class="framework-logo" /> React
 ```jsx
 import { useState, useMemo } from 'react';
 
@@ -509,7 +509,7 @@ export default function TrafficLight() {
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/vue.svg" width="20" height="20" class="framework-logo" /> Vue 3
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/vue.svg" alt="vue3" width="20" height="20" class="framework-logo" /> Vue 3
 ```vue
 <script setup>
 import { ref, computed } from 'vue';
@@ -542,11 +542,11 @@ function nextLight() {
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" width="20" height="20" class="framework-logo" /> Angular
-<pre>Oops, missing snippet ! You can contribute <a href="https://github.com/matschik/component-party/tree/main/content/2-templating/6-conditional">here</a> to fill this snippet.</pre>
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" alt="angular" width="20" height="20" class="framework-logo" /> Angular
+<pre>Oops, missing snippet ! <a href="https://github.com/matschik/component-party/tree/main/content/2-templating/6-conditional">You can help us by contributing on Github.</a></pre>
 # Lifecycle<a class="header-anchor" href="#lifecycle" aria-hidden="true">#</a>
 ## On mount<a class="header-anchor" href="#on-mount" aria-hidden="true">#</a>
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" width="20" height="20" class="framework-logo" /> Svelte
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" alt="svelte" width="20" height="20" class="framework-logo" /> Svelte
 ```svelte
 <script>
 	import { onMount } from 'svelte';
@@ -560,7 +560,7 @@ function nextLight() {
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/react.svg" width="20" height="20" class="framework-logo" /> React
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/react.svg" alt="react" width="20" height="20" class="framework-logo" /> React
 ```jsx
 import { useState, useEffect } from 'react';
 
@@ -576,7 +576,7 @@ export default function PageTitle() {
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/vue.svg" width="20" height="20" class="framework-logo" /> Vue 3
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/vue.svg" alt="vue3" width="20" height="20" class="framework-logo" /> Vue 3
 ```vue
 <script setup>
 import { ref, onMounted } from 'vue';
@@ -592,10 +592,10 @@ onMounted(() => {
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" width="20" height="20" class="framework-logo" /> Angular
-<pre>Oops, missing snippet ! You can contribute <a href="https://github.com/matschik/component-party/tree/main/content/3-lifecycle/1-on-mount">here</a> to fill this snippet.</pre>
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" alt="angular" width="20" height="20" class="framework-logo" /> Angular
+<pre>Oops, missing snippet ! <a href="https://github.com/matschik/component-party/tree/main/content/3-lifecycle/1-on-mount">You can help us by contributing on Github.</a></pre>
 ## On unmount<a class="header-anchor" href="#on-unmount" aria-hidden="true">#</a>
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" width="20" height="20" class="framework-logo" /> Svelte
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" alt="svelte" width="20" height="20" class="framework-logo" /> Svelte
 ```svelte
 <script>
 	import { onDestroy } from 'svelte';
@@ -615,7 +615,7 @@ onMounted(() => {
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/react.svg" width="20" height="20" class="framework-logo" /> React
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/react.svg" alt="react" width="20" height="20" class="framework-logo" /> React
 ```jsx
 import { useState, useEffect } from 'react';
 
@@ -637,7 +637,7 @@ export default function Time() {
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/vue.svg" width="20" height="20" class="framework-logo" /> Vue 3
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/vue.svg" alt="vue3" width="20" height="20" class="framework-logo" /> Vue 3
 ```vue
 <script setup>
 import { ref, onUnmounted } from 'vue';
@@ -657,11 +657,11 @@ onUnmounted(() => {
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" width="20" height="20" class="framework-logo" /> Angular
-<pre>Oops, missing snippet ! You can contribute <a href="https://github.com/matschik/component-party/tree/main/content/3-lifecycle/2-on-unmount">here</a> to fill this snippet.</pre>
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" alt="angular" width="20" height="20" class="framework-logo" /> Angular
+<pre>Oops, missing snippet ! <a href="https://github.com/matschik/component-party/tree/main/content/3-lifecycle/2-on-unmount">You can help us by contributing on Github.</a></pre>
 # Component composition<a class="header-anchor" href="#component-composition" aria-hidden="true">#</a>
 ## Props<a class="header-anchor" href="#props" aria-hidden="true">#</a>
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" width="20" height="20" class="framework-logo" /> Svelte
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" alt="svelte" width="20" height="20" class="framework-logo" /> Svelte
 ```svelte
 <script>
 	import UserProfile from './UserProfile.svelte';
@@ -686,7 +686,7 @@ onUnmounted(() => {
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/react.svg" width="20" height="20" class="framework-logo" /> React
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/react.svg" alt="react" width="20" height="20" class="framework-logo" /> React
 ```jsx
 import UserProfile from './UserProfile.jsx';
 
@@ -719,7 +719,7 @@ UserProfile.propTypes = {
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/vue.svg" width="20" height="20" class="framework-logo" /> Vue 3
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/vue.svg" alt="vue3" width="20" height="20" class="framework-logo" /> Vue 3
 ```vue
 <script setup>
 import { ref } from 'vue';
@@ -770,11 +770,11 @@ const props = defineProps({
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" width="20" height="20" class="framework-logo" /> Angular
-<pre>Oops, missing snippet ! You can contribute <a href="https://github.com/matschik/component-party/tree/main/content/4-component-composition/1-props">here</a> to fill this snippet.</pre>
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" alt="angular" width="20" height="20" class="framework-logo" /> Angular
+<pre>Oops, missing snippet ! <a href="https://github.com/matschik/component-party/tree/main/content/4-component-composition/1-props">You can help us by contributing on Github.</a></pre>
 # Form input<a class="header-anchor" href="#form-input" aria-hidden="true">#</a>
 ## Input text<a class="header-anchor" href="#input-text" aria-hidden="true">#</a>
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" width="20" height="20" class="framework-logo" /> Svelte
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" alt="svelte" width="20" height="20" class="framework-logo" /> Svelte
 ```svelte
 <script>
 	let text = 'Hello World';
@@ -785,7 +785,7 @@ const props = defineProps({
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/react.svg" width="20" height="20" class="framework-logo" /> React
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/react.svg" alt="react" width="20" height="20" class="framework-logo" /> React
 ```jsx
 import { useState } from 'react';
 
@@ -806,7 +806,7 @@ export default function InputHello() {
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/vue.svg" width="20" height="20" class="framework-logo" /> Vue 3
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/vue.svg" alt="vue3" width="20" height="20" class="framework-logo" /> Vue 3
 ```vue
 <script setup>
 import { ref } from 'vue';
@@ -820,10 +820,10 @@ const text = ref('Hello World');
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" width="20" height="20" class="framework-logo" /> Angular
-<pre>Oops, missing snippet ! You can contribute <a href="https://github.com/matschik/component-party/tree/main/content/6-form-input/1-input-text">here</a> to fill this snippet.</pre>
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" alt="angular" width="20" height="20" class="framework-logo" /> Angular
+<pre>Oops, missing snippet ! <a href="https://github.com/matschik/component-party/tree/main/content/6-form-input/1-input-text">You can help us by contributing on Github.</a></pre>
 ## Checkbox<a class="header-anchor" href="#checkbox" aria-hidden="true">#</a>
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" width="20" height="20" class="framework-logo" /> Svelte
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" alt="svelte" width="20" height="20" class="framework-logo" /> Svelte
 ```svelte
 <script>
 	let isAvailable = false;
@@ -834,7 +834,7 @@ const text = ref('Hello World');
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/react.svg" width="20" height="20" class="framework-logo" /> React
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/react.svg" alt="react" width="20" height="20" class="framework-logo" /> React
 ```jsx
 import { useState } from 'react';
 
@@ -855,7 +855,7 @@ export default function IsAvailable() {
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/vue.svg" width="20" height="20" class="framework-logo" /> Vue 3
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/vue.svg" alt="vue3" width="20" height="20" class="framework-logo" /> Vue 3
 ```vue
 <script setup>
 import { ref } from 'vue';
@@ -874,10 +874,10 @@ const isAvailable = ref(true);
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" width="20" height="20" class="framework-logo" /> Angular
-<pre>Oops, missing snippet ! You can contribute <a href="https://github.com/matschik/component-party/tree/main/content/6-form-input/2-checkbox">here</a> to fill this snippet.</pre>
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" alt="angular" width="20" height="20" class="framework-logo" /> Angular
+<pre>Oops, missing snippet ! <a href="https://github.com/matschik/component-party/tree/main/content/6-form-input/2-checkbox">You can help us by contributing on Github.</a></pre>
 ## Radio<a class="header-anchor" href="#radio" aria-hidden="true">#</a>
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" width="20" height="20" class="framework-logo" /> Svelte
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" alt="svelte" width="20" height="20" class="framework-logo" /> Svelte
 ```svelte
 <script>
 	let picked = 'red';
@@ -893,7 +893,7 @@ const isAvailable = ref(true);
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/react.svg" width="20" height="20" class="framework-logo" /> React
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/react.svg" alt="react" width="20" height="20" class="framework-logo" /> React
 ```jsx
 import { useState } from 'react';
 
@@ -917,7 +917,7 @@ export default function PickPill() {
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/vue.svg" width="20" height="20" class="framework-logo" /> Vue 3
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/vue.svg" alt="vue3" width="20" height="20" class="framework-logo" /> Vue 3
 ```vue
 <script setup>
 import { ref } from 'vue';
@@ -947,10 +947,10 @@ const picked = ref('red');
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" width="20" height="20" class="framework-logo" /> Angular
-<pre>Oops, missing snippet ! You can contribute <a href="https://github.com/matschik/component-party/tree/main/content/6-form-input/3-radio">here</a> to fill this snippet.</pre>
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" alt="angular" width="20" height="20" class="framework-logo" /> Angular
+<pre>Oops, missing snippet ! <a href="https://github.com/matschik/component-party/tree/main/content/6-form-input/3-radio">You can help us by contributing on Github.</a></pre>
 ## Select<a class="header-anchor" href="#select" aria-hidden="true">#</a>
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" width="20" height="20" class="framework-logo" /> Svelte
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" alt="svelte" width="20" height="20" class="framework-logo" /> Svelte
 ```svelte
 <script>
 	let selectedColorId = 2;
@@ -973,7 +973,7 @@ const picked = ref('red');
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/react.svg" width="20" height="20" class="framework-logo" /> React
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/react.svg" alt="react" width="20" height="20" class="framework-logo" /> React
 ```jsx
 import { useState } from 'react';
 
@@ -1004,7 +1004,7 @@ export default function ColorSelect() {
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/vue.svg" width="20" height="20" class="framework-logo" /> Vue 3
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/vue.svg" alt="vue3" width="20" height="20" class="framework-logo" /> Vue 3
 ```vue
 <script setup>
 import { ref } from 'vue';
@@ -1033,11 +1033,11 @@ const colors = [
 
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" width="20" height="20" class="framework-logo" /> Angular
-<pre>Oops, missing snippet ! You can contribute <a href="https://github.com/matschik/component-party/tree/main/content/6-form-input/4-select">here</a> to fill this snippet.</pre>
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" alt="angular" width="20" height="20" class="framework-logo" /> Angular
+<pre>Oops, missing snippet ! <a href="https://github.com/matschik/component-party/tree/main/content/6-form-input/4-select">You can help us by contributing on Github.</a></pre>
 # Webapp features<a class="header-anchor" href="#webapp-features" aria-hidden="true">#</a>
 ## Routing<a class="header-anchor" href="#routing" aria-hidden="true">#</a>
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" width="20" height="20" class="framework-logo" /> Svelte
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg" alt="svelte" width="20" height="20" class="framework-logo" /> Svelte
 ```
 |-- routes/
     |-- index.svelte // index page "/"
@@ -1046,7 +1046,7 @@ const colors = [
     |-- __layout.svelte // global app layout
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/react.svg" width="20" height="20" class="framework-logo" /> React
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/react.svg" alt="react" width="20" height="20" class="framework-logo" /> React
 ```
 |-- pages/
     |-- index.js // index page "/"
@@ -1058,13 +1058,13 @@ const colors = [
 
 https://remix.run/docs/en/v1/guides/routing
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/vue.svg" width="20" height="20" class="framework-logo" /> Vue 3
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/vue.svg" alt="vue3" width="20" height="20" class="framework-logo" /> Vue 3
 ```
 |-- pages/
     |-- index.vue // index page "/"
     |-- about.vue // about page "/about"
 ```
 
-### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" width="20" height="20" class="framework-logo" /> Angular
-<pre>Oops, missing snippet ! You can contribute <a href="https://github.com/matschik/component-party/tree/main/content/7-webapp-features/1-routing">here</a> to fill this snippet.</pre>
+### <img src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg" alt="angular" width="20" height="20" class="framework-logo" /> Angular
+<pre>Oops, missing snippet ! <a href="https://github.com/matschik/component-party/tree/main/content/7-webapp-features/1-routing">You can help us by contributing on Github.</a></pre>
 
