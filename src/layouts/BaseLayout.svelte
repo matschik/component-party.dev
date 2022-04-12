@@ -16,12 +16,12 @@
 				margin-top: 0px;
 			}
 
-			h1:hover .header-anchor,
-			h2:hover .header-anchor {
+			#main-content h1:hover .header-anchor,
+			#main-content h2:hover .header-anchor {
 				opacity: 100;
 			}
 
-			.header-anchor {
+			#main-content .header-anchor {
 				float: left;
 				margin-left: -0.87em;
 				padding-right: 0.23em;
