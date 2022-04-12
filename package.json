@@ -48,6 +48,7 @@
     "husky": "^7.0.4",
     "lint-staged": "^12.3.7",
     "lodash.kebabcase": "^4.1.1",
+    "pkg-dir": "^6.0.1",
     "postcss": "^8.4.12",
     "prettier": "^2.6.2",
     "prettier-plugin-svelte": "^2.7.0",

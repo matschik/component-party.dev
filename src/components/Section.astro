@@ -6,7 +6,7 @@ import kebabCase from 'lodash.kebabcase';
 import { Code, Markdown} from "astro/components"
 import nodePath from "node:path"
 
-const { id } = Astro.props
+const { sectionPath } = Astro.props
 
 const sections = []
 
@@ -18,11 +18,10 @@ function capitalize(string) {
 	return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-const contentURL = new URL(`../../content/${id}`, import.meta.url);
-const subSectionDirNames = await fs.readdir(contentURL)
+const subSectionDirNames = await fs.readdir(sectionPath)
 
 for(const dirName of subSectionDirNames){
-    const path = `${contentURL.pathname}/${dirName}`
+    const path = `${sectionPath}/${dirName}`
     const title = dirNameToTitle(dirName)
 
     const frameworkDirs = await fs.readdir(path)
@@ -60,7 +59,7 @@ for(const dirName of subSectionDirNames){
 }
 ---
 
-<Title as="h1" content={dirNameToTitle(id)} />
+<Title as="h1" content={dirNameToTitle(sectionPath.split("/").pop())} />
 {sections.map((section) => 
     (
         <>
