@@ -34,7 +34,7 @@
 		<script src="/hash-change-on-headings.js"></script>
 	</head>
 	<body class="bg-gray-900 text-white">
-		<header class="border-b border-gray-700 bg-gray-900 fixed top-0 w-full">
+		<header class="border-b border-gray-700 z-10 fixed w-full top-0 backdrop-blur">
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div class="flex justify-between items-center py-3">
 					<div>
