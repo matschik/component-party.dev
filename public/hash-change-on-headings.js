@@ -1,9 +1,39 @@
 window.addEventListener('DOMContentLoaded', () => {
 	hashChangeOnHeadingsModule();
 	frameworkDisplayModule();
+	codeViewerModule();
 });
 
+function codeViewerModule() {
+	function applyFileSelected(codeViewerId) {
+		for (const $fileSelected of document.querySelectorAll(`[data-codeviewer=${codeViewerId}][data-file-selected]`)) {
+			const filenameSelected = $fileSelected.getAttribute('data-file-selected');
+			for (const $file of $fileSelected.querySelectorAll('[data-file]')) {
+				const filename = $file.getAttribute('data-file');
+				$file.style.display = filename === filenameSelected ? 'block' : 'none';
+			}
+
+			for (const $fileButton of document.querySelectorAll(`[data-codeviewer=${codeViewerId}][data-file-button]`)) {
+				const filename = $fileButton.getAttribute('data-file-button');
+				$fileButton.style.fontWeight = filename === filenameSelected ? 600 : 400;
+			}
+		}
+	}
+
+	for (const $fileButton of document.querySelectorAll('[data-file-button]')) {
+		$fileButton.addEventListener('click', () => {
+			const filename = $fileButton.getAttribute('data-file-button');
+			const codeViewerId = $fileButton.getAttribute('data-codeviewer');
+			const target = document.querySelector(`[data-codeviewer=${codeViewerId}][data-file-selected]`);
+			target.setAttribute('data-file-selected', filename);
+			applyFileSelected(codeViewerId);
+		});
+	}
+}
+
 function frameworkDisplayModule() {
+	const frameworks = ['react', 'svelte', 'angular', 'vue3'];
+
 	const $ = {
 		fmwButtonHide: (framework) => document.querySelectorAll(framework ? `[data-framework-button-hide=${framework}]` : '[data-framework-button-hide]'),
 		fmwButtonShow: (framework) => document.querySelectorAll(framework ? `[data-framework-button-show=${framework}]` : '[data-framework-button-show]'),
@@ -19,34 +49,38 @@ function frameworkDisplayModule() {
 					const frameworkIndex = hiddenFrameworksProxy.indexOf(framework);
 					delete hiddenFrameworksProxy[frameworkIndex];
 				}
-				for (const $el of $.fmwContent(framework)) {
-					$el.style.display = 'block';
-				}
-				for (const $el of $.fmwButtonShow(framework)) {
-					$el.style.display = 'none';
-				}
+				apply();
 			},
 			hide() {
 				if (!hiddenFrameworksProxy.includes(framework)) {
 					hiddenFrameworksProxy.push(framework);
 				}
-				for (const $el of $.fmwContent(framework)) {
-					$el.style.display = 'none';
-				}
-				for (const $el of $.fmwButtonShow(framework)) {
-					$el.style.display = 'block';
-				}
+				apply();
 			},
 		};
 	}
 
-	for (const $el of $.fmwButtonShow()) {
-		$el.style.display = 'none';
+	function apply() {
+		for (const frameworkToHide of Object.values(hiddenFrameworksProxy)) {
+			for (const $el of $.fmwContent(frameworkToHide)) {
+				$el.style.display = 'none';
+			}
+			for (const $el of $.fmwButtonShow(frameworkToHide)) {
+				$el.style.display = 'block';
+			}
+		}
+
+		for (const frameworkToShow of arrayDiff(Object.values(hiddenFrameworksProxy), frameworks)) {
+			for (const $el of $.fmwContent(frameworkToShow)) {
+				$el.style.display = 'block';
+			}
+			for (const $el of $.fmwButtonShow(frameworkToShow)) {
+				$el.style.display = 'none';
+			}
+		}
 	}
 
-	for (const hiddenFramework of Object.values(hiddenFrameworksProxy)) {
-		onFramework(hiddenFramework).hide();
-	}
+	apply();
 
 	for (const $fmwButton of $.fmwButtonHide()) {
 		const framework = $fmwButton.getAttribute('data-framework-button-hide');
@@ -124,4 +158,22 @@ function createLocaleStorage(k) {
 			localStorage.removeItem(k);
 		},
 	};
+}
+
+function arrayDiff(a1, a2) {
+	var diff = {};
+
+	for (var i = 0; i < a1.length; i++) {
+		diff[a1[i]] = true;
+	}
+
+	for (var i = 0; i < a2.length; i++) {
+		if (diff[a2[i]]) {
+			delete diff[a2[i]];
+		} else {
+			diff[a2[i]] = true;
+		}
+	}
+
+	return Object.keys(diff);
 }
