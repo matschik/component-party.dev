@@ -6,15 +6,6 @@
 </script>
 
 {#if framework.img}
-	<img src={framework.img} alt={framework.id} width="20" height="20" class="framework-logo" />
+	<img src={framework.img} alt={framework.id} width="20" height="20" class="inline mr-[5px] mb-0 mt-0" />
 {/if}
 <span>{framework.title}</span>
-
-<style>
-	.framework-logo {
-		display: inline;
-		margin-right: 5px;
-		margin-bottom: 0px;
-		margin-top: 0px;
-	}
-</style>

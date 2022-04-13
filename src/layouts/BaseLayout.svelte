@@ -9,13 +9,6 @@
 		<link rel="icon" href="/favicon.png" />
 		<meta name="description" content="Web component JS frameworks overview by their syntax and features." />
 		<style>
-			#main-content .framework-logo {
-				display: inline;
-				margin-right: 5px;
-				margin-bottom: 0px;
-				margin-top: 0px;
-			}
-
 			#main-content h1:hover .header-anchor,
 			#main-content h2:hover .header-anchor {
 				opacity: 100;

@@ -11,6 +11,6 @@ const sectionNames = await fs.readdir(contentURL)
 
 <Layout>
     {sectionNames.map((sectionName) => 
-        <Section sectionPath={`${contentURL}/${sectionName}`} />
+        <Section path={`${contentURL}/${sectionName}`} />
     )}
 </Layout>
