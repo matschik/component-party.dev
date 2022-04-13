@@ -4,6 +4,8 @@
 
 > Web component JS frameworks quick overview by their syntax and features
 
+**Website: https://component-party.pages.dev**
+
 ## Why ?
 
 Many JS developers don't have a good overview of every existing JS framework with their own syntax and features.
@@ -11,22 +13,27 @@ How do we solve this ? Developers love having framework overview by examples. It
 
 ## Roadmap
 
-- [ ] Website (built with Astro)
-- [ ] Add SolidJS support
 - [ ] Add Angular support
+- [ ] Add SolidJS support
 - [ ] Add Preact support
 - [ ] Add Alpine support
+- [x] Website (built with Astro)
 - [x] Add React support
 - [x] Add Svelte support
 - [x] Add Vue 3 support
 
 ## Contributing
 
-1. Fork it!
-2. Create your feature branch: `git checkout -b my-new-feature`
-3. Commit your changes: `git commit -am 'Add some feature'`
-4. Push to the branch: `git push origin my-new-feature`
-5. Submit a pull request :D
+This site is built with [Astro](https://docs.astro.build). Site content is written in Markdown format located in `content`. For simple edits, you can directly edit the file on GitHub and generate a Pull Request.
+
+For local development, [pnpm](https://pnpm.io/) is preferred as package manager:
+
+```bash
+pnpm i
+pnpm run dev
+```
+
+This project requires Node.js to be `v14.0.0` or higher, because we use new JavaScript features in our code, such as optional chaining.
 
 ---
 

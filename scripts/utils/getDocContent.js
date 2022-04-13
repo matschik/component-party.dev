@@ -37,7 +37,7 @@ export default function getDocContent() {
 				function addSnippetWrap(content) {
 					return `\`\`\`${framework.ext}\n${content}\n\`\`\`\n\n`;
 				}
-				const imgTag = framework.img ? `<img src="${framework.img}" width="20" height="20" class="framework-logo" />` : '';
+				const imgTag = framework.img ? `<img src="${framework.img}" alt="${framework.id}" width="20" height="20" class="framework-logo" />` : '';
 				fileContent += `### ${imgTag} ${framework.title}\n`;
 
 				const frameworkDirPath = `${sectionDir}/${subSectionDir}/${framework.id}`;
@@ -51,7 +51,7 @@ export default function getDocContent() {
 						fileContent += frameworkFileContent;
 					}
 				} else {
-					fileContent += `<pre>Oops, missing snippet ! You can contribute <a href="https://github.com/matschik/component-party/tree/main/${sectionDir}/${subSectionDir}">here</a> to fill this snippet.</pre>\n`;
+					fileContent += `<pre>Oops, missing snippet ! <a href="https://github.com/matschik/component-party/tree/main/${sectionDir}/${subSectionDir}">You can help us by contributing on Github.</a></pre>\n`;
 				}
 			}
 		}
@@ -82,6 +82,6 @@ function addHashOnEachLine(content) {
 	);
 }
 
-function addHeaderAnchor(id){
-	return `<a class="header-anchor" href="#${kebabCase(id)}" aria-hidden="true">#</a>`
+function addHeaderAnchor(id) {
+	return `<a class="header-anchor" href="#${kebabCase(id)}" aria-hidden="true" tabindex="-1">#</a>`;
 }

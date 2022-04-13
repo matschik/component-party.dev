@@ -1,3 +1,5 @@
+With <a href="https://nextjs.org/docs/basic-features/pages">NextJS</a>
+
 ```
 |-- pages/
     |-- index.js // index page "/"

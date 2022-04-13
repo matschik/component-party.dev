@@ -9,19 +9,12 @@
 		<link rel="icon" href="/favicon.png" />
 		<meta name="description" content="Web component JS frameworks overview by their syntax and features." />
 		<style>
-			#main-content .framework-logo {
-				display: inline;
-				margin-right: 5px;
-				margin-bottom: 0px;
-				margin-top: 0px;
-			}
-
-			h1:hover .header-anchor,
-			h2:hover .header-anchor {
+			#main-content h1:hover .header-anchor,
+			#main-content h2:hover .header-anchor {
 				opacity: 100;
 			}
 
-			.header-anchor {
+			#main-content .header-anchor {
 				float: left;
 				margin-left: -0.87em;
 				padding-right: 0.23em;
@@ -34,12 +27,10 @@
 		<script src="/hash-change-on-headings.js"></script>
 	</head>
 	<body class="bg-gray-900 text-white">
-		<header class="border-b border-gray-700 bg-gray-900 fixed top-0 w-full">
+		<header class="border-b border-gray-700 z-10 fixed w-full top-0 backdrop-blur">
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div class="flex justify-between items-center py-3">
-					<div>
-						<span class="font-semibold text-lg">Component party</span>
-					</div>
+					<a class="font-semibold text-lg" href="#reactivity">Component party</a>
 
 					<div>
 						<a href="https://github.com/matschik/component-party" title="github" target="_blank" rel="noopener noreferrer">
@@ -79,7 +70,7 @@
 						{/each}
 					</nav>
 				</aside>
-				<main id="main-content" class="prose prose-invert prose-h1:scroll-mt-20 prose-h2:scroll-mt-20 w-full mx-auto pb-8 mt-10">
+				<main id="main-content" class="prose prose-invert prose-h1:scroll-mt-20 prose-pre:mt-0 prose-h2:scroll-mt-20 w-full mx-auto pb-8 mt-10">
 					<slot />
 				</main>
 			</div>
