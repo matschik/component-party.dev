@@ -9,6 +9,8 @@ import FRAMEWORKS from '../frameworks';
 
 const { path: sectionPath } = Astro.props
 
+const sectionId = sectionPath.split("/").pop()
+
 const sections = []
 
 function dirNameToTitle(dirName) {
@@ -60,24 +62,35 @@ for(const dirName of subSectionDirNames){
 }
 ---
 
-<Title as="h1" content={dirNameToTitle(sectionPath.split("/").pop())} />
+<Title as="h1" content={dirNameToTitle(sectionId)} />
 {sections.map((section) => 
     (
         <>
             <Title as="h2" content={section.title}/>
             {FRAMEWORKS.map((framework) => (
                 <>
-                    <h3><FrameworkLabel id={framework.id} /></h3>
-                    {section.frameworkSections.find(f => f.dirName === framework.id) ?
-                        section.frameworkSections.find(f => f.dirName === framework.id).files.map((file) => (
-                            file.ext === 'md'
-                            ? <Markdown set:html={file.content} />
-                            :
-                            <Code code={file.content} lang={file.ext} />
-                        ))
-                    :
-                        <pre>Oops, missing snippet ! <a href={`https://github.com/matschik/component-party/tree/main/content/${sectionPath.split("/").pop()}/${section.dirName}`}>You can help us by contributing on Github.</a></pre>
-                    }
+                    <div role="button" data-framework-button={framework.id}>
+                        <h3 class="hover:bg-gray-800 rounded py-1 px-2">
+                            <FrameworkLabel id={framework.id} />
+                        </h3>
+                    </div>
+                    <div data-framework-content={framework.id}>
+                        {section.frameworkSections.find(f => f.dirName === framework.id) ?
+                            section.frameworkSections.find(f => f.dirName === framework.id).files.map((file) => (
+                                file.ext === 'md'
+                                ? <Markdown set:html={file.content} />
+                                :
+                                <div>
+                                    <div class="bg-gray-800 py-1.5 px-3 text-xs rounded-t inline-block">
+                                        {file.fileName}
+                                    </div>
+                                    <Code code={file.content} lang={file.ext} />
+                                </div>
+                            ))
+                        :
+                            <pre>Oops, missing snippet ! <a href={`https://github.com/matschik/component-party/tree/main/content/${sectionId}/${section.dirName}`}>You can help us by contributing on Github.</a></pre>
+                        }
+                    </div>
                 
                 </>
             ))}

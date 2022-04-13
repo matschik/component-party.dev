@@ -8,7 +8,6 @@ const rootDir = await packageDirectory()
 const contentURL = `${rootDir}/content`
 const sectionNames = await fs.readdir(contentURL)
 ---
-
 <Layout>
     {sectionNames.map((sectionName) => 
         <Section path={`${contentURL}/${sectionName}`} />

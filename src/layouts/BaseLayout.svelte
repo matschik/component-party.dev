@@ -70,7 +70,7 @@
 						{/each}
 					</nav>
 				</aside>
-				<main id="main-content" class="prose prose-invert prose-h1:scroll-mt-20 prose-h2:scroll-mt-20 w-full mx-auto pb-8 mt-10">
+				<main id="main-content" class="prose prose-invert prose-h1:scroll-mt-20 prose-pre:mt-0 prose-h2:scroll-mt-20 w-full mx-auto pb-8 mt-10">
 					<slot />
 				</main>
 			</div>
