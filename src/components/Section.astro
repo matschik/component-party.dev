@@ -62,7 +62,9 @@ for(const dirName of subSectionDirNames){
 }
 ---
 
+
 <Title as="h1" content={dirNameToTitle(sectionId)} />
+
 {sections.map((section) => 
     (
         <>
@@ -95,7 +97,7 @@ for(const dirName of subSectionDirNames){
                     </div>
                 </>
             ))}
-            <div class="flex items-center space-x-2">
+            <div class="flex items-center space-x-2" style="margin-top: 1rem;">
                 {FRAMEWORKS.map((framework) => (
                     <button data-framework-button-show={framework.id} title={`Display ${framework.title}`} class="text-sm rounded border border-gray-700 px-3 py-1 border-opacity-50 bg-gray-900 hover:bg-gray-800 transition-all">
                         <FrameworkLabel id={framework.id} size={15} />
