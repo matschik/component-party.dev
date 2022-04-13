@@ -1,4 +1,4 @@
-const FRAMEWORKS = [
+export default [
 	{
 		id: 'svelte',
 		title: 'Svelte',
@@ -77,5 +77,3 @@ const FRAMEWORKS = [
 		],
 	},
 ];
-
-module.exports = { FRAMEWORKS };

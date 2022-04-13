@@ -9,13 +9,6 @@
 		<link rel="icon" href="/favicon.png" />
 		<meta name="description" content="Web component JS frameworks overview by their syntax and features." />
 		<style>
-			#main-content .framework-logo {
-				display: inline;
-				margin-right: 5px;
-				margin-bottom: 0px;
-				margin-top: 0px;
-			}
-
 			#main-content h1:hover .header-anchor,
 			#main-content h2:hover .header-anchor {
 				opacity: 100;
@@ -77,7 +70,7 @@
 						{/each}
 					</nav>
 				</aside>
-				<main id="main-content" class="prose prose-invert prose-h1:scroll-mt-20 prose-h2:scroll-mt-20 w-full mx-auto pb-8 mt-10">
+				<main id="main-content" class="prose prose-invert prose-h1:scroll-mt-20 prose-pre:mt-0 prose-h2:scroll-mt-20 w-full mx-auto pb-8 mt-10">
 					<slot />
 				</main>
 			</div>

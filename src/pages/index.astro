@@ -1,0 +1,17 @@
+---
+import Layout from "../layouts/BaseLayout.svelte"
+import fs from 'node:fs/promises';
+import Section from "../components/Section.astro"
+import { packageDirectory } from 'pkg-dir';
+
+const rootDir = await packageDirectory()
+const contentURL = `${rootDir}/content`
+const sectionNames = await fs.readdir(contentURL)
+---
+<Layout>
+    <div class="space-y-10">
+        {sectionNames.map((sectionName) => 
+            <Section path={`${contentURL}/${sectionName}`} />
+        )}
+    </div>
+</Layout>
