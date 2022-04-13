@@ -1,4 +1,69 @@
 window.addEventListener('DOMContentLoaded', () => {
+	hashChangeOnHeadingsModule();
+	frameworkDisplayModule();
+});
+
+function frameworkDisplayModule() {
+	const $ = {
+		fmwButtonHide: (framework) => document.querySelectorAll(framework ? `[data-framework-button-hide=${framework}]` : '[data-framework-button-hide]'),
+		fmwButtonShow: (framework) => document.querySelectorAll(framework ? `[data-framework-button-show=${framework}]` : '[data-framework-button-show]'),
+		fmwContent: (framework) => document.querySelectorAll(`[data-framework-content=${framework}]`),
+	};
+
+	const hiddenFrameworksProxy = createLocaleStorageProxy('hidden_frameworks');
+
+	function onFramework(framework) {
+		return {
+			show() {
+				if (hiddenFrameworksProxy.includes(framework)) {
+					const frameworkIndex = hiddenFrameworksProxy.indexOf(framework);
+					delete hiddenFrameworksProxy[frameworkIndex];
+				}
+				for (const $el of $.fmwContent(framework)) {
+					$el.style.display = 'block';
+				}
+				for (const $el of $.fmwButtonShow(framework)) {
+					$el.style.display = 'none';
+				}
+			},
+			hide() {
+				if (!hiddenFrameworksProxy.includes(framework)) {
+					hiddenFrameworksProxy.push(framework);
+				}
+				for (const $el of $.fmwContent(framework)) {
+					$el.style.display = 'none';
+				}
+				for (const $el of $.fmwButtonShow(framework)) {
+					$el.style.display = 'block';
+				}
+			},
+		};
+	}
+
+	for (const $el of $.fmwButtonShow()) {
+		$el.style.display = 'none';
+	}
+
+	for (const hiddenFramework of Object.values(hiddenFrameworksProxy)) {
+		onFramework(hiddenFramework).hide();
+	}
+
+	for (const $fmwButton of $.fmwButtonHide()) {
+		const framework = $fmwButton.getAttribute('data-framework-button-hide');
+		$fmwButton.addEventListener('click', () => {
+			onFramework(framework).hide();
+		});
+	}
+
+	for (const $fmwButton of $.fmwButtonShow()) {
+		const framework = $fmwButton.getAttribute('data-framework-button-show');
+		$fmwButton.addEventListener('click', () => {
+			onFramework(framework).show();
+		});
+	}
+}
+
+function hashChangeOnHeadingsModule() {
 	const anchorObserver = new IntersectionObserver((entries) => {
 		for (const entry of entries) {
 			if (entry.isIntersecting) {
@@ -7,21 +72,56 @@ window.addEventListener('DOMContentLoaded', () => {
 			}
 		}
 	});
-	for (const heading of document.querySelectorAll('#main-content h1, #main-content h2')) {
-		anchorObserver.observe(heading);
+	for (const $heading of document.querySelectorAll('#main-content h1, #main-content h2')) {
+		anchorObserver.observe($heading);
 	}
+}
 
-	for(const fmwButton of document.querySelectorAll("[data-framework-button]")){
-		const framework = fmwButton.getAttribute("data-framework-button")
-		fmwButton.addEventListener("click", () => {
-			for(const fmwContent of document.querySelectorAll(`[data-framework-content=${framework}]`)){
-				console.log(fmwContent.style.display, "éazzeeza")
-				if(!fmwContent.style.display || fmwContent.style.display === "block"){
-					fmwContent.style.display = "none"
-				} else {
-					fmwContent.style.display = "block"
+function createLocaleStorageProxy(key) {
+	const storage = createLocaleStorage(key);
+
+	return new Proxy(storage.getJSON() || [], {
+		get(target, prop) {
+			return target[prop];
+		},
+		set(target, prop, value, receiver) {
+			target[prop] = value;
+			storage.setJSON(receiver);
+			return true;
+		},
+		deleteProperty(target, prop) {
+			target.splice(prop, 1);
+			storage.setJSON(target);
+			return true;
+		},
+	});
+}
+
+function createLocaleStorage(k) {
+	function get() {
+		return localStorage.getItem(k);
+	}
+	return {
+		get,
+		getJSON() {
+			var value = get();
+			if (value) {
+				try {
+					return JSON.parse(value);
+				} catch (err) {
+					console.error({ getJSONErr: err });
+					return undefined;
 				}
 			}
-		})
-	}
-});
+		},
+		setJSON(o) {
+			this.set(JSON.stringify(o));
+		},
+		set(v) {
+			localStorage.setItem(k, v);
+		},
+		remove() {
+			localStorage.removeItem(k);
+		},
+	};
+}

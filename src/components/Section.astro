@@ -69,31 +69,39 @@ for(const dirName of subSectionDirNames){
             <Title as="h2" content={section.title}/>
             {FRAMEWORKS.map((framework) => (
                 <>
-                    <div role="button" data-framework-button={framework.id}>
-                        <h3 class="hover:bg-gray-800 rounded py-1 px-2">
-                            <FrameworkLabel id={framework.id} />
-                        </h3>
-                    </div>
                     <div data-framework-content={framework.id}>
-                        {section.frameworkSections.find(f => f.dirName === framework.id) ?
-                            section.frameworkSections.find(f => f.dirName === framework.id).files.map((file) => (
-                                file.ext === 'md'
-                                ? <Markdown set:html={file.content} />
-                                :
-                                <div>
-                                    <div class="bg-gray-800 py-1.5 px-3 text-xs rounded-t inline-block">
-                                        {file.fileName}
+                        <div role="button" data-framework-button-hide={framework.id}>
+                            <h3 class="hover:bg-gray-800 transition-all rounded py-1 px-2">
+                                <FrameworkLabel id={framework.id} />
+                            </h3>
+                        </div>
+                        <div>
+                            {section.frameworkSections.find(f => f.dirName === framework.id) ?
+                                section.frameworkSections.find(f => f.dirName === framework.id).files.map((file) => (
+                                    file.ext === 'md'
+                                    ? <Markdown set:html={file.content} />
+                                    :
+                                    <div>
+                                        <div class="bg-gray-800 py-1.5 px-3 text-xs rounded-t inline-block">
+                                            {file.fileName}
+                                        </div>
+                                        <Code code={file.content} lang={file.ext} />
                                     </div>
-                                    <Code code={file.content} lang={file.ext} />
-                                </div>
-                            ))
-                        :
-                            <pre>Oops, missing snippet ! <a href={`https://github.com/matschik/component-party/tree/main/content/${sectionId}/${section.dirName}`}>You can help us by contributing on Github.</a></pre>
-                        }
+                                ))
+                            :
+                                <pre>Oops, missing snippet ! <a href={`https://github.com/matschik/component-party/tree/main/content/${sectionId}/${section.dirName}`}>You can help us by contributing on Github.</a></pre>
+                            }
+                        </div>
                     </div>
-                
                 </>
             ))}
+            <div class="flex items-center space-x-2">
+                {FRAMEWORKS.map((framework) => (
+                    <button data-framework-button-show={framework.id} title={`Display ${framework.title}`} class="text-sm rounded border border-gray-700 px-3 py-1 border-opacity-50 bg-gray-900 hover:bg-gray-800 transition-all">
+                        <FrameworkLabel id={framework.id} size={15} />
+                    </button>
+                ))}
+            </div>
         </>
     )
 )}

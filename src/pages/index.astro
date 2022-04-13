@@ -9,7 +9,7 @@ const contentURL = `${rootDir}/content`
 const sectionNames = await fs.readdir(contentURL)
 ---
 <Layout>
-    {sectionNames.map((sectionName) => 
+    {sectionNames.slice(0,1).map((sectionName) => 
         <Section path={`${contentURL}/${sectionName}`} />
     )}
 </Layout>
