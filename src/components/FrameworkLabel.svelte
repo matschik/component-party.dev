@@ -1,7 +1,7 @@
 <script>
 	import FRAMEWORKS from '../frameworks';
 	export let id;
-	export let size = 20
+	export let size = 20;
 
 	$: framework = FRAMEWORKS.find((f) => f.id === id);
 </script>

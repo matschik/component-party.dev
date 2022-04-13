@@ -9,7 +9,7 @@ specifiers:
   '@tailwindcss/typography': ^0.5.2
   '@typescript-eslint/eslint-plugin': ^5.19.0
   '@typescript-eslint/parser': ^5.19.0
-  astro: ^1.0.0-beta.8
+  astro: ^1.0.0-beta.9
   autoprefixer: ^10.4.4
   eslint: ^8.13.0
   eslint-config-prettier: ^8.5.0
@@ -40,7 +40,7 @@ devDependencies:
   '@tailwindcss/typography': 0.5.2_tailwindcss@3.0.24
   '@typescript-eslint/eslint-plugin': 5.19.0_f34adc8488d2e4f014fe61432d70cbf2
   '@typescript-eslint/parser': 5.19.0_eslint@8.13.0+typescript@4.6.3
-  astro: 1.0.0-beta.8
+  astro: 1.0.0-beta.9
   autoprefixer: 10.4.4_postcss@8.4.12
   eslint: 8.13.0
   eslint-config-prettier: 8.5.0_eslint@8.13.0
@@ -154,8 +154,8 @@ packages:
       vscode-uri: 3.0.3
     dev: true
 
-  /@astrojs/markdown-remark/0.8.2:
-    resolution: {integrity: sha512-P6Qjy7pa+JWfQlCxL+IHn3Cf0GEPSW5xN6b8qZvplWizTNrKeEMgG6vFRGcUMUcbABJ0PkFexErwWs7C9q0AWQ==}
+  /@astrojs/markdown-remark/0.9.0:
+    resolution: {integrity: sha512-yagb3udzk+xCoGSfyzA7LBS7Q4P8swGQzA8XURFPaK1HfY9BKYasUvtaTYGA7G0r8KeDKAOVmwzYP74gxXGslg==}
     dependencies:
       '@astrojs/prism': 0.4.1
       assert: 2.0.0
@@ -1066,14 +1066,14 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /astro/1.0.0-beta.8:
-    resolution: {integrity: sha512-hAoEEUy1JgHPYp3USk7jlpaaqi0Iv9mCd+k6QbFrs9Ju0oxrhfXd8IF24NYvD3JjS0MaKqKa5Sn5oo4mVdMnwA==}
+  /astro/1.0.0-beta.9:
+    resolution: {integrity: sha512-u5x5V5IyKp63JAjVKRIVmN2Hjel6oHH2Ju8EjqUwsNPrd9Se2EbVXf/+h7ZjsgNZBS4quy5CWyNK8tAlzuMW0Q==}
     engines: {node: ^14.15.0 || >=16.0.0, npm: '>=6.14.0'}
     hasBin: true
     dependencies:
       '@astrojs/compiler': 0.14.1
       '@astrojs/language-server': 0.13.4
-      '@astrojs/markdown-remark': 0.8.2
+      '@astrojs/markdown-remark': 0.9.0
       '@astrojs/prism': 0.4.1
       '@astrojs/webapi': 0.11.0
       '@babel/core': 7.17.9
@@ -1148,7 +1148,7 @@ packages:
       postcss: ^8.1.0
     dependencies:
       browserslist: 4.20.2
-      caniuse-lite: 1.0.30001328
+      caniuse-lite: 1.0.30001331
       fraction.js: 4.2.0
       normalize-range: 0.1.2
       picocolors: 1.0.0
@@ -1223,7 +1223,7 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001328
+      caniuse-lite: 1.0.30001331
       electron-to-chromium: 1.4.107
       escalade: 3.1.1
       node-releases: 2.0.3
@@ -1263,8 +1263,8 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /caniuse-lite/1.0.30001328:
-    resolution: {integrity: sha512-Ue55jHkR/s4r00FLNiX+hGMMuwml/QGqqzVeMQ5thUewznU2EdULFvI3JR7JJid6OrjJNfFvHY2G2dIjmRaDDQ==}
+  /caniuse-lite/1.0.30001331:
+    resolution: {integrity: sha512-Y1xk6paHpUXKP/P6YjQv1xqyTbgAP05ycHBcRdQjTcyXlWol868sJJPlmk5ylOekw2BrucWes5jk+LvVd7WZ5Q==}
     dev: true
 
   /ccount/2.0.1:
@@ -4110,8 +4110,8 @@ packages:
     resolution: {integrity: sha512-p3VT+cOEgxFsRRA9X4lkI1E+k2/CtnKtU4gcxyaCUreilL/vqI6CdZ3wxVUx3UOUg+gnUOQQcRI7BmSI656MYA==}
     dev: true
 
-  /regexp.prototype.flags/1.4.1:
-    resolution: {integrity: sha512-pMR7hBVUUGI7PMA37m2ofIdQCsomVnas+Jn5UPGAHQ+/LlwKm/aTLJHdasmHRzlfeZwHiAOaRSo2rbBDm3nNUQ==}
+  /regexp.prototype.flags/1.4.2:
+    resolution: {integrity: sha512-Ynz8fTQW5/1elh+jWU2EDDzeoNbD0OQ0R+D1VJU5ATOkUaro4A9YEkdN2ODQl/8UQFPPpZNw91fOcLFamM7Pww==}
     engines: {node: '>= 0.4'}
     dependencies:
       call-bind: 1.0.2
@@ -4519,7 +4519,7 @@ packages:
       get-intrinsic: 1.1.1
       has-symbols: 1.0.3
       internal-slot: 1.0.3
-      regexp.prototype.flags: 1.4.1
+      regexp.prototype.flags: 1.4.2
       side-channel: 1.0.4
     dev: true
 

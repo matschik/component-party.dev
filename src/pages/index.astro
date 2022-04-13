@@ -2,7 +2,7 @@
 import Layout from "../layouts/BaseLayout.svelte"
 import fs from 'node:fs/promises';
 import Section from "../components/Section.astro"
-import {packageDirectory} from 'pkg-dir';
+import { packageDirectory } from 'pkg-dir';
 
 const rootDir = await packageDirectory()
 const contentURL = `${rootDir}/content`
