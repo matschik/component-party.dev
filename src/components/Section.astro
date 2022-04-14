@@ -132,10 +132,11 @@ function getSectionCodeFiles(section, framework){
                       </div>
                     ))}
                 </div>
-                
               </>
-            
             )}
+            {getSectionFiles(section, framework).length === 0 && 
+              <pre>Oops, missing snippet ! <a href={`https://github.com/matschik/component-party/tree/main/${section.dirName}/${framework.id}`}>You can help us by contributing on Github.</a></pre>
+            }
           </div>
         </div>
       ))}
