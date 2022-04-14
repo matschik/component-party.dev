@@ -76,6 +76,8 @@ function getSectionCodeFiles(section, framework){
   return getSectionFiles(section, framework)?.filter(f => f.ext !== "md")
 }
 ---
+<script src="./Section/frameworkDisplay.js"></script>
+<script src="./Section/codeViewer.js"></script>
 
 <Title as="h1" content={dirNameToTitle(sectionId)} />
 

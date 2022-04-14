@@ -1,6 +1,4 @@
-window.addEventListener('DOMContentLoaded', () => {
-	codeViewerModule();
-});
+codeViewerModule();
 
 function codeViewerModule() {
 	function applyFileSelected(codeViewerId) {

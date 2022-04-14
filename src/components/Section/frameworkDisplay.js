@@ -1,6 +1,4 @@
-window.addEventListener('DOMContentLoaded', () => {
-	frameworkDisplayModule();
-});
+frameworkDisplayModule();
 
 function frameworkDisplayModule() {
 	const frameworks = ['react', 'svelte', 'angular', 'vue3'];
@@ -65,20 +63,6 @@ function frameworkDisplayModule() {
 		$fmwButton.addEventListener('click', () => {
 			onFramework(framework).show();
 		});
-	}
-}
-
-function hashChangeOnHeadingsModule() {
-	const anchorObserver = new IntersectionObserver((entries) => {
-		for (const entry of entries) {
-			if (entry.isIntersecting) {
-				const { target } = entry;
-				window.history.pushState({}, '', `#${target.id}`);
-			}
-		}
-	});
-	for (const $heading of document.querySelectorAll('#main-content h1, #main-content h2')) {
-		anchorObserver.observe($heading);
 	}
 }
 

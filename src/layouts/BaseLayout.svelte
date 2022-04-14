@@ -29,9 +29,6 @@
 				text-decoration: none;
 			}
 		</style>
-		<script src="/hash-change-on-headings.js"></script>
-		<script src="/code-viewer.js"></script>
-		<script src="/framework-display.js"></script>
 	</head>
 	<body class="bg-gray-900 text-white">
 		<header class="border-b border-gray-700 z-10 fixed w-full top-0 backdrop-blur">
