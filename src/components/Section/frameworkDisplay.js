@@ -1,35 +1,4 @@
-window.addEventListener('DOMContentLoaded', () => {
-	hashChangeOnHeadingsModule();
-	frameworkDisplayModule();
-	codeViewerModule();
-});
-
-function codeViewerModule() {
-	function applyFileSelected(codeViewerId) {
-		for (const $fileSelected of document.querySelectorAll(`[data-codeviewer=${codeViewerId}][data-file-selected]`)) {
-			const filenameSelected = $fileSelected.getAttribute('data-file-selected');
-			for (const $file of $fileSelected.querySelectorAll('[data-file]')) {
-				const filename = $file.getAttribute('data-file');
-				$file.style.display = filename === filenameSelected ? 'block' : 'none';
-			}
-
-			for (const $fileButton of document.querySelectorAll(`[data-codeviewer=${codeViewerId}][data-file-button]`)) {
-				const filename = $fileButton.getAttribute('data-file-button');
-				$fileButton.style.fontWeight = filename === filenameSelected ? 600 : 400;
-			}
-		}
-	}
-
-	for (const $fileButton of document.querySelectorAll('[data-file-button]')) {
-		$fileButton.addEventListener('click', () => {
-			const filename = $fileButton.getAttribute('data-file-button');
-			const codeViewerId = $fileButton.getAttribute('data-codeviewer');
-			const target = document.querySelector(`[data-codeviewer=${codeViewerId}][data-file-selected]`);
-			target.setAttribute('data-file-selected', filename);
-			applyFileSelected(codeViewerId);
-		});
-	}
-}
+frameworkDisplayModule();
 
 function frameworkDisplayModule() {
 	const frameworks = ['react', 'svelte', 'angular', 'vue3'];
@@ -94,20 +63,6 @@ function frameworkDisplayModule() {
 		$fmwButton.addEventListener('click', () => {
 			onFramework(framework).show();
 		});
-	}
-}
-
-function hashChangeOnHeadingsModule() {
-	const anchorObserver = new IntersectionObserver((entries) => {
-		for (const entry of entries) {
-			if (entry.isIntersecting) {
-				const { target } = entry;
-				window.history.pushState({}, '', `#${target.id}`);
-			}
-		}
-	});
-	for (const $heading of document.querySelectorAll('#main-content h1, #main-content h2')) {
-		anchorObserver.observe($heading);
 	}
 }
 
