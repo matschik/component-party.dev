@@ -5,7 +5,8 @@ import fs from 'node:fs/promises';
 import kebabCase from 'lodash.kebabcase';
 import nodePath from "node:path"
 import FRAMEWORKS from '../frameworks';
-import { Code, Markdown } from "astro/components"
+import Code from "./Code.astro"
+import { Markdown } from "astro/components"
 
 const { path: sectionPath } = Astro.props
 
@@ -96,8 +97,8 @@ function getSectionCodeFiles(section, framework){
       </div>
       <div style="margin-top: 1rem;">
       {FRAMEWORKS.map((framework) => (
-        <div data-framework-content={framework.id} class="group" style="display: none;margin-top: 0rem;">
-          <div class="flex items-center space-x-2">
+        <div data-framework-content={framework.id} style="display: none;margin-top: 0rem;">
+          <div class="group flex items-center space-x-2">
             <h3 style="margin-top: 0rem; margin-bottom: 0rem;">
               <FrameworkLabel id={framework.id} />
             </h3>
