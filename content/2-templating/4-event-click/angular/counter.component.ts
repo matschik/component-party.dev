@@ -2,11 +2,9 @@ import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-counter',
-  template:`
-    <p>Counter: {{count}}</p>
-    <button (click)="incrementCount()">+1</button>
-  `
+  templateUrl:"./counter.component.html"
 })
+
 export class CounterComponent {
 
   @Input() count:number = 0;

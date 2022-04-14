@@ -2,8 +2,9 @@ import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-inputfocused',
-  template:`<input type="text" #inputelement />`
+  templateUrl:"./inputfocused.component.html"
 })
+
 export class InputfocusedComponent implements AfterViewInit {
   
   @ViewChild('inputelement')
