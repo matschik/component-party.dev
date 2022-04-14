@@ -5,5 +5,7 @@ const {id, size = 20} = Astro.props
 const framework = FRAMEWORKS.find((f) => f.id === id);
 ---
 
-{framework?.img && <img src={framework.img} alt={framework.id} width={size} height={size} class="inline mr-[5px] mb-0 mt-0" />}
-<span>{framework.title}</span>
+<div class="flex items-center">
+    {framework?.img && <img src={framework.img} alt={framework.id} width={size} height={size} class="inline mr-[5px] mb-0 mt-0" />}
+    <span>{framework.title}</span>
+</div>

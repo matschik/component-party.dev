@@ -5,13 +5,18 @@
 <html lang="en">
 	<head>
 		<meta name="viewport" content="width=device-width" />
-		<title>Component Party 🎉</title>
+		<title>Component Party</title>
 		<link rel="icon" href="/favicon.png" />
 		<meta name="description" content="Web component JS frameworks overview by their syntax and features." />
 		<style>
 			#main-content h1:hover .header-anchor,
 			#main-content h2:hover .header-anchor {
 				opacity: 100;
+			}
+
+			#main-content .astro-code {
+				border-top-left-radius: 0px;
+				font-size: 1rem;
 			}
 
 			#main-content .header-anchor {
@@ -25,6 +30,8 @@
 			}
 		</style>
 		<script src="/hash-change-on-headings.js"></script>
+		<script src="/code-viewer.js"></script>
+		<script src="/framework-display.js"></script>
 	</head>
 	<body class="bg-gray-900 text-white">
 		<header class="border-b border-gray-700 z-10 fixed w-full top-0 backdrop-blur">
@@ -70,7 +77,7 @@
 						{/each}
 					</nav>
 				</aside>
-				<main id="main-content" class="prose prose-invert prose-h1:scroll-mt-20 prose-pre:mt-0 prose-h2:scroll-mt-20 w-full mx-auto pb-8 mt-10">
+				<main id="main-content" class="prose prose-sm prose-invert prose-h1:scroll-mt-20 prose-pre:mt-0 prose-h2:scroll-mt-20 w-full mx-auto pb-8 mt-10">
 					<slot />
 				</main>
 			</div>
