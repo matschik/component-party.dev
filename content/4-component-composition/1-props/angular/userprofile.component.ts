@@ -19,3 +19,4 @@ export class UserprofileComponent implements UserprofileComponentProps {
   @Input() favouriteColors:string[] = []
   @Input() isAvailable:boolean = false
 }
+
