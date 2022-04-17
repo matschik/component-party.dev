@@ -5,7 +5,7 @@ import fs from 'node:fs/promises';
 import kebabCase from 'lodash.kebabcase';
 import nodePath from "node:path"
 import FRAMEWORKS from '../frameworks';
-import Code from "./Code.astro"
+import CodeViewer from "./CodeViewer.astro"
 import { Markdown } from "astro/components"
 
 const { path: sectionPath } = Astro.props
@@ -40,8 +40,8 @@ for(const dirName of subSectionDirNames){
             files.push({
                 path: filePath,
                 fileName: fileName,
-                ext: nodePath.parse(filePath).ext.split(".").pop(),
-                content: (await fs.readFile(filePath, "utf-8"))
+                //ext: nodePath.parse(filePath).ext.split(".").pop(),
+                //content: (await fs.readFile(filePath, "utf-8"))
             })
         }
 
@@ -131,7 +131,7 @@ function getSectionCodeFiles(section, framework){
                 <div data-codeviewer={`${section.id}-${framework.id}`} data-file-selected={getSectionCodeFiles(section, framework)[0].fileName}>
                     {getSectionCodeFiles(section, framework).map((file, index) => (
                       <div data-file={file.fileName} style={`display: ${index === 0 ? "block"  : "none"};`}>
-                        <Code code={file.content} lang={file.ext} />
+                        <CodeViewer path={file.path} />
                       </div>
                     ))}
                 </div>

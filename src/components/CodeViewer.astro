@@ -1,7 +1,7 @@
 ---
-import { Code } from "astro/components"
+import FileCode from "./FileCode.astro"
 
-const { code, lang } = Astro.props
+const { path } = Astro.props
 ---
 <script>
     function copyToClipboard(value) {
@@ -34,7 +34,7 @@ const { code, lang } = Astro.props
 
 <div data-code-copy-container class="relative group">
     <div data-code-copy-text>
-        <Code code={code} lang={lang} />
+        <FileCode path={path} />
     </div>
     <div class="absolute hidden group-hover:block transition-all top-0 right-0 mt-2 mr-2">
         <button data-code-copy-button class="px-1.5 py-1 rounded border opacity-60 hover:opacity-90" title="Copy to clipboard">
