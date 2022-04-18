@@ -6,6 +6,7 @@ import kebabCase from 'lodash.kebabcase';
 import FRAMEWORKS from '../frameworks';
 import CodeViewer from "./CodeViewer.astro"
 import { Markdown } from "astro/components"
+import nodePath from "node:path"
 
 const { path: sectionPath } = Astro.props
 
@@ -37,11 +38,12 @@ for(const dirName of subSectionDirNames){
 
         for(const fileName of fileNames){
             const filePath = `${frameworkPath}/${fileName}`
+            const ext = nodePath.parse(filePath).ext.split(".").pop()
             files.push({
                 path: filePath,
                 fileName: fileName,
-                //ext: nodePath.parse(filePath).ext.split(".").pop(),
-                //content: (await fs.readFile(filePath, "utf-8"))
+                ext,
+                content: ext === "md" && (await fs.readFile(filePath, "utf-8"))
             })
         }
 
