@@ -22,7 +22,7 @@ export default function createCache({ expireSec } = {}) {
 	}
 
 	function deleteKey(key) {
-		// This will remove the reference to the object on object `cache`.
+		// Remove the reference to the object on object `cache`.
 		// The v8 garbage collector will pick up any objects with zero references for garbage collection.
 		delete cache[key];
 	}

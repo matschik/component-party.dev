@@ -1,0 +1,9 @@
+---
+import BaseLayout from "./BaseLayout.svelte"
+import generateContentTree from '../utils/generateContentTree';
+const tree = await generateContentTree();
+---
+
+<BaseLayout tree={tree}>
+    <slot/>
+</BaseLayout>

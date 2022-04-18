@@ -1,23 +1,25 @@
 ---
 import fs from 'node:fs/promises';
 import nodePath from "node:path"
-import highlightCache from './CodeHighlight/cache';
 import astroHighlightCode from "./CodeHighlight/astroHighlightCode"
+import createFileMapCache from "../utils/createFileMapCache"
 
 const { path, lang, theme = 'github-dark', wrap = false } = Astro.props;
 
-const fileStat = await fs.stat(path)
-const cacheKey = `${path}-${fileStat.mtimeMs}`
+// check existence
+await fs.stat(path)
 
-if(!highlightCache.has(cacheKey)){
-    highlightCache.cleanKeyStartsWith(path)
-    const fileContent = await fs.readFile(path, "utf-8")
+const fileCodeCache = await createFileMapCache("fileCodeCache");
+
+let html = await fileCodeCache.get(path)
+if(!html){
     const fileExt = nodePath.parse(path).ext.split(".").pop()
-    const html = await astroHighlightCode({ code: fileContent, lang: lang || fileExt, theme, wrap })
-    highlightCache.set(cacheKey, html)
+    const fileContent = await fs.readFile(path, "utf-8")
+    html = await astroHighlightCode({ code: fileContent, lang: lang || fileExt, theme, wrap })
+    fileCodeCache.set(path, html)
 }
 
-const html = highlightCache.get(cacheKey)
----
 
+
+---
 <Fragment set:html={html} />

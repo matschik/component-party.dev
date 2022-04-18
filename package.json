@@ -46,7 +46,7 @@
     "eslint-plugin-svelte3": "^3.4.1",
     "eslint-plugin-vue": "^8.6.0",
     "husky": "^7.0.4",
-    "lint-staged": "^12.3.7",
+    "lint-staged": "^12.3.8",
     "lodash.kebabcase": "^4.1.1",
     "pkg-dir": "^6.0.1",
     "postcss": "^8.4.12",

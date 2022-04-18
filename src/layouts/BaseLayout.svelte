@@ -1,5 +1,5 @@
 <script>
-	import tree from '../tree.js';
+	export let tree = [];
 </script>
 
 <html lang="en">
