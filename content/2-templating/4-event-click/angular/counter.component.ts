@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-counter',
@@ -7,7 +7,7 @@ import { Component, Input } from '@angular/core';
 
 export class CounterComponent {
 
-  @Input() count:number = 0;
+  count:number = 0;
   
   incrementCount():void{
     this.count++;

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Pipe, PipeTransform, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Pipe, PipeTransform, ChangeDetectionStrategy } from '@angular/core';
 
 @Pipe({
 	name: 'double',
@@ -15,7 +15,7 @@ export class DoubleCountPipe implements PipeTransform {
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DoublecountComponent implements OnInit {
-	@Input() count: number = 10;
+	count: number = 10;
 
 	constructor() {}
 }
