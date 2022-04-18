@@ -7,7 +7,7 @@ import { createFileMapCache } from "micache"
 const { path, lang, theme = 'github-dark', wrap = false } = Astro.props;
 
 // check existence
-await fs.stat(path)
+await fs.access(path)
 
 const fileCodeCache = await createFileMapCache("fileCodeCache");
 

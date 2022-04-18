@@ -12,4 +12,6 @@ onUnmounted(() => {
 });
 </script>
 
-<p>Current time: {time}</p>
+<template>
+	<p>Current time: {time}</p>
+</template>
