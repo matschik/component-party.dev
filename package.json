@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "type": "module",
-  "main": "index.js",
   "packageManager": "pnpm@6.31.0",
   "scripts": {
     "dev": "astro dev",
