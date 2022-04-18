@@ -22,17 +22,17 @@ export default async function createFsCache(name) {
 		return `${cacheDir}/${key}`;
 	}
 
-	async function setKey(key, data) {
+	async function set(key, data) {
 		await fs.writeFile(getPath(key), data);
 	}
 
-	async function getKey(key) {
-		if (await hasKey(key)) {
+	async function get(key) {
+		if (await has(key)) {
 			return await fs.readFile(getPath(key), 'utf8');
 		}
 	}
 
-	async function hasKey(key) {
+	async function has(key) {
 		try {
 			await fs.access(getPath(key));
 		} catch {
@@ -42,7 +42,7 @@ export default async function createFsCache(name) {
 	}
 
 	async function deleteKey(key) {
-		if (await hasKey(key)) {
+		if (await has(key)) {
 			return await fs.deleteFile(getPath(key));
 		}
 	}
@@ -57,9 +57,9 @@ export default async function createFsCache(name) {
 	}
 
 	return {
-		set: setKey,
-		get: getKey,
-		has: hasKey,
+		set,
+		get,
+		has,
 		delete: deleteKey,
 		cleanKeyStartsWith,
 	};
