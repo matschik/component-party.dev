@@ -7,14 +7,6 @@ export default defineConfig({
 	// https://docs.astro.build/en/reference/configuration-reference/
 	integrations: [tailwind(), svelte()],
 	vite: {
-		plugins: [
-			// {
-			// 	handleHotUpdate({ file }) {
-			// 		if (file.includes('/content') || file.includes('/scripts/utils')) {
-			// 			generateIndexPage();
-			// 		}
-			// 	},
-			// },
-		],
+		plugins: [],
 	},
 });
