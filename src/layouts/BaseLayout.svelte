@@ -38,7 +38,10 @@
 		<header class="border-b border-gray-700 z-10 fixed w-full top-0 backdrop-blur">
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div class="flex justify-between items-center py-3">
-					<a class="font-semibold text-lg" href="#reactivity">Component party</a>
+					<a class="font-semibold text-lg flex items-center space-x-3" href="#reactivity">
+						<img src="favicon.png" alt="logo" class="w-5 h-5" />
+						<span>Component party</span>
+					</a>
 
 					<div>
 						<a href="https://github.com/matschik/component-party" title="Contribute on Github" target="_blank" rel="noopener noreferrer">
