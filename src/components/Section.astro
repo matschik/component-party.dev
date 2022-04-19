@@ -1,12 +1,12 @@
 ---
-import Title from "../components/Title.svelte"
-import FrameworkLabel from "../components/FrameworkLabel.astro"
 import fs from 'node:fs/promises';
 import kebabCase from 'lodash.kebabcase';
-import FRAMEWORKS from '../frameworks';
-import CodeViewer from "./CodeViewer.astro"
 import { Markdown } from "astro/components"
 import nodePath from "node:path"
+import Title from "../components/Title.svelte"
+import FrameworkLabel from "../components/FrameworkLabel.astro"
+import FRAMEWORKS from '../frameworks';
+import CodeViewer from "./CodeViewer.astro"
 import createVue3REPL from "../utils/createVue3REPL"
 
 const { path: sectionPath } = Astro.props
@@ -34,8 +34,6 @@ function generatePlaygroundURL(frameworkId, files){
       return acc
     }, {})
     playgroundURL = vue3REPL.fromContentByFilename(contentByFilename)
-  } else {
-    playgroundURL = FRAMEWORKS.find(f => f.id === frameworkId).playgroundURL
   }
    return playgroundURL
 }
@@ -58,7 +56,7 @@ for(const dirName of subSectionDirNames){
             const ext = nodePath.parse(filePath).ext.split(".").pop()
             files.push({
                 path: filePath,
-                fileName: fileName,
+                fileName,
                 ext,
                 content: await fs.readFile(filePath, "utf-8")
             })
@@ -127,15 +125,6 @@ function getFrameworkSectionPlaygroundURL(section, framework){
               <FrameworkLabel id={framework.id} />
             </h3>
             <div class="flex items-center space-x-3">
-              {framework.documentationURL && 
-                <a href={framework.documentationURL} target="_blank">
-                  <button class="opacity-30 hover:opacity-100 bg-gray-800 hover:bg-gray-700 py-1 px-1.5 rounded transition-all" title={`Open official documentation for ${framework.title}`} aria-label={`Open official documentation for ${framework.title}`}>
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M10 21h7a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v11m0 5l4.879-4.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242z" />
-                      </svg>
-                  </button>
-                </a>
-              }
               {getFrameworkSectionPlaygroundURL(section, framework) && 
                 <a href={getFrameworkSectionPlaygroundURL(section, framework)} target="_blank">
                   <button class="opacity-30 hover:opacity-100 bg-gray-800 hover:bg-gray-700 py-1 px-1.5 rounded transition-all" title={`Open playground for ${framework.title}`} aria-label={`Open playground for ${framework.title}`} >
