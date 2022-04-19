@@ -39,7 +39,7 @@
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div class="flex justify-between items-center py-3">
 					<a class="font-semibold text-lg flex items-center space-x-3" href="#reactivity">
-						<img src="favicon.png" alt="logo" class="w-5 h-5" />
+						<img src="/popper.svg" alt="logo" class="w-5 h-5" />
 						<span>Component party</span>
 					</a>
 
