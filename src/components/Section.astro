@@ -7,6 +7,7 @@ import FRAMEWORKS from '../frameworks';
 import CodeViewer from "./CodeViewer.astro"
 import { Markdown } from "astro/components"
 import nodePath from "node:path"
+import createVue3REPL from "../utils/createVue3REPL"
 
 const { path: sectionPath } = Astro.props
 
@@ -21,6 +22,22 @@ function dirNameToTitle(dirName) {
 
 function capitalize(string) {
 	return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+const vue3REPL = createVue3REPL()
+
+function generatePlaygroundURL(frameworkId, files){
+  let playgroundURL
+  if(frameworkId === "vue3"){
+    const contentByFilename = files.reduce((acc, file) => {
+      acc[file.fileName] =  file.content
+      return acc
+    }, {})
+    playgroundURL = vue3REPL.fromContentByFilename(contentByFilename)
+  } else {
+    playgroundURL = FRAMEWORKS.find(f => f.id === frameworkId).playgroundURL
+  }
+   return playgroundURL
 }
 
 const subSectionDirNames = await fs.readdir(sectionPath)
@@ -43,14 +60,15 @@ for(const dirName of subSectionDirNames){
                 path: filePath,
                 fileName: fileName,
                 ext,
-                content: ext === "md" && (await fs.readFile(filePath, "utf-8"))
+                content: await fs.readFile(filePath, "utf-8")
             })
         }
 
         frameworkSections.push({
             dirName: frameworkDir,
             path: frameworkPath,
-            files
+            files,
+            playgroundURL: generatePlaygroundURL(frameworkDir, files)
         })
     }
 
@@ -74,6 +92,10 @@ function getSectionMarkdownFiles(section, framework){
 
 function getSectionCodeFiles(section, framework){
   return getSectionFiles(section, framework)?.filter(f => f.ext !== "md")
+}
+
+function getFrameworkSectionPlaygroundURL(section, framework){
+  return section.frameworkSections.find((f) => f.dirName === framework.id)?.playgroundURL
 }
 ---
 <script src="./Section/frameworkDisplay.js"></script>
@@ -114,9 +136,9 @@ function getSectionCodeFiles(section, framework){
                   </button>
                 </a>
               }
-              {framework.playgroundURL && 
-                <a href={framework.playgroundURL} target="_blank">
-                  <button class="opacity-30 hover:opacity-100 bg-gray-800 hover:bg-gray-700 py-1 px-1.5 rounded transition-all" title={`Open playground for ${framework.title}`} aria-label={`Open playground for ${framework.title}`}>
+              {getFrameworkSectionPlaygroundURL(section, framework) && 
+                <a href={getFrameworkSectionPlaygroundURL(section, framework)} target="_blank">
+                  <button class="opacity-30 hover:opacity-100 bg-gray-800 hover:bg-gray-700 py-1 px-1.5 rounded transition-all" title={`Open playground for ${framework.title}`} aria-label={`Open playground for ${framework.title}`} >
                       <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
                         <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />

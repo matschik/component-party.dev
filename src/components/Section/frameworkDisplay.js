@@ -1,7 +1,9 @@
+import FRAMEWORKS from '../../frameworks.js';
+
 frameworkDisplayModule();
 
 function frameworkDisplayModule() {
-	const frameworks = ['react', 'svelte', 'angular', 'vue3'];
+	const frameworkIds = FRAMEWORKS.map((f) => f.id);
 
 	const $ = {
 		fmwButtonHide: (framework) => document.querySelectorAll(framework ? `[data-framework-button-hide=${framework}]` : '[data-framework-button-hide]'),
@@ -39,7 +41,7 @@ function frameworkDisplayModule() {
 			}
 		}
 
-		for (const frameworkToShow of arrayDiff(Object.values(hiddenFrameworksProxy), frameworks)) {
+		for (const frameworkToShow of arrayDiff(Object.values(hiddenFrameworksProxy), frameworkIds)) {
 			for (const $el of $.fmwContent(frameworkToShow)) {
 				$el.style.display = 'block';
 			}
