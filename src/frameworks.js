@@ -9,6 +9,8 @@ export default [
 			processor: 'svelte3/svelte3',
 			plugins: ['svelte3'],
 		},
+		playgroundURL: 'https://svelte.dev/repl',
+		documentationURL: 'https://svelte.dev/',
 	},
 	{
 		id: 'react',
@@ -24,6 +26,8 @@ export default [
 				},
 			},
 		},
+		playgroundURL: 'https://codesandbox.io/s/mystifying-goldberg-6wx04b',
+		documentationURL: 'https://reactjs.org/docs/getting-started.html',
 	},
 	{
 		id: 'vue3',
@@ -37,6 +41,8 @@ export default [
 			},
 			extends: ['eslint:recommended', 'plugin:vue/vue3-recommended'],
 		},
+		playgroundURL: 'https://sfc.vuejs.org',
+		documentationURL: 'https://vuejs.org/guide',
 	},
 	{
 		id: 'angular',
@@ -75,5 +81,7 @@ export default [
 				},
 			},
 		],
+		playgroundURL: 'https://codesandbox.io/s/angular',
+		documentationURL: 'https://angular.io/docs',
 	},
 ];
