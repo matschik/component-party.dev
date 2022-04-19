@@ -3,29 +3,26 @@ import { Component, Input, Pipe, PipeTransform } from '@angular/core';
 const TRAFFIC_LIGHTS = ['red', 'orange', 'green'];
 
 @Pipe({
-  name: 'light'
+	name: 'light',
 })
-
 export class TrafficLightPipe implements PipeTransform {
-  transform(value: number): string { 
-    return TRAFFIC_LIGHTS[value];
-  }
+	transform(value: number): string {
+		return TRAFFIC_LIGHTS[value];
+	}
 }
 
 @Component({
-  selector: 'app-trafficlight',
-  templateUrl:"./trafficlight.component.html"
+	selector: 'app-trafficlight',
+	templateUrl: './trafficlight.component.html',
 })
-export class TrafficlightComponent  {
+export class TrafficlightComponent {
+	@Input() lightIndex: number = 0;
 
-  @Input() lightIndex:number = 0;
-
-  nextLight():void{
-    if (this.lightIndex + 1 > TRAFFIC_LIGHTS.length - 1) {
-			this.lightIndex = 0
+	nextLight(): void {
+		if (this.lightIndex + 1 > TRAFFIC_LIGHTS.length - 1) {
+			this.lightIndex = 0;
 		} else {
-			this.lightIndex++
+			this.lightIndex++;
 		}
-  }
-
+	}
 }
