@@ -1,4 +1,5 @@
 <script>
+	import FRAMEWORKS from '../frameworks';
 	export let tree = [];
 </script>
 
@@ -7,7 +8,7 @@
 		<meta name="viewport" content="width=device-width" />
 		<title>Component Party</title>
 		<link rel="icon" href="/favicon.png" />
-		<meta name="description" content="Web component JS frameworks overview by their syntax and features." />
+		<meta name="description" content={`Web component JS frameworks overview by their syntax and features: ${FRAMEWORKS.map((f) => f.title).join(', ')}`} />
 		<style>
 			#main-content h1:hover .header-anchor,
 			#main-content h2:hover .header-anchor {
