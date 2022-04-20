@@ -1,7 +1,7 @@
 import nodePath from 'path';
 
 export default function createVue3REPL() {
-	const BASE_URL = 'https://svelte-repl-site.vercel.app/#';
+	const BASE_URL = 'https://svelte-repl.vercel.app/#';
 
 	function utoa(data) {
 		return btoa(unescape(encodeURIComponent(data)));
