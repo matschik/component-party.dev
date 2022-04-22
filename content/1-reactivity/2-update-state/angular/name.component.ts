@@ -1,10 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
 	selector: 'app-name',
 })
 export class NameComponent {
-	@Input() name: string = 'John';
+	name: string = 'John';
 
 	constructor() {
 		this.name = 'Jane';
