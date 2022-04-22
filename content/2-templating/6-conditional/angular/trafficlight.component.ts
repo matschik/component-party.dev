@@ -1,4 +1,4 @@
-import { Component, Input, Pipe, PipeTransform } from '@angular/core';
+import { Component, Pipe, PipeTransform } from '@angular/core';
 
 const TRAFFIC_LIGHTS = ['red', 'orange', 'green'];
 
@@ -16,7 +16,7 @@ export class TrafficLightPipe implements PipeTransform {
 	templateUrl: './trafficlight.component.html',
 })
 export class TrafficlightComponent {
-	@Input() lightIndex: number = 0;
+	lightIndex: number = 0;
 
 	nextLight(): void {
 		if (this.lightIndex + 1 > TRAFFIC_LIGHTS.length - 1) {
