@@ -4,3 +4,4 @@ new-section
 yarn.lock
 package-lock.json
 dist
+.DS_Store
