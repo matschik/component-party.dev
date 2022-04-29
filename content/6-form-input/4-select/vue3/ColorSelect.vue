@@ -17,6 +17,7 @@ const colors = [
       v-for="color in colors"
       :key="color.id"
       :value="color.id"
+      :disabled="color.isDisabled"
     >
       {{ color.text }}
     </option>
