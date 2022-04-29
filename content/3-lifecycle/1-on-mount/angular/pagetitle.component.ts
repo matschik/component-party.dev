@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, AfterContentInit } from '@angular/core';
 
 @Component({
   selector: 'app-pagetitle',
@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./pagetitle.component.css']
 })
 
-export class PagetitleComponent  {
+export class PagetitleComponent implements AfterContentInit  {
 
   pageTitle:string = "";
 
