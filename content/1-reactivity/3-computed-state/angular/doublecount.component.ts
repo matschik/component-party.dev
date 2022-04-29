@@ -11,7 +11,7 @@ export class DoubleCountPipe implements PipeTransform {
 
 @Component({
 	selector: 'app-doublecount',
-	template: ' <div></div>',
+	template: ' <div>{{ number | double }}</div>',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DoublecountComponent {
