@@ -8,5 +8,8 @@ export default defineConfig({
 	integrations: [tailwind(), svelte()],
 	vite: {
 		plugins: [],
+		optimizeDeps: {
+			exclude: ["locate-path", "path-exists", "find-up"]
+		}
 	},
 });
