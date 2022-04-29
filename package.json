@@ -31,6 +31,7 @@
     "@angular-eslint/eslint-plugin-template": "^13.2.1",
     "@angular-eslint/template-parser": "^13.2.1",
     "@angular/core": "^13.3.3",
+    "@angular/router": "^13.3.3",
     "@astrojs/svelte": "^0.0.2",
     "@astrojs/tailwind": "^0.1.2",
     "@tailwindcss/typography": "^0.5.2",
