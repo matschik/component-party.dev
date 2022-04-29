@@ -5,7 +5,7 @@ export default function PageTitle() {
 
 	useEffect(() => {
 		setPageTitle(document.title);
-	});
+	}, []);
 
 	return <p>Page title: {pageTitle}</p>;
 }
