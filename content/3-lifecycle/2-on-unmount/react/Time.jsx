@@ -11,7 +11,7 @@ export default function Time() {
 		return () => {
 			clearInterval(timer);
 		};
-	});
+	}, []);
 
 	return <p>Current time: {time}</p>;
 }
