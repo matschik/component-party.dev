@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, onDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-time',
@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./time.component.css']
 })
 
-export class TimeComponent  {
+export class TimeComponent implements OnDestroy  {
   
   time:string = new Date().toLocaleTimeString();
   timer:number;
