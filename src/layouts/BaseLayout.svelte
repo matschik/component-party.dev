@@ -75,7 +75,7 @@
 
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
 			<div class="flex">
-				<aside class="fixed mt-10 hidden lg:block">
+				<aside class="fixed mt-10 pr-12 max-h-screen overflow-y-auto hidden lg:block">
 					<nav class="font-semibold text-sm space-y-4">
 						{#each tree as treeNode}
 							<ul>
