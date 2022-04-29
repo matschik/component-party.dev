@@ -1,11 +1,12 @@
 <script setup>
-import { ref } from 'vue';
 import UserProfile from './UserProfile.vue';
-
-const username = ref('John');
 </script>
 
 <template>
-  <input v-model="username">
-  <UserProfile :name="username" />
+  <UserProfile
+    name="John"
+    :age="20"
+    :favourite-colors="['green', 'blue', 'red']"
+    is-available
+  />
 </template>
