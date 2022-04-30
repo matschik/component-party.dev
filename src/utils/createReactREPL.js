@@ -1,15 +1,8 @@
 import nodePath from 'path';
 
-export default function createSvelteREPL() {
-	const BASE_URL = 'https://svelte-repl.vercel.app/#';
-
-	function utoa(data) {
-		return btoa(unescape(encodeURIComponent(data)));
-	}
-
-	function generateURLFromData(data) {
-		return `${BASE_URL}${utoa(JSON.stringify(data))}`;
-	}
+// Preact repl currently only supports 1 file
+export default function createReactREPL() {
+	const BASE_URL = 'https://preactjs.com/repl';
 
 	function fromContentByFilename(contentByFilename) {
 		const data = [];
@@ -22,8 +15,7 @@ export default function createSvelteREPL() {
 				source: content,
 			});
 		}
-		const url = generateURLFromData(data);
-		return url;
+		return `${BASE_URL}?code=${encodeURIComponent(data[0].source)}`;
 	}
 
 	return {

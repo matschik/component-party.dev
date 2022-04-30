@@ -9,6 +9,7 @@ import FRAMEWORKS from '../frameworks';
 import CodeViewer from "./CodeViewer.astro"
 import createVue3REPL from "../utils/createVue3REPL"
 import createSvelteREPL from "../utils/createSvelteREPL"
+import createReactREPL from "../utils/createReactREPL"
 
 const { path: sectionPath } = Astro.props
 
@@ -27,6 +28,7 @@ function capitalize(string) {
 
 const vue3REPL = createVue3REPL()
 const svelteREPL = createSvelteREPL()
+const reactREPL = createReactREPL()
 
 function generatePlaygroundURL(frameworkId, files){
   let playgroundURL
@@ -42,6 +44,13 @@ function generatePlaygroundURL(frameworkId, files){
       return acc
     }, {})
     playgroundURL = svelteREPL.fromContentByFilename(contentByFilename) 
+  } else if(frameworkId === "react"){
+    if (files.length > 1) return
+    const contentByFilename = files.reduce((acc, file) => {
+      acc[file.fileName] =  file.content
+      return acc
+    }, {})
+    playgroundURL = reactREPL.fromContentByFilename(contentByFilename) 
   }
    return playgroundURL
 }
