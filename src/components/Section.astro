@@ -97,7 +97,12 @@ function getSectionMarkdownFiles(section, framework){
 }
 
 function getSectionCodeFiles(section, framework){
-  return getSectionFiles(section, framework)?.filter(f => f.ext !== "md")
+  const files = getSectionFiles(section, framework)?.filter(f => f.ext !== "md")
+  if(files?.length > 0 && typeof framework.filesSorter === 'function'){
+    return framework.filesSorter(files)
+  } else {
+    return files
+  }
 }
 
 function getFrameworkSectionPlaygroundURL(section, framework){

@@ -11,6 +11,9 @@ export default [
 		},
 		playgroundURL: 'https://svelte.dev/repl',
 		documentationURL: 'https://svelte.dev/',
+		filesSorter(files) {
+			return [files.find(({ fileName }) => fileName === 'App.svelte'), ...(files.filter(({ fileName }) => fileName !== 'App.svelte') || [])].filter((x) => x);
+		},
 	},
 	{
 		id: 'react',
@@ -28,6 +31,9 @@ export default [
 		},
 		playgroundURL: 'https://codesandbox.io/s/mystifying-goldberg-6wx04b',
 		documentationURL: 'https://reactjs.org/docs/getting-started.html',
+		filesSorter(files) {
+			return [files.find(({ fileName }) => fileName === 'App.jsx'), ...(files.filter(({ fileName }) => fileName !== 'App.jsx') || [])].filter((x) => x);
+		},
 	},
 	{
 		id: 'vue3',
@@ -43,6 +49,9 @@ export default [
 		},
 		playgroundURL: 'https://sfc.vuejs.org',
 		documentationURL: 'https://vuejs.org/guide',
+		filesSorter(files) {
+			return [files.find(({ fileName }) => fileName === 'App.vue'), ...(files.filter(({ fileName }) => fileName !== 'App.vue') || [])].filter((x) => x);
+		},
 	},
 	{
 		id: 'angular',
@@ -83,5 +92,17 @@ export default [
 		],
 		playgroundURL: 'https://codesandbox.io/s/angular',
 		documentationURL: 'https://angular.io/docs',
+		filesSorter(files) {
+			const sortedTs = [files.find(({ fileName }) => fileName.split('.').pop() === 'ts'), ...(files.filter(({ fileName }) => fileName.split('.').pop() !== 'ts') || [])].filter(
+				(x) => x
+			);
+
+			const sortedByApp = [
+				sortedTs.find(({ fileName }) => fileName.split('.')[0] === 'app'),
+				...(sortedTs.filter(({ fileName }) => fileName.split('.')[0] !== 'app') || []),
+			].filter((x) => x);
+
+			return sortedByApp;
+		},
 	},
 ];
