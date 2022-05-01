@@ -1,4 +1,5 @@
 <script>
 	let name = 'John';
-	console.log(name); // John
 </script>
+
+<h1>Hello {name}</h1>

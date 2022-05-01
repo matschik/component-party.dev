@@ -2,5 +2,6 @@ import { useState } from 'react';
 
 export default function Name() {
 	const [name] = useState('John');
-	console.log(name); // John
+
+	return <h1>Hello {name}</h1>;
 }

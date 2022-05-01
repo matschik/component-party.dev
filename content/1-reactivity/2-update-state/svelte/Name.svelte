@@ -1,5 +1,6 @@
 <script>
 	let name = 'John';
 	name = 'Jane';
-	console.log(name); // Jane
 </script>
+
+<h1>Hello {name}</h1>
