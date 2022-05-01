@@ -13,10 +13,12 @@ How do we solve this ? Developers love having framework overview by examples. It
 
 ## Roadmap
 
-- [ ] Add Angular support
 - [ ] Add SolidJS support
 - [ ] Add Preact support
 - [ ] Add Alpine support
+- [ ] Add native JS support ?
+- [ ] Add EmberJS
+- [x] Add Angular support
 - [x] Website (built with Astro)
 - [x] Add React support
 - [x] Add Svelte support
