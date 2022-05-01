@@ -13,6 +13,7 @@ specifiers:
   '@typescript-eslint/parser': ^5.20.0
   astro: ^1.0.0-beta.12
   autoprefixer: ^10.4.4
+  classnames: ^2.3.1
   eslint: ^8.13.0
   eslint-config-prettier: ^8.5.0
   eslint-plugin-prettier: ^4.0.0
@@ -47,6 +48,7 @@ devDependencies:
   '@typescript-eslint/parser': 5.20.0_eslint@8.13.0+typescript@4.6.3
   astro: 1.0.0-beta.12
   autoprefixer: 10.4.4_postcss@8.4.12
+  classnames: 2.3.1
   eslint: 8.13.0
   eslint-config-prettier: 8.5.0_eslint@8.13.0
   eslint-plugin-prettier: 4.0.0_1815ac95b7fb26c13c7d48a8eef62d0f
@@ -1353,6 +1355,10 @@ packages:
 
   /ci-info/3.3.0:
     resolution: {integrity: sha512-riT/3vI5YpVH6/qomlDnJow6TBee2PBKSEpx3O32EGPYbWGIRsIlGRms3Sm74wYE1JMo8RnO04Hb12+v1J5ICw==}
+    dev: true
+
+  /classnames/2.3.1:
+    resolution: {integrity: sha512-OlQdbZ7gLfGarSqxesMesDa5uz7KFbID8Kpq/SxIoNGDqY8lSYs0D+hhtBXhcdB3rcbXArFr7vlHheLk1voeNA==}
     dev: true
 
   /clean-stack/2.2.0:
