@@ -1,9 +1,26 @@
 ---
 import BaseLayout from "./BaseLayout.svelte"
 import generateContentTree from '../utils/generateContentTree';
+import FRAMEWORKS from '../frameworks';
+import FrameworkLabel from "../components/FrameworkLabel.astro"
 const tree = await generateContentTree();
 ---
 
 <BaseLayout tree={tree}>
-    <slot/>
+    <div class="px-20 py-2 sticky top-[53px] z-10 flex w-full backdrop-blur border-b border-gray-700">
+        {FRAMEWORKS.map((framework) => (
+            <button
+                data-framework-button-show={framework.id}
+                title={`Display ${framework.title}`}
+                class="text-sm rounded border border-gray-700 px-3 py-1 border-opacity-50 bg-gray-900 hover:bg-gray-800 transition-all mr-2"
+                style="opacity: 50;"
+            >
+                <FrameworkLabel id={framework.id} size={15} />
+            </button>
+        ))}
+    </div>
+    
+    <main id="main-content" class="px-20 pt-10 prose prose-invert prose-h1:scroll-mt-[7rem] prose-pre:mt-0 prose-h2:scroll-mt-[7rem]" style="max-width: 100%;">
+        <slot />
+    </main>
 </BaseLayout>

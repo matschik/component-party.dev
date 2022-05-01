@@ -118,19 +118,7 @@ function getFrameworkSectionPlaygroundURL(section, framework){
   sections.map((section) => (
     <>
       <Title as="h2" content={section.title} />
-      <div class="flex items-center" style="margin: 0rem;">
-        {FRAMEWORKS.map((framework) => (
-          <button
-            data-framework-button-show={framework.id}
-            title={`Display ${framework.title}`}
-            class="text-sm mt-4 rounded border border-gray-700 px-3 py-1 border-opacity-50 bg-gray-900 hover:bg-gray-800 transition-all mr-2"
-            style="display: none;"
-          >
-            <FrameworkLabel id={framework.id} size={15} />
-          </button>
-        ))}
-      </div>
-      <div style="margin-top: 1rem;">
+      <div class="grid grid-cols-1 2xl:grid-cols-2 gap-10" style="margin-top: 1rem;">
       {FRAMEWORKS.map((framework) => (
         <div data-framework-content={framework.id} style="display: none;margin-top: 0rem;">
           <div class="flex justify-between items-center space-x-3">
@@ -167,7 +155,7 @@ function getFrameworkSectionPlaygroundURL(section, framework){
               <>
                 <div class="flex space-x-1 items-center ml-0">
                   {getSectionCodeFiles(section, framework).map((file, index) =>(
-                      <button data-codeviewer={`${section.id}-${framework.id}`} data-file-button={file.fileName} class="bg-[#0d1117] py-1.5 px-3 text-xs rounded-t inline-block" style={`opacity: ${index === 0 ? 1  : 0.6};`}>
+                      <button data-codeviewer={`${section.id}-${framework.id}`} data-file-button={file.fileName} class="bg-[#0d1117] py-1.5 px-3 font-medium text-xs rounded-t inline-block" style={`opacity: ${index === 0 ? 1  : 0.6};`}>
                         {file.fileName}
                       </button>
                   ))}

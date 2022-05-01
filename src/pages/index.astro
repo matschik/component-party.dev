@@ -8,9 +8,8 @@ const rootDir = await packageDirectory()
 const contentURL = `${rootDir}/content`
 const sectionNames = await fs.readdir(contentURL)
 ---
-<script src="../hash-change-on-headings.js" />
 <Layout>
-    <div class="space-y-10">
+    <div class="space-y-12">
         {sectionNames.map((sectionName) => 
             <Section path={`${contentURL}/${sectionName}`} />
         )}

@@ -37,7 +37,7 @@ function frameworkDisplayModule() {
 				$el.style.display = 'none';
 			}
 			for (const $el of $.fmwButtonShow(frameworkToHide)) {
-				$el.style.display = 'block';
+				$el.style.opacity = '0.5';
 			}
 		}
 
@@ -46,7 +46,7 @@ function frameworkDisplayModule() {
 				$el.style.display = 'block';
 			}
 			for (const $el of $.fmwButtonShow(frameworkToShow)) {
-				$el.style.display = 'none';
+				$el.style.opacity = '1';
 			}
 		}
 	}
@@ -63,7 +63,11 @@ function frameworkDisplayModule() {
 	for (const $fmwButton of $.fmwButtonShow()) {
 		const framework = $fmwButton.getAttribute('data-framework-button-show');
 		$fmwButton.addEventListener('click', () => {
-			onFramework(framework).show();
+			if (hiddenFrameworksProxy.includes(framework)) {
+				onFramework(framework).show();
+			} else {
+				onFramework(framework).hide();
+			}
 		});
 	}
 }
