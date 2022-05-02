@@ -34,6 +34,12 @@
 				opacity: 0;
 				text-decoration: none;
 			}
+
+			@supports (backdrop-filter: blur(10px)) {
+				[class*='bg-'].backdrop-blur {
+					background-color: rgba(0, 0, 0, 0);
+				}
+			}
 		</style>
 		<!-- Primary Meta Tags -->
 		<meta name="title" content="Component Party" />
@@ -52,7 +58,7 @@
 		<meta property="twitter:image" content="https://component-party.pages.dev/banner.png" />
 	</head>
 	<body class="bg-gray-900 text-white font-sans">
-		<header class="z-10 fixed w-full top-0 backdrop-blur border-b border-gray-700">
+		<header class="z-10 fixed w-full top-0 backdrop-blur bg-gray-900/80 border-b border-gray-700">
 			<div class="px-4 sm:px-6 lg:px-8">
 				<div class="flex justify-between items-center py-3">
 					<a class="font-semibold text-lg flex items-center space-x-3" href="#reactivity">
