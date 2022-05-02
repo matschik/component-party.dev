@@ -4,36 +4,35 @@ specifiers:
   '@angular-eslint/eslint-plugin': ^13.2.1
   '@angular-eslint/eslint-plugin-template': ^13.2.1
   '@angular-eslint/template-parser': ^13.2.1
-  '@angular/core': ^13.3.5
-  '@angular/router': ^13.3.5
+  '@angular/core': ^13.3.3
+  '@angular/router': ^13.3.3
   '@astrojs/svelte': ^0.0.2
   '@astrojs/tailwind': ^0.1.2
   '@tailwindcss/typography': ^0.5.2
-  '@typescript-eslint/eslint-plugin': ^5.22.0
-  '@typescript-eslint/parser': ^5.22.0
-  astro: ^1.0.0-beta.20
-  autoprefixer: ^10.4.7
-  classnames: ^2.3.1
-  eslint: ^8.14.0
+  '@typescript-eslint/eslint-plugin': ^5.20.0
+  '@typescript-eslint/parser': ^5.20.0
+  astro: ^1.0.0-beta.12
+  autoprefixer: ^10.4.4
+  eslint: ^8.13.0
   eslint-config-prettier: ^8.5.0
   eslint-plugin-prettier: ^4.0.0
   eslint-plugin-react: ^7.29.4
   eslint-plugin-svelte3: ^3.4.1
-  eslint-plugin-vue: ^8.7.1
+  eslint-plugin-vue: ^8.6.0
   husky: ^7.0.4
-  lint-staged: ^12.4.1
+  lint-staged: ^12.3.8
   lodash.kebabcase: ^4.1.1
   micache: ^2.4.1
   pkg-dir: ^6.0.1
-  postcss: ^8.4.13
+  postcss: ^8.4.12
   prettier: ^2.6.2
   prettier-plugin-svelte: ^2.7.0
   prop-types: ^15.8.1
   react: ^17.0.2
-  svelte: ^3.48.0
+  svelte: ^3.47.0
   tailwindcss: ^3.0.24
-  typescript: ^4.6.4
-  vite: ^2.9.7
+  typescript: ^4.6.3
+  vite: ^2.9.5
 
 devDependencies:
   '@angular-eslint/eslint-plugin': 13.2.1_t725usgvqspm5woeqpaxbfp2qu
@@ -48,7 +47,6 @@ devDependencies:
   '@typescript-eslint/parser': 5.22.0_t725usgvqspm5woeqpaxbfp2qu
   astro: 1.0.0-beta.20
   autoprefixer: 10.4.7_postcss@8.4.13
-  classnames: 2.3.1
   eslint: 8.14.0
   eslint-config-prettier: 8.5.0_eslint@8.14.0
   eslint-plugin-prettier: 4.0.0_mzpligoj26dazigcet37nxg2zy
@@ -1368,10 +1366,6 @@ packages:
 
   /ci-info/3.3.0:
     resolution: {integrity: sha512-riT/3vI5YpVH6/qomlDnJow6TBee2PBKSEpx3O32EGPYbWGIRsIlGRms3Sm74wYE1JMo8RnO04Hb12+v1J5ICw==}
-    dev: true
-
-  /classnames/2.3.1:
-    resolution: {integrity: sha512-OlQdbZ7gLfGarSqxesMesDa5uz7KFbID8Kpq/SxIoNGDqY8lSYs0D+hhtBXhcdB3rcbXArFr7vlHheLk1voeNA==}
     dev: true
 
   /clean-stack/2.2.0:
