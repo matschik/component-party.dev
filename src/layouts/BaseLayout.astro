@@ -7,7 +7,7 @@ const tree = await generateContentTree();
 ---
 
 <BaseLayout tree={tree}>
-    <div class="px-20 py-2 sticky top-[53px] z-10 flex w-full backdrop-blur border-b border-gray-700">
+    <div class="px-20 py-2 sticky top-[53px] z-10 flex w-full backdrop-blur bg-gray-900/80 border-b border-gray-700">
         {FRAMEWORKS.map((framework) => (
             <button
                 data-framework-button-show={framework.id}
@@ -19,7 +19,7 @@ const tree = await generateContentTree();
             </button>
         ))}
     </div>
-    
+
     <main id="main-content" class="px-20 pt-10 prose prose-invert prose-h1:scroll-mt-[7rem] prose-pre:mt-0 prose-h2:scroll-mt-[7rem]" style="max-width: 100%;">
         <slot />
     </main>
