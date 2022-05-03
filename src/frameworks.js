@@ -108,4 +108,20 @@ export default [
 			return sortedByApp;
 		},
 	},
+	{
+		id: 'solid',
+		title: 'SolidJS',
+		ext: 'jsx',
+		img: '/framework/solid.svg',
+		eslint: {
+			files: ['**/solid/*.jsx'],
+			plugins: ['solid'],
+			extends: ['eslint:recommended', 'plugin:solid/recommended'],
+		},
+		playgroundURL: 'https://playground.solidjs.com/',
+		documentationURL: 'https://www.solidjs.com/',
+		filesSorter(files) {
+			return [files.find(({ fileName }) => fileName === 'main.jsx'), ...(files.filter(({ fileName }) => fileName !== 'main.jsx') || [])].filter((x) => x);
+		},
+	},
 ];
