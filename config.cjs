@@ -63,7 +63,7 @@ const FRAMEWORKS = [
 		img: 'https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg',
 		eslint: [
 			{
-				files: ['**/angular/*.ts'],
+				files: ['**/angular/**'],
 				parserOptions: {
 					project: ['tsconfig.app.json', 'tsconfig.spec.json'],
 					createDefaultProgram: true,
@@ -96,16 +96,16 @@ const FRAMEWORKS = [
 		playgroundURL: 'https://codesandbox.io/s/angular',
 		documentationURL: 'https://angular.io/docs',
 		filesSorter(files) {
-			const sortedTs = [files.find(({ fileName }) => fileName.split('.').pop() === 'ts'), ...(files.filter(({ fileName }) => fileName.split('.').pop() !== 'ts') || [])].filter(
-				(x) => x
-			);
+			// const sortedTs = [files.find(({ fileName }) => fileName.split('.').pop() === 'ts'), ...(files.filter(({ fileName }) => fileName.split('.').pop() !== 'ts') || [])].filter(
+			// 	(x) => x
+			// );
 
-			const sortedByApp = [
-				sortedTs.find(({ fileName }) => fileName.split('.')[0] === 'app'),
-				...(sortedTs.filter(({ fileName }) => fileName.split('.')[0] !== 'app') || []),
-			].filter((x) => x);
+			// const sortedByApp = [
+			// 	sortedTs.find(({ fileName }) => fileName.split('.')[0] === 'app'),
+			// 	...(sortedTs.filter(({ fileName }) => fileName.split('.')[0] !== 'app') || []),
+			// ].filter((x) => x);
 
-			return sortedByApp;
+			return files;
 		},
 	},
 	{
@@ -121,7 +121,23 @@ const FRAMEWORKS = [
 		playgroundURL: 'https://playground.solidjs.com/',
 		documentationURL: 'https://www.solidjs.com/',
 		filesSorter(files) {
-			return [files.find(({ fileName }) => fileName === 'App.jsx'), ...(files.filter(({ fileName }) => fileName !== 'App.jsx') || [])].filter((x) => x);
+			return [files.find(({ fileName }) => fileName === 'main.jsx'), ...(files.filter(({ fileName }) => fileName !== 'main.jsx') || [])].filter((x) => x);
+		},
+	},
+	{
+		id: 'lit',
+		title: 'Lit',
+		ext: 'js',
+		img: '/framework/lit.svg',
+		eslint: {
+			files: ['**/lit/**'],
+			plugins: ['lit'],
+			extends: ["plugin:lit/recommended"],
+		},
+		playgroundURL: 'https://lit.dev/playground',
+		documentationURL: 'https://lit.dev',
+		filesSorter(files) {
+			return files
 		},
 	},
 ];
