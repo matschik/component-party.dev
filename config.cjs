@@ -7,7 +7,12 @@ const FRAMEWORKS = [
 		eslint: {
 			files: ['*.svelte'],
 			processor: 'svelte3/svelte3',
-			plugins: ['svelte3'],
+			plugins: ['svelte3']
+		},
+		playgroundURL: 'https://svelte.dev/repl',
+		documentationURL: 'https://svelte.dev/',
+		filesSorter(files) {
+			return [files.find(({ fileName }) => fileName === 'App.svelte'), ...(files.filter(({ fileName }) => fileName !== 'App.svelte') || [])].filter((x) => x);
 		},
 	},
 	{
@@ -24,6 +29,11 @@ const FRAMEWORKS = [
 				},
 			},
 		},
+		playgroundURL: 'https://codesandbox.io/s/mystifying-goldberg-6wx04b',
+		documentationURL: 'https://reactjs.org/docs/getting-started.html',
+		filesSorter(files) {
+			return [files.find(({ fileName }) => fileName === 'App.jsx'), ...(files.filter(({ fileName }) => fileName !== 'App.jsx') || [])].filter((x) => x);
+		},
 	},
 	{
 		id: 'vue3',
@@ -36,6 +46,14 @@ const FRAMEWORKS = [
 				'vue/setup-compiler-macros': true,
 			},
 			extends: ['eslint:recommended', 'plugin:vue/vue3-recommended'],
+			rules: {
+				'vue/multi-word-component-names': "off"
+			}
+		},
+		playgroundURL: 'https://sfc.vuejs.org',
+		documentationURL: 'https://vuejs.org/guide',
+		filesSorter(files) {
+			return [files.find(({ fileName }) => fileName === 'App.vue'), ...(files.filter(({ fileName }) => fileName !== 'App.vue') || [])].filter((x) => x);
 		},
 	},
 	{
@@ -75,7 +93,24 @@ const FRAMEWORKS = [
 				},
 			},
 		],
+		playgroundURL: 'https://codesandbox.io/s/angular',
+		documentationURL: 'https://angular.io/docs',
+		filesSorter(files) {
+			const sortedTs = [files.find(({ fileName }) => fileName.split('.').pop() === 'ts'), ...(files.filter(({ fileName }) => fileName.split('.').pop() !== 'ts') || [])].filter(
+				(x) => x
+			);
+
+			const sortedByApp = [
+				sortedTs.find(({ fileName }) => fileName.split('.')[0] === 'app'),
+				...(sortedTs.filter(({ fileName }) => fileName.split('.')[0] !== 'app') || []),
+			].filter((x) => x);
+
+			return sortedByApp;
+		},
 	},
-];
+]
 
 module.exports = { FRAMEWORKS };
+
+	
+

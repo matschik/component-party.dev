@@ -9,7 +9,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "lint": "eslint .",
-    "lint:fix": "pnpm run lint -- --fix",
+    "lint:fix": "eslint . --fix",
     "prettier": "prettier --ignore-path .gitignore --plugin-search-dir=. . --check",
     "prettier:fix": "pnpm run prettier -- --write",
     "format": "pnpm run prettier:fix && pnpm run lint:fix",
