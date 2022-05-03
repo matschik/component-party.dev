@@ -153,6 +153,7 @@ function getFrameworkSectionPlaygroundURL(section, framework){
               }
               {getSectionCodeFiles(section, framework)?.length > 0 && (
                 <>
+                <p>{JSON.stringify(getSectionCodeFiles(section, framework).map(f => f.fileName))}</p>
                   <div class="flex space-x-1 items-center ml-0">
                     {getSectionCodeFiles(section, framework).map((file, index) =>(
                         <button data-codeviewer={`${section.id}-${framework.id}`} data-file-button={file.fileName} class="bg-[#0d1117] py-1.5 px-3 font-medium text-xs rounded-t inline-block" style={`opacity: ${index === 0 ? 1  : 0.6};`}>
