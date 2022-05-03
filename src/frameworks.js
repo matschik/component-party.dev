@@ -63,7 +63,7 @@ export default [
 		img: 'https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg',
 		eslint: [
 			{
-				files: ['**/angular/*.ts'],
+				files: ['**/angular/**'],
 				parserOptions: {
 					project: ['tsconfig.app.json', 'tsconfig.spec.json'],
 					createDefaultProgram: true,
@@ -122,6 +122,22 @@ export default [
 		documentationURL: 'https://www.solidjs.com/',
 		filesSorter(files) {
 			return [files.find(({ fileName }) => fileName === 'main.jsx'), ...(files.filter(({ fileName }) => fileName !== 'main.jsx') || [])].filter((x) => x);
+		},
+	},
+	{
+		id: 'lit',
+		title: 'Lit',
+		ext: 'js',
+		img: '/framework/lit.svg',
+		eslint: {
+			files: ['**/lit/**'],
+			plugins: ['lit'],
+			extends: ['plugin:lit/recommended'],
+		},
+		playgroundURL: 'https://lit.dev/playground',
+		documentationURL: 'https://lit.dev',
+		filesSorter(files) {
+			return files;
 		},
 	},
 ];

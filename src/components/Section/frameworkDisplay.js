@@ -73,8 +73,9 @@ function frameworkDisplayModule() {
 
 	(function init() {
 		if (!Object.values(frameworksProxy).length) {
-			for (let i = 0; i < frameworkIds.length; i++) {
-				frameworksProxy[i] = frameworkIds[i];
+			const initialFrameworkIds = ['react', 'svelte'];
+			for (let i = 0; i < initialFrameworkIds.length; i++) {
+				frameworksProxy[i] = initialFrameworkIds[i];
 			}
 		}
 
