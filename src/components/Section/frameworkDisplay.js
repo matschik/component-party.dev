@@ -9,22 +9,24 @@ function frameworkDisplayModule() {
 		fmwButtonHide: (framework) => document.querySelectorAll(framework ? `[data-framework-button-hide=${framework}]` : '[data-framework-button-hide]'),
 		fmwButtonShow: (framework) => document.querySelectorAll(framework ? `[data-framework-button-show=${framework}]` : '[data-framework-button-show]'),
 		fmwContent: (framework) => document.querySelectorAll(`[data-framework-content=${framework}]`),
+		fmwContentContainer: () => document.querySelectorAll(`[data-framework-content-container]`),
 	};
 
-	const hiddenFrameworksProxy = createLocaleStorageProxy('hidden_frameworks');
+	const frameworksProxy = createLocaleStorageProxy('frameworks_display');
 
 	function onFramework(framework) {
 		return {
 			show() {
-				if (hiddenFrameworksProxy.includes(framework)) {
-					const frameworkIndex = hiddenFrameworksProxy.indexOf(framework);
-					delete hiddenFrameworksProxy[frameworkIndex];
+				if (!frameworksProxy.includes(framework)) {
+					frameworksProxy.push(framework);
 				}
+
 				apply();
 			},
 			hide() {
-				if (!hiddenFrameworksProxy.includes(framework)) {
-					hiddenFrameworksProxy.push(framework);
+				if (frameworksProxy.includes(framework)) {
+					const frameworkIndex = frameworksProxy.indexOf(framework);
+					delete frameworksProxy[frameworkIndex];
 				}
 				apply();
 			},
@@ -32,16 +34,25 @@ function frameworkDisplayModule() {
 	}
 
 	function apply() {
-		for (const frameworkToHide of Object.values(hiddenFrameworksProxy)) {
-			for (const $el of $.fmwContent(frameworkToHide)) {
-				$el.style.display = 'none';
+		const $$fmwContentContainers = $.fmwContentContainer();
+		for (const $fmwContentContainer of [...$$fmwContentContainers]) {
+			const $$sortedFmwContent = [...$fmwContentContainer.children].sort(($fmwA, $fmwB) => {
+				function getIndex($fmw) {
+					const fmwId = $fmw.getAttribute('data-framework-content');
+					return Object.values(frameworksProxy).indexOf(fmwId);
+				}
+				const fmwAIndex = getIndex($fmwA);
+				const fmwBIndex = getIndex($fmwB);
+				return fmwAIndex === fmwBIndex ? 0 : fmwAIndex > fmwBIndex ? 1 : -1;
+			});
+			const list = document.createDocumentFragment();
+			for (const $fmw of $$sortedFmwContent) {
+				list.appendChild($fmw);
 			}
-			for (const $el of $.fmwButtonShow(frameworkToHide)) {
-				$el.style.opacity = '0.5';
-			}
+			$fmwContentContainer.appendChild(list);
 		}
 
-		for (const frameworkToShow of arrayDiff(Object.values(hiddenFrameworksProxy), frameworkIds)) {
+		for (const frameworkToShow of Object.values(frameworksProxy)) {
 			for (const $el of $.fmwContent(frameworkToShow)) {
 				$el.style.display = 'block';
 			}
@@ -49,9 +60,26 @@ function frameworkDisplayModule() {
 				$el.style.opacity = '1';
 			}
 		}
+
+		for (const frameworkToHide of arrayDiff(Object.values(frameworksProxy), frameworkIds)) {
+			for (const $el of $.fmwContent(frameworkToHide)) {
+				$el.style.display = 'none';
+			}
+			for (const $el of $.fmwButtonShow(frameworkToHide)) {
+				$el.style.opacity = '0.5';
+			}
+		}
 	}
 
-	apply();
+	(function init() {
+		if (!Object.values(frameworksProxy).length) {
+			for (let i = 0; i < frameworkIds.length; i++) {
+				frameworksProxy[i] = frameworkIds[i];
+			}
+		}
+
+		apply();
+	})();
 
 	for (const $fmwButton of $.fmwButtonHide()) {
 		const framework = $fmwButton.getAttribute('data-framework-button-hide');
@@ -63,10 +91,10 @@ function frameworkDisplayModule() {
 	for (const $fmwButton of $.fmwButtonShow()) {
 		const framework = $fmwButton.getAttribute('data-framework-button-show');
 		$fmwButton.addEventListener('click', () => {
-			if (hiddenFrameworksProxy.includes(framework)) {
-				onFramework(framework).show();
-			} else {
+			if (frameworksProxy.includes(framework)) {
 				onFramework(framework).hide();
+			} else {
+				onFramework(framework).show();
 			}
 		});
 	}
