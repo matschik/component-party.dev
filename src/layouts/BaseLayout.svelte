@@ -11,6 +11,24 @@
 		<link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
 		<meta name="description" content={`Web component JS frameworks overview by their syntax and features: ${FRAMEWORKS.map((f) => f.title).join(', ')}`} />
 		<style>
+			* {
+				scrollbar-color: rgba(255, 255, 255, 0.25) rgba(0, 0, 0, 0);
+				scrollbar-width: thin;
+			}
+
+			::-webkit-scrollbar {
+				width: 4px;
+				height: 4px;
+			}
+
+			::-webkit-scrollbar-track {
+				background-color: rgba(0, 0, 0, 0);
+			}
+
+			::-webkit-scrollbar-thumb {
+				background-color: rgba(255, 255, 255, 0.25);
+			}
+
 			#main-content h1:hover .header-anchor,
 			#main-content h2:hover .header-anchor {
 				opacity: 100;
