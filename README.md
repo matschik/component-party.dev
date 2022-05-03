@@ -39,7 +39,7 @@ pnpm run dev
 
 This project requires Node.js to be `v14.0.0` or higher, because we use new JavaScript features in our code, such as optional chaining.
 
-## Add a framework
+### Add a framework
 
 1) Fork the project and create a new branch
 2) Add the new framework SVG logo in `public/framework`
