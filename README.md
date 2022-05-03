@@ -13,16 +13,18 @@ How do we solve this ? Developers love having framework overview by examples. It
 
 ## Roadmap
 
-- [ ] Add SolidJS support
-- [ ] Add Preact support
-- [ ] Add Alpine support
-- [ ] Add native JS support ?
+- [ ] Add SolidJS
 - [ ] Add EmberJS
-- [x] Add Angular support
+- [ ] Add Preact
+- [ ] Add Alpine
+- [ ] Add [Lit](https://lit.dev/)
+- [ ] Add native JS ?
+
+- [x] Add Angular
 - [x] Website (built with Astro)
-- [x] Add React support
-- [x] Add Svelte support
-- [x] Add Vue 3 support
+- [x] Add React
+- [x] Add Svelte
+- [x] Add Vue 3
 
 ## Contributing
 
@@ -36,3 +38,10 @@ pnpm run dev
 ```
 
 This project requires Node.js to be `v14.0.0` or higher, because we use new JavaScript features in our code, such as optional chaining.
+
+## Add a framework
+
+1) Fork the project and create a new branch
+2) Add the new framework SVG logo in `public/framework`
+3) Install the ESLint plugin assiociated to the framework
+4) On `config.cjs` and `src/frameworks.js`, add a new entry with SVG link and ESLint configuration

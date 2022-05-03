@@ -7,7 +7,7 @@ const FRAMEWORKS = [
 		eslint: {
 			files: ['*.svelte'],
 			processor: 'svelte3/svelte3',
-			plugins: ['svelte3']
+			plugins: ['svelte3'],
 		},
 		playgroundURL: 'https://svelte.dev/repl',
 		documentationURL: 'https://svelte.dev/',
@@ -47,8 +47,8 @@ const FRAMEWORKS = [
 			},
 			extends: ['eslint:recommended', 'plugin:vue/vue3-recommended'],
 			rules: {
-				'vue/multi-word-component-names': "off"
-			}
+				'vue/multi-word-component-names': 'off',
+			},
 		},
 		playgroundURL: 'https://sfc.vuejs.org',
 		documentationURL: 'https://vuejs.org/guide',
@@ -116,7 +116,7 @@ const FRAMEWORKS = [
 		eslint: {
 			files: ['**/solid/*.jsx'],
 			plugins: ['solid'],
-			extends: ["eslint:recommended", "plugin:solid/recommended"]
+			extends: ['eslint:recommended', 'plugin:solid/recommended'],
 		},
 		playgroundURL: 'https://playground.solidjs.com/',
 		documentationURL: 'https://www.solidjs.com/',
@@ -124,9 +124,6 @@ const FRAMEWORKS = [
 			return [files.find(({ fileName }) => fileName === 'App.jsx'), ...(files.filter(({ fileName }) => fileName !== 'App.jsx') || [])].filter((x) => x);
 		},
 	},
-]
+];
 
 module.exports = { FRAMEWORKS };
-
-	
-

@@ -9,7 +9,7 @@ export default defineConfig({
 	vite: {
 		plugins: [],
 		optimizeDeps: {
-			exclude: ["locate-path", "path-exists", "find-up"]
-		}
+			exclude: ['locate-path', 'path-exists', 'find-up'],
+		},
 	},
 });

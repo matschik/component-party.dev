@@ -15,14 +15,12 @@ function nextLight() {
 </script>
 
 <template>
-  <button @click="nextLight">
-    Next light
-  </button>
-  <p>Light is: {{ light }}</p>
-  <p>
-    You must
-    <span v-if="light === 'red'">STOP</span>
-    <span v-else-if="light === 'orange'">SLOW DOWN</span>
-    <span v-else-if="light === 'green'">GO</span>
-  </p>
+	<button @click="nextLight">Next light</button>
+	<p>Light is: {{ light }}</p>
+	<p>
+		You must
+		<span v-if="light === 'red'">STOP</span>
+		<span v-else-if="light === 'orange'">SLOW DOWN</span>
+		<span v-else-if="light === 'green'">GO</span>
+	</p>
 </template>
