@@ -76,7 +76,7 @@
 		<meta property="twitter:image" content="https://component-party.pages.dev/banner.png" />
 	</head>
 	<body class="bg-gray-900 text-white font-sans">
-		<header class="z-10 fixed w-full top-0 backdrop-blur bg-gray-900/80 border-b border-gray-700">
+		<header class="backdrop-blur bg-gray-900/80 border-b border-gray-700">
 			<div class="px-4 sm:px-6 lg:px-8">
 				<div class="flex justify-between items-center py-3">
 					<a class="font-semibold text-lg flex items-center space-x-3" href="#reactivity">
@@ -98,8 +98,7 @@
 			</div>
 		</header>
 		<div class="flex">
-			<aside class="sticky flex-shrink-0 w-[300px] overflow-y-auto top-0 pr-12 max-h-screen border-r border-gray-700">
-				<div class="h-[52px]" />
+			<aside class="hidden lg:block sticky flex-shrink-0 w-[300px] overflow-y-auto top-0 pr-12 max-h-screen border-r border-gray-700">
 				<nav class="font-semibold w-full text-base py-2 pl-4 pb-20">
 					<ul class="space-y-6">
 						{#each tree as treeNode}
@@ -122,7 +121,6 @@
 				</nav>
 			</aside>
 			<div class="pb-8 w-full">
-				<div class="h-[52px]" />
 				<slot />
 			</div>
 		</div>
