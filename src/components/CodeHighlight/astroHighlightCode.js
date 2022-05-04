@@ -1,4 +1,4 @@
-import { getHighlighter } from 'shiki';
+import { getHighlighter } from './Shiki.js';
 
 export default async function astroHighlightCode({ code, lang = 'plaintext', theme = 'github-dark', wrap = false }) {
 	/** Replace the shiki class name with a custom astro class name. */
