@@ -13,7 +13,14 @@ How do we solve this ? Developers love having framework overview by examples. It
 
 ## Roadmap
 
-- [ ] Add SolidJS
+- [ ] SolidJS
+  * [x] Reactivity
+  * [x] Templating
+  * [x] Lifecycle
+  * [ ] Component composition
+  * [ ] Form input
+  * [ ] Webapp features
+
 - [ ] Add EmberJS
 - [ ] Add Preact
 - [ ] Add Alpine
