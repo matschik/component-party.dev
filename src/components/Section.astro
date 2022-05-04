@@ -153,7 +153,7 @@ function getFrameworkSectionPlaygroundURL(section, framework){
               }
               {getSectionCodeFiles(section, framework)?.length > 0 && (
                 <>
-                  <div class="flex space-x-1 items-center ml-0">
+                  <div class="flex space-x-1 items-center ml-0 overflow-x-auto">
                     {getSectionCodeFiles(section, framework).map((file, index) =>(
                         <button data-codeviewer={`${section.id}-${framework.id}`} data-file-button={file.fileName} class="bg-[#0d1117] py-1.5 px-3 font-medium text-xs rounded-t inline-block" style={`opacity: ${index === 0 ? 1  : 0.6};`}>
                           {file.fileName}
