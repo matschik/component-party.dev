@@ -7,12 +7,12 @@ const tree = await generateContentTree();
 ---
 
 <BaseLayout tree={tree}>
-    <div class="px-6 lg:px-20 py-2 sticky top-0 z-10 flex w-full backdrop-blur bg-gray-900/80 border-b border-gray-700">
+    <div class="px-6 lg:px-20 py-2 sticky top-0 z-10 flex w-full backdrop-blur bg-gray-900/80 border-b border-gray-700 whitespace-nowrap overflow-x-auto">
         {FRAMEWORKS.map((framework) => (
             <button
                 data-framework-button-show={framework.id}
                 title={`Display ${framework.title}`}
-                class="text-sm rounded border border-gray-700 px-3 py-1 border-opacity-50 bg-gray-900 hover:bg-gray-800 transition-all mr-2"
+                class="text-sm flex-shrink-0 rounded border border-gray-700 px-3 py-1 border-opacity-50 bg-gray-900 hover:bg-gray-800 transition-all mr-2"
                 style="opacity: 0.5;"
             >
                 <FrameworkLabel id={framework.id} size={15} />
@@ -20,7 +20,7 @@ const tree = await generateContentTree();
         ))}
     </div>
 
-    <main id="main-content" class="px-14 lg:px-20 pt-10 prose prose-sm prose-invert prose-h1:scroll-mt-[5rem] prose-pre:mt-0 prose-h2:scroll-mt-[5rem]" style="max-width: 100%;">
+    <main id="main-content" class="px-6 md:px-14 lg:px-20 pt-10 prose prose-sm prose-invert prose-h1:scroll-mt-[5rem] prose-pre:mt-0 prose-h2:scroll-mt-[5rem]" style="max-width: 100%;">
         <slot />
     </main>
 </BaseLayout>
