@@ -4,7 +4,7 @@
 
 > Web component JS frameworks quick overview by their syntax and features
 
-**Website: https://component-party.pages.dev**
+**Website: https://component-party.dev**
 
 ## Why ?
 
