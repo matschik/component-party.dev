@@ -1,11 +1,11 @@
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 
 const TRAFFIC_LIGHTS = ['red', 'orange', 'green'];
 
 export default function TrafficLight() {
 	const [lightIndex, setLightIndex] = useState(0);
 
-	const light = useMemo(() => TRAFFIC_LIGHTS[lightIndex], [lightIndex]);
+	const light = TRAFFIC_LIGHTS[lightIndex];
 
 	function nextLight() {
 		if (lightIndex + 1 > TRAFFIC_LIGHTS.length - 1) {
