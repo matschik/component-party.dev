@@ -1,4 +1,4 @@
-import { Component, Pipe, PipeTransform, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
 	name: 'double',
@@ -11,8 +11,7 @@ export class DoubleCountPipe implements PipeTransform {
 
 @Component({
 	selector: 'app-doublecount',
-	template: ' <div>{{ number | double }}</div>',
-	changeDetection: ChangeDetectionStrategy.OnPush,
+	template: '<div>{{ number | double }}</div>',
 })
 export class DoublecountComponent {
 	count: number = 10;

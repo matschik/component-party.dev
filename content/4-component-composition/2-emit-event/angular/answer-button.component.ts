@@ -5,6 +5,9 @@ import { Component, Output, EventEmitter } from '@angular/core';
 	templateUrl: './answer-button.component.html',
 })
 export class AnswerButtonComponent {
-	@Output() yes = new EventEmitter<void>();
-	@Output() no = new EventEmitter<void>();
+	@Output()
+	yes = new EventEmitter<void>();
+
+	@Output()
+	no = new EventEmitter<void>();
 }
