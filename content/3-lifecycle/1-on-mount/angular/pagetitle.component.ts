@@ -2,8 +2,7 @@ import { Component, AfterContentInit } from '@angular/core';
 
 @Component({
 	selector: 'app-pagetitle',
-	templateUrl: './pagetitle.component.html',
-	styleUrls: ['./pagetitle.component.css'],
+	template: '<p>Page title: {{ pageTitle }}</p>',
 })
 export class PagetitleComponent implements AfterContentInit {
 	pageTitle: string = '';
