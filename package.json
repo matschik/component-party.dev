@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "type": "module",
-  "packageManager": "pnpm@6.31.0",
+  "packageManager": "pnpm@7.0.0",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -32,7 +32,7 @@
     "@angular-eslint/template-parser": "^13.2.1",
     "@angular/core": "^13.3.3",
     "@angular/router": "^13.3.3",
-    "@astrojs/svelte": "^0.0.2",
+    "@astrojs/svelte": "^0.1.2",
     "@astrojs/tailwind": "^0.1.2",
     "@tailwindcss/typography": "^0.5.2",
     "@typescript-eslint/eslint-plugin": "^5.20.0",
