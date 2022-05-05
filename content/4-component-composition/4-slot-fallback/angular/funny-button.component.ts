@@ -1,16 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, ContentChild, TemplateRef } from '@angular/core';
 
 @Component({
 	selector: 'app-root',
 	styleUrls: ['./funny-button.component.css'],
 	template: `
-		<button #container>
-			<ng-content></ng-content>
-		</button>
+		<button>
+			<ng-container *ngIf="content;else fallback" [ngTemplateOutlet]="content"></ng-container>
 
-		<button *ngIf="!container.hasChildNodes()">
-			<span>No content found</span>
+			<ng-template #fallback>
+				<span>No content found</span>
+			</ng-template>
 		</button>
 	`,
 })
-export class FunnyButtonComponent {}
+export class FunnyButtonComponent {
+	@ContentChild('content', { read: TemplateRef })
+	content?: TemplateRef<unknown>;
+}
