@@ -1,7 +1,7 @@
 {
   "name": "component-party",
   "version": "1.0.0",
-  "description": "",
+  "description": "Web component JS frameworks overview by their syntax and features",
   "type": "module",
   "packageManager": "pnpm@7.0.0",
   "scripts": {
@@ -19,9 +19,7 @@
     "type": "git",
     "url": "git+https://github.com/matschik/component-party.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/matschik/component-party/issues"
   },
