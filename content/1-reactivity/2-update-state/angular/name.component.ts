@@ -9,6 +9,5 @@ export class NameComponent {
 
 	constructor() {
 		this.name = 'Jane';
-		console.log(this.name);
 	}
 }
