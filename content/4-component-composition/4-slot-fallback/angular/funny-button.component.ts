@@ -11,7 +11,6 @@ import { Component, ContentChild, TemplateRef } from '@angular/core';
 				<span>No content found</span>
 			</ng-template>
 		</button>
-		<ng-content></ng-content>
 	`,
 })
 export class FunnyButtonComponent {
