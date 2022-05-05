@@ -16,6 +16,4 @@ export class DoubleCountPipe implements PipeTransform {
 })
 export class DoublecountComponent {
 	count: number = 10;
-
-	constructor() {}
 }
