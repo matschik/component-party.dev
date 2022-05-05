@@ -1,9 +1,8 @@
-import { Component, onDestroy } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 
 @Component({
 	selector: 'app-time',
-	templateUrl: './time.component.html',
-	styleUrls: ['./time.component.css'],
+	templateUrl: '<p>Current time: {{ time }}</p>',
 })
 export class TimeComponent implements OnDestroy {
 	time: string = new Date().toLocaleTimeString();
