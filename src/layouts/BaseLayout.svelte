@@ -39,10 +39,6 @@
 				font-size: 1rem;
 			}
 
-			#main-content .missing-snippet {
-				font-size: 0.8571429rem;
-			}
-
 			#main-content .header-anchor {
 				float: left;
 				margin-left: -0.87em;
