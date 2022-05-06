@@ -3,7 +3,7 @@ import { ref, computed } from 'vue';
 const TRAFFIC_LIGHTS = ['red', 'orange', 'green'];
 const lightIndex = ref(0);
 
-const light = computed(() => TRAFFIC_LIGHTS[lightIndex]);
+const light = computed(() => TRAFFIC_LIGHTS[lightIndex.value]);
 
 function nextLight() {
 	if (lightIndex.value + 1 > TRAFFIC_LIGHTS.length - 1) {
