@@ -112,7 +112,7 @@ export default [
 		id: 'solid',
 		title: 'SolidJS',
 		ext: 'jsx',
-		img: '/framework/solid.svg',
+		img: 'https://raw.githubusercontent.com/matschik/component-party/main/public/framework/solid.svg',
 		eslint: {
 			files: ['**/solid/*.jsx'],
 			plugins: ['solid'],

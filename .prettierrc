@@ -5,7 +5,6 @@
   "tabWidth": 2,
   "trailingComma": "es5",
   "useTabs": true,
-  "plugins": ["prettier-plugin-svelte"],
   "overrides": [
     {
       "files": [".*", "*.json", "*.md", "*.toml", "*.yml"],
