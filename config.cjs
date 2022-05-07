@@ -128,7 +128,7 @@ const FRAMEWORKS = [
 		id: 'lit',
 		title: 'Lit',
 		ext: 'js',
-		img: '/framework/lit.svg',
+		img: 'https://raw.githubusercontent.com/matschik/component-party/main/public/framework/lit.svg',
 		eslint: {
 			files: ['**/lit/**'],
 			plugins: ['lit'],

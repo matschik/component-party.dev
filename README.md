@@ -191,6 +191,40 @@ How do we solve this ? Developers love having framework overview by examples. It
    * [ ] Routing
    * [ ] Router link
 
+</details><details>
+        <summary>
+            <img width="18" height="18" src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/lit.svg" />
+            <b>Lit</b>
+            <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/5" /></summary>
+
+* [ ] Reactivity
+   * [x] Declare state
+   * [ ] Update state
+   * [ ] Computed state
+* [ ] Templating
+   * [ ] Minimal template
+   * [ ] Styling
+   * [ ] Loop
+   * [ ] Event click
+   * [ ] Dom ref
+   * [ ] Conditional
+* [ ] Lifecycle
+   * [ ] On mount
+   * [ ] On unmount
+* [ ] Component composition
+   * [ ] Props
+   * [ ] Emit to parent
+   * [ ] Slot
+   * [ ] Slot fallback
+* [ ] Form input
+   * [ ] Input text
+   * [ ] Checkbox
+   * [ ] Radio
+   * [ ] Select
+* [ ] Webapp features
+   * [ ] Routing
+   * [ ] Router link
+
 </details>
 
 ## Contributing
