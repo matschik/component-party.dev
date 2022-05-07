@@ -4353,7 +4353,6 @@ packages:
       unist-util-visit: 4.1.0
     dev: true
 
-<<<<<<< HEAD
   /remark-stringify/10.0.2:
     resolution: {integrity: sha512-6wV3pvbPvHkbNnWB0wdDvVFHOe1hBRAx1Q/5g/EpH4RppAII6J8Gnwe7VbHuXaoKIF6LAg6ExTel/+kNqSQ7lw==}
     dependencies:
@@ -4371,11 +4370,11 @@ packages:
       unified: 10.1.2
     transitivePeerDependencies:
       - supports-color
-=======
+    dev: true
+
   /requireindex/1.2.0:
     resolution: {integrity: sha512-L9jEkOi3ASd9PYit2cwRfyppc9NoABujTP8/5gFcbERmo5jUoAKovIC3fsF17pkTnGsrByysqX+Kxd2OTNI1ww==}
     engines: {node: '>=0.10.5'}
->>>>>>> eb091f5 (add lit framework)
     dev: true
 
   /resolve-from/4.0.0:
