@@ -16,6 +16,7 @@ specifiers:
   autoprefixer: ^10.4.4
   eslint: ^8.13.0
   eslint-config-prettier: ^8.5.0
+  eslint-plugin-lit: ^1.6.1
   eslint-plugin-prettier: ^4.0.0
   eslint-plugin-react: ^7.29.4
   eslint-plugin-solid: ^0.4.7
@@ -54,6 +55,7 @@ devDependencies:
   autoprefixer: 10.4.7_postcss@8.4.13
   eslint: 8.14.0
   eslint-config-prettier: 8.5.0_eslint@8.14.0
+  eslint-plugin-lit: 1.6.1_eslint@8.14.0
   eslint-plugin-prettier: 4.0.0_mzpligoj26dazigcet37nxg2zy
   eslint-plugin-react: 7.29.4_eslint@8.14.0
   eslint-plugin-solid: 0.4.7_t725usgvqspm5woeqpaxbfp2qu
@@ -1989,6 +1991,18 @@ packages:
       eslint: '>=7.0.0'
     dependencies:
       eslint: 8.14.0
+    dev: true
+
+  /eslint-plugin-lit/1.6.1_eslint@8.14.0:
+    resolution: {integrity: sha512-BpPoWVhf8dQ/Sz5Pi9NlqbGoH5BcMcVyXhi2XTx2XGMAO9U2lS+GTSsqJjI5hL3OuxCicNiUEWXazAwi9cAGxQ==}
+    engines: {node: '>= 12'}
+    peerDependencies:
+      eslint: '>= 5'
+    dependencies:
+      eslint: 8.14.0
+      parse5: 6.0.1
+      parse5-htmlparser2-tree-adapter: 6.0.1
+      requireindex: 1.2.0
     dev: true
 
   /eslint-plugin-prettier/4.0.0_mzpligoj26dazigcet37nxg2zy:
@@ -4000,6 +4014,12 @@ packages:
       unist-util-visit-children: 1.1.4
     dev: true
 
+  /parse5-htmlparser2-tree-adapter/6.0.1:
+    resolution: {integrity: sha512-qPuWvbLgvDGilKc5BoicRovlT4MtYT6JfJyBOMDsKoiT+GiuP5qyrPCnR9HcPECIJJmZh5jRndyNThnhhb/vlA==}
+    dependencies:
+      parse5: 6.0.1
+    dev: true
+
   /parse5/6.0.1:
     resolution: {integrity: sha512-Ofn/CTFzRGTTxwpNEs9PP93gXShHcTq255nzRYSKe8AkVpZY7e1fpmTfOyoIvjP5HG7Z2ZM7VS9PPhQGW2pOpw==}
     dev: true
@@ -4350,6 +4370,11 @@ packages:
       unified: 10.1.2
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /requireindex/1.2.0:
+    resolution: {integrity: sha512-L9jEkOi3ASd9PYit2cwRfyppc9NoABujTP8/5gFcbERmo5jUoAKovIC3fsF17pkTnGsrByysqX+Kxd2OTNI1ww==}
+    engines: {node: '>=0.10.5'}
     dev: true
 
   /resolve-from/4.0.0:

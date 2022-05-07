@@ -124,4 +124,20 @@ export default [
 			return [files.find(({ fileName }) => fileName === 'main.jsx'), ...(files.filter(({ fileName }) => fileName !== 'main.jsx') || [])].filter((x) => x);
 		},
 	},
+	{
+		id: 'lit',
+		title: 'Lit',
+		ext: 'js',
+		img: 'https://raw.githubusercontent.com/matschik/component-party/main/public/framework/lit.svg',
+		eslint: {
+			files: ['**/lit/**'],
+			plugins: ['lit'],
+			extends: ['plugin:lit/recommended'],
+		},
+		playgroundURL: 'https://lit.dev/playground',
+		documentationURL: 'https://lit.dev',
+		filesSorter(files) {
+			return files;
+		},
+	},
 ];
