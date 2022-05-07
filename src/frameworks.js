@@ -124,4 +124,12 @@ export default [
 			return [files.find(({ fileName }) => fileName === 'main.jsx'), ...(files.filter(({ fileName }) => fileName !== 'main.jsx') || [])].filter((x) => x);
 		},
 	},
+	{
+		id: 'marko',
+		title: 'Marko',
+		ext: 'marko',
+		img: 'https://raw.githubusercontent.com/matschik/component-party/main/public/framework/marko.svg',
+		playgroundURL: 'https://markojs.com/try-online/',
+		documentationURL: 'https://markojs.com/',
+	},
 ];
