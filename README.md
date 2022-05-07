@@ -16,7 +16,6 @@ How do we solve this ? Developers love having framework overview by examples. It
 *   \[ ] Add EmberJS
 *   \[ ] Add Preact
 *   \[ ] Add Alpine
-*   \[ ] Add [Lit](https://lit.dev/)
 *   \[ ] Add native JS ?
 
 ## Progression
