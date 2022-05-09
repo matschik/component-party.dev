@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 @Component({
 	selector: 'app-pick-pill',
 	template: `
+		<div>Picked: {{ picked }}</div>
+
 		<input id="blue-pill" [checked]="picked === 'blue'" type="radio" value="blue" (change)="handleChange($event)" />
 		<label for="blue-pill">Blue pill</label>
 

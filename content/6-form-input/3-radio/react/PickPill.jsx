@@ -9,6 +9,8 @@ export default function PickPill() {
 
 	return (
 		<>
+			<div>Picked: {picked}</div>
+
 			<input id="blue-pill" checked={picked === 'blue'} type="radio" value="blue" onChange={handleChange} />
 			<label htmlFor="blue-pill">Blue pill</label>
 
