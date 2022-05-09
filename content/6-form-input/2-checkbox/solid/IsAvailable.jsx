@@ -4,7 +4,7 @@ export default function IsAvailable() {
 	const [isAvailable, setIsAvailable] = createSignal(false);
 
 	function handleChange() {
-		setIsAvailable(previousValue => !previousValue);
+		setIsAvailable((previousValue) => !previousValue);
 	}
 
 	return (

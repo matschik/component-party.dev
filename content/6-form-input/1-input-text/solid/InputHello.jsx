@@ -1,4 +1,4 @@
-import { createSignal } from "solid-js";
+import { createSignal } from 'solid-js';
 
 export default function InputHello() {
 	const [text, setText] = createSignal('Hello world');
@@ -9,7 +9,7 @@ export default function InputHello() {
 
 	return (
 		<>
-			<p>{text}</p>
+			<p>{text()}</p>
 			<input value={text()} onInput={handleChange} />
 		</>
 	);

@@ -132,12 +132,12 @@ const FRAMEWORKS = [
 		eslint: {
 			files: ['**/lit/**'],
 			plugins: ['lit'],
-			extends: ["plugin:lit/recommended"],
+			extends: ['plugin:lit/recommended'],
 		},
 		playgroundURL: 'https://lit.dev/playground',
 		documentationURL: 'https://lit.dev',
 		filesSorter(files) {
-			return files
+			return files;
 		},
 	},
 ];

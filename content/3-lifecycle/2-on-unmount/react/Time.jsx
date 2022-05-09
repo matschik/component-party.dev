@@ -7,7 +7,7 @@ export default function Time() {
 		const timer = setInterval(() => {
 			setTime(new Date().toLocaleTimeString());
 		}, 1000);
-		
+
 		return () => {
 			clearInterval(timer);
 		};
