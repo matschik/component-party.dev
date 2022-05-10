@@ -1,4 +1,4 @@
-import Component, { tracked } from '@glimmer/component';
+import Component from '@glimmer/component';
 export default class CounterComponent extends Component {
-	@tracked name = 'John';
+	name = 'John';
 }
