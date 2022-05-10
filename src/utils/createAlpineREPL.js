@@ -1,4 +1,4 @@
-import { getParameters } from 'codesandbox/lib/api/define';
+import { getParameters } from 'codesandbox/lib/api/define.js';
 
 export default function createAlpineREPL() {
 	const BASE_URL = 'https://codesandbox.io/api/v1/sandboxes/define?embed=1&parameters=';
