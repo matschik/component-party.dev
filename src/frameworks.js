@@ -149,7 +149,7 @@ export default [
 			files: ['**/alpine/**'],
 			extends: ['eslint:recommended'],
 		},
-		playgroundURL: 'https://codesandbox.io/s/alpinejs-sild2',
+		playgroundURL: 'https://codesandbox.io/s/7br3q8',
 		documentationURL: 'https://alpinejs.dev/start-here',
 		filesSorter(files) {
 			return files;
