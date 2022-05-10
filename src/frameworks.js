@@ -151,15 +151,15 @@ export default [
 		},
 		playgroundURL: 'https://codesandbox.io/s/7br3q8',
 		documentationURL: 'https://alpinejs.dev/start-here',
-    filesSorter(files) {
+		filesSorter(files) {
 			return files;
 		},
 	},
-  {
+	{
 		id: 'ember',
 		title: 'Ember',
 		ext: 'js',
-		img: 'https://raw.githubusercontent.com/matschik/component-party/main/public/framework/ember.svg',
+		img: 'framework/ember.svg',
 		eslint: {
 			files: ['**/ember/**'],
 			plugins: ['ember'],

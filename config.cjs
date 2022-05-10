@@ -159,7 +159,7 @@ const FRAMEWORKS = [
 		id: 'ember',
 		title: 'Ember',
 		ext: 'js',
-		img: 'https://raw.githubusercontent.com/matschik/component-party/main/public/framework/ember.svg',
+		img: 'framework/ember.svg',
 		eslint: {
 			files: ['**/ember/**'],
 			plugins: ['ember'],
