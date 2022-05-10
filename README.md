@@ -228,7 +228,7 @@ How do we solve this ? Developers love having framework overview by examples. It
         <summary>
             <img width="18" height="18" src="public/framework/alpine.svg" />
             <b>Alpine.js</b>
-            <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/86" /></summary>
+            <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/91" /></summary>
 
 - [x] Reactivity
   - [x] Declare state
@@ -249,11 +249,11 @@ How do we solve this ? Developers love having framework overview by examples. It
   - [x] Emit to parent
   - [x] Slot
   - [x] Slot fallback
-- [ ] Form input
+- [x] Form input
   - [x] Input text
   - [x] Checkbox
   - [x] Radio
-  - [ ] Select
+  - [x] Select
 - [ ] Webapp features
   - [ ] Routing
   - [ ] Router link
