@@ -121,7 +121,7 @@ export default [
 		playgroundURL: 'https://playground.solidjs.com/',
 		documentationURL: 'https://www.solidjs.com/',
 		filesSorter(files) {
-			return [files.find(({ fileName }) => fileName === 'main.jsx'), ...(files.filter(({ fileName }) => fileName !== 'main.jsx') || [])].filter((x) => x);
+			return [files.find(({ fileName }) => fileName === 'App.jsx'), ...(files.filter(({ fileName }) => fileName !== 'App.jsx') || [])].filter((x) => x);
 		},
 	},
 	{
@@ -136,6 +136,22 @@ export default [
 		},
 		playgroundURL: 'https://lit.dev/playground',
 		documentationURL: 'https://lit.dev',
+		filesSorter(files) {
+			return files;
+		},
+	},
+	{
+		id: 'ember',
+		title: 'Ember',
+		ext: 'js',
+		img: 'https://raw.githubusercontent.com/matschik/component-party/main/public/framework/ember.svg',
+		eslint: {
+			files: ['**/ember/**'],
+			plugins: ['ember'],
+			extends: ['plugin:ember/recommended'],
+		},
+		playgroundURL: 'https://ember-twiddle.com',
+		documentationURL: 'https://emberjs.com',
 		filesSorter(files) {
 			return files;
 		},

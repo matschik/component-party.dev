@@ -140,6 +140,23 @@ const FRAMEWORKS = [
 			return files;
 		},
 	},
+	{
+		id: 'ember',
+		title: 'Ember',
+		ext: 'js',
+		img: 'https://raw.githubusercontent.com/matschik/component-party/main/public/framework/ember.svg',
+		eslint: {
+			files: ['**/ember/**'],
+			plugins: ['ember'],
+			parser: "@babel/eslint-parser",
+			extends: ['plugin:ember/recommended'],
+		},
+		playgroundURL: 'https://ember-twiddle.com',
+		documentationURL: 'https://emberjs.com',
+		filesSorter(files) {
+			return files;
+		},
+	},
 ];
 
 module.exports = { FRAMEWORKS };
