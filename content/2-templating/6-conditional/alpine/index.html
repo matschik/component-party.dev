@@ -1,0 +1,21 @@
+<div x-data="{
+  TRAFFIC_LIGHTS: ['red', 'orange', 'green'],
+  lightIndex: 0,
+  get light() { return this.TRAFFIC_LIGHTS[this.lightIndex] },
+  nextLight() {
+    if (this.lightIndex + 1 > this.TRAFFIC_LIGHTS.length - 1) {
+      this.lightIndex = 0
+    } else {
+      this.lightIndex++
+    }
+  }
+}">
+  <button x-on:click="nextLight">Next light</button>
+  <p>Light is: <span x-text="light"></span></p>
+  <p>
+    You must
+    <span x-show="light === 'red'">STOP</span>
+    <span x-show="light === 'orange'">SLOW DOWN</span>
+    <span x-show="light === 'green'">GO</span>
+  </p>
+</div>

@@ -3,7 +3,7 @@ export default [
 		id: 'svelte',
 		title: 'Svelte',
 		ext: 'svelte',
-		img: 'https://raw.githubusercontent.com/matschik/component-party/main/public/framework/svelte.svg',
+		img: 'framework/svelte.svg',
 		eslint: {
 			files: ['*.svelte'],
 			processor: 'svelte3/svelte3',
@@ -19,7 +19,7 @@ export default [
 		id: 'react',
 		title: 'React',
 		ext: 'jsx',
-		img: 'https://raw.githubusercontent.com/matschik/component-party/main/public/framework/react.svg',
+		img: 'framework/react.svg',
 		eslint: {
 			files: ['**/react/*.jsx', '**/react/*.tsx'],
 			extends: ['eslint:recommended', 'plugin:react/recommended', 'plugin:react/jsx-runtime'],
@@ -39,7 +39,7 @@ export default [
 		id: 'vue3',
 		title: 'Vue 3',
 		ext: 'vue',
-		img: 'https://raw.githubusercontent.com/matschik/component-party/main/public/framework/vue.svg',
+		img: 'framework/vue.svg',
 		eslint: {
 			files: ['*.vue'],
 			env: {
@@ -60,7 +60,7 @@ export default [
 		id: 'angular',
 		title: 'Angular',
 		ext: 'ts',
-		img: 'https://raw.githubusercontent.com/matschik/component-party/main/public/framework/angular.svg',
+		img: 'framework/angular.svg',
 		eslint: [
 			{
 				files: ['**/angular/**'],
@@ -112,7 +112,7 @@ export default [
 		id: 'solid',
 		title: 'SolidJS',
 		ext: 'jsx',
-		img: 'https://raw.githubusercontent.com/matschik/component-party/main/public/framework/solid.svg',
+		img: 'framework/solid.svg',
 		eslint: {
 			files: ['**/solid/*.jsx'],
 			plugins: ['solid'],
@@ -128,7 +128,7 @@ export default [
 		id: 'lit',
 		title: 'Lit',
 		ext: 'js',
-		img: 'https://raw.githubusercontent.com/matschik/component-party/main/public/framework/lit.svg',
+		img: 'framework/lit.svg',
 		eslint: {
 			files: ['**/lit/**'],
 			plugins: ['lit'],
@@ -141,6 +141,21 @@ export default [
 		},
 	},
 	{
+		id: 'alpine',
+		title: 'Alpine.js',
+		ext: 'alpine',
+		img: 'framework/alpine.svg',
+		eslint: {
+			files: ['**/alpine/**'],
+			extends: ['eslint:recommended'],
+		},
+		playgroundURL: 'https://codesandbox.io/s/7br3q8',
+		documentationURL: 'https://alpinejs.dev/start-here',
+    filesSorter(files) {
+			return files;
+		},
+	},
+  {
 		id: 'ember',
 		title: 'Ember',
 		ext: 'js',
