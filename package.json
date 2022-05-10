@@ -38,6 +38,7 @@
     "@typescript-eslint/parser": "^5.20.0",
     "astro": "^1.0.0-beta.12",
     "autoprefixer": "^10.4.4",
+    "codesandbox": "^2.2.3",
     "eslint": "^8.13.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-lit": "^1.6.1",

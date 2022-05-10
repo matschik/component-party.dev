@@ -132,7 +132,7 @@ async function main() {
 		const percent = Math.ceil((allChecks.filter((v) => v).length / allChecks.length) * 100);
 		let frameworkContent = `<details>
         <summary>
-            <img width="18" height="18" src="${framework.img}" />
+            <img width="18" height="18" src="public/${framework.img}" />
             <b>${framework.title}</b>
             <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/${percent}" /></summary>
 
