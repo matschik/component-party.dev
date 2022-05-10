@@ -13,7 +13,6 @@ How do we solve this ? Developers love having framework overview by examples. It
 
 ## Roadmap
 
-*   \[ ] Add EmberJS
 *   \[ ] Add Preact
 *   \[ ] Add Alpine
 *   \[ ] Add Stencil
