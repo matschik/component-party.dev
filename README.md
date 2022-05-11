@@ -293,6 +293,42 @@ How do we solve this ? Developers love having framework overview by examples. It
 
 </details>
 
+</details><details>
+        <summary>
+            <img width="18" height="18" src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/marko.svg" />
+            <b>marko</b>
+            <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/41" /></summary>
+
+* [x] Reactivity
+   * [x] Declare state
+   * [x] Update state
+   * [x] Computed state
+* [x] Templating
+   * [x] Minimal template
+   * [x] Styling
+   * [X] Loop
+   * [X] Event click
+   * [ ] Dom ref
+   * [ ] Conditional
+* [x] Lifecycle
+   * [x] On mount
+   * [x] On unmount
+* [ ] Component composition
+   * [ ] Props
+   * [ ] Emit to parent
+   * [ ] Slot
+   * [ ] Slot fallback
+* [ ] Form input
+   * [ ] Input text
+   * [ ] Checkbox
+   * [ ] Radio
+   * [ ] Select
+* [ ] Webapp features
+   * [ ] Routing
+   * [ ] Router link
+
+</details>
+
 ## Contributing
 
 This site is built with [Astro](https://docs.astro.build). Site content is written in Markdown format located in `content`. For simple edits, you can directly edit the file on GitHub and generate a Pull Request.

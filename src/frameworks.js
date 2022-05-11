@@ -171,4 +171,12 @@ export default [
 			return files;
 		},
 	},
+	{
+		id: 'marko',
+		title: 'Marko',
+		ext: 'marko',
+		img: 'https://raw.githubusercontent.com/matschik/component-party/main/public/framework/marko.svg',
+		playgroundURL: 'https://markojs.com/try-online/',
+		documentationURL: 'https://markojs.com/',
+	},
 ];
