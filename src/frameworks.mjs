@@ -141,21 +141,6 @@ export default [
 		},
 	},
 	{
-		id: 'alpine',
-		title: 'Alpine.js',
-		ext: 'alpine',
-		img: 'framework/alpine.svg',
-		eslint: {
-			files: ['**/alpine/**'],
-			extends: ['eslint:recommended'],
-		},
-		playgroundURL: 'https://codesandbox.io/s/7br3q8',
-		documentationURL: 'https://alpinejs.dev/start-here',
-		filesSorter(files) {
-			return files;
-		},
-	},
-	{
 		id: 'ember',
 		title: 'Ember',
 		ext: 'js',
@@ -163,10 +148,26 @@ export default [
 		eslint: {
 			files: ['**/ember/**'],
 			plugins: ['ember'],
+			parser: '@babel/eslint-parser',
 			extends: ['plugin:ember/recommended'],
 		},
 		playgroundURL: 'https://ember-twiddle.com',
 		documentationURL: 'https://emberjs.com',
+		filesSorter(files) {
+			return files;
+		},
+	},
+	{
+		id: 'alpine',
+		title: 'Alpine.js',
+		ext: 'html',
+		img: 'framework/alpine.svg',
+		eslint: {
+			files: ['**/alpine/**'],
+			extends: ['eslint:recommended'],
+		},
+		playgroundURL: 'https://codesandbox.io/s/7br3q8',
+		documentationURL: 'https://alpinejs.dev/start-here',
 		filesSorter(files) {
 			return files;
 		},

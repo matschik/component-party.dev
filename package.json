@@ -50,6 +50,7 @@
     "eslint-plugin-solid": "^0.4.7",
     "eslint-plugin-svelte3": "^3.4.1",
     "eslint-plugin-vue": "^8.6.0",
+    "esm": "^3.2.25",
     "husky": "^7.0.4",
     "lint-staged": "^12.3.8",
     "lodash.kebabcase": "^4.1.1",

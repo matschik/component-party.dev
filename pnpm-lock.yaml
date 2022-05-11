@@ -26,6 +26,7 @@ specifiers:
   eslint-plugin-solid: ^0.4.7
   eslint-plugin-svelte3: ^3.4.1
   eslint-plugin-vue: ^8.6.0
+  esm: ^3.2.25
   husky: ^7.0.4
   lint-staged: ^12.3.8
   lodash.kebabcase: ^4.1.1
@@ -69,6 +70,7 @@ devDependencies:
   eslint-plugin-solid: 0.4.7_hcfsmds2fshutdssjqluwm76uu
   eslint-plugin-svelte3: 3.4.1_usjo443ynfgvutifl4ot2fkxzy
   eslint-plugin-vue: 8.7.1_eslint@8.15.0
+  esm: 3.2.25
   husky: 7.0.4
   lint-staged: 12.4.1
   lodash.kebabcase: 4.1.1
@@ -2706,6 +2708,11 @@ packages:
       v8-compile-cache: 2.3.0
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /esm/3.2.25:
+    resolution: {integrity: sha512-U1suiZ2oDVWv4zPO56S0NcR5QriEahGtdN2OR6FiOG4WJvcjBVFB0qI4+eKoWFH483PKGuLuu6V8Z4T5g63UVA==}
+    engines: {node: '>=6'}
     dev: true
 
   /espree/9.3.2:
