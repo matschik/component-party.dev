@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
-import createFsCache from './createFsCache';
 import crypto from 'crypto';
+
+import createFsCache from '@utils/createFsCache.js';
 
 async function md5(data) {
 	return crypto.createHash('md5').update(data).digest('hex');

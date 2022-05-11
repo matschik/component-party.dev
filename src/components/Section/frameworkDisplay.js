@@ -1,4 +1,4 @@
-import FRAMEWORKS from '../../frameworks.mjs';
+import FRAMEWORKS from '@config/frameworks.mjs';
 
 frameworkDisplayModule();
 

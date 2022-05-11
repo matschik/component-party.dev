@@ -1,15 +1,16 @@
 ---
-import fs from 'node:fs/promises';
-import kebabCase from 'lodash.kebabcase';
-import { Markdown } from "astro/components"
-import nodePath from "node:path"
-import Title from "../components/Title.svelte"
-import FrameworkLabel from "../components/FrameworkLabel.astro"
-import FRAMEWORKS from '../frameworks.mjs';
-import CodeViewer from "./CodeViewer.astro"
-import createVue3REPL from "../utils/createVue3REPL"
-import createSvelteREPL from "../utils/createSvelteREPL"
-import createAlpineREPL from "../utils/createAlpineREPL"
+import fs from 'node:fs/promises'
+import kebabCase from 'lodash.kebabcase'
+import { Markdown } from 'astro/components'
+import nodePath from 'node:path'
+
+import Title from '@components/Title.svelte'
+import FrameworkLabel from '@components/FrameworkLabel.astro'
+import FRAMEWORKS from '@config/frameworks.mjs'
+import CodeViewer from '@components/CodeViewer.astro'
+import createVue3REPL from '@utils/createVue3REPL.js'
+import createSvelteREPL from '@utils/createSvelteREPL.js'
+import createAlpineREPL from '@utils/createAlpineREPL.js'
 
 const { path: sectionPath } = Astro.props
 
