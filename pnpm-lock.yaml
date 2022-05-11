@@ -43,6 +43,7 @@ specifiers:
   tailwindcss: ^3.0.24
   typescript: ^4.6.3
   vite: ^2.9.5
+  vite-plugin-full-reload: ^1.0.0
 
 devDependencies:
   '@angular-eslint/eslint-plugin': 13.2.1_hcfsmds2fshutdssjqluwm76uu
@@ -87,6 +88,7 @@ devDependencies:
   tailwindcss: 3.0.24
   typescript: 4.6.4
   vite: 2.9.8
+  vite-plugin-full-reload: 1.0.0
 
 packages:
 
@@ -6858,6 +6860,13 @@ packages:
       is-buffer: 2.0.5
       unist-util-stringify-position: 3.0.2
       vfile-message: 3.1.2
+    dev: true
+
+  /vite-plugin-full-reload/1.0.0:
+    resolution: {integrity: sha512-GUhQ4wSm+H6yAlz7d2JwLu+BEcsFqZu1SUH0CNG+uyP4ALXGofUjHi+eGdLX19bYhMuOUWW3EwMt68jFkBsMew==}
+    dependencies:
+      picocolors: 1.0.0
+      picomatch: 2.3.1
     dev: true
 
   /vite/2.9.8:
