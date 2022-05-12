@@ -15,8 +15,8 @@ const tree = await generateContentTree();
                     data-framework-button-show={framework.id}
                     title={`Display ${framework.title}`}
                     class="text-sm flex-shrink-0 rounded border border-gray-700 px-3 py-1 border-opacity-50 bg-gray-900 hover:bg-gray-800 transition-all mr-2"
-                    style="opacity: 0.5;"
-                    x-on:click={`$store.framework.show('${framework.id}')`}
+                    x-bind:class={`$store.frameworksSelected.has('${framework.id}') ? 'border-blue-500' : 'opacity-70'`}
+                    x-on:click={`$store.frameworksSelected.toggle('${framework.id}')`}
                 >
                     <FrameworkLabel id={framework.id} size={15} />
                 </button>
