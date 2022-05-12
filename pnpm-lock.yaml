@@ -14,6 +14,7 @@ specifiers:
   '@types/mdast': ^3.0.10
   '@typescript-eslint/eslint-plugin': ^5.20.0
   '@typescript-eslint/parser': ^5.20.0
+  alpinejs: ^3.10.2
   astro: ^1.0.0-beta.12
   autoprefixer: ^10.4.4
   codesandbox: ^2.2.3
@@ -44,6 +45,9 @@ specifiers:
   typescript: ^4.6.3
   vite: ^2.9.5
   vite-plugin-full-reload: ^1.0.0
+
+dependencies:
+  alpinejs: 3.10.2
 
 devDependencies:
   '@angular-eslint/eslint-plugin': 13.2.1_hcfsmds2fshutdssjqluwm76uu
@@ -1082,6 +1086,16 @@ packages:
       vscode-uri: 2.1.2
     dev: true
 
+  /@vue/reactivity/3.1.5:
+    resolution: {integrity: sha512-1tdfLmNjWG6t/CsPldh+foumYFo3cpyCHgBYQ34ylaMsJ+SNHQ1kApMIa8jN+i593zQuaw3AdWH0nJTARzCFhg==}
+    dependencies:
+      '@vue/shared': 3.1.5
+    dev: false
+
+  /@vue/shared/3.1.5:
+    resolution: {integrity: sha512-oJ4F3TnvpXaQwZJNF3ZK+kLPHKarDmJjJ6jyzVNDKH9md1dptjC7lWR//jrGuLdek/U6iltWxqAnYOu8gCiOvA==}
+    dev: false
+
   /acorn-jsx/5.3.2_acorn@8.7.1:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
     peerDependencies:
@@ -1145,6 +1159,12 @@ packages:
       json-schema-traverse: 0.4.1
       uri-js: 4.4.1
     dev: true
+
+  /alpinejs/3.10.2:
+    resolution: {integrity: sha512-P6DTX78J94FgsskS3eS23s26hfb0NWQZUidBnkUK7fId1x64/kLm5E79lL3HNItUmHDCKOHvfP8EAcuCVab89w==}
+    dependencies:
+      '@vue/reactivity': 3.1.5
+    dev: false
 
   /ansi-align/2.0.0:
     resolution: {integrity: sha1-w2rsy6VjuJzrVW82kPCx2eNUf38=}
