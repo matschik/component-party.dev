@@ -118,8 +118,6 @@ function getFrameworkSectionPlaygroundURL(section, framework){
   return section.frameworkSections.find((f) => f.dirName === framework.id)?.playgroundURL
 }
 ---
-<script src="./Section/codeViewer.js"></script>
-
 <Title as="h1" content={dirNameToTitle(sectionId)} />
 
 {
@@ -159,24 +157,25 @@ function getFrameworkSectionPlaygroundURL(section, framework){
                       ))}
                     </div>
               }
+              
               {getSectionCodeFiles(section, framework)?.length > 0 && (
-                <>
+                <div x-data={`{ filenameSelected: '${getSectionCodeFiles(section, framework)[0].fileName}' }`}>
                   <div class="flex space-x-1 items-center ml-0 overflow-x-auto">
-                    {getSectionCodeFiles(section, framework).map((file, index) =>(
-                        <button data-codeviewer={`${section.id}-${framework.id}`} data-file-button={file.fileName} class="bg-[#0d1117] py-1.5 px-3 font-medium flex-shrink-0 text-xs rounded-t inline-block" style={`opacity: ${index === 0 ? 1  : 0.6};`}>
+                    {getSectionCodeFiles(section, framework).map((file) =>(
+                        <button class="bg-[#0d1117] py-1.5 px-3 font-medium flex-shrink-0 text-xs rounded-t inline-block" x-bind:class={`filenameSelected === '${file.fileName}' ? '' : 'opacity-60'`} x-on:click={`filenameSelected = '${file.fileName}'`}>
                           {file.fileName}
                         </button>
                     ))}
                   </div>
                   
-                  <div data-codeviewer={`${section.id}-${framework.id}`} data-file-selected={getSectionCodeFiles(section, framework)[0].fileName}>
-                      {getSectionCodeFiles(section, framework).map((file, index) => (
-                        <div data-file={file.fileName} style={`display: ${index === 0 ? "block"  : "none"};`}>
+                  <div>
+                      {getSectionCodeFiles(section, framework).map((file) => (
+                        <div x-show={`filenameSelected === '${file.fileName}'`}>
                           <CodeViewer path={file.path} editHref={`https://github.com/matschik/component-party/tree/main/${sectionRelativePath}/${section.dirName}/${framework.id}/${file.fileName}`} />
                         </div>
                       ))}
                   </div>
-                </>)
+                </div>)
               }
               {!(getSectionFiles(section, framework)?.length) && 
                 <div class="">
