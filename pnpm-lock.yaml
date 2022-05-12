@@ -26,6 +26,7 @@ specifiers:
   eslint-plugin-solid: ^0.4.7
   eslint-plugin-svelte3: ^3.4.1
   eslint-plugin-vue: ^8.6.0
+  esm: ^3.2.25
   husky: ^7.0.4
   lint-staged: ^12.3.8
   lodash.kebabcase: ^4.1.1
@@ -42,6 +43,7 @@ specifiers:
   tailwindcss: ^3.0.24
   typescript: ^4.6.3
   vite: ^2.9.5
+  vite-plugin-full-reload: ^1.0.0
 
 devDependencies:
   '@angular-eslint/eslint-plugin': 13.2.1_hcfsmds2fshutdssjqluwm76uu
@@ -69,6 +71,7 @@ devDependencies:
   eslint-plugin-solid: 0.4.7_hcfsmds2fshutdssjqluwm76uu
   eslint-plugin-svelte3: 3.4.1_usjo443ynfgvutifl4ot2fkxzy
   eslint-plugin-vue: 8.7.1_eslint@8.15.0
+  esm: 3.2.25
   husky: 7.0.4
   lint-staged: 12.4.1
   lodash.kebabcase: 4.1.1
@@ -85,6 +88,7 @@ devDependencies:
   tailwindcss: 3.0.24
   typescript: 4.6.4
   vite: 2.9.8
+  vite-plugin-full-reload: 1.0.0
 
 packages:
 
@@ -2706,6 +2710,11 @@ packages:
       v8-compile-cache: 2.3.0
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /esm/3.2.25:
+    resolution: {integrity: sha512-U1suiZ2oDVWv4zPO56S0NcR5QriEahGtdN2OR6FiOG4WJvcjBVFB0qI4+eKoWFH483PKGuLuu6V8Z4T5g63UVA==}
+    engines: {node: '>=6'}
     dev: true
 
   /espree/9.3.2:
@@ -6851,6 +6860,13 @@ packages:
       is-buffer: 2.0.5
       unist-util-stringify-position: 3.0.2
       vfile-message: 3.1.2
+    dev: true
+
+  /vite-plugin-full-reload/1.0.0:
+    resolution: {integrity: sha512-GUhQ4wSm+H6yAlz7d2JwLu+BEcsFqZu1SUH0CNG+uyP4ALXGofUjHi+eGdLX19bYhMuOUWW3EwMt68jFkBsMew==}
+    dependencies:
+      picocolors: 1.0.0
+      picomatch: 2.3.1
     dev: true
 
   /vite/2.9.8:

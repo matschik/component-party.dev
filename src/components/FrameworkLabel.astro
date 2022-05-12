@@ -1,5 +1,6 @@
 ---
-import FRAMEWORKS from '../frameworks';
+import FRAMEWORKS from '@config/frameworks.mjs';
+
 const {id, size = 20} = Astro.props
 
 const framework = FRAMEWORKS.find((f) => f.id === id);

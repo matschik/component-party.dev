@@ -13,9 +13,9 @@ How do we solve this ? Developers love having framework overview by examples. It
 
 ## Roadmap
 
-- \[ ] Add Preact
-- \[ ] Add Stencil
-- \[ ] Add native JS ?
+*   \[ ] Add Preact
+*   \[ ] Add Stencil
+*   \[ ] Add native JS ?
 
 ## Progression
 
@@ -225,7 +225,7 @@ How do we solve this ? Developers love having framework overview by examples. It
 
 </details><details>
         <summary>
-            <img width="18" height="18" src="https://raw.githubusercontent.com/matschik/component-party/main/public/framework/ember.svg" />
+            <img width="18" height="18" src="public/framework/ember.svg" />
             <b>Ember</b>
             <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/15" /></summary>
 
@@ -263,33 +263,33 @@ How do we solve this ? Developers love having framework overview by examples. It
             <b>Alpine.js</b>
             <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/91" /></summary>
 
-- [x] Reactivity
-  - [x] Declare state
-  - [x] Update state
-  - [x] Computed state
-- [x] Templating
-  - [x] Minimal template
-  - [x] Styling
-  - [x] Loop
-  - [x] Event click
-  - [x] Dom ref
-  - [x] Conditional
-- [x] Lifecycle
-  - [x] On mount
-  - [x] On unmount
-- [x] Component composition
-  - [x] Props
-  - [x] Emit to parent
-  - [x] Slot
-  - [x] Slot fallback
-- [x] Form input
-  - [x] Input text
-  - [x] Checkbox
-  - [x] Radio
-  - [x] Select
-- [ ] Webapp features
-  - [ ] Routing
-  - [ ] Router link
+* [x] Reactivity
+   * [x] Declare state
+   * [x] Update state
+   * [x] Computed state
+* [x] Templating
+   * [x] Minimal template
+   * [x] Styling
+   * [x] Loop
+   * [x] Event click
+   * [x] Dom ref
+   * [x] Conditional
+* [x] Lifecycle
+   * [x] On mount
+   * [x] On unmount
+* [x] Component composition
+   * [x] Props
+   * [x] Emit to parent
+   * [x] Slot
+   * [x] Slot fallback
+* [x] Form input
+   * [x] Input text
+   * [x] Checkbox
+   * [x] Radio
+   * [x] Select
+* [ ] Webapp features
+   * [ ] Routing
+   * [ ] Router link
 
 </details>
 
@@ -311,4 +311,4 @@ This project requires Node.js to be `v14.0.0` or higher, because we use new Java
 1.  Fork the project and create a new branch
 2.  Add the new framework SVG logo in `public/framework`
 3.  Install the ESLint plugin associated to the framework
-4.  On `config.cjs` and `src/frameworks.js`, add a new entry with SVG link and ESLint configuration
+4.  In `frameworks.mjs`, add a new entry with SVG link and ESLint configuration

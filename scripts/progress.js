@@ -1,6 +1,6 @@
 import { remark } from 'remark';
 import fs from 'fs/promises';
-import frameworks from '../src/frameworks.js';
+import frameworks from '../src/frameworks.mjs';
 import { packageDirectory } from 'pkg-dir';
 import nodePath from 'node:path';
 import kebabCase from 'lodash.kebabcase';

@@ -1,8 +1,9 @@
 ---
 import fs from 'node:fs/promises';
-import nodePath from "node:path"
-import astroHighlightCode from "./CodeHighlight/astroHighlightCode"
-import { createFileMapCache } from "micache"
+import nodePath from 'node:path';
+import { createFileMapCache } from 'micache';
+
+import astroHighlightCode from '@components/CodeHighlight/astroHighlightCode.js';
 
 const { path, lang, theme = 'github-dark', wrap = false } = Astro.props;
 

@@ -1,5 +1,6 @@
 <script>
-	import FRAMEWORKS from '../frameworks';
+	import FRAMEWORKS from '@config/frameworks.mjs';
+
 	export let tree = [];
 </script>
 

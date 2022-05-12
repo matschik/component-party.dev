@@ -50,6 +50,7 @@
     "eslint-plugin-solid": "^0.4.7",
     "eslint-plugin-svelte3": "^3.4.1",
     "eslint-plugin-vue": "^8.6.0",
+    "esm": "^3.2.25",
     "husky": "^7.0.4",
     "lint-staged": "^12.3.8",
     "lodash.kebabcase": "^4.1.1",
@@ -65,7 +66,8 @@
     "svelte": "^3.47.0",
     "tailwindcss": "^3.0.24",
     "typescript": "^4.6.3",
-    "vite": "^2.9.5"
+    "vite": "^2.9.5",
+    "vite-plugin-full-reload": "^1.0.0"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,vue,svelte}": [
