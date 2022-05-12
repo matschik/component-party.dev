@@ -1,37 +1,37 @@
 import Alpine from 'alpinejs';
 
 Alpine.store('frameworksSelected', {
-	frameworksSelectedProxy: createLocaleStorageProxy('frameworks_display'),
-	selectedIds: [],
+	_frameworksSelectedProxy: createLocaleStorageProxy('frameworks_display'),
+	_selectedIds: [],
 	init() {
 		// set default value of frameworksSelectedProxy
-		if (!Object.values(this.frameworksSelectedProxy).length) {
+		if (!Object.values(this._frameworksSelectedProxy).length) {
 			const initialFrameworkIds = ['react', 'svelte'];
 			for (let i = 0; i < initialFrameworkIds.length; i++) {
-				this.frameworksSelectedProxy[i] = initialFrameworkIds[i];
+				this._frameworksSelectedProxy[i] = initialFrameworkIds[i];
 			}
 		}
-		this.selectedIds = [...this.frameworksSelectedProxy];
+		this._selectedIds = [...this._frameworksSelectedProxy];
 	},
 	has(fmwId) {
-		return this.selectedIds.includes(fmwId);
+		return this._selectedIds.includes(fmwId);
 	},
 	toggle(fmwId) {
 		this.has(fmwId) ? this.hide(fmwId) : this.show(fmwId);
 	},
 	hide(fmwId) {
 		if (this.has(fmwId)) {
-			const frameworkIndex = this.frameworksSelectedProxy.indexOf(fmwId);
-			delete this.frameworksSelectedProxy[frameworkIndex];
+			const frameworkIndex = this._frameworksSelectedProxy.indexOf(fmwId);
+			delete this._frameworksSelectedProxy[frameworkIndex];
 		}
-		this.selectedIds = [...this.frameworksSelectedProxy];
+		this._selectedIds = [...this._frameworksSelectedProxy];
 	},
 	show(fmwId) {
 		if (!this.has(fmwId)) {
-			this.frameworksSelectedProxy.push(fmwId);
+			this._frameworksSelectedProxy.push(fmwId);
 		}
 
-		this.selectedIds = [...this.frameworksSelectedProxy];
+		this._selectedIds = [...this._frameworksSelectedProxy];
 	},
 });
 Alpine.start();
