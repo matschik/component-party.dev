@@ -3,7 +3,7 @@ import fs from 'node:fs/promises';
 import nodePath from 'node:path';
 import { createFileMapCache } from 'micache';
 
-import astroHighlightCode from '@components/CodeHighlight/astroHighlightCode.js';
+import astroHighlightCode from '@/components/CodeHighlight/astroHighlightCode.js';
 
 const { path, lang, theme = 'github-dark', wrap = false } = Astro.props;
 

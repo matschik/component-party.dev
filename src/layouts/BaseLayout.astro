@@ -1,8 +1,8 @@
 ---
-import FRAMEWORKS from '@config/frameworks.mjs';
-import BaseLayout from '@layouts/BaseLayout.svelte';
-import generateContentTree from '@utils/generateContentTree.js';
-import FrameworkLabel from '@components/FrameworkLabel.astro';
+import FRAMEWORKS from '@/frameworks.mjs';
+import BaseLayout from '@/layouts/BaseLayout.svelte';
+import generateContentTree from '@/utils/generateContentTree.js';
+import FrameworkLabel from '@/components/FrameworkLabel.astro';
 
 const tree = await generateContentTree();
 ---
