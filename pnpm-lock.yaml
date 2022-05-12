@@ -4,20 +4,20 @@ specifiers:
   '@angular-eslint/eslint-plugin': ^13.2.1
   '@angular-eslint/eslint-plugin-template': ^13.2.1
   '@angular-eslint/template-parser': ^13.2.1
-  '@angular/core': ^13.3.7
-  '@angular/router': ^13.3.7
+  '@angular/core': ^13.3.3
+  '@angular/router': ^13.3.3
   '@astrojs/svelte': ^0.1.2
   '@astrojs/tailwind': ^0.1.2
   '@babel/eslint-parser': ^7.17.0
   '@babel/plugin-proposal-decorators': ^7.17.9
   '@tailwindcss/typography': ^0.5.2
   '@types/mdast': ^3.0.10
-  '@typescript-eslint/eslint-plugin': ^5.23.0
-  '@typescript-eslint/parser': ^5.23.0
-  astro: ^1.0.0-beta.27
-  autoprefixer: ^10.4.7
+  '@typescript-eslint/eslint-plugin': ^5.20.0
+  '@typescript-eslint/parser': ^5.20.0
+  astro: ^1.0.0-beta.12
+  autoprefixer: ^10.4.4
   codesandbox: ^2.2.3
-  eslint: ^8.15.0
+  eslint: ^8.13.0
   eslint-config-prettier: ^8.5.0
   eslint-plugin-ember: ^10.6.1
   eslint-plugin-lit: ^1.6.1
@@ -25,24 +25,24 @@ specifiers:
   eslint-plugin-react: ^7.29.4
   eslint-plugin-solid: ^0.4.7
   eslint-plugin-svelte3: ^3.4.1
-  eslint-plugin-vue: ^8.7.1
+  eslint-plugin-vue: ^8.6.0
   esm: ^3.2.25
   husky: ^7.0.4
-  lint-staged: ^12.4.1
+  lint-staged: ^12.3.8
   lodash.kebabcase: ^4.1.1
   micache: ^2.4.1
   pkg-dir: ^6.0.1
-  postcss: ^8.4.13
+  postcss: ^8.4.12
   prettier: ^2.6.2
   prettier-plugin-svelte: ^2.7.0
   prop-types: ^15.8.1
   react: ^17.0.2
   remark: ^14.0.2
   shiki: ^0.10.1
-  svelte: ^3.48.0
+  svelte: ^3.47.0
   tailwindcss: ^3.0.24
-  typescript: ^4.6.4
-  vite: ^2.9.9
+  typescript: ^4.6.3
+  vite: ^2.9.5
   vite-plugin-full-reload: ^1.0.0
 
 devDependencies:
