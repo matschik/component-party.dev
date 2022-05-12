@@ -74,5 +74,8 @@
       "eslint --cache --fix",
       "prettier --write"
     ]
+  },
+  "dependencies": {
+    "alpinejs": "^3.10.2"
   }
 }
