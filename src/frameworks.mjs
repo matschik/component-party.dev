@@ -132,6 +132,7 @@ export default [
 		eslint: {
 			files: ['**/lit/**'],
 			plugins: ['lit'],
+			parser: '@babel/eslint-parser',
 			extends: ['plugin:lit/recommended'],
 		},
 		playgroundURL: 'https://lit.dev/playground',

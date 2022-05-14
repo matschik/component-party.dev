@@ -1,2 +1,2 @@
 tasks:
-  - init: pnpm install
+  - init: pnpm install --frozen-lockfile
