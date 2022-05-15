@@ -1,8 +1,9 @@
 import { LitElement, html } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { customElement, state } from 'lit/decorators.js';
 
-@customElement('name')
+@customElement('x-name')
 export class Name extends LitElement {
+	@state()
 	name = 'John';
 
 	render() {
