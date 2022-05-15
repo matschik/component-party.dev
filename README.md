@@ -193,11 +193,11 @@ How do we solve this ? Developers love having framework overview by examples. It
         <summary>
             <img width="18" height="18" src="public/framework/lit.svg" />
             <b>Lit</b>
-            <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/86" /></summary>
+            <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/91" /></summary>
 
-* [ ] Reactivity
+* [x] Reactivity
    * [x] Declare state
-   * [ ] Update state
+   * [x] Update state
    * [x] Computed state
 * [x] Templating
    * [x] Minimal template
