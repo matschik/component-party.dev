@@ -1,8 +1,4 @@
-import { children } from 'solid-js';
-
 export default function FunnyButton(props) {
-	const content = children(() => props.children);
-
 	return (
 		<button
 			style={{
@@ -18,7 +14,7 @@ export default function FunnyButton(props) {
 				outline: '0',
 			}}
 		>
-			{content()}
+			{props.children}
 		</button>
 	);
 }
