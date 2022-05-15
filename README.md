@@ -193,32 +193,32 @@ How do we solve this ? Developers love having framework overview by examples. It
         <summary>
             <img width="18" height="18" src="public/framework/lit.svg" />
             <b>Lit</b>
-            <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/5" /></summary>
+            <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/86" /></summary>
 
 * [ ] Reactivity
    * [x] Declare state
    * [ ] Update state
-   * [ ] Computed state
-* [ ] Templating
-   * [ ] Minimal template
-   * [ ] Styling
-   * [ ] Loop
-   * [ ] Event click
-   * [ ] Dom ref
-   * [ ] Conditional
-* [ ] Lifecycle
-   * [ ] On mount
-   * [ ] On unmount
-* [ ] Component composition
-   * [ ] Props
-   * [ ] Emit to parent
-   * [ ] Slot
-   * [ ] Slot fallback
-* [ ] Form input
-   * [ ] Input text
-   * [ ] Checkbox
-   * [ ] Radio
-   * [ ] Select
+   * [x] Computed state
+* [x] Templating
+   * [x] Minimal template
+   * [x] Styling
+   * [x] Loop
+   * [x] Event click
+   * [x] Dom ref
+   * [x] Conditional
+* [x] Lifecycle
+   * [x] On mount
+   * [x] On unmount
+* [x] Component composition
+   * [x] Props
+   * [x] Emit to parent
+   * [x] Slot
+   * [x] Slot fallback
+* [x] Form input
+   * [x] Input text
+   * [x] Checkbox
+   * [x] Radio
+   * [x] Select
 * [ ] Webapp features
    * [ ] Routing
    * [ ] Router link
