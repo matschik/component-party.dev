@@ -1,10 +1,12 @@
-import Component, { tracked } from '@glimmer/component';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
 
 export default class CounterComponent extends Component {
 	@tracked name = 'John';
 
-	constructor() {
-		super(...arguments);
+	constructor(owner, args) {
+		super(owner, args);
+
 		this.name = 'Jane';
 	}
 }
