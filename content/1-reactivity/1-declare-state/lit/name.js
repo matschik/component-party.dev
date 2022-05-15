@@ -2,7 +2,7 @@ import { LitElement, html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 
 @customElement('x-name')
-export class Name extends LitElement {
+export class XName extends LitElement {
 	@state()
 	name = 'John';
 
