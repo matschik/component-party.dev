@@ -18,10 +18,10 @@
 <p>
 	You must
 	{#if light === 'red'}
-		STOP
+		<span>STOP</span>
 	{:else if light === 'orange'}
-		SLOW DOWN
+		<span>SLOW DOWN</span>
 	{:else if light === 'green'}
-		GO
+		<span>GO</span>
 	{/if}
 </p>
