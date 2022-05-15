@@ -11,5 +11,13 @@
     transition: transform 0.2s cubic-bezier(0.34, 1.65, 0.88, 0.925) 0s;
     outline: 0;"
 >
-  {{yield}}
+  {{#if (has-block)}}
+
+    {{yield}}
+
+  {{else}}
+
+    <span>No content found</span>
+
+  {{/if}}
 </button>
