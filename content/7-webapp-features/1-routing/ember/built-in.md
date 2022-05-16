@@ -1,8 +1,9 @@
 Built-in <a href="https://guides.emberjs.com/release/routing/">routing</a>
 
 Given an `app/router.js` config of:
+
 ```js
-Router.map(function() {
+Router.map(function () {
   this.route('about');
   this.route('fallback', { path: '*' });
 });

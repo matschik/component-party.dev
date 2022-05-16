@@ -1,4 +1,5 @@
-<div x-data="{
+<div
+	x-data="{
   selectedColorId: 2,
   colors: [
     { id: 1, text: 'red' },
@@ -6,10 +7,11 @@
     { id: 3, text: 'green' },
     { id: 4, text: 'gray', isDisabled: true }
   ]
-}">
-  <select x-model.number="selectedColorId">
-    <template x-for="color in colors" x-bind:key="color.id">
-      <option x-text="color.text" x-bind:value="color.id" x-bind:disabled="!!color.isDisabled" x-bind:selected="color.id === selectedColorId"></option>
-    </template>
-  </select>
+}"
+>
+	<select x-model.number="selectedColorId">
+		<template x-for="color in colors" x-bind:key="color.id">
+			<option x-text="color.text" x-bind:value="color.id" x-bind:disabled="!!color.isDisabled" x-bind:selected="color.id === selectedColorId"></option>
+		</template>
+	</select>
 </div>

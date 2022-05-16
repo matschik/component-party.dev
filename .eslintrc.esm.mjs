@@ -1,4 +1,4 @@
-import FRAMEWORKS from './src/frameworks.mjs'
+import FRAMEWORKS from './src/frameworks.mjs';
 
 /**
  * @type {import("eslint").Linter.Config}

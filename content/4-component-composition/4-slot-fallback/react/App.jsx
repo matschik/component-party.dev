@@ -1,3 +1,4 @@
+import React from 'react';
 import FunnyButton from './FunnyButton.jsx';
 
 export default function App() {

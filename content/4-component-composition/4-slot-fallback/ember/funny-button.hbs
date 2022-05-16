@@ -1,5 +1,5 @@
 <button
-	style="
+	style='
     background: rgba(0, 0, 0, 0.4);
     color: #fff;
     padding: 10px 20px;
@@ -9,15 +9,15 @@
     transform: scale(0.9);
     box-shadow: 4px 4px rgba(0, 0, 0, 0.4);
     transition: transform 0.2s cubic-bezier(0.34, 1.65, 0.88, 0.925) 0s;
-    outline: 0;"
+    outline: 0;'
 >
-  {{#if (has-block)}}
+	{{#if (has-block)}}
 
-    {{yield}}
+		{{yield}}
 
-  {{else}}
+	{{else}}
 
-    <span>No content found</span>
+		<span>No content found</span>
 
-  {{/if}}
+	{{/if}}
 </button>
