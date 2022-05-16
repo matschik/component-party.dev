@@ -6,10 +6,7 @@ With [@vaadin/router](https://vaadin.com/router)
     <a href="/">Home</a>
   </li>
   <li>
-    <a href="/users">User list</a>
-  </li>
-  <li>
-    <a href="/users/1">Your profile</a>
+    <a href="/about">About us</a>
   </li>
 </ul>
 ```
