@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 export default function InputHello() {
 	const [text, setText] = useState('Hello world');

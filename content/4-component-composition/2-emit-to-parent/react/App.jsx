@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import AnswerButton from './AnswerButton.jsx';
 
 export default function App() {
@@ -16,7 +16,7 @@ export default function App() {
 		<>
 			<p>Can I come ?</p>
 			<AnswerButton onYes={onAnswerYes} onNo={onAnswerNo} />
-			<p style={{fontSize: 50}}>{canCome ? '😀' : '😥'}</p>
+			<p style={{ fontSize: 50 }}>{canCome ? '😀' : '😥'}</p>
 		</>
 	);
 }

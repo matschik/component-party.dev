@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 const colors = [
 	{ id: 1, text: 'red' },

@@ -67,6 +67,7 @@
 
 		<!-- Twitter -->
 		<meta property="twitter:card" content="summary_large_image" />
+		<meta name="twitter:creator" content="@matschik_" />
 		<meta property="twitter:url" content="https://component-party.dev/" />
 		<meta property="twitter:title" content="Component Party" />
 		<meta property="twitter:description" content="Web component JS frameworks overview by their syntax and features: Svelte, React, Vue 3, Angular" />
