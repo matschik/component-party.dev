@@ -1,4 +1,4 @@
-Build-in <a href="https://guides.emberjs.com/release/routing/">Routing</a>
+Built-in <a href="https://guides.emberjs.com/release/routing/">routing</a>
 
 Given an `app/router.js` config of:
 ```js

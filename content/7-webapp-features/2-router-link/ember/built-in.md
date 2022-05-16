@@ -1,4 +1,4 @@
-Build-in <a href="https://guides.emberjs.com/release/routing/linking-between-routes/">Routing</a>
+Built-in <a href="https://guides.emberjs.com/release/routing/linking-between-routes/">routing</a>
 
 ```hbs
 <ul>
