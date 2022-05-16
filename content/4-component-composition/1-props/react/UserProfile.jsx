@@ -1,3 +1,4 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 
 export default function UserProfile({ name = '', age = null, favouriteColors = [], isAvailable = false }) {

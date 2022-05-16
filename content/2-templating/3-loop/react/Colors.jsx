@@ -1,3 +1,5 @@
+import React from 'react';
+
 export default function Colors() {
 	const colors = ['red', 'green', 'blue'];
 	return (

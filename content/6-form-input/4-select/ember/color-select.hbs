@@ -1,11 +1,7 @@
 <select {{on 'change' this.select}}>
-  {{#each this.colors as |color|}}
-    <option
-      value={{color.id}}
-      disabled={{color.isDisabled}}
-      selected={{eq color.id this.selectedColorId}}
-    >
-      {{color.text}}
-    </option>
-  {{/each}}
+	{{#each this.colors as |color|}}
+		<option value={{color.id}} disabled={{color.isDisabled}} selected={{eq color.id this.selectedColorId}}>
+			{{color.text}}
+		</option>
+	{{/each}}
 </select>
