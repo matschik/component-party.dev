@@ -63,14 +63,14 @@
 		<meta property="og:url" content="https://component-party.dev/" />
 		<meta property="og:title" content="Component Party" />
 		<meta property="og:description" content="Web component JS frameworks overview by their syntax and features: Svelte, React, Vue 3, Angular" />
-		<meta property="og:image" content="https://component-party.dev/banner-2.png" />
+		<meta property="og:image" content="https://component-party.dev/banner2.png" />
 
 		<!-- Twitter -->
 		<meta property="twitter:card" content="summary_large_image" />
 		<meta property="twitter:url" content="https://component-party.dev/" />
 		<meta property="twitter:title" content="Component Party" />
 		<meta property="twitter:description" content="Web component JS frameworks overview by their syntax and features: Svelte, React, Vue 3, Angular" />
-		<meta property="twitter:image" content="https://component-party.dev/banner-2.png" />
+		<meta property="twitter:image" content="https://component-party.dev/banner2.png" />
 	</head>
 	<body class="bg-gray-900 text-white font-sans">
 		<header class="backdrop-blur bg-gray-900/80 border-b border-gray-700">
