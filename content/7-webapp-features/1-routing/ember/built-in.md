@@ -11,7 +11,7 @@ Router.map(function() {
 ```
 |-- routes/
     |-- application.js // global app setup
-    |-- index.js // handles minimally requried data to show "/"
+    |-- index.js // handles minimally required data to show "/"
     |-- about.js // handles minimally required data to show "/about"
     |-- fallback.js // fallback page
 |-- templates/
