@@ -1,4 +1,3 @@
-import { Switch, Match } from 'solid-js/web';
 import { createSignal } from 'solid-js';
 
 const TRAFFIC_LIGHTS = ['red', 'orange', 'green'];
@@ -22,18 +21,11 @@ export default function TrafficLight() {
 			<p>Light is: {light()}</p>
 			<p>
 				You must
-				<Switch>
-					<Match when={light() === 'red'}>
-						<span>STOP</span>
-					</Match>
-					<Match when={light() === 'orange'}>
-						<span>SLOW DOWN</span>
-					</Match>
-					<Match when={light() === 'green'}>
-						<span>GO</span>
-					</Match>
-				</Switch>
+				{light() === 'red' && <span> STOP</span>}
+				{light() === 'orange' && <span> SLOW DOWN</span>}
+				{light() === 'green' && <span> GO</span>}
 			</p>
 		</>
 	);
 }
+				 
