@@ -11,8 +11,8 @@ With [@vaadin/router](https://vaadin.com/router)
   const outlet = document.getElementById('outlet');
   const router = new Router(outlet);
   router.setRoutes([
-    { path: '/', component: 'x-home-view' },
-    { path: '/about', component: 'x-about-view' },
+    {path: '/', component: 'x-home-view'},
+    {path: '/about', component: 'x-about-view'},
   ]);
 </script>
 ```
