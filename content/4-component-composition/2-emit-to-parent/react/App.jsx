@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import AnswerButton from './AnswerButton.jsx';
 
 export default function App() {

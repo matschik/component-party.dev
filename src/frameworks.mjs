@@ -22,7 +22,7 @@ export default [
 		img: 'framework/react.svg',
 		eslint: {
 			files: ['**/react/*.jsx', '**/react/*.tsx'],
-			extends: ['eslint:recommended', 'plugin:react/recommended'],
+			extends: ['eslint:recommended', 'plugin:react/recommended', 'plugin:react/jsx-runtime'],
 			settings: {
 				react: {
 					version: 'detect',

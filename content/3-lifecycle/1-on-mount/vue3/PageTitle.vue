@@ -7,5 +7,5 @@ onMounted(() => {
 </script>
 
 <template>
-	<p>Page title: {{ pageTitle }}</p>
+  <p>Page title: {{ pageTitle }}</p>
 </template>

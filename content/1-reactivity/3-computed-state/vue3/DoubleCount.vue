@@ -5,5 +5,5 @@ const doubleCount = computed(() => count.value * 2);
 </script>
 
 <template>
-	<div>{{ doubleCount }}</div>
+  <div>{{ doubleCount }}</div>
 </template>

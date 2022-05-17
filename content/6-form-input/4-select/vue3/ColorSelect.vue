@@ -12,9 +12,14 @@ const colors = [
 </script>
 
 <template>
-	<select v-model="selectedColorId">
-		<option v-for="color in colors" :key="color.id" :value="color.id" :disabled="color.isDisabled">
-			{{ color.text }}
-		</option>
-	</select>
+  <select v-model="selectedColorId">
+    <option
+      v-for="color in colors"
+      :key="color.id"
+      :value="color.id"
+      :disabled="color.isDisabled"
+    >
+      {{ color.text }}
+    </option>
+  </select>
 </template>

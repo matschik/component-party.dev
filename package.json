@@ -71,8 +71,8 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,vue,svelte}": [
-      "eslint --cache --fix",
-      "prettier --write"
+      "prettier --write",
+      "eslint --cache --fix"
     ]
   },
   "dependencies": {

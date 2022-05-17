@@ -1,4 +1,3 @@
-import React from 'react';
 import UserProfile from './UserProfile.jsx';
 
 export default function App() {

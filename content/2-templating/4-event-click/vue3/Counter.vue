@@ -8,6 +8,8 @@ function incrementCount() {
 </script>
 
 <template>
-	<p>Counter: {{ count }}</p>
-	<button @click="incrementCount">+1</button>
+  <p>Counter: {{ count }}</p>
+  <button @click="incrementCount">
+    +1
+  </button>
 </template>
