@@ -3,6 +3,6 @@ import FunnyButton from './FunnyButton.vue';
 </script>
 
 <template>
-	<FunnyButton />
-	<FunnyButton> I got content ! </FunnyButton>
+  <FunnyButton />
+  <FunnyButton> I got content ! </FunnyButton>
 </template>

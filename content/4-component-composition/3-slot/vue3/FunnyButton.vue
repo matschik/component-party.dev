@@ -1,6 +1,6 @@
 <template>
-	<button
-		style="
+  <button
+    style="
 			background: rgba(0, 0, 0, 0.4);
 			color: #fff;
 			padding: 10px 20px;
@@ -12,7 +12,7 @@
 			transition: transform 0.2s cubic-bezier(0.34, 1.65, 0.88, 0.925) 0s;
 			outline: 0;
 		"
-	>
-		<slot />
-	</button>
+  >
+    <slot />
+  </button>
 </template>

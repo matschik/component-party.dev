@@ -8,9 +8,7 @@ export default defineConfig({
 	// https://docs.astro.build/en/reference/configuration-reference/
 	integrations: [tailwind(), svelte()],
 	vite: {
-		plugins: [
-      FullReload(['content/**/*'])
-    ],
+		plugins: [FullReload(['content/**/*'])],
 		optimizeDeps: {
 			exclude: ['locate-path', 'path-exists', 'find-up'],
 		},
