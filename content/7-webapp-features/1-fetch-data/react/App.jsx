@@ -10,16 +10,18 @@ export default function App() {
 			) : error ? (
 				<p>An error occured while fetching users</p>
 			) : (
-				<ul>
-					{users.map((user) => (
-						<li key={user.login.uuid}>
-							<img src={user.picture.thumbnail} alt="user" />
-							<p>
-								{user.name.first} {user.name.last}
-							</p>
-						</li>
-					))}
-				</ul>
+				users && (
+					<ul>
+						{users.map((user) => (
+							<li key={user.login.uuid}>
+								<img src={user.picture.thumbnail} alt="user" />
+								<p>
+									{user.name.first} {user.name.last}
+								</p>
+							</li>
+						))}
+					</ul>
+				)
 			)}
 		</>
 	);
