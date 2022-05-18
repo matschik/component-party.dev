@@ -1,6 +1,6 @@
-# Component Party 🎉
+[![Open in Gitpod][gitpod-src]][gitpod-href]
 
-[![Open in Gitpod](https://shields.io/badge/Open%20in-Gitpod-green?logo=Gitpod)](https://gitpod.io/#https://github.com/matschik/component-party)
+![Component Party](.github/banner.png)
 
 > Web component JS frameworks quick overview by their syntax and features
 
@@ -312,3 +312,11 @@ This project requires Node.js to be `v14.0.0` or higher, because we use new Java
 2.  Add the new framework SVG logo in `public/framework`
 3.  Install the ESLint plugin associated to the framework
 4.  In `src/frameworks.mjs`, add a new entry with SVG link and ESLint configuration
+
+## License
+
+MIT. Made with 💖
+
+<!-- variables -->
+[gitpod-src]: https://shields.io/badge/Open%20in-Gitpod-green?logo=Gitpod
+[gitpod-href]: https://gitpod.io/#https://github.com/matschik/component-party
