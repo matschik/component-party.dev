@@ -1,23 +1,23 @@
-# Component Party 🎉
+[![Open in Gitpod][gitpod-src]][gitpod-href]
 
-[![Open in Gitpod](https://shields.io/badge/Open%20in-Gitpod-green?logo=Gitpod)](https://gitpod.io/#https://github.com/matschik/component-party)
+![Component Party 🎉](.github/banner.png)
 
 > Web component JS frameworks quick overview by their syntax and features
 
 **Website: https://component-party.dev**
 
-## Why ?
+## 🤔 Why ?
 
 Many JS developers don't have a good overview of every existing JS framework with their own syntax and features.
 How do we solve this ? Developers love having framework overview by examples. It's a quick introduction before going deeper.
 
-## Roadmap
+## 🚀 Roadmap
 
 - \[ ] Add Preact
 - \[ ] Add Stencil
 - \[ ] Add native JS ?
 
-## Progression
+## 🔥 Progression
 
 <details>
         <summary>
@@ -293,7 +293,7 @@ How do we solve this ? Developers love having framework overview by examples. It
 
 </details>
 
-## Contributing
+## 🧑‍💻 Contributing
 
 This site is built with [Astro](https://docs.astro.build). Site content is written in Markdown format located in `content`. For simple edits, you can directly edit the file on GitHub and generate a Pull Request.
 
@@ -312,3 +312,11 @@ This project requires Node.js to be `v14.0.0` or higher, because we use new Java
 2.  Add the new framework SVG logo in `public/framework`
 3.  Install the ESLint plugin associated to the framework
 4.  In `src/frameworks.mjs`, add a new entry with SVG link and ESLint configuration
+
+## 🖋️ License
+
+MIT. Made with 💖
+
+<!-- variables -->
+[gitpod-src]: https://shields.io/badge/Open%20in-Gitpod-green?logo=Gitpod
+[gitpod-href]: https://gitpod.io/#https://github.com/matschik/component-party
