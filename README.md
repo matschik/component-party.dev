@@ -1,6 +1,6 @@
 [![Open in Gitpod][gitpod-src]][gitpod-href]
 
-![Component Party](.github/banner.png)
+![Component Party 🎉](.github/banner.png)
 
 > Web component JS frameworks quick overview by their syntax and features
 
