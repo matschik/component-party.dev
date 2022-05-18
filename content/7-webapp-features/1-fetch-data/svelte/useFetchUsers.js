@@ -2,8 +2,8 @@ import { writable } from 'svelte/store';
 
 export default function useFetchUsers() {
 	const data = writable();
-	const isLoading = writable(false);
 	const error = writable();
+	const isLoading = writable(false);
 
 	async function fetchData() {
 		isLoading.set(true);
