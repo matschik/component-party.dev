@@ -1,11 +1,12 @@
 import { writable } from 'svelte/store';
 
-export default function fetchUsers() {
+export default function useFetchUsers() {
 	const data = writable();
 	const isLoading = writable(false);
 	const error = writable();
 
 	async function fetchData() {
+		isLoading.set(true);
 		try {
 			const response = await fetch('https://randomuser.me/api/?results=3');
 			const { results: users } = await response.json();
@@ -15,18 +16,9 @@ export default function fetchUsers() {
 			data.set();
 			error.set(err);
 		}
+		isLoading.set(false);
 	}
 	fetchData();
 
-	return {
-		data: {
-			subscribe: data.subscribe,
-		},
-		error: {
-			subscribe: error.subscribe,
-		},
-		isLoading: {
-			subscribe: isLoading.subscribe,
-		},
-	};
+	return { isLoading, error, data };
 }

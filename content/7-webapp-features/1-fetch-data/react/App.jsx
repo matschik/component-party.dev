@@ -4,11 +4,11 @@ export default function App() {
 	const { isLoading, error, data: users } = useFetchUsers();
 
 	return (
-		<ul>
+		<>
 			{isLoading ? (
-				<div>Fetching users...</div>
+				<p>Fetching users...</p>
 			) : error ? (
-				<div>An error occured while fetching users</div>
+				<p>An error occured while fetching users</p>
 			) : (
 				<ul>
 					{users.map((user) => (
@@ -21,6 +21,6 @@ export default function App() {
 					))}
 				</ul>
 			)}
-		</ul>
+		</>
 	);
 }

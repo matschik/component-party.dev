@@ -1,13 +1,13 @@
 <script>
-	import fetchUsers from './fetchUsers';
+	import useFetchUsers from './useFetchUsers';
 
-	const { data: users, isLoading, error } = fetchUsers();
+	const { isLoading, error, data: users } = useFetchUsers();
 </script>
 
 {#if $isLoading}
-	<div>Fetching users...</div>
+	<p>Fetching users...</p>
 {:else if $error}
-	<div>An error occured while fetching users</div>
+	<p>An error occured while fetching users</p>
 {:else if $users}
 	<ul>
 		{#each $users as user}
