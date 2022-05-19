@@ -321,6 +321,11 @@ This project requires Node.js to be `v14.0.0` or higher, because we use new Java
 3.  Install the ESLint plugin associated to the framework
 4.  In `src/frameworks.mjs`, add a new entry with SVG link and ESLint configuration
 
+## Contributors
+
+This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
+[![Contributors](https://opencollective.com/component-party/contributors.svg?width=890&button=false)](https://github.com/matschik/component-party/graphs/contributors)
+
 ## 🖋️ License
 
 MIT. Made with 💖
