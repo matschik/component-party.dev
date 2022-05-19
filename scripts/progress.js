@@ -12,6 +12,7 @@ function removeMarkdownHeadingContent(content, headingValue, replaceContentValue
 	let targetNodeIndexStart;
 	for (let i = 0; i < tree.children.length; i++) {
 		const rootNode = tree.children[i];
+
 		if (rootNode.type === 'heading' && rootNode?.children[0]?.value === headingValue) {
 			targetNodeIndexStart = i;
 			break;
@@ -19,19 +20,21 @@ function removeMarkdownHeadingContent(content, headingValue, replaceContentValue
 	}
 
 	// find index end
-	let targetNodeIndexEnd = targetNodeIndexStart;
-	for (let i = targetNodeIndexStart + 1; i < tree.children.length; i++) {
-		const rootNode = tree.children[i];
-		if (rootNode.type === 'heading') {
-			targetNodeIndexEnd = i;
-			break;
+	if (Number.isInteger(targetNodeIndexStart)) {
+		let targetNodeIndexEnd = targetNodeIndexStart;
+		for (let i = targetNodeIndexStart + 1; i < tree.children.length; i++) {
+			const rootNode = tree.children[i];
+			if (rootNode.type === 'heading') {
+				targetNodeIndexEnd = i;
+				break;
+			}
 		}
-	}
 
-	tree.children.splice(targetNodeIndexStart + 1, targetNodeIndexEnd - targetNodeIndexStart - 1, {
-		type: 'text',
-		value: replaceContentValue || '',
-	});
+		tree.children.splice(targetNodeIndexStart + 1, targetNodeIndexEnd - targetNodeIndexStart - 1, {
+			type: 'text',
+			value: replaceContentValue || '',
+		});
+	}
 
 	const newContent = remark.stringify(tree);
 	return newContent;
@@ -106,7 +109,7 @@ async function parseContentDir() {
 async function main() {
 	const codeContentDir = await parseContentDir();
 	const content = await fs.readFile('./README.md', 'utf8');
-	let newContent = removeMarkdownHeadingContent(content, 'Progression', '{{progression}}');
+	let newContent = removeMarkdownHeadingContent(content, '🔥 Progression', '{{progression}}');
 
 	let progressionContent = '';
 	for (const framework of frameworks) {

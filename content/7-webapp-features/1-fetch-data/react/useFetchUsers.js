@@ -6,7 +6,7 @@ export default function useFetchUsers() {
 	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
-		async function fetchUsers() {
+		async function fetchData() {
 			setIsLoading(true);
 			try {
 				const response = await fetch('https://randomuser.me/api/?results=3');
@@ -19,7 +19,7 @@ export default function useFetchUsers() {
 			}
 			setIsLoading(false);
 		}
-		fetchUsers();
+		fetchData();
 	}, []);
 
 	return { isLoading, error, data };
