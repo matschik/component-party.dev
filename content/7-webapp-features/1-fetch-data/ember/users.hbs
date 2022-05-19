@@ -1,0 +1,10 @@
+<ul>
+    {{#each this.allUsers as |user|}}
+        <li key={user.login.uuid}>						
+            <img src={"{{user.picture.thumbnail}}"} alt="user" />
+		    <p>
+			    {user.name.first} {user.name.last}
+		    </p>				
+        </li>
+    {{/each}}
+</ul>
