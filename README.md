@@ -267,7 +267,7 @@ How do we solve this ? Developers love having framework overview by examples. It
 </details><details>
         <summary>
             <img width="18" height="18" src="public/framework/alpine.svg" />
-            <b>Alpine.js</b>
+            <b>Alpine</b>
             <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/87" /></summary>
 
 * [x] Reactivity

@@ -160,7 +160,7 @@ export default [
 	},
 	{
 		id: 'alpine',
-		title: 'Alpine.js',
+		title: 'Alpine',
 		ext: 'html',
 		img: 'framework/alpine.svg',
 		eslint: {
