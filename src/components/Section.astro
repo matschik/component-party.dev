@@ -31,7 +31,9 @@ function generatePlaygroundURL(frameworkId, files) {
     return;
   }
 
-  const contentByFilename = files.reduce((acc, file) => {
+  const frameworkConfig = FRAMEWORKS.find(f => f.id === frameworkId)
+
+  const contentByFilename = frameworkConfig.filesSorter(files).reduce((acc, file) => {
     acc[file.fileName] = file.content;
     return acc;
   }, {});
