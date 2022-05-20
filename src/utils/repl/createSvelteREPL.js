@@ -12,16 +12,16 @@ export default function createSvelteREPL() {
 	}
 
 	function fromContentByFilename(contentByFilename) {
-		const data = [];
-		for (const filename of Object.keys(contentByFilename)) {
+		const data = Object.keys(contentByFilename).map((filename) => {
 			const content = contentByFilename[filename];
 			const parsedFilename = nodePath.parse(filename);
-			data.push({
+			return {
 				name: parsedFilename.name,
 				type: parsedFilename.ext.split('.').pop(),
 				source: content,
-			});
-		}
+			};
+		});
+
 		const url = generateURLFromData(data);
 		return url;
 	}
