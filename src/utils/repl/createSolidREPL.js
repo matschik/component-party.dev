@@ -14,9 +14,11 @@ export default () => {
 		const data = Object.keys(contentByFilename).map((filename) => {
 			const content = contentByFilename[filename];
 			const parsedFilename = nodePath.parse(filename);
+			const ext = parsedFilename.ext.split('.').pop();
+
 			return {
 				name: parsedFilename.name,
-				type: 'tsx',
+				type: ext === 'jsx' ? 'tsx' : ext,
 				source: content.replaceAll('.jsx', '.tsx'),
 			};
 		});
