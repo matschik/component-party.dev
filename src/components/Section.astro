@@ -8,9 +8,7 @@ import Title from '@/components/Title.svelte'
 import FrameworkLabel from '@/components/FrameworkLabel.astro'
 import FRAMEWORKS from '@/frameworks.mjs'
 import CodeViewer from '@/components/CodeViewer.astro'
-import createVue3REPL from '@/utils/createVue3REPL.js'
-import createSvelteREPL from '@/utils/createSvelteREPL.js'
-import createAlpineREPL from '@/utils/createAlpineREPL.js'
+import repl from "@/utils/repl"
 
 const { path: sectionPath } = Astro.props
 
@@ -27,32 +25,20 @@ function capitalize(string) {
 	return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-const vue3REPL = createVue3REPL()
-const svelteREPL = createSvelteREPL()
-const alpineREPL = createAlpineREPL()
-
-function generatePlaygroundURL(frameworkId, files){
-  let playgroundURL
-  if(frameworkId === "vue3"){
-    const contentByFilename = files.reduce((acc, file) => {
-      acc[file.fileName] =  file.content
-      return acc
-    }, {})
-    playgroundURL = vue3REPL.fromContentByFilename(contentByFilename)
-  } else if(frameworkId === "svelte"){
-    const contentByFilename = files.reduce((acc, file) => {
-      acc[file.fileName] =  file.content
-      return acc
-    }, {})
-    playgroundURL = svelteREPL.fromContentByFilename(contentByFilename) 
-  } else if(frameworkId === 'alpine'){
-    const contentByFilename = files.reduce((acc, file) => {
-      acc[file.fileName] =  { content: file.content }
-      return acc
-    }, {})
-    playgroundURL = alpineREPL.fromContentByFilename(contentByFilename)
+function generatePlaygroundURL(frameworkId, files) {
+  const frameworkREPL = repl[frameworkId];
+  if (!frameworkREPL) {
+    return;
   }
-   return playgroundURL
+
+  const contentByFilename = files.reduce((acc, file) => {
+    acc[file.fileName] = file.content;
+    return acc;
+  }, {});
+
+  const playgroundURL = frameworkREPL.fromContentByFilename(contentByFilename);
+
+  return playgroundURL;
 }
 
 const subSectionDirNames = await fs.readdir(sectionPath)
