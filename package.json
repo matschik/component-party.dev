@@ -25,7 +25,6 @@
   },
   "homepage": "https://github.com/matschik/component-party#readme",
   "devDependencies": {
-    "@amoutonbrady/lz-string": "^0.0.1",
     "@angular-eslint/eslint-plugin": "^13.2.1",
     "@angular-eslint/eslint-plugin-template": "^13.2.1",
     "@angular-eslint/template-parser": "^13.2.1",
@@ -35,6 +34,7 @@
     "@astrojs/tailwind": "^0.1.2",
     "@babel/eslint-parser": "^7.17.0",
     "@babel/plugin-proposal-decorators": "^7.17.9",
+    "@matschik/lz-string": "^0.0.2",
     "@tailwindcss/typography": "^0.5.2",
     "@types/mdast": "^3.0.10",
     "@typescript-eslint/eslint-plugin": "^5.20.0",

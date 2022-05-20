@@ -1,5 +1,5 @@
 import nodePath from 'path';
-import { compressToURL } from '@amoutonbrady/lz-string';
+import { compressToURL } from '@matschik/lz-string';
 
 export default () => {
 	const BASE_URL = 'https://playground.solidjs.com/#';

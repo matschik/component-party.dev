@@ -1,7 +1,6 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@amoutonbrady/lz-string': ^0.0.1
   '@angular-eslint/eslint-plugin': ^13.2.1
   '@angular-eslint/eslint-plugin-template': ^13.2.1
   '@angular-eslint/template-parser': ^13.2.1
@@ -11,6 +10,7 @@ specifiers:
   '@astrojs/tailwind': ^0.1.2
   '@babel/eslint-parser': ^7.17.0
   '@babel/plugin-proposal-decorators': ^7.17.9
+  '@matschik/lz-string': ^0.0.2
   '@tailwindcss/typography': ^0.5.2
   '@types/mdast': ^3.0.10
   '@typescript-eslint/eslint-plugin': ^5.20.0
@@ -51,7 +51,6 @@ dependencies:
   alpinejs: 3.10.2
 
 devDependencies:
-  '@amoutonbrady/lz-string': 0.0.1
   '@angular-eslint/eslint-plugin': 13.2.1_hcfsmds2fshutdssjqluwm76uu
   '@angular-eslint/eslint-plugin-template': 13.2.1_hcfsmds2fshutdssjqluwm76uu
   '@angular-eslint/template-parser': 13.2.1_hcfsmds2fshutdssjqluwm76uu
@@ -61,6 +60,7 @@ devDependencies:
   '@astrojs/tailwind': 0.1.2
   '@babel/eslint-parser': 7.17.0_eslint@8.15.0
   '@babel/plugin-proposal-decorators': 7.17.9
+  '@matschik/lz-string': 0.0.2
   '@tailwindcss/typography': 0.5.2_tailwindcss@3.0.24
   '@types/mdast': 3.0.10
   '@typescript-eslint/eslint-plugin': 5.23.0_c63nfttrfhylg3zmgcxfslaw44
@@ -97,10 +97,6 @@ devDependencies:
   vite-plugin-full-reload: 1.0.0
 
 packages:
-
-  /@amoutonbrady/lz-string/0.0.1:
-    resolution: {integrity: sha512-crH4ovRiiTg9y1lDTEtMwTdD4s/aYoz4EemUD3p+9GvHMOeJ3tUXQ/DQM1Mw9/wc9Od4jG97w0m9+gZmLysGFQ==}
-    dev: true
 
   /@ampproject/remapping/2.2.0:
     resolution: {integrity: sha512-qRmjj8nj9qmLTQXXmaR1cck3UXSRMPrbsLJAasZpF+t3riI71BXed5ebIOYwQntykeZuhjsdweEc9BxH5Jc26w==}
@@ -696,6 +692,10 @@ packages:
 
   /@ljharb/has-package-exports-patterns/0.0.2:
     resolution: {integrity: sha512-4/RWEeXDO6bocPONheFe6gX/oQdP/bEpv0oL4HqjPP5DCenBSt0mHgahppY49N0CpsaqffdwPq+TlX9CYOq2Dw==}
+    dev: true
+
+  /@matschik/lz-string/0.0.2:
+    resolution: {integrity: sha512-gJ4CL+hrC+eqe3p1JB4hU02s5N6+t4tALLK1jdMKGCeshkfkRgpd498qAekvbcgKZjYWy5bQqoPvbD4TtCYw7w==}
     dev: true
 
   /@nodelib/fs.scandir/2.1.5:
