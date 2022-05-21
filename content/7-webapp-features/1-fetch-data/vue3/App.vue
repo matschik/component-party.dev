@@ -11,7 +11,7 @@ const { isLoading, error, data: users } = useFetchUsers();
   <p v-else-if="error">
     An error ocurred while fetching users
   </p>
-  <ul v-else>
+  <ul v-else-if="users">
     <li
       v-for="user in users"
       :key="user.login.uuid"
