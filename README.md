@@ -1,6 +1,6 @@
 [![Open in Gitpod][gitpod-src]][gitpod-href]
 
-![Component Party 🎉](.github/banner.png)
+![Component Party 🎉](.github/banner.webp)
 
 > Web component JS frameworks quick overview by their syntax and features
 
@@ -198,7 +198,7 @@ How do we solve this ? Developers love having framework overview by examples. It
         <summary>
             <img width="18" height="18" src="public/framework/lit.svg" />
             <b>Lit</b>
-            <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/96" /></summary>
+            <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/100" /></summary>
 
 * [x] Reactivity
    * [x] Declare state
@@ -224,8 +224,8 @@ How do we solve this ? Developers love having framework overview by examples. It
    * [x] Checkbox
    * [x] Radio
    * [x] Select
-* [ ] Webapp features
-   * [ ] Fetch data
+* [x] Webapp features
+   * [x] Fetch data
    * [x] Router link
    * [x] Routing
 
@@ -323,8 +323,8 @@ This project requires Node.js to be `v14.0.0` or higher, because we use new Java
 
 ## 🧑‍💻 Contributors
 
-This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
-[![Contributors](https://opencollective.com/component-party/contributors.svg?width=890&button=false)](https://github.com/matschik/component-party/graphs/contributors)
+This project exists thanks to all the people who contribute. \[[Contribute](CONTRIBUTING.md)].
+[![Contributors](https://opencollective.com/component-party/contributors.svg?width=890\&button=false)](https://github.com/matschik/component-party/graphs/contributors)
 
 ## ⚖️ License
 
