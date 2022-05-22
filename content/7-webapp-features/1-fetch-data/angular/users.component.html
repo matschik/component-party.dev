@@ -1,0 +1,16 @@
+<ul *ngIf="users$ | async as users; else loadingOrError">
+    <li *ngFor="let user of users">
+      <img [src]="user.picture.thumbnail" alt="user">
+      <p>{{user.name.first}} {{user.name.last}}</p>
+    </li>
+  </ul>
+  
+  <ng-template #loadingOrError>
+    <p *ngIf="userService.error$ | async; else loading">
+      An error occured while fetching users
+    </p>
+  </ng-template>
+  
+  <ng-template #loading>
+    Fetching users...
+  </ng-template>
