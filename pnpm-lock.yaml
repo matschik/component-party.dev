@@ -10,6 +10,7 @@ specifiers:
   '@astrojs/tailwind': ^0.1.2
   '@babel/eslint-parser': ^7.17.0
   '@babel/plugin-proposal-decorators': ^7.17.9
+  '@builder.io/qwik': 0.0.20-5
   '@matschik/lz-string': ^0.0.2
   '@tailwindcss/typography': ^0.5.2
   '@types/mdast': ^3.0.10
@@ -60,6 +61,7 @@ devDependencies:
   '@astrojs/tailwind': 0.1.2
   '@babel/eslint-parser': 7.17.0_eslint@8.16.0
   '@babel/plugin-proposal-decorators': 7.17.12
+  '@builder.io/qwik': 0.0.20-5
   '@matschik/lz-string': 0.0.2
   '@tailwindcss/typography': 0.5.2_tailwindcss@3.0.24
   '@types/mdast': 3.0.10
@@ -607,6 +609,11 @@ packages:
     dependencies:
       '@babel/helper-validator-identifier': 7.16.7
       to-fast-properties: 2.0.0
+    dev: true
+
+  /@builder.io/qwik/0.0.20-5:
+    resolution: {integrity: sha512-UldU9W4hUXFqFBU7+kSOmri7L49YOkESFdBQpd3fNnUTxc8YxYe4dRBDK67mZIrMCReH0aKCT6YWvQ7caHgZEQ==}
+    engines: {node: '>=14'}
     dev: true
 
   /@ember-data/rfc395-data/0.0.4:
