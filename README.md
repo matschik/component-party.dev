@@ -305,7 +305,7 @@ How do we solve this ? Developers love having framework overview by examples. It
             <b>Qwik</b>
             <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/5" /></summary>
 
-* [] Reactivity
+* [ ] Reactivity
    * [x] Declare state
    * [ ] Update state
    * [ ] Computed state
@@ -325,8 +325,8 @@ How do we solve this ? Developers love having framework overview by examples. It
    * [ ] Slot
    * [ ] Slot fallback
 * [ ] Form input
-   * [ ] Input te t
-   * [ ] Checkbo 
+   * [ ] Input text
+   * [ ] Checkbox
    * [ ] Radio
    * [ ] Select
 * [ ] Webapp features
@@ -335,8 +335,6 @@ How do we solve this ? Developers love having framework overview by examples. It
    * [ ] Routing
 
 </details>
-
-
 
 ## 🤝 Contributing
 
