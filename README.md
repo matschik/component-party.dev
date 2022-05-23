@@ -299,7 +299,44 @@ How do we solve this ? Developers love having framework overview by examples. It
    * [ ] Router link
    * [ ] Routing
 
+</details><details>
+        <summary>
+            <img width="18" height="18" src="public/framework/qwik.svg" />
+            <b>Qwik</b>
+            <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/5" /></summary>
+
+* [] Reactivity
+   * [x] Declare state
+   * [ ] Update state
+   * [ ] Computed state
+* [ ] Templating
+   * [ ] Minimal template
+   * [ ] Styling
+   * [ ] Loop
+   * [ ] Event click
+   * [ ] Dom ref
+   * [ ] Conditional
+* [ ] Lifecycle
+   * [ ] On mount
+   * [ ] On unmount
+* [ ] Component composition
+   * [ ] Props
+   * [ ] Emit to parent
+   * [ ] Slot
+   * [ ] Slot fallback
+* [ ] Form input
+   * [ ] Input te t
+   * [ ] Checkbo 
+   * [ ] Radio
+   * [ ] Select
+* [ ] Webapp features
+   * [ ] Fetch data
+   * [ ] Router link
+   * [ ] Routing
+
 </details>
+
+
 
 ## 🤝 Contributing
 

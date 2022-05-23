@@ -173,4 +173,19 @@ export default [
 			return files;
 		},
 	},
+	{
+		id: 'qwik',
+		title: 'Qwik',
+		ext: 'html',
+		img: 'framework/qwik.svg',
+		eslint: {
+			files: ['**/qwik/**'],
+			extends: ['eslint:recommended'],
+		},
+		playgroundURL: 'https://qwik.builder.io/playground',
+		documentationURL: 'https://qwik.builder.io/docs/overview',
+		filesSorter(files) {
+			return files;
+		},
+	}
 ];
