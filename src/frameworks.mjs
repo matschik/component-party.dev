@@ -168,7 +168,6 @@ export default [
 	{
 		id: 'qwik',
 		title: 'Qwik',
-		ext: 'html',
 		img: 'framework/qwik.svg',
 		eslint: {
 			files: ['**/qwik/**'],
