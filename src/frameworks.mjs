@@ -2,7 +2,6 @@ export default [
 	{
 		id: 'svelte',
 		title: 'Svelte',
-		ext: 'svelte',
 		img: 'framework/svelte.svg',
 		eslint: {
 			files: ['*.svelte'],
@@ -18,7 +17,6 @@ export default [
 	{
 		id: 'react',
 		title: 'React',
-		ext: 'jsx',
 		img: 'framework/react.svg',
 		eslint: {
 			files: ['**/react/*.jsx', '**/react/*.tsx'],
@@ -38,7 +36,6 @@ export default [
 	{
 		id: 'vue3',
 		title: 'Vue 3',
-		ext: 'vue',
 		img: 'framework/vue.svg',
 		eslint: {
 			files: ['*.vue'],
@@ -59,7 +56,6 @@ export default [
 	{
 		id: 'angular',
 		title: 'Angular',
-		ext: 'ts',
 		img: 'framework/angular.svg',
 		eslint: [
 			{
@@ -111,7 +107,6 @@ export default [
 	{
 		id: 'solid',
 		title: 'SolidJS',
-		ext: 'jsx',
 		img: 'framework/solid.svg',
 		eslint: {
 			files: ['**/solid/*.jsx'],
@@ -127,7 +122,6 @@ export default [
 	{
 		id: 'lit',
 		title: 'Lit',
-		ext: 'js',
 		img: 'framework/lit.svg',
 		eslint: {
 			files: ['**/lit/**'],
@@ -144,7 +138,6 @@ export default [
 	{
 		id: 'ember',
 		title: 'Ember',
-		ext: 'js',
 		img: 'framework/ember.svg',
 		eslint: {
 			files: ['**/ember/**'],
@@ -161,7 +154,6 @@ export default [
 	{
 		id: 'alpine',
 		title: 'Alpine',
-		ext: 'html',
 		img: 'framework/alpine.svg',
 		eslint: {
 			files: ['**/alpine/**'],
