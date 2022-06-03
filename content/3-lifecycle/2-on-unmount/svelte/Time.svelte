@@ -7,9 +7,7 @@
 		time = new Date().toLocaleTimeString();
 	}, 1000);
 
-	onDestroy(() => {
-		clearInterval(timer);
-	});
+	onDestroy(() => clearInterval(timer) );
 </script>
 
 <p>Current time: {time}</p>
