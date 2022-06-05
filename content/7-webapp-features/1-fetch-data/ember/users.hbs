@@ -1,10 +1,17 @@
-<ul>
-    {{#each this.allUsers as |user|}}
-        <li key={user.login.uuid}>						
-            <img src={"{{user.picture.thumbnail}}"} alt="user" />
-		    <p>
-			    {user.name.first} {user.name.last}
-		    </p>				
-        </li>
-    {{/each}}
-</ul>
+{{#if isLoading}}
+    <p>Fetching users...</p>
+{{else if error}}
+    <p>An error occured while fetching users</p>
+{{else}}
+    <ul>
+
+        {{#each users as |user| key="login.uuid"}}
+            <li>						
+                <img src={{user.picture.thumbnail}} alt="user" />
+		        <p>
+			        {{user.name.first}} {{user.name.last}}
+		        </p>				
+            </li>
+        {{/each}}
+    </ul>
+{{/if}}
