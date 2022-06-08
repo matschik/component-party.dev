@@ -1,0 +1,22 @@
+{{#let (this.fetchUsers) as |request|}}
+  {{#if request.isLoading}}
+
+    <p>Fetching users...</p>
+
+  {{else if request.error}}
+
+    <p>An error occurred while fetching users</p>
+
+  {{else}}
+
+     <ul>
+       {{#each request.users as |user|}}
+          <li>
+            <img src={{user.picture.thumbnail}} alt="user">
+            <p>{{user.name.first}} {{user.name.last}}</p>
+          </li>
+       {{/each}}
+     </ul>
+
+  {{/if}}
+{{/let}}
