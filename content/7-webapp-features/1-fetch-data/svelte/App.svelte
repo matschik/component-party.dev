@@ -1,16 +1,16 @@
 <script>
-	import useFetchUsers from './useFetchUsers';
+	async function fetchUsers() {
+		return (await fetch('https://randomuser.me/api/?results=3')).json();
+	}
 
-	const { isLoading, error, data: users } = useFetchUsers();
+	let promise = fetchUsers();
 </script>
 
-{#if $isLoading}
+{#await promise}
 	<p>Fetching users...</p>
-{:else if $error}
-	<p>An error occured while fetching users</p>
-{:else if $users}
+{:then { results: users }}
 	<ul>
-		{#each $users as user}
+		{#each users as user}
 			<li>
 				<img src={user.picture.thumbnail} alt="user" />
 				<p>
@@ -20,4 +20,6 @@
 			</li>
 		{/each}
 	</ul>
-{/if}
+{:catch error}
+	<p>An error occured while fetching users</p>
+{/await}
