@@ -1,11 +1,8 @@
 <script>
-	import { onMount } from 'svelte';
-
-	let inputElement;
-
-	onMount(() => {
-		inputElement.focus();
-	});
+ function focus(node){
+   node.focus();
+ }	
+	
 </script>
 
-<input bind:this={inputElement} />
+<input use:focus />
