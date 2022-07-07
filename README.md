@@ -303,17 +303,17 @@ How do we solve this ? Developers love having framework overview by examples. It
         <summary>
             <img width="18" height="18" src="public/framework/qwik.svg" />
             <b>Qwik</b>
-            <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/5" /></summary>
+            <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/32" /></summary>
 
-* [ ] Reactivity
+* [x] Reactivity
    * [x] Declare state
-   * [ ] Update state
-   * [ ] Computed state
+   * [x] Update state
+   * [x] Computed state
 * [ ] Templating
-   * [ ] Minimal template
-   * [ ] Styling
-   * [ ] Loop
-   * [ ] Event click
+   * [x] Minimal template
+   * [x] Styling
+   * [x] Loop
+   * [x] Event click
    * [ ] Dom ref
    * [ ] Conditional
 * [ ] Lifecycle
