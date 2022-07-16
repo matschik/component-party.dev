@@ -170,8 +170,16 @@ export default [
 		title: 'Qwik',
 		img: 'framework/qwik.svg',
 		eslint: {
+			env: {
+				browser: true,
+				es2021: true,
+				node: true,
+			},
 			files: ['**/qwik/**'],
-			extends: ['eslint:recommended'],
+			extends: [
+				'eslint:recommended',
+				'plugin:qwik/recommended'
+			],
 		},
 		playgroundURL: 'https://qwik.builder.io/playground',
 		documentationURL: 'https://qwik.builder.io/docs/overview',

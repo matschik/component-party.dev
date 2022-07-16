@@ -25,6 +25,7 @@ specifiers:
   eslint-plugin-ember: ^10.6.1
   eslint-plugin-lit: ^1.6.1
   eslint-plugin-prettier: ^4.0.0
+  eslint-plugin-qwik: ^0.0.34
   eslint-plugin-react: ^7.29.4
   eslint-plugin-solid: ^0.4.7
   eslint-plugin-svelte3: ^3.4.1
@@ -75,6 +76,7 @@ devDependencies:
   eslint-plugin-ember: 10.6.1_eslint@8.16.0
   eslint-plugin-lit: 1.6.1_eslint@8.16.0
   eslint-plugin-prettier: 4.0.0_j7rsahgqtkecno6yauhsgsglf4
+  eslint-plugin-qwik: 0.0.34_eslint@8.16.0
   eslint-plugin-react: 7.30.0_eslint@8.16.0
   eslint-plugin-solid: 0.4.7_utdtartgf6fqqgkivzeynh76la
   eslint-plugin-svelte3: 3.4.1_vypdqzeyqutkgs6qzc7qod4c64
@@ -2614,6 +2616,15 @@ packages:
       eslint-config-prettier: 8.5.0_eslint@8.16.0
       prettier: 2.6.2
       prettier-linter-helpers: 1.0.0
+    dev: true
+
+  /eslint-plugin-qwik/0.0.34_eslint@8.16.0:
+    resolution: {integrity: sha512-yxzLJANzSyGWT4X3RTzIDV5O7LWRjD8Kg1NAAdHI9rIFruTc2JSPSNK5sY0L7XzLoix3kl0gsnZe8LTxguGgdA==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      eslint: '>= 8'
+    dependencies:
+      eslint: 8.16.0
     dev: true
 
   /eslint-plugin-react/7.30.0_eslint@8.16.0:
