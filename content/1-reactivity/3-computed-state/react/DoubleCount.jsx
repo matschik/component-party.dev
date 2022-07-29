@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 
 export default function DoubleCount() {
 	const [count] = useState(10);
