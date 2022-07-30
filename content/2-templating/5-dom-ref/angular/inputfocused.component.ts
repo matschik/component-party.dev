@@ -6,9 +6,9 @@ import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 })
 export class InputfocusedComponent implements OnInit {
 	@ViewChild('inputRef', { static: true })
-	inputRef?: ElementRef<HTMLInputElement>;
+	inputRef!: ElementRef<HTMLInputElement>;
 
 	ngOnInit() {
-		this.inputRef?.nativeElement.focus();
+		this.inputRef!.nativeElement.focus();
 	}
 }
