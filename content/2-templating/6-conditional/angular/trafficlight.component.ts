@@ -1,24 +1,30 @@
-import { Component, Pipe, PipeTransform } from '@angular/core';
+import { Component } from '@angular/core';
 
 const TRAFFIC_LIGHTS = ['red', 'orange', 'green'];
 
-@Pipe({
-	name: 'light',
-})
-export class TrafficLightPipe implements PipeTransform {
-	transform(value: number): string {
-		return TRAFFIC_LIGHTS[value];
-	}
-}
-
 @Component({
 	selector: 'app-trafficlight',
-	templateUrl: './trafficlight.component.html',
+	template: `
+		<button (click)="nextLight()">Next light</button>
+		<p>Light is: {{ light }}</p>
+		<p>
+			You must
+			<ng-container [ngSwitch]="light">
+				<span *ngSwitchCase="'red'">STOP</span>
+				<span *ngSwitchCase="'orange'">SLOW DOWN</span>
+				<span *ngSwitchCase="'green'">GO</span>
+			</ng-container>
+		</p>
+	`,
 })
 export class TrafficlightComponent {
-	lightIndex: number = 0;
+	lightIndex = 0;
 
-	nextLight(): void {
+	get light() {
+		return TRAFFIC_LIGHTS[this.lightIndex];
+	}
+
+	nextLight() {
 		if (this.lightIndex + 1 > TRAFFIC_LIGHTS.length - 1) {
 			this.lightIndex = 0;
 		} else {

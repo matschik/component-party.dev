@@ -2,8 +2,12 @@ import { Component } from '@angular/core';
 
 @Component({
 	selector: 'app-colors',
-	templateUrl: './colors.component.html',
+	template: `
+		<ul>
+			<li *ngFor="let color of colors">{{ color }}</li>
+		</ul>
+	`,
 })
 export class ColorsComponent {
-	colors: string[] = ['red', 'green', 'blue'];
+	colors = ['red', 'green', 'blue'];
 }

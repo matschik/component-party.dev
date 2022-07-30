@@ -9,12 +9,12 @@ export class TimeComponent implements OnDestroy {
 	timer: number;
 
 	constructor() {
-		this.timer = window.setInterval(() => {
+		this.timer = setInterval(() => {
 			this.time = new Date().toLocaleTimeString();
 		}, 1000);
 	}
 
-	ngOnDestroy(): void {
-		window.clearInterval(this.timer);
+	ngOnDestroy() {
+		clearInterval(this.timer);
 	}
 }

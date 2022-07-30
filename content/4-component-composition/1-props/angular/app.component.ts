@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 
 @Component({
 	selector: 'app-root',
-	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css'],
+	template: ` <app-userprofile name="John" [age]="20" [favouriteColors]="['green', 'blue', 'red']" [isAvailable]="true"> </app-userprofile> `,
 })
 export class AppComponent {}

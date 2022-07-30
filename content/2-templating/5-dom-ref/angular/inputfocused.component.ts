@@ -1,14 +1,14 @@
-import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 
 @Component({
 	selector: 'app-inputfocused',
-	template: '<input type="text" #inputelement />',
+	template: `<input type="text" #inputRef />`,
 })
-export class InputfocusedComponent implements AfterViewInit {
-	@ViewChild('inputelement')
-	inputElement: ElementRef<HTMLInputElement> | undefined;
+export class InputfocusedComponent implements OnInit {
+	@ViewChild('inputRef', { static: true })
+	inputRef?: ElementRef<HTMLInputElement>;
 
-	ngAfterViewInit(): void {
-		this.inputElement?.nativeElement.focus();
+	ngOnInit() {
+		this.inputRef?.nativeElement.focus();
 	}
 }
