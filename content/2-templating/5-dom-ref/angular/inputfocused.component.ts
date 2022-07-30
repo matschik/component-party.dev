@@ -9,6 +9,6 @@ export class InputfocusedComponent implements OnInit {
 	inputRef!: ElementRef<HTMLInputElement>;
 
 	ngOnInit() {
-		this.inputRef!.nativeElement.focus();
+		this.inputRef.nativeElement.focus();
 	}
 }
