@@ -24,14 +24,14 @@ export class UserService {
 	loadUsers() {
 		this.state.next({ ...initialState, loading: true });
 
-		this.http.get<UserRes>('https://randomuser.me/api/?results=3').subscribe({
+		this.http.get<UserResponse>('https://randomuser.me/api/?results=3').subscribe({
 			next: ({ results }) => this.state.next({ ...initialState, users: results }),
 			error: (error) => this.state.next({ ...initialState, error }),
 		});
 	}
 }
 
-export interface UserRes {
+export interface UserResponse {
 	results: User[];
 	info: any;
 }
