@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, take } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 export interface UsersState {
 	users: User[];
@@ -24,17 +24,10 @@ export class UserService {
 	loadUsers() {
 		this.state.next({ ...initialState, loading: true });
 
-		this.http
-			.get<UserRes>('https://randomuser.me/api/?results=3')
-			.pipe(
-				take(1),
-				tap(({ results }) => this.state.next({ ...initialState, users: results })),
-				catchError((error) => {
-					this.state.next({ ...initialState, error });
-					return error;
-				})
-			)
-			.subscribe();
+		this.http.get<UserRes>('https://randomuser.me/api/?results=3').subscribe({
+			next: ({ results }) => this.state.next({ ...initialState, users: results }),
+			error: (error) => this.state.next({ ...initialState, error }),
+		});
 	}
 }
 
