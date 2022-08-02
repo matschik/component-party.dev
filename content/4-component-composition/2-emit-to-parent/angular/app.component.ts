@@ -2,7 +2,13 @@ import { Component } from '@angular/core';
 
 @Component({
 	selector: 'app-root',
-	templateUrl: './app.component.html',
+	template: `
+		<p>Can I come ?</p>
+
+		<app-answer-button (yes)="onAnswerYes()" (no)="onAnswerNo()"> </app-answer-button>
+
+		<p style="font-size: 50px">{{ canCome ? '😀' : '😥' }}</p>
+	`,
 })
 export class AppComponent {
 	canCome = true;

@@ -1,8 +1,0 @@
-<button (click)="nextLight()">Next light</button>
-<p>Light is: {{ lightIndex | light }}</p>
-<p>
-	You must
-	<span *ngIf="(lightIndex | light) === 'red'">STOP</span>
-	<span *ngIf="(lightIndex | light) === 'orange'">SLOW DOWN</span>
-	<span *ngIf="(lightIndex | light) === 'green'">GO</span>
-</p>

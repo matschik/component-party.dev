@@ -2,12 +2,15 @@ import { Component } from '@angular/core';
 
 @Component({
 	selector: 'app-counter',
-	templateUrl: './counter.component.html',
+	template: `
+		<p>Counter: {{ count }}</p>
+		<button (click)="incrementCount()">+1</button>
+	`,
 })
 export class CounterComponent {
-	count: number = 0;
+	count = 0;
 
-	incrementCount(): void {
+	incrementCount() {
 		this.count++;
 	}
 }

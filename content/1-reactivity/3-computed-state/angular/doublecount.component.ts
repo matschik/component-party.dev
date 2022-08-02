@@ -1,18 +1,13 @@
-import { Component, Pipe, PipeTransform } from '@angular/core';
-
-@Pipe({
-	name: 'double',
-})
-export class DoubleCountPipe implements PipeTransform {
-	transform(value: number): number {
-		return value * 2;
-	}
-}
+import { Component } from '@angular/core';
 
 @Component({
 	selector: 'app-doublecount',
-	template: '<div>{{ number | double }}</div>',
+	template: '<div>{{ doubleCount }}</div>',
 })
 export class DoublecountComponent {
-	count: number = 10;
+	count = 10;
+
+	get doubleCount() {
+		return this.count * 2;
+	}
 }

@@ -1,25 +1,50 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Subject } from 'rxjs';
-import { User } from './user';
+import { BehaviorSubject } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
+export interface UsersState {
+	users: User[];
+	error: string | null;
+	loading: boolean;
+}
 
+export const initialState: UsersState = {
+	users: [],
+	error: null,
+	loading: false,
+};
+
+@Injectable({ providedIn: 'root' })
 export class UserService {
-  error$: Subject<any> = new Subject();
-  
-  private users$ = this.HttpClient.get<{results: User[]; info: any}>('https://randomuser.me/api/?results=3')
-  .pipe(
-    map(x => x.results),
-    catchError(e => {this.error$.next(e); return []})
-  );
-  
-  constructor(private HttpClient: HttpClient) {}
+	private state = new BehaviorSubject<UsersState>(initialState);
+	state$ = this.state.asObservable();
 
-  getUsers() {
-    return this.users$;
-  }
+	constructor(private http: HttpClient) {}
 
+	loadUsers() {
+		this.state.next({ ...initialState, loading: true });
+
+		this.http.get<UserRes>('https://randomuser.me/api/?results=3').subscribe({
+			next: ({ results }) => this.state.next({ ...initialState, users: results }),
+			error: (error) => this.state.next({ ...initialState, error }),
+		});
+	}
+}
+
+export interface UserRes {
+	results: User[];
+	info: any;
+}
+
+export interface User {
+	name: {
+		title: string;
+		first: string;
+		last: string;
+	};
+	picture: {
+		large: string;
+		medium: string;
+		thumbnail: string;
+	};
 }
