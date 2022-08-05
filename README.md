@@ -11,10 +11,6 @@
 Many JS developers don't have a good overview of every existing JS framework with their own syntax and features.
 How do we solve this ? Developers love having framework overview by examples. It's a quick introduction before going deeper.
 
-## 🚀 Roadmap
-
-The essentials are done. Feel free to open an issue to make a proposal.
-
 ## 🔥 Progression
 
 <details>
