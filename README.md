@@ -13,9 +13,7 @@ How do we solve this ? Developers love having framework overview by examples. It
 
 ## 🚀 Roadmap
 
-*   \[ ] Add Preact
-*   \[ ] Add Stencil
-*   \[ ] Add native JS ?
+The essentials are done. Feel free to open an issue to make a proposal.
 
 ## 🔥 Progression
 
