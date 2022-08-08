@@ -105,6 +105,19 @@ export default [
 		},
 	},
 	{
+		id: 'aurelia1',
+		title: 'Aurelia',
+		img: 'framework/aurelia1.svg',
+		eslint: {
+			files: ['**/aurelia1/*.ts']
+		},
+		playgroundURL: 'https://aurelia.io',
+		documentationURL: 'https://aurelia.io/',
+		filesSorter(files) {
+			return files;
+		},
+	},
+	{
 		id: 'solid',
 		title: 'SolidJS',
 		img: 'framework/solid.svg',
