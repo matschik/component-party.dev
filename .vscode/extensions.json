@@ -1,10 +1,11 @@
 {
   "recommendations": [
-    "astro-build.astro-vscode", 
-    "bradlc.vscode-tailwindcss", 
-    "svelte.svelte-vscode", 
-    "esbenp.prettier-vscode", 
-    "dbaeumer.vscode-eslint"
+    "astro-build.astro-vscode",
+    "bradlc.vscode-tailwindcss",
+    "svelte.svelte-vscode",
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "Vue.volar"
   ],
   "unwantedRecommendations": []
 }
