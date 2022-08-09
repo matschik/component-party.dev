@@ -2,11 +2,11 @@
   "recommendations": [
     "astro-build.astro-vscode",
     "bradlc.vscode-tailwindcss",
-    "svelte.svelte-vscode",
-    "johnsoncodehk.volar",
     "esbenp.prettier-vscode",
     "dbaeumer.vscode-eslint",
-    "streetsidesoftware.code-spell-checker"
+    "svelte.svelte-vscode",
+    "streetsidesoftware.code-spell-checker",
+    "Vue.volar"
   ],
   "unwantedRecommendations": []
 }
