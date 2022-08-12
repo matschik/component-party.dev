@@ -1,7 +1,7 @@
 ---
 import fs from 'node:fs/promises'
 import kebabCase from 'lodash.kebabcase'
-import { Markdown } from 'astro/components'
+import  Markdown  from '@astrojs/markdown-component'
 import nodePath from 'node:path'
 
 import Title from '@/components/Title.svelte'
@@ -141,7 +141,7 @@ function getFrameworkSectionPlaygroundURL(section, framework){
               {getSectionMarkdownFiles(section, framework)?.length > 0 && 
                     <div>
                       {getSectionMarkdownFiles(section, framework).map((file) => (
-                            <Markdown set:html={file.content} />
+                            <Markdown set:html={file.content || ""} />
                       ))}
                     </div>
               }
