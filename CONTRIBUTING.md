@@ -9,7 +9,6 @@ This site is built with [Astro](https://docs.astro.build). Site content is writt
 3.  Install the ESLint plugin associated to the framework
 4.  In `src/frameworks.mjs`, add a new entry with SVG link and ESLint configuration
 
-
 ## Improve website
 
 For local development, [pnpm](https://pnpm.io/) is preferred as package manager:

@@ -1,22 +1,22 @@
 {{#let (this.fetchUsers) as |request|}}
-  {{#if request.isLoading}}
+	{{#if request.isLoading}}
 
-    <p>Fetching users...</p>
+		<p>Fetching users...</p>
 
-  {{else if request.error}}
+	{{else if request.error}}
 
-    <p>An error occurred while fetching users</p>
+		<p>An error occurred while fetching users</p>
 
-  {{else}}
+	{{else}}
 
-     <ul>
-       {{#each request.users as |user|}}
-          <li>
-            <img src={{user.picture.thumbnail}} alt="user">
-            <p>{{user.name.first}} {{user.name.last}}</p>
-          </li>
-       {{/each}}
-     </ul>
+		<ul>
+			{{#each request.users as |user|}}
+				<li>
+					<img src={{user.picture.thumbnail}} alt='user' />
+					<p>{{user.name.first}} {{user.name.last}}</p>
+				</li>
+			{{/each}}
+		</ul>
 
-  {{/if}}
+	{{/if}}
 {{/let}}

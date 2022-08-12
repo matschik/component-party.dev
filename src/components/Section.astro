@@ -1,21 +1,21 @@
 ---
-import fs from 'node:fs/promises'
-import kebabCase from 'lodash.kebabcase'
-import { Markdown } from 'astro/components'
-import nodePath from 'node:path'
+import fs from 'node:fs/promises';
+import kebabCase from 'lodash.kebabcase';
+import Markdown from '@astrojs/markdown-component';
+import nodePath from 'node:path';
 
-import Title from '@/components/Title.svelte'
-import FrameworkLabel from '@/components/FrameworkLabel.astro'
-import FRAMEWORKS from '@/frameworks.mjs'
-import CodeViewer from '@/components/CodeViewer.astro'
-import repl from "@/utils/repl"
+import Title from '@/components/Title.svelte';
+import FrameworkLabel from '@/components/FrameworkLabel.astro';
+import FRAMEWORKS from '@/frameworks.mjs';
+import CodeViewer from '@/components/CodeViewer.astro';
+import repl from '@/utils/repl';
 
-const { path: sectionPath } = Astro.props
+const { path: sectionPath } = Astro.props;
 
-const sectionId = sectionPath.split("/").pop()
-const sectionRelativePath = sectionPath.split("/").slice(-2).join("/")
+const sectionId = sectionPath.split('/').pop();
+const sectionRelativePath = sectionPath.split('/').slice(-2).join('/');
 
-const sections = []
+const sections = [];
 
 function dirNameToTitle(dirName) {
 	return capitalize(dirName.split('-').splice(1).join(' '));
@@ -26,170 +26,194 @@ function capitalize(string) {
 }
 
 function generatePlaygroundURL(frameworkId, files) {
-  const frameworkREPL = repl[frameworkId];
-  if (!frameworkREPL) {
-    return;
-  }
+	const frameworkREPL = repl[frameworkId];
+	if (!frameworkREPL) {
+		return;
+	}
 
-  const frameworkConfig = FRAMEWORKS.find(f => f.id === frameworkId)
+	const frameworkConfig = FRAMEWORKS.find((f) => f.id === frameworkId);
 
-  const contentByFilename = frameworkConfig.filesSorter(files).reduce((acc, file) => {
-    acc[file.fileName] = file.content;
-    return acc;
-  }, {});
+	const contentByFilename = frameworkConfig.filesSorter(files).reduce((acc, file) => {
+		acc[file.fileName] = file.content;
+		return acc;
+	}, {});
 
-  const playgroundURL = frameworkREPL.fromContentByFilename(contentByFilename);
+	const playgroundURL = frameworkREPL.fromContentByFilename(contentByFilename);
 
-  return playgroundURL;
+	return playgroundURL;
 }
 
-const subSectionDirNames = await fs.readdir(sectionPath)
+const subSectionDirNames = await fs.readdir(sectionPath);
 
-for(const dirName of subSectionDirNames){
-    const path = `${sectionPath}/${dirName}`
-    const title = dirNameToTitle(dirName)
+for (const dirName of subSectionDirNames) {
+	const path = `${sectionPath}/${dirName}`;
+	const title = dirNameToTitle(dirName);
 
-    const frameworkDirs = await fs.readdir(path)
-    const frameworkSections = []
-    for(const frameworkDir of frameworkDirs){
-        const frameworkPath = `${path}/${frameworkDir}`
-        const files = []
-        const fileNames = await fs.readdir(`${frameworkPath}`)
+	const frameworkDirs = await fs.readdir(path);
+	const frameworkSections = [];
+	for (const frameworkDir of frameworkDirs) {
+		const frameworkPath = `${path}/${frameworkDir}`;
+		const files = [];
+		const fileNames = await fs.readdir(`${frameworkPath}`);
 
-        for(const fileName of fileNames){
-            const filePath = `${frameworkPath}/${fileName}`
-            const ext = nodePath.parse(filePath).ext.split(".").pop()
-            files.push({
-                path: filePath,
-                fileName,
-                ext,
-                content: await fs.readFile(filePath, "utf-8")
-            })
-        }
+		for (const fileName of fileNames) {
+			const filePath = `${frameworkPath}/${fileName}`;
+			const ext = nodePath.parse(filePath).ext.split('.').pop();
+			files.push({
+				path: filePath,
+				fileName,
+				ext,
+				content: await fs.readFile(filePath, 'utf-8'),
+			});
+		}
 
-        frameworkSections.push({
-            dirName: frameworkDir,
-            path: frameworkPath,
-            files,
-            playgroundURL: generatePlaygroundURL(frameworkDir, files)
-        })
-    }
+		frameworkSections.push({
+			dirName: frameworkDir,
+			path: frameworkPath,
+			files,
+			playgroundURL: generatePlaygroundURL(frameworkDir, files),
+		});
+	}
 
-    
-    sections.push({
-        id: kebabCase(title),
-        path,
-        dirName,
-        title,
-        frameworkSections
-    })
+	sections.push({
+		id: kebabCase(title),
+		path,
+		dirName,
+		title,
+		frameworkSections,
+	});
 }
 
-function getSectionFiles(section, framework){
-  return section.frameworkSections.find((f) => f.dirName === framework.id)?.files
+function getSectionFiles(section, framework) {
+	return section.frameworkSections.find((f) => f.dirName === framework.id)?.files;
 }
 
-function getSectionMarkdownFiles(section, framework){
-  return getSectionFiles(section, framework)?.filter(f => f.ext === "md")
+function getSectionMarkdownFiles(section, framework) {
+	return getSectionFiles(section, framework)?.filter((f) => f.ext === 'md');
 }
 
-function getSectionCodeFiles(section, framework){
-  const files = getSectionFiles(section, framework)?.filter(f => f.ext !== "md")
-  if(files?.length > 0 && typeof framework.filesSorter === 'function'){
-    return framework.filesSorter(files)
-  } else {
-    return files
-  }
+function getSectionCodeFiles(section, framework) {
+	const files = getSectionFiles(section, framework)?.filter((f) => f.ext !== 'md');
+	if (files?.length > 0 && typeof framework.filesSorter === 'function') {
+		return framework.filesSorter(files);
+	} else {
+		return files;
+	}
 }
 
-function getFrameworkSectionPlaygroundURL(section, framework){
-  return section.frameworkSections.find((f) => f.dirName === framework.id)?.playgroundURL
+function getFrameworkSectionPlaygroundURL(section, framework) {
+	return section.frameworkSections.find((f) => f.dirName === framework.id)?.playgroundURL;
 }
 ---
+
 <Title as="h1" content={dirNameToTitle(sectionId)} />
 
 {
-  sections.map((section) => (
-    <>
-      <Title as="h2" content={section.title} />
-      <div class="grid grid-cols-1 2xl:grid-cols-2 gap-10" style="margin-top: 1rem;">
-        {FRAMEWORKS.map((framework) => (
-          <div x-show={`$store.frameworksSelected.has('${framework.id}')`} style="margin-top: 0rem;">
-            <div class="flex justify-between items-center space-x-3">
-              <h3 style="margin-top: 0rem; margin-bottom: 0rem;">
-                <FrameworkLabel id={framework.id} />
-              </h3>
-              <div class="flex items-center space-x-3">
-                {getFrameworkSectionPlaygroundURL(section, framework) && 
-                  <a href={getFrameworkSectionPlaygroundURL(section, framework)} target="_blank">
-                    <button class="opacity-50 hover:opacity-100 bg-gray-800 hover:bg-gray-700 py-1 px-1.5 rounded transition-all" title={`Open playground for ${framework.title}`} aria-label={`Open playground for ${framework.title}`} >
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                    </button>
-                  </a>
-                }
-                <button class="opacity-50 hover:opacity-100 bg-gray-800 hover:bg-gray-700 py-1 px-1.5 rounded transition-all" title={`Hide ${framework.title} snippets`} aria-label={`Hide ${framework.title} snippets`} x-on:click={`$store.frameworksSelected.hide('${framework.id}')`}>
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-            <div class="mt-2">
-              {getSectionMarkdownFiles(section, framework)?.length > 0 && 
-                    <div>
-                      {getSectionMarkdownFiles(section, framework).map((file) => (
-                            <Markdown set:html={file.content} />
-                      ))}
-                    </div>
-              }
-              
-              {getSectionCodeFiles(section, framework)?.length > 0 && (
-                <div x-data={`{ filenameSelected: '${getSectionCodeFiles(section, framework)[0].fileName}' }`}>
-                  <div class="flex space-x-1 items-center ml-0 overflow-x-auto">
-                    {getSectionCodeFiles(section, framework).map((file) =>(
-                        <button class="bg-[#0d1117] py-1.5 px-3 font-medium flex-shrink-0 text-xs rounded-t inline-block" x-bind:class={`filenameSelected === '${file.fileName}' ? '' : 'opacity-60'`} x-on:click={`filenameSelected = '${file.fileName}'`}>
-                          {file.fileName}
-                        </button>
-                    ))}
-                  </div>
-                  
-                  <div>
-                      {getSectionCodeFiles(section, framework).map((file) => (
-                        <div x-show={`filenameSelected === '${file.fileName}'`}>
-                          <CodeViewer path={file.path} editHref={`https://github.com/matschik/component-party/tree/main/${sectionRelativePath}/${section.dirName}/${framework.id}/${file.fileName}`} />
-                        </div>
-                      ))}
-                  </div>
-                </div>)
-              }
-              {!(getSectionFiles(section, framework)?.length) && 
-                <div class="">
-                  <div class="bg-gray-800 text-white rounded-md mx-auto">
-                    <div class="text-center py-8 px-4 sm:px-6">
-                      <div>
-                        <span class="block text-2xl tracking-tight font-bold">Missing snippet</span>
-                        <span class="block text-lg mt-1 font-semibold">Help us to improve Component Party 🎉</span>
-                      </div>
-                      <div class="mt-6 flex justify-center">
-                        <div class="inline-flex rounded-md shadow">
-                          <a href={`https://github.com/matschik/component-party/tree/main/${sectionRelativePath}/${section.dirName}`} class="inline-flex space-x-2 items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-[#161b22] hover:bg-[#161b22]/80 no-underline"> 
-                            <span>Contribute on Github</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5 text-white"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg>
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                </div>
-                </div>
+	sections.map((section) => (
+		<>
+			<Title as="h2" content={section.title} />
+			<div class="grid grid-cols-1 2xl:grid-cols-2 gap-10" style="margin-top: 1rem;">
+				{FRAMEWORKS.map((framework) => (
+					<div x-show={`$store.frameworksSelected.has('${framework.id}')`} style="margin-top: 0rem;">
+						<div class="flex justify-between items-center space-x-3">
+							<h3 style="margin-top: 0rem; margin-bottom: 0rem;">
+								<FrameworkLabel id={framework.id} />
+							</h3>
+							<div class="flex items-center space-x-3">
+								{getFrameworkSectionPlaygroundURL(section, framework) && (
+									<a href={getFrameworkSectionPlaygroundURL(section, framework)} target="_blank">
+										<button
+											class="opacity-50 hover:opacity-100 bg-gray-800 hover:bg-gray-700 py-1 px-1.5 rounded transition-all"
+											title={`Open playground for ${framework.title}`}
+											aria-label={`Open playground for ${framework.title}`}
+										>
+											<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+												<path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+												<path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+											</svg>
+										</button>
+									</a>
+								)}
+								<button
+									class="opacity-50 hover:opacity-100 bg-gray-800 hover:bg-gray-700 py-1 px-1.5 rounded transition-all"
+									title={`Hide ${framework.title} snippets`}
+									aria-label={`Hide ${framework.title} snippets`}
+									x-on:click={`$store.frameworksSelected.hide('${framework.id}')`}
+								>
+									<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+										<path
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"
+										/>
+									</svg>
+								</button>
+							</div>
+						</div>
+						<div class="mt-2">
+							{getSectionMarkdownFiles(section, framework)?.length > 0 && (
+								<div>
+									{getSectionMarkdownFiles(section, framework).map((file) => (
+										<Markdown set:html={file.content || ''} />
+									))}
+								</div>
+							)}
 
-              }
-            </div>
-          </div>
-        ))}
-      </div>
-    </>
-  ))
+							{getSectionCodeFiles(section, framework)?.length > 0 && (
+								<div x-data={`{ filenameSelected: '${getSectionCodeFiles(section, framework)[0].fileName}' }`}>
+									<div class="flex space-x-1 items-center ml-0 overflow-x-auto">
+										{getSectionCodeFiles(section, framework).map((file) => (
+											<button
+												class="bg-[#0d1117] py-1.5 px-3 font-medium flex-shrink-0 text-xs rounded-t inline-block"
+												x-bind:class={`filenameSelected === '${file.fileName}' ? '' : 'opacity-60'`}
+												x-on:click={`filenameSelected = '${file.fileName}'`}
+											>
+												{file.fileName}
+											</button>
+										))}
+									</div>
+
+									<div>
+										{getSectionCodeFiles(section, framework).map((file) => (
+											<div x-show={`filenameSelected === '${file.fileName}'`}>
+												<CodeViewer
+													path={file.path}
+													editHref={`https://github.com/matschik/component-party/tree/main/${sectionRelativePath}/${section.dirName}/${framework.id}/${file.fileName}`}
+												/>
+											</div>
+										))}
+									</div>
+								</div>
+							)}
+							{!getSectionFiles(section, framework)?.length && (
+								<div class="">
+									<div class="bg-gray-800 text-white rounded-md mx-auto">
+										<div class="text-center py-8 px-4 sm:px-6">
+											<div>
+												<span class="block text-2xl tracking-tight font-bold">Missing snippet</span>
+												<span class="block text-lg mt-1 font-semibold">Help us to improve Component Party 🎉</span>
+											</div>
+											<div class="mt-6 flex justify-center">
+												<div class="inline-flex rounded-md shadow">
+													<a
+														href={`https://github.com/matschik/component-party/tree/main/${sectionRelativePath}/${section.dirName}`}
+														class="inline-flex space-x-2 items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-[#161b22] hover:bg-[#161b22]/80 no-underline"
+													>
+														<span>Contribute on Github</span>
+														<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5 text-white">
+															<path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+														</svg>
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							)}
+						</div>
+					</div>
+				))}
+			</div>
+		</>
+	))
 }
