@@ -12,7 +12,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "prettier": "prettier --ignore-path .gitignore --plugin-search-dir=. . --check",
-    "prettier:fix": "pnpm run prettier -- --write .",
+    "prettier:fix": "prettier --ignore-path .gitignore --plugin-search-dir=. --write .",
     "format": "pnpm run prettier:fix && pnpm run lint:fix",
     "prepare": "husky install"
   },
@@ -63,6 +63,7 @@
     "pkg-dir": "^6.0.1",
     "postcss": "^8.4.16",
     "prettier": "^2.7.1",
+    "prettier-plugin-astro": "^0.5.0",
     "prettier-plugin-svelte": "^2.7.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",

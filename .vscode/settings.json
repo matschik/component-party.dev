@@ -8,15 +8,5 @@
   "[svelte]": {
     "editor.defaultFormatter": "svelte.svelte-vscode"
   },
-  "cSpell.words": [
-    "alpinejs",
-    "astro",
-    "astrojs",
-    "matschik",
-    "mdast",
-    "pnpm",
-    "qwik",
-    "shiki",
-    "webp"
-  ]
+  "cSpell.words": ["alpinejs", "astro", "astrojs", "matschik", "mdast", "pnpm", "qwik", "shiki", "webp"]
 }

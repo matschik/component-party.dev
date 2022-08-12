@@ -8,19 +8,17 @@ import astroHighlightCode from '@/components/CodeHighlight/astroHighlightCode.js
 const { path, lang, theme = 'github-dark', wrap = false } = Astro.props;
 
 // check existence
-await fs.access(path)
+await fs.access(path);
 
-const fileCodeCache = await createFileMapCache("fileCodeCache");
+const fileCodeCache = await createFileMapCache('fileCodeCache');
 
-let html = await fileCodeCache.get(path)
-if(!html){
-    const fileExt = nodePath.parse(path).ext.split(".").pop()
-    const fileContent = await fs.readFile(path, "utf-8")
-    html = await astroHighlightCode({ code: fileContent, lang: lang || fileExt, theme, wrap })
-    fileCodeCache.set(path, html)
+let html = await fileCodeCache.get(path);
+if (!html) {
+	const fileExt = nodePath.parse(path).ext.split('.').pop();
+	const fileContent = await fs.readFile(path, 'utf-8');
+	html = await astroHighlightCode({ code: fileContent, lang: lang || fileExt, theme, wrap });
+	fileCodeCache.set(path, html);
 }
-
-
-
 ---
+
 <Fragment set:html={html} />

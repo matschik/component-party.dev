@@ -1,7 +1,7 @@
 ---
 import FRAMEWORKS from '@/frameworks.mjs';
 
-const {id, size = 20} = Astro.props
+const { id, size = 20 } = Astro.props;
 
 const framework = FRAMEWORKS.find((f) => f.id === id);
 
@@ -9,6 +9,6 @@ const baseURL = import.meta.env.MODE === 'development' ? '' : 'https://raw.githu
 ---
 
 <div class="flex items-center space-x-1">
-    {framework?.img && <img src={baseURL + framework.img} alt={framework.id} width={size} height={size} class="inline mr-[5px] mb-0 mt-0" />}
-    <span class="flex-shrink-0">{framework.title}</span>
+	{framework?.img && <img src={baseURL + framework.img} alt={framework.id} width={size} height={size} class="inline mr-[5px] mb-0 mt-0" />}
+	<span class="flex-shrink-0">{framework.title}</span>
 </div>

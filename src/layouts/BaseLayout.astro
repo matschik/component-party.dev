@@ -6,25 +6,32 @@ import FrameworkLabel from '@/components/FrameworkLabel.astro';
 
 const tree = await generateContentTree();
 ---
-<BaseLayout tree={tree}>
-    <script src="@/components/scripts/alpine-init.js"></script>
-    <div x-init="() => { $el.classList.remove('hidden');$el.classList.add('block') }" class="hidden">
-        <div class="flex px-6 lg:px-20 py-2 sticky top-0 z-10 w-full backdrop-blur bg-gray-900/80 border-b border-gray-700 whitespace-nowrap overflow-x-auto">
-            {FRAMEWORKS.map((framework) => (
-                <button
-                    data-framework-button-show={framework.id}
-                    title={`Display ${framework.title}`}
-                    class="text-sm flex-shrink-0 rounded border border-gray-700 px-3 py-1 border-opacity-50 bg-gray-900 hover:bg-gray-800 transition-all mr-2"
-                    x-bind:class={`$store.frameworksSelected.has('${framework.id}') ? 'border-blue-500' : 'opacity-70'`}
-                    x-on:click={`$store.frameworksSelected.toggle('${framework.id}')`}
-                >
-                    <FrameworkLabel id={framework.id} size={15} />
-                </button>
-            ))}
-        </div>
 
-        <main id="main-content" class="px-6 md:px-14 lg:px-20 pt-10 prose prose-sm prose-invert prose-h1:scroll-mt-[5rem] prose-pre:mt-0 prose-h2:scroll-mt-[5rem]" style="max-width: 100%;">
-            <slot />
-        </main>
-    </div>
+<BaseLayout tree={tree}>
+	<script src="@/components/scripts/alpine-init.js"></script>
+	<div x-init="() => { $el.classList.remove('hidden');$el.classList.add('block') }" class="hidden">
+		<div class="flex px-6 lg:px-20 py-2 sticky top-0 z-10 w-full backdrop-blur bg-gray-900/80 border-b border-gray-700 whitespace-nowrap overflow-x-auto">
+			{
+				FRAMEWORKS.map((framework) => (
+					<button
+						data-framework-button-show={framework.id}
+						title={`Display ${framework.title}`}
+						class="text-sm flex-shrink-0 rounded border border-gray-700 px-3 py-1 border-opacity-50 bg-gray-900 hover:bg-gray-800 transition-all mr-2"
+						x-bind:class={`$store.frameworksSelected.has('${framework.id}') ? 'border-blue-500' : 'opacity-70'`}
+						x-on:click={`$store.frameworksSelected.toggle('${framework.id}')`}
+					>
+						<FrameworkLabel id={framework.id} size={15} />
+					</button>
+				))
+			}
+		</div>
+
+		<main
+			id="main-content"
+			class="px-6 md:px-14 lg:px-20 pt-10 prose prose-sm prose-invert prose-h1:scroll-mt-[5rem] prose-pre:mt-0 prose-h2:scroll-mt-[5rem]"
+			style="max-width: 100%;"
+		>
+			<slot />
+		</main>
+	</div>
 </BaseLayout>
