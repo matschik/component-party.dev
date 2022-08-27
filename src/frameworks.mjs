@@ -175,17 +175,17 @@ export default [
 				es2021: true,
 				node: true,
 			},
+			parser: '@typescript-eslint/parser',
 			parserOptions: {
 				ecmaFeatures: {
-				  jsx: true,
+					jsx: true,
 				},
-			  },
+			},
 			files: ['**/qwik/**'],
-			extends: ['eslint:recommended',
-			'plugin:qwik/recommended'],
+			extends: ['eslint:recommended', 'plugin:qwik/recommended'],
 			rules: {
-				'qwik/valid-lexical-scope': 'off'
-			}
+				'qwik/valid-lexical-scope': 'off',
+			},
 		},
 		playgroundURL: 'https://qwik.builder.io/playground',
 		documentationURL: 'https://qwik.builder.io/docs/overview',
