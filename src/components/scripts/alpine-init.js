@@ -2,6 +2,7 @@ import Alpine from 'alpinejs';
 
 Alpine.store('frameworksSelected', {
 	_frameworksSelectedProxy: createLocaleStorageProxy('frameworks_display'),
+	_urlStorage: createUrlStorage('f'),
 	_selectedIds: [],
 	init() {
 		// set default value of frameworksSelectedProxy
@@ -11,7 +12,8 @@ Alpine.store('frameworksSelected', {
 				this._frameworksSelectedProxy[i] = initialFrameworkIds[i];
 			}
 		}
-		this._selectedIds = [...this._frameworksSelectedProxy];
+		const frameworksFromUrl = this._urlStorage.get();
+		this._selectedIds = frameworksFromUrl.length ? [...frameworksFromUrl] : [...this._frameworksSelectedProxy];
 	},
 	has(fmwId) {
 		return this._selectedIds.includes(fmwId);
@@ -24,6 +26,8 @@ Alpine.store('frameworksSelected', {
 			const frameworkIndex = this._frameworksSelectedProxy.indexOf(fmwId);
 			delete this._frameworksSelectedProxy[frameworkIndex];
 		}
+
+		this._urlStorage.set(this._frameworksSelectedProxy);
 		this._selectedIds = [...this._frameworksSelectedProxy];
 	},
 	show(fmwId) {
@@ -31,6 +35,7 @@ Alpine.store('frameworksSelected', {
 			this._frameworksSelectedProxy.push(fmwId);
 		}
 
+		this._urlStorage.set(this._frameworksSelectedProxy);
 		this._selectedIds = [...this._frameworksSelectedProxy];
 	},
 });
@@ -81,6 +86,21 @@ function createLocaleStorage(k) {
 		},
 		remove() {
 			localStorage.removeItem(k);
+		},
+	};
+}
+
+function createUrlStorage(k) {
+	return {
+		get() {
+			const url = new URL(window.location.href);
+			const frameworkQuery = url.searchParams.get(k);
+			return frameworkQuery ? frameworkQuery.split('-') : [];
+		},
+		set(ids) {
+			const url = new URL(window.location.href);
+			url.searchParams.set(k, ids.join('-'));
+			window.history.replaceState(null, document.title, url.toString());
 		},
 	};
 }
