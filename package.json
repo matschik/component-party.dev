@@ -36,7 +36,7 @@
     "@astrojs/tailwind": "^1.0.0",
     "@babel/eslint-parser": "^7.18.9",
     "@babel/plugin-proposal-decorators": "^7.18.10",
-    "@builder.io/qwik": "0.0.100",
+    "@builder.io/qwik": "0.10.0",
     "@matschik/lz-string": "^0.0.2",
     "@tailwindcss/typography": "^0.5.4",
     "@types/mdast": "^3.0.10",
