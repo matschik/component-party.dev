@@ -14,7 +14,7 @@ export default function App() {
 				<p>Fetching users...</p>
 			</Match>
 			<Match when={data.error}>
-				<p>An error occurred while fetchint users</p>
+				<p>An error occurred while fetching users</p>
 			</Match>
 			<Match when={users()}>
 				<ul>
