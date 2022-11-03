@@ -1,5 +1,4 @@
-import { Switch, Match } from 'solid-js/web';
-import { createSignal } from 'solid-js';
+import { createSignal, Switch, Match } from 'solid-js';
 
 const TRAFFIC_LIGHTS = ['red', 'orange', 'green'];
 

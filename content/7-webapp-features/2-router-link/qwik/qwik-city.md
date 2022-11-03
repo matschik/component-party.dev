@@ -15,7 +15,7 @@ const Home = component$(() => {
       </li>
     </ul>
   );
-})
+});
 
 export default Home;
 ```

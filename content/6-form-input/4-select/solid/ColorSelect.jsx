@@ -1,5 +1,4 @@
-import { For } from 'solid-js/web';
-import { createSignal } from 'solid-js';
+import { createSignal, For } from 'solid-js';
 
 const colors = [
 	{ id: 1, text: 'red' },
