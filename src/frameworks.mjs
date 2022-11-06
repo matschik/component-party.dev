@@ -33,12 +33,29 @@ export default [
 			return [files.find(({ fileName }) => fileName === 'App.jsx'), ...(files.filter(({ fileName }) => fileName !== 'App.jsx') || [])].filter((x) => x);
 		},
 	},
+  {
+		id: 'vue2',
+		title: 'Vue 2',
+		img: 'framework/vue.svg',
+		eslint: {
+			files: ['**/vue2/*.vue'],
+			extends: ['eslint:recommended', 'plugin:vue/recommended'],
+			rules: {
+				'vue/multi-word-component-names': 'off'
+			},
+		},
+		playgroundURL: 'https://sfc.vuejs.org',
+		documentationURL: 'https://vuejs.org/guide',
+		filesSorter(files) {
+			return [files.find(({ fileName }) => fileName === 'App.vue'), ...(files.filter(({ fileName }) => fileName !== 'App.vue') || [])].filter((x) => x);
+		},
+	},
 	{
 		id: 'vue3',
 		title: 'Vue 3',
 		img: 'framework/vue.svg',
 		eslint: {
-			files: ['*.vue'],
+			files: ['**/vue3/*.vue'],
 			env: {
 				'vue/setup-compiler-macros': true,
 			},
