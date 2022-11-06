@@ -3,9 +3,7 @@
 
 	let inputElement;
 
-	onMount(() => {
-		inputElement.focus();
-	});
+	onMount(() => inputElement.focus());
 </script>
 
 <input bind:this={inputElement} />
