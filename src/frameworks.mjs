@@ -44,7 +44,7 @@ export default [
 				'vue/multi-word-component-names': 'off'
 			},
 		},
-		playgroundURL: 'https://sfc.vuejs.org',
+		playgroundURL: '',
 		documentationURL: 'https://vuejs.org/guide',
 		filesSorter(files) {
 			return [files.find(({ fileName }) => fileName === 'App.vue'), ...(files.filter(({ fileName }) => fileName !== 'App.vue') || [])].filter((x) => x);
