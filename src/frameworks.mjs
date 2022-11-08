@@ -33,7 +33,7 @@ export default [
 			return [files.find(({ fileName }) => fileName === 'App.jsx'), ...(files.filter(({ fileName }) => fileName !== 'App.jsx') || [])].filter((x) => x);
 		},
 	},
-  {
+	{
 		id: 'vue2',
 		title: 'Vue 2',
 		img: 'framework/vue.svg',
@@ -41,7 +41,7 @@ export default [
 			files: ['**/vue2/*.vue'],
 			extends: ['eslint:recommended', 'plugin:vue/recommended'],
 			rules: {
-				'vue/multi-word-component-names': 'off'
+				'vue/multi-word-component-names': 'off',
 			},
 		},
 		playgroundURL: '',

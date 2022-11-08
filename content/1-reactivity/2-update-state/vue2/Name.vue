@@ -5,7 +5,7 @@ export default {
 			name: 'John',
 		};
 	},
-	create() {
+	created() {
 		this.name = 'Jane';
 	},
 };
