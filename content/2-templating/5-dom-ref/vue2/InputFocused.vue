@@ -1,8 +1,8 @@
 <script>
 export default {
-	mounted() {
-		this.$refs.inputElement.focus();
-	},
+  mounted() {
+    this.$refs.inputElement.focus();
+  },
 };
 </script>
 

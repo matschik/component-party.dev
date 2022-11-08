@@ -1,10 +1,10 @@
 <script>
 export default {
-	data() {
-		return {
-			colors: ['red', 'green', 'blue'],
-		};
-	},
+  data() {
+    return {
+      colors: ['red', 'green', 'blue'],
+    };
+  },
 };
 </script>
 

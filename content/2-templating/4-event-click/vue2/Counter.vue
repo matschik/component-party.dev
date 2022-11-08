@@ -1,15 +1,15 @@
 <script>
 export default {
-	data() {
-		return {
-			count: 0,
-		};
-	},
-	methods: {
-		incrementCount() {
-			this.count++;
-		},
-	},
+  data() {
+    return {
+      count: 0,
+    };
+  },
+  methods: {
+    incrementCount() {
+      this.count++;
+    },
+  },
 };
 </script>
 

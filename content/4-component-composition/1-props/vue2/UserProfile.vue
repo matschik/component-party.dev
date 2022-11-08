@@ -1,27 +1,27 @@
 <script>
 export default {
-	props: {
-		name: {
-			type: String,
-			required: true,
-			default: '',
-		},
-		age: {
-			type: Number,
-			required: true,
-			default: null,
-		},
-		favoriteColors: {
-			type: Array,
-			required: true,
-			default: () => [],
-		},
-		isAvailable: {
-			type: Boolean,
-			required: true,
-			default: false,
-		},
-	},
+  props: {
+    name: {
+      type: String,
+      required: true,
+      default: '',
+    },
+    age: {
+      type: Number,
+      required: true,
+      default: null,
+    },
+    favoriteColors: {
+      type: Array,
+      required: true,
+      default: () => [],
+    },
+    isAvailable: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+  },
 };
 </script>
 

@@ -1,25 +1,25 @@
 <script>
 export default {
-	data() {
-		return {
-			TRAFFIC_LIGHTS: ['red', 'orange', 'green'],
-			lightIndex: 0,
-		};
-	},
-	computed: {
-		light() {
-			return this.TRAFFIC_LIGHTS[this.lightIndex];
-		},
-	},
-	methods: {
-		nextLight() {
-			if (this.lightIndex + 1 > this.TRAFFIC_LIGHTS.length - 1) {
-				this.lightIndex = 0;
-			} else {
-				this.lightIndex++;
-			}
-		},
-	},
+  data() {
+    return {
+      TRAFFIC_LIGHTS: ['red', 'orange', 'green'],
+      lightIndex: 0,
+    };
+  },
+  computed: {
+    light() {
+      return this.TRAFFIC_LIGHTS[this.lightIndex];
+    },
+  },
+  methods: {
+    nextLight() {
+      if (this.lightIndex + 1 > this.TRAFFIC_LIGHTS.length - 1) {
+        this.lightIndex = 0;
+      } else {
+        this.lightIndex++;
+      }
+    },
+  },
 };
 </script>
 

@@ -1,13 +1,13 @@
 <script>
 export default {
-	data() {
-		return {
-			pageTitle: '',
-		};
-	},
-	mounted() {
-		this.pageTitle = document.title;
-	},
+  data() {
+    return {
+      pageTitle: '',
+    };
+  },
+  mounted() {
+    this.pageTitle = document.title;
+  },
 };
 </script>
 

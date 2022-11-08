@@ -1,10 +1,10 @@
 <script>
 export default {
-	data() {
-		return {
-			name: 'John',
-		};
-	},
+  data() {
+    return {
+      name: 'John',
+    };
+  },
 };
 </script>
 

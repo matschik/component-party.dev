@@ -1,10 +1,10 @@
 <script>
 export default {
-	data() {
-		return {
-			text: 'Hello World',
-		};
-	},
+  data() {
+    return {
+      text: 'Hello World',
+    };
+  },
 };
 </script>
 

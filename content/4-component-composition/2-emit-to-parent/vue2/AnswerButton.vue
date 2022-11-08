@@ -1,13 +1,13 @@
 <script>
 export default {
-	methods: {
-		clickYes() {
-			this.$emit('yes');
-		},
-		clickNo() {
-			this.$emit('no');
-		},
-	},
+  methods: {
+    clickYes() {
+      this.$emit('yes');
+    },
+    clickNo() {
+      this.$emit('no');
+    },
+  },
 };
 </script>
 

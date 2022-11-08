@@ -1,13 +1,13 @@
 <script>
 export default {
-	data() {
-		return {
-			name: 'John',
-		};
-	},
-	created() {
-		this.name = 'Jane';
-	},
+  data() {
+    return {
+      name: 'John',
+    };
+  },
+  created() {
+    this.name = 'Jane';
+  },
 };
 </script>
 

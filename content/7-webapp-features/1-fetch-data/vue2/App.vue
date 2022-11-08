@@ -1,31 +1,31 @@
 <script>
 export default {
-	data() {
-		return {
-			isLoading: false,
-			error: undefined,
-			users: undefined,
-		};
-	},
-	mounted() {
-		this.fetchData();
-	},
-	methods: {
-		async fetchData() {
-			this.isLoading = true;
-			try {
-				const response = await fetch('https://randomuser.me/api/?results=3');
-				const { results: users } = await response.json();
-				this.users = users;
-				this.error = undefined;
-			} catch (error) {
-				this.error = error;
-			} finally {
-				this.users = undefined;
-				this.isLoading = false;
-			}
-		},
-	},
+  data() {
+    return {
+      isLoading: false,
+      error: undefined,
+      users: undefined,
+    };
+  },
+  mounted() {
+    this.fetchData();
+  },
+  methods: {
+    async fetchData() {
+      this.isLoading = true;
+      try {
+        const response = await fetch('https://randomuser.me/api/?results=3');
+        const { results: users } = await response.json();
+        this.users = users;
+        this.error = undefined;
+      } catch (error) {
+        this.error = error;
+      } finally {
+        this.users = undefined;
+        this.isLoading = false;
+      }
+    },
+  },
 };
 </script>
 

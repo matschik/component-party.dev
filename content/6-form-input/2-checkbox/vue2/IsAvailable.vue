@@ -1,10 +1,10 @@
 <script>
 export default {
-	data() {
-		return {
-			isAvailable: true,
-		};
-	},
+  data() {
+    return {
+      isAvailable: true,
+    };
+  },
 };
 </script>
 

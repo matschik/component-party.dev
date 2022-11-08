@@ -1,22 +1,22 @@
 <script>
 import AnswerButton from './AnswerButton.vue';
 export default {
-	components: {
-		AnswerButton,
-	},
-	data() {
-		return {
-			canCome: true,
-		};
-	},
-	methods: {
-		onAnswerNo() {
-			this.canCome = false;
-		},
-		onAnswerYes() {
-			this.canCome = true;
-		},
-	},
+  components: {
+    AnswerButton,
+  },
+  data() {
+    return {
+      canCome: true,
+    };
+  },
+  methods: {
+    onAnswerNo() {
+      this.canCome = false;
+    },
+    onAnswerYes() {
+      this.canCome = true;
+    },
+  },
 };
 </script>
 

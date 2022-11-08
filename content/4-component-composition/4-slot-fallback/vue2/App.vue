@@ -1,9 +1,9 @@
 <script>
 import FunnyButton from './FunnyButton.vue';
 export default {
-	components: {
-		FunnyButton,
-	},
+  components: {
+    FunnyButton,
+  },
 };
 </script>
 

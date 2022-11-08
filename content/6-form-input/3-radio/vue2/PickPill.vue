@@ -1,10 +1,10 @@
 <script>
 export default {
-	data() {
-		return {
-			picked: 'red',
-		};
-	},
+  data() {
+    return {
+      picked: 'red',
+    };
+  },
 };
 </script>
 
