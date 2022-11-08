@@ -1,5 +1,11 @@
-<script setup>
-const colors = ['red', 'green', 'blue'];
+<script>
+export default {
+	data() {
+		return {
+			colors: ['red', 'green', 'blue'],
+		};
+	},
+};
 </script>
 
 <template>
