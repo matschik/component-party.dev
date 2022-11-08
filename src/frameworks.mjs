@@ -45,7 +45,7 @@ export default [
 			},
 		},
 		playgroundURL: '',
-		documentationURL: 'https://vuejs.org/guide',
+		documentationURL: 'https://v2.vuejs.org',
 		filesSorter(files) {
 			return [files.find(({ fileName }) => fileName === 'App.vue'), ...(files.filter(({ fileName }) => fileName !== 'App.vue') || [])].filter((x) => x);
 		},
