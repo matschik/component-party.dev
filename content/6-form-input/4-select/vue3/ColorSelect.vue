@@ -1,13 +1,13 @@
 <script setup>
-import { ref } from 'vue';
+import { ref } from "vue";
 
 const selectedColorId = ref(2);
 
 const colors = [
-	{ id: 1, text: 'red' },
-	{ id: 2, text: 'blue' },
-	{ id: 3, text: 'green' },
-	{ id: 4, text: 'gray', isDisabled: true },
+  { id: 1, text: "red" },
+  { id: 2, text: "blue" },
+  { id: 3, text: "green" },
+  { id: 4, text: "gray", isDisabled: true },
 ];
 </script>
 

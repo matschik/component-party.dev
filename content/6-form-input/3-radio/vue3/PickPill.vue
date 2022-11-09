@@ -1,7 +1,7 @@
 <script setup>
-import { ref } from 'vue';
+import { ref } from "vue";
 
-const picked = ref('red');
+const picked = ref("red");
 </script>
 
 <template>

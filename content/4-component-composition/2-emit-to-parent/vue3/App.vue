@@ -1,15 +1,15 @@
 <script setup>
-import { ref } from 'vue';
-import AnswerButton from './AnswerButton.vue';
+import { ref } from "vue";
+import AnswerButton from "./AnswerButton.vue";
 
 let canCome = ref(true);
 
 function onAnswerNo() {
-	canCome.value = false;
+  canCome.value = false;
 }
 
 function onAnswerYes() {
-	canCome.value = true;
+  canCome.value = true;
 }
 </script>
 
@@ -20,6 +20,6 @@ function onAnswerYes() {
     @no="onAnswerNo"
   />
   <p style="font-size: 50px">
-    {{ canCome ? '😀' : '😥' }}
+    {{ canCome ? "😀" : "😥" }}
   </p>
 </template>

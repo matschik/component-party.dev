@@ -1,16 +1,16 @@
 <script setup>
-import { ref, computed } from 'vue';
-const TRAFFIC_LIGHTS = ['red', 'orange', 'green'];
+import { ref, computed } from "vue";
+const TRAFFIC_LIGHTS = ["red", "orange", "green"];
 const lightIndex = ref(0);
 
 const light = computed(() => TRAFFIC_LIGHTS[lightIndex.value]);
 
 function nextLight() {
-	if (lightIndex.value + 1 > TRAFFIC_LIGHTS.length - 1) {
-		lightIndex.value = 0;
-	} else {
-		lightIndex.value++;
-	}
+  if (lightIndex.value + 1 > TRAFFIC_LIGHTS.length - 1) {
+    lightIndex.value = 0;
+  } else {
+    lightIndex.value++;
+  }
 }
 </script>
 

@@ -1,17 +1,17 @@
-import { LitElement, html } from 'lit';
-import { customElement, state } from 'lit/decorators.js';
+import { LitElement, html } from "lit";
+import { customElement, state } from "lit/decorators.js";
 
-@customElement('x-name')
+@customElement("x-name")
 export class XName extends LitElement {
-	@state()
-	name = 'John';
+  @state()
+  name = "John";
 
-	constructor() {
-		super();
-		this.name = 'Jane';
-	}
+  constructor() {
+    super();
+    this.name = "Jane";
+  }
 
-	render() {
-		return html`<h1>Hello ${this.name}!</h1>`;
-	}
+  render() {
+    return html`<h1>Hello ${this.name}!</h1>`;
+  }
 }

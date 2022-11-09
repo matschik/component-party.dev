@@ -1,5 +1,5 @@
 <script>
-import AnswerButton from './AnswerButton.vue';
+import AnswerButton from "./AnswerButton.vue";
 export default {
   components: {
     AnswerButton,
@@ -28,7 +28,7 @@ export default {
       @no="onAnswerNo"
     />
     <p style="font-size: 50px">
-      {{ canCome ? '😀' : '😥' }}
+      {{ canCome ? "😀" : "😥" }}
     </p>
   </div>
 </template>

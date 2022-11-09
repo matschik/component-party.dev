@@ -1,5 +1,5 @@
 <script>
-import UserProfile from './UserProfile.vue';
+import UserProfile from "./UserProfile.vue";
 
 export default {
   components: {

@@ -3,12 +3,12 @@ Built-in <a href="https://guides.emberjs.com/release/routing/linking-between-rou
 ```hbs
 <ul>
   <li>
-    <LinkTo @route='index'>
+    <LinkTo @route="index">
       Home
     </LinkTo>
   </li>
   <li>
-    <LinkTo @route='about'>
+    <LinkTo @route="about">
       About us
     </LinkTo>
   </li>

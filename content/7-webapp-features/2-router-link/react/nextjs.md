@@ -1,7 +1,7 @@
 With <a href="https://nextjs.org/docs/api-reference/next/link">NextJS</a>
 
 ```jsx
-import Link from 'next/link';
+import Link from "next/link";
 
 export default function Home() {
   return (

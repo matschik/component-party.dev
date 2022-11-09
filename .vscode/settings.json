@@ -4,9 +4,18 @@
   "editor.formatOnSave": false,
   // Runs Prettier, then ESLint
   "editor.codeActionsOnSave": ["source.formatDocument", "source.fixAll.eslint"],
-  "vetur.validation.template": false,
   "[svelte]": {
     "editor.defaultFormatter": "svelte.svelte-vscode"
   },
-  "cSpell.words": ["alpinejs", "astro", "astrojs", "matschik", "mdast", "pnpm", "qwik", "shiki", "webp"]
+  "cSpell.words": [
+    "alpinejs",
+    "astro",
+    "astrojs",
+    "matschik",
+    "mdast",
+    "pnpm",
+    "qwik",
+    "shiki",
+    "webp"
+  ]
 }

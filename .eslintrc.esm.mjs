@@ -1,4 +1,4 @@
-import FRAMEWORKS from './src/frameworks.mjs';
+import FRAMEWORKS from "./src/frameworks.mjs";
 
 /**
  * @type {import("eslint").Linter.Config}
@@ -6,12 +6,12 @@ import FRAMEWORKS from './src/frameworks.mjs';
 export default {
   parserOptions: {
     ecmaVersion: 2022,
-    sourceType: 'module',
+    sourceType: "module",
   },
   env: {
     browser: true,
   },
-  plugins: ['prettier'],
+  plugins: ["prettier"],
   overrides: FRAMEWORKS.reduce((acc, { eslint }) => {
     if (Array.isArray(eslint)) {
       acc.push(...eslint);

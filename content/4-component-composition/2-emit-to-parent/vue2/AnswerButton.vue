@@ -2,10 +2,10 @@
 export default {
   methods: {
     clickYes() {
-      this.$emit('yes');
+      this.$emit("yes");
     },
     clickNo() {
-      this.$emit('no');
+      this.$emit("no");
     },
   },
 };

@@ -1,15 +1,15 @@
 <script>
-	import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher } from "svelte";
 
-	const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher();
 
-	function clickYes() {
-		dispatch('yes');
-	}
+  function clickYes() {
+    dispatch("yes");
+  }
 
-	function clickNo() {
-		dispatch('no');
-	}
+  function clickNo() {
+    dispatch("no");
+  }
 </script>
 
 <button on:click={clickYes}> YES </button>

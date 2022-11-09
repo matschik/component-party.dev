@@ -1,5 +1,5 @@
 <script setup>
-const colors = ['red', 'green', 'blue'];
+const colors = ["red", "green", "blue"];
 </script>
 
 <template>

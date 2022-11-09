@@ -4,7 +4,7 @@ export default {
     name: {
       type: String,
       required: true,
-      default: '',
+      default: "",
     },
     age: {
       type: Number,
@@ -29,7 +29,7 @@ export default {
   <div>
     <p>My name is {{ props.name }} !</p>
     <p>My age is {{ props.age }} !</p>
-    <p>My favorite colors are {{ props.favoriteColors.join(', ') }} !</p>
-    <p>I am {{ props.isAvailable ? 'available' : 'not available' }}</p>
+    <p>My favorite colors are {{ props.favoriteColors.join(", ") }} !</p>
+    <p>I am {{ props.isAvailable ? "available" : "not available" }}</p>
   </div>
 </template>

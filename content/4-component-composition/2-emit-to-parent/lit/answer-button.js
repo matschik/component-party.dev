@@ -1,20 +1,20 @@
-import { LitElement, html } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { LitElement, html } from "lit";
+import { customElement } from "lit/decorators.js";
 
-@customElement('answer-button')
+@customElement("answer-button")
 export class AnswerButton extends LitElement {
-	clickYes() {
-		this.dispatchEvent(new Event('yes'));
-	}
+  clickYes() {
+    this.dispatchEvent(new Event("yes"));
+  }
 
-	clickNo() {
-		this.dispatchEvent(new Event('no'));
-	}
+  clickNo() {
+    this.dispatchEvent(new Event("no"));
+  }
 
-	render() {
-		return html`
-			<button @click=${this.clickYes}>Yes</button>
-			<button @click=${this.clickNo}>No</button>
-		`;
-	}
+  render() {
+    return html`
+      <button @click=${this.clickYes}>Yes</button>
+      <button @click=${this.clickNo}>No</button>
+    `;
+  }
 }

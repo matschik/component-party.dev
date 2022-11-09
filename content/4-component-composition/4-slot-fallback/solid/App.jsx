@@ -1,10 +1,10 @@
-import FunnyButton from './FunnyButton.jsx';
+import FunnyButton from "./FunnyButton.jsx";
 
 export default function App() {
-	return (
-		<>
-			<FunnyButton />
-			<FunnyButton>I got content !</FunnyButton>
-		</>
-	);
+  return (
+    <>
+      <FunnyButton />
+      <FunnyButton>I got content !</FunnyButton>
+    </>
+  );
 }

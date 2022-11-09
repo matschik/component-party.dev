@@ -1,10 +1,10 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted } from "vue";
 
 const inputElement = ref();
 
 onMounted(() => {
-	inputElement.value.focus();
+  inputElement.value.focus();
 });
 </script>
 

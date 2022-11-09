@@ -1,22 +1,22 @@
-import { useState } from 'react';
-import AnswerButton from './AnswerButton.jsx';
+import { useState } from "react";
+import AnswerButton from "./AnswerButton.jsx";
 
 export default function App() {
-	const [canCome, setCanCome] = useState(true);
+  const [canCome, setCanCome] = useState(true);
 
-	function onAnswerNo() {
-		setCanCome(false);
-	}
+  function onAnswerNo() {
+    setCanCome(false);
+  }
 
-	function onAnswerYes() {
-		setCanCome(true);
-	}
+  function onAnswerYes() {
+    setCanCome(true);
+  }
 
-	return (
-		<>
-			<p>Can I come ?</p>
-			<AnswerButton onYes={onAnswerYes} onNo={onAnswerNo} />
-			<p style={{ fontSize: 50 }}>{canCome ? '😀' : '😥'}</p>
-		</>
-	);
+  return (
+    <>
+      <p>Can I come ?</p>
+      <AnswerButton onYes={onAnswerYes} onNo={onAnswerNo} />
+      <p style={{ fontSize: 50 }}>{canCome ? "😀" : "😥"}</p>
+    </>
+  );
 }

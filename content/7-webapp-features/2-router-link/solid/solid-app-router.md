@@ -1,7 +1,7 @@
 With [solid-app-router](https://github.com/solidjs/solid-app-router)
 
 ```jsx
-import { Link } from 'solid-app-router';
+import { Link } from "solid-app-router";
 
 export default function Home() {
   return (

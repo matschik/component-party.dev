@@ -1,5 +1,5 @@
 <script>
-	import FunnyButton from './FunnyButton.svelte';
+  import FunnyButton from "./FunnyButton.svelte";
 </script>
 
 <FunnyButton />

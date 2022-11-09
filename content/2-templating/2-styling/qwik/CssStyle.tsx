@@ -1,16 +1,16 @@
-import { component$, useStyles$ } from '@builder.io/qwik';
+import { component$, useStyles$ } from "@builder.io/qwik";
 
 export const App = component$(() => {
-	useStyles$(`
+  useStyles$(`
     .title {
       color: red;
     }
     `);
 
-	return (
-		<>
-			<h1 class="title">I am red</h1>
-			<button style={{ 'font-size': '10rem' }}>I am a button</button>
-		</>
-	);
+  return (
+    <>
+      <h1 class="title">I am red</h1>
+      <button style={{ "font-size": "10rem" }}>I am a button</button>
+    </>
+  );
 });

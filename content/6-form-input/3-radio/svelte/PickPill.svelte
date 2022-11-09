@@ -1,5 +1,5 @@
 <script>
-	let picked = 'red';
+  let picked = "red";
 </script>
 
 <div>Picked: {picked}</div>

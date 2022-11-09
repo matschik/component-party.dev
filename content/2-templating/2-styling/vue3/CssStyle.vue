@@ -9,6 +9,6 @@
 
 <style scoped>
 .title {
-	color: red;
+  color: red;
 }
 </style>

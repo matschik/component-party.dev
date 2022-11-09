@@ -1,7 +1,7 @@
-import { createSignal } from 'solid-js';
+import { createSignal } from "solid-js";
 
 export default function Name() {
-	const [name] = createSignal('John');
+  const [name] = createSignal("John");
 
-	return <h1>Hello {name()}</h1>;
+  return <h1>Hello {name()}</h1>;
 }

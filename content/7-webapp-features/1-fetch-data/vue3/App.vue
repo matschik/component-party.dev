@@ -1,5 +1,5 @@
 <script setup>
-import useFetchUsers from './useFetchUsers';
+import useFetchUsers from "./useFetchUsers";
 
 const { isLoading, error, data: users } = useFetchUsers();
 </script>

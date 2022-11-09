@@ -1,26 +1,29 @@
-import { LitElement, html } from 'lit';
-import { customElement, state } from 'lit/decorators.js';
+import { LitElement, html } from "lit";
+import { customElement, state } from "lit/decorators.js";
 
-import './answer-button';
+import "./answer-button";
 
-@customElement('x-app')
+@customElement("x-app")
 export class XApp extends LitElement {
-	@state()
-	canCome = true;
+  @state()
+  canCome = true;
 
-	onAnswerNo() {
-		this.canCome = false;
-	}
+  onAnswerNo() {
+    this.canCome = false;
+  }
 
-	onAnswerYes() {
-		this.canCome = true;
-	}
+  onAnswerYes() {
+    this.canCome = true;
+  }
 
-	render() {
-		return html`
-			<p>Can I come ?</p>
-			<answer-button @yes=${this.onAnswerYes} @no=${this.onAnswerNo}></answer-button>
-			<p style="font-size: 50px;">${this.canCome ? '😀' : '😥'}</p>
-		`;
-	}
+  render() {
+    return html`
+      <p>Can I come ?</p>
+      <answer-button
+        @yes=${this.onAnswerYes}
+        @no=${this.onAnswerNo}
+      ></answer-button>
+      <p style="font-size: 50px;">${this.canCome ? "😀" : "😥"}</p>
+    `;
+  }
 }

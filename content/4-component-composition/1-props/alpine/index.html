@@ -1,15 +1,17 @@
 <!--Alpine JS suggests using a server-side templating engine or another frontend framework in conjunction with Alpine to do this-->
 
 <div
-	x-data="{
+  x-data="{
   name: 'John',
   age: 20,
   favouriteColors: ['green', 'blue', 'red'],
   isAvailable: true
 }"
 >
-	<p>My name is <span x-text="John"></span></p>
-	<p>My age is <span x-text="age"></span></p>
-	<p>My favourite colors are <span x-text="favouriteColors.join(', ')"></span></p>
-	<p>I am <span x-text="isAvailable ? 'available' : 'not available'"></span></p>
+  <p>My name is <span x-text="John"></span></p>
+  <p>My age is <span x-text="age"></span></p>
+  <p>
+    My favourite colors are <span x-text="favouriteColors.join(', ')"></span>
+  </p>
+  <p>I am <span x-text="isAvailable ? 'available' : 'not available'"></span></p>
 </div>

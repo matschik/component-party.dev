@@ -2,7 +2,7 @@
 export default {
   data() {
     return {
-      pageTitle: '',
+      pageTitle: "",
     };
   },
   mounted() {

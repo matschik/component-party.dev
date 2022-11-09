@@ -1,23 +1,23 @@
 <script>
-	import useFetchUsers from './useFetchUsers';
+  import useFetchUsers from "./useFetchUsers";
 
-	const { isLoading, error, data: users } = useFetchUsers();
+  const { isLoading, error, data: users } = useFetchUsers();
 </script>
 
 {#if $isLoading}
-	<p>Fetching users...</p>
+  <p>Fetching users...</p>
 {:else if $error}
-	<p>An error occured while fetching users</p>
+  <p>An error occured while fetching users</p>
 {:else if $users}
-	<ul>
-		{#each $users as user}
-			<li>
-				<img src={user.picture.thumbnail} alt="user" />
-				<p>
-					{user.name.first}
-					{user.name.last}
-				</p>
-			</li>
-		{/each}
-	</ul>
+  <ul>
+    {#each $users as user}
+      <li>
+        <img src={user.picture.thumbnail} alt="user" />
+        <p>
+          {user.name.first}
+          {user.name.last}
+        </p>
+      </li>
+    {/each}
+  </ul>
 {/if}

@@ -1,12 +1,12 @@
 <script setup>
-const emit = defineEmits(['yes', 'no']);
+const emit = defineEmits(["yes", "no"]);
 
 function clickYes() {
-	emit('yes');
+  emit("yes");
 }
 
 function clickNo() {
-	emit('no');
+  emit("no");
 }
 </script>
 

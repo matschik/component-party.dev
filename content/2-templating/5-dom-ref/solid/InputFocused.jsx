@@ -1,9 +1,9 @@
-import { onMount } from 'solid-js';
+import { onMount } from "solid-js";
 
 export default function InputFocused() {
-	let inputElement;
+  let inputElement;
 
-	onMount(() => inputElement.focus());
+  onMount(() => inputElement.focus());
 
-	return <input ref={inputElement} type="text" />;
+  return <input ref={inputElement} type="text" />;
 }

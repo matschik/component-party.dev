@@ -1,9 +1,9 @@
 <script>
-	let count = 0;
+  let count = 0;
 
-	function incrementCount() {
-		count++;
-	}
+  function incrementCount() {
+    count++;
+  }
 </script>
 
 <p>Counter: {count}</p>

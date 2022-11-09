@@ -1,12 +1,12 @@
-<button {{on 'click' this.nextLight}}>Next light</button>
+<button {{on "click" this.nextLight}}>Next light</button>
 <p>Light is: {{this.light}}</p>
 <p>
-	You must
-	{{#if (eq this.light 'red')}}
-		STOP
-	{{else if (eq this.light 'orange')}}
-		SLOW DOWN
-	{{else if (eq this.light 'green')}}
-		GO
-	{{/if}}
+  You must
+  {{#if (eq this.light "red")}}
+    STOP
+  {{else if (eq this.light "orange")}}
+    SLOW DOWN
+  {{else if (eq this.light "green")}}
+    GO
+  {{/if}}
 </p>

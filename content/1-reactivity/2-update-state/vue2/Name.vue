@@ -2,11 +2,11 @@
 export default {
   data() {
     return {
-      name: 'John',
+      name: "John",
     };
   },
   created() {
-    this.name = 'Jane';
+    this.name = "Jane";
   },
 };
 </script>

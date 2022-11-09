@@ -1,22 +1,22 @@
-import { createSignal } from 'solid-js';
-import AnswerButton from './AnswerButton.jsx';
+import { createSignal } from "solid-js";
+import AnswerButton from "./AnswerButton.jsx";
 
 export default function App() {
-	const [canCome, setCanCome] = createSignal(true);
+  const [canCome, setCanCome] = createSignal(true);
 
-	function onAnswerNo() {
-		setCanCome(false);
-	}
+  function onAnswerNo() {
+    setCanCome(false);
+  }
 
-	function onAnswerYes() {
-		setCanCome(true);
-	}
+  function onAnswerYes() {
+    setCanCome(true);
+  }
 
-	return (
-		<>
-			<p>Can I come ?</p>
-			<AnswerButton onYes={onAnswerYes} onNo={onAnswerNo} />
-			<p style={{ 'font-size': '50px' }}>{canCome() ? '😀' : '😥'}</p>
-		</>
-	);
+  return (
+    <>
+      <p>Can I come ?</p>
+      <AnswerButton onYes={onAnswerYes} onNo={onAnswerNo} />
+      <p style={{ "font-size": "50px" }}>{canCome() ? "😀" : "😥"}</p>
+    </>
+  );
 }

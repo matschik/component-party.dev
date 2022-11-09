@@ -2,7 +2,7 @@
 export default {
   data() {
     return {
-      text: 'Hello World',
+      text: "Hello World",
     };
   },
 };

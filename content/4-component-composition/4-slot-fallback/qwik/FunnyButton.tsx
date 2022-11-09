@@ -1,4 +1,4 @@
-import { component$, Slot, useStylesScoped$ } from '@builder.io/qwik';
+import { component$, Slot, useStylesScoped$ } from "@builder.io/qwik";
 
 /**
  * Fallback content as described in the docs is not working
@@ -8,7 +8,7 @@ import { component$, Slot, useStylesScoped$ } from '@builder.io/qwik';
  * The recommended workaround is something like this, using CSS
  */
 const FunnyButton = component$(() => {
-	useStylesScoped$(`
+  useStylesScoped$(`
       button {
         background: rgba(0, 0, 0, 0.4);
         color: #fff;
@@ -26,14 +26,14 @@ const FunnyButton = component$(() => {
         display: none;
       }
   `);
-	return (
-		<button>
-			<span class="slot">
-				<Slot />
-			</span>
-			<span class="fallback">No content found</span>
-		</button>
-	);
+  return (
+    <button>
+      <span class="slot">
+        <Slot />
+      </span>
+      <span class="fallback">No content found</span>
+    </button>
+  );
 });
 
 export default FunnyButton;

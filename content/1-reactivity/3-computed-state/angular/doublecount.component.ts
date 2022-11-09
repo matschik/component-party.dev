@@ -1,13 +1,13 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-	selector: 'app-doublecount',
-	template: '<div>{{ doubleCount }}</div>',
+  selector: "app-doublecount",
+  template: "<div>{{ doubleCount }}</div>",
 })
 export class DoublecountComponent {
-	count = 10;
+  count = 10;
 
-	get doubleCount() {
-		return this.count * 2;
-	}
+  get doubleCount() {
+    return this.count * 2;
+  }
 }

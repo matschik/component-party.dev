@@ -1,8 +1,8 @@
 <script setup>
-import { ref, onMounted } from 'vue';
-const pageTitle = ref('');
+import { ref, onMounted } from "vue";
+const pageTitle = ref("");
 onMounted(() => {
-	pageTitle.value = document.title;
+  pageTitle.value = document.title;
 });
 </script>
 

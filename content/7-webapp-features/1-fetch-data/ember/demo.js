@@ -1,38 +1,38 @@
-import { tracked } from '@glimmer/tracking';
-import Component from '@glimmer/component';
+import { tracked } from "@glimmer/tracking";
+import Component from "@glimmer/component";
 
 export default class Demo extends Component {
-	fetchUsers = () => getUsers();
+  fetchUsers = () => getUsers();
 }
 
 class State {
-	@tracked isLoading = false;
-	@tracked error = null;
-	@tracked data = null;
+  @tracked isLoading = false;
+  @tracked error = null;
+  @tracked data = null;
 }
 
 function getUsers() {
-	let state = new State();
+  let state = new State();
 
-	async function fetchData() {
-		state.isLoading = true;
+  async function fetchData() {
+    state.isLoading = true;
 
-		try {
-			let response = await fetch('https://randomuser.me/api/?results=3');
-			let { results: users } = await response.json();
-			state.data = users;
-			state.error = null;
-		} catch (err) {
-			state.data = null;
-			state.error = err;
-		}
+    try {
+      let response = await fetch("https://randomuser.me/api/?results=3");
+      let { results: users } = await response.json();
+      state.data = users;
+      state.error = null;
+    } catch (err) {
+      state.data = null;
+      state.error = err;
+    }
 
-		state.isLoading = false;
-	}
+    state.isLoading = false;
+  }
 
-	fetchData();
+  fetchData();
 
-	return state;
+  return state;
 }
 
 // NOTE: in Polaris, the backing class for the component isn't needed at all.

@@ -1,5 +1,5 @@
 <script setup>
-import FunnyButton from './FunnyButton.vue';
+import FunnyButton from "./FunnyButton.vue";
 </script>
 
 <template>

@@ -2,7 +2,7 @@
 export default {
   data() {
     return {
-      colors: ['red', 'green', 'blue'],
+      colors: ["red", "green", "blue"],
     };
   },
 };

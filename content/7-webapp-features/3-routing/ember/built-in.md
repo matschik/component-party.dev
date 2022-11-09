@@ -4,8 +4,8 @@ Given an `app/router.js` config of:
 
 ```js
 Router.map(function () {
-  this.route('about');
-  this.route('fallback', { path: '*' });
+  this.route("about");
+  this.route("fallback", { path: "*" });
 });
 ```
 

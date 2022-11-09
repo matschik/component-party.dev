@@ -1,10 +1,10 @@
 <p
-	x-data="{
+  x-data="{
   time: new Date().toLocaleTimeString(),
   timer: null,
   init() { this.timer = setInterval(() => (this.time = new Date().toLocaleTimeString()), 1000) },
   destroy() { clearInterval(this.timer) }
 }"
 >
-	Current time: <span x-text="time"></span>
+  Current time: <span x-text="time"></span>
 </p>

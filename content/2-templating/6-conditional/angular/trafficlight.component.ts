@@ -1,34 +1,34 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
-const TRAFFIC_LIGHTS = ['red', 'orange', 'green'];
+const TRAFFIC_LIGHTS = ["red", "orange", "green"];
 
 @Component({
-	selector: 'app-trafficlight',
-	template: `
-		<button (click)="nextLight()">Next light</button>
-		<p>Light is: {{ light }}</p>
-		<p>
-			You must
-			<ng-container [ngSwitch]="light">
-				<span *ngSwitchCase="'red'">STOP</span>
-				<span *ngSwitchCase="'orange'">SLOW DOWN</span>
-				<span *ngSwitchCase="'green'">GO</span>
-			</ng-container>
-		</p>
-	`,
+  selector: "app-trafficlight",
+  template: `
+    <button (click)="nextLight()">Next light</button>
+    <p>Light is: {{ light }}</p>
+    <p>
+      You must
+      <ng-container [ngSwitch]="light">
+        <span *ngSwitchCase="'red'">STOP</span>
+        <span *ngSwitchCase="'orange'">SLOW DOWN</span>
+        <span *ngSwitchCase="'green'">GO</span>
+      </ng-container>
+    </p>
+  `,
 })
 export class TrafficlightComponent {
-	lightIndex = 0;
+  lightIndex = 0;
 
-	get light() {
-		return TRAFFIC_LIGHTS[this.lightIndex];
-	}
+  get light() {
+    return TRAFFIC_LIGHTS[this.lightIndex];
+  }
 
-	nextLight() {
-		if (this.lightIndex + 1 > TRAFFIC_LIGHTS.length - 1) {
-			this.lightIndex = 0;
-		} else {
-			this.lightIndex++;
-		}
-	}
+  nextLight() {
+    if (this.lightIndex + 1 > TRAFFIC_LIGHTS.length - 1) {
+      this.lightIndex = 0;
+    } else {
+      this.lightIndex++;
+    }
+  }
 }

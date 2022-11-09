@@ -2,7 +2,7 @@
 export default {
   data() {
     return {
-      TRAFFIC_LIGHTS: ['red', 'orange', 'green'],
+      TRAFFIC_LIGHTS: ["red", "orange", "green"],
       lightIndex: 0,
     };
   },

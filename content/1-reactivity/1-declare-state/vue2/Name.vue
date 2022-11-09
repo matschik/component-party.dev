@@ -2,7 +2,7 @@
 export default {
   data() {
     return {
-      name: 'John',
+      name: "John",
     };
   },
 };

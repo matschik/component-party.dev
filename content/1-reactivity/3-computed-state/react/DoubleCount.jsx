@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function DoubleCount() {
-	const [count] = useState(10);
-	const doubleCount = count * 2;
+  const [count] = useState(10);
+  const doubleCount = count * 2;
 
-	return <div>{doubleCount}</div>;
+  return <div>{doubleCount}</div>;
 }

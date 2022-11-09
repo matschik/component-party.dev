@@ -1,17 +1,17 @@
-import { LitElement, html } from 'lit';
-import { customElement, state } from 'lit/decorators.js';
+import { LitElement, html } from "lit";
+import { customElement, state } from "lit/decorators.js";
 
-@customElement('page-title')
+@customElement("page-title")
 export class PageTitle extends LitElement {
-	@state()
-	pageTitle = '';
+  @state()
+  pageTitle = "";
 
-	connectedCallback() {
-		super.connectedCallback();
-		this.pageTitle = document.title;
-	}
+  connectedCallback() {
+    super.connectedCallback();
+    this.pageTitle = document.title;
+  }
 
-	render() {
-		return html`<p>Page title: ${this.pageTitle}</p>`;
-	}
+  render() {
+    return html`<p>Page title: ${this.pageTitle}</p>`;
+  }
 }

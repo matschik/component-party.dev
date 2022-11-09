@@ -1,13 +1,13 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-	selector: 'app-input-hello',
-	template: '<input [value]="text" (change)="handleInputChange($event)" />',
+  selector: "app-input-hello",
+  template: '<input [value]="text" (change)="handleInputChange($event)" />',
 })
 export class InputHelloComponent {
-	text = '';
+  text = "";
 
-	handleInputChange(event: Event) {
-		this.text = (event.target as HTMLInputElement).value;
-	}
+  handleInputChange(event: Event) {
+    this.text = (event.target as HTMLInputElement).value;
+  }
 }

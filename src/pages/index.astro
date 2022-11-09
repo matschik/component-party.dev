@@ -1,9 +1,9 @@
 ---
-import fs from 'node:fs/promises';
-import { packageDirectory } from 'pkg-dir';
+import fs from "node:fs/promises";
+import { packageDirectory } from "pkg-dir";
 
-import Layout from '@/layouts/BaseLayout.astro';
-import Section from '@/components/Section.astro';
+import Layout from "@/layouts/BaseLayout.astro";
+import Section from "@/components/Section.astro";
 
 const rootDir = await packageDirectory();
 const contentURL = `${rootDir}/content`;
@@ -11,7 +11,11 @@ const sectionNames = await fs.readdir(contentURL);
 ---
 
 <Layout>
-	<div class="space-y-12">
-		{sectionNames.map((sectionName) => <Section path={`${contentURL}/${sectionName}`} />)}
-	</div>
+  <div class="space-y-12">
+    {
+      sectionNames.map((sectionName) => (
+        <Section path={`${contentURL}/${sectionName}`} />
+      ))
+    }
+  </div>
 </Layout>

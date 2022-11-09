@@ -1,23 +1,24 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-	selector: 'app-root',
-	template: `
-		<p>Can I come ?</p>
+  selector: "app-root",
+  template: `
+    <p>Can I come ?</p>
 
-		<app-answer-button (yes)="onAnswerYes()" (no)="onAnswerNo()"> </app-answer-button>
+    <app-answer-button (yes)="onAnswerYes()" (no)="onAnswerNo()">
+    </app-answer-button>
 
-		<p style="font-size: 50px">{{ canCome ? '😀' : '😥' }}</p>
-	`,
+    <p style="font-size: 50px">{{ canCome ? "😀" : "😥" }}</p>
+  `,
 })
 export class AppComponent {
-	canCome = true;
+  canCome = true;
 
-	onAnswerYes() {
-		this.canCome = true;
-	}
+  onAnswerYes() {
+    this.canCome = true;
+  }
 
-	onAnswerNo() {
-		this.canCome = false;
-	}
+  onAnswerNo() {
+    this.canCome = false;
+  }
 }

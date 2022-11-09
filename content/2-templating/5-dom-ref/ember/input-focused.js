@@ -1,8 +1,8 @@
-import Component from '@glimmer/component';
-import { modifier } from 'ember-modifier';
+import Component from "@glimmer/component";
+import { modifier } from "ember-modifier";
 
 export default class InputFocused extends Component {
-	autofocus = modifier((element) => element.focus());
+  autofocus = modifier((element) => element.focus());
 }
 
 /**

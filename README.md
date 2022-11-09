@@ -19,34 +19,34 @@ How do we solve this ? Developers love having framework overview by examples. It
             <b>Svelte</b>
             <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/100" /></summary>
 
-* [x] Reactivity
-   * [x] Declare state
-   * [x] Update state
-   * [x] Computed state
-* [x] Templating
-   * [x] Minimal template
-   * [x] Styling
-   * [x] Loop
-   * [x] Event click
-   * [x] Dom ref
-   * [x] Conditional
-* [x] Lifecycle
-   * [x] On mount
-   * [x] On unmount
-* [x] Component composition
-   * [x] Props
-   * [x] Emit to parent
-   * [x] Slot
-   * [x] Slot fallback
-* [x] Form input
-   * [x] Input text
-   * [x] Checkbox
-   * [x] Radio
-   * [x] Select
-* [x] Webapp features
-   * [x] Fetch data
-   * [x] Router link
-   * [x] Routing
+- [x] Reactivity
+  - [x] Declare state
+  - [x] Update state
+  - [x] Computed state
+- [x] Templating
+  - [x] Minimal template
+  - [x] Styling
+  - [x] Loop
+  - [x] Event click
+  - [x] Dom ref
+  - [x] Conditional
+- [x] Lifecycle
+  - [x] On mount
+  - [x] On unmount
+- [x] Component composition
+  - [x] Props
+  - [x] Emit to parent
+  - [x] Slot
+  - [x] Slot fallback
+- [x] Form input
+  - [x] Input text
+  - [x] Checkbox
+  - [x] Radio
+  - [x] Select
+- [x] Webapp features
+  - [x] Fetch data
+  - [x] Router link
+  - [x] Routing
 
 </details><details>
         <summary>
@@ -54,34 +54,34 @@ How do we solve this ? Developers love having framework overview by examples. It
             <b>React</b>
             <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/100" /></summary>
 
-* [x] Reactivity
-   * [x] Declare state
-   * [x] Update state
-   * [x] Computed state
-* [x] Templating
-   * [x] Minimal template
-   * [x] Styling
-   * [x] Loop
-   * [x] Event click
-   * [x] Dom ref
-   * [x] Conditional
-* [x] Lifecycle
-   * [x] On mount
-   * [x] On unmount
-* [x] Component composition
-   * [x] Props
-   * [x] Emit to parent
-   * [x] Slot
-   * [x] Slot fallback
-* [x] Form input
-   * [x] Input text
-   * [x] Checkbox
-   * [x] Radio
-   * [x] Select
-* [x] Webapp features
-   * [x] Fetch data
-   * [x] Router link
-   * [x] Routing
+- [x] Reactivity
+  - [x] Declare state
+  - [x] Update state
+  - [x] Computed state
+- [x] Templating
+  - [x] Minimal template
+  - [x] Styling
+  - [x] Loop
+  - [x] Event click
+  - [x] Dom ref
+  - [x] Conditional
+- [x] Lifecycle
+  - [x] On mount
+  - [x] On unmount
+- [x] Component composition
+  - [x] Props
+  - [x] Emit to parent
+  - [x] Slot
+  - [x] Slot fallback
+- [x] Form input
+  - [x] Input text
+  - [x] Checkbox
+  - [x] Radio
+  - [x] Select
+- [x] Webapp features
+  - [x] Fetch data
+  - [x] Router link
+  - [x] Routing
 
 </details><details>
         <summary>
@@ -89,34 +89,34 @@ How do we solve this ? Developers love having framework overview by examples. It
             <b>Vue 2</b>
             <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/100" /></summary>
 
-* [x] Reactivity
-   * [x] Declare state
-   * [x] Update state
-   * [x] Computed state
-* [x] Templating
-   * [x] Minimal template
-   * [x] Styling
-   * [x] Loop
-   * [x] Event click
-   * [x] Dom ref
-   * [x] Conditional
-* [x] Lifecycle
-   * [x] On mount
-   * [x] On unmount
-* [x] Component composition
-   * [x] Props
-   * [x] Emit to parent
-   * [x] Slot
-   * [x] Slot fallback
-* [x] Form input
-   * [x] Input text
-   * [x] Checkbox
-   * [x] Radio
-   * [x] Select
-* [x] Webapp features
-   * [x] Fetch data
-   * [x] Router link
-   * [x] Routing
+- [x] Reactivity
+  - [x] Declare state
+  - [x] Update state
+  - [x] Computed state
+- [x] Templating
+  - [x] Minimal template
+  - [x] Styling
+  - [x] Loop
+  - [x] Event click
+  - [x] Dom ref
+  - [x] Conditional
+- [x] Lifecycle
+  - [x] On mount
+  - [x] On unmount
+- [x] Component composition
+  - [x] Props
+  - [x] Emit to parent
+  - [x] Slot
+  - [x] Slot fallback
+- [x] Form input
+  - [x] Input text
+  - [x] Checkbox
+  - [x] Radio
+  - [x] Select
+- [x] Webapp features
+  - [x] Fetch data
+  - [x] Router link
+  - [x] Routing
 
 </details><details>
         <summary>
@@ -124,34 +124,34 @@ How do we solve this ? Developers love having framework overview by examples. It
             <b>Vue 3</b>
             <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/100" /></summary>
 
-* [x] Reactivity
-   * [x] Declare state
-   * [x] Update state
-   * [x] Computed state
-* [x] Templating
-   * [x] Minimal template
-   * [x] Styling
-   * [x] Loop
-   * [x] Event click
-   * [x] Dom ref
-   * [x] Conditional
-* [x] Lifecycle
-   * [x] On mount
-   * [x] On unmount
-* [x] Component composition
-   * [x] Props
-   * [x] Emit to parent
-   * [x] Slot
-   * [x] Slot fallback
-* [x] Form input
-   * [x] Input text
-   * [x] Checkbox
-   * [x] Radio
-   * [x] Select
-* [x] Webapp features
-   * [x] Fetch data
-   * [x] Router link
-   * [x] Routing
+- [x] Reactivity
+  - [x] Declare state
+  - [x] Update state
+  - [x] Computed state
+- [x] Templating
+  - [x] Minimal template
+  - [x] Styling
+  - [x] Loop
+  - [x] Event click
+  - [x] Dom ref
+  - [x] Conditional
+- [x] Lifecycle
+  - [x] On mount
+  - [x] On unmount
+- [x] Component composition
+  - [x] Props
+  - [x] Emit to parent
+  - [x] Slot
+  - [x] Slot fallback
+- [x] Form input
+  - [x] Input text
+  - [x] Checkbox
+  - [x] Radio
+  - [x] Select
+- [x] Webapp features
+  - [x] Fetch data
+  - [x] Router link
+  - [x] Routing
 
 </details><details>
         <summary>
@@ -159,34 +159,34 @@ How do we solve this ? Developers love having framework overview by examples. It
             <b>Angular</b>
             <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/100" /></summary>
 
-* [x] Reactivity
-   * [x] Declare state
-   * [x] Update state
-   * [x] Computed state
-* [x] Templating
-   * [x] Minimal template
-   * [x] Styling
-   * [x] Loop
-   * [x] Event click
-   * [x] Dom ref
-   * [x] Conditional
-* [x] Lifecycle
-   * [x] On mount
-   * [x] On unmount
-* [x] Component composition
-   * [x] Props
-   * [x] Emit to parent
-   * [x] Slot
-   * [x] Slot fallback
-* [x] Form input
-   * [x] Input text
-   * [x] Checkbox
-   * [x] Radio
-   * [x] Select
-* [x] Webapp features
-   * [x] Fetch data
-   * [x] Router link
-   * [x] Routing
+- [x] Reactivity
+  - [x] Declare state
+  - [x] Update state
+  - [x] Computed state
+- [x] Templating
+  - [x] Minimal template
+  - [x] Styling
+  - [x] Loop
+  - [x] Event click
+  - [x] Dom ref
+  - [x] Conditional
+- [x] Lifecycle
+  - [x] On mount
+  - [x] On unmount
+- [x] Component composition
+  - [x] Props
+  - [x] Emit to parent
+  - [x] Slot
+  - [x] Slot fallback
+- [x] Form input
+  - [x] Input text
+  - [x] Checkbox
+  - [x] Radio
+  - [x] Select
+- [x] Webapp features
+  - [x] Fetch data
+  - [x] Router link
+  - [x] Routing
 
 </details><details>
         <summary>
@@ -194,34 +194,34 @@ How do we solve this ? Developers love having framework overview by examples. It
             <b>SolidJS</b>
             <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/100" /></summary>
 
-* [x] Reactivity
-   * [x] Declare state
-   * [x] Update state
-   * [x] Computed state
-* [x] Templating
-   * [x] Minimal template
-   * [x] Styling
-   * [x] Loop
-   * [x] Event click
-   * [x] Dom ref
-   * [x] Conditional
-* [x] Lifecycle
-   * [x] On mount
-   * [x] On unmount
-* [x] Component composition
-   * [x] Props
-   * [x] Emit to parent
-   * [x] Slot
-   * [x] Slot fallback
-* [x] Form input
-   * [x] Input text
-   * [x] Checkbox
-   * [x] Radio
-   * [x] Select
-* [x] Webapp features
-   * [x] Fetch data
-   * [x] Router link
-   * [x] Routing
+- [x] Reactivity
+  - [x] Declare state
+  - [x] Update state
+  - [x] Computed state
+- [x] Templating
+  - [x] Minimal template
+  - [x] Styling
+  - [x] Loop
+  - [x] Event click
+  - [x] Dom ref
+  - [x] Conditional
+- [x] Lifecycle
+  - [x] On mount
+  - [x] On unmount
+- [x] Component composition
+  - [x] Props
+  - [x] Emit to parent
+  - [x] Slot
+  - [x] Slot fallback
+- [x] Form input
+  - [x] Input text
+  - [x] Checkbox
+  - [x] Radio
+  - [x] Select
+- [x] Webapp features
+  - [x] Fetch data
+  - [x] Router link
+  - [x] Routing
 
 </details><details>
         <summary>
@@ -229,34 +229,34 @@ How do we solve this ? Developers love having framework overview by examples. It
             <b>Lit</b>
             <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/100" /></summary>
 
-* [x] Reactivity
-   * [x] Declare state
-   * [x] Update state
-   * [x] Computed state
-* [x] Templating
-   * [x] Minimal template
-   * [x] Styling
-   * [x] Loop
-   * [x] Event click
-   * [x] Dom ref
-   * [x] Conditional
-* [x] Lifecycle
-   * [x] On mount
-   * [x] On unmount
-* [x] Component composition
-   * [x] Props
-   * [x] Emit to parent
-   * [x] Slot
-   * [x] Slot fallback
-* [x] Form input
-   * [x] Input text
-   * [x] Checkbox
-   * [x] Radio
-   * [x] Select
-* [x] Webapp features
-   * [x] Fetch data
-   * [x] Router link
-   * [x] Routing
+- [x] Reactivity
+  - [x] Declare state
+  - [x] Update state
+  - [x] Computed state
+- [x] Templating
+  - [x] Minimal template
+  - [x] Styling
+  - [x] Loop
+  - [x] Event click
+  - [x] Dom ref
+  - [x] Conditional
+- [x] Lifecycle
+  - [x] On mount
+  - [x] On unmount
+- [x] Component composition
+  - [x] Props
+  - [x] Emit to parent
+  - [x] Slot
+  - [x] Slot fallback
+- [x] Form input
+  - [x] Input text
+  - [x] Checkbox
+  - [x] Radio
+  - [x] Select
+- [x] Webapp features
+  - [x] Fetch data
+  - [x] Router link
+  - [x] Routing
 
 </details><details>
         <summary>
@@ -264,34 +264,34 @@ How do we solve this ? Developers love having framework overview by examples. It
             <b>Ember</b>
             <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/100" /></summary>
 
-* [x] Reactivity
-   * [x] Declare state
-   * [x] Update state
-   * [x] Computed state
-* [x] Templating
-   * [x] Minimal template
-   * [x] Styling
-   * [x] Loop
-   * [x] Event click
-   * [x] Dom ref
-   * [x] Conditional
-* [x] Lifecycle
-   * [x] On mount
-   * [x] On unmount
-* [x] Component composition
-   * [x] Props
-   * [x] Emit to parent
-   * [x] Slot
-   * [x] Slot fallback
-* [x] Form input
-   * [x] Input text
-   * [x] Checkbox
-   * [x] Radio
-   * [x] Select
-* [x] Webapp features
-   * [x] Fetch data
-   * [x] Router link
-   * [x] Routing
+- [x] Reactivity
+  - [x] Declare state
+  - [x] Update state
+  - [x] Computed state
+- [x] Templating
+  - [x] Minimal template
+  - [x] Styling
+  - [x] Loop
+  - [x] Event click
+  - [x] Dom ref
+  - [x] Conditional
+- [x] Lifecycle
+  - [x] On mount
+  - [x] On unmount
+- [x] Component composition
+  - [x] Props
+  - [x] Emit to parent
+  - [x] Slot
+  - [x] Slot fallback
+- [x] Form input
+  - [x] Input text
+  - [x] Checkbox
+  - [x] Radio
+  - [x] Select
+- [x] Webapp features
+  - [x] Fetch data
+  - [x] Router link
+  - [x] Routing
 
 </details><details>
         <summary>
@@ -299,34 +299,34 @@ How do we solve this ? Developers love having framework overview by examples. It
             <b>Alpine</b>
             <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/100" /></summary>
 
-* [x] Reactivity
-   * [x] Declare state
-   * [x] Update state
-   * [x] Computed state
-* [x] Templating
-   * [x] Minimal template
-   * [x] Styling
-   * [x] Loop
-   * [x] Event click
-   * [x] Dom ref
-   * [x] Conditional
-* [x] Lifecycle
-   * [x] On mount
-   * [x] On unmount
-* [x] Component composition
-   * [x] Props
-   * [x] Emit to parent
-   * [x] Slot
-   * [x] Slot fallback
-* [x] Form input
-   * [x] Input text
-   * [x] Checkbox
-   * [x] Radio
-   * [x] Select
-* [x] Webapp features
-   * [x] Fetch data
-   * [x] Router link
-   * [x] Routing
+- [x] Reactivity
+  - [x] Declare state
+  - [x] Update state
+  - [x] Computed state
+- [x] Templating
+  - [x] Minimal template
+  - [x] Styling
+  - [x] Loop
+  - [x] Event click
+  - [x] Dom ref
+  - [x] Conditional
+- [x] Lifecycle
+  - [x] On mount
+  - [x] On unmount
+- [x] Component composition
+  - [x] Props
+  - [x] Emit to parent
+  - [x] Slot
+  - [x] Slot fallback
+- [x] Form input
+  - [x] Input text
+  - [x] Checkbox
+  - [x] Radio
+  - [x] Select
+- [x] Webapp features
+  - [x] Fetch data
+  - [x] Router link
+  - [x] Routing
 
 </details><details>
         <summary>
@@ -334,34 +334,34 @@ How do we solve this ? Developers love having framework overview by examples. It
             <b>Qwik</b>
             <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/100" /></summary>
 
-* [x] Reactivity
-   * [x] Declare state
-   * [x] Update state
-   * [x] Computed state
-* [x] Templating
-   * [x] Minimal template
-   * [x] Styling
-   * [x] Loop
-   * [x] Event click
-   * [x] Dom ref
-   * [x] Conditional
-* [x] Lifecycle
-   * [x] On mount
-   * [x] On unmount
-* [x] Component composition
-   * [x] Props
-   * [x] Emit to parent
-   * [x] Slot
-   * [x] Slot fallback
-* [x] Form input
-   * [x] Input text
-   * [x] Checkbox
-   * [x] Radio
-   * [x] Select
-* [x] Webapp features
-   * [x] Fetch data
-   * [x] Router link
-   * [x] Routing
+- [x] Reactivity
+  - [x] Declare state
+  - [x] Update state
+  - [x] Computed state
+- [x] Templating
+  - [x] Minimal template
+  - [x] Styling
+  - [x] Loop
+  - [x] Event click
+  - [x] Dom ref
+  - [x] Conditional
+- [x] Lifecycle
+  - [x] On mount
+  - [x] On unmount
+- [x] Component composition
+  - [x] Props
+  - [x] Emit to parent
+  - [x] Slot
+  - [x] Slot fallback
+- [x] Form input
+  - [x] Input text
+  - [x] Checkbox
+  - [x] Radio
+  - [x] Select
+- [x] Webapp features
+  - [x] Fetch data
+  - [x] Router link
+  - [x] Routing
 
 </details>
 
@@ -388,7 +388,7 @@ This project requires Node.js to be `v14.0.0` or higher, because we use new Java
 ## 🧑‍💻 Contributors
 
 This project exists thanks to all the people who contribute. \[[Contribute](CONTRIBUTING.md)].
-[![Contributors](https://opencollective.com/component-party/contributors.svg?width=890\&button=false)](https://github.com/matschik/component-party/graphs/contributors)
+[![Contributors](https://opencollective.com/component-party/contributors.svg?width=890&button=false)](https://github.com/matschik/component-party/graphs/contributors)
 
 ## ⚖️ License
 
@@ -397,5 +397,4 @@ MIT. Made with 💖
 <!-- variables -->
 
 [gitpod-src]: https://shields.io/badge/Open%20in-Gitpod-green?logo=Gitpod
-
 [gitpod-href]: https://gitpod.io/#https://github.com/matschik/component-party

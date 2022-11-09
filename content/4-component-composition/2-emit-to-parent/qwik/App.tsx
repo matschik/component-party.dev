@@ -1,26 +1,26 @@
-import { $, component$, useStore } from '@builder.io/qwik';
-import AnswerButton from './AnswerButton';
+import { $, component$, useStore } from "@builder.io/qwik";
+import AnswerButton from "./AnswerButton";
 
 const App = component$(() => {
-	const store = useStore({
-		canCome: true,
-	});
+  const store = useStore({
+    canCome: true,
+  });
 
-	const onAnswerNo = $(() => {
-		store.canCome = false;
-	});
+  const onAnswerNo = $(() => {
+    store.canCome = false;
+  });
 
-	const onAnswerYes = $(() => {
-		store.canCome = true;
-	});
+  const onAnswerYes = $(() => {
+    store.canCome = true;
+  });
 
-	return (
-		<>
-			<p>Can I come ?</p>
-			<AnswerButton onYes$={onAnswerYes} onNo$={onAnswerNo} />
-			<p style={{ fontSize: 50 }}>{store.canCome ? 'ðŸ˜€' : 'ðŸ˜¥'}</p>
-		</>
-	);
+  return (
+    <>
+      <p>Can I come ?</p>
+      <AnswerButton onYes$={onAnswerYes} onNo$={onAnswerNo} />
+      <p style={{ fontSize: 50 }}>{store.canCome ? "ðŸ˜€" : "ðŸ˜¥"}</p>
+    </>
+  );
 });
 
 export default App;

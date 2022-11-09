@@ -1,13 +1,13 @@
-import { component$, useClientEffect$, useStore } from '@builder.io/qwik';
+import { component$, useClientEffect$, useStore } from "@builder.io/qwik";
 
 export const App = component$(() => {
-	const store = useStore({
-		pageTitle: '',
-	});
+  const store = useStore({
+    pageTitle: "",
+  });
 
-	useClientEffect$(() => {
-		store.pageTitle = document.title;
-	});
+  useClientEffect$(() => {
+    store.pageTitle = document.title;
+  });
 
-	return <p>Page title: {store.pageTitle}</p>;
+  return <p>Page title: {store.pageTitle}</p>;
 });

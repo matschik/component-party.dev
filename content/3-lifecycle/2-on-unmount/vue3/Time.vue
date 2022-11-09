@@ -1,14 +1,14 @@
 <script setup>
-import { ref, onUnmounted } from 'vue';
+import { ref, onUnmounted } from "vue";
 
 const time = ref(new Date().toLocaleTimeString());
 
 const timer = setInterval(() => {
-	time.value = new Date().toLocaleTimeString();
+  time.value = new Date().toLocaleTimeString();
 }, 1000);
 
 onUnmounted(() => {
-	clearInterval(timer);
+  clearInterval(timer);
 });
 </script>
 

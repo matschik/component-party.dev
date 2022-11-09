@@ -1,11 +1,11 @@
-import { LitElement, html } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { LitElement, html } from "lit";
+import { customElement } from "lit/decorators.js";
 
-import './funny-button';
+import "./funny-button";
 
-@customElement('x-app')
+@customElement("x-app")
 export class XApp extends LitElement {
-	render() {
-		return html`<funny-button>Click me !</funny-button>`;
-	}
+  render() {
+    return html`<funny-button>Click me !</funny-button>`;
+  }
 }
