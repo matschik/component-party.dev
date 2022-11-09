@@ -8,7 +8,7 @@
   "plugins": ["prettier-plugin-svelte"],
   "overrides": [
     {
-      "files": [".*", "*.json", "*.md", "*.toml", "*.yml"],
+      "files": [".*", "*.json", "*.md", "*.toml", "*.yml", "**/vue2/*"],
       "options": {
         "useTabs": false
       }
