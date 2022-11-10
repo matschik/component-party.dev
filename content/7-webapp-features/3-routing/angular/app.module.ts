@@ -1,17 +1,7 @@
 import { RouterModule } from "@angular/router";
 import { NgModule, Component } from "@angular/core";
-
-@Component({
-  selector: "app-home",
-  template: "<h1>Home page</h1>",
-})
-export class HomeComponent {}
-
-@Component({
-  selector: "app-about",
-  template: "<h1>About page</h1>",
-})
-export class AboutComponent {}
+import { HomeComponent } from "./home.component";
+import { AboutComponent } from "./about.component";
 
 @Component({
   selector: "app-root",
