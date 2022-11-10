@@ -4,6 +4,7 @@ import nodePath from "node:path";
 import { createFileMapCache } from "micache";
 
 import astroHighlightCode from "@/components/CodeHighlight/astroHighlightCode.js";
+import { highlightAngularComponent, isAngularComponent } from "@/components/CodeHighlight/highlightAngularComponent.js";
 
 const { path, lang, theme = "github-dark", wrap = false } = Astro.props;
 
@@ -13,15 +14,22 @@ await fs.access(path);
 const fileCodeCache = await createFileMapCache("fileCodeCache");
 
 let html = await fileCodeCache.get(path);
+
 if (!html) {
   const fileExt = nodePath.parse(path).ext.split(".").pop();
   const fileContent = await fs.readFile(path, "utf-8");
-  html = await astroHighlightCode({
-    code: fileContent,
-    lang: lang || fileExt,
-    theme,
-    wrap,
-  });
+
+  if (isAngularComponent(fileContent)) {
+    html = await highlightAngularComponent(fileContent, theme, wrap,  lang || fileExt);
+  } else {
+    html = await astroHighlightCode({
+      code: fileContent,
+      lang: lang || fileExt,
+      theme,
+      wrap,
+    });
+  }
+
   fileCodeCache.set(path, html);
 }
 ---
