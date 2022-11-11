@@ -33,7 +33,7 @@ export async function highlightAngularComponent(
 }
 
 function getAngularTemplateCode(fileContent) {
-  // regex to grab whats inside angular component template inside backticks
+  // regex to grab what is inside angular component template inside backticks
   const regex = /template:\s*`([\s\S]*?)`/gm;
 
   // grab the template string
@@ -54,16 +54,13 @@ function removeAngularTemplateContent(fileContent) {
 }
 
 function removeCodeWrapper(html) {
-  html = html.replace(
-    '<pre is:raw class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code>',
-    ""
-  );
-  return html.replace("</code></pre>", "");
+  let regexForWrapper = /<pre([\s\S]*?)><code>([\s\S]*?)<\/code><\/pre>/gm;
+  let code = regexForWrapper.exec(html);
+  return code[2];
 }
 
 export function isAngularComponent(fileContent) {
   return (
-    fileContent.includes('from "@angular/core"') &&
-    fileContent.includes("template:")
+    fileContent.includes("@angular/core") && fileContent.includes("template")
   );
 }
