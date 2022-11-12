@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 
 @Component({
   selector: "app-input-hello",
-  template: '<input [value]="text" (change)="handleInputChange($event)" />',
+  template: `<input [value]="text" (change)="handleInputChange($event)" />`,
 })
 export class InputHelloComponent {
   text = "";
