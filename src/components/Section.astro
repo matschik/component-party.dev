@@ -124,8 +124,7 @@ function getFrameworkSectionPlaygroundURL(section, framework) {
       >
         {FRAMEWORKS.map((framework) => (
           <div
-            x-show={`$store.frameworksSelected.has('${framework.id}')`}
-            style="margin-top: 0rem;"
+            x-bind:style={`'margin-top: 0rem;' + 'order: ' + $store.frameworksSelected.getOrder('${framework.id}') + ';' + 'display:' + ($store.frameworksSelected.has('${framework.id}') ? 'block' : 'none') + ';'`}
           >
             <div class="flex justify-between items-center space-x-3">
               <h3 style="margin-top: 0rem; margin-bottom: 0rem;">

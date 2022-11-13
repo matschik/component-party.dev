@@ -13,6 +13,9 @@ Alpine.store("frameworksSelected", {
     }
     this._selectedIds = [...this._frameworksSelectedProxy];
   },
+  getOrder(fmwId) {
+    return this._selectedIds.indexOf(fmwId) + 1;
+  },
   has(fmwId) {
     return this._selectedIds.includes(fmwId);
   },
