@@ -7,14 +7,10 @@ export default function Home() {
   return (
     <ul>
       <li>
-        <Link href="/">
-          <a>Home</a>
-        </Link>
+        <Link href="/">Home</Link>
       </li>
       <li>
-        <Link href="/about">
-          <a>About us</a>
-        </Link>
+        <Link href="/about">About us</Link>
       </li>
     </ul>
   );
