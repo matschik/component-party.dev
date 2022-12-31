@@ -1,87 +1,31 @@
 {
-  "name": "component-party",
-  "version": "1.0.0",
-  "description": "Web component JS frameworks overview by their syntax and features",
+  "name": "component-party2",
+  "private": true,
+  "version": "0.0.0",
   "type": "module",
-  "packageManager": "pnpm@7.0.0",
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "progression": "node scripts/progress.js",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "prettier": "prettier --ignore-path .gitignore --plugin-search-dir=. . --check",
-    "prettier:fix": "prettier --ignore-path .gitignore --plugin-search-dir=. --write .",
-    "format": "pnpm run prettier:fix && pnpm run lint:fix",
-    "prepare": "husky install"
+    "dev": "vite",
+    "build": "node scripts/generateContent.js && vite build",
+    "content": "node scripts/generateContent.js",
+    "preview": "vite preview",
+    "progress": "node scripts/progress.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/matschik/component-party.git"
-  },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/matschik/component-party/issues"
-  },
-  "homepage": "https://github.com/matschik/component-party#readme",
   "devDependencies": {
-    "@angular-eslint/eslint-plugin": "^14.1.2",
-    "@angular-eslint/eslint-plugin-template": "^14.1.2",
-    "@angular-eslint/template-parser": "^14.1.2",
-    "@angular/core": "^14.2.10",
-    "@angular/router": "^14.2.10",
-    "@astrojs/markdown-component": "^1.0.2",
-    "@astrojs/svelte": "^1.0.2",
-    "@astrojs/tailwind": "^2.1.2",
-    "@babel/eslint-parser": "^7.19.1",
-    "@babel/plugin-proposal-decorators": "^7.20.2",
-    "@builder.io/qwik": "0.13.3",
-    "@matschik/lz-string": "^0.0.2",
+    "@sveltejs/vite-plugin-svelte": "^2.0.2",
     "@tailwindcss/typography": "^0.5.8",
-    "@types/mdast": "^3.0.10",
-    "@typescript-eslint/eslint-plugin": "^5.42.1",
-    "@typescript-eslint/parser": "^5.42.1",
-    "astro": "^1.6.7",
     "autoprefixer": "^10.4.13",
-    "codesandbox": "^2.2.3",
-    "eslint": "^8.27.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-ember": "^11.2.0",
-    "eslint-plugin-lit": "^1.6.1",
-    "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-qwik": "^0.13.3",
-    "eslint-plugin-react": "^7.31.10",
-    "eslint-plugin-solid": "^0.8.0",
-    "eslint-plugin-svelte3": "^4.0.0",
-    "eslint-plugin-vue": "^9.7.0",
-    "esm": "^3.2.25",
-    "husky": "^8.0.2",
-    "lint-staged": "^13.0.3",
     "lodash.kebabcase": "^4.1.1",
-    "micache": "^2.4.1",
     "pkg-dir": "^7.0.0",
-    "postcss": "^8.4.19",
-    "prettier": "^2.7.1",
-    "prettier-plugin-astro": "^0.7.0",
-    "prettier-plugin-svelte": "^2.8.0",
-    "prop-types": "^15.8.1",
-    "react": "^18.2.0",
+    "postcss": "^8.4.20",
     "remark": "^14.0.2",
-    "shiki": "^0.11.1",
-    "svelte": "^3.53.1",
+    "shiki": "^0.12.1",
+    "svelte": "^3.55.0",
+    "svelte-preprocess": "^5.0.0",
     "tailwindcss": "^3.2.4",
-    "typescript": "^4.8.4",
-    "vite": "^3.2.3",
-    "vite-plugin-full-reload": "^1.0.4"
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx,vue,svelte}": [
-      "prettier --write",
-      "eslint --cache --fix"
-    ]
+    "vite": "^4.0.3"
   },
   "dependencies": {
-    "alpinejs": "^3.10.5"
+    "classnames": "^2.3.2",
+    "heroiconsvelte": "^0.1.5"
   }
 }

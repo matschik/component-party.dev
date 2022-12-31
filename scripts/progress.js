@@ -1,9 +1,9 @@
 import { remark } from "remark";
 import fs from "fs/promises";
-import frameworks from "../src/frameworks.mjs";
 import { packageDirectory } from "pkg-dir";
 import nodePath from "node:path";
 import kebabCase from "lodash.kebabcase";
+import FRAMEWORKS from "../frameworks.mjs";
 
 function removeMarkdownHeadingContent(
   content,
@@ -127,7 +127,7 @@ async function main() {
   );
 
   let progressionContent = "";
-  for (const framework of frameworks) {
+  for (const framework of FRAMEWORKS) {
     function mdCheck(b) {
       return b ? "x" : " ";
     }

@@ -1,5 +1,3 @@
-[![Open in Gitpod][gitpod-src]][gitpod-href]
-
 ![Component Party 🎉](.github/banner.webp)
 
 > Web component JS frameworks quick overview by their syntax and features
@@ -393,8 +391,3 @@ This project exists thanks to all the people who contribute. \[[Contribute](CONT
 ## ⚖️ License
 
 MIT. Made with 💖
-
-<!-- variables -->
-
-[gitpod-src]: https://shields.io/badge/Open%20in-Gitpod-green?logo=Gitpod
-[gitpod-href]: https://gitpod.io/#https://github.com/matschik/component-party
