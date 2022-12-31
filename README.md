@@ -367,7 +367,7 @@ How do we solve this ? Developers love having framework overview by examples. It
         <summary>
             <img width="18" height="18" src="public/framework/aurelia.svg" />
             <b>Aurelia 1</b>
-            <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/20" /></summary>
+            <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/25" /></summary>
 
 - [x] Reactivity
   - [x] Declare state
