@@ -383,8 +383,8 @@ How do we solve this ? Developers love having framework overview by examples. It
 - [x] Lifecycle
   - [x] On mount
   - [x] On unmount
-- [ ] Component composition
-  - [ ] Props
+- [-] Component composition
+  - [x] Props
   - [ ] Emit to parent
   - [ ] Slot
   - [ ] Slot fallback
