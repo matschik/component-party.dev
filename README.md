@@ -377,9 +377,9 @@ How do we solve this ? Developers love having framework overview by examples. It
   - [x] Minimal template
   - [x] Styling
   - [x] Loop
-  - [ ] Event click
-  - [ ] Dom ref
-  - [ ] Conditional
+  - [x] Event click
+  - [x] Dom ref
+  - [x] Conditional
 - [ ] Lifecycle
   - [ ] On mount
   - [ ] On unmount
