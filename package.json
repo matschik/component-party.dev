@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "node scripts/generateContent.js && vite",
     "build": "node scripts/generateContent.js && vite build",
     "content": "node scripts/generateContent.js",
     "preview": "vite preview",

@@ -128,7 +128,7 @@
 
     <main
       id="main-content"
-      class="px-6 md:px-14 max-w-full lg:px-20 pt-10 prose prose-sm prose-invert prose-h1:scroll-mt-[5rem] prose-pre:mt-0 prose-h2:scroll-mt-[5rem]"
+      class="px-6 md:px-14 lg:px-20 max-w-full  pt-10 prose prose-sm prose-invert prose-h1:scroll-mt-[5rem] prose-pre:mt-0 prose-h2:scroll-mt-[5rem]"
     >
       <div>
         {#each sections as section}

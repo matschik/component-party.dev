@@ -3,10 +3,11 @@ import { packageDirectory } from "pkg-dir";
 import path from "node:path";
 import kebabCase from "lodash.kebabcase";
 import { getHighlighter } from "shiki";
+import componentPartyShikiTheme from "./componentPartyShikiTheme.js";
 
 const highlighter = await getHighlighter({
-  theme: "css-variables",
-  langs: ["javascript", "svelte", "html", "hbs", "tsx", "jsx", "vue"],
+  theme: componentPartyShikiTheme,
+  langs: ["javascript", "svelte", "html", "hbs", "ts", "tsx", "jsx", "vue", "md"],
 });
 
 const rootDir = await packageDirectory();

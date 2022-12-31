@@ -1,13 +1,4 @@
 :root {
-  --shiki-color-text: theme("colors.white");
-  --shiki-token-constant: theme("colors.emerald.300");
-  --shiki-token-string: theme("colors.emerald.300");
-  --shiki-token-comment: theme("colors.zinc.500");
-  --shiki-token-keyword: theme("colors.sky.300");
-  --shiki-token-parameter: theme("colors.pink.300");
-  --shiki-token-function: theme("colors.violet.300");
-  --shiki-token-string-expression: theme("colors.emerald.300");
-  --shiki-token-punctuation: theme("colors.zinc.200");
   color-scheme: dark;
 }
 
@@ -15,8 +6,9 @@
   font-family: "Mona Sans";
   src: url("/font/Mona-Sans.woff2") format("woff2 supports variations"),
     url("/font/Mona-Sans.woff2") format("woff2-variations");
-  font-weight: 200 900;
+  font-weight: 200 500;
   font-stretch: 75% 125%;
+  font-display: swap;
 }
 
 @tailwind base;

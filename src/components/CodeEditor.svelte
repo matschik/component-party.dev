@@ -50,7 +50,7 @@
 </div>
 
 <div class="relative group">
-  <div bind:this={codeSnippetEl} class="text-lg bg-[#0d1117]">
+  <div bind:this={codeSnippetEl} class="text-[1.2rem] bg-[#0d1117]">
     {@html snippet.content}
   </div>
   <div
