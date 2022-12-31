@@ -363,6 +363,41 @@ How do we solve this ? Developers love having framework overview by examples. It
   - [x] Router link
   - [x] Routing
 
+</details><details>
+        <summary>
+            <img width="18" height="18" src="public/framework/aurelia1.svg" />
+            <b>Aurelia 1</b>
+            <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/20" /></summary>
+
+- [x] Reactivity
+  - [x] Declare state
+  - [x] Update state
+  - [x] Computed state
+- [x] Templating
+  - [x] Minimal template
+  - [x] Styling
+  - [x] Loop
+  - [ ] Event click
+  - [ ] Dom ref
+  - [ ] Conditional
+- [ ] Lifecycle
+  - [ ] On mount
+  - [ ] On unmount
+- [ ] Component composition
+  - [ ] Props
+  - [ ] Emit to parent
+  - [ ] Slot
+  - [ ] Slot fallback
+- [ ] Form input
+  - [ ] Input text
+  - [ ] Checkbox
+  - [ ] Radio
+  - [ ] Select
+- [ ] Webapp features
+  - [ ] Fetch data
+  - [ ] Router link
+  - [ ] Routing
+
 </details>
 
 ## 🤝 Contributing
