@@ -385,7 +385,7 @@ How do we solve this ? Developers love having framework overview by examples. It
   - [x] On unmount
 - [-] Component composition
   - [x] Props
-  - [ ] Emit to parent
+  - [x] Emit to parent
   - [ ] Slot
   - [ ] Slot fallback
 - [ ] Form input
