@@ -23,6 +23,7 @@
     }
     frameworkIdsSelected = frameworkIdsSelected;
   }
+  
   $: {
     async function importFrameworkSnippets(frameworkIds) {
       for (const frameworkId of frameworkIds) {
@@ -132,10 +133,9 @@
     >
       <div>
         {#each sections as section}
-          <h1 id={section.sectionId}>
+          <h1 id={section.sectionId} class="header-anchor">
             {section.title}
             <a
-              class="header-anchor"
               href={"#" + section.sectionId}
               aria-hidden="true"
               tabindex="-1"
@@ -145,10 +145,9 @@
           </h1>
 
           {#each snippets.filter((s) => s.sectionId === section.sectionId) as snippet}
-            <h2 id={snippet.snippetId}>
+            <h2 id={snippet.snippetId} class="header-anchor">
               {snippet.title}
               <a
-                class="header-anchor"
                 href={"#" + snippet.snippetId}
                 aria-hidden="true"
                 tabindex="-1"
@@ -202,7 +201,7 @@
 </div>
 
 <style>
-  .header-anchor {
+  .header-anchor > a {
     float: left;
     margin-left: -0.87em;
     padding-right: 0.23em;
@@ -212,8 +211,7 @@
     text-decoration: none;
   }
 
-  h1:hover .header-anchor,
-  h2:hover .header-anchor {
+  .header-anchor:hover > a {
     opacity: 100;
   }
 </style>
