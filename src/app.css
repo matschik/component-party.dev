@@ -30,3 +30,7 @@ html {
     background-color: rgba(0, 0, 0, 0);
   }
 }
+
+.shiki {
+  @apply text-[1.05rem];
+}

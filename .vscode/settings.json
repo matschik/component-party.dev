@@ -1,6 +1,5 @@
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnSave": false,
   // Runs Prettier, then ESLint
   "editor.codeActionsOnSave": ["source.formatDocument", "source.fixAll.eslint"],
   "[svelte]": {

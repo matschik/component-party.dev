@@ -13,6 +13,7 @@
   },
   "devDependencies": {
     "@matschik/lz-string": "^0.0.2",
+    "@stefanprobst/remark-shiki": "^2.1.0",
     "@sveltejs/vite-plugin-svelte": "^2.0.2",
     "@tailwindcss/typography": "^0.5.8",
     "autoprefixer": "^10.4.13",
@@ -21,14 +22,20 @@
     "pkg-dir": "^7.0.0",
     "postcss": "^8.4.20",
     "prettier": "^2.8.1",
+    "rehype-raw": "^6.1.1",
+    "rehype-stringify": "^9.0.3",
     "remark": "^14.0.2",
+    "remark-parse": "^10.0.1",
+    "remark-rehype": "^10.1.0",
     "shiki": "^0.12.1",
     "svelte": "^3.55.0",
     "svelte-preprocess": "^5.0.0",
     "tailwindcss": "^3.2.4",
+    "unified": "^10.1.2",
     "vite": "^4.0.3"
   },
   "dependencies": {
+    "@veljs/svelte": "^0.1.8",
     "classnames": "^2.3.2",
     "heroiconsvelte": "^0.1.5"
   }

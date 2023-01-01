@@ -5,8 +5,9 @@ import kebabCase from "lodash.kebabcase";
 import { getHighlighter } from "shiki";
 import FRAMEWORKS from "../frameworks.mjs";
 import frameworkPlayground from "./lib/playground/index.js";
-import componentPartyShikiTheme from "./componentPartyShikiTheme.js";
+import componentPartyShikiTheme from "./lib/componentPartyShikiTheme.js";
 import prettier from "prettier";
+import markdownToHtml from "./lib/markdownToHtml.js";
 
 const highlighter = await getHighlighter({
   theme: componentPartyShikiTheme,
@@ -57,6 +58,7 @@ for (const sectionDirName of sectionDirNames) {
         snippetId,
         files: [],
         playgroundURL: "",
+        markdownContent: "",
       };
 
       const codeFilesDirPath = path.join(frameworksDirPath, frameworkId);
@@ -67,6 +69,12 @@ for (const sectionDirName of sectionDirNames) {
         const ext = path.parse(codeFilePath).ext.split(".").pop();
         const content = await fs.readFile(codeFilePath, "utf-8");
 
+        if (ext === "md") {
+          frameworkSnippet.markdownContent = await markdownToHtml(content);
+          // Only support 1 markdown file and every other files are ignored
+          break;
+        }
+
         frameworkSnippet.files.push({
           fileName: codeFileName,
           ext,
@@ -75,13 +83,15 @@ for (const sectionDirName of sectionDirNames) {
         });
       }
 
-      const playgroundURL = generatePlaygroundURL(
-        frameworkId,
-        frameworkSnippet.files
-      );
+      if (frameworkSnippet.files.length > 0) {
+        const playgroundURL = generatePlaygroundURL(
+          frameworkId,
+          frameworkSnippet.files
+        );
 
-      if (playgroundURL) {
-        frameworkSnippet.playgroundURL = playgroundURL;
+        if (playgroundURL) {
+          frameworkSnippet.playgroundURL = playgroundURL;
+        }
       }
 
       if (!byFrameworkId[frameworkId]) {
