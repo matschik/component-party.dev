@@ -152,7 +152,7 @@
               class="grid grid-cols-1 2xl:grid-cols-2 gap-10"
               style="margin-top: 1rem;"
             >
-              {#each [...frameworkIdsSelected] as frameworkId}
+              {#each [...frameworkIdsSelected] as frameworkId (frameworkId)}
                 {@const framework = FRAMEWORKS.find(
                   (f) => f.id === frameworkId
                 )}

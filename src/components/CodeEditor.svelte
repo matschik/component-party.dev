@@ -7,8 +7,9 @@
 
   let codeSnippetEl;
 
-  let filenameSelected = files[0]?.fileName;
-  $: snippet = files.find((s) => s.fileName === filenameSelected);
+  let filenameSelected = files.length > 0 && files[0]?.fileName;
+  $: snippet =
+    filenameSelected && files.find((s) => s.fileName === filenameSelected);
 
   function copyToClipboard(value) {
     const $textarea = document.createElement("textarea");
@@ -39,7 +40,7 @@
 </script>
 
 <div class="flex space-x-1 items-center ml-0 overflow-x-auto">
-  {#each files as file}
+  {#each files as file (file.fileName)}
     <button
       class={c(
         "bg-[#0d1117] py-1.5 px-3 font-medium flex-shrink-0 text-xs rounded-t inline-block",
