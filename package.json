@@ -5,11 +5,10 @@
   "type": "module",
   "packageManager": "pnpm@7.0.0",
   "scripts": {
-    "dev": "node scripts/generateContent.js && vite",
-    "build": "node scripts/generateContent.js && vite build",
-    "content": "node scripts/generateContent.js",
+    "dev": "vite",
+    "build": "vite build",
     "preview": "vite preview",
-    "progress": "node scripts/progress.js"
+    "progress": "node scripts/generateReadMeProgress.js"
   },
   "devDependencies": {
     "@matschik/lz-string": "^0.0.2",

@@ -167,5 +167,4 @@ ${list}
 
   await fs.writeFile("README.md", newContent);
 }
-
 main().catch(console.error);
