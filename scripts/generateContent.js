@@ -69,21 +69,19 @@ for (const sectionDirName of sectionDirNames) {
         const ext = path.parse(codeFilePath).ext.split(".").pop();
         const content = await fs.readFile(codeFilePath, "utf-8");
 
+        const file = {
+          fileName: codeFileName,
+          ext,
+          content,
+          contentHtml: "",
+        };
+
         if (ext === "md") {
-          const contentHtml = await markdownToHtml(content);
-          frameworkSnippet.markdownFiles.push({
-            fileName: codeFileName,
-            ext,
-            content,
-            contentHtml,
-          });
+          file.contentHtml = await markdownToHtml(content);
+          frameworkSnippet.markdownFiles.push(file);
         } else {
-          frameworkSnippet.files.push({
-            fileName: codeFileName,
-            ext,
-            content,
-            contentHtml: highlighter.codeToHtml(content, { lang: ext }),
-          });
+          file.contentHtml = highlighter.codeToHtml(content, { lang: ext });
+          frameworkSnippet.files.push(file);
         }
       }
 
