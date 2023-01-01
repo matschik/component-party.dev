@@ -58,7 +58,7 @@ for (const sectionDirName of sectionDirNames) {
         snippetId,
         files: [],
         playgroundURL: "",
-        markdownContent: "",
+        markdownFiles: [],
       };
 
       const codeFilesDirPath = path.join(frameworksDirPath, frameworkId);
@@ -70,17 +70,21 @@ for (const sectionDirName of sectionDirNames) {
         const content = await fs.readFile(codeFilePath, "utf-8");
 
         if (ext === "md") {
-          frameworkSnippet.markdownContent = await markdownToHtml(content);
-          // Only support 1 markdown file and every other files are ignored
-          break;
+          const contentHtml = await markdownToHtml(content);
+          frameworkSnippet.markdownFiles.push({
+            fileName: codeFileName,
+            ext,
+            content,
+            contentHtml,
+          });
+        } else {
+          frameworkSnippet.files.push({
+            fileName: codeFileName,
+            ext,
+            content,
+            contentHtml: highlighter.codeToHtml(content, { lang: ext }),
+          });
         }
-
-        frameworkSnippet.files.push({
-          fileName: codeFileName,
-          ext,
-          content,
-          contentHtml: highlighter.codeToHtml(content, { lang: ext }),
-        });
       }
 
       if (frameworkSnippet.files.length > 0) {
