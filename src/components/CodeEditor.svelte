@@ -51,7 +51,7 @@
 
 <div class="relative group">
   <div bind:this={codeSnippetEl} class="text-[1.2rem] bg-[#0d1117]">
-      {@html snippet.content}
+      {@html snippet.contentHtml}
   </div>
   <div
     class="absolute hidden group-hover:block transition-all top-0 right-0 mt-2 mr-2"

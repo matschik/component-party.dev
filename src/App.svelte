@@ -23,7 +23,7 @@
     }
     frameworkIdsSelected = frameworkIdsSelected;
   }
-  
+
   $: {
     async function importFrameworkSnippets(frameworkIds) {
       for (const frameworkId of frameworkIds) {
@@ -135,11 +135,7 @@
         {#each sections as section}
           <h1 id={section.sectionId} class="header-anchor">
             {section.title}
-            <a
-              href={"#" + section.sectionId}
-              aria-hidden="true"
-              tabindex="-1"
-            >
+            <a href={"#" + section.sectionId} aria-hidden="true" tabindex="-1">
               #
             </a>
           </h1>
@@ -166,31 +162,66 @@
                 {@const frameworkSnippet = snippetsByFrameworkId
                   .get(frameworkId)
                   ?.find((s) => s.snippetId === snippet.snippetId)}
-                <div style:margin-top="0rem" style:order="0">
-                  <div class="flex justify-between items-center space-x-3">
-                    <h3 style="margin-top: 0rem; margin-bottom: 0rem;">
-                      <FrameworkLabel id={framework.id} />
-                    </h3>
-                    <div class="flex items-center space-x-3">
-                      <button
-                        class="opacity-50 hover:opacity-100 bg-gray-800 hover:bg-gray-700 py-1 px-1.5 rounded transition-all"
-                        title={`Hide ${framework.title} snippets`}
-                        aria-label={`Hide ${framework.title} snippets`}
-                        on:click={() => hideFrameworkId(framework.id)}
-                      >
-                        <EyeSlashIcon class="h-4 w-4" />
-                      </button>
+                {#if frameworkSnippet}
+                  <div style:margin-top="0rem" style:order="0">
+                    <div class="flex justify-between items-center space-x-3">
+                      <h3 style="margin-top: 0rem; margin-bottom: 0rem;">
+                        <FrameworkLabel id={framework.id} />
+                      </h3>
+                      <div class="flex items-center space-x-3">
+                        {#if frameworkSnippet.playgroundURL}
+                          <a
+                            href={frameworkSnippet.playgroundURL}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            <button
+                              class="opacity-50 hover:opacity-100 bg-gray-800 hover:bg-gray-700 py-1 px-1.5 rounded transition-all"
+                              title={`Open playground for ${framework.title}`}
+                              aria-label={`Open playground for ${framework.title}`}
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="h-4 w-4"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                stroke-width="2"
+                              >
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
+                                />
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                />
+                              </svg>
+                            </button>
+                          </a>
+                        {/if}
+                        <button
+                          class="opacity-50 hover:opacity-100 bg-gray-800 hover:bg-gray-700 py-1 px-1.5 rounded transition-all"
+                          title={`Hide ${framework.title} snippets`}
+                          aria-label={`Hide ${framework.title} snippets`}
+                          on:click={() => hideFrameworkId(framework.id)}
+                        >
+                          <EyeSlashIcon class="h-4 w-4" />
+                        </button>
+                      </div>
+                    </div>
+                    <div class="mt-2">
+                      {#if frameworkSnippet}
+                        <CodeEditor
+                          files={frameworkSnippet.files}
+                          editHref={`https://github.com/matschik/component-party/tree/main/content/${snippet.sectionDirName}/${snippet.snippetDirName}/${frameworkId}`}
+                        />
+                      {/if}
                     </div>
                   </div>
-                  <div class="mt-2">
-                    {#if frameworkSnippet}
-                      <CodeEditor
-                        files={frameworkSnippet.files}
-                        editHref={`https://github.com/matschik/component-party/tree/main/content/${snippet.sectionDirName}/${snippet.snippetDirName}/${frameworkId}`}
-                      />
-                    {/if}
-                  </div>
-                </div>
+                {/if}
               {/each}
             </div>
           {/each}

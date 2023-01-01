@@ -12,12 +12,15 @@
     "progress": "node scripts/progress.js"
   },
   "devDependencies": {
+    "@matschik/lz-string": "^0.0.2",
     "@sveltejs/vite-plugin-svelte": "^2.0.2",
     "@tailwindcss/typography": "^0.5.8",
     "autoprefixer": "^10.4.13",
+    "codesandbox": "^2.2.3",
     "lodash.kebabcase": "^4.1.1",
     "pkg-dir": "^7.0.0",
     "postcss": "^8.4.20",
+    "prettier": "^2.8.1",
     "remark": "^14.0.2",
     "shiki": "^0.12.1",
     "svelte": "^3.55.0",
