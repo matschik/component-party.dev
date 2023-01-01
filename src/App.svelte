@@ -12,9 +12,26 @@
   import CodeEditor from "./components/CodeEditor.svelte";
   import AppNotificationCenter from "./components/AppNotificationCenter.svelte";
   import GithubIcon from "./components/GithubIcon.svelte";
+  import createLocaleStorage from "./lib/createLocaleStorage.js";
+  import { onMount } from "svelte";
 
-  let frameworkIdsSelected = new Set(["svelte"]);
+  const frameworkIdsSelectedStorage = createLocaleStorage("framework_display");
+
+  let frameworkIdsSelected = new Set();
   let snippetsByFrameworkId = new Map();
+
+  let frameworkIdsSelectedStorageInitialized = false;
+
+  onMount(() => {
+    frameworkIdsSelected = new Set(frameworkIdsSelectedStorage.getJSON());
+    frameworkIdsSelectedStorageInitialized = true;
+  });
+
+  $: {
+    if (frameworkIdsSelectedStorageInitialized) {
+      frameworkIdsSelectedStorage.setJSON([...frameworkIdsSelected]);
+    }
+  }
 
   function hideFrameworkId(frameworkId) {
     frameworkIdsSelected.delete(frameworkId);
@@ -148,81 +165,83 @@
                 #
               </a>
             </h2>
-            <div
-              class="grid grid-cols-1 2xl:grid-cols-2 gap-10"
-              style="margin-top: 1rem;"
-            >
-              {#each [...frameworkIdsSelected] as frameworkId (frameworkId)}
-                {@const framework = FRAMEWORKS.find(
-                  (f) => f.id === frameworkId
-                )}
-                {@const frameworkSnippet = snippetsByFrameworkId
-                  .get(frameworkId)
-                  ?.find((s) => s.snippetId === snippet.snippetId)}
-                {#if frameworkSnippet}
-                  <div style:margin-top="0rem" style:order="0">
-                    <div class="flex justify-between items-center space-x-3">
-                      <h3 style="margin-top: 0rem; margin-bottom: 0rem;">
-                        <FrameworkLabel id={framework.id} />
-                      </h3>
-                      <div class="flex items-center space-x-3">
-                        {#if frameworkSnippet.playgroundURL}
+            {#if frameworkIdsSelectedStorageInitialized}
+              <div
+                class="grid grid-cols-1 2xl:grid-cols-2 gap-10"
+                style="margin-top: 1rem;"
+              >
+                {#each [...frameworkIdsSelected] as frameworkId (frameworkId)}
+                  {@const framework = FRAMEWORKS.find(
+                    (f) => f.id === frameworkId
+                  )}
+                  {@const frameworkSnippet = snippetsByFrameworkId
+                    .get(frameworkId)
+                    ?.find((s) => s.snippetId === snippet.snippetId)}
+                  {#if frameworkSnippet}
+                    <div style:margin-top="0rem" style:order="0">
+                      <div class="flex justify-between items-center space-x-3">
+                        <h3 style="margin-top: 0rem; margin-bottom: 0rem;">
+                          <FrameworkLabel id={framework.id} />
+                        </h3>
+                        <div class="flex items-center space-x-3">
+                          {#if frameworkSnippet.playgroundURL}
+                            <a
+                              href={frameworkSnippet.playgroundURL}
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              <button
+                                class="opacity-50 hover:opacity-100 bg-gray-800 hover:bg-gray-700 py-1 px-1.5 rounded transition-all"
+                                title={`Open playground for ${framework.title}`}
+                                aria-label={`Open playground for ${framework.title}`}
+                              >
+                                <PlayIcon class="h-4 w-4" />
+                              </button>
+                            </a>
+                          {/if}
                           <a
-                            href={frameworkSnippet.playgroundURL}
+                            href={`https://github.com/matschik/component-party/tree/main/content/${snippet.sectionDirName}/${snippet.snippetDirName}/${frameworkId}`}
                             target="_blank"
                             rel="noreferrer"
                           >
                             <button
                               class="opacity-50 hover:opacity-100 bg-gray-800 hover:bg-gray-700 py-1 px-1.5 rounded transition-all"
-                              title={`Open playground for ${framework.title}`}
-                              aria-label={`Open playground for ${framework.title}`}
+                              title="Edit on Github"
+                              aria-label="Edit on Github"
                             >
-                              <PlayIcon class="h-4 w-4" />
+                              <PencilIcon class="h-4 w-4" />
                             </button>
                           </a>
-                        {/if}
-                        <a
-                          href={`https://github.com/matschik/component-party/tree/main/content/${snippet.sectionDirName}/${snippet.snippetDirName}/${frameworkId}`}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          <button
-                            class="opacity-50 hover:opacity-100 bg-gray-800 hover:bg-gray-700 py-1 px-1.5 rounded transition-all"
-                            title="Edit on Github"
-                            aria-label="Edit on Github"
-                          >
-                            <PencilIcon class="h-4 w-4" />
-                          </button>
-                        </a>
-                        <div>
-                          <button
-                            class="opacity-50 hover:opacity-100 bg-gray-800 hover:bg-gray-700 py-1 px-1.5 rounded transition-all"
-                            title={`Hide ${framework.title} snippets`}
-                            aria-label={`Hide ${framework.title} snippets`}
-                            on:click={() => hideFrameworkId(framework.id)}
-                          >
-                            <EyeSlashIcon class="h-4 w-4" />
-                          </button>
+                          <div>
+                            <button
+                              class="opacity-50 hover:opacity-100 bg-gray-800 hover:bg-gray-700 py-1 px-1.5 rounded transition-all"
+                              title={`Hide ${framework.title} snippets`}
+                              aria-label={`Hide ${framework.title} snippets`}
+                              on:click={() => hideFrameworkId(framework.id)}
+                            >
+                              <EyeSlashIcon class="h-4 w-4" />
+                            </button>
+                          </div>
                         </div>
                       </div>
+                      <div class="mt-2">
+                        {#if frameworkSnippet.markdownFiles.length > 0}
+                          <div class="space-y-2">
+                            {#each frameworkSnippet.markdownFiles as markdownFile}
+                              <div>
+                                {@html markdownFile.contentHtml}
+                              </div>
+                            {/each}
+                          </div>
+                        {:else if frameworkSnippet.files.length > 0}
+                          <CodeEditor files={frameworkSnippet.files} />
+                        {/if}
+                      </div>
                     </div>
-                    <div class="mt-2">
-                      {#if frameworkSnippet.markdownFiles.length > 0}
-                        <div class="space-y-2">
-                          {#each frameworkSnippet.markdownFiles as markdownFile}
-                            <div>
-                              {@html markdownFile.contentHtml}
-                            </div>
-                          {/each}
-                        </div>
-                      {:else if frameworkSnippet.files.length > 0}
-                        <CodeEditor files={frameworkSnippet.files} />
-                      {/if}
-                    </div>
-                  </div>
-                {/if}
-              {/each}
-            </div>
+                  {/if}
+                {/each}
+              </div>
+            {/if}
           {/each}
         {/each}
       </div>
