@@ -3,16 +3,7 @@ import { svelte } from "@sveltejs/vite-plugin-svelte";
 import sveltePreprocess from "svelte-preprocess";
 import { createHtmlPlugin } from "vite-plugin-html";
 import FRAMEWORKS from "./frameworks.mjs";
-import generateContent from "./vite-plugins/generateContent.js";
-
-function pluginGenerateFrameworkContent() {
-  return {
-    name: "generateFrameworkContent",
-    async buildStart() {
-      await generateContent();
-    },
-  };
-}
+import pluginGenerateFrameworkContent from "./vite-plugins/pluginGenerateFrameworkContent.js";
 
 // https://vitejs.dev/config/
 export default defineConfig({

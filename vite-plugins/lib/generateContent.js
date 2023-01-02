@@ -3,11 +3,11 @@ import { packageDirectory } from "pkg-dir";
 import path from "node:path";
 import kebabCase from "lodash.kebabcase";
 import { getHighlighter } from "shiki";
-import FRAMEWORKS from "../frameworks.mjs";
-import frameworkPlayground from "./lib/playground/index.js";
-import componentPartyShikiTheme from "./lib/componentPartyShikiTheme.js";
+import FRAMEWORKS from "../../frameworks.mjs";
+import frameworkPlayground from "./playground/index.js";
+import componentPartyShikiTheme from "./componentPartyShikiTheme.js";
 import prettier from "prettier";
-import markdownToHtml from "./lib/markdownToHtml.js";
+import markdownToHtml from "./markdownToHtml.js";
 
 export default async function generateContent() {
   const highlighter = await getHighlighter({

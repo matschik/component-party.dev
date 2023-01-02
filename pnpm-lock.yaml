@@ -9,8 +9,10 @@ specifiers:
   autoprefixer: ^10.4.13
   classnames: ^2.3.2
   codesandbox: ^2.2.3
+  folder-hash: ^4.0.2
   heroiconsvelte: ^0.1.5
   lodash.kebabcase: ^4.1.1
+  micache: ^2.4.1
   pkg-dir: ^7.0.0
   postcss: ^8.4.20
   prettier: ^2.8.1
@@ -39,7 +41,9 @@ devDependencies:
   '@tailwindcss/typography': 0.5.8_tailwindcss@3.2.4
   autoprefixer: 10.4.13_postcss@8.4.20
   codesandbox: 2.2.3
+  folder-hash: 4.0.2
   lodash.kebabcase: 4.1.1
+  micache: 2.4.1
   pkg-dir: 7.0.0
   postcss: 8.4.20
   prettier: 2.8.1
@@ -1388,6 +1392,18 @@ packages:
       readable-stream: 2.3.7
     dev: true
 
+  /folder-hash/4.0.2:
+    resolution: {integrity: sha512-Iw9GCqdA+zHfDVvk90TSAV66jq0IwiZaPvPgUiW+DHRwnaPOeZomzlgutx9QclinsQGz/XcVIGlDEJbFhCV5wA==}
+    engines: {node: '>=10.10.0'}
+    hasBin: true
+    dependencies:
+      debug: 4.3.4
+      graceful-fs: 4.2.10
+      minimatch: 5.0.1
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
   /follow-redirects/1.5.10:
     resolution: {integrity: sha512-0V5l4Cizzvqt5D44aTXbFZz+FtyXV1vrDN6qrelxtfYQKW0KO0W2T/hkE8xvGa/540LkZlkaUjO4ailYTFtHVQ==}
     engines: {node: '>=4.0'}
@@ -2175,6 +2191,12 @@ packages:
     engines: {node: '>= 8'}
     dev: true
 
+  /micache/2.4.1:
+    resolution: {integrity: sha512-PyKt0WSraY0WwZvBzQkluvNR+9P3Zjsv74YNtQiymdYMG4yMS1fwrNJqhPQt4y/D3OyGzLq8SKyZSYSCp+mKAg==}
+    dependencies:
+      pkg-dir: 6.0.1
+    dev: true
+
   /micromark-core-commonmark/1.0.6:
     resolution: {integrity: sha512-K+PkJTxqjFfSNkfAhp4GB+cZPfQd6dxtTXnf+RjZOV7T4EEXnvgzOcnp+eSTmpGk9d1S9sL6/lqrgSNn/s0HZA==}
     dependencies:
@@ -2379,6 +2401,13 @@ packages:
     resolution: {integrity: sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==}
     dependencies:
       brace-expansion: 1.1.11
+    dev: true
+
+  /minimatch/5.0.1:
+    resolution: {integrity: sha512-nLDxIFRyhDblz3qMuq+SoRZED4+miJ/G+tdDrjkkkRnjAsBexeGpgjLEQ0blJy7rHhR2b93rhQY4SvyWu9v03g==}
+    engines: {node: '>=10'}
+    dependencies:
+      brace-expansion: 2.0.1
     dev: true
 
   /minimatch/5.1.2:
@@ -2753,6 +2782,13 @@ packages:
   /pify/3.0.0:
     resolution: {integrity: sha512-C3FsVNH1udSEX48gGX1xfvwTWfsYWj5U+8/uK15BGzIGrKoUpghX8hWZwa/OFnakBiiVNmBvemTJR5mcy7iPcg==}
     engines: {node: '>=4'}
+    dev: true
+
+  /pkg-dir/6.0.1:
+    resolution: {integrity: sha512-C9R+PTCKGA32HG0n5I4JMYkdLL58ZpayVuncQHQrGeKa8o26A4o2x0u6BKekHG+Au0jv5ZW7Xfq1Cj6lm9Ag4w==}
+    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
+    dependencies:
+      find-up: 6.3.0
     dev: true
 
   /pkg-dir/7.0.0:
