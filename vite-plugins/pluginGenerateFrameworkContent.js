@@ -3,6 +3,8 @@ import generateContent from "./lib/generateContent.js";
 import { createFsCache } from "micache";
 import { hashElement } from "folder-hash";
 
+console.log(process.env.NODE_ENV);
+
 const contentDirFsCache = await createFsCache("pluginGenerateFrameworkContent");
 
 export default function pluginGenerateFrameworkContent() {
@@ -25,7 +27,10 @@ export default function pluginGenerateFrameworkContent() {
     }
   }
 
-  const fsContentWatcher = fs.watch("content", { recursive: true }, build);
+  let fsContentWatcher;
+  if (process.env.NODE_ENV === "development") {
+    fs.watch("content", { recursive: true }, build);
+  }
 
   return {
     name,
@@ -33,7 +38,7 @@ export default function pluginGenerateFrameworkContent() {
       await build();
     },
     buildEnd() {
-      fsContentWatcher.close();
+      fsContentWatcher && fsContentWatcher.close();
     },
   };
 }
