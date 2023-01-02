@@ -8,6 +8,10 @@ import frameworkPlayground from "./playground/index.js";
 import componentPartyShikiTheme from "./componentPartyShikiTheme.js";
 import prettier from "prettier";
 import markdownToHtml from "./markdownToHtml.js";
+import {
+  highlightAngularComponent,
+  mustUseAngularHighlighter,
+} from "./angularHighlighter.js";
 
 export default async function generateContent() {
   const highlighter = await getHighlighter({
@@ -82,7 +86,10 @@ export default async function generateContent() {
             file.contentHtml = await markdownToHtml(content);
             frameworkSnippet.markdownFiles.push(file);
           } else {
-            file.contentHtml = highlighter.codeToHtml(content, { lang: ext });
+            file.contentHtml = mustUseAngularHighlighter(content)
+              ? highlightAngularComponent(highlighter.codeToHtml, content, ext)
+              : highlighter.codeToHtml(content, { lang: ext });
+
             frameworkSnippet.files.push(file);
           }
         }

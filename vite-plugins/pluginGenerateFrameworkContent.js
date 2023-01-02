@@ -1,9 +1,7 @@
-import fs, { watch } from "fs";
+import fs from "fs";
 import generateContent from "./lib/generateContent.js";
 import { createFsCache } from "micache";
 import { hashElement } from "folder-hash";
-
-console.log(process.env.NODE_ENV);
 
 const contentDirFsCache = await createFsCache("pluginGenerateFrameworkContent");
 

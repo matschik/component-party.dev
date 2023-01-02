@@ -8,7 +8,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "progress": "node scripts/generateReadMeProgress.js"
+    "build:content": "node vite-plugins/generateContentExec.js",
+    "build:progress": "node scripts/generateReadMeProgress.js"
   },
   "dependencies": {
     "@veljs/svelte": "^0.1.8",
