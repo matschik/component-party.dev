@@ -29,7 +29,7 @@ export default function pluginGenerateFrameworkContent() {
 
   let fsContentWatcher;
   if (process.env.NODE_ENV === "development") {
-    fs.watch("content", { recursive: true }, build);
+    fsContentWatcher = fs.watch("content", { recursive: true }, build);
   }
 
   return {
