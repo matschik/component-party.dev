@@ -16,6 +16,7 @@
   import { onMount } from "svelte";
   import Header from "./components/Header.svelte";
   import Aside from "./components/Aside.svelte";
+  import GithubIcon from "./components/GithubIcon.svelte";
 
   const frameworkIdsSelectedStorage = createLocaleStorage("framework_display");
 
@@ -176,7 +177,7 @@
                                 </a>
                               {/if}
                               <a
-                                href={`https://github.com/matschik/component-party/tree/main/content/${snippet.sectionDirName}/${snippet.snippetDirName}/${frameworkId}`}
+                                href={frameworkSnippet.snippetEditHref}
                                 target="_blank"
                                 rel="noreferrer"
                               >
@@ -211,6 +212,40 @@
                               </div>
                             {:else if frameworkSnippet.files.length > 0}
                               <CodeEditor files={frameworkSnippet.files} />
+                            {:else}
+                              <div
+                                class="bg-gray-800 text-white rounded-md mx-auto"
+                              >
+                                <div class="text-center py-8 px-4 sm:px-6">
+                                  <div>
+                                    <span
+                                      class="block text-2xl tracking-tight font-bold"
+                                    >
+                                      Missing snippet
+                                    </span>
+                                    <span
+                                      class="block text-lg mt-1 font-semibold"
+                                    >
+                                      Help us to improve Component Party 🎉
+                                    </span>
+                                  </div>
+                                  <div class="mt-6 flex justify-center">
+                                    <div class="inline-flex rounded-md shadow">
+                                      <a
+                                        class="inline-flex space-x-2 items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-[#161b22] hover:bg-[#161b22]/80 no-underline"
+                                        href={frameworkSnippet.snippetEditHref}
+                                      >
+                                        <button
+                                          class="flex items-center space-x-3"
+                                        >
+                                          <span>Contribute on Github</span>
+                                          <GithubIcon class="h-5 w-5" />
+                                        </button>
+                                      </a>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
                             {/if}
                           </div>
                         </div>

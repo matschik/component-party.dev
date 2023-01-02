@@ -17,7 +17,7 @@
 
 html {
   font-family: Mona Sans;
-  @apply bg-gray-900/80;
+  @apply bg-gray-900;
 }
 
 /* #main-content .astro-code {

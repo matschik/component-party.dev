@@ -7,9 +7,7 @@
   const framework = FRAMEWORKS.find((f) => f.id === id);
 
   const baseURL =
-    import.meta.env.MODE === "development"
-      ? ""
-      : "https://raw.githubusercontent.com/matschik/component-party/main/public/";
+    "https://raw.githubusercontent.com/matschik/component-party/main/public/";
 </script>
 
 <div class="flex items-center space-x-1">
