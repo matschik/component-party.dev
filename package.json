@@ -8,7 +8,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "build:content": "node vite-plugins/generateContentExec.js",
+    "build:content": "node scripts/generateContent.js",
     "build:progress": "node scripts/generateReadMeProgress.js"
   },
   "dependencies": {

@@ -14,7 +14,8 @@ export default function pluginGenerateFrameworkContent() {
 
   async function build() {
     logInfo("Generating framework content files...");
-    const contentDirHash = (await hashElement("content")).hash;
+    const contentDirHash =
+      (await hashElement("content")).hash + (await hashElement("build")).hash;
     const contentDirLastHash = await contentDirFsCache.get("contentDirHash");
     if (contentDirHash !== contentDirLastHash) {
       await generateContent();
