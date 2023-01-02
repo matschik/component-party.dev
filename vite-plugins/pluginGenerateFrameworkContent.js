@@ -25,12 +25,15 @@ export default function pluginGenerateFrameworkContent() {
     }
   }
 
-  fs.watch("content", { recursive: true }, build);
+  const fsContentWatcher = fs.watch("content", { recursive: true }, build);
 
   return {
     name,
     async buildStart() {
       await build();
+    },
+    buildEnd() {
+      fsContentWatcher.close();
     },
   };
 }
