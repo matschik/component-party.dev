@@ -389,7 +389,7 @@ How do we solve this ? Developers love having framework overview by examples. It
 - [ ] Form input
   - [x] Input text
   - [x] Checkbox
-  - [ ] Radio
+  - [x] Radio
   - [ ] Select
 - [ ] Webapp features
   - [ ] Fetch data
