@@ -381,13 +381,13 @@ How do we solve this ? Developers love having framework overview by examples. It
 - [x] Lifecycle
   - [x] On mount
   - [x] On unmount
-- [-] Component composition
+- [x] Component composition
   - [x] Props
   - [x] Emit to parent
-  - [ ] Slot
-  - [ ] Slot fallback
+  - [x] Slot
+  - [x] Slot fallback
 - [ ] Form input
-  - [ ] Input text
+  - [x] Input text
   - [ ] Checkbox
   - [ ] Radio
   - [ ] Select
