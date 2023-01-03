@@ -26,7 +26,9 @@
   let frameworkIdsSelectedStorageInitialized = false;
 
   onMount(() => {
-    frameworkIdsSelected = new Set(frameworkIdsSelectedStorage.getJSON());
+    frameworkIdsSelected = new Set(
+      frameworkIdsSelectedStorage.getJSON() || ["svelte", "react"]
+    );
     frameworkIdsSelectedStorageInitialized = true;
   });
 
