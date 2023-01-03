@@ -365,7 +365,7 @@ How do we solve this ? Developers love having framework overview by examples. It
         <summary>
             <img width="18" height="18" src="public/framework/aurelia.svg" />
             <b>Aurelia 1</b>
-            <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/40" /></summary>
+            <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/100" /></summary>
 
 - [x] Reactivity
   - [x] Declare state
@@ -391,10 +391,10 @@ How do we solve this ? Developers love having framework overview by examples. It
   - [x] Checkbox
   - [x] Radio
   - [x] Select
-- [ ] Webapp features
+- [x] Webapp features
   - [x] Fetch data (Todo: test code)
   - [x] Router link
-  - [ ] Routing
+  - [x] Routing
 
 </details>
 
