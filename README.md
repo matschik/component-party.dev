@@ -386,11 +386,11 @@ How do we solve this ? Developers love having framework overview by examples. It
   - [x] Emit to parent
   - [x] Slot
   - [x] Slot fallback
-- [ ] Form input
+- [x] Form input
   - [x] Input text
   - [x] Checkbox
   - [x] Radio
-  - [ ] Select
+  - [x] Select
 - [ ] Webapp features
   - [ ] Fetch data
   - [ ] Router link
