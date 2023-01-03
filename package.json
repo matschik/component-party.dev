@@ -13,7 +13,8 @@
     "format": "prettier --ignore-path .gitignore --plugin-search-dir=. --write .",
     "format:check": "prettier --ignore-path .gitignore --plugin-search-dir=. . --check",
     "build:content": "node scripts/generateContent.js",
-    "build:progress": "node scripts/generateReadMeProgress.js"
+    "build:progress": "node scripts/generateReadMeProgress.js",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@veljs/svelte": "^0.1.8",
@@ -45,6 +46,8 @@
     "eslint-plugin-vue": "^9.8.0",
     "esm": "^3.2.25",
     "folder-hash": "^4.0.2",
+    "husky": "^8.0.2",
+    "lint-staged": "^13.1.0",
     "lodash.kebabcase": "^4.1.1",
     "micache": "^2.4.1",
     "pkg-dir": "^7.0.0",
@@ -70,5 +73,11 @@
     "@stefanprobst/remark-shiki": {
       "shiki": "0.12.1"
     }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,vue,svelte}": [
+      "prettier --write",
+      "eslint --cache --fix"
+    ]
   }
 }
