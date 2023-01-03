@@ -392,7 +392,7 @@ How do we solve this ? Developers love having framework overview by examples. It
   - [x] Radio
   - [x] Select
 - [ ] Webapp features
-  - [ ] Fetch data
+  - [x] Fetch data (Todo: test code)
   - [ ] Router link
   - [ ] Routing
 
