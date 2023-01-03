@@ -1,21 +1,8 @@
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "eslint.probe": ["javascript", "javascriptreact", "vue"],
-  "editor.formatOnSave": false,
   // Runs Prettier, then ESLint
   "editor.codeActionsOnSave": ["source.formatDocument", "source.fixAll.eslint"],
   "[svelte]": {
     "editor.defaultFormatter": "svelte.svelte-vscode"
-  },
-  "cSpell.words": [
-    "alpinejs",
-    "astro",
-    "astrojs",
-    "matschik",
-    "mdast",
-    "pnpm",
-    "qwik",
-    "shiki",
-    "webp"
-  ]
+  }
 }
