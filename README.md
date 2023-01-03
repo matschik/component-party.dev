@@ -388,7 +388,7 @@ How do we solve this ? Developers love having framework overview by examples. It
   - [x] Slot fallback
 - [ ] Form input
   - [x] Input text
-  - [ ] Checkbox
+  - [x] Checkbox
   - [ ] Radio
   - [ ] Select
 - [ ] Webapp features
