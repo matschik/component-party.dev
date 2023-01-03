@@ -1,2 +1,2 @@
-export const helloWorld = () => <h1>Hello world</h1>
+export const HelloWorld = () => <h1>Hello world</h1>
 
