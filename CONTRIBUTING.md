@@ -7,7 +7,7 @@ This site is built with [Astro](https://docs.astro.build). Site content is writt
 1.  Fork the project and create a new branch
 2.  Add the new framework SVG logo in `public/framework`
 3.  Install the ESLint plugin associated to the framework
-4.  In `src/frameworks.mjs`, add a new entry with SVG link and ESLint configuration
+4.  In `frameworks.mjs`, add a new entry with SVG link and ESLint configuration
 
 ## Improve website
 
