@@ -14,6 +14,7 @@ specifiers:
   '@typescript-eslint/eslint-plugin': ^5.48.0
   '@veljs/svelte': ^0.1.8
   autoprefixer: ^10.4.13
+  chokidar: ^3.5.3
   classnames: ^2.3.2
   codesandbox: ^2.2.3
   eslint: ^8.31.0
@@ -69,6 +70,7 @@ devDependencies:
   '@tailwindcss/typography': 0.5.8_tailwindcss@3.2.4
   '@typescript-eslint/eslint-plugin': 5.48.0_iukboom6ndih5an6iafl45j2fe
   autoprefixer: 10.4.13_postcss@8.4.20
+  chokidar: 3.5.3
   codesandbox: 2.2.3
   eslint: 8.31.0
   eslint-plugin-ember: 11.4.2_eslint@8.31.0

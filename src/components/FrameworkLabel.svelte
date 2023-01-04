@@ -6,8 +6,9 @@
 
   const framework = FRAMEWORKS.find((f) => f.id === id);
 
-  const baseURL =
-    "https://raw.githubusercontent.com/matschik/component-party/main/public/";
+  const baseURL = import.meta.env.DEV
+    ? "/"
+    : "https://raw.githubusercontent.com/matschik/component-party/main/public/";
 </script>
 
 <div class="flex items-center space-x-1">
