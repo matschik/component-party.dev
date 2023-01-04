@@ -34,6 +34,7 @@
     "@tailwindcss/typography": "^0.5.8",
     "@typescript-eslint/eslint-plugin": "^5.48.0",
     "autoprefixer": "^10.4.13",
+    "chokidar": "^3.5.3",
     "codesandbox": "^2.2.3",
     "eslint": "^8.31.0",
     "eslint-plugin-ember": "^11.4.2",
