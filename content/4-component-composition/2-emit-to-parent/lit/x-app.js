@@ -18,7 +18,7 @@ export class XApp extends LitElement {
 
   render() {
     return html`
-      <p>Can I come ?</p>
+      <p>Can I come?</p>
       <answer-button
         @yes=${this.onAnswerYes}
         @no=${this.onAnswerNo}

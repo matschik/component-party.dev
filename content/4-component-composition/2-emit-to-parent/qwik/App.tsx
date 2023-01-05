@@ -16,7 +16,7 @@ const App = component$(() => {
 
   return (
     <>
-      <p>Can I come ?</p>
+      <p>Can I come?</p>
       <AnswerButton onYes$={onAnswerYes} onNo$={onAnswerNo} />
       <p style={{ fontSize: 50 }}>{store.canCome ? "ðŸ˜€" : "ðŸ˜¥"}</p>
     </>

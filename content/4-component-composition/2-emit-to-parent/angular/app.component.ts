@@ -3,7 +3,7 @@ import { Component } from "@angular/core";
 @Component({
   selector: "app-root",
   template: `
-    <p>Can I come ?</p>
+    <p>Can I come?</p>
 
     <app-answer-button (yes)="onAnswerYes()" (no)="onAnswerNo()">
     </app-answer-button>

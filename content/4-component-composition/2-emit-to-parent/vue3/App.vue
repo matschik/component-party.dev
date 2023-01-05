@@ -14,7 +14,7 @@ function onAnswerYes() {
 </script>
 
 <template>
-  <p>Can I come ?</p>
+  <p>Can I come?</p>
   <AnswerButton
     @yes="onAnswerYes"
     @no="onAnswerNo"

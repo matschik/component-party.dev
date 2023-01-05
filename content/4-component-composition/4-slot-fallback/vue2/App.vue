@@ -10,6 +10,6 @@ export default {
 <template>
   <div>
     <FunnyButton />
-    <FunnyButton> I got content ! </FunnyButton>
+    <FunnyButton> I got content! </FunnyButton>
   </div>
 </template>

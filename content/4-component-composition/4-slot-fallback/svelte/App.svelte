@@ -3,4 +3,4 @@
 </script>
 
 <FunnyButton />
-<FunnyButton>I got content !</FunnyButton>
+<FunnyButton>I got content!</FunnyButton>

@@ -22,7 +22,7 @@ export default {
 
 <template>
   <div>
-    <p>Can I come ?</p>
+    <p>Can I come?</p>
     <AnswerButton
       @yes="onAnswerYes"
       @no="onAnswerNo"

@@ -14,7 +14,7 @@ export default function App() {
 
   return (
     <>
-      <p>Can I come ?</p>
+      <p>Can I come?</p>
       <AnswerButton onYes={onAnswerYes} onNo={onAnswerNo} />
       <p style={{ fontSize: 50 }}>{canCome ? "😀" : "😥"}</p>
     </>
