@@ -14,11 +14,8 @@ function onAnswerYes() {
 </script>
 
 <template>
-  <p>Can I come ?</p>
-  <AnswerButton
-    @yes="onAnswerYes"
-    @no="onAnswerNo"
-  />
+  <p>Are you happy ?</p>
+  <AnswerButton @yes="onAnswerYes" @no="onAnswerNo" />
   <p style="font-size: 50px">
     {{ canCome ? "😀" : "😥" }}
   </p>
