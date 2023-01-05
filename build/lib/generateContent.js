@@ -110,6 +110,10 @@ export default async function generateContent() {
           }
 
           if (frameworkSnippet.files.length > 0) {
+            const { filesSorter } = FRAMEWORKS.find(
+              (f) => f.id === frameworkId
+            );
+            frameworkSnippet.files = filesSorter(frameworkSnippet.files);
             const playgroundURL = generatePlaygroundURL(
               frameworkId,
               frameworkSnippet.files
