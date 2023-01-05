@@ -122,6 +122,12 @@ export default async function generateContent() {
             if (playgroundURL) {
               frameworkSnippet.playgroundURL = playgroundURL;
             }
+
+            // Remove content key, not used anymore
+            frameworkSnippet.files = frameworkSnippet.files.map((file) => ({
+              ...file,
+              content: undefined,
+            }));
           }
 
           if (!byFrameworkId[frameworkId]) {
