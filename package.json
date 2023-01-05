@@ -17,7 +17,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@veljs/svelte": "^0.1.8",
+    "@veljs/svelte": "^0.1.11",
     "classnames": "^2.3.2",
     "heroiconsvelte": "^0.1.5"
   },
