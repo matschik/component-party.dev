@@ -1,4 +1,4 @@
-export class EventClick {
+export class Counter {
   count: number = 0;
 
   incrementCount() {

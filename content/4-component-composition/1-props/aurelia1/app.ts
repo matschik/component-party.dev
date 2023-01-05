@@ -1,4 +1,4 @@
-export class ComponentComposition {
+export class App {
   age = 20;
   name = "John";
   colors = ["green", "blue", "red"];

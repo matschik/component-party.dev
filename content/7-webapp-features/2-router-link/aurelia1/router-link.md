@@ -4,13 +4,13 @@ See http://aurelia.io/docs/tutorials/creating-a-contact-manager#building-the-app
 
 ```html
 <template>
-    <ul>
-        <li>
-          <a routerLink="/#/home">Home</a>
-        </li>
-        <li>
-          <a routerLink="/#/about">About</a>
-        </li>
-    </ul>
+  <ul>
+    <li>
+      <a routerLink="/#/home">Home</a>
+    </li>
+    <li>
+      <a routerLink="/#/about">About</a>
+    </li>
+  </ul>
 </template>
 ```

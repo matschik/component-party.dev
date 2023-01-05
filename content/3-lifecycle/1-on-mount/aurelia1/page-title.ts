@@ -1,4 +1,4 @@
-export class OnMount {
+export class PageTitle {
   pageTitle = "";
 
   attached(): void {

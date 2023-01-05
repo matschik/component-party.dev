@@ -1,4 +1,4 @@
-export class EmitToParent {
+export class App {
   canCome = false;
 
   handleAnswer(...reply) {

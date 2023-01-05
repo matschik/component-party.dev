@@ -1,4 +1,4 @@
-export class UnMount {
+export class Time {
   time: string = new Date().toLocaleTimeString();
   timer: any;
 

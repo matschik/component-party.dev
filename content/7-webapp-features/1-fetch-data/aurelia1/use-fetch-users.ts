@@ -1,7 +1,7 @@
 export class UseFetchUsers {
-    data = null;
-    error = null;
-    isLoading = false;
+  data = null;
+  error = null;
+  isLoading = false;
 
   async fetchData() {
     this.isLoading = true;

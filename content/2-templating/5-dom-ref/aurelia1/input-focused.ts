@@ -1,4 +1,4 @@
-export class DomRef {
+export class InputFocused {
   inputElement: HTMLInputElement;
 
   attached() {

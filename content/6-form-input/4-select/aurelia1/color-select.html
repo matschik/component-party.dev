@@ -1,0 +1,12 @@
+<template>
+  <select value.bind="selectedColorId">
+    <option value="">Select A Color</option>
+    <option
+      repeat.for="color of colors"
+      value.bind="color.id"
+      disabled.bind="color.isDisabled"
+    >
+      ${color.text}
+    </option>
+  </select>
+</template>
