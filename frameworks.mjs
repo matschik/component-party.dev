@@ -257,7 +257,13 @@ export default [
     playgroundURL: "https://codesandbox.io/s/ppmy26opw7",
     documentationURL: "http://aurelia.io/docs/",
     filesSorter(files) {
-      return files;
+      return [
+        files.find(({ fileName }) => fileName === "app.html"),
+        files.find(({ fileName }) => fileName === "app.ts"),
+        ...(files.filter(
+          ({ fileName }) => !["app.html", "app.ts"].includes(fileName)
+        ) || []),
+      ].filter(Boolean);
     },
   },
 ];
