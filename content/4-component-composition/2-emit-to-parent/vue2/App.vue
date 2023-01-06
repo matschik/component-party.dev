@@ -22,7 +22,7 @@ export default {
 
 <template>
   <div>
-    <p>Are you happy ?</p>
+    <p>Are you happy?</p>
     <AnswerButton @yes="onAnswerYes" @no="onAnswerNo" />
     <p style="font-size: 50px">
       {{ canCome ? "😀" : "😥" }}

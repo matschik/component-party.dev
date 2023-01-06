@@ -17,9 +17,9 @@ const UserProfile = component$((props: Props) => {
 
   return (
     <>
-      <p>My name is {name} !</p>
-      <p>My age is {age} !</p>
-      <p>My favourite colors are {favouriteColors.join(", ")} !</p>
+      <p>My name is {name}!</p>
+      <p>My age is {age}!</p>
+      <p>My favourite colors are {favouriteColors.join(", ")}!</p>
       <p>I am {isAvailable ? "available" : "not available"}</p>
     </>
   );
