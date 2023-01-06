@@ -1,0 +1,10 @@
+<template>
+  <p if.bind="isLoading">Fetching users...</p>
+  <p if.bind="error">An error ocurred while fetching users</p>
+  <ul if.bind="users">
+    <li repeat.for="user of users">
+      <img src.bind="user.picture.thumbnail" alt="user" />
+      <p>${ user.name.first } ${ user.name.last }</p>
+    </li>
+  </ul>
+</template>

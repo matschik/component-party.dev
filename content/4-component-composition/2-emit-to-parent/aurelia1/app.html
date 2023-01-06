@@ -1,0 +1,6 @@
+<template>
+  <require from="./answer-button"></require>
+  <p>Can I come ?</p>
+  <answer-button action-handler.call="handleAnswer(reply)"></answer-button>
+  <p style="font-size: 50px">${canCome ? "😀" : "😥"}</p>
+</template>

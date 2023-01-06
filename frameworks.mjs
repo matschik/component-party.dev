@@ -254,4 +254,35 @@ export default [
       ].filter(Boolean);
     },
   },
+  {
+    id: "aurelia1",
+    title: "Aurelia 1",
+    img: "framework/aurelia.svg",
+    eslint: {
+      env: {
+        browser: true,
+        es2021: true,
+        node: true,
+      },
+      parser: "@typescript-eslint/parser",
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+      files: ["**/aurelia1/**"],
+      extends: ["eslint:recommended"],
+    },
+    playgroundURL: "https://codesandbox.io/s/ppmy26opw7",
+    documentationURL: "http://aurelia.io/docs/",
+    filesSorter(files) {
+      return [
+        files.find(({ fileName }) => fileName === "app.html"),
+        files.find(({ fileName }) => fileName === "app.ts"),
+        ...(files.filter(
+          ({ fileName }) => !["app.html", "app.ts"].includes(fileName)
+        ) || []),
+      ].filter(Boolean);
+    },
+  },
 ];
