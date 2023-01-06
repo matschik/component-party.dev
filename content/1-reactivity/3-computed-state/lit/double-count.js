@@ -6,11 +6,8 @@ export class DoubleCount extends LitElement {
   @state()
   count = 10;
 
-  get doubleCount() {
-    return this.count * 2;
-  }
-
   render() {
-    return html`<div>${this.doubleCount}</div>`;
+    const doubleCount = this.count * 2;
+    return html`<div>${doubleCount}</div>`;
   }
 }
