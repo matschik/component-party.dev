@@ -1,53 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Component Party</title>
+    <link rel="icon" href="/favicon.png" />
+    <link
+      rel="preload"
+      href="/font/Mona-Sans.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin=""
+    />
 
-<head>
-  <meta name="viewport" content="width=device-width" />
-  <title>Component Party</title>
-  <link rel="icon" href="/favicon.png" />
-  <link rel="preload" href="/font/Mona-Sans.woff2" as="font" type="font/woff2" crossorigin="" />
+    <meta
+      name="description"
+      content="Web component JS frameworks overview by their syntax and features: <%= frameworkList %>"
+    />
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="Component Party" />
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://component-party.dev/" />
+    <meta property="og:title" content="Component Party" />
+    <meta
+      property="og:description"
+      content="Web component JS frameworks overview by their syntax and features: <%= frameworkList %>"
+    />
+    <meta
+      property="og:image"
+      content="https://component-party.dev/banner2.png"
+    />
 
-  <meta name="description"
-    content="Web component JS frameworks overview by their syntax and features: <%= frameworkList %>" />
-  <!-- Primary Meta Tags -->
-  <meta name="title" content="Component Party" />
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://component-party.dev/" />
-  <meta property="og:title" content="Component Party" />
-  <meta property="og:description"
-    content="Web component JS frameworks overview by their syntax and features: <%= frameworkList %>" />
-  <meta property="og:image" content="https://component-party.dev/banner2.png" />
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://component-party.dev/" />
+    <meta property="twitter:title" content="Component Party" />
+    <meta
+      property="twitter:description"
+      content="Web component JS frameworks overview by their syntax and features: <%= frameworkList %>"
+    />
+    <meta
+      property="twitter:image"
+      content="https://component-party.dev/banner2.png"
+    />
+    <style>
+      @font-face {
+        font-family: "Mona Sans";
+        src: url("/font/Mona-Sans.woff2") format("woff2 supports variations"),
+          url("/font/Mona-Sans.woff2") format("woff2-variations");
+        font-weight: 200 500;
+        font-stretch: 75% 125%;
+        font-display: swap;
+      }
 
-  <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:url" content="https://component-party.dev/" />
-  <meta property="twitter:title" content="Component Party" />
-  <meta property="twitter:description"
-    content="Web component JS frameworks overview by their syntax and features: <%= frameworkList %>" />
-  <meta property="twitter:image" content="https://component-party.dev/banner2.png" />
-  <style>
-    @font-face {
-      font-family: "Mona Sans";
-      src: url("/font/Mona-Sans.woff2") format("woff2 supports variations"),
-        url("/font/Mona-Sans.woff2") format("woff2-variations");
-      font-weight: 200 500;
-      font-stretch: 75% 125%;
-      font-display: swap;
-    }
+      html {
+        font-family: "Mona Sans" !important;
+        /* bg-gray-900 */
+        background-color: rgb(17 24 39);
+        color: #fff;
+      }
+    </style>
+  </head>
 
-    html {
-      font-family: "Mona Sans" !important;
-      /* bg-gray-900 */
-      background-color: rgb(17 24 39);
-      color: #fff;
-    }
-  </style>
-</head>
-
-<body>
-  <div id="app"></div>
-  <script type="module" src="/src/main.js"></script>
-</body>
-
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
 </html>

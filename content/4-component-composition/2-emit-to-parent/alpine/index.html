@@ -1,4 +1,8 @@
-<div x-data="{ canCome: true }" x-on:yes="canCome = true" x-on:no="canCome = false">
+<div
+  x-data="{ canCome: true }"
+  x-on:yes="canCome = true"
+  x-on:no="canCome = false"
+>
   <p>Are you happy ?</p>
   <div>
     <button x-on:click="$dispatch('yes')">YES</button>

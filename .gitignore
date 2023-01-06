@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Lint
+.eslintcache
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -24,3 +27,4 @@ dist-ssr
 *.sw?
 
 src/generatedContent
+
