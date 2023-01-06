@@ -12,6 +12,6 @@
   }
 </script>
 
-<p>Can I come ?</p>
+<p>Are you happy?</p>
 <AnswerButton on:yes={onAnswerYes} on:no={onAnswerNo} />
 <p style="font-size: 50px;">{canCome ? "😀" : "😥"}</p>

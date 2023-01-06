@@ -4,10 +4,10 @@
 
 **Website: <https://component-party.dev>**
 
-## 🤔 Why ?
+## 🤔 Why?
 
 Many JS developers don't have a good overview of every existing JS framework with their own syntax and features.
-How do we solve this ? Developers love having framework overview by examples. It's a quick introduction before going deeper.
+How do we solve this? Developers love having framework overview by examples. It's a quick introduction before going deeper.
 
 ## 🔥 Progression
 

@@ -4,5 +4,5 @@ import FunnyButton from "./FunnyButton.vue";
 
 <template>
   <FunnyButton />
-  <FunnyButton> I got content ! </FunnyButton>
+  <FunnyButton> I got content! </FunnyButton>
 </template>

@@ -13,6 +13,15 @@ import {
   mustUseAngularHighlighter,
 } from "./angularHighlighter.js";
 
+async function pathExists(path) {
+  try {
+    await fs.access(path);
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
+
 export default async function generateContent() {
   const highlighter = await getHighlighter({
     theme: componentPartyShikiTheme,
@@ -57,60 +66,77 @@ export default async function generateContent() {
 
       const frameworksDirPath = path.join(snippetsDirPath, snippetDirName);
       const frameworkIds = await fs.readdir(frameworksDirPath);
-      for (const frameworkId of frameworkIds) {
-        const frameworkSnippet = {
-          frameworkId,
-          snippetId,
-          files: [],
-          playgroundURL: "",
-          markdownFiles: [],
-          snippetEditHref: `https://github.com/matschik/component-party/tree/main/content/${sectionDirName}/${snippetDirName}/${frameworkId}`,
-        };
 
-        const codeFilesDirPath = path.join(frameworksDirPath, frameworkId);
-        const codeFileNames = await fs.readdir(codeFilesDirPath);
-
-        for (const codeFileName of codeFileNames) {
-          const codeFilePath = path.join(codeFilesDirPath, codeFileName);
-          const ext = path.parse(codeFilePath).ext.split(".").pop();
-          const content = await fs.readFile(codeFilePath, "utf-8");
-
-          const file = {
-            fileName: codeFileName,
-            ext,
-            content,
-            contentHtml: "",
+      await Promise.all(
+        frameworkIds.map(async (frameworkId) => {
+          const frameworkSnippet = {
+            frameworkId,
+            snippetId,
+            files: [],
+            playgroundURL: "",
+            markdownFiles: [],
+            snippetEditHref: `https://github.com/matschik/component-party/tree/main/content/${sectionDirName}/${snippetDirName}/${frameworkId}`,
           };
 
-          if (ext === "md") {
-            file.contentHtml = await markdownToHtml(content);
-            frameworkSnippet.markdownFiles.push(file);
-          } else {
-            file.contentHtml = mustUseAngularHighlighter(content)
-              ? highlightAngularComponent(highlighter.codeToHtml, content, ext)
-              : highlighter.codeToHtml(content, { lang: ext });
+          const codeFilesDirPath = path.join(frameworksDirPath, frameworkId);
+          const codeFileNames = await fs.readdir(codeFilesDirPath);
 
-            frameworkSnippet.files.push(file);
+          for (const codeFileName of codeFileNames) {
+            const codeFilePath = path.join(codeFilesDirPath, codeFileName);
+            const ext = path.parse(codeFilePath).ext.split(".").pop();
+            const content = await fs.readFile(codeFilePath, "utf-8");
+
+            const file = {
+              fileName: codeFileName,
+              ext,
+              content,
+              contentHtml: "",
+            };
+
+            if (ext === "md") {
+              file.contentHtml = await markdownToHtml(content);
+              frameworkSnippet.markdownFiles.push(file);
+            } else {
+              file.contentHtml = mustUseAngularHighlighter(content)
+                ? highlightAngularComponent(
+                    highlighter.codeToHtml,
+                    content,
+                    ext
+                  )
+                : highlighter.codeToHtml(content, { lang: ext });
+
+              frameworkSnippet.files.push(file);
+            }
           }
-        }
 
-        if (frameworkSnippet.files.length > 0) {
-          const playgroundURL = generatePlaygroundURL(
-            frameworkId,
-            frameworkSnippet.files
-          );
+          if (frameworkSnippet.files.length > 0) {
+            const { filesSorter } = FRAMEWORKS.find(
+              (f) => f.id === frameworkId
+            );
+            frameworkSnippet.files = filesSorter(frameworkSnippet.files);
+            const playgroundURL = generatePlaygroundURL(
+              frameworkId,
+              frameworkSnippet.files
+            );
 
-          if (playgroundURL) {
-            frameworkSnippet.playgroundURL = playgroundURL;
+            if (playgroundURL) {
+              frameworkSnippet.playgroundURL = playgroundURL;
+            }
+
+            // Remove content key, not used anymore
+            frameworkSnippet.files = frameworkSnippet.files.map((file) => ({
+              ...file,
+              content: undefined,
+            }));
           }
-        }
 
-        if (!byFrameworkId[frameworkId]) {
-          byFrameworkId[frameworkId] = [];
-        }
+          if (!byFrameworkId[frameworkId]) {
+            byFrameworkId[frameworkId] = [];
+          }
 
-        byFrameworkId[frameworkId].push(frameworkSnippet);
-      }
+          byFrameworkId[frameworkId].push(frameworkSnippet);
+        })
+      );
     }
   }
 
@@ -118,9 +144,11 @@ export default async function generateContent() {
   const frameworkDirPath = path.join(generatedContentDirPath, "framework");
   const treeFilePath = path.join(generatedContentDirPath, "tree.js");
   const frameworkIndexPath = path.join(frameworkDirPath, "index.js");
-  await fs.rm(generatedContentDirPath, { recursive: true, force: true });
-  await fs.mkdir(generatedContentDirPath, { recursive: true });
-  const commentDisclaimer = `// File generated from "node scripts/generateContent.js", DO NOT EDIT`;
+  const commentDisclaimer = `// File generated from "node scripts/generateContent.js", DO NOT EDIT/COMMIT`;
+
+  if (!(await pathExists(generatedContentDirPath))) {
+    await fs.mkdir(generatedContentDirPath, { recursive: true });
+  }
 
   await writeJsFile(
     treeFilePath,
@@ -131,17 +159,25 @@ export default async function generateContent() {
   `
   );
 
-  await fs.mkdir(frameworkDirPath, { recursive: true });
-  for (const frameworkId of Object.keys(byFrameworkId)) {
-    const frameworkFilePath = path.join(frameworkDirPath, `${frameworkId}.js`);
-    await writeJsFile(
-      frameworkFilePath,
-      `
-    ${commentDisclaimer}
-    export default ${JSON.stringify(byFrameworkId[frameworkId], null, 2)}
-    `
-    );
+  if (!(await pathExists(frameworkDirPath))) {
+    await fs.mkdir(frameworkDirPath, { recursive: true });
   }
+
+  await Promise.all(
+    Object.keys(byFrameworkId).map((frameworkId) => {
+      const frameworkFilePath = path.join(
+        frameworkDirPath,
+        `${frameworkId}.js`
+      );
+      return writeJsFile(
+        frameworkFilePath,
+        `
+        ${commentDisclaimer}
+        export default ${JSON.stringify(byFrameworkId[frameworkId], null, 2)}
+        `
+      );
+    })
+  );
 
   await writeJsFile(
     frameworkIndexPath,

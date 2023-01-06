@@ -1,7 +1,7 @@
 import { tracked } from "@glimmer/tracking";
 import Component from "@glimmer/component";
 
-export default class Demo extends Component {
+export default class App extends Component {
   fetchUsers = () => getUsers();
 }
 
