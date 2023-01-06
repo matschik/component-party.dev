@@ -110,6 +110,10 @@ export default async function generateContent() {
           }
 
           if (frameworkSnippet.files.length > 0) {
+            const { filesSorter } = FRAMEWORKS.find(
+              (f) => f.id === frameworkId
+            );
+            frameworkSnippet.files = filesSorter(frameworkSnippet.files);
             const playgroundURL = generatePlaygroundURL(
               frameworkId,
               frameworkSnippet.files
@@ -118,6 +122,12 @@ export default async function generateContent() {
             if (playgroundURL) {
               frameworkSnippet.playgroundURL = playgroundURL;
             }
+
+            // Remove content key, not used anymore
+            frameworkSnippet.files = frameworkSnippet.files.map((file) => ({
+              ...file,
+              content: undefined,
+            }));
           }
 
           if (!byFrameworkId[frameworkId]) {

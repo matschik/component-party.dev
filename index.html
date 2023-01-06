@@ -43,9 +43,26 @@
       property="twitter:image"
       content="https://component-party.dev/banner2.png"
     />
+    <style>
+      @font-face {
+        font-family: "Mona Sans";
+        src: url("/font/Mona-Sans.woff2") format("woff2 supports variations"),
+          url("/font/Mona-Sans.woff2") format("woff2-variations");
+        font-weight: 200 500;
+        font-stretch: 75% 125%;
+        font-display: swap;
+      }
+
+      html {
+        font-family: "Mona Sans" !important;
+        /* bg-gray-900 */
+        background-color: rgb(17 24 39);
+        color: #fff;
+      }
+    </style>
   </head>
 
-  <body class="bg-gray-900 text-white">
+  <body>
     <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
   </body>

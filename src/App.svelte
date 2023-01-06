@@ -18,29 +18,82 @@
   import Aside from "./components/Aside.svelte";
   import GithubIcon from "./components/GithubIcon.svelte";
 
-  const frameworkIdsSelectedStorage = createLocaleStorage("framework_display");
+  const frameworkIdsStorage = createLocaleStorage("framework_display");
+
+  function removeSearchParamKeyFromURL(k) {
+    // Get the current search params as an object
+    const searchParams = new URLSearchParams(window.location.search);
+
+    if (!searchParams.has(k)) {
+      // The key doesn't exist, so don't do anything
+      return;
+    }
+
+    // Remove the parameter you want to remove
+    searchParams.delete(k);
+
+    let newUrl;
+    if (searchParams.toString().length > 0) {
+      // There are still search params, so include the `?` character
+      newUrl = `${window.location.pathname}?${searchParams}`;
+    } else {
+      // There are no search params, so don't include the `?` character
+      newUrl = window.location.pathname;
+    }
+
+    // Update the URL without reloading the page
+    history.replaceState({}, "", newUrl);
+  }
 
   let frameworkIdsSelected = new Set();
   let snippetsByFrameworkId = new Map();
 
   let frameworkIdsSelectedStorageInitialized = false;
 
-  onMount(() => {
-    frameworkIdsSelected = new Set(
-      frameworkIdsSelectedStorage.getJSON() || ["svelte", "react"]
-    );
+  const frameworkIdsFromURLKey = "f";
+
+  onMount(function handleInitialFrameworkIdsSelected() {
+    let frameworkIdsSelectedOnInit = [];
+
+    const url = new URL(window.location.href);
+
+    const frameworkIdsFromURLStr = url.searchParams.get(frameworkIdsFromURLKey);
+
+    if (frameworkIdsFromURLStr) {
+      const frameworkIdsFromURL = frameworkIdsFromURLStr
+        .split(",")
+        .filter((fId) => FRAMEWORKS.find((framework) => framework.id === fId));
+      if (frameworkIdsFromURL.length > 0) {
+        frameworkIdsSelectedOnInit = frameworkIdsFromURL;
+      } else {
+        removeSearchParamKeyFromURL(frameworkIdsFromURLKey);
+      }
+    }
+
+    if (frameworkIdsSelectedOnInit.length === 0) {
+      const frameworkIdsFromStorage = frameworkIdsStorage.getJSON();
+      if (frameworkIdsFromStorage?.length > 0) {
+        frameworkIdsSelectedOnInit = frameworkIdsFromStorage;
+      }
+    }
+
+    if (frameworkIdsSelectedOnInit.length === 0) {
+      frameworkIdsSelectedOnInit = ["svelte", "react"];
+    }
+
+    frameworkIdsSelected = new Set(frameworkIdsSelectedOnInit);
     frameworkIdsSelectedStorageInitialized = true;
   });
 
-  $: {
-    if (frameworkIdsSelectedStorageInitialized) {
-      frameworkIdsSelectedStorage.setJSON([...frameworkIdsSelected]);
-    }
+  function saveFrameworkIdsSelectedOnStorage() {
+    frameworkIdsStorage.setJSON([...frameworkIdsSelected]);
+    removeSearchParamKeyFromURL(frameworkIdsFromURLKey);
   }
 
   function hideFrameworkId(frameworkId) {
     frameworkIdsSelected.delete(frameworkId);
     frameworkIdsSelected = frameworkIdsSelected;
+    saveFrameworkIdsSelectedOnStorage();
   }
 
   function toggleFrameworkId(frameworkId) {
@@ -50,6 +103,7 @@
       frameworkIdsSelected.add(frameworkId);
     }
     frameworkIdsSelected = frameworkIdsSelected;
+    saveFrameworkIdsSelectedOnStorage();
   }
 
   $: {

@@ -2,28 +2,9 @@
   color-scheme: dark;
 }
 
-@font-face {
-  font-family: "Mona Sans";
-  src: url("/font/Mona-Sans.woff2") format("woff2 supports variations"),
-    url("/font/Mona-Sans.woff2") format("woff2-variations");
-  font-weight: 200 500;
-  font-stretch: 75% 125%;
-  font-display: swap;
-}
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-html {
-  font-family: Mona Sans;
-  @apply bg-gray-900;
-}
-
-/* #main-content .astro-code {
-  border-top-left-radius: 0px;
-  font-size: 1rem;
-} */
 
 @supports (backdrop-filter: blur(10px)) {
   [class*="bg-"].backdrop-blur {

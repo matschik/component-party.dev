@@ -2,6 +2,7 @@ export default function createLocaleStorage(k) {
   function get() {
     return localStorage.getItem(k);
   }
+
   return {
     get,
     getJSON() {
