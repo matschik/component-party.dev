@@ -1,6 +1,6 @@
-Using RouterConfiguration -> options.pushState = false
+Using `RouterConfiguration` with `options.pushState = false`
 
-See http://aurelia.io/docs/tutorials/creating-a-contact-manager#building-the-application-shell
+See [Building the Application Shell](http://aurelia.io/docs/tutorials/creating-a-contact-manager#building-the-application-shell)
 
 ```html
 <template>
