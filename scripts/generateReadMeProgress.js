@@ -4,6 +4,7 @@ import { packageDirectory } from "pkg-dir";
 import nodePath from "node:path";
 import kebabCase from "lodash.kebabcase";
 import FRAMEWORKS from "../frameworks.mjs";
+import prettier from "prettier";
 
 function removeMarkdownHeadingContent(
   content,
@@ -165,6 +166,9 @@ ${list}
 
   newContent = newContent.replace("{{progression}}", progressionContent);
 
-  await fs.writeFile("README.md", newContent);
+  await fs.writeFile(
+    "README.md",
+    prettier.format(newContent, { parser: "markdown" })
+  );
 }
 main().catch(console.error);
