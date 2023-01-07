@@ -280,9 +280,16 @@
                                       Missing snippet
                                     </span>
                                     <span
-                                      class="block text-lg mt-1 font-semibold"
+                                      class="block text-lg mt-1 font-semibold space-x-1"
                                     >
-                                      Help us to improve Component Party 🎉
+                                      <span>
+                                        Help us to improve Component Party
+                                      </span>
+                                      <img
+                                        src="/popper.svg"
+                                        alt="logo"
+                                        class="w-5 h-5 m-0 inline-block"
+                                      />
                                     </span>
                                   </div>
                                   <div class="mt-6 flex justify-center">

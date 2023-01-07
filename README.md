@@ -1,39 +1,40 @@
 ![Component Party 🎉](.github/banner.webp)> Web component JS frameworks quick overview by their syntax and features**Website: <https://component-party.dev>**## 🤔 Why?Many JS developers don't have a good overview of every existing JS framework with their own syntax and features.
 How do we solve this? Developers love having framework overview by examples. It's a quick introduction before going deeper.## 🔥 Progression<details>
+
 <summary>
 <img width="18" height="18" src="public/framework/svelte.svg" />
 <b>Svelte</b>
 <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/100" /></summary>
 
-- [x] Reactivity
-  - [x] Declare state
-  - [x] Update state
-  - [x] Computed state
-- [x] Templating
-  - [x] Minimal template
-  - [x] Styling
-  - [x] Loop
-  - [x] Event click
-  - [x] Dom ref
-  - [x] Conditional
-- [x] Lifecycle
-  - [x] On mount
-  - [x] On unmount
-- [x] Component composition
-  - [x] Props
-  - [x] Emit to parent
-  - [x] Slot
-  - [x] Slot fallback
-- [x] Form input
-  - [x] Input text
-  - [x] Checkbox
-  - [x] Radio
-  - [x] Select
-- [x] Webapp features
-  - [x] Render app
-  - [x] Fetch data
-  - [x] Router link
-  - [x] Routing
+- \[x] Reactivity
+  - \[x] Declare state
+  - \[x] Update state
+  - \[x] Computed state
+- \[x] Templating
+  - \[x] Minimal template
+  - \[x] Styling
+  - \[x] Loop
+  - \[x] Event click
+  - \[x] Dom ref
+  - \[x] Conditional
+- \[x] Lifecycle
+  - \[x] On mount
+  - \[x] On unmount
+- \[x] Component composition
+  - \[x] Props
+  - \[x] Emit to parent
+  - \[x] Slot
+  - \[x] Slot fallback
+- \[x] Form input
+  - \[x] Input text
+  - \[x] Checkbox
+  - \[x] Radio
+  - \[x] Select
+- \[x] Webapp features
+  - \[x] Render app
+  - \[x] Fetch data
+  - \[x] Router link
+  - \[x] Routing
 
 </details><details>
         <summary>
@@ -41,35 +42,35 @@ How do we solve this? Developers love having framework overview by examples. It'
             <b>React</b>
             <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/96" /></summary>
 
-- [x] Reactivity
-  - [x] Declare state
-  - [x] Update state
-  - [x] Computed state
-- [x] Templating
-  - [x] Minimal template
-  - [x] Styling
-  - [x] Loop
-  - [x] Event click
-  - [x] Dom ref
-  - [x] Conditional
-- [x] Lifecycle
-  - [x] On mount
-  - [x] On unmount
-- [x] Component composition
-  - [x] Props
-  - [x] Emit to parent
-  - [x] Slot
-  - [x] Slot fallback
-- [x] Form input
-  - [x] Input text
-  - [x] Checkbox
-  - [x] Radio
-  - [x] Select
-- [ ] Webapp features
-  - [ ] Render app
-  - [x] Fetch data
-  - [x] Router link
-  - [x] Routing
+- \[x] Reactivity
+  - \[x] Declare state
+  - \[x] Update state
+  - \[x] Computed state
+- \[x] Templating
+  - \[x] Minimal template
+  - \[x] Styling
+  - \[x] Loop
+  - \[x] Event click
+  - \[x] Dom ref
+  - \[x] Conditional
+- \[x] Lifecycle
+  - \[x] On mount
+  - \[x] On unmount
+- \[x] Component composition
+  - \[x] Props
+  - \[x] Emit to parent
+  - \[x] Slot
+  - \[x] Slot fallback
+- \[x] Form input
+  - \[x] Input text
+  - \[x] Checkbox
+  - \[x] Radio
+  - \[x] Select
+- \[ ] Webapp features
+  - \[ ] Render app
+  - \[x] Fetch data
+  - \[x] Router link
+  - \[x] Routing
 
 </details><details>
         <summary>
@@ -77,35 +78,35 @@ How do we solve this? Developers love having framework overview by examples. It'
             <b>Vue 2</b>
             <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/96" /></summary>
 
-- [x] Reactivity
-  - [x] Declare state
-  - [x] Update state
-  - [x] Computed state
-- [x] Templating
-  - [x] Minimal template
-  - [x] Styling
-  - [x] Loop
-  - [x] Event click
-  - [x] Dom ref
-  - [x] Conditional
-- [x] Lifecycle
-  - [x] On mount
-  - [x] On unmount
-- [x] Component composition
-  - [x] Props
-  - [x] Emit to parent
-  - [x] Slot
-  - [x] Slot fallback
-- [x] Form input
-  - [x] Input text
-  - [x] Checkbox
-  - [x] Radio
-  - [x] Select
-- [ ] Webapp features
-  - [ ] Render app
-  - [x] Fetch data
-  - [x] Router link
-  - [x] Routing
+- \[x] Reactivity
+  - \[x] Declare state
+  - \[x] Update state
+  - \[x] Computed state
+- \[x] Templating
+  - \[x] Minimal template
+  - \[x] Styling
+  - \[x] Loop
+  - \[x] Event click
+  - \[x] Dom ref
+  - \[x] Conditional
+- \[x] Lifecycle
+  - \[x] On mount
+  - \[x] On unmount
+- \[x] Component composition
+  - \[x] Props
+  - \[x] Emit to parent
+  - \[x] Slot
+  - \[x] Slot fallback
+- \[x] Form input
+  - \[x] Input text
+  - \[x] Checkbox
+  - \[x] Radio
+  - \[x] Select
+- \[ ] Webapp features
+  - \[ ] Render app
+  - \[x] Fetch data
+  - \[x] Router link
+  - \[x] Routing
 
 </details><details>
         <summary>
@@ -113,35 +114,35 @@ How do we solve this? Developers love having framework overview by examples. It'
             <b>Vue 3</b>
             <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/96" /></summary>
 
-- [x] Reactivity
-  - [x] Declare state
-  - [x] Update state
-  - [x] Computed state
-- [x] Templating
-  - [x] Minimal template
-  - [x] Styling
-  - [x] Loop
-  - [x] Event click
-  - [x] Dom ref
-  - [x] Conditional
-- [x] Lifecycle
-  - [x] On mount
-  - [x] On unmount
-- [x] Component composition
-  - [x] Props
-  - [x] Emit to parent
-  - [x] Slot
-  - [x] Slot fallback
-- [x] Form input
-  - [x] Input text
-  - [x] Checkbox
-  - [x] Radio
-  - [x] Select
-- [ ] Webapp features
-  - [ ] Render app
-  - [x] Fetch data
-  - [x] Router link
-  - [x] Routing
+- \[x] Reactivity
+  - \[x] Declare state
+  - \[x] Update state
+  - \[x] Computed state
+- \[x] Templating
+  - \[x] Minimal template
+  - \[x] Styling
+  - \[x] Loop
+  - \[x] Event click
+  - \[x] Dom ref
+  - \[x] Conditional
+- \[x] Lifecycle
+  - \[x] On mount
+  - \[x] On unmount
+- \[x] Component composition
+  - \[x] Props
+  - \[x] Emit to parent
+  - \[x] Slot
+  - \[x] Slot fallback
+- \[x] Form input
+  - \[x] Input text
+  - \[x] Checkbox
+  - \[x] Radio
+  - \[x] Select
+- \[ ] Webapp features
+  - \[ ] Render app
+  - \[x] Fetch data
+  - \[x] Router link
+  - \[x] Routing
 
 </details><details>
         <summary>
@@ -149,35 +150,35 @@ How do we solve this? Developers love having framework overview by examples. It'
             <b>Angular</b>
             <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/96" /></summary>
 
-- [x] Reactivity
-  - [x] Declare state
-  - [x] Update state
-  - [x] Computed state
-- [x] Templating
-  - [x] Minimal template
-  - [x] Styling
-  - [x] Loop
-  - [x] Event click
-  - [x] Dom ref
-  - [x] Conditional
-- [x] Lifecycle
-  - [x] On mount
-  - [x] On unmount
-- [x] Component composition
-  - [x] Props
-  - [x] Emit to parent
-  - [x] Slot
-  - [x] Slot fallback
-- [x] Form input
-  - [x] Input text
-  - [x] Checkbox
-  - [x] Radio
-  - [x] Select
-- [ ] Webapp features
-  - [ ] Render app
-  - [x] Fetch data
-  - [x] Router link
-  - [x] Routing
+- \[x] Reactivity
+  - \[x] Declare state
+  - \[x] Update state
+  - \[x] Computed state
+- \[x] Templating
+  - \[x] Minimal template
+  - \[x] Styling
+  - \[x] Loop
+  - \[x] Event click
+  - \[x] Dom ref
+  - \[x] Conditional
+- \[x] Lifecycle
+  - \[x] On mount
+  - \[x] On unmount
+- \[x] Component composition
+  - \[x] Props
+  - \[x] Emit to parent
+  - \[x] Slot
+  - \[x] Slot fallback
+- \[x] Form input
+  - \[x] Input text
+  - \[x] Checkbox
+  - \[x] Radio
+  - \[x] Select
+- \[ ] Webapp features
+  - \[ ] Render app
+  - \[x] Fetch data
+  - \[x] Router link
+  - \[x] Routing
 
 </details><details>
         <summary>
@@ -185,35 +186,35 @@ How do we solve this? Developers love having framework overview by examples. It'
             <b>SolidJS</b>
             <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/96" /></summary>
 
-- [x] Reactivity
-  - [x] Declare state
-  - [x] Update state
-  - [x] Computed state
-- [x] Templating
-  - [x] Minimal template
-  - [x] Styling
-  - [x] Loop
-  - [x] Event click
-  - [x] Dom ref
-  - [x] Conditional
-- [x] Lifecycle
-  - [x] On mount
-  - [x] On unmount
-- [x] Component composition
-  - [x] Props
-  - [x] Emit to parent
-  - [x] Slot
-  - [x] Slot fallback
-- [x] Form input
-  - [x] Input text
-  - [x] Checkbox
-  - [x] Radio
-  - [x] Select
-- [ ] Webapp features
-  - [ ] Render app
-  - [x] Fetch data
-  - [x] Router link
-  - [x] Routing
+- \[x] Reactivity
+  - \[x] Declare state
+  - \[x] Update state
+  - \[x] Computed state
+- \[x] Templating
+  - \[x] Minimal template
+  - \[x] Styling
+  - \[x] Loop
+  - \[x] Event click
+  - \[x] Dom ref
+  - \[x] Conditional
+- \[x] Lifecycle
+  - \[x] On mount
+  - \[x] On unmount
+- \[x] Component composition
+  - \[x] Props
+  - \[x] Emit to parent
+  - \[x] Slot
+  - \[x] Slot fallback
+- \[x] Form input
+  - \[x] Input text
+  - \[x] Checkbox
+  - \[x] Radio
+  - \[x] Select
+- \[ ] Webapp features
+  - \[ ] Render app
+  - \[x] Fetch data
+  - \[x] Router link
+  - \[x] Routing
 
 </details><details>
         <summary>
@@ -221,35 +222,35 @@ How do we solve this? Developers love having framework overview by examples. It'
             <b>Lit</b>
             <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/100" /></summary>
 
-- [x] Reactivity
-  - [x] Declare state
-  - [x] Update state
-  - [x] Computed state
-- [x] Templating
-  - [x] Minimal template
-  - [x] Styling
-  - [x] Loop
-  - [x] Event click
-  - [x] Dom ref
-  - [x] Conditional
-- [x] Lifecycle
-  - [x] On mount
-  - [x] On unmount
-- [x] Component composition
-  - [x] Props
-  - [x] Emit to parent
-  - [x] Slot
-  - [x] Slot fallback
-- [x] Form input
-  - [x] Input text
-  - [x] Checkbox
-  - [x] Radio
-  - [x] Select
-- [x] Webapp features
-  - [x] Render app
-  - [x] Fetch data
-  - [x] Router link
-  - [x] Routing
+- \[x] Reactivity
+  - \[x] Declare state
+  - \[x] Update state
+  - \[x] Computed state
+- \[x] Templating
+  - \[x] Minimal template
+  - \[x] Styling
+  - \[x] Loop
+  - \[x] Event click
+  - \[x] Dom ref
+  - \[x] Conditional
+- \[x] Lifecycle
+  - \[x] On mount
+  - \[x] On unmount
+- \[x] Component composition
+  - \[x] Props
+  - \[x] Emit to parent
+  - \[x] Slot
+  - \[x] Slot fallback
+- \[x] Form input
+  - \[x] Input text
+  - \[x] Checkbox
+  - \[x] Radio
+  - \[x] Select
+- \[x] Webapp features
+  - \[x] Render app
+  - \[x] Fetch data
+  - \[x] Router link
+  - \[x] Routing
 
 </details><details>
         <summary>
@@ -257,35 +258,35 @@ How do we solve this? Developers love having framework overview by examples. It'
             <b>Ember</b>
             <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/96" /></summary>
 
-- [x] Reactivity
-  - [x] Declare state
-  - [x] Update state
-  - [x] Computed state
-- [x] Templating
-  - [x] Minimal template
-  - [x] Styling
-  - [x] Loop
-  - [x] Event click
-  - [x] Dom ref
-  - [x] Conditional
-- [x] Lifecycle
-  - [x] On mount
-  - [x] On unmount
-- [x] Component composition
-  - [x] Props
-  - [x] Emit to parent
-  - [x] Slot
-  - [x] Slot fallback
-- [x] Form input
-  - [x] Input text
-  - [x] Checkbox
-  - [x] Radio
-  - [x] Select
-- [ ] Webapp features
-  - [ ] Render app
-  - [x] Fetch data
-  - [x] Router link
-  - [x] Routing
+- \[x] Reactivity
+  - \[x] Declare state
+  - \[x] Update state
+  - \[x] Computed state
+- \[x] Templating
+  - \[x] Minimal template
+  - \[x] Styling
+  - \[x] Loop
+  - \[x] Event click
+  - \[x] Dom ref
+  - \[x] Conditional
+- \[x] Lifecycle
+  - \[x] On mount
+  - \[x] On unmount
+- \[x] Component composition
+  - \[x] Props
+  - \[x] Emit to parent
+  - \[x] Slot
+  - \[x] Slot fallback
+- \[x] Form input
+  - \[x] Input text
+  - \[x] Checkbox
+  - \[x] Radio
+  - \[x] Select
+- \[ ] Webapp features
+  - \[ ] Render app
+  - \[x] Fetch data
+  - \[x] Router link
+  - \[x] Routing
 
 </details><details>
         <summary>
@@ -293,35 +294,35 @@ How do we solve this? Developers love having framework overview by examples. It'
             <b>Alpine</b>
             <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/100" /></summary>
 
-- [x] Reactivity
-  - [x] Declare state
-  - [x] Update state
-  - [x] Computed state
-- [x] Templating
-  - [x] Minimal template
-  - [x] Styling
-  - [x] Loop
-  - [x] Event click
-  - [x] Dom ref
-  - [x] Conditional
-- [x] Lifecycle
-  - [x] On mount
-  - [x] On unmount
-- [x] Component composition
-  - [x] Props
-  - [x] Emit to parent
-  - [x] Slot
-  - [x] Slot fallback
-- [x] Form input
-  - [x] Input text
-  - [x] Checkbox
-  - [x] Radio
-  - [x] Select
-- [x] Webapp features
-  - [x] Render app
-  - [x] Fetch data
-  - [x] Router link
-  - [x] Routing
+- \[x] Reactivity
+  - \[x] Declare state
+  - \[x] Update state
+  - \[x] Computed state
+- \[x] Templating
+  - \[x] Minimal template
+  - \[x] Styling
+  - \[x] Loop
+  - \[x] Event click
+  - \[x] Dom ref
+  - \[x] Conditional
+- \[x] Lifecycle
+  - \[x] On mount
+  - \[x] On unmount
+- \[x] Component composition
+  - \[x] Props
+  - \[x] Emit to parent
+  - \[x] Slot
+  - \[x] Slot fallback
+- \[x] Form input
+  - \[x] Input text
+  - \[x] Checkbox
+  - \[x] Radio
+  - \[x] Select
+- \[x] Webapp features
+  - \[x] Render app
+  - \[x] Fetch data
+  - \[x] Router link
+  - \[x] Routing
 
 </details><details>
         <summary>
@@ -329,35 +330,35 @@ How do we solve this? Developers love having framework overview by examples. It'
             <b>Qwik</b>
             <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/96" /></summary>
 
-- [x] Reactivity
-  - [x] Declare state
-  - [x] Update state
-  - [x] Computed state
-- [x] Templating
-  - [x] Minimal template
-  - [x] Styling
-  - [x] Loop
-  - [x] Event click
-  - [x] Dom ref
-  - [x] Conditional
-- [x] Lifecycle
-  - [x] On mount
-  - [x] On unmount
-- [x] Component composition
-  - [x] Props
-  - [x] Emit to parent
-  - [x] Slot
-  - [x] Slot fallback
-- [x] Form input
-  - [x] Input text
-  - [x] Checkbox
-  - [x] Radio
-  - [x] Select
-- [ ] Webapp features
-  - [ ] Render app
-  - [x] Fetch data
-  - [x] Router link
-  - [x] Routing
+- \[x] Reactivity
+  - \[x] Declare state
+  - \[x] Update state
+  - \[x] Computed state
+- \[x] Templating
+  - \[x] Minimal template
+  - \[x] Styling
+  - \[x] Loop
+  - \[x] Event click
+  - \[x] Dom ref
+  - \[x] Conditional
+- \[x] Lifecycle
+  - \[x] On mount
+  - \[x] On unmount
+- \[x] Component composition
+  - \[x] Props
+  - \[x] Emit to parent
+  - \[x] Slot
+  - \[x] Slot fallback
+- \[x] Form input
+  - \[x] Input text
+  - \[x] Checkbox
+  - \[x] Radio
+  - \[x] Select
+- \[ ] Webapp features
+  - \[ ] Render app
+  - \[x] Fetch data
+  - \[x] Router link
+  - \[x] Routing
 
 </details><details>
         <summary>
@@ -365,35 +366,35 @@ How do we solve this? Developers love having framework overview by examples. It'
             <b>Aurelia 1</b>
             <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/96" /></summary>
 
-- [x] Reactivity
-  - [x] Declare state
-  - [x] Update state
-  - [x] Computed state
-- [x] Templating
-  - [x] Minimal template
-  - [x] Styling
-  - [x] Loop
-  - [x] Event click
-  - [x] Dom ref
-  - [x] Conditional
-- [x] Lifecycle
-  - [x] On mount
-  - [x] On unmount
-- [x] Component composition
-  - [x] Props
-  - [x] Emit to parent
-  - [x] Slot
-  - [x] Slot fallback
-- [x] Form input
-  - [x] Input text
-  - [x] Checkbox
-  - [x] Radio
-  - [x] Select
-- [ ] Webapp features
-  - [ ] Render app
-  - [x] Fetch data
-  - [x] Router link
-  - [x] Routing
+- \[x] Reactivity
+  - \[x] Declare state
+  - \[x] Update state
+  - \[x] Computed state
+- \[x] Templating
+  - \[x] Minimal template
+  - \[x] Styling
+  - \[x] Loop
+  - \[x] Event click
+  - \[x] Dom ref
+  - \[x] Conditional
+- \[x] Lifecycle
+  - \[x] On mount
+  - \[x] On unmount
+- \[x] Component composition
+  - \[x] Props
+  - \[x] Emit to parent
+  - \[x] Slot
+  - \[x] Slot fallback
+- \[x] Form input
+  - \[x] Input text
+  - \[x] Checkbox
+  - \[x] Radio
+  - \[x] Select
+- \[ ] Webapp features
+  - \[ ] Render app
+  - \[x] Fetch data
+  - \[x] Router link
+  - \[x] Routing
 
 </details>## 🤝 ContributingThis site is built with [Astro](https://docs.astro.build). Site content is written in Markdown format located in `content`. For simple edits, you can directly edit the file on GitHub and generate a Pull Request.For local development, [pnpm](https://pnpm.io/) is preferred as package manager:```bash
 pnpm i
