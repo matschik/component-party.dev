@@ -33,6 +33,7 @@
     "@sveltejs/vite-plugin-svelte": "^2.0.2",
     "@tailwindcss/typography": "^0.5.8",
     "@typescript-eslint/eslint-plugin": "^5.48.0",
+    "@typescript-eslint/parser": "^5.48.0",
     "autoprefixer": "^10.4.13",
     "chokidar": "^3.5.3",
     "codesandbox": "^2.2.3",
