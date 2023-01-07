@@ -65,7 +65,7 @@ export default async function generateContent() {
       });
 
       const frameworksDirPath = path.join(snippetsDirPath, snippetDirName);
-      const frameworkIds = await fs.readdir(frameworksDirPath);
+      const frameworkIds = FRAMEWORKS.map(({ id }) => id);
 
       await Promise.all(
         frameworkIds.map(async (frameworkId) => {
@@ -79,6 +79,10 @@ export default async function generateContent() {
           };
 
           const codeFilesDirPath = path.join(frameworksDirPath, frameworkId);
+          if (!(await pathExists(codeFilesDirPath))) {
+            byFrameworkId[frameworkId].push(frameworkSnippet);
+            return;
+          }
           const codeFileNames = await fs.readdir(codeFilesDirPath);
 
           for (const codeFileName of codeFileNames) {

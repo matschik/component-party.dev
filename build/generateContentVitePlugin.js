@@ -21,7 +21,10 @@ export default function pluginGenerateFrameworkContent() {
     buildIsRunning = true;
     logInfo("Generating framework content files...");
     const contentDirHash =
-      (await hashElement("content")).hash + (await hashElement("build")).hash;
+      (await hashElement("content")).hash +
+      (await hashElement("build")).hash +
+      (await hashElement("frameworks.mjs")).hash;
+
     const contentDirLastHash = await contentDirFsCache.get("contentDirHash");
     if (contentDirHash !== contentDirLastHash) {
       await generateContent();
@@ -35,7 +38,7 @@ export default function pluginGenerateFrameworkContent() {
 
   let fsContentWatcher;
   if (process.env.NODE_ENV === "development") {
-    fsContentWatcher = chokidar.watch("content").on("change", build);
+    fsContentWatcher = chokidar.watch(["content"]).on("change", build);
   }
 
   return {

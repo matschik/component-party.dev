@@ -1,9 +1,9 @@
 import { autoinject, computedFrom } from "aurelia-framework";
-import { UseFetchUsers } from "./use-fetch-users";
+import { UseFetchUsers } from "./UseFetchUsers";
 
 @autoinject()
 export class App {
-  constructor(private useFetchUsers: UseFetchUsers) {}
+  constructor(private useFetchUsers: UseFetchUsers) { }
 
   attached() {
     this.useFetchUsers.fetchData();
