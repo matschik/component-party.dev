@@ -7,7 +7,7 @@
   setContext(
     "user",
     createUserContext({
-      username: "john",
+      username: "unicorn42",
       email: "john@example.com",
     })
   );
