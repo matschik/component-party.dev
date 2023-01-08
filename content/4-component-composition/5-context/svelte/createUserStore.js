@@ -1,14 +1,14 @@
 import { writable } from "svelte/store";
 
-export default function createUserContext(initialData) {
+export default function createUserStore(initialData) {
   const userStore = writable(initialData);
 
   return {
     subscribe: userStore.subscribe,
-    updateEmail(newEmail) {
+    updateUsername(newUsername) {
       userStore.update((userData) => ({
         ...userData,
-        email: newEmail,
+        username: newUsername,
       }));
     },
   };

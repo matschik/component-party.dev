@@ -44,7 +44,7 @@ export default [
     playgroundURL: "https://codesandbox.io/s/mystifying-goldberg-6wx04b",
     documentationURL: "https://reactjs.org/docs/getting-started.html",
     filesSorter(files) {
-      return sortAllFilenames(files, ["App.jsx"]);
+      return sortAllFilenames(files, ["index.html", "App.jsx"]);
     },
   },
   {
@@ -107,7 +107,7 @@ export default [
     playgroundURL: "https://qwik.builder.io/playground",
     documentationURL: "https://qwik.builder.io/docs/overview",
     filesSorter(files) {
-      return sortAllFilenames(files, ["App.tsx"]);
+      return sortAllFilenames(files, ["index.html", "App.tsx"]);
     },
   },
   {

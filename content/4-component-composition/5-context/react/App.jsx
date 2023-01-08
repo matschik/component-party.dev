@@ -6,17 +6,21 @@ const UserContext = createContext();
 export default function App() {
   // In a real app, you would fetch the user data from an API
   const [user, setUser] = useState({
+    id: 1,
     username: "unicorn42",
-    email: "john@example.com",
+    email: "unicorn42@example.com",
   });
 
-  function updateEmail(newEmail) {
-    setUser((userData) => ({ ...userData, email: newEmail }));
+  function updateUsername(newUsername) {
+    setUser((userData) => ({ ...userData, username: newUsername }));
   }
 
   return (
-    <UserContext.Provider value={{ ...user, updateEmail }}>
-      <UserProfile />
-    </UserContext.Provider>
+    <>
+      <h1>Welcome back, {user.username}</h1>
+      <UserContext.Provider value={{ ...user, updateUsername }}>
+        <UserProfile />
+      </UserContext.Provider>
+    </>
   );
 }
