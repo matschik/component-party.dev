@@ -55,7 +55,7 @@
     "micache": "^2.4.1",
     "pkg-dir": "^7.0.0",
     "postcss": "^8.4.21",
-    "prettier": "^2.8.1",
+    "prettier": "^2.8.2",
     "prettier-plugin-svelte": "^2.9.0",
     "react": "^18.2.0",
     "rehype-raw": "^6.1.1",
