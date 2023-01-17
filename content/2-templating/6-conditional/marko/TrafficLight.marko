@@ -1,0 +1,17 @@
+static const TRAFFIC_LIGHTS = ["red", "orange", "green"];
+<let/lightIndex = 0/>
+<let/light = TRAFFIC_LIGHTS[lightIndex]/>
+
+<button onClick () {
+    lightIndex++;
+    if (lightIndex >= TRAFFIC_LIGHTS.length) {
+      lightIndex = 0;
+    }
+  }>Next light</button>
+<p>Light is: ${light}</p>
+<p>
+  You must
+  <if=light === "red">STOP</if>
+  <if=light === "orange">SLOW DOWN</if>
+  <if=light === "green">GO</if>
+</p>

@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2560 1400">
+  <path fill="url(#a)" d="M427 0h361L361 697l427 697H427L0 698z"/>
+  <linearGradient id="a" x2="0" y2="1">
+    <stop stop-color="#04bfc2"/>
+    <stop offset=".25" stop-color="#06cfe5"/>
+    <stop offset=".5" stop-color="#3ed6f8"/>
+    <stop offset=".5" stop-color="#0bbdf8"/>
+    <stop offset=".75" stop-color="#05a5f0"/>
+    <stop offset="1" stop-color="#0578c0"/>
+  </linearGradient>
+  <path fill="url(#b)" d="M854 697h361L788 0H427z"/>
+  <linearGradient id="b" x2="0" y2="1">
+    <stop stop-color="#1de6c5"/>
+    <stop offset=".5" stop-color="#19d89c"/>
+    <stop offset="1" stop-color="#16b175"/>
+  </linearGradient>
+  <path fill="url(#c)" d="M1281 0h361l-427 697H854z"/>
+  <linearGradient id="c" x2="0" y2="1">
+    <stop stop-color="#6bb904"/>
+    <stop offset=".5" stop-color="#81dc09"/>
+    <stop offset="1" stop-color="#83e91c"/>
+  </linearGradient>
+  <path fill="url(#d)" d="M1642 0h-361l428 697-428 697h361l428-697z"/>
+  <linearGradient id="d" x2="0" y2="1">
+    <stop stop-color="#ffeb10"/>
+    <stop offset=".25" stop-color="#ffd900"/>
+    <stop offset=".5" stop-color="#fdc601"/>
+    <stop offset=".5" stop-color="#ffa600"/>
+    <stop offset=".75" stop-color="#ff9500"/>
+    <stop offset="1" stop-color="#ef7400"/>
+  </linearGradient>
+  <path fill="url(#e)" d="M2132 0h-361l427 697-428 697h361l428-697z"/>
+  <linearGradient id="e" x2="0" y2="1">
+    <stop stop-color="#ff425b"/>
+    <stop offset=".25" stop-color="#f3154d"/>
+    <stop offset=".5" stop-color="#f1185c"/>
+    <stop offset=".5" stop-color="#d11661"/>
+    <stop offset=".75" stop-color="#ce176c"/>
+    <stop offset="1.1" stop-color="#a31460"/>
+  </linearGradient>
+</svg>

@@ -251,4 +251,24 @@ export default [
       return sortAllFilenames(files, ["app.html", "app.ts"]);
     },
   },
+  {
+    id: "marko",
+    title: "Marko",
+    img: "framework/marko.svg",
+    eslint: {
+      env: {
+        browser: true,
+        es2021: true,
+        node: true,
+      },
+      parser: "@typescript-eslint/parser",
+      files: ["**/marko/**"],
+      extends: ["eslint:recommended"],
+    },
+    playgroundURL: "https://markojs.com/playground/",
+    documentationURL: "https://markojs.com/docs/getting-started/",
+    filesSorter(files) {
+      return sortAllFilenames(files, ["app.marko"]);
+    },
+  },
 ];
