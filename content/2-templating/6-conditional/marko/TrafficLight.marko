@@ -1,12 +1,9 @@
 static const TRAFFIC_LIGHTS = ["red", "orange", "green"];
 <let/lightIndex = 0/>
-<let/light = TRAFFIC_LIGHTS[lightIndex]/>
+<const/light = TRAFFIC_LIGHTS[lightIndex]/>
 
 <button onClick () {
-    lightIndex++;
-    if (lightIndex >= TRAFFIC_LIGHTS.length) {
-      lightIndex = 0;
-    }
+    lightIndex = (lightIndex + 1) % TRAFFIC_LIGHTS.length;
   }>Next light</button>
 <p>Light is: ${light}</p>
 <p>
