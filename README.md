@@ -15,7 +15,7 @@ How do we solve this ? Developers love having framework overview by examples. It
 <summary>
 <img width="18" height="18" src="public/framework/svelte.svg" />
 <b>Svelte</b>
-<img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/100" /></summary>
+<img alt="100% progress" src="https://us-central1-progress-markdown.cloudfunctions.net/progress/100" /></summary>
 
 - [x] Reactivity
   - [x] Declare state
@@ -52,7 +52,7 @@ How do we solve this ? Developers love having framework overview by examples. It
         <summary>
             <img width="18" height="18" src="public/framework/react.svg" />
             <b>React</b>
-            <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/100" /></summary>
+            <img alt="100% progress" src="https://us-central1-progress-markdown.cloudfunctions.net/progress/100" /></summary>
 
 - [x] Reactivity
   - [x] Declare state
@@ -89,7 +89,7 @@ How do we solve this ? Developers love having framework overview by examples. It
         <summary>
             <img width="18" height="18" src="public/framework/vue.svg" />
             <b>Vue 3</b>
-            <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/96" /></summary>
+            <img alt="96% progress" src="https://us-central1-progress-markdown.cloudfunctions.net/progress/96" /></summary>
 
 - [x] Reactivity
   - [x] Declare state
@@ -126,7 +126,7 @@ How do we solve this ? Developers love having framework overview by examples. It
         <summary>
             <img width="18" height="18" src="public/framework/solid.svg" />
             <b>SolidJS</b>
-            <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/92" /></summary>
+            <img alt="92% progress" src="https://us-central1-progress-markdown.cloudfunctions.net/progress/92" /></summary>
 
 - [x] Reactivity
   - [x] Declare state
@@ -163,7 +163,7 @@ How do we solve this ? Developers love having framework overview by examples. It
         <summary>
             <img width="18" height="18" src="public/framework/qwik.svg" />
             <b>Qwik</b>
-            <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/92" /></summary>
+            <img alt="92% progress" src="https://us-central1-progress-markdown.cloudfunctions.net/progress/92" /></summary>
 
 - [x] Reactivity
   - [x] Declare state
@@ -200,7 +200,7 @@ How do we solve this ? Developers love having framework overview by examples. It
         <summary>
             <img width="18" height="18" src="public/framework/angular.svg" />
             <b>Angular</b>
-            <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/92" /></summary>
+            <img alt="92% progress" src="https://us-central1-progress-markdown.cloudfunctions.net/progress/92" /></summary>
 
 - [x] Reactivity
   - [x] Declare state
@@ -237,7 +237,7 @@ How do we solve this ? Developers love having framework overview by examples. It
         <summary>
             <img width="18" height="18" src="public/framework/lit.svg" />
             <b>Lit</b>
-            <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/96" /></summary>
+            <img alt="96% progress" src="https://us-central1-progress-markdown.cloudfunctions.net/progress/96" /></summary>
 
 - [x] Reactivity
   - [x] Declare state
@@ -274,7 +274,7 @@ How do we solve this ? Developers love having framework overview by examples. It
         <summary>
             <img width="18" height="18" src="public/framework/vue.svg" />
             <b>Vue 2</b>
-            <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/96" /></summary>
+            <img alt="96% progress" src="https://us-central1-progress-markdown.cloudfunctions.net/progress/96" /></summary>
 
 - [x] Reactivity
   - [x] Declare state
@@ -311,7 +311,7 @@ How do we solve this ? Developers love having framework overview by examples. It
         <summary>
             <img width="18" height="18" src="public/framework/ember.svg" />
             <b>Ember</b>
-            <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/92" /></summary>
+            <img alt="92% progress" src="https://us-central1-progress-markdown.cloudfunctions.net/progress/92" /></summary>
 
 - [x] Reactivity
   - [x] Declare state
@@ -348,7 +348,7 @@ How do we solve this ? Developers love having framework overview by examples. It
         <summary>
             <img width="18" height="18" src="public/framework/alpine.svg" />
             <b>Alpine</b>
-            <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/96" /></summary>
+            <img alt="96% progress" src="https://us-central1-progress-markdown.cloudfunctions.net/progress/96" /></summary>
 
 - [x] Reactivity
   - [x] Declare state
@@ -385,7 +385,7 @@ How do we solve this ? Developers love having framework overview by examples. It
         <summary>
             <img width="18" height="18" src="public/framework/aurelia.svg" />
             <b>Aurelia 1</b>
-            <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/92" /></summary>
+            <img alt="92% progress" src="https://us-central1-progress-markdown.cloudfunctions.net/progress/92" /></summary>
 
 - [x] Reactivity
   - [x] Declare state
@@ -422,7 +422,7 @@ How do we solve this ? Developers love having framework overview by examples. It
         <summary>
             <img width="18" height="18" src="public/framework/marko.svg">
             <b>Marko</b>
-            <img alt="92% progress" src="https://us-central1-progress-markdown.cloudfunctions.net/progress/92"></summary>
+            <img alt="93% progress" src="https://us-central1-progress-markdown.cloudfunctions.net/progress/93"></summary>
 
 - [x] Reactivity
   - [x] Declare state
