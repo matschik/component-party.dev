@@ -3,12 +3,11 @@
   username: "unicorn42",
   email: "unicorn42@example.com",
 }/>
-
-function updateUsername(newUsername) {
+<const/updateUsername(newUsername) {
   user = { ...user, username: newUsername };
-}
+}/>
 
 <h1>Welcome back, ${user.username}</h1>
-<set user={ ...user, updateUsername }>
+<set={ ...user, updateUsername }>
   <UserProfile />
 </set>
