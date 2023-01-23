@@ -1,6 +1,6 @@
 <p
-  x-data="{ pageTitle: '' }"
-  x-init="$nextTick(() => { pageTitle = document.title })"
+  x-data="{ viewportSize: '' }"
+  x-init="$nextTick(() => { viewportSize = `${window.innerWidth} × ${window.innerHeight}` })"
 >
-  Page title: <span x-text="pageTitle"></span>
+  Viewport size: <span x-text="viewportSize"></span>
 </p>
