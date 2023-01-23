@@ -5,11 +5,7 @@
   $: light = TRAFFIC_LIGHTS[lightIndex];
 
   function nextLight() {
-    if (lightIndex + 1 > TRAFFIC_LIGHTS.length - 1) {
-      lightIndex = 0;
-    } else {
-      lightIndex++;
-    }
+    lightIndex = (lightIndex + 1) % TRAFFIC_LIGHTS.length;
   }
 </script>
 
