@@ -4,10 +4,13 @@ import { ref, onMounted } from "vue";
 const inputElement = ref();
 
 onMounted(() => {
-  inputElement.value.focus();
+  inputElement.value.indeterminate = true;
 });
 </script>
 
 <template>
-  <input ref="inputElement">
+  <input
+    ref="inputElement"
+    type="checkbox"
+  >
 </template>
