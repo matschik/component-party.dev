@@ -6,7 +6,7 @@ routes/
 |-- about/
     |-- +page.marko // about page "/about"
 |-- +layout.marko // global app layout
-|-- +handler.{js,ts,*} // run code for conditionally rendering HTML/API route
+|-- +handler.{js,ts,*} // conditionally render HTML, API route, run arbitrary code…
 |-- +middleware.{js,ts,*} // added to HTTP framework middleware chain
 |-- +meta.{js,ts,*} // adds metadata to route
 |-- +404.marko // shows when no suitable route found
