@@ -110,7 +110,7 @@ How do we solve this ? Developers love having framework overview by examples. It
   - [x] Emit to parent
   - [x] Slot
   - [x] Slot fallback
-  - [ ] Context
+  - [x] Context
 - [x] Form input
   - [x] Input text
   - [x] Checkbox
