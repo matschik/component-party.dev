@@ -227,8 +227,8 @@ How do we solve this ? Developers love having framework overview by examples. It
   - [x] Checkbox
   - [x] Radio
   - [x] Select
-- [ ] Webapp features
-  - [ ] Render app
+- [x] Webapp features
+  - [x] Render app
   - [x] Fetch data
   - [x] Router link
   - [x] Routing
