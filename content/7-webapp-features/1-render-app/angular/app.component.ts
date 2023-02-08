@@ -2,7 +2,8 @@ import { Component } from "@angular/core";
 
 @Component({
   selector: "app-root",
-  template: `<h1>{{ title }} app is running!</h1>`,
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.scss"],
 })
 export class AppComponent {
   title = "Component Party";
