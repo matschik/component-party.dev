@@ -130,7 +130,7 @@
 
 <div class="flex">
   <Aside />
-  <div class="pb-8 w-full">
+  <div class="pb-8 w-10 grow">
     <div
       class="flex px-6 lg:px-20 py-2 sticky top-0 z-10 w-full backdrop-blur bg-gray-900/80 border-b border-gray-700 whitespace-nowrap overflow-x-auto"
     >
