@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <script type="dagger/configs">
+      {
+        "user_profile": "#userProfile"
+      }
+    </script>
+    <template id="userProfile">
+      <p>My name is ${ name }!</p>
+      <p>My age is ${ age }!</p>
+      <p>My favorite colors are ${ favouriteColors.join(', ') }!</p>
+      <p>I am ${ isAvailable ? '' : 'not ' }available</p>
+    </template>
+  </head>
+  <body>
+    <user_profile +loading="{
+      name: 'John',
+      age: 20,
+      favouriteColors: ['green', 'blue', 'red'],
+      isAvailable: true
+    }"></user_profile>
+  </body>
+</html>

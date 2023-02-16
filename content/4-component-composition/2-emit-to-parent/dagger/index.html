@@ -1,0 +1,13 @@
+<div
+  +loading="{ canCome: true, node: null }"
+  +loaded="node = $node"
+  +yes="canCome = true"
+  +no="canCome = false"
+>
+  <p>Are you happy?</p>
+  <div>
+    <button +click="node.dispatchEvent(new Event('yes'))">YES</button>
+    <button +click="node.dispatchEvent(new Event('no'))">NO</button>
+  </div>
+  <p style="font-size: 50px">${ canCome ? '😀' : '😥' }</p>
+</div>

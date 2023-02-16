@@ -1,0 +1,19 @@
+<div
+  +loading="{
+  light: '',
+  TRAFFIC_LIGHTS: ['red', 'orange', 'green'],
+  lightIndex: 0
+}"
+  $watch="light = TRAFFIC_LIGHTS[lightIndex]"
+>
+  <button +click="lightIndex = (lightIndex + 1) % TRAFFIC_LIGHTS.length">
+    Next light
+  </button>
+  <p>Light is: ${ light }</p>
+  <p>
+    You must
+    <span $exist="light === 'red'">STOP</span>
+    <span $exist="light === 'orange'">SLOW DOWN</span>
+    <span $exist="light === 'green'">GO</span>
+  </p>
+</div>

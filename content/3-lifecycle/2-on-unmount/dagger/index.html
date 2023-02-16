@@ -1,0 +1,10 @@
+<p
+  +loading="{
+  time: new Date().toLocaleTimeString(),
+  timer: null
+}"
+  +loaded="timer = setInterval(() => (time = new Date().toLocaleTimeString()), 1000)"
+  +unloading="clearInterval(timer)"
+>
+  Current time: ${ time }
+</p>

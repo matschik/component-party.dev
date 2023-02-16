@@ -1,0 +1,22 @@
+<div
+  +loading="{
+  selectedColorId: 2,
+  colors: [
+    { id: 1, text: 'red' },
+    { id: 2, text: 'blue' },
+    { id: 3, text: 'green' },
+    { id: 4, text: 'gray', isDisabled: true }
+  ]
+}"
+>
+  <span>The selectedColorId is ${ selectedColorId }</span>
+  <select $selected="selectedColorId">
+    <option
+      $each#item:color="colors"
+      $value="color.id"
+      $disabled="!!color.isDisabled"
+    >
+      ${ color.text }
+    </option>
+  </select>
+</div>

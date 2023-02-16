@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="dagger/configs">
+      {
+        "_": "#script"
+      }
+    </script>
+    <script id="script" type="dagger/script">
+      export const loading = () => alert('Hello dagger!');
+    </script>
+  </head>
+  <body>
+    <h1 +loading="loading()">Hello world</h1>
+  </body>
+</html>

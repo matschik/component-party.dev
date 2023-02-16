@@ -251,4 +251,20 @@ export default [
       return sortAllFilenames(files, ["app.html", "app.ts"]);
     },
   },
+  {
+    id: "dagger",
+    title: "Dagger.js",
+    img: "framework/dagger.svg",
+    eslint: {
+      files: ["**/dagger/*.js"],
+      env: {
+        browser: true,
+        es2021: true,
+      },
+    },
+    documentationURL: "https://daggerjs.org",
+    filesSorter(files) {
+      return sortAllFilenames(files, ["index.html"]);
+    },
+  },
 ];
