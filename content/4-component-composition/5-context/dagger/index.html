@@ -1,1 +1,26 @@
-TODO
+<html>
+  <head>
+    <script type="dagger/configs">
+      {
+        "user_profile": "./user_profile.html"
+      }
+    </script>
+  </head>
+  <body>
+    <div
+      +loading="{
+        user: {
+            id: 1,
+            username: 'unicorn42',
+            email: 'unicorn42@example.com'
+        },
+        updateUsername: (user, newUsername) => {
+            user.username = newUsername;
+        }
+      }"
+    >
+      <h1>Welcome back, ${ user.username }</h1>
+      <user_profile></user_profile>
+    </div>
+  </body>
+</html>
