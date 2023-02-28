@@ -79,7 +79,7 @@ export default [
     playgroundURL: "https://playground.solidjs.com/",
     documentationURL: "https://www.solidjs.com/",
     filesSorter(files) {
-      return sortAllFilenames(files, ["App.jsx"]);
+      return sortAllFilenames(files, ["index.html", "App.jsx"]);
     },
   },
   {
