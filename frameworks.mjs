@@ -251,4 +251,23 @@ export default [
       return sortAllFilenames(files, ["app.html", "app.ts"]);
     },
   },
+  {
+    id: "Mithril",
+    title: "Mithril v2",
+    img: "framework/mithril.svg",
+    eslint: {
+      env: {
+        browser: true,
+        es2021: true,
+        node: true,
+      },
+      files: ["**/mithril/**"],
+      extends: ["eslint:recommended"],
+    },
+    playgroundURL: "https://codesandbox.io/s/q99qzov66",
+    documentationURL: "https://mithril.js.org/",
+    filesSorter(files) {
+      return sortAllFilenames(files, ["index.html", "app.js"]);
+    },
+  },
 ];
