@@ -110,7 +110,7 @@ How do we solve this ? Developers love having framework overview by examples. It
   - [x] Emit to parent
   - [x] Slot
   - [x] Slot fallback
-  - [ ] Context
+  - [x] Context
 - [x] Form input
   - [x] Input text
   - [x] Checkbox
@@ -153,8 +153,8 @@ How do we solve this ? Developers love having framework overview by examples. It
   - [x] Checkbox
   - [x] Radio
   - [x] Select
-- [ ] Webapp features
-  - [ ] Render app
+- [x] Webapp features
+  - [x] Render app
   - [x] Fetch data
   - [x] Router link
   - [x] Routing
@@ -179,12 +179,12 @@ How do we solve this ? Developers love having framework overview by examples. It
 - [x] Lifecycle
   - [x] On mount
   - [x] On unmount
-- [ ] Component composition
+- [x] Component composition
   - [x] Props
   - [x] Emit to parent
   - [x] Slot
   - [x] Slot fallback
-  - [ ] Context
+  - [x] Context
 - [x] Form input
   - [x] Input text
   - [x] Checkbox
@@ -274,7 +274,7 @@ How do we solve this ? Developers love having framework overview by examples. It
         <summary>
             <img width="18" height="18" src="public/framework/vue.svg" />
             <b>Vue 2</b>
-            <img alt="96% progress" src="https://us-central1-progress-markdown.cloudfunctions.net/progress/96" /></summary>
+            <img alt="100% progress" src="https://us-central1-progress-markdown.cloudfunctions.net/progress/100" /></summary>
 
 - [x] Reactivity
   - [x] Declare state
@@ -290,12 +290,12 @@ How do we solve this ? Developers love having framework overview by examples. It
 - [x] Lifecycle
   - [x] On mount
   - [x] On unmount
-- [ ] Component composition
+- [x] Component composition
   - [x] Props
   - [x] Emit to parent
   - [x] Slot
   - [x] Slot fallback
-  - [ ] Context
+  - [x] Context
 - [x] Form input
   - [x] Input text
   - [x] Checkbox
