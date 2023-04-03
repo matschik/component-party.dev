@@ -111,6 +111,19 @@ export default [
     },
   },
   {
+    id: "marko",
+    title: "Marko",
+    img: "framework/marko.svg",
+    eslint: {
+      files: ["!**"], // Marko’s linter/prettyprinter doesn’t use eslint
+    },
+    playgroundURL: "https://markojs.com/playground/",
+    documentationURL: "https://markojs.com/docs/getting-started/",
+    filesSorter(files) {
+      return sortAllFilenames(files, ["index.marko", "App.marko"]);
+    },
+  },
+  {
     id: "angular",
     title: "Angular",
     img: "framework/angular.svg",

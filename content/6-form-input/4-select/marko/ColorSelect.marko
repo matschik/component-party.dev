@@ -1,0 +1,15 @@
+static const colors = [
+  { id: 1, text: "red" },
+  { id: 2, text: "blue" },
+  { id: 3, text: "green" },
+  { id: 4, text: "gray", isDisabled: true },
+];
+<let/selectedColorId = 2/>
+
+<select onChange(event) { selectedColorId = event.target.value }>
+  <for|{ id, isDisabled, text }| of=colors>
+    <option value=id disabled=isDisabled selected=id === selectedColorId>
+      ${text}
+    </option>
+  </for>
+</select>

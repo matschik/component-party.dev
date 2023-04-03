@@ -1,0 +1,13 @@
+<let/user = { // In a real app, you would fetch the user data from an API
+  id: 1,
+  username: "unicorn42",
+  email: "unicorn42@example.com",
+}/>
+<const/updateUsername(newUsername) {
+  user = { ...user, username: newUsername };
+}/>
+
+<h1>Welcome back, ${user.username}</h1>
+<set={ ...user, updateUsername }>
+  <UserProfile />
+</set>

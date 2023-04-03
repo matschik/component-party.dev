@@ -1,0 +1,6 @@
+<let/time = new Date()/>
+<lifecycle
+  onMount() { this.timer = setInterval(_ => time = new Date(), 1000) }
+  onDestroy() { clearInterval(this.timer) }
+/>
+<p>Current time: ${time.toLocaleTimeString()}</p>
