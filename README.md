@@ -311,7 +311,7 @@ How do we solve this ? Developers love having framework overview by examples. It
         <summary>
             <img width="18" height="18" src="public/framework/ember.svg" />
             <b>Ember</b>
-            <img alt="95% progress" src="https://us-central1-progress-markdown.cloudfunctions.net/progress/95" /></summary>
+            <img alt="96% progress" src="https://us-central1-progress-markdown.cloudfunctions.net/progress/96" /></summary>
 
 - [x] Reactivity
   - [x] Declare state
