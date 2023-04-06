@@ -311,7 +311,7 @@ How do we solve this ? Developers love having framework overview by examples. It
         <summary>
             <img width="18" height="18" src="public/framework/ember.svg" />
             <b>Ember</b>
-            <img alt="92% progress" src="https://us-central1-progress-markdown.cloudfunctions.net/progress/92" /></summary>
+            <img alt="95% progress" src="https://us-central1-progress-markdown.cloudfunctions.net/progress/95" /></summary>
 
 - [x] Reactivity
   - [x] Declare state
@@ -327,12 +327,12 @@ How do we solve this ? Developers love having framework overview by examples. It
 - [x] Lifecycle
   - [x] On mount
   - [x] On unmount
-- [ ] Component composition
+- [x] Component composition
   - [x] Props
   - [x] Emit to parent
   - [x] Slot
   - [x] Slot fallback
-  - [ ] Context
+  - [x] Context
 - [x] Form input
   - [x] Input text
   - [x] Checkbox
