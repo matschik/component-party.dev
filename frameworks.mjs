@@ -264,4 +264,29 @@ export default [
       return sortAllFilenames(files, ["app.html", "app.ts"]);
     },
   },
+  {
+    id: "aurelia2",
+    title: "Aurelia 2",
+    img: "framework/aurelia.svg",
+    eslint: {
+      env: {
+        browser: true,
+        es2021: true,
+        node: true,
+      },
+      parser: "@typescript-eslint/parser",
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+      files: ["**/aurelia2/**"],
+      extends: ["eslint:recommended"],
+    },
+    playgroundURL: "https://stackblitz.com/edit/au2-conventions?file=src%2Fmy-app.html",
+    documentationURL: "http://docs.aurelia.io",
+    filesSorter(files) {
+      return sortAllFilenames(files, ["app.html", "app.ts"]);
+    },
+  },
 ];
