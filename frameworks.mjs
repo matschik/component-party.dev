@@ -111,6 +111,19 @@ export default [
     },
   },
   {
+    id: "marko",
+    title: "Marko",
+    img: "framework/marko.svg",
+    eslint: {
+      files: ["!**"], // Marko’s linter/prettyprinter doesn’t use eslint
+    },
+    playgroundURL: "https://markojs.com/playground/",
+    documentationURL: "https://markojs.com/docs/getting-started/",
+    filesSorter(files) {
+      return sortAllFilenames(files, ["index.marko", "App.marko"]);
+    },
+  },
+  {
     id: "angular",
     title: "Angular",
     img: "framework/angular.svg",
@@ -265,6 +278,30 @@ export default [
     documentationURL: "https://daggerjs.org",
     filesSorter(files) {
       return sortAllFilenames(files, ["index.html"]);
+  },
+  {
+    id: "aurelia2",
+    title: "Aurelia 2",
+    img: "framework/aurelia.svg",
+    eslint: {
+      env: {
+        browser: true,
+        es2021: true,
+        node: true,
+      },
+      parser: "@typescript-eslint/parser",
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+      files: ["**/aurelia2/**"],
+      extends: ["eslint:recommended"],
+    },
+    playgroundURL: "https://stackblitz.com/edit/au2-conventions?file=src%2Fmy-app.html",
+    documentationURL: "http://docs.aurelia.io",
+    filesSorter(files) {
+      return sortAllFilenames(files, ["app.html", "app.ts"]);
     },
   },
 ];

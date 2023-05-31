@@ -25,7 +25,16 @@ async function pathExists(path) {
 export default async function generateContent() {
   const highlighter = await getHighlighter({
     theme: componentPartyShikiTheme,
-    langs: ["javascript", "svelte", "html", "hbs", "tsx", "jsx", "vue"],
+    langs: [
+      "javascript",
+      "svelte",
+      "html",
+      "hbs",
+      "tsx",
+      "jsx",
+      "vue",
+      "marko",
+    ],
   });
 
   const rootDir = await packageDirectory();
