@@ -128,7 +128,7 @@
   <Aside />
   <div class="pb-8 w-10 grow">
     <div
-      class="flex px-6 lg:px-20 py-2 sticky top-0 z-10 w-full backdrop-blur bg-gray-900/80 border-b border-gray-700 whitespace-nowrap overflow-x-auto"
+      class="flex px-6 lg:px-20 py-2 sticky top-0 z-20 w-full backdrop-blur bg-gray-900/80 border-b border-gray-700 whitespace-nowrap overflow-x-auto"
     >
       {#each frameworks as framework (framework.id)}
         <button
@@ -146,7 +146,10 @@
       {/each}
     </div>
 
-    <main id="main-content" class="px-6 md:px-14 lg:px-20 max-w-full pt-10">
+    <main
+      id="main-content"
+      class="relative px-6 md:px-14 lg:px-20 max-w-full pt-10"
+    >
       <div>
         {#if frameworkIdsSelected.size === 0}
           <div class="space-y-4">
@@ -188,7 +191,11 @@
                       "." +
                       snippet.snippetId}
                   >
-                    <h2 id={snippet.snippetId} class="header-anchor">
+                    <!-- bg-[var(--bg-color)] -->
+                    <h2
+                      id={snippet.snippetId}
+                      class="header-anchor sticky py-2 top-[2.9531rem] z-10 bg-[var(--bg-color)]"
+                    >
                       {snippet.title}
                       <a
                         href={"#" + snippet.snippetId}
