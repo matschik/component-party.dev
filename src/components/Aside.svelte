@@ -1,8 +1,85 @@
 <script>
   import c from "classnames";
   import { sections, snippets } from "../generatedContent/tree.js";
-  export let visibleSectionIds = new Set();
-  export let visibleSnippetIds = new Set();
+  import { onMount, onDestroy } from "svelte";
+
+  let largestVisibleSectionId = null;
+  let largestVisibleSnippetId = null;
+
+  function getLargestElement(elements) {
+    let largestArea = 0;
+    let largestElement = null;
+
+    for (const element of elements) {
+      const rect = element.getBoundingClientRect();
+      const visibleWidth =
+        Math.min(rect.right, window.innerWidth) - Math.max(rect.left, 0);
+      const visibleHeight =
+        Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
+
+      if (visibleWidth > 0 && visibleHeight > 0) {
+        const area = visibleWidth * visibleHeight;
+
+        if (area > largestArea) {
+          largestArea = area;
+          largestElement = element;
+        }
+      }
+    }
+
+    return largestElement;
+  }
+
+  function throttle(func, wait) {
+    let waiting = false;
+    return function () {
+      if (waiting) {
+        return;
+      }
+
+      waiting = true;
+      setTimeout(() => {
+        func.apply(this, arguments);
+        waiting = false;
+      }, wait);
+    };
+  }
+
+  function startListeningScroll() {
+    function onScroll() {
+      const largestSection = getLargestElement(
+        document.querySelectorAll("[data-section-id]")
+      );
+      if (largestSection) {
+        largestVisibleSectionId = largestSection.dataset.sectionId;
+      }
+
+      const largestSnippet = getLargestElement(
+        document.querySelectorAll("[data-snippet-id]")
+      );
+      if (largestSnippet) {
+        largestVisibleSnippetId = largestSnippet.dataset.snippetId;
+      }
+    }
+
+    const throttleOnScroll = throttle(onScroll, 100);
+
+    document.addEventListener("scroll", throttleOnScroll, { passive: true });
+
+    return () => {
+      document.removeEventListener("scroll", throttleOnScroll);
+    };
+  }
+
+  let stopListeningScroll;
+
+  onMount(() => {
+    stopListeningScroll = startListeningScroll();
+  });
+
+  onDestroy(() => {
+    stopListeningScroll && stopListeningScroll();
+  });
 </script>
 
 <aside
@@ -17,7 +94,7 @@
             class={c(
               "inline-block w-full py-1.5 px-4 text-white opacity-90 hover:opacity-100 hover:bg-gray-800 rounded transition-opacity",
               {
-                "bg-gray-800": visibleSectionIds.has(section.sectionId),
+                "bg-gray-800": section.sectionId === largestVisibleSectionId,
               }
             )}
           >
@@ -30,9 +107,8 @@
                   href={`#${snippet.snippetId}`}
                   class={c(
                     "inline-block w-full py-1.5 px-4 text-white hover:bg-gray-800 rounded hover:opacity-100 transition-opacity",
-                    visibleSnippetIds.has(
-                      section.sectionId + "." + snippet.snippetId
-                    )
+                    section.sectionId + "." + snippet.snippetId ===
+                      largestVisibleSnippetId
                       ? "bg-gray-800 opacity-70"
                       : "opacity-50"
                   )}

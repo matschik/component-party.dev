@@ -8,7 +8,7 @@
   import CodeEditor from "./components/CodeEditor.svelte";
   import AppNotificationCenter from "./components/AppNotificationCenter.svelte";
   import createLocaleStorage from "./lib/createLocaleStorage.js";
-  import { onMount } from "svelte";
+  import { onDestroy, onMount } from "svelte";
   import Header from "./components/Header.svelte";
   import Aside from "./components/Aside.svelte";
   import GithubIcon from "./components/GithubIcon.svelte";
@@ -112,52 +112,6 @@
     importFrameworkSnippets([...frameworkIdsSelected]);
   }
 
-  function applyInViewportObserverToSelector(selector, onEntry) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        onEntry?.(entry);
-      });
-    });
-
-    const observerInterval = setInterval(() => {
-      const elements = document.querySelectorAll(selector);
-      if (elements && elements.length > 0) {
-        elements.forEach((section) => observer.observe(section));
-        clearInterval(observerInterval);
-      }
-    }, 10);
-
-    return observer;
-  }
-
-  let visibleSectionIds = new Set();
-  let visibleSnippetIds = new Set();
-
-  function addObservers() {
-    applyInViewportObserverToSelector("[data-section-id]", (entry) => {
-      const id = entry.target.dataset.sectionId;
-      if (entry.isIntersecting) {
-        visibleSectionIds.add(id);
-      } else {
-        visibleSectionIds.delete(id);
-      }
-      visibleSectionIds = new Set(visibleSectionIds);
-    });
-    applyInViewportObserverToSelector("[data-snippet-id]", (entry) => {
-      const id = entry.target.dataset.snippetId;
-      if (entry.isIntersecting) {
-        visibleSnippetIds.add(id);
-      } else {
-        visibleSnippetIds.delete(id);
-      }
-      visibleSnippetIds = new Set(visibleSnippetIds);
-    });
-  }
-
-  onMount(() => {
-    setTimeout(addObservers, 500);
-  });
-
   $: frameworks = [
     ...([...frameworkIdsSelected].map((id) =>
       FRAMEWORKS.find((f) => f.id === id)
@@ -171,7 +125,7 @@
 <Header />
 
 <div class="flex">
-  <Aside {visibleSectionIds} {visibleSnippetIds} />
+  <Aside />
   <div class="pb-8 w-10 grow">
     <div
       class="flex px-6 lg:px-20 py-2 sticky top-0 z-10 w-full backdrop-blur bg-gray-900/80 border-b border-gray-700 whitespace-nowrap overflow-x-auto"
