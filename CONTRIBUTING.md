@@ -2,7 +2,7 @@
 
 This site is built with [Vite](https://vitejs.dev) and [Svelte](https://svelte.dev). Site content is written in Markdown format located in `content`. For simple edits, you can directly edit the file on GitHub and generate a Pull Request.
 
-## Add a framework
+## Add a new framework
 
 1.  Fork the project and create a new branch
 2.  Add the new framework SVG logo in `public/framework`

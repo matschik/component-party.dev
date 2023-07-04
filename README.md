@@ -89,7 +89,7 @@ How do we solve this ? Developers love having framework overview by examples. It
         <summary>
             <img width="18" height="18" src="public/framework/vue.svg" />
             <b>Vue 3</b>
-            <img alt="96% progress" src="https://us-central1-progress-markdown.cloudfunctions.net/progress/96" /></summary>
+            <img alt="100% progress" src="https://us-central1-progress-markdown.cloudfunctions.net/progress/100" /></summary>
 
 - [x] Reactivity
   - [x] Declare state
@@ -105,7 +105,7 @@ How do we solve this ? Developers love having framework overview by examples. It
 - [x] Lifecycle
   - [x] On mount
   - [x] On unmount
-- [ ] Component composition
+- [x] Component composition
   - [x] Props
   - [x] Emit to parent
   - [x] Slot
@@ -470,7 +470,7 @@ pnpm run dev
 
 This project requires Node.js to be `v16.0.0` or higher.
 
-### Add a framework
+### Add a new framework
 
 1.  Fork the project and create a new branch
 2.  Add the new framework SVG logo in `public/framework`
