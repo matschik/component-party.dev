@@ -157,6 +157,13 @@
   onMount(() => {
     setTimeout(addObservers, 500);
   });
+
+  $: frameworks = [
+    ...([...frameworkIdsSelected].map((id) =>
+      FRAMEWORKS.find((f) => f.id === id)
+    ) || []),
+    ...(FRAMEWORKS.filter((f) => !frameworkIdsSelected.has(f.id)) || []),
+  ];
 </script>
 
 <AppNotificationCenter />
@@ -169,7 +176,7 @@
     <div
       class="flex px-6 lg:px-20 py-2 sticky top-0 z-10 w-full backdrop-blur bg-gray-900/80 border-b border-gray-700 whitespace-nowrap overflow-x-auto"
     >
-      {#each FRAMEWORKS as framework}
+      {#each frameworks as framework (framework.id)}
         <button
           title={`Display ${framework.title}`}
           class={c(
@@ -239,7 +246,7 @@
                     </h2>
                     {#if frameworkIdsSelectedStorageInitialized}
                       <div
-                        class="grid grid-cols-1 2xl:grid-cols-2 gap-10"
+                        class="grid grid-cols-1 2xl:grid-cols-2 gap-x-10"
                         style="margin-top: 1rem;"
                       >
                         {#each [...frameworkIdsSelected] as frameworkId (frameworkId)}
