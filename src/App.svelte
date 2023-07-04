@@ -173,7 +173,7 @@
             class="max-w-full prose prose-sm prose-invert prose-h1:scroll-mt-[5rem] prose-pre:mt-0 prose-h2:scroll-mt-[5rem]"
           >
             {#each sections as section}
-              <div data-section-id={section.sectionId}>
+              <div>
                 <h1 id={section.sectionId} class="header-anchor">
                   {section.title}
                   <a

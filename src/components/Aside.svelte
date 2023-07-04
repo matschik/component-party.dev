@@ -2,8 +2,8 @@
   import c from "classnames";
   import { sections, snippets } from "../generatedContent/tree.js";
   import { onMount, onDestroy } from "svelte";
+  import throttle from "../lib/throttle.js";
 
-  let largestVisibleSectionId = null;
   let largestVisibleSnippetId = null;
 
   function getLargestElement(elements) {
@@ -30,35 +30,15 @@
     return largestElement;
   }
 
-  function throttle(func, wait) {
-    let waiting = false;
-    return function () {
-      if (waiting) {
-        return;
-      }
-
-      waiting = true;
-      setTimeout(() => {
-        func.apply(this, arguments);
-        waiting = false;
-      }, wait);
-    };
-  }
-
-  function startListeningScroll() {
+  function listenLargestSnippetOnScroll() {
     function onScroll() {
-      const largestSection = getLargestElement(
-        document.querySelectorAll("[data-section-id]")
-      );
-      if (largestSection) {
-        largestVisibleSectionId = largestSection.dataset.sectionId;
-      }
-
       const largestSnippet = getLargestElement(
         document.querySelectorAll("[data-snippet-id]")
       );
       if (largestSnippet) {
         largestVisibleSnippetId = largestSnippet.dataset.snippetId;
+      } else {
+        largestVisibleSnippetId = null;
       }
     }
 
@@ -71,14 +51,14 @@
     };
   }
 
-  let stopListeningScroll;
+  let unlistenLargestSnippetOnScroll;
 
   onMount(() => {
-    stopListeningScroll = startListeningScroll();
+    unlistenLargestSnippetOnScroll = listenLargestSnippetOnScroll();
   });
 
   onDestroy(() => {
-    stopListeningScroll && stopListeningScroll();
+    unlistenLargestSnippetOnScroll && unlistenLargestSnippetOnScroll();
   });
 </script>
 
@@ -94,7 +74,9 @@
             class={c(
               "inline-block w-full py-1.5 px-4 text-white opacity-90 hover:opacity-100 hover:bg-gray-800 rounded transition-opacity",
               {
-                "bg-gray-800": section.sectionId === largestVisibleSectionId,
+                "bg-gray-800":
+                  largestVisibleSnippetId &&
+                  largestVisibleSnippetId.startsWith(section.sectionId),
               }
             )}
           >
