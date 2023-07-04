@@ -1,5 +1,8 @@
 <script>
+  import c from "classnames";
   import { sections, snippets } from "../generatedContent/tree.js";
+  export let visibleSectionIds = new Set();
+  export let visibleSnippetIds = new Set();
 </script>
 
 <aside
@@ -11,7 +14,12 @@
         <li>
           <a
             href={`#${section.sectionId}`}
-            class="inline-block w-full py-1.5 px-4 text-white opacity-90 hover:opacity-100 hover:bg-gray-800 rounded transition-opacity"
+            class={c(
+              "inline-block w-full py-1.5 px-4 text-white opacity-90 hover:opacity-100 hover:bg-gray-800 rounded transition-opacity",
+              {
+                "bg-gray-800": visibleSectionIds.has(section.sectionId),
+              }
+            )}
           >
             {section.title}
           </a>
@@ -20,7 +28,14 @@
               <li>
                 <a
                   href={`#${snippet.snippetId}`}
-                  class="inline-block w-full py-1.5 px-4 text-white opacity-50 hover:bg-gray-800 rounded hover:opacity-100 transition-opacity"
+                  class={c(
+                    "inline-block w-full py-1.5 px-4 text-white hover:bg-gray-800 rounded hover:opacity-100 transition-opacity",
+                    visibleSnippetIds.has(
+                      section.sectionId + "." + snippet.snippetId
+                    )
+                      ? "bg-gray-800 opacity-70"
+                      : "opacity-50"
+                  )}
                 >
                   {snippet.title}
                 </a>
