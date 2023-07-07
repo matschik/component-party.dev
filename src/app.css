@@ -15,3 +15,11 @@
 .shiki {
   @apply text-[1.05rem];
 }
+
+.no-scroll {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.no-scroll::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}

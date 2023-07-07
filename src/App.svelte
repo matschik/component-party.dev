@@ -8,7 +8,7 @@
   import CodeEditor from "./components/CodeEditor.svelte";
   import AppNotificationCenter from "./components/AppNotificationCenter.svelte";
   import createLocaleStorage from "./lib/createLocaleStorage.js";
-  import { onDestroy, onMount } from "svelte";
+  import { onMount } from "svelte";
   import Header from "./components/Header.svelte";
   import Aside from "./components/Aside.svelte";
   import GithubIcon from "./components/GithubIcon.svelte";
@@ -128,7 +128,7 @@
   <Aside />
   <div class="pb-8 w-10 grow">
     <div
-      class="flex px-6 lg:px-20 py-2 sticky top-0 z-20 w-full backdrop-blur bg-gray-900/80 border-b border-gray-700 whitespace-nowrap overflow-x-auto"
+      class="no-scroll flex px-6 lg:px-20 py-2 sticky top-0 z-20 w-full backdrop-blur bg-gray-900/80 border-b border-gray-700 whitespace-nowrap overflow-x-auto"
     >
       {#each frameworks as framework (framework.id)}
         <button
