@@ -27,13 +27,10 @@
     // Remove the parameter you want to remove
     searchParams.delete(k);
 
-    let newUrl;
+    let newUrl = window.location.pathname;
     if (searchParams.toString().length > 0) {
       // There are still search params, so include the `?` character
-      newUrl = `${window.location.pathname}?${searchParams}`;
-    } else {
-      // There are no search params, so don't include the `?` character
-      newUrl = window.location.pathname;
+      newUrl += `?${searchParams}`;
     }
 
     // Update the URL without reloading the page
