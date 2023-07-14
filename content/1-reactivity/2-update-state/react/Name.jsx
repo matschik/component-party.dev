@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Name() {
   const [name, setName] = useState("John");
-  setName("Jane");
+
+  useEffect(() => setName("Jane"), []);
 
   return <h1>Hello {name}</h1>;
 }
