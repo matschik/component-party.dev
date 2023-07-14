@@ -3,7 +3,7 @@
 </script>
 
 <ul>
-  {#each colors as color}
+  {#each colors as color (color)}
     <li>{color}</li>
   {/each}
 </ul>
