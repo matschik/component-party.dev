@@ -13,5 +13,5 @@
 </script>
 
 <p>Are you happy?</p>
-<AnswerButton on:yes={onAnswerYes} on:no={onAnswerNo} />
+<AnswerButton onYes={onAnswerYes} onNo={onAnswerNo} />
 <p style="font-size: 50px;">{canCome ? "😀" : "😥"}</p>
