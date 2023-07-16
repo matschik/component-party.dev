@@ -1,5 +1,5 @@
 <script>
-  import GithubIcon from "./GithubIcon.svelte";
+  import GithubStarButton from "./GithubStarButton.svelte";
 </script>
 
 <header class="backdrop-blur bg-gray-900/80 border-b border-gray-700">
@@ -9,18 +9,7 @@
         <img src="/popper.svg" alt="logo" class="w-5 h-5" />
         <span>Component party</span>
       </a>
-
-      <div>
-        <a
-          href="https://github.com/matschik/component-party"
-          title="Contribute on Github"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <GithubIcon class="h-6 w-6" />
-          <span class="sr-only">github</span>
-        </a>
-      </div>
+      <GithubStarButton />
     </div>
   </div>
 </header>
