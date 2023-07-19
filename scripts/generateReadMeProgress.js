@@ -1,4 +1,3 @@
-import { remark } from "remark";
 import fs from "fs/promises";
 import { packageDirectory } from "pkg-dir";
 import nodePath from "node:path";
@@ -6,51 +5,67 @@ import kebabCase from "lodash.kebabcase";
 import FRAMEWORKS from "../frameworks.mjs";
 import prettier from "prettier";
 
-function removeMarkdownHeadingContent(
-  content,
-  headingValue,
-  replaceContentValue
-) {
-  const tree = remark.parse(content);
+async function main() {
+  const codeContentDir = await parseContentDir();
+  const readmeContent = await fs.readFile("./README.md", "utf8");
 
-  // find index start
-  let targetNodeIndexStart;
-  for (let i = 0; i < tree.children.length; i++) {
-    const rootNode = tree.children[i];
-
-    if (
-      rootNode.type === "heading" &&
-      rootNode?.children[0]?.value === headingValue
-    ) {
-      targetNodeIndexStart = i;
-      break;
-    }
-  }
-
-  // find index end
-  if (Number.isInteger(targetNodeIndexStart)) {
-    let targetNodeIndexEnd = targetNodeIndexStart;
-    for (let i = targetNodeIndexStart + 1; i < tree.children.length; i++) {
-      const rootNode = tree.children[i];
-      if (rootNode.type === "heading") {
-        targetNodeIndexEnd = i;
-        break;
-      }
+  let progressionContent = "";
+  for (const framework of FRAMEWORKS) {
+    function mdCheck(b) {
+      return b ? "x" : " ";
     }
 
-    tree.children.splice(
-      targetNodeIndexStart + 1,
-      targetNodeIndexEnd - targetNodeIndexStart - 1,
-      {
-        type: "text",
-        value: replaceContentValue || "",
+    let list = "";
+    const allChecks = [];
+    for (const rootDir of codeContentDir) {
+      let sublist = "";
+      const checks = [];
+      for (const subdir of rootDir.children) {
+        const isChecked =
+          subdir.children.find((n) => n.dirName === framework.id)?.files
+            .length > 0;
+        checks.push(isChecked);
+        sublist += `   * [${mdCheck(isChecked)}] ${subdir.title}\n`;
       }
+      list += `* [${mdCheck(checks.every((v) => v))}] ${rootDir.title}\n`;
+      list += sublist;
+      allChecks.push(...checks);
+    }
+
+    const percent = Math.ceil(
+      (allChecks.filter((v) => v).length / allChecks.length) * 100
     );
+    let frameworkContent = `<details>
+        <summary>
+            <img width="18" height="18" src="public/${framework.img}" />
+            <b>${framework.title}</b>
+            <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/${percent}" /></summary>
+
+${list}
+</details>`;
+    progressionContent += frameworkContent;
   }
 
-  const newContent = remark.stringify(tree);
-  return newContent;
+  const MARKER_START = "<!-- progression start -->";
+  const MARKER_END = "<!-- progression end -->";
+  const progressionContentRegex = new RegExp(
+    `${MARKER_START}([\\s\\S]*?)${MARKER_END}`
+  );
+
+  const newProgressionContent =
+    "\n" +
+    prettier.format(progressionContent, {
+      parser: "markdown",
+    });
+
+  const newReadmeContent = readmeContent.replace(
+    progressionContentRegex,
+    `${MARKER_START}${newProgressionContent}${MARKER_END}`
+  );
+
+  await fs.writeFile("README.md", newReadmeContent);
 }
+main().catch(console.error);
 
 async function parseContentDir() {
   const rootDir = await packageDirectory();
@@ -117,58 +132,3 @@ async function parseContentDir() {
   }
   return rootSections;
 }
-
-async function main() {
-  const codeContentDir = await parseContentDir();
-  const content = await fs.readFile("./README.md", "utf8");
-  let newContent = removeMarkdownHeadingContent(
-    content,
-    "🔥 Progression",
-    "{{progression}}"
-  );
-
-  let progressionContent = "";
-  for (const framework of FRAMEWORKS) {
-    function mdCheck(b) {
-      return b ? "x" : " ";
-    }
-
-    let list = "";
-    const allChecks = [];
-    for (const rootDir of codeContentDir) {
-      let sublist = "";
-      const checks = [];
-      for (const subdir of rootDir.children) {
-        const isChecked =
-          subdir.children.find((n) => n.dirName === framework.id)?.files
-            .length > 0;
-        checks.push(isChecked);
-        sublist += `   * [${mdCheck(isChecked)}] ${subdir.title}\n`;
-      }
-      list += `* [${mdCheck(checks.every((v) => v))}] ${rootDir.title}\n`;
-      list += sublist;
-      allChecks.push(...checks);
-    }
-
-    const percent = Math.ceil(
-      (allChecks.filter((v) => v).length / allChecks.length) * 100
-    );
-    let frameworkContent = `<details>
-        <summary>
-            <img width="18" height="18" src="public/${framework.img}" />
-            <b>${framework.title}</b>
-            <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/${percent}" /></summary>
-
-${list}
-</details>`;
-    progressionContent += frameworkContent;
-  }
-
-  newContent = newContent.replace("{{progression}}", progressionContent);
-
-  await fs.writeFile(
-    "README.md",
-    prettier.format(newContent, { parser: "markdown" })
-  );
-}
-main().catch(console.error);
