@@ -109,12 +109,28 @@
     importFrameworkSnippets([...frameworkIdsSelected]);
   }
 
-  $: frameworks = [
-    ...([...frameworkIdsSelected].map((id) =>
-      FRAMEWORKS.find((f) => f.id === id)
-    ) || []),
-    ...(FRAMEWORKS.filter((f) => !frameworkIdsSelected.has(f.id)) || []),
-  ];
+  const MAX_FRAMEWORK_NB_INITIAL_DISPLAYED = 10;
+
+  const FRAMEWORKS_INITIAL_DISPLAYED = FRAMEWORKS.slice(
+    0,
+    MAX_FRAMEWORK_NB_INITIAL_DISPLAYED
+  );
+
+  const FRAMEWORKS_MORE = FRAMEWORKS.slice(MAX_FRAMEWORK_NB_INITIAL_DISPLAYED);
+
+  $: frameworksSelected = [...frameworkIdsSelected].map((id) =>
+    FRAMEWORKS.find((f) => f.id === id)
+  );
+
+  $: frameworksNotSelected = FRAMEWORKS_INITIAL_DISPLAYED.filter(
+    (f) => !frameworkIdsSelected.has(f.id)
+  );
+
+  $: frameworksMoreNotSelected = FRAMEWORKS_MORE.filter(
+    (f) => !frameworkIdsSelected.has(f.id)
+  );
+
+  let showBonusFrameworks = false;
 </script>
 
 <AppNotificationCenter />
@@ -127,7 +143,7 @@
     <div
       class="no-scroll flex px-6 lg:px-20 py-2 sticky top-0 z-20 w-full backdrop-blur bg-gray-900/80 border-b border-gray-700 whitespace-nowrap overflow-x-auto"
     >
-      {#each frameworks as framework (framework.id)}
+      {#each [...frameworksSelected, ...frameworksNotSelected] as framework (framework.id)}
         <button
           title={`Display ${framework.title}`}
           class={c(
@@ -141,6 +157,45 @@
           <FrameworkLabel id={framework.id} size={15} />
         </button>
       {/each}
+      {#if showBonusFrameworks}
+        {#each frameworksMoreNotSelected as framework (framework.id)}
+          <button
+            title={`Display ${framework.title}`}
+            class={c(
+              "text-sm flex-shrink-0 rounded border border-gray-700 px-3 py-1 border-opacity-50 bg-gray-900 hover:bg-gray-800 transition-all mr-2",
+              frameworkIdsSelected.has(framework.id)
+                ? "border-blue-500"
+                : "opacity-70"
+            )}
+            on:click={() => toggleFrameworkId(framework.id)}
+          >
+            <FrameworkLabel id={framework.id} size={15} />
+          </button>
+        {/each}
+      {:else if frameworksMoreNotSelected.length > 0}
+        <button
+          title="more"
+          class="opacity-70 text-sm flex-shrink-0 rounded border border-gray-700 px-3 py-1 border-opacity-50 bg-gray-900 hover:bg-gray-800 transition-all mr-2"
+          on:click={() => {
+            showBonusFrameworks = !showBonusFrameworks;
+          }}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-4 h-4"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
+            />
+          </svg>
+        </button>
+      {/if}
     </div>
 
     <main

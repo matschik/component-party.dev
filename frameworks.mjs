@@ -23,6 +23,8 @@ export default [
     filesSorter(files) {
       return sortAllFilenames(files, ["index.html", "app.js", "App.svelte"]);
     },
+    repositoryLink: "https://github.com/sveltejs/svelte",
+    mainPackageName: "svelte",
   },
   {
     id: "react",
@@ -46,6 +48,8 @@ export default [
     filesSorter(files) {
       return sortAllFilenames(files, ["index.html", "App.jsx"]);
     },
+    repositoryLink: "https://github.com/facebook/react",
+    mainPackageName: "react",
   },
   {
     id: "vue3",
@@ -66,62 +70,8 @@ export default [
     filesSorter(files) {
       return sortAllFilenames(files, ["index.html", "App.vue"]);
     },
-  },
-  {
-    id: "solid",
-    title: "SolidJS",
-    img: "framework/solid.svg",
-    eslint: {
-      files: ["**/solid/*.jsx"],
-      plugins: ["solid"],
-      extends: ["eslint:recommended", "plugin:solid/recommended"],
-    },
-    playgroundURL: "https://playground.solidjs.com/",
-    documentationURL: "https://www.solidjs.com/",
-    filesSorter(files) {
-      return sortAllFilenames(files, ["index.html", "App.jsx"]);
-    },
-  },
-  {
-    id: "qwik",
-    title: "Qwik",
-    img: "framework/qwik.svg",
-    eslint: {
-      env: {
-        browser: true,
-        es2021: true,
-        node: true,
-      },
-      parser: "@typescript-eslint/parser",
-      parserOptions: {
-        ecmaFeatures: {
-          jsx: true,
-        },
-      },
-      files: ["**/qwik/**"],
-      extends: ["eslint:recommended", "plugin:qwik/recommended"],
-      rules: {
-        "qwik/valid-lexical-scope": "off",
-      },
-    },
-    playgroundURL: "https://qwik.builder.io/playground",
-    documentationURL: "https://qwik.builder.io/docs/overview",
-    filesSorter(files) {
-      return sortAllFilenames(files, ["index.html", "App.tsx"]);
-    },
-  },
-  {
-    id: "marko",
-    title: "Marko",
-    img: "framework/marko.svg",
-    eslint: {
-      files: ["!**"], // Marko’s linter/prettyprinter doesn’t use eslint
-    },
-    playgroundURL: "https://markojs.com/playground/",
-    documentationURL: "https://markojs.com/docs/getting-started/",
-    filesSorter(files) {
-      return sortAllFilenames(files, ["index.marko", "App.marko"]);
-    },
+    repositoryLink: "https://github.com/vuejs/core",
+    mainPackageName: "vue",
   },
   {
     id: "angular",
@@ -175,6 +125,8 @@ export default [
         "app.component.html",
       ]);
     },
+    repositoryLink: "https://github.com/angular/angular",
+    mainPackageName: "@angular/core",
   },
   {
     id: "lit",
@@ -191,6 +143,8 @@ export default [
     filesSorter(files) {
       return sortAllFilenames(files, ["index.html", "x-app.js"]);
     },
+    repositoryLink: "https://github.com/lit/lit",
+    mainPackageName: "lit",
   },
   {
     id: "vue2",
@@ -208,6 +162,8 @@ export default [
     filesSorter(files) {
       return sortAllFilenames(files, ["index.html", "App.vue"]);
     },
+    repositoryLink: "https://github.com/vuejs/vue",
+    mainPackageName: "vue@^2",
   },
   {
     id: "ember",
@@ -224,6 +180,25 @@ export default [
     filesSorter(files) {
       return sortAllFilenames(files, ["index.html", "app.hbs", "app.js"]);
     },
+    repositoryLink: "https://github.com/emberjs/ember.js",
+    mainPackageName: "ember-source",
+  },
+  {
+    id: "solid",
+    title: "SolidJS",
+    img: "framework/solid.svg",
+    eslint: {
+      files: ["**/solid/*.jsx"],
+      plugins: ["solid"],
+      extends: ["eslint:recommended", "plugin:solid/recommended"],
+    },
+    playgroundURL: "https://playground.solidjs.com/",
+    documentationURL: "https://www.solidjs.com/",
+    filesSorter(files) {
+      return sortAllFilenames(files, ["index.html", "App.jsx"]);
+    },
+    repositoryLink: "https://github.com/solidjs/solid",
+    mainPackageName: "solid-js",
   },
   {
     id: "alpine",
@@ -238,6 +213,102 @@ export default [
     filesSorter(files) {
       return sortAllFilenames(files, ["index.html"]);
     },
+    repositoryLink: "https://github.com/alpinejs/alpine",
+    mainPackageName: "alpinejs",
+  },
+  {
+    id: "mithril",
+    title: "Mithril",
+    img: "framework/mithril.svg",
+    eslint: {
+      env: {
+        browser: true,
+        es2021: true,
+        node: true,
+      },
+      files: ["**/mithril/**"],
+      extends: ["eslint:recommended"],
+    },
+    playgroundURL: "https://codesandbox.io/s/q99qzov66",
+    documentationURL: "https://mithril.js.org/",
+    filesSorter(files) {
+      return sortAllFilenames(files, ["index.html", "app.js"]);
+    },
+    repositoryLink: "https://github.com/MithrilJS/mithril.js",
+    mainPackageName: "mithril",
+  },
+  {
+    id: "aurelia2",
+    title: "Aurelia 2",
+    img: "framework/aurelia.svg",
+    eslint: {
+      env: {
+        browser: true,
+        es2021: true,
+        node: true,
+      },
+      parser: "@typescript-eslint/parser",
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+      files: ["**/aurelia2/**"],
+      extends: ["eslint:recommended"],
+    },
+    playgroundURL:
+      "https://stackblitz.com/edit/au2-conventions?file=src%2Fmy-app.html",
+    documentationURL: "http://docs.aurelia.io",
+    filesSorter(files) {
+      return sortAllFilenames(files, ["app.html", "app.ts"]);
+    },
+    repositoryLink: "https://github.com/aurelia/aurelia",
+    mainPackageName: "aurelia",
+  },
+  {
+    id: "qwik",
+    title: "Qwik",
+    img: "framework/qwik.svg",
+    eslint: {
+      env: {
+        browser: true,
+        es2021: true,
+        node: true,
+      },
+      parser: "@typescript-eslint/parser",
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+      files: ["**/qwik/**"],
+      extends: ["eslint:recommended", "plugin:qwik/recommended"],
+      rules: {
+        "qwik/valid-lexical-scope": "off",
+      },
+    },
+    playgroundURL: "https://qwik.builder.io/playground",
+    documentationURL: "https://qwik.builder.io/docs/overview",
+    filesSorter(files) {
+      return sortAllFilenames(files, ["index.html", "App.tsx"]);
+    },
+    repositoryLink: "https://github.com/BuilderIO/qwik",
+    mainPackageName: "@builder.io/qwik",
+  },
+  {
+    id: "marko",
+    title: "Marko",
+    img: "framework/marko.svg",
+    eslint: {
+      files: ["!**"], // Marko’s linter/prettyprinter doesn’t use eslint
+    },
+    playgroundURL: "https://markojs.com/playground/",
+    documentationURL: "https://markojs.com/docs/getting-started/",
+    filesSorter(files) {
+      return sortAllFilenames(files, ["index.marko", "App.marko"]);
+    },
+    repositoryLink: "https://github.com/marko-js/marko",
+    mainPackageName: "marko",
   },
   {
     id: "aurelia1",
@@ -263,49 +334,7 @@ export default [
     filesSorter(files) {
       return sortAllFilenames(files, ["app.html", "app.ts"]);
     },
-  },
-  {
-    id: "aurelia2",
-    title: "Aurelia 2",
-    img: "framework/aurelia.svg",
-    eslint: {
-      env: {
-        browser: true,
-        es2021: true,
-        node: true,
-      },
-      parser: "@typescript-eslint/parser",
-      parserOptions: {
-        ecmaFeatures: {
-          jsx: true,
-        },
-      },
-      files: ["**/aurelia2/**"],
-      extends: ["eslint:recommended"],
-    },
-    playgroundURL: "https://stackblitz.com/edit/au2-conventions?file=src%2Fmy-app.html",
-    documentationURL: "http://docs.aurelia.io",
-    filesSorter(files) {
-      return sortAllFilenames(files, ["app.html", "app.ts"]);
-    },
-  },
-  {
-    id: "mithril",
-    title: "Mithril v2",
-    img: "framework/mithril.svg",
-    eslint: {
-      env: {
-        browser: true,
-        es2021: true,
-        node: true,
-      },
-      files: ["**/mithril/**"],
-      extends: ["eslint:recommended"],
-    },
-    playgroundURL: "https://codesandbox.io/s/q99qzov66",
-    documentationURL: "https://mithril.js.org/",
-    filesSorter(files) {
-      return sortAllFilenames(files, ["index.html", "app.js"]);
-    },
+    repositoryLink: "https://github.com/aurelia/framework",
+    mainPackageName: "aurelia-framework",
   },
 ];
