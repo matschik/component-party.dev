@@ -2,21 +2,21 @@ import { createSignal } from "solid-js";
 import AnswerButton from "./AnswerButton.jsx";
 
 export default function App() {
-  const [canCome, setCanCome] = createSignal(true);
+  const [isHappy, setIsHappy] = createSignal(true);
 
   function onAnswerNo() {
-    setCanCome(false);
+    setIsHappy(false);
   }
 
   function onAnswerYes() {
-    setCanCome(true);
+    setIsHappy(true);
   }
 
   return (
     <>
       <p>Are you happy?</p>
       <AnswerButton onYes={onAnswerYes} onNo={onAnswerNo} />
-      <p style={{ "font-size": "50px" }}>{canCome() ? "😀" : "😥"}</p>
+      <p style={{ "font-size": "50px" }}>{isHappy() ? "😀" : "😥"}</p>
     </>
   );
 }

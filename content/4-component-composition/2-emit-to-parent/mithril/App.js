@@ -2,16 +2,16 @@ import m from "mithril";
 import AnswerButton from "./AnswerButton.js";
 
 export default function App() {
-  let canCome = true;
-  const onAnswerNo = () => (canCome = false);
-  const onAnswerYes = () => (canCome = true);
+  let isHappy = true;
+  const onAnswerNo = () => (isHappy = false);
+  const onAnswerYes = () => (isHappy = true);
 
   return {
     view: () =>
       m(
         "",
         m("p", "Are you happy?"),
-        m("p", { style: { fontSize: 50 } }, canCome ? "😀" : "😥"),
+        m("p", { style: { fontSize: 50 } }, isHappy ? "😀" : "😥"),
         m(AnswerButton, { onYes: onAnswerYes, onNo: onAnswerNo })
       ),
   };

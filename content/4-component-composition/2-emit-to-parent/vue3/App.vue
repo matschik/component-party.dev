@@ -2,21 +2,24 @@
 import { ref } from "vue";
 import AnswerButton from "./AnswerButton.vue";
 
-let canCome = ref(true);
+let isHappy = ref(true);
 
 function onAnswerNo() {
-  canCome.value = false;
+  isHappy.value = false;
 }
 
 function onAnswerYes() {
-  canCome.value = true;
+  isHappy.value = true;
 }
 </script>
 
 <template>
   <p>Are you happy?</p>
-  <AnswerButton @yes="onAnswerYes" @no="onAnswerNo" />
+  <AnswerButton
+    @yes="onAnswerYes"
+    @no="onAnswerNo"
+  />
   <p style="font-size: 50px">
-    {{ canCome ? "😀" : "😥" }}
+    {{ isHappy ? "😀" : "😥" }}
   </p>
 </template>

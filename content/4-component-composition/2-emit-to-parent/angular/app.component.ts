@@ -8,17 +8,17 @@ import { Component } from "@angular/core";
     <app-answer-button (yes)="onAnswerYes()" (no)="onAnswerNo()">
     </app-answer-button>
 
-    <p style="font-size: 50px">{{ canCome ? "😀" : "😥" }}</p>
+    <p style="font-size: 50px">{{ isHappy ? "😀" : "😥" }}</p>
   `,
 })
 export class AppComponent {
-  canCome = true;
+  isHappy = true;
 
   onAnswerYes() {
-    this.canCome = true;
+    this.isHappy = true;
   }
 
   onAnswerNo() {
-    this.canCome = false;
+    this.isHappy = false;
   }
 }
