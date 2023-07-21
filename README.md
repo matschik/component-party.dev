@@ -546,6 +546,18 @@ pnpm run dev
 
 This project requires Node.js to be `v16.0.0` or higher.
 
+### Principle when add/edit a framework snippet
+
+> Clarity is better than optimization for Component Party
+
+We've made an intentional decision to prioritize clarity over optimization. This aim facilitates the primary purpose of our venture, which is to serve as an educational asset in the sphere of web component JavaScript frameworks.
+
+Our focus is to break down complex topics into clear, manageable pieces to ensure our content can be easily understood and applied by anyone undertaking the learning journey. Rather than providing the most optimized solutions, our goal is to showcase various features and syntax of different JS frameworks in the most accessible way possible. We strive for simplicity and clarity, ensuring that learners can deeply understand the concept at hand.
+
+We believe that once an in-depth understanding is established, learners can then apply their own optimization strategies. This approach is correlated with achieving the full understanding of how the frameworks perform and behave in different scenarios, which is fundamental for mastering the field.
+
+In this way, we hope that our work serves as an effective stepping stone, helping learners gain confidence in their understanding of web component JavaScript frameworks, thus enabling them to perform refinements and optimizations down the line on their own. Remember, optimization has its role, but understanding should come first. This is the guiding principle of our educational resource.
+
 ### Add a new framework
 
 1.  Fork the project and create a new branch
