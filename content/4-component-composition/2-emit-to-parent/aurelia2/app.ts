@@ -1,7 +1,7 @@
 export class App {
-  canCome = false;
+  isHappy = false;
 
   handleAnswer = (answer = false) => {
-    this.canCome = answer;
+    this.isHappy = answer;
   };
 }

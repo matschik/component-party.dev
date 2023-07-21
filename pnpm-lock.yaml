@@ -25,6 +25,9 @@ devDependencies:
   '@angular-eslint/template-parser':
     specifier: ^16.0.3
     version: 16.0.3(eslint@8.44.0)(typescript@5.1.6)
+  '@angular/core':
+    specifier: ^16.1.6
+    version: 16.1.6(rxjs@7.8.1)(zone.js@0.13.1)
   '@aurelia/router':
     specifier: 2.0.0-beta.7
     version: 2.0.0-beta.7
@@ -253,6 +256,18 @@ packages:
       typescript: 5.1.6
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /@angular/core@16.1.6(rxjs@7.8.1)(zone.js@0.13.1):
+    resolution: {integrity: sha512-tUXvVLc+Vbl8Se7hajwyUTNmKD9uPq+SZH6x8sRM2n5azzjBZltOoJfzxK5JKAkiFf/KkQhteHkMBfoDLZ2tmw==}
+    engines: {node: ^16.14.0 || >=18.10.0}
+    peerDependencies:
+      rxjs: ^6.5.3 || ^7.4.0
+      zone.js: ~0.13.0
+    dependencies:
+      rxjs: 7.8.1
+      tslib: 2.6.0
+      zone.js: 0.13.1
     dev: true
 
   /@aurelia/fetch-client@2.0.0-beta.7:
@@ -7440,6 +7455,12 @@ packages:
   /yocto-queue@1.0.0:
     resolution: {integrity: sha512-9bnSc/HEW2uRy67wc+T8UwauLuPJVn28jb+GtJY16iiKWyvmYJRXVT4UamsAEGQfPohgr2q4Tq0sQbQlxTfi1g==}
     engines: {node: '>=12.20'}
+    dev: true
+
+  /zone.js@0.13.1:
+    resolution: {integrity: sha512-+bIeDAFEBYuXRuU3qGQvzdPap+N1zjM4KkBAiiQuVVCrHrhjDuY6VkUhNa5+U27+9w0q3fbKiMCbpJ0XzMmSWA==}
+    dependencies:
+      tslib: 2.6.0
     dev: true
 
   /zwitch@2.0.4:

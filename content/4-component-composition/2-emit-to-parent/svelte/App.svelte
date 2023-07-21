@@ -1,17 +1,17 @@
 <script>
   import AnswerButton from "./AnswerButton.svelte";
 
-  let canCome = true;
+  let isHappy = true;
 
   function onAnswerNo() {
-    canCome = false;
+    isHappy = false;
   }
 
   function onAnswerYes() {
-    canCome = true;
+    isHappy = true;
   }
 </script>
 
 <p>Are you happy?</p>
 <AnswerButton onYes={onAnswerYes} onNo={onAnswerNo} />
-<p style="font-size: 50px;">{canCome ? "😀" : "😥"}</p>
+<p style="font-size: 50px;">{isHappy ? "😀" : "😥"}</p>

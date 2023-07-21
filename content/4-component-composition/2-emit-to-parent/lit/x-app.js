@@ -6,14 +6,14 @@ import "./answer-button";
 @customElement("x-app")
 export class XApp extends LitElement {
   @state()
-  canCome = true;
+  isHappy = true;
 
   onAnswerNo() {
-    this.canCome = false;
+    this.isHappy = false;
   }
 
   onAnswerYes() {
-    this.canCome = true;
+    this.isHappy = true;
   }
 
   render() {
@@ -23,7 +23,7 @@ export class XApp extends LitElement {
         @yes=${this.onAnswerYes}
         @no=${this.onAnswerNo}
       ></answer-button>
-      <p style="font-size: 50px;">${this.canCome ? "😀" : "😥"}</p>
+      <p style="font-size: 50px;">${this.isHappy ? "😀" : "😥"}</p>
     `;
   }
 }

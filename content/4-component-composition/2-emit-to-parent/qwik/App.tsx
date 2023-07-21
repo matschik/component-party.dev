@@ -3,22 +3,22 @@ import AnswerButton from "./AnswerButton";
 
 const App = component$(() => {
   const store = useStore({
-    canCome: true,
+    isHappy: true,
   });
 
   const onAnswerNo = $(() => {
-    store.canCome = false;
+    store.isHappy = false;
   });
 
   const onAnswerYes = $(() => {
-    store.canCome = true;
+    store.isHappy = true;
   });
 
   return (
     <>
       <p>Are you happy?</p>
       <AnswerButton onYes$={onAnswerYes} onNo$={onAnswerNo} />
-      <p style={{ fontSize: 50 }}>{store.canCome ? "ðŸ˜€" : "ðŸ˜¥"}</p>
+      <p style={{ fontSize: 50 }}>{store.isHappy ? "ðŸ˜€" : "ðŸ˜¥"}</p>
     </>
   );
 });
