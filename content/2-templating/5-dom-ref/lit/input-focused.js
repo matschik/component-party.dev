@@ -1,16 +1,15 @@
 import { LitElement, html } from "lit";
-import { customElement, state } from "lit/decorators.js";
-import { ref, createRef } from "lit/directives/ref.js";
+import { customElement, state, query } from "lit/decorators.js";
 
 @customElement("input-focused")
 export class InputFocused extends LitElement {
-  inputRef = createRef();
+  @query('input') inputEl!: HTMLInputElement;
 
   firstUpdated() {
-    this.inputRef.value.focus();
+    this.inputEl.focus();
   }
 
   render() {
-    return html`<input type="text" ${ref(this.inputRef)} />`;
+    return html`<input type="text" />`;
   }
 }
