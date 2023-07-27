@@ -4,8 +4,8 @@
   let inputElement;
 
   onMount(() => {
-    inputElement.focus();
+    inputElement.indeterminate = true;
   });
 </script>
 
-<input bind:this={inputElement} />
+<input bind:this={inputElement} type="checkbox" />

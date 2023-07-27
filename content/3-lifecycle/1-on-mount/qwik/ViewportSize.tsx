@@ -2,12 +2,12 @@ import { component$, useClientEffect$, useStore } from "@builder.io/qwik";
 
 export const App = component$(() => {
   const store = useStore({
-    pageTitle: "",
+    viewportSize: "",
   });
 
   useClientEffect$(() => {
-    store.pageTitle = document.title;
+    store.viewportSize = `${window.innerWidth} × ${window.innerHeight}`;
   });
 
-  return <p>Page title: {store.pageTitle}</p>;
+  return <p>Viewport size: {store.viewportSize}</p>;
 });

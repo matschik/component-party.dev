@@ -1,8 +1,8 @@
 import Component from "@glimmer/component";
 import { modifier } from "ember-modifier";
 
-export default class InputFocused extends Component {
-  autofocus = modifier((element) => element.focus());
+export default class InputIndeterminate extends Component {
+  indeterminate = modifier((element) => element.indeterminate = true);
 }
 
 /**
@@ -13,6 +13,6 @@ export default class InputFocused extends Component {
  *    - ember-modifier becomes default part of blueprint
  *  - https://github.com/emberjs/rfcs/pull/757
  *    - dependencyless support for using
- *       `autofocus = element => element.focus()`
+ *       `indeterminate = element => element.indeterminate = true`
  *       instead
  */
