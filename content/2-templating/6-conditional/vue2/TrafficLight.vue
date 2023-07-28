@@ -13,7 +13,7 @@ export default {
   },
   methods: {
     nextLight() {
-      this.lightIndex = (this.lightIndex + 1) % TRAFFIC_LIGHTS.length;
+      this.lightIndex = (this.lightIndex + 1) % this.TRAFFIC_LIGHTS.length;
     },
   },
 };
