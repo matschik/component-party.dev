@@ -127,7 +127,7 @@ How do we solve this ? Developers love having framework overview by examples. It
         <summary>
             <img width="18" height="18" src="public/framework/angular.svg" />
             <b>Angular</b>
-            <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/92" /></summary>
+            <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/96" /></summary>
 
 - [x] Reactivity
   - [x] Declare state
@@ -154,8 +154,8 @@ How do we solve this ? Developers love having framework overview by examples. It
   - [x] Checkbox
   - [x] Radio
   - [x] Select
-- [ ] Webapp features
-  - [ ] Render app
+- [x] Webapp features
+  - [x] Render app
   - [x] Fetch data
   - [x] Router link
   - [x] Routing
