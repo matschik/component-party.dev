@@ -5,10 +5,7 @@ export default function TrafficLight() {
   let lightIndex = 0;
   let currentLight = () => TRAFFIC_LIGHTS[lightIndex];
 
-  const nextLight = () =>
-    lightIndex + 1 > TRAFFIC_LIGHTS.length - 1
-      ? (lightIndex = 0)
-      : (lightIndex = lightIndex + 1);
+  const nextLight = () => (lightIndex + 1) % TRAFFIC_LIGHTS.length;
 
   const instructions = () => {
     switch (currentLight()) {
