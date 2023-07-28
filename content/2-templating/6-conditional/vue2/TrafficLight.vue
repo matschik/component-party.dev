@@ -13,11 +13,7 @@ export default {
   },
   methods: {
     nextLight() {
-      if (this.lightIndex + 1 > this.TRAFFIC_LIGHTS.length - 1) {
-        this.lightIndex = 0;
-      } else {
-        this.lightIndex++;
-      }
+      this.lightIndex = (this.lightIndex + 1) % TRAFFIC_LIGHTS.length;
     },
   },
 };

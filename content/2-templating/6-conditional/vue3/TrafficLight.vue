@@ -6,11 +6,7 @@ const lightIndex = ref(0);
 const light = computed(() => TRAFFIC_LIGHTS[lightIndex.value]);
 
 function nextLight() {
-  if (lightIndex.value + 1 > TRAFFIC_LIGHTS.length - 1) {
-    lightIndex.value = 0;
-  } else {
-    lightIndex.value++;
-  }
+  lightIndex.value = (lightIndex.value + 1) % TRAFFIC_LIGHTS.length;
 }
 </script>
 

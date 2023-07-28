@@ -10,11 +10,7 @@ export const App = component$(() => {
   const light = TRAFFIC_LIGHTS[store.lightIndex];
 
   const nextLight = $(() => {
-    if (store.lightIndex + 1 > TRAFFIC_LIGHTS.length - 1) {
-      store.lightIndex = 0;
-    } else {
-      store.lightIndex += 1;
-    }
+    store.lightIndex = (store.lightIndex + 1) % TRAFFIC_LIGHTS.length;
   });
 
   return (
