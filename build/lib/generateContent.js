@@ -218,7 +218,8 @@ function capitalize(string) {
 }
 
 async function writeJsFile(filepath, jsCode) {
-  await fs.writeFile(filepath, prettier.format(jsCode, { parser: "babel" }));
+  const codeFormatted = await prettier.format(jsCode, { parser: "babel" });
+  await fs.writeFile(filepath, codeFormatted);
 }
 
 function generatePlaygroundURL(frameworkId, files) {
