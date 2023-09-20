@@ -10,11 +10,11 @@ function sortAllFilenames(files, filenamesSorted) {
 
 export default [
   {
-    id: "svelte",
-    title: "Svelte",
+    id: "svelte4",
+    title: "Svelte 4",
     img: "framework/svelte.svg",
     eslint: {
-      files: ["*.svelte"],
+      files: ["**/svelte4/*.svelte"],
       parser: "svelte-eslint-parser",
     },
     playgroundURL: "https://svelte.dev/repl",
@@ -335,5 +335,21 @@ export default [
     },
     repositoryLink: "https://github.com/aurelia/framework",
     mainPackageName: "aurelia-framework",
+  },
+  {
+    id: "svelte5",
+    title: "Svelte 5 (preview)",
+    img: "framework/svelte.svg",
+    eslint: {
+      files: ["**/TODO-THIS-IS-DISABLED-svelte5/*.svelte"],
+      parser: "svelte-eslint-parser",
+    },
+    playgroundURL: "https://svelte-5-preview.vercel.app/",
+    documentationURL: "https://svelte-5-preview.vercel.app/docs",
+    filesSorter(files) {
+      return sortAllFilenames(files, ["index.html", "app.js", "App.svelte"]);
+    },
+    repositoryLink: "https://github.com/sveltejs/svelte",
+    mainPackageName: "svelte",
   },
 ];
