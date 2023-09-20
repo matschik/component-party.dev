@@ -62,6 +62,7 @@ export default [
       extends: ["eslint:recommended", "plugin:vue/vue3-recommended"],
       rules: {
         "vue/multi-word-component-names": "off",
+        "vue/singleline-html-element-content-newline": "off",
       },
     },
     playgroundURL: "https://sfc.vuejs.org",
@@ -154,6 +155,7 @@ export default [
       extends: ["eslint:recommended", "plugin:vue/recommended"],
       rules: {
         "vue/multi-word-component-names": "off",
+        "vue/singleline-html-element-content-newline": "off",
       },
     },
     playgroundURL: "",

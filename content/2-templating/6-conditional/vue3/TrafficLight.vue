@@ -11,9 +11,7 @@ function nextLight() {
 </script>
 
 <template>
-  <button @click="nextLight">
-    Next light
-  </button>
+  <button @click="nextLight">Next light</button>
   <p>Light is: {{ light }}</p>
   <p>
     You must

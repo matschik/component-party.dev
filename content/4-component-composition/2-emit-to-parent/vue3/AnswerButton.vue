@@ -11,11 +11,7 @@ function clickNo() {
 </script>
 
 <template>
-  <button @click="clickYes">
-    YES
-  </button>
+  <button @click="clickYes">YES</button>
 
-  <button @click="clickNo">
-    NO
-  </button>
+  <button @click="clickNo">NO</button>
 </template>
