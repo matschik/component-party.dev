@@ -3,7 +3,9 @@ import { UseFetchUsers } from "./UseFetchUsers";
 
 @autoinject()
 export class App {
-  constructor(private useFetchUsers: UseFetchUsers) { }
+  constructor(private useFetchUsers: UseFetchUsers) {
+    this.useFetchUsers = useFetchUsers;
+  }
 
   attached() {
     this.useFetchUsers.fetchData();

@@ -2,10 +2,10 @@ import { component$, useStore } from "@builder.io/qwik";
 
 export const Counter = component$(() => {
   const store = useStore({ count: 0 });
-  
-  const incrementCount = $(() => {
+
+  const incrementCount = () => {
     store.count++;
-  });
+  };
 
   return (
     <>

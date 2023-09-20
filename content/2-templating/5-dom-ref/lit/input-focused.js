@@ -3,7 +3,7 @@ import { customElement, state, query } from "lit/decorators.js";
 
 @customElement("input-focused")
 export class InputFocused extends LitElement {
-  @query('input') inputEl;
+  @query("input") inputEl;
 
   firstUpdated() {
     this.inputEl.focus();
