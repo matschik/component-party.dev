@@ -15,8 +15,7 @@ export default [
     img: "framework/svelte.svg",
     eslint: {
       files: ["*.svelte"],
-      processor: "svelte3/svelte3",
-      plugins: ["svelte3"],
+      parser: "svelte-eslint-parser",
     },
     playgroundURL: "https://svelte.dev/repl",
     documentationURL: "https://svelte.dev/",

@@ -19,6 +19,7 @@
   "dependencies": {
     "@veljs/svelte": "^0.1.11",
     "classnames": "^2.3.2",
+    "eslint-plugin-svelte": "^2.33.2",
     "heroiconsvelte": "^1.0.2"
   },
   "devDependencies": {
@@ -48,7 +49,6 @@
     "eslint-plugin-qwik": "^1.2.6",
     "eslint-plugin-react": "^7.33.1",
     "eslint-plugin-solid": "^0.12.1",
-    "eslint-plugin-svelte3": "^4.0.0",
     "eslint-plugin-vue": "^9.17.0",
     "esm": "^3.2.25",
     "folder-hash": "^4.0.4",
