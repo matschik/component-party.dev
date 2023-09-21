@@ -65,12 +65,14 @@
     if (frameworkIdsSelectedOnInit.length === 0) {
       const frameworkIdsFromStorage = frameworkIdsStorage.getJSON();
       if (frameworkIdsFromStorage?.length > 0) {
-        frameworkIdsSelectedOnInit = frameworkIdsFromStorage;
+        frameworkIdsSelectedOnInit = frameworkIdsFromStorage.map((x) =>
+          x === "svelte" ? "svelte4" : x
+        );
       }
     }
 
     if (frameworkIdsSelectedOnInit.length === 0) {
-      frameworkIdsSelectedOnInit = ["svelte", "react"];
+      frameworkIdsSelectedOnInit = ["svelte4", "react"];
     }
 
     frameworkIdsSelected = new Set(frameworkIdsSelectedOnInit);
@@ -388,7 +390,9 @@
     margin-left: -0.87em;
     padding-right: 0.23em;
     font-weight: 500;
-    transition: color 0.25s, opacity 0.25s;
+    transition:
+      color 0.25s,
+      opacity 0.25s;
     opacity: 0;
     text-decoration: none;
   }
