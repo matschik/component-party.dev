@@ -8,8 +8,10 @@ export default function useFetchUsers() {
     try {
       const response = await fetch("https://randomuser.me/api/?results=3");
       users = (await response.json()).results;
+      error = undefined;
     } catch (err) {
       error = err;
+      users = undefined;
     }
     isLoading = false;
   }
