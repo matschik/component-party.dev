@@ -1,13 +1,13 @@
-import { Component } from "@angular/core";
+import { Component, signal } from "@angular/core";
 
 @Component({
   selector: "app-name",
   template: `<h1>Hello {{ name }}</h1>`,
 })
 export class NameComponent {
-  name = "John";
+  name = signal("John");
 
   constructor() {
-    this.name = "Jane";
+    this.name.set("Jane");
   }
 }
