@@ -1,14 +1,12 @@
 export default function createUserState(initial) {
-  let user = $state(initial);
+  let username = $state(initial.username);
   return {
-    get value() {
-      return user;
+    ...initial,
+    get username() {
+      return username;
     },
-    updateUsername(newUsername) {
-      user = {
-        ...user,
-        username: newUsername,
-      };
+    set username(value) {
+      username = value;
     },
   };
 }
