@@ -13,5 +13,5 @@
   setContext("user", user);
 </script>
 
-<h1>Welcome back, {user.value.username}</h1>
+<h1>Welcome back, {user.username}</h1>
 <UserProfile />
