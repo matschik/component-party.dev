@@ -7,4 +7,4 @@
 </script>
 
 <p>Counter: {count}</p>
-<button on:click={incrementCount}>+1</button>
+<button onclick={incrementCount}>+1</button>
