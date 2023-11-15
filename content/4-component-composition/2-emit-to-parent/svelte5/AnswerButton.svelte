@@ -1,17 +1,7 @@
 <script>
-  import { createEventDispatcher } from "svelte";
-
-  const dispatch = createEventDispatcher();
-
-  function clickYes() {
-    dispatch("yes");
-  }
-
-  function clickNo() {
-    dispatch("no");
-  }
+  let { onYes, onNo } = $props()
 </script>
 
-<button on:click={clickYes}> YES </button>
+<button onclick={onYes}> YES </button>
 
-<button on:click={clickNo}> NO </button>
+<button onclick={onNo}> NO </button>
