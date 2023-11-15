@@ -1,7 +1,7 @@
 <script>
   import { setContext } from "svelte";
   import UserProfile from "./UserProfile.svelte";
-  import createUserState from "./createUserState.js";
+  import createUserState from "./createUserState.svelte.js";
 
   // In a real app, you would fetch the user data from an API
   const user = createUserState({

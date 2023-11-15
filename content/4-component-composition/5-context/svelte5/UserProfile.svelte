@@ -8,7 +8,7 @@
   <h2>My Profile</h2>
   <p>Username: {user.username}</p>
   <p>Email: {user.email}</p>
-  <button on:click={() => (user.username = "Jane")}>
+  <button onclick={() => (user.username = "Jane")}>
     Update username to Jane
   </button>
 </div>

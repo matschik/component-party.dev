@@ -9,7 +9,7 @@
   }
 </script>
 
-<button on:click={nextLight}>Next light</button>
+<button onclick={nextLight}>Next light</button>
 <p>Light is: {light}</p>
 <p>
   You must
