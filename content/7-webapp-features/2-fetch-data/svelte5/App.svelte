@@ -1,5 +1,5 @@
 <script>
-  import useFetchUsers from "./useFetchUsers";
+  import useFetchUsers from "./useFetchUsers.svelte.js";
 
   const response = useFetchUsers();
 </script>
