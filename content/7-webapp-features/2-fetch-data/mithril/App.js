@@ -16,7 +16,7 @@ export default function App() {
         "",
         isLoading && m("p", "Fetching users..."),
         error
-          ? m("p", "An error occured while fetching users")
+          ? m("p", "An error occurred while fetching users")
           : users.map((user) =>
               m(
                 "li",

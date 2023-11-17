@@ -8,7 +8,7 @@ export default function App() {
       {isLoading ? (
         <p>Fetching users...</p>
       ) : error ? (
-        <p>An error occured while fetching users</p>
+        <p>An error occurred while fetching users</p>
       ) : (
         users && (
           <ul>

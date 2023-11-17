@@ -7,7 +7,7 @@
 {#if $isLoading}
   <p>Fetching users...</p>
 {:else if $error}
-  <p>An error occured while fetching users</p>
+  <p>An error occurred while fetching users</p>
 {:else if $users}
   <ul>
     {#each $users as user}

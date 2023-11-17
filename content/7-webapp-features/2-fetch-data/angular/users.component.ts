@@ -10,7 +10,7 @@ import { UserService } from "./user.service";
 
       <ng-template #errorTpl>
         <p *ngIf="vm.error; else usersListTpl">
-          An error occured while fetching users
+          An error occurred while fetching users
         </p>
       </ng-template>
 
