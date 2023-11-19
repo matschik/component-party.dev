@@ -1,33 +1,31 @@
 import { Component } from "@angular/core";
+import { CommonModule } from '@angular/common';
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: "app-pick-pill",
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   template: `
     <div>Picked: {{ picked }}</div>
 
     <input
       id="blue-pill"
-      [checked]="picked === 'blue'"
       type="radio"
       value="blue"
-      (change)="handleChange($event)"
+      [(ngModel)]="picked"
     />
     <label for="blue-pill">Blue pill</label>
 
     <input
       id="red-pill"
-      [checked]="picked === 'red'"
       type="radio"
       value="red"
-      (change)="handleChange($event)"
+      [(ngModel)]="picked"
     />
     <label for="red-pill">Red pill</label>
   `,
 })
 export class PickPillComponent {
   picked = "red";
-
-  handleChange(event) {
-    this.picked = event.target.value;
-  }
 }

@@ -1,13 +1,14 @@
 import { Component } from "@angular/core";
+import { CommonModule } from '@angular/common';
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: "app-input-hello",
-  template: `<input [value]="text" (change)="handleInputChange($event)" />`,
+  standalone: true,
+  imports: [CommonModule, FormsModule],
+  template: `<p>{{text}}</p>
+  <input [(ngModel)]="text">`,
 })
 export class InputHelloComponent {
   text = "";
-
-  handleInputChange(event: Event) {
-    this.text = (event.target as HTMLInputElement).value;
-  }
 }
