@@ -1,9 +1,13 @@
 import { Component } from "@angular/core";
+import { CommonModule } from '@angular/common';
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: "app-color-select",
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   template: `
-    <select [value]="selectedColorId" (change)="handleChange($event)">
+    <select [(ngModel)]="selectedColorId">
       <option
         *ngFor="let color of colors"
         [value]="color.id"
@@ -23,8 +27,4 @@ export class ColorSelectComponent {
     { id: 3, text: "green" },
     { id: 4, text: "gray", isDisabled: true },
   ];
-
-  handleChange(event) {
-    this.selectedColorId = event.target.value;
-  }
 }
