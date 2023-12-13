@@ -143,7 +143,7 @@
   <Aside />
   <div class="pb-8 w-10 grow">
     <div
-      class="no-scroll flex px-6 lg:px-20 py-2 sticky top-0 z-20 w-full backdrop-blur bg-gray-900/80 border-b border-gray-700 whitespace-nowrap overflow-x-auto"
+      class="flex px-6 lg:px-20 py-2 sticky top-0 z-20 w-full backdrop-blur bg-gray-900/80 border-b border-gray-700 whitespace-nowrap overflow-x-auto"
     >
       {#each [...frameworksSelected, ...frameworksNotSelected] as framework (framework.id)}
         <button
