@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 
 @Component({
-  selector: "app-root",
+  selector: "app-funny-button",
   styleUrls: ["./funny-button.component.css"],
   template: `
     <button>
