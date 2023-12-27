@@ -2,7 +2,7 @@ import m from "mithril";
 
 export default function IsAvailable() {
   let isAvailable = false;
-  const onUpdate = (isAvailable = !isAvailable);
+  const onUpdate = () => (isAvailable = !isAvailable);
 
   return {
     view: () =>
@@ -13,7 +13,7 @@ export default function IsAvailable() {
           id: "is-available",
           type: "checkbox",
           checked: isAvailable,
-          onChange: onUpdate,
+          onchange: onUpdate,
         }),
         m("label", { for: "is-available" }, "Is available")
       ),
