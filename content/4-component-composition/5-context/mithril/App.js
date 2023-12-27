@@ -1,5 +1,5 @@
 import m from "mithril";
-import UserProfile from "./UserProfile.jsx";
+import UserProfile from "./UserProfile";
 
 export default function App() {
   // In a real app, you would fetch the user data from an API
