@@ -1,30 +1,35 @@
 import m from "mithril";
-import { fetchUsers } from "./useFetchUsers";
 
 export default function App() {
-  let isLoading = false;
+  let isLoading = true;
   let error = null;
   let users = [];
 
-  const onSuccess = (data) => (users = data);
-  const onError = (err) => (error = err);
-  fetchUsers(isLoading, onSuccess, onError);
+  async function fetchData() {
+    try {
+      const { results } = await m.request(
+        "https://randomuser.me/api/?results=3"
+      );
+      users = results;
+    } catch (err) {
+      error = err;
+    }
+    isLoading = false;
+  }
 
   return {
-    view: () =>
-      m(
-        "",
-        isLoading && m("p", "Fetching users..."),
-        error
-          ? m("p", "An error occurred while fetching users")
-          : users.map((user) =>
-              m(
-                "li",
-                { key: user.login.uuid },
-                m("img", { src: user.picture.profile, alt: "user" }),
-                m("p", `${user.name.first} ${user.name.last}`)
-              )
-            )
-      ),
+    oninit: fetchData,
+    view() {
+      if (isLoading) return m("p", "Fetching users...");
+      if (error) return m("p", "An error occurred while fetching users");
+      return users.map((user) =>
+        m(
+          "li",
+          { key: user.login.uuid },
+          m("img", { src: user.picture.thumbnail, alt: "user" }),
+          m("p", `${user.name.first} ${user.name.last}`)
+        )
+      );
+    },
   };
 }
