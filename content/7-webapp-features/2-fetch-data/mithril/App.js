@@ -1,11 +1,12 @@
 import m from "mithril";
 
 export default function App() {
-  let isLoading = true;
+  let isLoading = false;
   let error = null;
   let users = [];
 
-  async function fetchData() {
+  async function fetchUsers() {
+    isLoading = true;
     try {
       const { results } = await m.request(
         "https://randomuser.me/api/?results=3"
@@ -18,7 +19,7 @@ export default function App() {
   }
 
   return {
-    oninit: fetchData,
+    oninit: fetchUsers,
     view() {
       if (isLoading) return m("p", "Fetching users...");
       if (error) return m("p", "An error occurred while fetching users");
