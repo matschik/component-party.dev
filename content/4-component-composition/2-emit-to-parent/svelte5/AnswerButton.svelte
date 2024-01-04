@@ -1,5 +1,5 @@
 <script>
-  let { onYes, onNo } = $props()
+  let { onYes, onNo } = $props();
 </script>
 
 <button onclick={onYes}> YES </button>

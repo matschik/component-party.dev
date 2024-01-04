@@ -54,9 +54,9 @@ ${list}
 
   const newProgressionContent =
     "\n" +
-    prettier.format(progressionContent, {
+    (await prettier.format(progressionContent, {
       parser: "markdown",
-    });
+    }));
 
   const newReadmeContent = readmeContent.replace(
     progressionContentRegex,
