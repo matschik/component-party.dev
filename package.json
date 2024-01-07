@@ -17,6 +17,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@lit/context": "^1.1.0",
     "@veljs/svelte": "^0.1.11",
     "classnames": "^2.5.1",
     "eslint-plugin-svelte": "^2.35.1",
