@@ -4,7 +4,9 @@ import { Component } from "@angular/core";
   selector: "app-colors",
   template: `
     <ul>
-      <li *ngFor="let color of colors">{{ color }}</li>
+      @for (color of colors) {
+        <li>{{ color }}</li>
+      }
     </ul>
   `,
 })
