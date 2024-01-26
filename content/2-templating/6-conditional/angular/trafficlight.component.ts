@@ -19,6 +19,7 @@ const TRAFFIC_LIGHTS = ["red", "orange", "green"];
         @case("green") {
           <span>GO</span>
           }
+        }
     </p>
   `,
 })
