@@ -1,5 +1,5 @@
 <script>
-  let pageTitle = "";
+  let pageTitle = $state("");
   $effect(() => {
     pageTitle = document.title;
   });
