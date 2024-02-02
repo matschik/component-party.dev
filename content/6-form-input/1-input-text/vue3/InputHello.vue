@@ -5,5 +5,5 @@ const text = ref("Hello World");
 
 <template>
   <p>{{ text }}</p>
-  <input v-model="text" />
+  <input v-model="text">
 </template>

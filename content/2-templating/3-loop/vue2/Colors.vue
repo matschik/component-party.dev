@@ -10,7 +10,10 @@ export default {
 
 <template>
   <ul>
-    <li v-for="color in colors" :key="color">
+    <li
+      v-for="color in colors"
+      :key="color"
+    >
       {{ color }}
     </li>
   </ul>

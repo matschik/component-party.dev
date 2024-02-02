@@ -10,7 +10,11 @@ export default {
 
 <template>
   <div>
-    <input id="is-available" v-model="isAvailable" type="checkbox" />
+    <input
+      id="is-available"
+      v-model="isAvailable"
+      type="checkbox"
+    >
     <label for="is-available">Is available</label>
   </div>
 </template>

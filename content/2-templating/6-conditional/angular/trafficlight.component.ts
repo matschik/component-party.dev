@@ -10,16 +10,16 @@ const TRAFFIC_LIGHTS = ["red", "orange", "green"];
     <p>
       You must
       @switch (light) {
-        @case("red") {
+        @case ("red") {
           <span>STOP</span>
-          }
-        @case("orange") {
-          <span>SLOW DOWN</span>
-          }
-        @case("green") {
-          <span>GO</span>
-          }
         }
+        @case ("orange") {
+          <span>SLOW DOWN</span>
+        }
+        @case ("green") {
+          <span>GO</span>
+        }
+      }
     </p>
   `,
 })

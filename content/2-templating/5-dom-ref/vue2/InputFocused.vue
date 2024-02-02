@@ -7,5 +7,5 @@ export default {
 </script>
 
 <template>
-  <input ref="inputElement" />
+  <input ref="inputElement">
 </template>
