@@ -9,17 +9,11 @@ const TRAFFIC_LIGHTS = ["red", "orange", "green"];
     <p>Light is: {{ light }}</p>
     <p>
       You must
-      @switch (light) {
-        @case ("red") {
-          <span>STOP</span>
-        }
-        @case ("orange") {
-          <span>SLOW DOWN</span>
-        }
-        @case ("green") {
-          <span>GO</span>
-        }
-      }
+      <ng-container [ngSwitch]="light">
+        <span *ngSwitchCase="'red'">STOP</span>
+        <span *ngSwitchCase="'orange'">SLOW DOWN</span>
+        <span *ngSwitchCase="'green'">GO</span>
+      </ng-container>
     </p>
   `,
 })
