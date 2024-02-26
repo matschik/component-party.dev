@@ -43,6 +43,7 @@
     "autoprefixer": "^10.4.17",
     "chokidar": "^3.5.3",
     "codesandbox": "^2.2.3",
+    "ember-eslint-parser": "^0.3.8",
     "eslint": "^8.56.0",
     "eslint-plugin-ember": "^12.0.0",
     "eslint-plugin-lit": "^1.11.0",
@@ -86,7 +87,7 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,vue}": "eslint --cache --fix",
+    "*.{js,jsx,ts,tsx,vue,gjs}": "eslint --cache --fix",
     "**/svelte4/*.svelte": "eslint --cache --fix",
     "*.{js,jsx,ts,tsx,svelte,vue,html,md,css,hbs}": "prettier --cache --write"
   }

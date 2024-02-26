@@ -167,11 +167,33 @@ export default [
     mainPackageName: "vue@^2",
   },
   {
-    id: "ember",
-    title: "Ember",
+    id: "emberPolaris",
+    title: "Ember (Polaris - preview)",
     img: "framework/ember.svg",
     eslint: {
-      files: ["**/ember/**"],
+      files: ["**/emberPolaris/**"],
+      plugins: ["ember"],
+      parser: "ember-eslint-parser",
+      extends: [
+        "eslint:recommended",
+        "plugin:ember/recommended",
+        "plugin:ember/recommended-gjs",
+      ],
+    },
+    playgroundURL: "https://ember-twiddle.com",
+    documentationURL: "https://emberjs.com",
+    filesSorter(files) {
+      return sortAllFilenames(files, ["index.html", "app.hbs", "app.js"]);
+    },
+    repositoryLink: "https://github.com/emberjs/ember.js",
+    mainPackageName: "ember-source",
+  },
+  {
+    id: "emberOctane",
+    title: "Ember (Octane)",
+    img: "framework/ember.svg",
+    eslint: {
+      files: ["**/emberOctane/**"],
       plugins: ["ember"],
       parser: "@babel/eslint-parser",
       extends: ["plugin:ember/recommended"],

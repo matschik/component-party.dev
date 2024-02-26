@@ -30,6 +30,7 @@ export default async function generateContent() {
       "svelte",
       "html",
       "hbs",
+      "gjs",
       "tsx",
       "jsx",
       "vue",

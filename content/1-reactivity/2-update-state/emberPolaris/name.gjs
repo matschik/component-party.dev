@@ -9,4 +9,8 @@ export default class CounterComponent extends Component {
 
     this.name = "Jane";
   }
+
+  <template>
+    <h1>Hello {{this.name}}</h1>
+  </template>
 }
