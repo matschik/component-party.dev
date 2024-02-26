@@ -180,7 +180,7 @@ export default [
         "plugin:ember/recommended-gjs",
       ],
     },
-    playgroundURL: "https://ember-twiddle.com",
+    playgroundURL: "http://new.emberjs.com",
     documentationURL: "https://emberjs.com",
     filesSorter(files) {
       return sortAllFilenames(files, ["index.html", "app.hbs", "app.js"]);
