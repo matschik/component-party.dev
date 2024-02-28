@@ -353,5 +353,25 @@ export default [
     },
     repositoryLink: "https://github.com/sveltejs/svelte",
     mainPackageName: "svelte",
+  }, {
+    id: "dlight",
+    title: "DLight.js",
+    img: "framework/dlight.svg",
+    eslint: {
+      env: {
+        browser: true,
+        es2021: true,
+        node: true,
+      },
+      files: ["**/dlight/**"],
+      extends: ["eslint:recommended"],
+    },
+    playgroundURL: "https://dlight.dev/playground",
+    documentationURL: "https://dlight.dev/docs/getting-started",
+    filesSorter(files) {
+      return sortAllFilenames(files, ["index.html", "App.view.js"]);
+    },
+    repositoryLink: "https://github.com/dlight-js/dlight",
+    mainPackageName: "react",
   },
 ];

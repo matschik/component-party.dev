@@ -1,0 +1,8 @@
+<svg width="436" height="432" viewBox="0 0 436 432" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="39" cy="191" r="39" fill="#F1D6A0"/>
+<circle cx="39" cy="361" r="39" fill="#BAE291"/>
+<circle cx="212" cy="399.5" r="32" fill="#FABE8E"/>
+<circle cx="180" cy="32" r="32" fill="#FABE8E"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M212 32C212 14.3269 197.673 0 180 0L180 32H148L148 272C148 289.673 162.327 304 180 304C197.673 304 212 289.673 212 272L212 32Z" fill="#FABE8E"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M212 367.514C302.285 366.231 372 297.122 372 215.766C372 133.644 300.966 64 209.443 64H148V32H180V0H209.443C332.822 0 436 94.9059 436 215.766C436 335.79 334.244 430.218 212 431.518V367.514Z" fill="#FABE8E"/>
+</svg>
