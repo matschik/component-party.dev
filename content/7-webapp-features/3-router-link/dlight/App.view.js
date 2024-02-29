@@ -1,16 +1,17 @@
-import { View } from '@dlightjs/dlight';
+import { View } from "@dlightjs/dlight";
 
 @View
 class App {
   Body() {
-    ul(); {
-      li(); {
-        a('Home')
-          .href('/')
+    ul();
+    {
+      li();
+      {
+        a("Home").href("/");
       }
-      li(); {
-        a('About')
-          .href('/about')
+      li();
+      {
+        a("About us").href("/about");
       }
     }
   }

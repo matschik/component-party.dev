@@ -1,14 +1,14 @@
-import { View } from '@dlightjs/dlight';
-import UserProfile from './UserProfile.view';
+import { View } from "@dlightjs/dlight";
+import UserProfile from "./UserProfile.view";
 
 @View
 class App {
   Body() {
     UserProfile()
-      .name('John Doe')
+      .name("John")
       .age(20)
-      .favouriteColors(['green', 'blue', 'red'])
-      .isAvailable(true)
+      .favouriteColors(["green", "blue", "red"])
+      .isAvailable(true);
   }
 }
 

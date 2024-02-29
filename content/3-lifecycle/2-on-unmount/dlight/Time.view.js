@@ -1,4 +1,4 @@
-import { View } from '@dlightjs/dlight';
+import { View } from "@dlightjs/dlight";
 
 @View
 class Time {
@@ -6,7 +6,7 @@ class Time {
 
   timer = setInterval(() => {
     this.time = new Date().toLocaleTimeString();
-  });
+  }, 1000);
 
   willUnmount() {
     clearInterval(this.timer);

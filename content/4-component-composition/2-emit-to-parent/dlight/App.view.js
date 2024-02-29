@@ -1,24 +1,22 @@
-import { View } from '@dlightjs/dlight';
+import { View } from "@dlightjs/dlight";
+import AnswerButton from "./HelloWorld.view";
 
 @View
 class App {
   isHappy = true;
 
-  onYes() {
-    this.isHappy = true;
-  }
-
-  onNo() {
+  onAnswerNo() {
     this.isHappy = false;
   }
 
+  onAnswerYes() {
+    this.isHappy = true;
+  }
+
   Body() {
-    p('Are you happy?')
-    AnswerButton()
-      .onYes(this.onYes)
-      .onNo(this.onNo)
-    p(this.isHappy ? '😀' : '😥')
-      .style({ fontSize: '50px' })
+    p("Are you happy?");
+    AnswerButton().onYes(this.onAnswerYes).onNo(this.onAnswerNo);
+    p(this.isHappy ? "😀" : "😥").style({ fontSize: "50px" });
   }
 }
 
