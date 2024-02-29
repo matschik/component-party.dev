@@ -1,17 +1,14 @@
-import { View } from '@dlightjs/dlight';
+import { View } from "@dlightjs/dlight";
 
 @View
 class InputFocused {
-  inputElement
-
+  inputElement;
   didMount() {
-    this.inputElement.focus()
+    this.inputElement.focus();
   }
 
   Body() {
-    input()
-      .type('text')
-      .element(this.inputElement)
+    input().type("text").element(this.inputElement);
   }
 }
 

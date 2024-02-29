@@ -1,15 +1,14 @@
-import { View } from '@dlightjs/dlight';
+import { View } from "@dlightjs/dlight";
 
 @View
 class Name {
-  name = 'John';
-
+  name = "John";
   willMount() {
-    this.name = 'Jane';
+    this.name = "Jane";
   }
 
   Body() {
-    h1(`Hello ${this.name}`)
+    h1(`Hello ${this.name}`);
   }
 }
 

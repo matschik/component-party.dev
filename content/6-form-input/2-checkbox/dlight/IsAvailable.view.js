@@ -3,7 +3,6 @@ import { View } from "@dlightjs/dlight";
 @View
 class IsAvailable {
   isAvailable = false;
-
   handleChange() {
     this.isAvailable = !this.isAvailable;
   }

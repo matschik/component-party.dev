@@ -1,17 +1,15 @@
-import { View } from '@dlightjs/dlight';
+import { View } from "@dlightjs/dlight";
 
 @View
 class Counter {
   count = 0;
-
   incrementCount() {
     this.count++;
   }
 
   Body() {
-    p(`Counter: ${this.count}`)
-    button('+1')
-      .onClick(this.incrementCount)
+    p(`Counter: ${this.count}`);
+    button("+1").onClick(this.incrementCount);
   }
 }
 

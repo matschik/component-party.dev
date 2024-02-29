@@ -3,7 +3,6 @@ import { View } from "@dlightjs/dlight";
 @View
 class PickPill {
   picked = "red";
-
   handleChange(event) {
     this.picked = event.target.value;
   }

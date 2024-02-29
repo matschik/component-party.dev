@@ -10,7 +10,6 @@ const colors = [
 @View
 class ColorSelect {
   selectedColorId = 2;
-
   handleChange(event) {
     this.selectedColorId = event.target.value;
   }

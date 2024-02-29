@@ -8,7 +8,6 @@ class App {
     username: "unicorn42",
     email: "unicorn42@example.com",
   };
-
   updateUserName(newUsername) {
     this.user.username = newUsername;
   }

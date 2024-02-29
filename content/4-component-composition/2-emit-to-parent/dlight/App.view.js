@@ -4,11 +4,9 @@ import AnswerButton from "./HelloWorld.view";
 @View
 class App {
   isHappy = true;
-
   onAnswerNo() {
     this.isHappy = false;
   }
-
   onAnswerYes() {
     this.isHappy = true;
   }

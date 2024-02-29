@@ -1,4 +1,4 @@
-import { Model } from '@dlightjs/dlight';
+import { Model } from "@dlightjs/dlight";
 
 @Model
 class FetchUsers {
