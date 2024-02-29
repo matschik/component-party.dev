@@ -358,13 +358,8 @@ export default [
     title: "DLight.js",
     img: "framework/dlight.svg",
     eslint: {
-      env: {
-        browser: true,
-        es2021: true,
-        node: true,
-      },
+      parser: "@babel/eslint-parser",
       files: ["**/dlight/**"],
-      extends: ["eslint:recommended"],
     },
     playgroundURL: "https://dlight.dev/playground",
     documentationURL: "https://dlight.dev/docs/getting-started",
