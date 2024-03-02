@@ -86,7 +86,7 @@
             {#each snippets.filter((s) => s.sectionId === section.sectionId) as snippet}
               <li>
                 <a
-                  href={`#${snippet.snippetId}`}
+                  href={`#${section.sectionId + "." + snippet.snippetId}`}
                   class={c(
                     "inline-block w-full py-1.5 px-4 text-white hover:bg-gray-800 rounded hover:opacity-100 transition-opacity",
                     section.sectionId + "." + snippet.snippetId ===

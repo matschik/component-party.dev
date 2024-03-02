@@ -241,13 +241,13 @@
 
                 {#each snippets.filter((s) => s.sectionId === section.sectionId) as snippet}
                   <div
+                    id={section.sectionId + "." + snippet.snippetId}
                     data-snippet-id={section.sectionId +
                       "." +
                       snippet.snippetId}
                   >
                     <!-- bg-[var(--bg-color)] -->
                     <h2
-                      id={snippet.snippetId}
                       class="header-anchor sticky py-2 top-[2.9531rem] z-10 bg-[var(--bg-color)]"
                     >
                       {snippet.title}
