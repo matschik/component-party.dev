@@ -188,7 +188,7 @@
             viewBox="0 0 24 24"
             stroke-width="1.5"
             stroke="currentColor"
-            class="w-4 h-4"
+            class="size-4"
           >
             <path
               stroke-linecap="round"
@@ -208,17 +208,17 @@
         {#if frameworkIdsSelected.size === 0}
           <div class="space-y-4">
             <div class="flex justify-center">
-              <ArrowUpIcon class="w-6 h-6 animate-bounce" />
+              <ArrowUpIcon class="size-6 animate-bounce" />
             </div>
             <div class="flex justify-center">
               <p
                 class="text-lg opacity-80 flex items-center text-center space-x-3"
               >
-                <img src="/popper.svg" alt="logo" class="w-6 h-6" />
+                <img src="/popper.svg" alt="logo" class="size-6" />
                 <span>
                   Please select a framework to view framework's snippets
                 </span>
-                <img src="/popper.svg" alt="logo" class="w-6 h-6" />
+                <img src="/popper.svg" alt="logo" class="size-6" />
               </p>
             </div>
           </div>
@@ -343,7 +343,7 @@
                                           <img
                                             src="/popper.svg"
                                             alt="logo"
-                                            class="w-5 h-5 m-0 inline-block"
+                                            class="size-5 m-0 inline-block"
                                           />
                                         </span>
                                       </div>

@@ -1,9 +1,10 @@
 {
-  "name": "component-party",
+  "name": "component-party.dev",
   "private": true,
   "version": "2.0.0",
   "type": "module",
   "packageManager": "pnpm@8.6.5",
+  "repository": "github:matschik/component-party.dev",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

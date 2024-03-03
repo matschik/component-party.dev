@@ -69,14 +69,14 @@
   <span
     class="space-x-2 flex items-center border-r border-[#373b43] font-medium px-2"
   >
-    <GithubIcon class="w-[1.1rem] h-[1.1rem]" />
+    <GithubIcon class="size-[1.1rem]" />
     <span class="mt-px">Star</span>
   </span>
   {#if isFetchingStarCount || starCount !== 0}
     <div class="h-full flex justify-center items-center pl-3 pr-3 font-medium">
       {#if isFetchingStarCount && starCount === 0}
         <svg
-          class="animate-spin h-4 w-4 mx-1"
+          class="animate-spin size-4 mx-1"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
