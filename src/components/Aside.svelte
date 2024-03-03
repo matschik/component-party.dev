@@ -65,14 +65,14 @@
 <aside
   class="no-scroll hidden lg:block sticky flex-shrink-0 w-[300px] overflow-y-auto top-0 pr-8 max-h-screen border-r border-gray-700"
 >
-  <nav class="font-semibold w-full text-base py-2 pl-4 pb-20">
+  <nav class="w-full text-base py-2 pl-4 pb-20">
     <ul class="space-y-6">
       {#each sections as section}
         <li>
           <a
             href={`#${section.sectionId}`}
             class={c(
-              "inline-block w-full py-1.5 px-4 text-white opacity-90 hover:opacity-100 hover:bg-gray-800 rounded transition-opacity",
+              "inline-block w-full py-1.5 px-4 text-white font-semibold opacity-90 hover:opacity-100 hover:bg-gray-800 rounded transition-opacity",
               {
                 "bg-gray-800":
                   largestVisibleSnippetId &&
@@ -88,7 +88,7 @@
                 <a
                   href={`#${section.sectionId + "." + snippet.snippetId}`}
                   class={c(
-                    "inline-block w-full py-1.5 px-4 text-white hover:bg-gray-800 rounded hover:opacity-100 transition-opacity",
+                    "inline-block w-full py-1.5 px-4 text-white font-medium hover:bg-gray-800 rounded hover:opacity-100 transition-opacity",
                     section.sectionId + "." + snippet.snippetId ===
                       largestVisibleSnippetId
                       ? "bg-gray-800 opacity-70"
