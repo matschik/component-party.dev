@@ -367,6 +367,6 @@ export default [
       return sortAllFilenames(files, ["index.html", "App.view.js"]);
     },
     repositoryLink: "https://github.com/dlight-js/dlight",
-    mainPackageName: "react",
+    mainPackageName: "@dlightjs/dlight",
   },
 ];
