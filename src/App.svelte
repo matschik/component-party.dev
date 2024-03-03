@@ -137,7 +137,7 @@
 
 <AppNotificationCenter />
 
-<Header />
+<Header {frameworksSelected} />
 
 <div class="flex">
   <Aside />

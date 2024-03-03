@@ -2,6 +2,7 @@
   import c from "classnames";
   import { notifications } from "@veljs/svelte/NotificationCenter.svelte";
   import { ClipboardDocumentIcon } from "heroiconsvelte/24/outline";
+  import copyToClipboard from "../lib/copyToClipboard.js";
 
   export let files = [];
 
@@ -10,24 +11,6 @@
   let filenameSelected = files.length > 0 && files[0]?.fileName;
   $: snippet =
     filenameSelected && files.find((s) => s.fileName === filenameSelected);
-
-  function copyToClipboard(value) {
-    const $textarea = document.createElement("textarea");
-    $textarea.innerHTML = value;
-    document.body.appendChild($textarea);
-    $textarea.select();
-    let success = false;
-    try {
-      document.execCommand("copy");
-      success = true;
-    } catch (err) {
-      alert(
-        "Oops, unable to copy to clipboard. Please check website permissions."
-      );
-    }
-    $textarea.remove();
-    return success;
-  }
 
   function copySnippet() {
     if (codeSnippetEl) {
