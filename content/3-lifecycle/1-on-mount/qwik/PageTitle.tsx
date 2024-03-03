@@ -1,4 +1,4 @@
-import { component$, useClientEffect$, useStore } from "@builder.io/qwik";
+import { component$, useVisibleTask$, useStore } from "@builder.io/qwik";
 
 export const App = component$(() => {
   const store = useStore({
