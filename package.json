@@ -15,7 +15,7 @@
     "format:check": "prettier --ignore-path .gitignore --plugin-search-dir=. . --check",
     "build:content": "node scripts/generateContent.js",
     "build:progress": "node scripts/generateReadMeProgress.js",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "dependencies": {
     "@lit/context": "^1.1.0",
