@@ -5,7 +5,7 @@ export const App = component$(() => {
     pageTitle: "",
   });
 
-  useClientEffect$(() => {
+  useVisibleTask$(() => {
     store.pageTitle = document.title;
   });
 
