@@ -164,7 +164,7 @@ How do we solve this ? Developers love having framework overview by examples. It
         <summary>
             <img width="18" height="18" src="public/framework/lit.svg" />
             <b>Lit</b>
-            <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/96" /></summary>
+            <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/100" /></summary>
 
 - [x] Reactivity
   - [x] Declare state
