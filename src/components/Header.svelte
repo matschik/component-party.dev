@@ -30,7 +30,7 @@
         {#if frameworksSelected.length > 0}
           <button
             type="button"
-            class="flex items-center space-x-2 rounded bg-gray-800 px-2 py-1 text-sm text-gray-200 shadow-sm hover:bg-white/15"
+            class="flex items-center space-x-2 rounded bg-gray-800 px-2 py-1 text-sm text-white shadow-sm hover:bg-white/15"
             aria-label="Copy framework selection link"
             on:click={copyShareLink}
           >

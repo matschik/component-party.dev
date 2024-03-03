@@ -60,7 +60,7 @@
 </script>
 
 <a
-  class="bg-[#21262d] text-[#c9d1d9] border border-[#373b43] py-1 rounded flex items-center text-sm shadow-inner hover:opacity-90"
+  class="bg-[#21262d] text-white border border-[#373b43] py-1 rounded flex items-center text-sm shadow-inner hover:opacity-90"
   href={`https://github.com/${REPOSITORY_PATH}`}
   target="_blank"
   aria-label={`Star ${REPOSITORY_PATH} on GitHub`}
