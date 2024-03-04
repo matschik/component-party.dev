@@ -20,6 +20,9 @@ dependencies:
   heroiconsvelte:
     specifier: ^1.0.2
     version: 1.0.2(svelte@4.2.12)
+  svelte-router-spa:
+    specifier: ^7.0.1
+    version: 7.0.1(svelte@4.2.12)
 
 devDependencies:
   '@angular-eslint/eslint-plugin':
@@ -6606,6 +6609,15 @@ packages:
       typescript: 5.3.3
     dev: true
 
+  /svelte-router-spa@7.0.1(svelte@4.2.12):
+    resolution: {integrity: sha512-Oh1bVBkK4UYSXzBSrVa8kTRrPtkc9+C7TSVlUkoFXyAf4dQtRrGXqPbXGU0lR5MJ8VkwXU68XclGtpCeWm5gpg==}
+    peerDependencies:
+      svelte: ^3.36.0
+    dependencies:
+      svelte: 4.2.12
+      url-params-parser: 1.0.4
+    dev: false
+
   /svelte@3.59.2:
     resolution: {integrity: sha512-vzSyuGr3eEoAtT/A6bmajosJZIUWySzY2CzB3w2pgPvnkUjGqlDnsNnA0PMO+mMAhuyMul6C2uuZzY6ELSkzyA==}
     engines: {node: '>= 8'}
@@ -7036,6 +7048,10 @@ packages:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
     dependencies:
       punycode: 2.3.1
+
+  /url-params-parser@1.0.4:
+    resolution: {integrity: sha512-0m6BqGpY2OetTZ3UPTLKkbTfUHigsX2YhrzORT9iYiyUJ/SP2WJ3cggg2YWtvMs36GPwK9Q44ffddyarniu2Tg==}
+    dev: false
 
   /url-parse-lax@1.0.0:
     resolution: {integrity: sha512-BVA4lR5PIviy2PMseNd2jbFQ+jwSwQGdJejf5ctd1rEXt0Ypd7yanUK9+lYechVlN5VaTJGsu2U/3MDDu6KgBA==}

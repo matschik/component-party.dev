@@ -22,7 +22,8 @@
     "@veljs/svelte": "^0.1.11",
     "classnames": "^2.5.1",
     "eslint-plugin-svelte": "^2.35.1",
-    "heroiconsvelte": "^1.0.2"
+    "heroiconsvelte": "^1.0.2",
+    "svelte-router-spa": "^7.0.1"
   },
   "devDependencies": {
     "@angular-eslint/eslint-plugin": "^17.2.1",

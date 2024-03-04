@@ -1,4 +1,4 @@
-<footer class="bg-gray-900">
+<footer class="bg-gray-900 pb-20">
   <h2 id="footer-heading" class="sr-only">Footer</h2>
   <div class="mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-32">
     <div class="xl:grid xl:grid-cols-3 xl:gap-8">
@@ -20,7 +20,7 @@
           </a>
         </div>
       </div>
-      <div class="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
+      <div class="mt-16 grid grid-cols-1 sm:grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
         <% for (const navigation of it.navigations) { %>
         <div class="md:grid md:gap-8">
           <aside>
@@ -28,7 +28,7 @@
               <%= navigation.title %>
             </h3>
             <nav>
-              <ul role="list" class="mt-6 space-y-2">
+              <ul role="list" class="mt-2 space-y-2">
                 <% for (const link of navigation.links) { %>
                 <li>
                   <a href="<%= link.url %>" class="text-sm leading-6 text-gray-300 hover:text-white">
@@ -42,11 +42,6 @@
         </div>
         <% } %>
       </div>
-    </div>
-    <div class="mt-16 border-t border-white/10 pt-8 sm:mt-20 lg:mt-24">
-      <p class="text-xs leading-5 text-gray-400">
-        &copy; 2020 Your Company, Inc. All rights reserved.
-      </p>
     </div>
   </div>
 </footer>

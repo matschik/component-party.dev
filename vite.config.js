@@ -7,6 +7,8 @@ import { Eta } from "eta";
 import FRAMEWORKS from "./frameworks.mjs";
 import pluginGenerateFrameworkContent from "./build/generateContentVitePlugin.js";
 
+// @TODO: sitemap
+
 const footerNavigation = [
   {
     title: "Most Popular Frameworks",
@@ -33,24 +35,24 @@ const footerNavigation = [
   {
     title: "Comparing Legacy version & Current Version",
     links: [
-      { name: "Vue 2 vs. Vue 3", url: "/compare/vue-2-vs-vue-3" },
+      { name: "Vue 2 vs. Vue 3", url: "/compare/vue2-vs-vue3" },
       {
         name: "Aurelia 1 vs. Aurelia 2",
-        url: "/compare/aurelia-1-vs-aurelia-2",
+        url: "/compare/aurelia1-vs-aurelia2",
       },
     ],
   },
   {
     title: "Comparing Current Version & Upcoming Version",
     links: [
-      { name: "Svelte 4 vs. Svelte 5", url: "/compare/svelte-4-vs-svelte-5" },
+      { name: "Svelte 4 vs. Svelte 5", url: "/compare/svelte4-vs-svelte5" },
     ],
   },
 ];
 
 const footerLinks = footerNavigation.map((n) => n.links).flat();
 
-const sharedTemplateData = {
+const templateDataDefaults = {
   title: "Component Party",
   url: "https://component-party.dev/",
   description: `Web component JS frameworks overview by their syntax and features: ${FRAMEWORKS.map((f) => f.title).join(", ")}`,
@@ -67,14 +69,14 @@ export default defineConfig({
         outputPath: `${link.url}.html`,
         template: "dist/index.html",
         templateData: {
-          ...sharedTemplateData,
-          title: `${link.name} - ${sharedTemplateData.title}`,
+          ...templateDataDefaults,
+          title: `${link.name} - ${templateDataDefaults.title}`,
         },
       })),
       {
         outputPath: "index.html",
         template: "dist/index.html",
-        templateData: sharedTemplateData,
+        templateData: templateDataDefaults,
       },
     ]),
   ],
@@ -119,7 +121,11 @@ async function generateHtmlPagesPlugin(pages) {
         const matchedPage = pages.find(
           (page) => ctx.originalUrl === filePathToUrl(page.outputPath)
         );
-        html = htmlTransform.render(html, matchedPage.templateData);
+        if (matchedPage) {
+          html = htmlTransform.render(html, matchedPage.templateData);
+        } else {
+          html = htmlTransform.render(html, templateDataDefaults);
+        }
       }
       return html;
     },
