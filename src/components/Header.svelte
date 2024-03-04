@@ -10,7 +10,12 @@
     if (frameworksSelected.length === 0) {
       return;
     }
-    const shareURL = `${location.origin}?f=${[...frameworksSelected].map((f) => f.id).join(",")}`;
+    let shareURL = `${location.origin}`;
+    if (frameworksSelected.length === 2) {
+      shareURL += `/compare/${[...frameworksSelected].map((f) => f.id).join("-vs-")}`;
+    } else {
+      shareURL += `?f=${[...frameworksSelected].map((f) => f.id).join(",")}`;
+    }
     copyToClipboard(shareURL);
     notifications.show({
       title: `Framework selection link copied with ${[...frameworksSelected].map((f) => f.title).join(", ")}`,
