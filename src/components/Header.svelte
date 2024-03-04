@@ -30,12 +30,12 @@
         {#if frameworksSelected.length > 0}
           <button
             type="button"
-            class="flex items-center space-x-2 rounded bg-gray-800 px-2 py-1 text-sm text-white shadow-sm hover:bg-white/15"
+            class="flex items-center space-x-2 rounded bg-gray-800 px-2 py-1.5 text-sm text-white shadow-sm hover:bg-white/15"
             aria-label="Copy framework selection link"
             on:click={copyShareLink}
           >
             <LinkIcon class="size-[1.3rem] sm:size-[1.1rem]" />
-            <span class="mt-[2px] hidden sm:inline">Share</span>
+            <span class="hidden sm:inline">Share</span>
           </button>
         {/if}
         <GithubStarButton />
