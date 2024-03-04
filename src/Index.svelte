@@ -8,13 +8,12 @@
   import CodeEditor from "./components/CodeEditor.svelte";
   import AppNotificationCenter from "./components/AppNotificationCenter.svelte";
   import createLocaleStorage from "./lib/createLocaleStorage.js";
-  import { onMount } from "svelte";
+  import { getContext, onMount } from "svelte";
   import Header from "./components/Header.svelte";
   import Aside from "./components/Aside.svelte";
   import GithubIcon from "./components/GithubIcon.svelte";
-  import { navigateTo } from "svelte-router-spa";
 
-  export let currentRoute;
+  const { currentRoute, navigate } = getContext("router");
 
   const frameworkIdsStorage = createLocaleStorage("framework_display");
 
@@ -47,28 +46,33 @@
   let isVersusFrameworks = false;
   let onMountCallbacks = new Set();
   let isMounted = false;
+  const siteTitle = "Component Party";
 
   // -- on route change --
   $: {
     window.scrollTo(0, 0);
     isVersusFrameworks = false;
-    if (currentRoute.name === "/") {
+    document.title = siteTitle;
+    if ($currentRoute.path === "/") {
       if (isMounted) {
         handleInitialFrameworkIdsSelectedFromStorage();
       } else {
         onMountCallbacks.add(handleInitialFrameworkIdsSelectedFromStorage);
       }
-    } else if (currentRoute.namedParams?.versus) {
-      const versusFrameworks = handleVersus(currentRoute.namedParams.versus);
+    } else if ($currentRoute.params?.versus) {
+      const versusFrameworks = handleVersus($currentRoute.params.versus);
       if (versusFrameworks) {
         isVersusFrameworks = true;
         frameworkIdsSelected = new Set(versusFrameworks.map((f) => f.id));
         frameworkIdsSelectedInitialized = true;
+        document.title = `${versusFrameworks
+          .map((f) => f.title)
+          .join(" vs ")} - ${siteTitle}`;
       } else {
-        navigateTo("/");
+        navigate("/");
       }
     } else {
-      navigateTo("/");
+      navigate("/");
     }
   }
 
@@ -207,8 +211,8 @@
           )}
           on:click={() => {
             toggleFrameworkId(framework.id);
-            if (isVersusFrameworks && currentRoute.name !== "/") {
-              navigateTo("/");
+            if (isVersusFrameworks && $currentRoute.path !== "/") {
+              navigate("/");
             }
           }}
         >

@@ -1,17 +1,10 @@
 <script>
-  import { Router } from "svelte-router-spa";
+  import Router from "./Router.svelte";
   import Index from "./Index.svelte";
+
   const routes = [
-    {
-      name: "/",
-      component: Index,
-    },
-    { name: "/compare/:versus", component: Index },
-    {
-      name: "404",
-      path: "404",
-      component: Index,
-    },
+    { path: "/", component: Index },
+    { path: "/compare/:versus", component: Index },
   ];
 </script>
 

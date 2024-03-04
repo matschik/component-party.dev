@@ -386,11 +386,13 @@ const frameworks = [
   },
 ];
 
-export function matchFrameworkId(id){
-  return frameworks.find((framework) =>
-  framework.id === id ||
-  (framework.isCurrentVersion &&
-    framework.frameworkName.toLowerCase() === id))
+export function matchFrameworkId(id) {
+  return frameworks.find(
+    (framework) =>
+      framework.id === id ||
+      (framework.isCurrentVersion &&
+        framework.frameworkName.toLowerCase() === id)
+  );
 }
 
 export default frameworks;

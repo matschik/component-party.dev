@@ -94,7 +94,7 @@
           />
         </svg>
       {:else}
-        <span class="mt-px">{starCount}</span>
+        <span>{starCount}</span>
       {/if}
     </div>
   {/if}
