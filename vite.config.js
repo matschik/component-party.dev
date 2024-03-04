@@ -64,7 +64,6 @@ export default defineConfig({
     svelte(),
     generateHtmlPagesPlugin([
       ...footerLinks.map((link) => ({
-        entry: "/src/main.js",
         outputPath: `${link.url}.html`,
         template: "dist/index.html",
         templateData: {
@@ -73,7 +72,6 @@ export default defineConfig({
         },
       })),
       {
-        entry: "/src/main.js",
         outputPath: "index.html",
         template: "dist/index.html",
         templateData: sharedTemplateData,
@@ -91,37 +89,39 @@ export default defineConfig({
 async function generateHtmlPagesPlugin(pages) {
   const eta = new Eta({ views: "." });
 
-  const indexPageData = sharedTemplateData;
-
-  const include = {
+  const template = {
     footer: await fs.readFile(
-      path.resolve(__dirname, "build/include/footer.eta"),
+      path.resolve(__dirname, "build/template/footer.eta"),
       "utf8"
     ),
   };
 
-  function transformIndexHtml(html) {
-    for (const [key, etaContent] of Object.entries(include)) {
-      html = html.replace(
-        `<!--include:${key}-->`,
-        eta.renderString(etaContent, { navigations: footerNavigation })
-      );
-    }
-    html = eta.renderString(html, indexPageData);
-    return html;
-  }
+  const htmlTransform = {
+    include(html) {
+      for (const [templateName, templateContent] of Object.entries(template)) {
+        html = html.replace(
+          `<!--template:${templateName}-->`,
+          eta.renderString(templateContent, { navigations: footerNavigation })
+        );
+      }
+      return html;
+    },
+    render(htmlEta, data) {
+      return eta.renderString(htmlEta, data);
+    },
+  };
 
   return {
     name: "generate-html-pages",
-    transformIndexHtml,
-    async load(id) {
-      if (id.endsWith("index.html")) {
-        const indexPath = path.resolve(__dirname, "index.html");
-        let html = await fs.readFile(indexPath, "utf8");
-        html = transformIndexHtml(html);
-        return html;
+    transformIndexHtml(html, ctx) {
+      html = htmlTransform.include(html);
+      if (ctx.server) {
+        const matchedPage = pages.find(
+          (page) => ctx.originalUrl === filePathToUrl(page.outputPath)
+        );
+        html = htmlTransform.render(html, matchedPage.templateData);
       }
-      return null;
+      return html;
     },
     async closeBundle() {
       for (const page of pages) {
@@ -139,4 +139,17 @@ async function generateHtmlPagesPlugin(pages) {
       }
     },
   };
+}
+
+function filePathToUrl(filePath) {
+  let normalizedPath = path.normalize(filePath);
+  let baseName = path.basename(normalizedPath);
+
+  if (baseName === "index.html") {
+    return path.dirname(normalizedPath) === "."
+      ? "/"
+      : path.dirname(normalizedPath) + "/";
+  } else {
+    return normalizedPath.replace(/.html$/, "");
+  }
 }
