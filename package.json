@@ -54,6 +54,7 @@
     "eslint-plugin-solid": "^0.13.1",
     "eslint-plugin-vue": "^9.22.0",
     "esm": "^3.2.25",
+    "eta": "^3.2.0",
     "folder-hash": "^4.0.4",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",

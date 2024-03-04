@@ -243,7 +243,6 @@
                       "." +
                       snippet.snippetId}
                   >
-                    <!-- bg-[var(--bg-color)] -->
                     <h2
                       class="header-anchor sticky py-2 top-[2.9531rem] z-10 bg-[var(--bg-color)]"
                     >

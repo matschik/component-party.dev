@@ -12,6 +12,7 @@ export default [
   {
     id: "svelte4",
     title: "Svelte 4",
+    frameworkName: "Svelte",
     img: "framework/svelte.svg",
     eslint: {
       files: ["**/svelte4/*.svelte"],
@@ -28,6 +29,7 @@ export default [
   {
     id: "react",
     title: "React",
+    frameworkName: "React",
     img: "framework/react.svg",
     eslint: {
       files: ["**/react/*.jsx", "**/react/*.tsx"],
@@ -53,6 +55,7 @@ export default [
   {
     id: "vue3",
     title: "Vue 3",
+    frameworkName: "Vue",
     img: "framework/vue.svg",
     eslint: {
       files: ["**/vue3/*.vue"],
@@ -76,6 +79,7 @@ export default [
   {
     id: "angular",
     title: "Angular",
+    frameworkName: "Angular",
     img: "framework/angular.svg",
     eslint: [
       {
@@ -131,6 +135,7 @@ export default [
   {
     id: "lit",
     title: "Lit",
+    frameworkName: "Lit",
     img: "framework/lit.svg",
     eslint: {
       files: ["**/lit/**"],
@@ -149,6 +154,7 @@ export default [
   {
     id: "vue2",
     title: "Vue 2",
+    frameworkName: "Vue",
     img: "framework/vue.svg",
     eslint: {
       files: ["**/vue2/*.vue"],
@@ -169,6 +175,7 @@ export default [
   {
     id: "ember",
     title: "Ember",
+    frameworkName: "Ember",
     img: "framework/ember.svg",
     eslint: {
       files: ["**/ember/**"],
@@ -186,7 +193,8 @@ export default [
   },
   {
     id: "solid",
-    title: "SolidJS",
+    title: "Solid.js",
+    frameworkName: "Solid",
     img: "framework/solid.svg",
     eslint: {
       files: ["**/solid/*.jsx"],
@@ -204,6 +212,7 @@ export default [
   {
     id: "alpine",
     title: "Alpine",
+    frameworkName: "Alpine",
     img: "framework/alpine.svg",
     eslint: {
       files: ["**/alpine/**"],
@@ -220,6 +229,7 @@ export default [
   {
     id: "mithril",
     title: "Mithril",
+    frameworkName: "Mithril",
     img: "framework/mithril.svg",
     eslint: {
       env: {
@@ -241,6 +251,7 @@ export default [
   {
     id: "aurelia2",
     title: "Aurelia 2",
+    frameworkName: "Aurelia",
     img: "framework/aurelia.svg",
     eslint: {
       env: {
@@ -269,6 +280,7 @@ export default [
   {
     id: "qwik",
     title: "Qwik",
+    frameworkName: "Qwik",
     img: "framework/qwik.svg",
     eslint: {
       env: {
@@ -299,6 +311,7 @@ export default [
   {
     id: "marko",
     title: "Marko",
+    frameworkName: "Marko",
     img: "framework/marko.svg",
     eslint: {
       files: ["!**"], // Marko’s linter/prettyprinter doesn’t use eslint
@@ -314,6 +327,7 @@ export default [
   {
     id: "aurelia1",
     title: "Aurelia 1",
+    frameworkName: "Aurelia",
     img: "framework/aurelia.svg",
     eslint: {
       env: {
@@ -341,6 +355,7 @@ export default [
   {
     id: "svelte5",
     title: "Svelte 5 (preview)",
+    frameworkName: "Svelte",
     img: "framework/svelte.svg",
     eslint: {
       files: ["**/TODO-THIS-IS-DISABLED-svelte5/*.svelte"],
