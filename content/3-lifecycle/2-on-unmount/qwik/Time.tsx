@@ -1,11 +1,11 @@
-import { component$, useClientEffect$, useStore } from "@builder.io/qwik";
+import { component$, useVisibleTask$, useStore } from "@builder.io/qwik";
 
 export const App = component$(() => {
   const store = useStore({
     time: new Date().toLocaleTimeString(),
   });
 
-  useClientEffect$(() => {
+  useVisibleTask$(() => {
     const timer = setInterval(() => {
       store.time = new Date().toLocaleTimeString();
     }, 1000);
