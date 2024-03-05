@@ -16,17 +16,19 @@
 
   const currentRoute = writable({ component: null });
 
-  function navigate(path) {
-    const urlParsed = new URL(path);
+  function navigate(path, state) {
+    state = state || {};
+    const urlParsed = new URL(path, window.location.origin);
     const routePayload = router.lookup(urlParsed.pathname);
+
     if (routePayload) {
       if (routePayload.component.toString().startsWith("class")) {
         currentRoute.set(routePayload);
-        window.history.pushState({}, "", path);
+        window.history.pushState(state, "", path);
       } else if (typeof routePayload.component === "function") {
         routePayload.component().then((module) => {
           currentRoute.set({ ...routePayload, component: module.default });
-          window.history.pushState({}, "", path);
+          window.history.pushState(state, "", path);
         });
       } else {
         console.error("Invalid route component");
@@ -54,7 +56,7 @@
 
   onMount(() => {
     document.addEventListener("click", handleClick);
-    navigate(window.location.href);
+    navigate(window.location.href, { isInitialNavigation: true });
   });
 
   onDestroy(() => {
