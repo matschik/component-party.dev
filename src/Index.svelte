@@ -95,11 +95,11 @@
     }
 
     if (frameworkIdsSelectedOnInit.length === 0) {
-      const frameworkIdsFromStorage = frameworkIdsStorage.getJSON();
+      const frameworkIdsFromStorage = frameworkIdsStorage
+        .getJSON()
+        ?.filter(matchFrameworkId);
       if (frameworkIdsFromStorage?.length > 0) {
-        frameworkIdsSelectedOnInit = frameworkIdsFromStorage.map((x) =>
-          x === "svelte" ? "svelte4" : x
-        );
+        frameworkIdsSelectedOnInit = frameworkIdsFromStorage;
       }
     }
 

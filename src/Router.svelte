@@ -17,7 +17,8 @@
   const currentRoute = writable({ component: null });
 
   function navigate(path) {
-    const routePayload = router.lookup(path);
+    const urlParsed = new URL(path);
+    const routePayload = router.lookup(urlParsed.pathname);
     if (routePayload) {
       if (routePayload.component.toString().startsWith("class")) {
         currentRoute.set(routePayload);
@@ -36,7 +37,7 @@
   }
 
   window.onpopstate = () => {
-    navigate(window.location.pathname);
+    navigate(window.location.href);
   };
 
   function handleClick(event) {
@@ -53,7 +54,7 @@
 
   onMount(() => {
     document.addEventListener("click", handleClick);
-    navigate(window.location.pathname);
+    navigate(window.location.href);
   });
 
   onDestroy(() => {
