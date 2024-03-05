@@ -5,9 +5,7 @@ name: Node.js CI
 
 on:
   push:
-    branches: [main]
   pull_request:
-    branches: [main]
 
 env:
   NODE_OPTIONS: --max_old_space_size=4096
@@ -28,7 +26,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Setup PNPM
-        # uses: pnpm/action-setup@35ab4267a1a21c8e8cb1c087cf1642e891ff57bd
         uses: pnpm/action-setup@v2.2.1
       - run: pnpm install --frozen-lockfile
       - run: pnpm run lint
