@@ -8,7 +8,7 @@
   import CodeEditor from "./components/CodeEditor.svelte";
   import AppNotificationCenter from "./components/AppNotificationCenter.svelte";
   import createLocaleStorage from "./lib/createLocaleStorage.js";
-  import { getContext, onMount } from "svelte";
+  import { getContext, onDestroy, onMount } from "svelte";
   import Header from "./components/Header.svelte";
   import Aside from "./components/Aside.svelte";
   import GithubIcon from "./components/GithubIcon.svelte";
@@ -48,16 +48,18 @@
   let isMounted = false;
   const siteTitle = "Component Party";
 
-  // -- on route change --
-  $: {
+  const unsubscribeCurrentRoute = currentRoute.subscribe(($currentRoute) => {
     window.scrollTo(0, 0);
     isVersusFrameworks = false;
     document.title = siteTitle;
+
     if ($currentRoute.path === "/") {
       if (isMounted) {
-        handleInitialFrameworkIdsSelectedFromStorage();
+        handleInitialFrameworkIdsSelectedFromStorage({ useDefaults: false });
       } else {
-        onMountCallbacks.add(handleInitialFrameworkIdsSelectedFromStorage);
+        onMountCallbacks.add(() =>
+          handleInitialFrameworkIdsSelectedFromStorage({ useDefaults: true })
+        );
       }
     } else if ($currentRoute.params?.versus) {
       const versusFrameworks = handleVersus($currentRoute.params.versus);
@@ -74,9 +76,11 @@
     } else {
       navigate("/");
     }
-  }
+  });
 
-  function handleInitialFrameworkIdsSelectedFromStorage() {
+  onDestroy(unsubscribeCurrentRoute);
+
+  function handleInitialFrameworkIdsSelectedFromStorage({ useDefaults }) {
     let frameworkIdsSelectedOnInit = [];
 
     const url = new URL(window.location.href);
@@ -103,7 +107,7 @@
       }
     }
 
-    if (frameworkIdsSelectedOnInit.length === 0) {
+    if (useDefaults && frameworkIdsSelectedOnInit.length === 0) {
       frameworkIdsSelectedOnInit = ["react", "svelte4"];
     }
 
