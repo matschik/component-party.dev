@@ -1,25 +1,26 @@
+import { codeToHighlightCodeHtml } from "./highlighter.js";
+
 export function mustUseAngularHighlighter(fileContent) {
   return (
     fileContent.includes("@angular/core") && fileContent.includes("template")
   );
 }
 
-export function highlightAngularComponent(highlighter, fileContent, fileExt) {
+export async function highlightAngularComponent(fileContent, fileExt) {
   const templateCode = getAngularTemplateCode(fileContent);
 
   let codeHighlighted = "";
   if (templateCode) {
     const componentWithEmptyTemplate =
       removeAngularTemplateContent(fileContent);
-    const templateCodeHighlighted = highlighter(templateCode, {
-      lang: "html",
-    });
+    const templateCodeHighlighted = await codeToHighlightCodeHtml(
+      templateCode,
+      "html"
+    );
 
-    const componentWithoutTemplateHighlighted = highlighter(
+    const componentWithoutTemplateHighlighted = await codeToHighlightCodeHtml(
       componentWithEmptyTemplate,
-      {
-        lang: fileExt,
-      }
+      fileExt
     );
 
     codeHighlighted = componentWithoutTemplateHighlighted.replace(
@@ -27,9 +28,7 @@ export function highlightAngularComponent(highlighter, fileContent, fileExt) {
       "template: `" + removeCodeWrapper(templateCodeHighlighted) + "`,"
     );
   } else {
-    codeHighlighted = highlighter(fileContent, {
-      lang: fileExt,
-    });
+    codeHighlighted = codeToHighlightCodeHtml(fileContent, fileExt);
   }
 
   return codeHighlighted;

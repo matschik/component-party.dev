@@ -2,16 +2,17 @@ import fs from "node:fs/promises";
 import { packageDirectory } from "pkg-dir";
 import path from "node:path";
 import kebabCase from "lodash.kebabcase";
-import { getHighlighter } from "shiki";
 import FRAMEWORKS from "../../frameworks.mjs";
 import frameworkPlayground from "./playground/index.js";
-import componentPartyShikiTheme from "./componentPartyShikiTheme.js";
 import prettier from "prettier";
-import markdownToHtml from "./markdownToHtml.js";
 import {
   highlightAngularComponent,
   mustUseAngularHighlighter,
 } from "./angularHighlighter.js";
+import {
+  codeToHighlightCodeHtml,
+  markdownToHighlightedHtml,
+} from "./highlighter.js";
 
 async function pathExists(path) {
   try {
@@ -23,20 +24,6 @@ async function pathExists(path) {
 }
 
 export default async function generateContent() {
-  const highlighter = await getHighlighter({
-    theme: componentPartyShikiTheme,
-    langs: [
-      "javascript",
-      "svelte",
-      "html",
-      "hbs",
-      "tsx",
-      "jsx",
-      "vue",
-      "marko",
-    ],
-  });
-
   const rootDir = await packageDirectory();
   const contentPath = path.join(rootDir, "content");
   const sectionDirNames = await fs.readdir(contentPath);
@@ -107,16 +94,12 @@ export default async function generateContent() {
             };
 
             if (ext === "md") {
-              file.contentHtml = await markdownToHtml(content);
+              file.contentHtml = await markdownToHighlightedHtml(content);
               frameworkSnippet.markdownFiles.push(file);
             } else {
               file.contentHtml = mustUseAngularHighlighter(content)
-                ? highlightAngularComponent(
-                    highlighter.codeToHtml,
-                    content,
-                    ext
-                  )
-                : highlighter.codeToHtml(content, { lang: ext });
+                ? await highlightAngularComponent(content, ext)
+                : await codeToHighlightCodeHtml(content, ext);
 
               frameworkSnippet.files.push(file);
             }

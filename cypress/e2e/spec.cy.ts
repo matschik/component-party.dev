@@ -21,6 +21,15 @@ describe("Initial frameworks", () => {
       "vue3,svelte4"
     );
   });
+
+  it("initial frameworks from query param 'f'", () => {
+    cy.visit("/?f=react,vue3");
+    cy.get("[data-framework-id-selected-list]").should(
+      "have.attr",
+      "data-framework-id-selected-list",
+      "react,vue3"
+    );
+  });
 });
 
 describe("pages", () => {

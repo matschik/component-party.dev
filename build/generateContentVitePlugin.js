@@ -44,7 +44,12 @@ export default function pluginGenerateFrameworkContent() {
   return {
     name,
     async buildStart() {
-      await build();
+      try {
+        await build();
+      } catch (error) {
+        console.error(error);
+        throw error;
+      }
     },
     async buildEnd() {
       fsContentWatcher && (await fsContentWatcher.close());
