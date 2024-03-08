@@ -1,6 +1,6 @@
 import { createSignal } from "solid-js";
 
-import { UserContext } from "./UseContext";
+import { UserContext } from "./UserContext";
 import UserProfile from "./UserProfile";
 
 export default function App() {

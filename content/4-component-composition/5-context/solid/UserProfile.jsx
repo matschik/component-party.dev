@@ -1,6 +1,6 @@
 import { useContext } from "solid-js";
 
-import { UserContext } from "./UseContext";
+import { UserContext } from "./UserContext";
 
 export default function UserProfile() {
   const [user, updateUsername] = useContext(UserContext);
