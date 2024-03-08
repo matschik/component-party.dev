@@ -275,7 +275,7 @@ How do we solve this ? Developers love having framework overview by examples. It
         <summary>
             <img width="18" height="18" src="public/framework/solid.svg" />
             <b>SolidJS</b>
-            <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/96" /></summary>
+            <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/100" /></summary>
 
 - [x] Reactivity
   - [x] Declare state
@@ -291,12 +291,12 @@ How do we solve this ? Developers love having framework overview by examples. It
 - [x] Lifecycle
   - [x] On mount
   - [x] On unmount
-- [ ] Component composition
+- [x] Component composition
   - [x] Props
   - [x] Emit to parent
   - [x] Slot
   - [x] Slot fallback
-  - [ ] Context
+  - [x] Context
 - [x] Form input
   - [x] Input text
   - [x] Checkbox
