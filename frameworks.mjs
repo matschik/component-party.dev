@@ -8,10 +8,12 @@ function sortAllFilenames(files, filenamesSorted) {
   ].filter(Boolean);
 }
 
-export default [
+const frameworks = [
   {
     id: "svelte4",
     title: "Svelte 4",
+    frameworkName: "Svelte",
+    isCurrentVersion: true,
     img: "framework/svelte.svg",
     eslint: {
       files: ["**/svelte4/*.svelte"],
@@ -28,6 +30,8 @@ export default [
   {
     id: "react",
     title: "React",
+    frameworkName: "React",
+    isCurrentVersion: true,
     img: "framework/react.svg",
     eslint: {
       files: ["**/react/*.jsx", "**/react/*.tsx"],
@@ -53,6 +57,8 @@ export default [
   {
     id: "vue3",
     title: "Vue 3",
+    frameworkName: "Vue",
+    isCurrentVersion: true,
     img: "framework/vue.svg",
     eslint: {
       files: ["**/vue3/*.vue"],
@@ -76,6 +82,8 @@ export default [
   {
     id: "angular",
     title: "Angular",
+    frameworkName: "Angular",
+    isCurrentVersion: true,
     img: "framework/angular.svg",
     eslint: [
       {
@@ -131,6 +139,8 @@ export default [
   {
     id: "lit",
     title: "Lit",
+    frameworkName: "Lit",
+    isCurrentVersion: true,
     img: "framework/lit.svg",
     eslint: {
       files: ["**/lit/**"],
@@ -149,6 +159,8 @@ export default [
   {
     id: "vue2",
     title: "Vue 2",
+    frameworkName: "Vue",
+    isCurrentVersion: false,
     img: "framework/vue.svg",
     eslint: {
       files: ["**/vue2/*.vue"],
@@ -168,7 +180,9 @@ export default [
   },
   {
     id: "emberPolaris",
-    title: "Ember (Polaris - preview)",
+    title: "Ember Polaris (preview)",
+    frameworkName: "Ember",
+    isCurrentVersion: false,
     img: "framework/ember.svg",
     eslint: {
       files: ["**/emberPolaris/**"],
@@ -190,7 +204,9 @@ export default [
   },
   {
     id: "emberOctane",
-    title: "Ember (Octane)",
+    title: "Ember Octane",
+    frameworkName: "Ember",
+    isCurrentVersion: true,
     img: "framework/ember.svg",
     eslint: {
       files: ["**/emberOctane/**"],
@@ -208,7 +224,9 @@ export default [
   },
   {
     id: "solid",
-    title: "SolidJS",
+    title: "Solid.js",
+    frameworkName: "Solid",
+    isCurrentVersion: true,
     img: "framework/solid.svg",
     eslint: {
       files: ["**/solid/*.jsx"],
@@ -226,6 +244,8 @@ export default [
   {
     id: "alpine",
     title: "Alpine",
+    frameworkName: "Alpine",
+    isCurrentVersion: true,
     img: "framework/alpine.svg",
     eslint: {
       files: ["**/alpine/**"],
@@ -242,6 +262,8 @@ export default [
   {
     id: "mithril",
     title: "Mithril",
+    frameworkName: "Mithril",
+    isCurrentVersion: true,
     img: "framework/mithril.svg",
     eslint: {
       env: {
@@ -263,6 +285,8 @@ export default [
   {
     id: "aurelia2",
     title: "Aurelia 2",
+    frameworkName: "Aurelia",
+    isCurrentVersion: true,
     img: "framework/aurelia.svg",
     eslint: {
       env: {
@@ -291,6 +315,8 @@ export default [
   {
     id: "qwik",
     title: "Qwik",
+    frameworkName: "Qwik",
+    isCurrentVersion: true,
     img: "framework/qwik.svg",
     eslint: {
       env: {
@@ -321,6 +347,8 @@ export default [
   {
     id: "marko",
     title: "Marko",
+    frameworkName: "Marko",
+    isCurrentVersion: true,
     img: "framework/marko.svg",
     eslint: {
       files: ["!**"], // Marko’s linter/prettyprinter doesn’t use eslint
@@ -336,6 +364,8 @@ export default [
   {
     id: "aurelia1",
     title: "Aurelia 1",
+    frameworkName: "Aurelia",
+    isCurrentVersion: false,
     img: "framework/aurelia.svg",
     eslint: {
       env: {
@@ -363,6 +393,8 @@ export default [
   {
     id: "svelte5",
     title: "Svelte 5 (preview)",
+    frameworkName: "Svelte",
+    isCurrentVersion: false,
     img: "framework/svelte.svg",
     eslint: {
       files: ["**/TODO-THIS-IS-DISABLED-svelte5/*.svelte"],
@@ -377,3 +409,14 @@ export default [
     mainPackageName: "svelte",
   },
 ];
+
+export function matchFrameworkId(id) {
+  return frameworks.find(
+    (framework) =>
+      framework.id === id ||
+      (framework.isCurrentVersion &&
+        framework.frameworkName.toLowerCase() === id)
+  );
+}
+
+export default frameworks;

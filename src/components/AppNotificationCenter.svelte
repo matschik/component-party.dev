@@ -9,11 +9,11 @@
   <TransitionWithClass
     class="pointer-events-auto overflow-hidden rounded-lg bg-[#181622] border border-[#33323e] shadow-lg ring-1 ring-black ring-opacity-5"
     enter="transform ease-out duration-200 transition"
-    enterfrom="translate-y-2 opacity-0 translate-y-0 translate-x-2"
-    enterto="translate-y-0 opacity-100 translate-x-0"
+    enterFrom="translate-y-2 opacity-0 translate-y-0 translate-x-2"
+    enterTo="translate-y-0 opacity-100 translate-x-0"
     leave="transition ease-in duration-100"
-    leavefrom="opacity-100"
-    leaveto="opacity-0"
+    leaveFrom="opacity-100"
+    leaveTo="opacity-0"
   >
     <div class="p-4">
       <div class="flex items-start">

@@ -15,10 +15,10 @@
   {#if framework?.img}
     <img
       src={baseURL + framework.img}
-      alt={framework.id}
       width={size}
       height={size}
       class="inline mr-[5px] mb-0 mt-0"
+      alt={`logo of ${framework.title}`}
     />
   {/if}
   <span class="flex-shrink-0">{framework.title}</span>

@@ -60,23 +60,21 @@
 </script>
 
 <a
-  class="bg-[#21262d] text-[#c9d1d9] border border-[#373b43] py-1 rounded flex items-center text-sm shadow-inner hover:opacity-90"
+  class="bg-[#21262d] text-white border border-[#373b43] py-1 rounded flex items-center text-sm shadow-inner hover:opacity-90"
   href={`https://github.com/${REPOSITORY_PATH}`}
   target="_blank"
   aria-label={`Star ${REPOSITORY_PATH} on GitHub`}
   on:click={onButtonClick}
 >
-  <span
-    class="space-x-2 flex items-center border-r border-[#373b43] font-medium px-2"
-  >
-    <GithubIcon class="w-[1.1rem] h-[1.1rem]" />
-    <span class="mt-px">Star</span>
+  <span class="space-x-2 flex items-center border-r border-[#373b43] px-2">
+    <GithubIcon class="size-[1.1rem]" />
+    <span>Star</span>
   </span>
   {#if isFetchingStarCount || starCount !== 0}
-    <div class="h-full flex justify-center items-center pl-3 pr-3 font-medium">
+    <div class="h-full flex justify-center items-center pl-3 pr-3">
       {#if isFetchingStarCount && starCount === 0}
         <svg
-          class="animate-spin h-4 w-4 mx-1"
+          class="animate-spin size-4 mx-1"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
@@ -96,7 +94,7 @@
           />
         </svg>
       {:else}
-        <span class="mt-px">{starCount}</span>
+        <span>{starCount}</span>
       {/if}
     </div>
   {/if}

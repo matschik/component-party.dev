@@ -1,4 +1,4 @@
-With <a href="https://kit.svelte.dev/docs/routing#pages">SvelteKit</a>
+With [SvelteKit](https://kit.svelte.dev/docs/routing#pages)
 
 ```
 |-- routes/
