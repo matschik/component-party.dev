@@ -383,6 +383,21 @@ const frameworks = [
     },
     repositoryLink: "https://github.com/sveltejs/svelte",
     mainPackageName: "svelte",
+  }, {
+    id: "dlight",
+    title: "DLight.js",
+    img: "framework/dlight.svg",
+    eslint: {
+      parser: "@babel/eslint-parser",
+      files: ["**/dlight/**"],
+    },
+    playgroundURL: "https://dlight.dev/playground",
+    documentationURL: "https://dlight.dev/docs/getting-started",
+    filesSorter(files) {
+      return sortAllFilenames(files, ["index.html", "App.view.js"]);
+    },
+    repositoryLink: "https://github.com/dlight-js/dlight",
+    mainPackageName: "@dlightjs/dlight",
   },
 ];
 
