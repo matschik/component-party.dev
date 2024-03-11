@@ -1,11 +1,12 @@
 import UserProfile from "./user-profile.gjs";
-import { array } from "@ember/helper";
+
+const favoriteColors = ["green", "blue", "red"];
 
 <template>
   <UserProfile
     @name="John"
     @age={{20}}
-    @favouriteColors={{array "green" "blue" "red"}}
+    @favouriteColors={{favoriteColors}}
     @isAvailable={{true}}
   />
 </template>
