@@ -1,9 +1,6 @@
-import Component from "@glimmer/component";
+const pageTitle = () => document.title;
 
-export default class PageTitle extends Component {
-  pageTitle = () => document.title;
+<template>
+  <p>Page title is: {{(pageTitle)}}</p>
+</template>
 
-  <template>
-    <p>Page title is: {{(this.pageTitle)}}</p>
-  </template>
-}

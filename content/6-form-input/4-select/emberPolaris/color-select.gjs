@@ -1,12 +1,13 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
 import { on } from '@ember/modifier';
-import eq from 'ember-truth-helpers/helpers/eq';
 
 export default class ColorSelect extends Component {
   @tracked selectedColorId = 2;
 
   select = (event) => (this.selectedColorId = event.target.value);
+
+  isSelected = (colorId) => this.selectedColorId === colorId;
 
   colors = [
     { id: 1, text: "red" },
@@ -21,7 +22,7 @@ export default class ColorSelect extends Component {
         <option
           value={{color.id}}
           disabled={{color.isDisabled}}
-          selected={{eq color.id this.selectedColorId}}
+          selected={{this.isSelected color.id}}
         >
           {{color.text}}
         </option>
