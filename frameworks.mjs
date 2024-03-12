@@ -179,30 +179,6 @@ const frameworks = [
     mainPackageName: "vue@^2",
   },
   {
-    id: "emberPolaris",
-    title: "Ember Polaris (preview)",
-    frameworkName: "Ember",
-    isCurrentVersion: false,
-    img: "framework/ember.svg",
-    eslint: {
-      files: ["**/emberPolaris/**"],
-      plugins: ["ember"],
-      parser: "ember-eslint-parser",
-      extends: [
-        "eslint:recommended",
-        "plugin:ember/recommended",
-        "plugin:ember/recommended-gjs",
-      ],
-    },
-    playgroundURL: "http://new.emberjs.com",
-    documentationURL: "https://emberjs.com",
-    filesSorter(files) {
-      return sortAllFilenames(files, ["index.html", "app.hbs", "app.js"]);
-    },
-    repositoryLink: "https://github.com/emberjs/ember.js",
-    mainPackageName: "ember-source",
-  },
-  {
     id: "emberOctane",
     title: "Ember Octane",
     frameworkName: "Ember",
@@ -258,6 +234,48 @@ const frameworks = [
     },
     repositoryLink: "https://github.com/alpinejs/alpine",
     mainPackageName: "alpinejs",
+  },
+  {
+    id: "svelte5",
+    title: "Svelte 5 (preview)",
+    frameworkName: "Svelte",
+    isCurrentVersion: false,
+    img: "framework/svelte.svg",
+    eslint: {
+      files: ["**/TODO-THIS-IS-DISABLED-svelte5/*.svelte"],
+      parser: "svelte-eslint-parser",
+    },
+    playgroundURL: "https://svelte-5-preview.vercel.app/",
+    documentationURL: "https://svelte-5-preview.vercel.app/docs",
+    filesSorter(files) {
+      return sortAllFilenames(files, ["index.html", "app.js", "App.svelte"]);
+    },
+    repositoryLink: "https://github.com/sveltejs/svelte",
+    mainPackageName: "svelte",
+  },
+  {
+    id: "emberPolaris",
+    title: "Ember Polaris (preview)",
+    frameworkName: "Ember",
+    isCurrentVersion: false,
+    img: "framework/ember.svg",
+    eslint: {
+      files: ["**/emberPolaris/**"],
+      plugins: ["ember"],
+      parser: "ember-eslint-parser",
+      extends: [
+        "eslint:recommended",
+        "plugin:ember/recommended",
+        "plugin:ember/recommended-gjs",
+      ],
+    },
+    playgroundURL: "http://new.emberjs.com",
+    documentationURL: "https://emberjs.com",
+    filesSorter(files) {
+      return sortAllFilenames(files, ["index.html", "app.hbs", "app.js"]);
+    },
+    repositoryLink: "https://github.com/emberjs/ember.js",
+    mainPackageName: "ember-source",
   },
   {
     id: "mithril",
@@ -389,24 +407,6 @@ const frameworks = [
     },
     repositoryLink: "https://github.com/aurelia/framework",
     mainPackageName: "aurelia-framework",
-  },
-  {
-    id: "svelte5",
-    title: "Svelte 5 (preview)",
-    frameworkName: "Svelte",
-    isCurrentVersion: false,
-    img: "framework/svelte.svg",
-    eslint: {
-      files: ["**/TODO-THIS-IS-DISABLED-svelte5/*.svelte"],
-      parser: "svelte-eslint-parser",
-    },
-    playgroundURL: "https://svelte-5-preview.vercel.app/",
-    documentationURL: "https://svelte-5-preview.vercel.app/docs",
-    filesSorter(files) {
-      return sortAllFilenames(files, ["index.html", "app.js", "App.svelte"]);
-    },
-    repositoryLink: "https://github.com/sveltejs/svelte",
-    mainPackageName: "svelte",
   },
 ];
 
