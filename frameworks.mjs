@@ -179,13 +179,37 @@ const frameworks = [
     mainPackageName: "vue@^2",
   },
   {
-    id: "ember",
-    title: "Ember",
+    id: "emberPolaris",
+    title: "Ember Polaris (preview)",
+    frameworkName: "Ember",
+    isCurrentVersion: false,
+    img: "framework/ember.svg",
+    eslint: {
+      files: ["**/emberPolaris/**"],
+      plugins: ["ember"],
+      parser: "ember-eslint-parser",
+      extends: [
+        "eslint:recommended",
+        "plugin:ember/recommended",
+        "plugin:ember/recommended-gjs",
+      ],
+    },
+    playgroundURL: "http://new.emberjs.com",
+    documentationURL: "https://emberjs.com",
+    filesSorter(files) {
+      return sortAllFilenames(files, ["index.html", "app.hbs", "app.js"]);
+    },
+    repositoryLink: "https://github.com/emberjs/ember.js",
+    mainPackageName: "ember-source",
+  },
+  {
+    id: "emberOctane",
+    title: "Ember Octane",
     frameworkName: "Ember",
     isCurrentVersion: true,
     img: "framework/ember.svg",
     eslint: {
-      files: ["**/ember/**"],
+      files: ["**/emberOctane/**"],
       plugins: ["ember"],
       parser: "@babel/eslint-parser",
       extends: ["plugin:ember/recommended"],

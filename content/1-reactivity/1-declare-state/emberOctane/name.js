@@ -1,5 +1,5 @@
 import Component from "@glimmer/component";
 
-export default class CounterComponent extends Component {
+export default class NameComponent extends Component {
   name = "John";
 }

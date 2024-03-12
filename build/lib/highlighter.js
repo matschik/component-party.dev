@@ -5,7 +5,17 @@ import componentPartyShikiTheme from "./componentPartyShikiTheme.js";
 
 const highlighter = await getHighlighter({
   theme: componentPartyShikiTheme,
-  langs: ["javascript", "svelte", "html", "hbs", "tsx", "jsx", "vue", "marko"],
+  langs: [
+    "javascript",
+    "svelte",
+    "html",
+    "hbs",
+    "gjs",
+    "tsx",
+    "jsx",
+    "vue",
+    "marko",
+  ],
 });
 
 const md = MarkdownIt({
