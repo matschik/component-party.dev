@@ -81,6 +81,9 @@
   onDestroy(unsubscribeCurrentRoute);
 
   function handleInitialFrameworkIdsSelectedFromStorage({ useDefaults }) {
+    if (frameworkIdsSelectedInitialized) {
+      return;
+    }
     let frameworkIdsSelectedOnInit = [];
 
     const url = new URL(window.location.href);

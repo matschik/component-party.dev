@@ -42,3 +42,15 @@ describe("pages", () => {
     );
   });
 });
+
+// describe("sidenav links", () => {
+//   it("clicking sidenav links", () => {
+//     cy.visit("/?f=react");
+//     cy.get("main a[href='#reactivity']").click();
+//     cy.get("[data-framework-id-selected-list]").should(
+//       "have.attr",
+//       "data-framework-id-selected-list",
+//       "react"
+//     );
+//   });
+// })
