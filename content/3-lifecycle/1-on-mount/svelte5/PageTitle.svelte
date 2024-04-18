@@ -5,4 +5,4 @@
   });
 </script>
 
-<p>Page title is: {pageTitle}</p>
+<p>Page title: {pageTitle}</p>
