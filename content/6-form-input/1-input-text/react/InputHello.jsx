@@ -10,7 +10,7 @@ export default function InputHello() {
   return (
     <>
       <p>{text}</p>
-      <input value={text} onChange={handleChange} />
+      <input value={text} onInput={handleChange} />
     </>
   );
 }
