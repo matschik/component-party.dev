@@ -1,4 +1,4 @@
-import { component$, useStore, $ } from "@builder.io/qwik";
+import { component$, useSignal } from "@builder.io/qwik";
 
 export const colors = [
   { id: 1, text: "red" },
@@ -8,16 +8,17 @@ export const colors = [
 ];
 
 const ColorSelect = component$(() => {
-  const store = useStore({ selectedColorId: 2 });
-
-  const handleChange = $((event: Event) => {
-    store.selectedColorId = Number((event.target as HTMLInputElement).value);
-  });
+  const selectedColorId = useSignal("2");
 
   return (
-    <select value={store.selectedColorId} onChange$={handleChange}>
+    <select bind:value={selectedColorId}>
       {colors.map((color) => (
-        <option value={color.id} disabled={color.isDisabled}>
+        <option
+          key={color.id}
+          value={color.id}
+          disabled={color.isDisabled}
+          selected={`${color.id}` === selectedColorId.value}
+        >
           {color.text}
         </option>
       ))}
