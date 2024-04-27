@@ -1,16 +1,12 @@
-import { component$, useStore, $ } from "@builder.io/qwik";
+import { component$, useSignal } from "@builder.io/qwik";
 
 const InputHello = component$(() => {
-  const store = useStore({ text: "" });
-
-  const handleChange = $((event: InputEvent) => {
-    store.text = (event.target as HTMLInputElement).value;
-  });
+  const text = useSignal("");
 
   return (
     <>
-      <p>{store.text}</p>
-      <input value={store.text} onInput$={handleChange} />
+      <p>{text.value}</p>
+      <input bind:value={text} />
     </>
   );
 });
