@@ -1,27 +1,24 @@
-import { $, component$, useStore } from "@builder.io/qwik";
+import { $, component$, useComputed$, useSignal } from "@builder.io/qwik";
 
 export const TRAFFIC_LIGHTS = ["red", "orange", "green"];
 
-export const App = component$(() => {
-  const store = useStore({
-    lightIndex: 0,
-  });
+export const TrafficLight = component$(() => {
+  const lightIndex = useSignal(0);
 
-  const light = TRAFFIC_LIGHTS[store.lightIndex];
+  const light = useComputed$(() => TRAFFIC_LIGHTS[lightIndex.value]);
 
   const nextLight = $(() => {
-    store.lightIndex = (store.lightIndex + 1) % TRAFFIC_LIGHTS.length;
+    lightIndex.value = (lightIndex.value + 1) % TRAFFIC_LIGHTS.length;
   });
 
   return (
     <>
       <button onClick$={nextLight}>Next light</button>
-      <p>Light is: {light}</p>
+      <p>Light is: {light.value}</p>
       <p>
-        You must
-        {light === "red" && <span>STOP</span>}
-        {light === "orange" && <span>SLOW DOWN</span>}
-        {light === "green" && <span>GO</span>}
+        You must {light.value === "red" && <span>STOP</span>}
+        {light.value === "orange" && <span>SLOW DOWN</span>}
+        {light.value === "green" && <span>GO</span>}
       </p>
     </>
   );

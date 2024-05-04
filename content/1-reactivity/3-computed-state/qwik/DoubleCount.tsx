@@ -1,8 +1,8 @@
-import { component$, useStore } from "@builder.io/qwik";
+import { component$, useSignal, useComputed$ } from "@builder.io/qwik";
 
 export const DoubleCount = component$(() => {
-  const store = useStore({ count: 10 });
-  const doubleCount = store.count * 2;
+  const count = useSignal(10);
+  const doubleCount = useComputed$(() => count.value * 2);
 
-  return <div>{doubleCount}</div>;
+  return <div>{doubleCount.value}</div>;
 });
