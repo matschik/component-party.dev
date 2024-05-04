@@ -66,12 +66,14 @@
   aria-label={`Star ${REPOSITORY_PATH} on GitHub`}
   on:click={onButtonClick}
 >
-  <span class="space-x-2 flex items-center border-r border-[#373b43] px-2">
-    <GithubIcon class="size-[1.1rem]" />
-    <span>Star</span>
+  <span
+    class="flex items-center border-[#373b43] px-3 sm:space-x-2 sm:border-r"
+  >
+    <GithubIcon class="size-[1.3rem] sm:size-[1.1rem]" />
+    <span class="hidden sm:inline">Star</span>
   </span>
   {#if isFetchingStarCount || starCount !== 0}
-    <div class="h-full flex justify-center items-center pl-3 pr-3">
+    <div class="hidden h-full items-center justify-center px-3 sm:flex">
       {#if isFetchingStarCount && starCount === 0}
         <svg
           class="animate-spin size-4 mx-1"
