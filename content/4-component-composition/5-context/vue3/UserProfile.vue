@@ -1,6 +1,5 @@
 <script setup>
-import { inject } from "vue";
-const { user, updateUsername } = inject("user");
+import { user, updateUsername } from "./userStore";
 </script>
 
 <template>
@@ -8,7 +7,7 @@ const { user, updateUsername } = inject("user");
     <h2>My Profile</h2>
     <p>Username: {{ user.username }}</p>
     <p>Email: {{ user.email }}</p>
-    <button @click="() => updateUsername('Jane')">
+    <button @click="updateUsername('Jane')">
       Update username to Jane
     </button>
   </div>
