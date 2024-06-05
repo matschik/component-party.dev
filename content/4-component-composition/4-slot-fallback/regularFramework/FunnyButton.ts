@@ -17,5 +17,5 @@ export default (...children: any[]) =>
         outline: "0",
       },
     },
-    ...(children ?? ["No content found!"])
+    ...(children.length === 0 ? ["No content found!"]: children)
   );

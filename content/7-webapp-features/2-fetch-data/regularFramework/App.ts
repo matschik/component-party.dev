@@ -24,11 +24,13 @@ const NewResource = <T>(
 };
 
 export default () => {
-  const data = NewResource<
+  const data = NewResource<{
+    results:
     Array<{
       picture: { thumbnail: string };
       name: { first: string; last: string };
     }>
+  }
   >(
     new URL("https://randomuser.me/api/?results=3"),
     async (res) => await res.json()
@@ -38,7 +40,7 @@ export default () => {
       case "loading":
         return NewElement("p", {}, "Fetching users...");
       case "loaded":
-        return data.resource.value.map((user: any) =>
+        return data.resource.value.results.map((user: any) =>
           NewElement(
             "li",
             {},

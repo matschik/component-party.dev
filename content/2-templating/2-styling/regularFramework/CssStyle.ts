@@ -1,12 +1,13 @@
 import { NewElement } from "regular-framework/client";
-import "./CssStyle.module.css";
+// @ts-ignore
+import styles from "./CssStyle.module.css";
 
 export default () => {
   return [
     NewElement(
       "h1",
       {
-        class: "title",
+        class: styles.title,
       },
       "I am red"
     ),
