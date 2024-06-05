@@ -2,11 +2,11 @@ import { NewElement, NewSignal } from "regular-framework/client";
 
 const NewResource = <T>(
   url: URL,
-  action = async (v: Response): Promise<T> => v as T
+  action = async (v: Response): Promise<T> => v as any
 ) => {
   type State = "loading" | "loaded" | "error";
   const state = NewSignal<State>("loading");
-  const resource = NewSignal<T>(undefined);
+  const resource = NewSignal<T>({} as T);
 
   (async () => {
     const response = await fetch(url.href);
