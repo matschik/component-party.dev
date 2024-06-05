@@ -301,6 +301,24 @@ const frameworks = [
     mainPackageName: "mithril",
   },
   {
+    id: "regularFramework",
+    title: "RegularFramework",
+    frameworkName: "RegularFramework",
+    isCurrentVersion: true,
+    img: "framework/regularFramework.svg",
+    eslint: {
+      parser: "@typescript-eslint/parser",
+      files: ["**/regularFramework/**"],
+    },
+    playgroundURL: "",
+    documentationURL: "https://intzaaa.github.io/RegularFramework",
+    filesSorter(files) {
+      return sortAllFilenames(files, ["index.html", "app.js"]);
+    },
+    repositoryLink: "https://github.com/intzaaa/RegularFramework",
+    mainPackageName: "regular-framework",
+  },
+  {
     id: "aurelia2",
     title: "Aurelia 2",
     frameworkName: "Aurelia",
