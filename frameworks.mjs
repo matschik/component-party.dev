@@ -305,15 +305,17 @@ const frameworks = [
     title: "RegularFramework",
     frameworkName: "RegularFramework",
     isCurrentVersion: true,
+    // TODO: Add RegularFramework's logo
     img: "framework/regularFramework.svg",
     eslint: {
       parser: "@typescript-eslint/parser",
       files: ["**/regularFramework/**"],
     },
+    // TODO: Add RegularFramework's playground URL
     playgroundURL: "",
     documentationURL: "https://intzaaa.github.io/RegularFramework",
     filesSorter(files) {
-      return sortAllFilenames(files, ["index.html", "app.js"]);
+      return sortAllFilenames(files, ["index.html", "app.ts"]);
     },
     repositoryLink: "https://github.com/intzaaa/RegularFramework",
     mainPackageName: "regular-framework",
