@@ -29,3 +29,6 @@ dist-ssr
 src/generatedContent
 
 archive
+
+.git
+pnpm-lock.yaml
