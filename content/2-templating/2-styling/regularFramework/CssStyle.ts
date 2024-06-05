@@ -1,5 +1,4 @@
 import { NewElement } from "regular-framework/client";
-// @ts-ignore
 import styles from "./CssStyle.module.css";
 
 export default () => {
