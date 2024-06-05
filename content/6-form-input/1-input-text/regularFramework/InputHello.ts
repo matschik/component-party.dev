@@ -6,6 +6,7 @@ export default () => {
   return [
     NewElement("p", {}, text),
     NewElement("input", {
+      value: text,
       events(events) {
         if (events.type === "input")
           text.value = (events.target as HTMLInputElement).value;
