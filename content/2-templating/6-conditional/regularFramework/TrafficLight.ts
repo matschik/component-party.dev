@@ -17,16 +17,15 @@ export default () => {
       "Next Light"
     ),
     NewElement("p", {}, "Light is: ", () => TRAFFIC_LIGHTS[lightIndex.value]),
-    () =>
-      NewElement("p", {}, "You must ", () => {
-        switch (TRAFFIC_LIGHTS[lightIndex.value]) {
-          case "red":
-            return "stop".toUpperCase();
-          case "orange":
-            return "slow down".toUpperCase();
-          case "green":
-            return "go".toUpperCase();
-        }
-      }),
+    NewElement("p", {}, "You must ", () => {
+      switch (TRAFFIC_LIGHTS[lightIndex.value]) {
+        case "red":
+          return "STOP";
+        case "orange":
+          return "SLOW DOWN";
+        case "green":
+          return "GO";
+      }
+    }),
   ];
 };
