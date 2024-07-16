@@ -11,7 +11,7 @@ export default {
       this.time = new Date().toLocaleTimeString();
     }, 1000);
   },
-  beforeUnmount() {
+  beforeDestroy() {
     clearInterval(this.timer);
   },
 };
