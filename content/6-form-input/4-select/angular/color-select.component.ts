@@ -1,11 +1,8 @@
-import { Component } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import { Component, NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 
 @Component({
   selector: "app-color-select",
-  standalone: true,
-  imports: [CommonModule, FormsModule],
   template: `
     <select [(ngModel)]="selectedColorId">
       <option
@@ -28,3 +25,10 @@ export class ColorSelectComponent {
     { id: 4, text: "gray", isDisabled: true },
   ];
 }
+
+@NgModule({
+  declarations: [ColorSelectComponent],
+  imports: [FormsModule],
+  exports: [ColorSelectComponent],
+})
+export class ColorSelectModule {}

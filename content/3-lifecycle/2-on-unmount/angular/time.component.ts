@@ -1,20 +1,23 @@
-import { Component, OnDestroy } from "@angular/core";
+import { Component, NgModule, OnDestroy } from "@angular/core";
 
 @Component({
   selector: "app-time",
   template: `<p>Current time: {{ time }}</p>`,
 })
 export class TimeComponent implements OnDestroy {
-  time: string = new Date().toLocaleTimeString();
-  timer: number;
+  time = new Date().toLocaleTimeString();
 
-  constructor() {
-    this.timer = setInterval(() => {
-      this.time = new Date().toLocaleTimeString();
-    }, 1000);
-  }
+  timer = setInterval(() => {
+    this.time = new Date().toLocaleTimeString();
+  }, 1000);
 
   ngOnDestroy() {
     clearInterval(this.timer);
   }
 }
+
+@NgModule({
+  declarations: [TimeComponent],
+  exports: [TimeComponent],
+})
+export class TimeModule {}

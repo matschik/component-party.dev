@@ -1,4 +1,5 @@
-import { Component } from "@angular/core";
+import { Component, NgModule } from "@angular/core";
+import { UserprofileModule } from "./userprofile.component";
 
 @Component({
   selector: "app-root",
@@ -13,3 +14,10 @@ import { Component } from "@angular/core";
   `,
 })
 export class AppComponent {}
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [UserprofileModule],
+  bootstrap: [AppComponent],
+})
+export class AppModule {}

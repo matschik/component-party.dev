@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, NgModule } from "@angular/core";
 
 @Component({
   selector: "app-name",
@@ -7,3 +7,9 @@ import { Component } from "@angular/core";
 export class NameComponent {
   name = "John";
 }
+
+@NgModule({
+  declarations: [NameComponent],
+  exports: [NameComponent],
+})
+export class NameModule {}

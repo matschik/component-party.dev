@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, NgModule } from "@angular/core";
 
 @Component({
   selector: "app-cssstyle",
@@ -15,3 +15,9 @@ import { Component } from "@angular/core";
   ],
 })
 export class CssStyleComponent {}
+
+@NgModule({
+  declarations: [CssStyleComponent],
+  exports: [CssStyleComponent],
+})
+export class CssStyleModule {}

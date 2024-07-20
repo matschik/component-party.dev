@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, NgModule } from "@angular/core";
 
 @Component({
   selector: "app-counter",
@@ -14,3 +14,9 @@ export class CounterComponent {
     this.count++;
   }
 }
+
+@NgModule({
+  declarations: [CounterComponent],
+  exports: [CounterComponent],
+})
+export class CounterModule {}
