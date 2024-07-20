@@ -1,5 +1,4 @@
-import { Component } from "@angular/core";
-import { Observable } from "rxjs";
+import { Component, NgModule } from "@angular/core";
 import { UserService } from "./user.service";
 
 @Component({
@@ -30,3 +29,9 @@ export class UsersComponent {
     this.userService.loadUsers();
   }
 }
+
+@NgModule({
+  declarations: [UsersComponent],
+  exports: [UsersComponent],
+})
+export class UsersModule {}

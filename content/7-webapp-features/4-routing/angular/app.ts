@@ -1,5 +1,6 @@
-import { RouterModule } from "@angular/router";
 import { NgModule, Component } from "@angular/core";
+import { RouterModule } from "@angular/router";
+
 import { HomeComponent } from "./home.component";
 import { AboutComponent } from "./about.component";
 
@@ -16,13 +17,13 @@ import { AboutComponent } from "./about.component";
 export class AppComponent {}
 
 @NgModule({
+  declarations: [AppComponent, HomeComponent, AboutComponent],
   imports: [
     RouterModule.forRoot([
       { path: "home", component: HomeComponent },
       { path: "about", component: AboutComponent },
     ]),
   ],
-  declarations: [AppComponent, HomeComponent, AboutComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -1,4 +1,5 @@
-import { Component } from "@angular/core";
+import { Component, NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
 
 @Component({
   selector: "app-colors",
@@ -11,3 +12,10 @@ import { Component } from "@angular/core";
 export class ColorsComponent {
   colors = ["red", "green", "blue"];
 }
+
+@NgModule({
+  declarations: [ColorsComponent],
+  imports: [CommonModule],
+  exports: [ColorsComponent],
+})
+export class ColorsModule {}
