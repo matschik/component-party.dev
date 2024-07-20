@@ -26,7 +26,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Setup PNPM
-        uses: pnpm/action-setup@v2.2.1
+        uses: pnpm/action-setup@v4.0.0
       - run: pnpm install --frozen-lockfile
       - run: pnpm run lint
       - run: pnpm run build
