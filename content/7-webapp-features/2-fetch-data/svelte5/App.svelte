@@ -1,16 +1,17 @@
 <script>
-  import useFetchUsers from "./useFetchUsers.svelte.js";
+  let usersPromise = $state(fetchUsers());
 
-  const response = useFetchUsers();
+  async function fetchUsers() {
+    const response = await fetch("https://randomuser.me/api/?results=3");
+    return await response.json();
+  }
 </script>
 
-{#if response.isLoading}
+{#await usersPromise}
   <p>Fetching users...</p>
-{:else if response.error}
-  <p>An error occurred while fetching users</p>
-{:else if response.users}
+{:then { results: users }}
   <ul>
-    {#each response.users as user}
+    {#each users as user}
       <li>
         <img src={user.picture.thumbnail} alt="user" />
         <p>
@@ -20,4 +21,6 @@
       </li>
     {/each}
   </ul>
-{/if}
+{:catch}
+  <p>An error occurred while fetching users</p>
+{/await}
