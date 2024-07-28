@@ -1,7 +1,6 @@
-import { useState, createContext } from "react";
+import { useState } from "react";
 import UserProfile from "./UserProfile";
-
-export const UserContext = createContext();
+import { UserContext } from "./UserContext";
 
 export default function App() {
   // In a real app, you would fetch the user data from an API
