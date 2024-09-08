@@ -1,7 +1,7 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { useTemplateRef, onMounted } from "vue";
 
-const inputElement = ref();
+const inputElement = useTemplateRef("inputElement");
 
 onMounted(() => {
   inputElement.value.focus();
