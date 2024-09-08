@@ -51,7 +51,7 @@
     "codesandbox": "^2.2.3",
     "cypress": "^13.14.2",
     "ember-eslint-parser": "^0.5.0",
-    "eslint": "^9.10.0",
+    "eslint": "^8.57.0",
     "eslint-plugin-ember": "^12.2.0",
     "eslint-plugin-lit": "^1.15.0",
     "eslint-plugin-prettier": "^5.2.1",
