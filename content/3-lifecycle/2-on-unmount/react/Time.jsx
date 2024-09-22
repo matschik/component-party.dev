@@ -8,9 +8,7 @@ export default function Time() {
       setTime(new Date().toLocaleTimeString());
     }, 1000);
 
-    return () => {
-      clearInterval(timer);
-    };
+    return () => clearInterval(timer);
   }, []);
 
   return <p>Current time: {time}</p>;
