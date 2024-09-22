@@ -21,7 +21,7 @@ export default [
     playgroundURL: "https://svelte.dev/repl",
     documentationURL: "https://svelte.dev/",
     filesSorter(files) {
-      return sortAllFilenames(files, ["index.html", "app.js", "App.svelte"]);
+      return sortAllFilenames(files, ["index.html", "App.svelte"]);
     },
     repositoryLink: "https://github.com/sveltejs/svelte",
     mainPackageName: "svelte",
@@ -44,7 +44,7 @@ export default [
       },
     },
     playgroundURL: "https://codesandbox.io/s/mystifying-goldberg-6wx04b",
-    documentationURL: "https://reactjs.org/docs/getting-started.html",
+    documentationURL: "https://reac.org/docs/getting-started.html",
     filesSorter(files) {
       return sortAllFilenames(files, ["index.html", "App.jsx"]);
     },
