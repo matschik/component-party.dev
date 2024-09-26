@@ -1,7 +1,7 @@
 <script>
   import useFetchUsers from "./useFetchUsers.svelte.js";
 
-  const {isLoading, error, users} = useFetchUsers();
+  const {isLoading, error, users} = $derived(useFetchUsers());
 </script>
 
 {#if isLoading}
