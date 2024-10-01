@@ -5,12 +5,12 @@ export const App = component$(() => {
     time: new Date().toLocaleTimeString(),
   });
 
-  useVisibleTask$(() => {
+  useVisibleTask$(({ cleanup }) => {
     const timer = setInterval(() => {
       store.time = new Date().toLocaleTimeString();
     }, 1000);
 
-    return () => clearInterval(timer);
+    cleanup(() => clearInterval(timer));
   });
 
   return <p>Current time: {store.time}</p>;
