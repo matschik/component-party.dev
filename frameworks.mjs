@@ -49,7 +49,7 @@ const frameworks = [
     playgroundURL: "https://codesandbox.io/s/mystifying-goldberg-6wx04b",
     documentationURL: "https://reactjs.org/docs/getting-started.html",
     filesSorter(files) {
-      return sortAllFilenames(files, ["index.html", "App.jsx"]);
+      return sortAllFilenames(files, ["index.html", "main.jsx", "App.jsx"]);
     },
     repositoryLink: "https://github.com/facebook/react",
     mainPackageName: "react",
@@ -74,7 +74,7 @@ const frameworks = [
     playgroundURL: "https://sfc.vuejs.org",
     documentationURL: "https://vuejs.org/guide",
     filesSorter(files) {
-      return sortAllFilenames(files, ["index.html", "App.vue"]);
+      return sortAllFilenames(files, ["index.html", "main.js", "App.vue"]);
     },
     repositoryLink: "https://github.com/vuejs/core",
     mainPackageName: "vue",
@@ -173,7 +173,7 @@ const frameworks = [
     playgroundURL: "",
     documentationURL: "https://v2.vuejs.org",
     filesSorter(files) {
-      return sortAllFilenames(files, ["index.html", "App.vue"]);
+      return sortAllFilenames(files, ["index.html", "main.js", "App.vue"]);
     },
     repositoryLink: "https://github.com/vuejs/vue",
     mainPackageName: "vue@^2",
@@ -212,7 +212,7 @@ const frameworks = [
     playgroundURL: "https://playground.solidjs.com/",
     documentationURL: "https://www.solidjs.com/",
     filesSorter(files) {
-      return sortAllFilenames(files, ["index.html", "App.jsx"]);
+      return sortAllFilenames(files, ["index.html", "main.jsx", "App.jsx"]);
     },
     repositoryLink: "https://github.com/solidjs/solid",
     mainPackageName: "solid-js",
@@ -295,7 +295,7 @@ const frameworks = [
     playgroundURL: "https://codesandbox.io/s/q99qzov66",
     documentationURL: "https://mithril.js.org/",
     filesSorter(files) {
-      return sortAllFilenames(files, ["index.html", "app.js"]);
+      return sortAllFilenames(files, ["index.html", "main.js", "app.js"]);
     },
     repositoryLink: "https://github.com/MithrilJS/mithril.js",
     mainPackageName: "mithril",
@@ -325,7 +325,7 @@ const frameworks = [
       "https://stackblitz.com/edit/au2-conventions?file=src%2Fmy-app.html",
     documentationURL: "http://docs.aurelia.io",
     filesSorter(files) {
-      return sortAllFilenames(files, ["app.html", "app.ts"]);
+      return sortAllFilenames(files, ["index.html", "main.ts", "app.html", "app.ts"]);
     },
     repositoryLink: "https://github.com/aurelia/aurelia",
     mainPackageName: "aurelia",
@@ -357,7 +357,7 @@ const frameworks = [
     playgroundURL: "https://qwik.builder.io/playground",
     documentationURL: "https://qwik.builder.io/docs/overview",
     filesSorter(files) {
-      return sortAllFilenames(files, ["index.html", "App.tsx"]);
+      return sortAllFilenames(files, ["index.html", "main.tsx", "App.tsx"]);
     },
     repositoryLink: "https://github.com/BuilderIO/qwik",
     mainPackageName: "@builder.io/qwik",
@@ -403,7 +403,7 @@ const frameworks = [
     playgroundURL: "https://codesandbox.io/s/ppmy26opw7",
     documentationURL: "http://aurelia.io/docs/",
     filesSorter(files) {
-      return sortAllFilenames(files, ["app.html", "app.ts"]);
+      return sortAllFilenames(files, ["index.html", "main.ts", "app.html", "app.ts"]);
     },
     repositoryLink: "https://github.com/aurelia/framework",
     mainPackageName: "aurelia-framework",
