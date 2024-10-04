@@ -307,18 +307,15 @@
                 </h1>
 
                 {#each snippets.filter((s) => s.sectionId === section.sectionId) as snippet}
-                  <div
-                    id={section.sectionId + "." + snippet.snippetId}
-                    data-snippet-id={section.sectionId +
-                      "." +
-                      snippet.snippetId}
-                  >
+                  {@const snippetPathId =
+                    section.sectionId + "." + snippet.snippetId}
+                  <div id={snippetPathId} data-snippet-id={snippetPathId}>
                     <h2
                       class="header-anchor sticky py-2 top-[2.9531rem] z-10 bg-[var(--bg-color)]"
                     >
                       {snippet.title}
                       <a
-                        href={"#" + snippet.snippetId}
+                        href={"#" + snippetPathId}
                         aria-hidden="true"
                         tabindex="-1"
                       >
