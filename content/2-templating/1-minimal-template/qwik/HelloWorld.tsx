@@ -1,5 +1,3 @@
-import { component$ } from "@builder.io/qwik";
-
-export const HelloWorld = component$(() => {
+export const HelloWorld = () => {
   return <div>Hello World</div>;
-});
+};
