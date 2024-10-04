@@ -210,12 +210,14 @@
     >
       {#each [...frameworksSelected, ...frameworksNotSelected] as framework (framework.id)}
         <button
-          title={`Display ${framework.title}`}
+          title={frameworkIdsSelected.has(framework.id)
+            ? `Hide ${framework.title}`
+            : `Display ${framework.title}`}
           class={c(
-            "text-sm flex-shrink-0 rounded border border-gray-700 px-3 py-1 border-opacity-50 bg-gray-900 hover:bg-gray-800 transition-all mr-2",
+            "text-sm flex-shrink-0 rounded border px-3 py-1 bg-gray-900 hover:bg-gray-800 transition-all mr-2",
             frameworkIdsSelected.has(framework.id)
-              ? "border-blue-500"
-              : "opacity-70"
+              ? "border-gray-500"
+              : "opacity-70 border-opacity-50 border-gray-700"
           )}
           on:click={() => {
             toggleFrameworkId(framework.id);
@@ -289,7 +291,7 @@
           </div>
         {:else}
           <div
-            class="max-w-full prose prose-sm prose-invert prose-h1:font-semibold prose-h2:font-medium prose-h3:font-medium prose-h1:scroll-mt-[5rem] prose-pre:mt-0 prose-h2:scroll-mt-[5rem]"
+            class="max-w-full prose prose-sm prose-invert prose-h1:font-semibold prose-h2:font-medium prose-h3:font-medium prose-h1:scroll-mt-[5rem] prose-pre:mt-0 prose-pre:text-base prose-h2:scroll-mt-[5rem]"
           >
             {#each sections as section}
               <div class="px-6 md:px-14 lg:px-20 max-w-full">
