@@ -216,7 +216,7 @@
           class={c(
             "text-sm flex-shrink-0 rounded border px-3 py-1 bg-gray-900 hover:bg-gray-800 transition-all mr-2",
             frameworkIdsSelected.has(framework.id)
-              ? "border-gray-500"
+              ? "border-blue-900"
               : "opacity-70 border-opacity-50 border-gray-700"
           )}
           on:click={() => {
