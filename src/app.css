@@ -1,15 +1,7 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 @supports (backdrop-filter: blur(10px)) {
   [class*="bg-"].backdrop-blur {
     background-color: rgba(0, 0, 0, 0);
   }
-}
-
-.shiki {
-  @apply text-[1.05rem];
 }
 
 .no-scroll {
