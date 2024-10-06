@@ -1,5 +1,3 @@
-<svelte:options runes />
-
 <script>
   let {
     enter = "transition ease-out duration-100",

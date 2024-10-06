@@ -1,5 +1,3 @@
-<svelte:options runes />
-
 <script>
   import FRAMEWORKS from "../../frameworks.mjs";
 

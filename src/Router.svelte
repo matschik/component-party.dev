@@ -1,5 +1,3 @@
-<svelte:options runes />
-
 <script>
   import { onMount, onDestroy, setContext } from "svelte";
   import { writable } from "svelte/store";

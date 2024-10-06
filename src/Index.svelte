@@ -1,5 +1,3 @@
-<svelte:options runes />
-
 <script>
   import { SvelteMap, SvelteSet } from "svelte/reactivity";
   import c from "classnames";

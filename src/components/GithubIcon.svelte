@@ -1,5 +1,3 @@
-<svelte:options runes />
-
 <script>
   const props = $props();
 </script>

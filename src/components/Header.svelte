@@ -1,5 +1,3 @@
-<svelte:options runes />
-
 <script>
   import { notifications } from "./NotificationCenter.svelte";
   import GithubStarButton from "./GithubStarButton.svelte";

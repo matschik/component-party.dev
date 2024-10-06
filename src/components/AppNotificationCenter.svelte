@@ -1,5 +1,3 @@
-<svelte:options runes />
-
 <script>
   import NotificationCenter from "./NotificationCenter.svelte";
   import TransitionWithClass from "./TransitionWithClass.svelte";

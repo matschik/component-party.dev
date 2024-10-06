@@ -1,5 +1,3 @@
-<svelte:options runes />
-
 <script>
   import { onMount } from "svelte";
   import createLocaleStorage from "../lib/createLocaleStorage";

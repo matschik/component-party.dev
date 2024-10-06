@@ -325,7 +325,12 @@ const frameworks = [
       "https://stackblitz.com/edit/au2-conventions?file=src%2Fmy-app.html",
     documentationURL: "http://docs.aurelia.io",
     filesSorter(files) {
-      return sortAllFilenames(files, ["index.html", "main.ts", "app.html", "app.ts"]);
+      return sortAllFilenames(files, [
+        "index.html",
+        "main.ts",
+        "app.html",
+        "app.ts",
+      ]);
     },
     repositoryLink: "https://github.com/aurelia/aurelia",
     mainPackageName: "aurelia",
@@ -403,7 +408,12 @@ const frameworks = [
     playgroundURL: "https://codesandbox.io/s/ppmy26opw7",
     documentationURL: "http://aurelia.io/docs/",
     filesSorter(files) {
-      return sortAllFilenames(files, ["index.html", "main.ts", "app.html", "app.ts"]);
+      return sortAllFilenames(files, [
+        "index.html",
+        "main.ts",
+        "app.html",
+        "app.ts",
+      ]);
     },
     repositoryLink: "https://github.com/aurelia/framework",
     mainPackageName: "aurelia-framework",

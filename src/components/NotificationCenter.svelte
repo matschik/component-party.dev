@@ -1,5 +1,3 @@
-<svelte:options runes />
-
 <script module>
   import { writable } from "svelte/store";
   const { subscribe, update } = writable([]);

@@ -1,5 +1,3 @@
-<svelte:options runes />
-
 <script>
   import c from "classnames";
   import { notifications } from "./NotificationCenter.svelte";
