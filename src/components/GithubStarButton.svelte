@@ -4,13 +4,12 @@
   import GithubIcon from "./GithubIcon.svelte";
 
   const REPOSITORY_PATH = "matschik/component-party.dev";
-  const DURATION_2_MIN = 1000 * 60 * 2;
-  const STAR_COUNT_DURATION_EXPIRATION = DURATION_2_MIN;
+  const STAR_COUNT_EXPIRES_IN_MS = 1000 * 60 * 2;
 
   const starCountStorage = createLocaleStorage("github-star-count");
 
-  let starCount = 0;
-  let isFetchingStarCount = false;
+  let starCount = $state(0);
+  let isFetchingStarCount = $state(false);
 
   async function getRepoStarCount() {
     const starCountStorageData = starCountStorage.getJSON();
@@ -18,7 +17,7 @@
       starCount = starCountStorageData.value;
       if (
         starCountStorageData.fetchedAt >
-        Date.now() - STAR_COUNT_DURATION_EXPIRATION
+        Date.now() - STAR_COUNT_EXPIRES_IN_MS
       ) {
         return;
       }
@@ -64,16 +63,16 @@
   href={`https://github.com/${REPOSITORY_PATH}`}
   target="_blank"
   aria-label={`Star ${REPOSITORY_PATH} on GitHub`}
-  on:click={onButtonClick}
+  onclick={onButtonClick}
 >
-  <span
-    class="flex items-center border-[#373b43] px-3 sm:space-x-2 sm:border-r"
-  >
+  <span class="flex items-center px-3 sm:space-x-2">
     <GithubIcon class="size-[1.3rem] sm:size-[1.1rem]" />
     <span class="hidden sm:inline">Star</span>
   </span>
   {#if isFetchingStarCount || starCount !== 0}
-    <div class="hidden h-full items-center justify-center px-3 sm:flex">
+    <div
+      class="hidden h-full items-center justify-center px-3 sm:flex border-[#373b43] sm:border-l"
+    >
       {#if isFetchingStarCount && starCount === 0}
         <svg
           class="animate-spin size-4 mx-1"

@@ -1,13 +1,13 @@
 import { defineConfig } from "vite";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
-import sveltePreprocess from "svelte-preprocess";
 import fs from "node:fs/promises";
 import path from "node:path";
 import { Eta } from "eta";
 import { minify as htmlMinify } from "html-minifier-terser";
 import FRAMEWORKS from "./frameworks.mjs";
 import pluginGenerateFrameworkContent from "./build/generateContentVitePlugin.js";
-
+import UnoCSS from "unocss/vite";
+import { svelteInspector } from "@sveltejs/vite-plugin-svelte-inspector";
 // @TODO: sitemap
 
 const footerNavigation = [
@@ -69,6 +69,7 @@ export default defineConfig({
   plugins: [
     pluginGenerateFrameworkContent(),
     svelte(),
+    svelteInspector(), // https://github.com/sveltejs/vite-plugin-svelte/blob/main/docs/inspector.md
     generateHtmlPagesPlugin([
       ...footerLinks.map((link) => ({
         outputPath: `${link.url}.html`,
@@ -84,13 +85,9 @@ export default defineConfig({
         templateData: templateDataDefaults,
       },
     ]),
+    UnoCSS(),
   ],
   ignore: ["content"],
-  preprocess: [
-    sveltePreprocess({
-      postcss: true,
-    }),
-  ],
 });
 
 async function generateHtmlPagesPlugin(pages) {
@@ -98,7 +95,7 @@ async function generateHtmlPagesPlugin(pages) {
 
   const template = {
     footer: await fs.readFile(
-      path.resolve(__dirname, "build/template/footer.eta"),
+      path.resolve(__dirname, "build/template/footer.html"),
       "utf8"
     ),
   };

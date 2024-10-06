@@ -1,10 +1,9 @@
 <script>
   import FRAMEWORKS from "../../frameworks.mjs";
 
-  export let id;
-  export let size = 20;
+  let { id, size = 20 } = $props();
 
-  const framework = FRAMEWORKS.find((f) => f.id === id);
+  const framework = $derived(FRAMEWORKS.find((f) => f.id === id));
 
   const baseURL = import.meta.env.DEV
     ? "/"

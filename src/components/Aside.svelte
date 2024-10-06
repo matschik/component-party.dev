@@ -4,7 +4,7 @@
   import { onMount, onDestroy } from "svelte";
   import throttle from "../lib/throttle.js";
 
-  let largestVisibleSnippetId = null;
+  let largestVisibleSnippetId = $state(null);
 
   function getLargestElement(elements) {
     let largestArea = 0;
@@ -84,13 +84,14 @@
           </a>
           <ul>
             {#each snippets.filter((s) => s.sectionId === section.sectionId) as snippet}
+              {@const snippetPathId =
+                section.sectionId + "." + snippet.snippetId}
               <li>
                 <a
-                  href={`#${section.sectionId + "." + snippet.snippetId}`}
+                  href={`#${snippetPathId}`}
                   class={c(
                     "inline-block w-full py-1.5 px-4 text-white font-medium hover:bg-gray-800 rounded hover:opacity-100 transition-opacity",
-                    section.sectionId + "." + snippet.snippetId ===
-                      largestVisibleSnippetId
+                    snippetPathId === largestVisibleSnippetId
                       ? "bg-gray-800 opacity-70"
                       : "opacity-50"
                   )}

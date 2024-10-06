@@ -1,10 +1,9 @@
 <script>
-  import { LinkIcon } from "heroiconsvelte/24/outline";
-  import { notifications } from "@veljs/svelte/NotificationCenter.svelte";
+  import { notifications } from "./NotificationCenter.svelte";
   import GithubStarButton from "./GithubStarButton.svelte";
   import copyToClipboard from "../lib/copyToClipboard.js";
 
-  export let frameworksSelected = [];
+  let { frameworksSelected = [] } = $props();
 
   function copyShareLink() {
     if (frameworksSelected.length === 0) {
@@ -37,9 +36,9 @@
             type="button"
             class="flex items-center space-x-2 rounded border border-gray-700 border-opacity-50 bg-gray-900 px-3 py-1 text-sm text-white transition-all hover:bg-gray-800"
             aria-label="Copy framework selection link"
-            on:click={copyShareLink}
+            onclick={copyShareLink}
           >
-            <LinkIcon class="size-[1.3rem] sm:size-[1.1rem]" />
+            <div class="i-heroicons:link size-[1.3rem] sm:size-[1.1rem]"></div>
             <span class="hidden sm:inline">Share</span>
           </button>
         {/if}

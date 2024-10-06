@@ -1,16 +1,17 @@
 <script>
   import c from "classnames";
-  import { notifications } from "@veljs/svelte/NotificationCenter.svelte";
-  import { ClipboardDocumentIcon } from "heroiconsvelte/24/outline";
+  import { notifications } from "./NotificationCenter.svelte";
   import copyToClipboard from "../lib/copyToClipboard.js";
 
-  export let files = [];
+  const { files = [] } = $props();
 
-  let codeSnippetEl;
+  let codeSnippetEl = $state();
 
-  let filenameSelected = files.length > 0 && files[0]?.fileName;
-  $: snippet =
-    filenameSelected && files.find((s) => s.fileName === filenameSelected);
+  let filenameSelected = $state(files.length > 0 && files[0]?.fileName);
+
+  const snippet = $derived(
+    filenameSelected && files.find((s) => s.fileName === filenameSelected)
+  );
 
   function copySnippet() {
     if (codeSnippetEl) {
@@ -26,10 +27,10 @@
   {#each files as file (file.fileName)}
     <button
       class={c(
-        "bg-[#0d1117] py-1.5 px-3 font-medium flex-shrink-0 text-xs rounded-t inline-block",
+        "bg-[#0d1117] py-1.5 px-3 flex-shrink-0 text-xs rounded-t inline-block",
         filenameSelected !== file.fileName && "opacity-60"
       )}
-      on:click={() => {
+      onclick={() => {
         filenameSelected = file.fileName;
       }}
     >
@@ -39,7 +40,7 @@
 </div>
 
 <div class="relative group">
-  <div bind:this={codeSnippetEl} class="bg-[#0d1117]">
+  <div bind:this={codeSnippetEl} class="bg-[#0d1117] px-4 py-3 text-sm">
     {@html snippet.contentHtml}
   </div>
   <div
@@ -50,9 +51,9 @@
         class="px-1.5 bg-[#0d1117] py-1 rounded border opacity-60 hover:opacity-90"
         title="Copy to clipboard"
         aria-label="Copy to clipboard"
-        on:click={copySnippet}
+        onclick={copySnippet}
       >
-        <ClipboardDocumentIcon class="h-5 w-5" />
+        <div class="i-heroicons:clipboard-document size-5"></div>
       </button>
     </div>
   </div>
