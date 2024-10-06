@@ -15,9 +15,28 @@ const frameworks = [
     frameworkName: "Svelte",
     isCurrentVersion: true,
     img: "framework/svelte.svg",
-    eslint: {
-      files: ["**/svelte4/*.svelte"],
-      parser: "svelte-eslint-parser",
+    async getEslintConfigs() {
+      const js = await importDefault("@eslint/js");
+      const svelteParser = await importDefault("svelte-eslint-parser");
+      const globalsBrowser = (await importDefault("globals")).browser;
+
+      return [
+        {
+          files: ["content/**/svelte4/**/*.svelte"],
+          languageOptions: {
+            parser: svelteParser,
+          },
+        },
+        {
+          files: ["content/**/svelte4/**/*.js"],
+          rules: js.configs.recommended.rules,
+          languageOptions: {
+            globals: {
+              ...globalsBrowser,
+            },
+          },
+        },
+      ];
     },
     playgroundURL: "https://svelte.dev/repl",
     documentationURL: "https://svelte.dev/",
@@ -34,7 +53,7 @@ const frameworks = [
     isCurrentVersion: true,
     img: "framework/react.svg",
     eslint: {
-      files: ["**/react/*.jsx", "**/react/*.tsx"],
+      files: ["content/**/react/*.jsx"],
       extends: [
         "eslint:recommended",
         "plugin:react/recommended",
@@ -61,7 +80,7 @@ const frameworks = [
     isCurrentVersion: true,
     img: "framework/vue.svg",
     eslint: {
-      files: ["**/vue3/*.vue"],
+      files: ["content/**/vue3/*.vue"],
       env: {
         "vue/setup-compiler-macros": true,
       },
@@ -87,7 +106,7 @@ const frameworks = [
     img: "framework/angular.svg",
     eslint: [
       {
-        files: ["**/angular/**"],
+        files: ["content/**/angular/**"],
         parserOptions: {
           project: ["tsconfig.app.json"],
           createDefaultProgram: true,
@@ -113,7 +132,7 @@ const frameworks = [
         },
       },
       {
-        files: ["**/angular/*.html"],
+        files: ["content/**/angular/*.html"],
         extends: ["plugin:@angular-eslint/template/recommended"],
         rules: {
           /**
@@ -142,11 +161,19 @@ const frameworks = [
     frameworkName: "Lit",
     isCurrentVersion: true,
     img: "framework/lit.svg",
-    eslint: {
-      files: ["**/lit/**"],
-      plugins: ["lit"],
-      parser: "@babel/eslint-parser",
-      extends: ["plugin:lit/recommended"],
+    async getEslintConfigs() {
+      const { configs } = await import("eslint-plugin-lit");
+      const babelParser = await importDefault("@babel/eslint-parser");
+
+      return [
+        {
+          ...configs["flat/recommended"],
+          files: ["content/**/lit/**.js"],
+          languageOptions: {
+            parser: babelParser,
+          },
+        },
+      ];
     },
     playgroundURL: "https://lit.dev/playground",
     documentationURL: "https://lit.dev",
@@ -163,7 +190,7 @@ const frameworks = [
     isCurrentVersion: false,
     img: "framework/vue.svg",
     eslint: {
-      files: ["**/vue2/*.vue"],
+      files: ["content/**/vue2/*.vue"],
       extends: ["eslint:recommended", "plugin:vue/recommended"],
       rules: {
         "vue/multi-word-component-names": "off",
@@ -184,11 +211,20 @@ const frameworks = [
     frameworkName: "Ember",
     isCurrentVersion: true,
     img: "framework/ember.svg",
-    eslint: {
-      files: ["**/emberOctane/**"],
-      plugins: ["ember"],
-      parser: "@babel/eslint-parser",
-      extends: ["plugin:ember/recommended"],
+    async getEslintConfigs() {
+      const filepaths = ["content/**/emberOctane/**/*.js"];
+      const eslintPluginEmberConfigRecommended = await importDefault(
+        "eslint-plugin-ember/configs/recommended"
+      );
+
+      return [
+        {
+          ...eslintPluginEmberConfigRecommended[1],
+          plugins: eslintPluginEmberConfigRecommended[0].plugins,
+          files: filepaths,
+          rules: eslintPluginEmberConfigRecommended[2].rules,
+        },
+      ];
     },
     playgroundURL: "https://ember-twiddle.com",
     documentationURL: "https://emberjs.com",
@@ -205,7 +241,7 @@ const frameworks = [
     isCurrentVersion: true,
     img: "framework/solid.svg",
     eslint: {
-      files: ["**/solid/*.jsx"],
+      files: ["content/**/solid/*.jsx"],
       plugins: ["solid"],
       extends: ["eslint:recommended", "plugin:solid/recommended"],
     },
@@ -224,7 +260,7 @@ const frameworks = [
     isCurrentVersion: true,
     img: "framework/alpine.svg",
     eslint: {
-      files: ["**/alpine/**"],
+      files: ["content/**/alpine/**"],
       extends: ["eslint:recommended"],
     },
     playgroundURL: "https://codesandbox.io/s/7br3q8",
@@ -241,9 +277,38 @@ const frameworks = [
     frameworkName: "Svelte",
     isCurrentVersion: false,
     img: "framework/svelte.svg",
-    eslint: {
-      files: ["**/TODO-THIS-IS-DISABLED-svelte5/*.svelte"],
-      parser: "svelte-eslint-parser",
+    async getEslintConfigs() {
+      const js = await importDefault("@eslint/js");
+      const globalsBrowser = (await importDefault("globals")).browser;
+      const eslintPluginSvelte = await importDefault("eslint-plugin-svelte");
+      const svelteParser = await importDefault("svelte-eslint-parser");
+
+      const eslintPluginSvelteConfig =
+        eslintPluginSvelte.configs["flat/recommended"];
+
+      return [
+        {
+          ...eslintPluginSvelteConfig[1],
+          files: ["content/**/svelte5/**/*.svelte"],
+          plugins: eslintPluginSvelteConfig[0].plugins,
+          rules: eslintPluginSvelteConfig[2].rules,
+        },
+        {
+          files: ["content/**/svelte5/**/*.svelte.js"],
+          languageOptions: {
+            parser: svelteParser,
+          },
+        },
+        {
+          files: ["content/**/svelte5/**/*.js"],
+          rules: js.configs.recommended.rules,
+          languageOptions: {
+            globals: {
+              ...globalsBrowser,
+            },
+          },
+        },
+      ];
     },
     playgroundURL: "https://svelte-5-preview.vercel.app/",
     documentationURL: "https://svelte-5-preview.vercel.app/docs",
@@ -259,15 +324,20 @@ const frameworks = [
     frameworkName: "Ember",
     isCurrentVersion: false,
     img: "framework/ember.svg",
-    eslint: {
-      files: ["**/emberPolaris/**"],
-      plugins: ["ember"],
-      parser: "ember-eslint-parser",
-      extends: [
-        "eslint:recommended",
-        "plugin:ember/recommended",
-        "plugin:ember/recommended-gjs",
-      ],
+    async getEslintConfigs() {
+      const filepaths = ["content/**/emberPolaris/**/*.{gjs,gts,js}"];
+      const eslintPluginEmberConfigRecommended = await importDefault(
+        "eslint-plugin-ember/configs/recommended"
+      );
+
+      return [
+        {
+          ...eslintPluginEmberConfigRecommended[1],
+          plugins: eslintPluginEmberConfigRecommended[0].plugins,
+          files: filepaths,
+          rules: eslintPluginEmberConfigRecommended[2].rules,
+        },
+      ];
     },
     playgroundURL: "http://new.emberjs.com",
     documentationURL: "https://emberjs.com",
@@ -289,7 +359,7 @@ const frameworks = [
         es2021: true,
         node: true,
       },
-      files: ["**/mithril/**"],
+      files: ["content/**/mithril/**"],
       extends: ["eslint:recommended"],
     },
     playgroundURL: "https://codesandbox.io/s/q99qzov66",
@@ -318,7 +388,7 @@ const frameworks = [
           jsx: true,
         },
       },
-      files: ["**/aurelia2/**"],
+      files: ["content/**/aurelia2/**"],
       extends: ["eslint:recommended"],
     },
     playgroundURL:
@@ -353,7 +423,7 @@ const frameworks = [
           jsx: true,
         },
       },
-      files: ["**/qwik/**"],
+      files: ["content/**/qwik/**"],
       extends: ["eslint:recommended", "plugin:qwik/recommended"],
       rules: {
         "qwik/valid-lexical-scope": "off",
@@ -402,7 +472,7 @@ const frameworks = [
           jsx: true,
         },
       },
-      files: ["**/aurelia1/**"],
+      files: ["content/**/aurelia1/**"],
       extends: ["eslint:recommended"],
     },
     playgroundURL: "https://codesandbox.io/s/ppmy26opw7",
@@ -427,6 +497,11 @@ export function matchFrameworkId(id) {
       (framework.isCurrentVersion &&
         framework.frameworkName.toLowerCase() === id)
   );
+}
+
+async function importDefault(moduleName) {
+  const module = await import(moduleName);
+  return module.default;
 }
 
 export default frameworks;
