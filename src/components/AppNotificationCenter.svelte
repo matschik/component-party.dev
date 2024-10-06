@@ -1,7 +1,8 @@
+<svelte:options runes />
+
 <script>
-  import NotificationCenter from "@veljs/svelte/NotificationCenter.svelte";
-  import TransitionWithClass from "@veljs/svelte/TransitionWithClass.svelte";
-  import { CheckCircleIcon, XMarkIcon } from "heroiconsvelte/24/outline";
+  import NotificationCenter from "./NotificationCenter.svelte";
+  import TransitionWithClass from "./TransitionWithClass.svelte";
 </script>
 
 <NotificationCenter zIndex={100} let:notification>
@@ -18,7 +19,7 @@
     <div class="p-4">
       <div class="flex items-start">
         <div class="flex-shrink-0">
-          <CheckCircleIcon class="h-6 w-6 text-green-400" />
+          <div class="i-heroicons:check-circle size-6 text-green-400"></div>
         </div>
         <div class="ml-3 w-0 flex-1 pt-0.5">
           <p class="text-sm font-medium">
@@ -28,10 +29,10 @@
         <div class="ml-4 flex flex-shrink-0">
           <button
             class="inline-flex rounded-md bg-transparent focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-            on:click={() => notification.close()}
+            onclick={() => notification.close()}
           >
             <span class="sr-only">Close</span>
-            <XMarkIcon class="h-5 w-5" />
+            <div class="i-heroicons:x-mark size-5"></div>
           </button>
         </div>
       </div>

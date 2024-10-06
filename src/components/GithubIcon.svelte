@@ -1,5 +1,11 @@
+<svelte:options runes />
+
+<script>
+  const props = $props();
+</script>
+
 <svg
-  {...$$props}
+  {...props}
   xmlns="http://www.w3.org/2000/svg"
   aria-hidden="true"
   focusable="false"

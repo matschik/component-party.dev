@@ -1,3 +1,5 @@
+<svelte:options runes />
+
 <script>
   import Router from "./Router.svelte";
   import Index from "./Index.svelte";

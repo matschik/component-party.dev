@@ -1,9 +1,11 @@
+<svelte:options runes />
+
 <script>
   import { onMount, onDestroy, setContext } from "svelte";
   import { writable } from "svelte/store";
   import { createRouter } from "radix3";
 
-  export let routes = [];
+  let { routes = [] } = $props();
 
   const router = createRouter({
     routes: routes.reduce((acc, route) => {
@@ -26,10 +28,11 @@
         currentRoute.set(routePayload);
         window.history.pushState(state, "", path);
       } else if (typeof routePayload.component === "function") {
-        routePayload.component().then((module) => {
-          currentRoute.set({ ...routePayload, component: module.default });
-          window.history.pushState(state, "", path);
+        currentRoute.set({
+          ...routePayload,
+          component: routePayload.component,
         });
+        window.history.pushState(state, "", path);
       } else {
         console.error("Invalid route component");
       }
@@ -69,4 +72,6 @@
   });
 </script>
 
-<svelte:component this={$currentRoute.component} />
+{#if $currentRoute.component}
+  {@render $currentRoute.component()}
+{/if}
