@@ -40,7 +40,10 @@
 </div>
 
 <div class="relative group">
-  <div bind:this={codeSnippetEl} class="bg-[#0d1117] px-4 py-3 text-sm">
+  <div
+    bind:this={codeSnippetEl}
+    class="bg-[#0d1117] px-4 py-3 text-sm overflow-auto"
+  >
     {@html snippet.contentHtml}
   </div>
   <div
