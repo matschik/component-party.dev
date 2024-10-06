@@ -35,7 +35,7 @@
 </script>
 
 <script>
-  let { zIndex = 20, children } = $props();
+  let { zIndex = 20, notificationContainer } = $props();
 
   function dismissAfter(_, notification) {
     notification.dismissAfter &&
@@ -50,7 +50,7 @@
   <ul class="notifications-list space-y-4">
     {#each $notifications as notification (notification)}
       <li use:dismissAfter={notification}>
-        {@render children()}
+        {@render notificationContainer(notification)}
       </li>
     {/each}
   </ul>
