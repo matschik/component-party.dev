@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, NgModule, OnInit } from "@angular/core";
 
 @Component({
   selector: "app-pagetitle",
@@ -11,3 +11,9 @@ export class PagetitleComponent implements OnInit {
     this.pageTitle = document.title;
   }
 }
+
+@NgModule({
+  declarations: [PagetitleComponent],
+  exports: [PagetitleComponent],
+})
+export class PagetitleModule {}

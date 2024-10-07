@@ -1,11 +1,8 @@
-import { Component } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import { Component, NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 
 @Component({
   selector: "app-pick-pill",
-  standalone: true,
-  imports: [CommonModule, FormsModule],
   template: `
     <div>Picked: {{ picked }}</div>
 
@@ -19,3 +16,10 @@ import { FormsModule } from "@angular/forms";
 export class PickPillComponent {
   picked = "red";
 }
+
+@NgModule({
+  declarations: [PickPillComponent],
+  imports: [FormsModule],
+  exports: [PickPillComponent],
+})
+export class PickPillModule {}

@@ -15,11 +15,17 @@ const footerNavigation = [
     title: "Most Popular Frameworks",
     links: [
       { name: "React vs Vue", url: "/compare/react-vs-vue" },
-      { name: "React vs Angular", url: "/compare/react-vs-angular" },
+      {
+        name: "React vs Angular",
+        url: "/compare/react-vs-angular-renaissance",
+      },
       { name: "Vue vs React", url: "/compare/vue-vs-react" },
-      { name: "Vue vs Angular", url: "/compare/vue-vs-angular" },
-      { name: "Angular vs React", url: "/compare/angular-vs-react" },
-      { name: "Angular vs Vue", url: "/compare/angular-vs-vue" },
+      { name: "Vue vs Angular", url: "/compare/vue-vs-angular-renaissance" },
+      {
+        name: "Angular vs React",
+        url: "/compare/angular-renaissance-vs-react",
+      },
+      { name: "Angular vs Vue", url: "/compare/angular-renaissance-vs-vue" },
     ],
   },
   {
@@ -29,8 +35,14 @@ const footerNavigation = [
       { name: "React vs Solid", url: "/compare/react-vs-solid" },
       { name: "Vue vs Svelte", url: "/compare/vue-vs-svelte" },
       { name: "Vue vs Solid", url: "/compare/vue-vs-solid" },
-      { name: "Angular vs Svelte", url: "/compare/angular-vs-svelte" },
-      { name: "Angular vs Solid", url: "/compare/angular-vs-solid" },
+      {
+        name: "Angular vs Svelte",
+        url: "/compare/angular-renaissance-vs-svelte",
+      },
+      {
+        name: "Angular vs Solid",
+        url: "/compare/angular-renaissance-vs-solid",
+      },
     ],
   },
   {
@@ -40,6 +52,10 @@ const footerNavigation = [
       {
         name: "Aurelia 1 vs Aurelia 2",
         url: "/compare/aurelia1-vs-aurelia2",
+      },
+      {
+        name: "Angular vs Angular Renaissance",
+        url: "/compare/angular-vs-angularRenaissance",
       },
     ],
   },
