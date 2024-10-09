@@ -1,5 +1,6 @@
 import { LitElement, html } from "lit";
 import { customElement, state } from "lit/decorators.js";
+import { repeat } from "lit/directives/repeat";
 
 @customElement("color-select")
 export class ColorSelect extends LitElement {
@@ -20,7 +21,9 @@ export class ColorSelect extends LitElement {
   render() {
     return html`
       <select @change=${this.handleChange}>
-        ${this.colors.map(
+        ${repeat(
+          this.colors,
+          (color) => color.id,
           (color) =>
             html`<option
               value=${color.id}
