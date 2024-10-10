@@ -15,29 +15,6 @@ const frameworks = [
     frameworkName: "Svelte",
     isCurrentVersion: true,
     img: "framework/svelte.svg",
-    async getEslintConfigs() {
-      const js = await importDefault("@eslint/js");
-      const svelteParser = await importDefault("svelte-eslint-parser");
-      const globalsBrowser = (await importDefault("globals")).browser;
-
-      return [
-        {
-          files: ["content/**/svelte4/**/*.svelte"],
-          languageOptions: {
-            parser: svelteParser,
-          },
-        },
-        {
-          files: ["content/**/svelte4/**/*.js"],
-          rules: js.configs.recommended.rules,
-          languageOptions: {
-            globals: {
-              ...globalsBrowser,
-            },
-          },
-        },
-      ];
-    },
     playgroundURL: "https://svelte.dev/repl",
     documentationURL: "https://svelte.dev/",
     filesSorter(files) {
@@ -161,20 +138,6 @@ const frameworks = [
     frameworkName: "Lit",
     isCurrentVersion: true,
     img: "framework/lit.svg",
-    async getEslintConfigs() {
-      const { configs } = await import("eslint-plugin-lit");
-      const babelParser = await importDefault("@babel/eslint-parser");
-
-      return [
-        {
-          ...configs["flat/recommended"],
-          files: ["content/**/lit/**.js"],
-          languageOptions: {
-            parser: babelParser,
-          },
-        },
-      ];
-    },
     playgroundURL: "https://lit.dev/playground",
     documentationURL: "https://lit.dev",
     filesSorter(files) {
@@ -211,21 +174,6 @@ const frameworks = [
     frameworkName: "Ember",
     isCurrentVersion: true,
     img: "framework/ember.svg",
-    async getEslintConfigs() {
-      const filepaths = ["content/**/emberOctane/**/*.js"];
-      const eslintPluginEmberConfigRecommended = await importDefault(
-        "eslint-plugin-ember/configs/recommended"
-      );
-
-      return [
-        {
-          ...eslintPluginEmberConfigRecommended[1],
-          plugins: eslintPluginEmberConfigRecommended[0].plugins,
-          files: filepaths,
-          rules: eslintPluginEmberConfigRecommended[2].rules,
-        },
-      ];
-    },
     playgroundURL: "https://ember-twiddle.com",
     documentationURL: "https://emberjs.com",
     filesSorter(files) {
@@ -277,39 +225,6 @@ const frameworks = [
     frameworkName: "Svelte",
     isCurrentVersion: false,
     img: "framework/svelte.svg",
-    async getEslintConfigs() {
-      const js = await importDefault("@eslint/js");
-      const globalsBrowser = (await importDefault("globals")).browser;
-      const eslintPluginSvelte = await importDefault("eslint-plugin-svelte");
-      const svelteParser = await importDefault("svelte-eslint-parser");
-
-      const eslintPluginSvelteConfig =
-        eslintPluginSvelte.configs["flat/recommended"];
-
-      return [
-        {
-          ...eslintPluginSvelteConfig[1],
-          files: ["content/**/svelte5/**/*.svelte"],
-          plugins: eslintPluginSvelteConfig[0].plugins,
-          rules: eslintPluginSvelteConfig[2].rules,
-        },
-        {
-          files: ["content/**/svelte5/**/*.svelte.js"],
-          languageOptions: {
-            parser: svelteParser,
-          },
-        },
-        {
-          files: ["content/**/svelte5/**/*.js"],
-          rules: js.configs.recommended.rules,
-          languageOptions: {
-            globals: {
-              ...globalsBrowser,
-            },
-          },
-        },
-      ];
-    },
     playgroundURL: "https://svelte-5-preview.vercel.app/",
     documentationURL: "https://svelte-5-preview.vercel.app/docs",
     filesSorter(files) {
@@ -324,21 +239,6 @@ const frameworks = [
     frameworkName: "Ember",
     isCurrentVersion: false,
     img: "framework/ember.svg",
-    async getEslintConfigs() {
-      const filepaths = ["content/**/emberPolaris/**/*.{gjs,gts,js}"];
-      const eslintPluginEmberConfigRecommended = await importDefault(
-        "eslint-plugin-ember/configs/recommended"
-      );
-
-      return [
-        {
-          ...eslintPluginEmberConfigRecommended[1],
-          plugins: eslintPluginEmberConfigRecommended[0].plugins,
-          files: filepaths,
-          rules: eslintPluginEmberConfigRecommended[2].rules,
-        },
-      ];
-    },
     playgroundURL: "http://new.emberjs.com",
     documentationURL: "https://emberjs.com",
     filesSorter(files) {
@@ -500,7 +400,7 @@ export function matchFrameworkId(id) {
 }
 
 async function importDefault(moduleName) {
-  const module = await import(moduleName);
+  const module = await import(/* @vite-ignore */ moduleName);
   return module.default;
 }
 
