@@ -3,7 +3,7 @@
   import { notifications } from "./NotificationCenter.svelte";
   import copyToClipboard from "../lib/copyToClipboard.js";
 
-  const { files = [] } = $props();
+  const { files = [], snippetEditHref } = $props();
 
   let codeSnippetEl = $state();
 
@@ -50,13 +50,22 @@
     class="absolute hidden group-hover:block transition-all top-0 right-0 mt-2 mr-2"
   >
     <div class="flex items-center space-x-3">
+      <a
+        href={snippetEditHref}
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Edit on Github"
+        class="px-1.5 bg-[#0d1117] py-1 rounded border opacity-60 hover:opacity-90"
+      >
+        <div class="i-heroicons:pencil size-4"></div>
+      </a>
       <button
         class="px-1.5 bg-[#0d1117] py-1 rounded border opacity-60 hover:opacity-90"
         title="Copy to clipboard"
         aria-label="Copy to clipboard"
         onclick={copySnippet}
       >
-        <div class="i-heroicons:clipboard-document size-5"></div>
+        <div class="i-heroicons:clipboard-document size-4"></div>
       </button>
     </div>
   </div>

@@ -361,28 +361,13 @@
                                         </button>
                                       </a>
                                     {/if}
-                                    <a
-                                      href={frameworkSnippet.snippetEditHref}
-                                      target="_blank"
-                                      rel="noreferrer"
-                                      aria-label="Edit on Github"
-                                    >
-                                      <button
-                                        class="opacity-50 hover:opacity-100 bg-gray-800 hover:bg-gray-700 py-1 px-1.5 rounded transition-all"
-                                        title="Edit on Github"
-                                        aria-label="Edit on Github"
-                                      >
-                                        <div
-                                          class="i-heroicons:pencil size-4"
-                                        ></div>
-                                      </button>
-                                    </a>
                                   </div>
                                 </div>
                                 <div class="mt-2">
                                   {#if frameworkSnippet.files.length > 0}
                                     <CodeEditor
                                       files={frameworkSnippet.files}
+                                      snippetEditHref={frameworkSnippet.snippetEditHref}
                                     />
                                   {:else}
                                     <div
