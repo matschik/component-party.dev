@@ -1,4 +1,5 @@
-import { Component } from "@angular/core";
+import { Component, NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
 
 const TRAFFIC_LIGHTS = ["red", "orange", "green"];
 
@@ -28,3 +29,10 @@ export class TrafficlightComponent {
     this.lightIndex = (this.lightIndex + 1) % TRAFFIC_LIGHTS.length;
   }
 }
+
+@NgModule({
+  declarations: [TrafficlightComponent],
+  imports: [CommonModule],
+  exports: [TrafficlightComponent],
+})
+export class TrafficlightModule {}

@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, NgModule } from "@angular/core";
 
 @Component({
   selector: "app-userprofile",
@@ -15,3 +15,9 @@ export class UserprofileComponent {
   @Input() favouriteColors: string[] = [];
   @Input() isAvailable: boolean = false;
 }
+
+@NgModule({
+  declarations: [UserprofileComponent],
+  exports: [UserprofileComponent],
+})
+export class UserprofileModule {}

@@ -1,4 +1,5 @@
-import { Component } from "@angular/core";
+import { Component, NgModule } from "@angular/core";
+import { AnswerButtonModule } from "./answer-button.component";
 
 @Component({
   selector: "app-root",
@@ -22,3 +23,10 @@ export class AppComponent {
     this.isHappy = false;
   }
 }
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [AnswerButtonModule],
+  bootstrap: [AppComponent],
+})
+export class AppModule {}
