@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@iconify-json/heroicons": "^1.2.1",
+    "angular-eslint": "^18.3.1",
     "classnames": "^2.5.1",
     "radix3": "^1.1.2"
   },
@@ -42,7 +43,6 @@
     "@shikijs/markdown-it": "^1.22.0",
     "@sveltejs/vite-plugin-svelte": "4.0.0-next.7",
     "@sveltejs/vite-plugin-svelte-inspector": "3.0.0-next.3",
-    "@typescript-eslint/eslint-plugin": "^8.8.1",
     "@typescript-eslint/parser": "^8.8.1",
     "@unocss/preset-icons": "^0.63.4",
     "@unocss/preset-typography": "^0.63.4",
@@ -85,6 +85,7 @@
     "svelte": "5.0.0-next.262",
     "tslib": "^2.7.0",
     "typescript": "^5.6.3",
+    "typescript-eslint": "^8.8.1",
     "unocss": "^0.63.4",
     "vite": "^5.4.8",
     "vite-plugin-html": "^3.2.2",

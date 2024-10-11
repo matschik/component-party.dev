@@ -10,8 +10,8 @@ import { Component, Input } from "@angular/core";
   `,
 })
 export class UserprofileComponent {
-  @Input() name: string = "";
-  @Input() age: number = 0;
+  @Input() name = "";
+  @Input() age = 0;
   @Input() favouriteColors: string[] = [];
-  @Input() isAvailable: boolean = false;
+  @Input() isAvailable = false;
 }

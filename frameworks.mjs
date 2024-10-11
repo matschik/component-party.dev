@@ -56,17 +56,6 @@ const frameworks = [
     frameworkName: "Vue",
     isCurrentVersion: true,
     img: "framework/vue.svg",
-    eslint: {
-      files: ["content/**/vue3/*.vue"],
-      env: {
-        "vue/setup-compiler-macros": true,
-      },
-      extends: ["eslint:recommended", "plugin:vue/vue3-recommended"],
-      rules: {
-        "vue/multi-word-component-names": "off",
-        "vue/singleline-html-element-content-newline": "off",
-      },
-    },
     playgroundURL: "https://sfc.vuejs.org",
     documentationURL: "https://vuejs.org/guide",
     filesSorter(files) {
@@ -152,14 +141,6 @@ const frameworks = [
     frameworkName: "Vue",
     isCurrentVersion: false,
     img: "framework/vue.svg",
-    eslint: {
-      files: ["content/**/vue2/*.vue"],
-      extends: ["eslint:recommended", "plugin:vue/recommended"],
-      rules: {
-        "vue/multi-word-component-names": "off",
-        "vue/singleline-html-element-content-newline": "off",
-      },
-    },
     playgroundURL: "",
     documentationURL: "https://v2.vuejs.org",
     filesSorter(files) {
@@ -188,11 +169,6 @@ const frameworks = [
     frameworkName: "Solid",
     isCurrentVersion: true,
     img: "framework/solid.svg",
-    eslint: {
-      files: ["content/**/solid/*.jsx"],
-      plugins: ["solid"],
-      extends: ["eslint:recommended", "plugin:solid/recommended"],
-    },
     playgroundURL: "https://playground.solidjs.com/",
     documentationURL: "https://www.solidjs.com/",
     filesSorter(files) {
@@ -207,10 +183,6 @@ const frameworks = [
     frameworkName: "Alpine",
     isCurrentVersion: true,
     img: "framework/alpine.svg",
-    eslint: {
-      files: ["content/**/alpine/**"],
-      extends: ["eslint:recommended"],
-    },
     playgroundURL: "https://codesandbox.io/s/7br3q8",
     documentationURL: "https://alpinejs.dev/start-here",
     filesSorter(files) {
@@ -343,9 +315,6 @@ const frameworks = [
     frameworkName: "Marko",
     isCurrentVersion: true,
     img: "framework/marko.svg",
-    eslint: {
-      files: ["!**"], // Marko’s linter/prettyprinter doesn’t use eslint
-    },
     playgroundURL: "https://markojs.com/playground/",
     documentationURL: "https://markojs.com/docs/getting-started/",
     filesSorter(files) {
