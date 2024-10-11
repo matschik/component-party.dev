@@ -1,9 +1,9 @@
 export class Time {
   time: string = new Date().toLocaleTimeString();
-  timer: any;
+  timer: number;
 
   constructor() {
-    this.timer = setInterval(() => {
+    this.timer = window.setInterval(() => {
       this.time = new Date().toLocaleTimeString();
     }, 1000);
   }

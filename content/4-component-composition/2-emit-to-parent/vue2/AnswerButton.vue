@@ -13,8 +13,12 @@ export default {
 
 <template>
   <div>
-    <button @click="clickYes">YES</button>
+    <button @click="clickYes">
+      YES
+    </button>
 
-    <button @click="clickNo">NO</button>
+    <button @click="clickNo">
+      NO
+    </button>
   </div>
 </template>
