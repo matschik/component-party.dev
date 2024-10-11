@@ -1,0 +1,13 @@
+<div>
+  <h1>Welcome back, {{ user.username }}</h1>
+  <ng-template
+    *ngTemplateOutlet="UserContext; context: { user: user, updateUsername }"
+  ></ng-template>
+</div>
+
+<ng-template #UserContext let-user="user">
+  <app-user-profile
+    [user]="user"
+    [updateUsername]="updateUsername"
+  ></app-user-profile>
+</ng-template>
