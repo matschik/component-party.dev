@@ -570,7 +570,7 @@ How do we solve this ? Developers love having framework overview by examples. It
 </details><details>
         <summary>
             <img width="18" height="18" src="public/framework/svelte.svg" />
-            <b>Svelte 5 (preview)</b>
+            <b>Svelte 5</b>
             <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/100" /></summary>
 
 - [x] Reactivity
