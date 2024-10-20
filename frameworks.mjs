@@ -237,7 +237,7 @@ const frameworks = [
   },
   {
     id: "svelte5",
-    title: "Svelte 5 (preview)",
+    title: "Svelte 5",
     frameworkName: "Svelte",
     isCurrentVersion: false,
     img: "framework/svelte.svg",
