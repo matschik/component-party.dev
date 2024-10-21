@@ -10,7 +10,7 @@ export class XApp extends LitElement {
       name="John"
       age="20"
       .favouriteColors=${["green", "blue", "red"]}
-      isavailable
+      isAvailable
     ></user-profile>`;
   }
 }
