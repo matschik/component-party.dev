@@ -51,7 +51,6 @@
   const siteTitle = "Component Party";
 
   const unsubscribeCurrentRoute = currentRoute.subscribe(($currentRoute) => {
-    window.scrollTo(0, 0);
     isVersusFrameworks = false;
     document.title = siteTitle;
 
