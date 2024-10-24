@@ -113,7 +113,7 @@
     }
 
     if (useDefaults && frameworkIdsSelectedOnInit.length === 0) {
-      frameworkIdsSelectedOnInit = ["react", "svelte4"];
+      frameworkIdsSelectedOnInit = ["react", "svelte5"];
     }
 
     frameworkIdsSelected = new SvelteSet(frameworkIdsSelectedOnInit);
