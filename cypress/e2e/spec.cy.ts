@@ -5,7 +5,7 @@ describe("Initial frameworks", () => {
     cy.get("[data-framework-id-selected-list]").should(
       "have.attr",
       "data-framework-id-selected-list",
-      "react,svelte4"
+      "react,svelte5"
     );
   });
 
