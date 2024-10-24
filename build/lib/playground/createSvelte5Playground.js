@@ -4,7 +4,12 @@ export default function createSvelte5Playground() {
   const BASE_URL = "https://svelte.dev/playground?version=5#";
 
   async function fromContentByFilename(contentByFilename) {
-    const files = Object.keys(contentByFilename).map((filename, index) => {
+    const filenames = Object.keys(contentByFilename);
+    if (filenames.some((f) => f.includes(".html"))) {
+      return;
+    }
+
+    const files = filenames.map((filename, index) => {
       const contents = contentByFilename[filename];
       const name = index === 0 ? "App.svelte" : path.parse(filename).base;
       return {
