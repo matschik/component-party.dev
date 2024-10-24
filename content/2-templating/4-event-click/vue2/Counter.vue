@@ -16,6 +16,8 @@ export default {
 <template>
   <div>
     <p>Counter: {{ count }}</p>
-    <button @click="incrementCount">+1</button>
+    <button @click="incrementCount">
+      +1
+    </button>
   </div>
 </template>

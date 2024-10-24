@@ -15,10 +15,6 @@ const frameworks = [
     frameworkName: "Svelte",
     isCurrentVersion: true,
     img: "framework/svelte.svg",
-    eslint: {
-      files: ["**/svelte4/*.svelte"],
-      parser: "svelte-eslint-parser",
-    },
     playgroundURL: "https://svelte.dev/repl",
     documentationURL: "https://svelte.dev/",
     filesSorter(files) {
@@ -34,7 +30,7 @@ const frameworks = [
     isCurrentVersion: true,
     img: "framework/react.svg",
     eslint: {
-      files: ["**/react/*.jsx", "**/react/*.tsx"],
+      files: ["content/**/react/*.jsx"],
       extends: [
         "eslint:recommended",
         "plugin:react/recommended",
@@ -60,17 +56,6 @@ const frameworks = [
     frameworkName: "Vue",
     isCurrentVersion: true,
     img: "framework/vue.svg",
-    eslint: {
-      files: ["**/vue3/*.vue"],
-      env: {
-        "vue/setup-compiler-macros": true,
-      },
-      extends: ["eslint:recommended", "plugin:vue/vue3-recommended"],
-      rules: {
-        "vue/multi-word-component-names": "off",
-        "vue/singleline-html-element-content-newline": "off",
-      },
-    },
     playgroundURL: "https://sfc.vuejs.org",
     documentationURL: "https://vuejs.org/guide",
     filesSorter(files) {
@@ -87,7 +72,7 @@ const frameworks = [
     img: "framework/angular.svg",
     eslint: [
       {
-        files: ["**/angular/**"],
+        files: ["content/**/angular/**"],
         parserOptions: {
           project: ["tsconfig.app.json"],
           createDefaultProgram: true,
@@ -113,7 +98,7 @@ const frameworks = [
         },
       },
       {
-        files: ["**/angular/*.html"],
+        files: ["content/**/angular/*.html"],
         extends: ["plugin:@angular-eslint/template/recommended"],
         rules: {
           /**
@@ -142,12 +127,6 @@ const frameworks = [
     frameworkName: "Lit",
     isCurrentVersion: true,
     img: "framework/lit.svg",
-    eslint: {
-      files: ["**/lit/**"],
-      plugins: ["lit"],
-      parser: "@babel/eslint-parser",
-      extends: ["plugin:lit/recommended"],
-    },
     playgroundURL: "https://lit.dev/playground",
     documentationURL: "https://lit.dev",
     filesSorter(files) {
@@ -162,14 +141,6 @@ const frameworks = [
     frameworkName: "Vue",
     isCurrentVersion: false,
     img: "framework/vue.svg",
-    eslint: {
-      files: ["**/vue2/*.vue"],
-      extends: ["eslint:recommended", "plugin:vue/recommended"],
-      rules: {
-        "vue/multi-word-component-names": "off",
-        "vue/singleline-html-element-content-newline": "off",
-      },
-    },
     playgroundURL: "",
     documentationURL: "https://v2.vuejs.org",
     filesSorter(files) {
@@ -184,12 +155,6 @@ const frameworks = [
     frameworkName: "Ember",
     isCurrentVersion: true,
     img: "framework/ember.svg",
-    eslint: {
-      files: ["**/emberOctane/**"],
-      plugins: ["ember"],
-      parser: "@babel/eslint-parser",
-      extends: ["plugin:ember/recommended"],
-    },
     playgroundURL: "https://ember-twiddle.com",
     documentationURL: "https://emberjs.com",
     filesSorter(files) {
@@ -204,11 +169,6 @@ const frameworks = [
     frameworkName: "Solid",
     isCurrentVersion: true,
     img: "framework/solid.svg",
-    eslint: {
-      files: ["**/solid/*.jsx"],
-      plugins: ["solid"],
-      extends: ["eslint:recommended", "plugin:solid/recommended"],
-    },
     playgroundURL: "https://playground.solidjs.com/",
     documentationURL: "https://www.solidjs.com/",
     filesSorter(files) {
@@ -223,10 +183,6 @@ const frameworks = [
     frameworkName: "Alpine",
     isCurrentVersion: true,
     img: "framework/alpine.svg",
-    eslint: {
-      files: ["**/alpine/**"],
-      extends: ["eslint:recommended"],
-    },
     playgroundURL: "https://codesandbox.io/s/7br3q8",
     documentationURL: "https://alpinejs.dev/start-here",
     filesSorter(files) {
@@ -241,10 +197,6 @@ const frameworks = [
     frameworkName: "Svelte",
     isCurrentVersion: false,
     img: "framework/svelte.svg",
-    eslint: {
-      files: ["**/TODO-THIS-IS-DISABLED-svelte5/*.svelte"],
-      parser: "svelte-eslint-parser",
-    },
     playgroundURL: "https://svelte-5-preview.vercel.app/",
     documentationURL: "https://svelte-5-preview.vercel.app/docs",
     filesSorter(files) {
@@ -259,16 +211,6 @@ const frameworks = [
     frameworkName: "Ember",
     isCurrentVersion: false,
     img: "framework/ember.svg",
-    eslint: {
-      files: ["**/emberPolaris/**"],
-      plugins: ["ember"],
-      parser: "ember-eslint-parser",
-      extends: [
-        "eslint:recommended",
-        "plugin:ember/recommended",
-        "plugin:ember/recommended-gjs",
-      ],
-    },
     playgroundURL: "http://new.emberjs.com",
     documentationURL: "https://emberjs.com",
     filesSorter(files) {
@@ -289,7 +231,7 @@ const frameworks = [
         es2021: true,
         node: true,
       },
-      files: ["**/mithril/**"],
+      files: ["content/**/mithril/**"],
       extends: ["eslint:recommended"],
     },
     playgroundURL: "https://codesandbox.io/s/q99qzov66",
@@ -318,7 +260,7 @@ const frameworks = [
           jsx: true,
         },
       },
-      files: ["**/aurelia2/**"],
+      files: ["content/**/aurelia2/**"],
       extends: ["eslint:recommended"],
     },
     playgroundURL:
@@ -353,7 +295,7 @@ const frameworks = [
           jsx: true,
         },
       },
-      files: ["**/qwik/**"],
+      files: ["content/**/qwik/**"],
       extends: ["eslint:recommended", "plugin:qwik/recommended"],
       rules: {
         "qwik/valid-lexical-scope": "off",
@@ -373,9 +315,6 @@ const frameworks = [
     frameworkName: "Marko",
     isCurrentVersion: true,
     img: "framework/marko.svg",
-    eslint: {
-      files: ["!**"], // Marko’s linter/prettyprinter doesn’t use eslint
-    },
     playgroundURL: "https://markojs.com/playground/",
     documentationURL: "https://markojs.com/docs/getting-started/",
     filesSorter(files) {
@@ -402,7 +341,7 @@ const frameworks = [
           jsx: true,
         },
       },
-      files: ["**/aurelia1/**"],
+      files: ["content/**/aurelia1/**"],
       extends: ["eslint:recommended"],
     },
     playgroundURL: "https://codesandbox.io/s/ppmy26opw7",
@@ -427,6 +366,11 @@ export function matchFrameworkId(id) {
       (framework.isCurrentVersion &&
         framework.frameworkName.toLowerCase() === id)
   );
+}
+
+async function importDefault(moduleName) {
+  const module = await import(/* @vite-ignore */ moduleName);
+  return module.default;
 }
 
 export default frameworks;
