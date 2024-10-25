@@ -635,9 +635,8 @@ We believe that deep understanding should precede optimization, enabling learner
 4.  In `frameworks.mjs`, add a new entry with SVG link and ESLint configuration
 5.  If the framework needs a language syntax highlight, add it to the call to `getHighlighter`’s `langs` argument in `build/lib/generateContent.js`
 6.  To make a playground link:
-    1. Add a `create${FRAMEWORK}Playground.js` file in `build/lib/playground`.
-    2. That file should export a function that returns an object with a `fromContentByFilename` method that accepts an object of filepath keys and file content values, then returns an absolute URL to a framework’s online REPL with those files loaded.
-    3. Register its export in `build/lib/playground/index.js`
+    1. In file `build/lib/playgroundUrlByFramework.js`, add your framework id.
+    2. The method accepts an object of filepath keys and file content values, then returns a playground URL to the framework’s online REPL with those files loaded.
 
 ## 🧑‍💻 Contributors
 

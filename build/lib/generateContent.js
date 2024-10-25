@@ -3,7 +3,7 @@ import { packageDirectory } from "pkg-dir";
 import path from "node:path";
 import kebabCase from "lodash.kebabcase";
 import FRAMEWORKS from "../../frameworks.mjs";
-import frameworkPlayground from "./playground/index.js";
+import playgroundUrlByFramework from "./playgroundUrlByFramework.js";
 import prettier from "prettier";
 import {
   highlightAngularComponent,
@@ -207,7 +207,7 @@ async function writeJsFile(filepath, jsCode) {
 }
 
 async function generatePlaygroundURL(frameworkId, files, title) {
-  const frameworkIdPlayground = frameworkPlayground[frameworkId];
+  const frameworkIdPlayground = playgroundUrlByFramework[frameworkId];
   if (!frameworkIdPlayground) {
     return;
   }
@@ -221,10 +221,7 @@ async function generatePlaygroundURL(frameworkId, files, title) {
       return acc;
     }, {});
 
-  const playgroundURL = await frameworkIdPlayground.fromContentByFilename(
-    contentByFilename,
-    title
-  );
+  const playgroundURL = await frameworkIdPlayground(contentByFilename, title);
 
   return playgroundURL;
 }
