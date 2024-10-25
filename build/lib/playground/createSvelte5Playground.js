@@ -1,7 +1,7 @@
 import path from "node:path";
 
 export default function createSvelte5Playground() {
-  const BASE_URL = "https://svelte.dev/playground?version=5#";
+  const BASE_URL = "https://svelte.dev/playground/untitled?version=5#";
 
   async function fromContentByFilename(contentByFilename) {
     const filenames = Object.keys(contentByFilename);
