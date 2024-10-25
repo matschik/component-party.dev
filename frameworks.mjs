@@ -139,7 +139,7 @@ const frameworks = [
   {
     id: "angularRenaissance",
     title: "Angular Renaissance",
-    frameworkName: "Angular Renaissance",
+    frameworkName: "Angular",
     isCurrentVersion: true,
     img: "framework/angular-renaissance.svg",
     eslint: [
