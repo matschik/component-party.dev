@@ -3,7 +3,7 @@ import path from "node:path";
 export default function createSvelte5Playground() {
   const BASE_URL = "https://svelte.dev/playground/untitled?version=5#";
 
-  async function fromContentByFilename(contentByFilename) {
+  async function fromContentByFilename(contentByFilename, title) {
     const filenames = Object.keys(contentByFilename);
     if (filenames.some((f) => f.includes(".html"))) {
       return;
@@ -21,7 +21,9 @@ export default function createSvelte5Playground() {
       };
     });
 
-    const hash = await compress_and_encode_text(JSON.stringify({ files }));
+    const payload = { title, files };
+
+    const hash = await compress_and_encode_text(JSON.stringify(payload));
 
     const url = `${BASE_URL}${hash}`;
 
