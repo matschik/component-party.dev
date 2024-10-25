@@ -124,7 +124,7 @@ How do we solve this ? Developers love having framework overview by examples. It
   <summary>
       <img width="18" height="18" src="public/framework/angular.svg" />
       <b>Angular</b>
-      <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/96" />
+      <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/100" />
   </summary>
   * [x] Reactivity
    * [x] Declare state
@@ -140,12 +140,12 @@ How do we solve this ? Developers love having framework overview by examples. It
 * [x] Lifecycle
    * [x] On mount
    * [x] On unmount
-* [ ] Component composition
+* [x] Component composition
    * [x] Props
    * [x] Emit to parent
    * [x] Slot
    * [x] Slot fallback
-   * [ ] Context
+   * [x] Context
 * [x] Form input
    * [x] Input text
    * [x] Checkbox
@@ -154,6 +154,42 @@ How do we solve this ? Developers love having framework overview by examples. It
 * [x] Webapp features
    * [x] Render app
    * [x] Fetch data
+
+</details>
+<details>
+  <summary>
+      <img width="18" height="18" src="public/framework/angular-renaissance.svg" />
+      <b>Angular Renaissance</b>
+      <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/0" />
+  </summary>
+  * [ ] Reactivity
+   * [ ] Declare state
+   * [ ] Update state
+   * [ ] Computed state
+* [ ] Templating
+   * [ ] Minimal template
+   * [ ] Styling
+   * [ ] Loop
+   * [ ] Event click
+   * [ ] Dom ref
+   * [ ] Conditional
+* [ ] Lifecycle
+   * [ ] On mount
+   * [ ] On unmount
+* [ ] Component composition
+   * [ ] Props
+   * [ ] Emit to parent
+   * [ ] Slot
+   * [ ] Slot fallback
+   * [ ] Context
+* [ ] Form input
+   * [ ] Input text
+   * [ ] Checkbox
+   * [ ] Radio
+   * [ ] Select
+* [ ] Webapp features
+   * [ ] Render app
+   * [ ] Fetch data
 
 </details>
 <details>
