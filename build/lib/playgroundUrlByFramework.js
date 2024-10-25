@@ -21,33 +21,19 @@ export default {
     const url = generateURLFromData(data);
     return url;
   },
-  svelte5: async (contentByFilename, title) => {
-    const BASE_URL = "https://svelte.dev/playground/untitled?version=5#";
-
-    const filenames = Object.keys(contentByFilename);
-    if (filenames.some((f) => f.includes(".html"))) {
-      return;
-    }
-
-    const files = filenames.map((filename, index) => {
-      const contents = contentByFilename[filename];
-      const name = index === 0 ? "App.svelte" : nodePath.parse(filename).base;
-      return {
-        type: "file",
-        name,
-        basename: name,
-        contents,
-        text: true,
-      };
+  svelte4: async (contentByFilename, title) => {
+    return generateSveltePlaygroundURL({
+      version: 4,
+      contentByFilename,
+      title,
     });
-
-    const payload = { title, files };
-
-    const hash = await compress_and_encode_text(JSON.stringify(payload));
-
-    const url = `${BASE_URL}${hash}`;
-
-    return url;
+  },
+  svelte5: async (contentByFilename, title) => {
+    return generateSveltePlaygroundURL({
+      version: 5,
+      contentByFilename,
+      title,
+    });
   },
   alpine: (contentByFilename) => {
     const BASE_URL =
@@ -118,6 +104,39 @@ export default {
     return BASE_URL + compressToURL(JSON.stringify(data));
   },
 };
+
+async function generateSveltePlaygroundURL({
+  version,
+  contentByFilename,
+  title,
+}) {
+  const BASE_URL = `https://svelte.dev/playground/untitled?version=${version}#`;
+
+  const filenames = Object.keys(contentByFilename);
+  if (filenames.some((f) => f.includes(".html"))) {
+    return;
+  }
+
+  const files = filenames.map((filename, index) => {
+    const contents = contentByFilename[filename];
+    const name = index === 0 ? "App.svelte" : nodePath.parse(filename).base;
+    return {
+      type: "file",
+      name,
+      basename: name,
+      contents,
+      text: true,
+    };
+  });
+
+  const payload = { title, files };
+
+  const hash = await compress_and_encode_text(JSON.stringify(payload));
+
+  const url = `${BASE_URL}${hash}`;
+
+  return url;
+}
 
 // method `compress_and_encode_text` from https://github.com/sveltejs/svelte.dev/blob/main/apps/svelte.dev/src/routes/(authed)/playground/%5Bid%5D/gzip.js
 async function compress_and_encode_text(input) {
