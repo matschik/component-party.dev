@@ -110,9 +110,10 @@ export default async function generateContent() {
               (f) => f.id === frameworkId
             );
             frameworkSnippet.files = filesSorter(frameworkSnippet.files);
-            const playgroundURL = generatePlaygroundURL(
+            const playgroundURL = await generatePlaygroundURL(
               frameworkId,
-              frameworkSnippet.files
+              frameworkSnippet.files,
+              title
             );
 
             if (playgroundURL) {
@@ -205,7 +206,7 @@ async function writeJsFile(filepath, jsCode) {
   await fs.writeFile(filepath, codeFormatted);
 }
 
-function generatePlaygroundURL(frameworkId, files) {
+async function generatePlaygroundURL(frameworkId, files, title) {
   const frameworkIdPlayground = frameworkPlayground[frameworkId];
   if (!frameworkIdPlayground) {
     return;
@@ -220,8 +221,10 @@ function generatePlaygroundURL(frameworkId, files) {
       return acc;
     }, {});
 
-  const playgroundURL =
-    frameworkIdPlayground.fromContentByFilename(contentByFilename);
+  const playgroundURL = await frameworkIdPlayground.fromContentByFilename(
+    contentByFilename,
+    title
+  );
 
   return playgroundURL;
 }
