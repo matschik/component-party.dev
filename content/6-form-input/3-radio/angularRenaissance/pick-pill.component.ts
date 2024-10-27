@@ -6,7 +6,7 @@ import { FormsModule } from "@angular/forms";
   imports: [FormsModule],
   selector: "app-pick-pill",
   template: `
-    <div>Picked: {{ picked }}</div>
+    <div>Picked: {{ picked() }}</div>
 
     <input id="blue-pill" type="radio" value="blue" [(ngModel)]="picked" />
     <label for="blue-pill">Blue pill</label>

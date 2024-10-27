@@ -1,14 +1,14 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, signal } from "@angular/core";
 
 @Component({
   standalone: true,
   selector: "app-pagetitle",
-  template: `<p>Page title: {{ pageTitle }}</p>`,
+  template: `<p>Page title: {{ pageTitle() }}</p>`,
 })
 export class PagetitleComponent implements OnInit {
-  pageTitle = "";
+  pageTitle = signal("");
 
   ngOnInit() {
-    this.pageTitle = document.title;
+    this.pageTitle.set(document.title);
   }
 }

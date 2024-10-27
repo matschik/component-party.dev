@@ -6,7 +6,7 @@ import { FormsModule } from "@angular/forms";
   imports: [FormsModule],
   selector: "app-input-hello",
   template: `
-    <p>{{ text }}</p>
+    <p>{{ text() }}</p>
     <input [(ngModel)]="text" />
   `,
 })
