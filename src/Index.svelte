@@ -144,15 +144,29 @@
     saveFrameworkIdsSelectedOnStorage();
   }
 
+  let snippetsByFrameworkIdLoading = $state(new SvelteSet());
+  let snippetsByFrameworkIdError = $state(new SvelteSet());
+
   $effect(async () => {
-    for (const frameworkId of [...frameworkIdsSelected]) {
-      if (!snippetsByFrameworkId.has(frameworkId)) {
-        const frameworkSnippets = (
+    Promise.all(
+      [...frameworkIdsSelected].map(async (frameworkId) => {
+        if (!snippetsByFrameworkId.has(frameworkId)) {
+          snippetsByFrameworkIdError.delete(frameworkId);
+          snippetsByFrameworkIdLoading.add(frameworkId);
+
           await snippetsImporterByFrameworkId[frameworkId]()
-        ).default;
-        snippetsByFrameworkId.set(frameworkId, frameworkSnippets);
-      }
-    }
+            .then(({ default: frameworkSnippets }) => {
+              snippetsByFrameworkId.set(frameworkId, frameworkSnippets);
+            })
+            .catch(() => {
+              snippetsByFrameworkIdError.add(frameworkId);
+            })
+            .finally(() => {
+              snippetsByFrameworkIdLoading.delete(frameworkId);
+            });
+        }
+      })
+    );
   });
 
   const MAX_FRAMEWORK_NB_INITIAL_DISPLAYED = 10;
@@ -332,16 +346,21 @@
                             {@const frameworkSnippet = snippetsByFrameworkId
                               .get(frameworkId)
                               ?.find((s) => s.snippetId === snippet.snippetId)}
-                            {#if frameworkSnippet}
-                              <div style:margin-top="0rem" style:order="0">
-                                <div
-                                  class="flex justify-between items-center space-x-3"
+                            {@const frameworkSnippetIsLoading =
+                              snippetsByFrameworkIdLoading.has(frameworkId)}
+                            {@const frameworkSnippetIsError =
+                              snippetsByFrameworkIdError.has(frameworkId)}
+
+                            <div style:margin-top="0rem" style:order="0">
+                              <div
+                                class="flex justify-between items-center space-x-3"
+                              >
+                                <h3
+                                  style="margin-top: 0rem; margin-bottom: 0rem;"
                                 >
-                                  <h3
-                                    style="margin-top: 0rem; margin-bottom: 0rem;"
-                                  >
-                                    <FrameworkLabel id={framework.id} />
-                                  </h3>
+                                  <FrameworkLabel id={framework.id} />
+                                </h3>
+                                {#if frameworkSnippet}
                                   <div class="flex items-center space-x-3">
                                     {#if frameworkSnippet.playgroundURL}
                                       <a
@@ -362,8 +381,10 @@
                                       </a>
                                     {/if}
                                   </div>
-                                </div>
-                                <div class="mt-2">
+                                {/if}
+                              </div>
+                              <div class="mt-2">
+                                {#if frameworkSnippet}
                                   {#if frameworkSnippet.files.length > 0}
                                     <CodeEditor
                                       files={frameworkSnippet.files}
@@ -416,9 +437,43 @@
                                       </div>
                                     </div>
                                   {/if}
-                                </div>
+                                {:else if frameworkSnippetIsLoading}
+                                  <div role="status">
+                                    <div
+                                      class="w-75px h-23px bg-[#0d1117] py-3 px-4 rounded-t"
+                                    >
+                                      <div
+                                        class="h-2.5 rounded-full bg-gray-700 w-10 animate-pulse"
+                                      ></div>
+                                    </div>
+                                    <div
+                                      class="w-630px h-164px bg-[#0d1117] px-4 py-7"
+                                    >
+                                      <div class="max-w-sm animate-pulse">
+                                        <div
+                                          class="h-3.5 rounded-full bg-gray-700 w-48 mb-4"
+                                        ></div>
+                                        <div
+                                          class="h-3.5 rounded-full bg-gray-700 max-w-[360px] mb-2.5"
+                                        ></div>
+                                        <div
+                                          class="h-3.5 rounded-full bg-gray-700 mb-4"
+                                        ></div>
+                                        <div
+                                          class="h-3.5 rounded-full bg-gray-700 max-w-[330px] mb-2.5"
+                                        ></div>
+                                        <span class="sr-only">Loading...</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                {:else if frameworkSnippetIsError}
+                                  <p class="text-orange-500">
+                                    Error loading snippets. Please reload the
+                                    page.
+                                  </p>
+                                {/if}
                               </div>
-                            {/if}
+                            </div>
                           {/each}
                         </div>
                       {/if}

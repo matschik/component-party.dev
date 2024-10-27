@@ -601,7 +601,7 @@ pnpm i
 pnpm run dev
 ```
 
-This project requires Node.js to be `v16.0.0` or higher.
+This project requires Node.js to be `v20` or higher.
 
 ### Principle when add/edit a framework snippet
 
