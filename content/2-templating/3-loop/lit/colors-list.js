@@ -1,5 +1,6 @@
 import { LitElement, html } from "lit";
 import { customElement } from "lit/decorators.js";
+import { repeat } from "lit/directives/repeat.js";
 
 @customElement("colors-list")
 export class ColorsList extends LitElement {
@@ -8,7 +9,11 @@ export class ColorsList extends LitElement {
   render() {
     return html`
       <ul>
-        ${this.colors.map((color) => html`<li>${color}</li>`)}
+        ${repeat(
+          this.colors,
+          (color) => color,
+          (color) => html`<li>${color}</li>`
+        )}
       </ul>
     `;
   }
