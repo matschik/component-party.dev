@@ -36,7 +36,7 @@ export class UserService {
 
 export interface UserResponse {
   results: User[];
-  info: any;
+  info: unknown;
 }
 
 export interface User {
