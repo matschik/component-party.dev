@@ -4,7 +4,6 @@ import { UserContext } from "./UserContext";
 import UserProfile from "./UserProfile";
 
 export default function App() {
-  // In a real app, you would fetch the user data from an API
   const [user, setUser] = createSignal({
     id: 1,
     username: "unicorn42",

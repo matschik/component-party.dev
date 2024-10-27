@@ -3,7 +3,6 @@ import UserProfile from "./UserProfile";
 import { UserContext } from "./UserContext";
 
 export default function App() {
-  // In a real app, you would fetch the user data from an API
   const [user, setUser] = useState({
     id: 1,
     username: "unicorn42",
