@@ -10,17 +10,17 @@ function sortAllFilenames(files, filenamesSorted) {
 
 const frameworks = [
   {
-    id: "svelte4",
-    title: "Svelte 4",
+    id: "svelte5",
+    title: "Svelte 5",
     frameworkName: "Svelte",
-    isCurrentVersion: true,
+    isCurrentVersion: false,
     img: "framework/svelte.svg",
     eslint: {
-      files: ["**/svelte4/*.svelte"],
+      files: ["**/TODO-THIS-IS-DISABLED-svelte5/*.svelte"],
       parser: "svelte-eslint-parser",
     },
-    playgroundURL: "https://svelte.dev/repl",
-    documentationURL: "https://svelte.dev/",
+    playgroundURL: "https://svelte-5-preview.vercel.app/",
+    documentationURL: "https://svelte-5-preview.vercel.app/docs",
     filesSorter(files) {
       return sortAllFilenames(files, ["index.html", "app.js", "App.svelte"]);
     },
@@ -80,63 +80,6 @@ const frameworks = [
     mainPackageName: "vue",
   },
   {
-    id: "angular",
-    title: "Angular",
-    frameworkName: "Angular",
-    isCurrentVersion: false,
-    img: "framework/angular.svg",
-    eslint: [
-      {
-        files: ["**/angular/**"],
-        parserOptions: {
-          project: ["tsconfig.app.json"],
-          createDefaultProgram: true,
-        },
-        extends: [
-          "plugin:@angular-eslint/recommended",
-          // This is required if you use inline templates in Components
-          "plugin:@angular-eslint/template/process-inline-templates",
-        ],
-        rules: {
-          /**
-           * Any TypeScript source code (NOT TEMPLATE) related rules you wish to use/reconfigure over and above the
-           * recommended set provided by the @angular-eslint project would go here.
-           */
-          "@angular-eslint/directive-selector": [
-            "error",
-            { type: "attribute", prefix: "app", style: "camelCase" },
-          ],
-          "@angular-eslint/component-selector": [
-            "error",
-            { type: "element", prefix: "app", style: "kebab-case" },
-          ],
-        },
-      },
-      {
-        files: ["**/angular/*.html"],
-        extends: ["plugin:@angular-eslint/template/recommended"],
-        rules: {
-          /**
-           * Any template/HTML related rules you wish to use/reconfigure over and above the
-           * recommended set provided by the @angular-eslint project would go here.
-           */
-        },
-      },
-    ],
-    playgroundURL: "https://codesandbox.io/s/angular",
-    documentationURL: "https://angular.io/docs",
-    filesSorter(files) {
-      return sortAllFilenames(files, [
-        "index.html",
-        "app.module.ts",
-        "app.component.ts",
-        "app.component.html",
-      ]);
-    },
-    repositoryLink: "https://github.com/angular/angular",
-    mainPackageName: "@angular/core",
-  },
-  {
     id: "angularRenaissance",
     title: "Angular Renaissance",
     frameworkName: "Angular",
@@ -194,6 +137,63 @@ const frameworks = [
     mainPackageName: "@angular/core",
   },
   {
+    id: "angular",
+    title: "Angular",
+    frameworkName: "Angular",
+    isCurrentVersion: false,
+    img: "framework/angular.svg",
+    eslint: [
+      {
+        files: ["**/angular/**"],
+        parserOptions: {
+          project: ["tsconfig.app.json"],
+          createDefaultProgram: true,
+        },
+        extends: [
+          "plugin:@angular-eslint/recommended",
+          // This is required if you use inline templates in Components
+          "plugin:@angular-eslint/template/process-inline-templates",
+        ],
+        rules: {
+          /**
+           * Any TypeScript source code (NOT TEMPLATE) related rules you wish to use/reconfigure over and above the
+           * recommended set provided by the @angular-eslint project would go here.
+           */
+          "@angular-eslint/directive-selector": [
+            "error",
+            { type: "attribute", prefix: "app", style: "camelCase" },
+          ],
+          "@angular-eslint/component-selector": [
+            "error",
+            { type: "element", prefix: "app", style: "kebab-case" },
+          ],
+        },
+      },
+      {
+        files: ["**/angular/*.html"],
+        extends: ["plugin:@angular-eslint/template/recommended"],
+        rules: {
+          /**
+           * Any template/HTML related rules you wish to use/reconfigure over and above the
+           * recommended set provided by the @angular-eslint project would go here.
+           */
+        },
+      },
+    ],
+    playgroundURL: "https://codesandbox.io/s/angular",
+    documentationURL: "https://angular.io/docs",
+    filesSorter(files) {
+      return sortAllFilenames(files, [
+        "index.html",
+        "app.module.ts",
+        "app.component.ts",
+        "app.component.html",
+      ]);
+    },
+    repositoryLink: "https://github.com/angular/angular",
+    mainPackageName: "@angular/core",
+  },
+  {
     id: "lit",
     title: "Lit",
     frameworkName: "Lit",
@@ -212,28 +212,6 @@ const frameworks = [
     },
     repositoryLink: "https://github.com/lit/lit",
     mainPackageName: "lit",
-  },
-  {
-    id: "vue2",
-    title: "Vue 2",
-    frameworkName: "Vue",
-    isCurrentVersion: false,
-    img: "framework/vue.svg",
-    eslint: {
-      files: ["**/vue2/*.vue"],
-      extends: ["eslint:recommended", "plugin:vue/recommended"],
-      rules: {
-        "vue/multi-word-component-names": "off",
-        "vue/singleline-html-element-content-newline": "off",
-      },
-    },
-    playgroundURL: "",
-    documentationURL: "https://v2.vuejs.org",
-    filesSorter(files) {
-      return sortAllFilenames(files, ["index.html", "main.js", "App.vue"]);
-    },
-    repositoryLink: "https://github.com/vuejs/vue",
-    mainPackageName: "vue@^2",
   },
   {
     id: "emberOctane",
@@ -275,6 +253,46 @@ const frameworks = [
     mainPackageName: "solid-js",
   },
   {
+    id: "svelte4",
+    title: "Svelte 4",
+    frameworkName: "Svelte",
+    isCurrentVersion: true,
+    img: "framework/svelte.svg",
+    eslint: {
+      files: ["**/svelte4/*.svelte"],
+      parser: "svelte-eslint-parser",
+    },
+    playgroundURL: "https://svelte.dev/repl",
+    documentationURL: "https://svelte.dev/",
+    filesSorter(files) {
+      return sortAllFilenames(files, ["index.html", "app.js", "App.svelte"]);
+    },
+    repositoryLink: "https://github.com/sveltejs/svelte",
+    mainPackageName: "svelte",
+  },
+  {
+    id: "vue2",
+    title: "Vue 2",
+    frameworkName: "Vue",
+    isCurrentVersion: false,
+    img: "framework/vue.svg",
+    eslint: {
+      files: ["**/vue2/*.vue"],
+      extends: ["eslint:recommended", "plugin:vue/recommended"],
+      rules: {
+        "vue/multi-word-component-names": "off",
+        "vue/singleline-html-element-content-newline": "off",
+      },
+    },
+    playgroundURL: "",
+    documentationURL: "https://v2.vuejs.org",
+    filesSorter(files) {
+      return sortAllFilenames(files, ["index.html", "main.js", "App.vue"]);
+    },
+    repositoryLink: "https://github.com/vuejs/vue",
+    mainPackageName: "vue@^2",
+  },
+  {
     id: "alpine",
     title: "Alpine",
     frameworkName: "Alpine",
@@ -291,24 +309,6 @@ const frameworks = [
     },
     repositoryLink: "https://github.com/alpinejs/alpine",
     mainPackageName: "alpinejs",
-  },
-  {
-    id: "svelte5",
-    title: "Svelte 5",
-    frameworkName: "Svelte",
-    isCurrentVersion: false,
-    img: "framework/svelte.svg",
-    eslint: {
-      files: ["**/TODO-THIS-IS-DISABLED-svelte5/*.svelte"],
-      parser: "svelte-eslint-parser",
-    },
-    playgroundURL: "https://svelte-5-preview.vercel.app/",
-    documentationURL: "https://svelte-5-preview.vercel.app/docs",
-    filesSorter(files) {
-      return sortAllFilenames(files, ["index.html", "app.js", "App.svelte"]);
-    },
-    repositoryLink: "https://github.com/sveltejs/svelte",
-    mainPackageName: "svelte",
   },
   {
     id: "emberPolaris",
