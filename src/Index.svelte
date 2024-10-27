@@ -451,16 +451,16 @@
                                     >
                                       <div class="max-w-sm animate-pulse">
                                         <div
-                                          class="h-4 rounded-full bg-gray-700 w-48 mb-4"
+                                          class="h-3.5 rounded-full bg-gray-700 w-48 mb-4"
                                         ></div>
                                         <div
-                                          class="h-4 rounded-full bg-gray-700 max-w-[360px] mb-2.5"
+                                          class="h-3.5 rounded-full bg-gray-700 max-w-[360px] mb-2.5"
                                         ></div>
                                         <div
-                                          class="h-4 rounded-full bg-gray-700 mb-4"
+                                          class="h-3.5 rounded-full bg-gray-700 mb-4"
                                         ></div>
                                         <div
-                                          class="h-4 rounded-full bg-gray-700 max-w-[330px] mb-2.5"
+                                          class="h-3.5 rounded-full bg-gray-700 max-w-[330px] mb-2.5"
                                         ></div>
                                         <span class="sr-only">Loading...</span>
                                       </div>
