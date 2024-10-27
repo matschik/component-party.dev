@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, NgModule } from "@angular/core";
 
 @Component({
   selector: "app-doublecount",
@@ -11,3 +11,9 @@ export class DoublecountComponent {
     return this.count * 2;
   }
 }
+
+@NgModule({
+  declarations: [DoublecountComponent],
+  exports: [DoublecountComponent],
+})
+export class DoublecountModule {}

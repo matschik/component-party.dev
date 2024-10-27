@@ -83,7 +83,7 @@ const frameworks = [
     id: "angular",
     title: "Angular",
     frameworkName: "Angular",
-    isCurrentVersion: true,
+    isCurrentVersion: false,
     img: "framework/angular.svg",
     eslint: [
       {
@@ -114,6 +114,63 @@ const frameworks = [
       },
       {
         files: ["**/angular/*.html"],
+        extends: ["plugin:@angular-eslint/template/recommended"],
+        rules: {
+          /**
+           * Any template/HTML related rules you wish to use/reconfigure over and above the
+           * recommended set provided by the @angular-eslint project would go here.
+           */
+        },
+      },
+    ],
+    playgroundURL: "https://codesandbox.io/s/angular",
+    documentationURL: "https://angular.io/docs",
+    filesSorter(files) {
+      return sortAllFilenames(files, [
+        "index.html",
+        "app.module.ts",
+        "app.component.ts",
+        "app.component.html",
+      ]);
+    },
+    repositoryLink: "https://github.com/angular/angular",
+    mainPackageName: "@angular/core",
+  },
+  {
+    id: "angularRenaissance",
+    title: "Angular Renaissance",
+    frameworkName: "Angular",
+    isCurrentVersion: true,
+    img: "framework/angular-renaissance.svg",
+    eslint: [
+      {
+        files: ["**/angular-renaissance/**"],
+        parserOptions: {
+          project: ["tsconfig.app.json"],
+          createDefaultProgram: true,
+        },
+        extends: [
+          "plugin:@angular-eslint/recommended",
+          // This is required if you use inline templates in Components
+          "plugin:@angular-eslint/template/process-inline-templates",
+        ],
+        rules: {
+          /**
+           * Any TypeScript source code (NOT TEMPLATE) related rules you wish to use/reconfigure over and above the
+           * recommended set provided by the @angular-eslint project would go here.
+           */
+          "@angular-eslint/directive-selector": [
+            "error",
+            { type: "attribute", prefix: "app", style: "camelCase" },
+          ],
+          "@angular-eslint/component-selector": [
+            "error",
+            { type: "element", prefix: "app", style: "kebab-case" },
+          ],
+        },
+      },
+      {
+        files: ["**/angular-renaissance/*.html"],
         extends: ["plugin:@angular-eslint/template/recommended"],
         rules: {
           /**

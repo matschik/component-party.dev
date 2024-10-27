@@ -1,4 +1,10 @@
-import { Component, ViewChild, ElementRef, OnInit } from "@angular/core";
+import {
+  Component,
+  ViewChild,
+  ElementRef,
+  OnInit,
+  NgModule,
+} from "@angular/core";
 
 @Component({
   selector: "app-inputfocused",
@@ -12,3 +18,9 @@ export class InputfocusedComponent implements OnInit {
     this.inputRef.nativeElement.focus();
   }
 }
+
+@NgModule({
+  declarations: [InputfocusedComponent],
+  exports: [InputfocusedComponent],
+})
+export class InputfocusedModule {}

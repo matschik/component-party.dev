@@ -1,14 +1,20 @@
-import { Component } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import { Component, NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 
 @Component({
   selector: "app-input-hello",
-  standalone: true,
-  imports: [CommonModule, FormsModule],
-  template: `<p>{{ text }}</p>
-    <input [(ngModel)]="text" />`,
+  template: `
+    <p>{{ text }}</p>
+    <input [(ngModel)]="text" />
+  `,
 })
 export class InputHelloComponent {
   text = "";
 }
+
+@NgModule({
+  declarations: [InputHelloComponent],
+  imports: [FormsModule],
+  exports: [InputHelloComponent],
+})
+export class InputHelloModule {}
