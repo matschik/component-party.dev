@@ -171,26 +171,24 @@
   let snippetsByFrameworkIdLoading = $state(new SvelteSet());
   let snippetsByFrameworkIdError = $state(new SvelteSet());
 
-  $effect(async () => {
-    Promise.all(
-      [...frameworkIdsSelected].map(async (frameworkId) => {
-        if (!snippetsByFrameworkId.has(frameworkId)) {
-          snippetsByFrameworkIdError.delete(frameworkId);
-          snippetsByFrameworkIdLoading.add(frameworkId);
+  $effect(() => {
+    [...frameworkIdsSelected].map((frameworkId) => {
+      if (!snippetsByFrameworkId.has(frameworkId)) {
+        snippetsByFrameworkIdError.delete(frameworkId);
+        snippetsByFrameworkIdLoading.add(frameworkId);
 
-          await snippetsImporterByFrameworkId[frameworkId]()
-            .then(({ default: frameworkSnippets }) => {
-              snippetsByFrameworkId.set(frameworkId, frameworkSnippets);
-            })
-            .catch(() => {
-              snippetsByFrameworkIdError.add(frameworkId);
-            })
-            .finally(() => {
-              snippetsByFrameworkIdLoading.delete(frameworkId);
-            });
-        }
-      })
-    );
+        snippetsImporterByFrameworkId[frameworkId]()
+          .then(({ default: frameworkSnippets }) => {
+            snippetsByFrameworkId.set(frameworkId, frameworkSnippets);
+          })
+          .catch(() => {
+            snippetsByFrameworkIdError.add(frameworkId);
+          })
+          .finally(() => {
+            snippetsByFrameworkIdLoading.delete(frameworkId);
+          });
+      }
+    });
   });
 
   let showBonusFrameworks = $state(false);
