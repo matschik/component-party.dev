@@ -341,7 +341,7 @@
                             {@const frameworkSnippetIsError =
                               snippetsByFrameworkIdError.has(frameworkId)}
 
-                            <div style:margin-top="0rem" style:order="0">
+                            <div>
                               <div
                                 class="flex justify-between items-center space-x-3"
                               >
@@ -360,9 +360,10 @@
                                         aria-label={`Open playground for ${framework.title}`}
                                       >
                                         <button
-                                          class="opacity-50 hover:opacity-100 bg-gray-800 hover:bg-gray-700 py-1 px-1.5 rounded transition-all"
+                                          class="opacity-50 hover:opacity-100 bg-gray-800 hover:bg-gray-700 py-1 px-2 rounded transition-all flex items-center gap-x-2"
                                           title={`Open playground for ${framework.title}`}
                                           aria-label={`Open playground for ${framework.title}`}
+                                          tabindex="-1"
                                         >
                                           <div
                                             class="i-heroicons:play size-4"
