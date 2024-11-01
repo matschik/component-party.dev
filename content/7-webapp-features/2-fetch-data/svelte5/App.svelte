@@ -1,16 +1,12 @@
 <script>
-  import useFetchUsers from "./useFetchUsers.svelte.js";
-
-  const response = useFetchUsers();
+  import fetchUsers from "./fetchUsers";
 </script>
 
-{#if response.isLoading}
+{#await fetchUsers()}
   <p>Fetching users...</p>
-{:else if response.error}
-  <p>An error occurred while fetching users</p>
-{:else if response.users}
+{:then users}
   <ul>
-    {#each response.users as user}
+    {#each users as user}
       <li>
         <img src={user.picture.thumbnail} alt="user" />
         <p>
@@ -20,4 +16,6 @@
       </li>
     {/each}
   </ul>
-{/if}
+{:catch error}
+  <p>An error {error} occurred while fetching users</p>
+{/await}
