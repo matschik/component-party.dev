@@ -438,7 +438,7 @@
                                       ></div>
                                     </div>
                                     <div
-                                      class="w-630px h-164px bg-[#0d1117] px-4 py-7"
+                                      class="w-full h-164px bg-[#0d1117] px-4 py-7"
                                     >
                                       <div class="max-w-sm animate-pulse">
                                         <div
