@@ -1,19 +1,10 @@
-import { Task } from "@lit/task";
 import { LitElement, html } from "lit";
 import { customElement } from "lit/decorators.js";
+import { createFetchUsersTask } from "./fetch-users-task";
 
 @customElement("x-app")
 export class XApp extends LitElement {
-  fetchUsers = new Task(this, {
-    task: async () => {
-      const response = await fetch("https://randomuser.me/api/?results=3");
-      if (!response.ok) {
-        throw new Error(response.status);
-      }
-      return response.json();
-    },
-    args: () => [],
-  });
+  fetchUsers = createFetchUsersTask(this);
 
   render() {
     return this.fetchUsers.render({
