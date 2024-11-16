@@ -1,7 +1,6 @@
 import nodePath from "node:path";
 import { compressToURL } from "@matschik/lz-string";
 import { getParameters } from "codesandbox/lib/api/define.js";
-import astro from "@/generatedContent/framework/astro";
 
 export default {
   vue3: (contentByFilename) => {
@@ -103,14 +102,6 @@ export default {
     }));
 
     return BASE_URL + compressToURL(JSON.stringify(data));
-  },
-  astro: async (contentByFilename, title) => {
-    const files = Object.entries(contentByFilename).map(([path, content]) => ({
-      path,
-      content,
-    }));
-    const url = await astro.generatePlaygroundUrl({ files, title });
-    return url;
   },
 };
 
