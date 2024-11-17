@@ -64,10 +64,6 @@ const footerNavigation = [
     title: "Comparing Current Version & Upcoming Version",
     links: [
       {
-        name: "Angular vs Angular Renaissance",
-        url: "/compare/angular-vs-angularRenaissance",
-      },
-      {
         name: "Ember Octane vs Ember Polaris",
         url: "/compare/emberOctane-vs-emberPolaris",
       },
