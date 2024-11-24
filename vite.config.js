@@ -48,6 +48,7 @@ const footerNavigation = [
   {
     title: "Comparing Legacy version & Current Version",
     links: [
+      { name: "Svelte 4 vs Svelte 5", url: "/compare/svelte4-vs-svelte5" },
       { name: "Vue 2 vs Vue 3", url: "/compare/vue2-vs-vue3" },
       {
         name: "Aurelia 1 vs Aurelia 2",
@@ -62,11 +63,6 @@ const footerNavigation = [
   {
     title: "Comparing Current Version & Upcoming Version",
     links: [
-      {
-        name: "Angular vs Angular Renaissance",
-        url: "/compare/angular-vs-angularRenaissance",
-      },
-      { name: "Svelte 4 vs Svelte 5", url: "/compare/svelte4-vs-svelte5" },
       {
         name: "Ember Octane vs Ember Polaris",
         url: "/compare/emberOctane-vs-emberPolaris",
