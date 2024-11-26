@@ -475,6 +475,24 @@ const frameworks = [
     repositoryLink: "https://github.com/aurelia/framework",
     mainPackageName: "aurelia-framework",
   },
+  {
+    id: "astro",
+    title: "Astro",
+    frameworkName: "Astro",
+    isCurrentVersion: true,
+    img: "framework/astro.svg",
+    eslint: {
+      files: ["**/astro/**"],
+      parser: "eslint-plugin-astro",
+    },
+    playgroundURL: "",
+    documentationURL: "",
+    filesSorter(files) {
+      return sortAllFilenames(files, ["index.html", "index.astro"]);
+    },
+    repositoryLink: "https://github.com/withastro/astro",
+    mainPackageName: "astro",
+  },
 ];
 
 export function matchFrameworkId(id) {

@@ -15,6 +15,7 @@ const highlighter = await getHighlighter({
     "jsx",
     "vue",
     "marko",
+    "astro",
   ],
 });
 
