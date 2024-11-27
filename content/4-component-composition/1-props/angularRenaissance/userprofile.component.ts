@@ -1,7 +1,6 @@
 import { Component, input } from "@angular/core";
 
 @Component({
-  standalone: true,
   selector: "app-userprofile",
   template: `
     <p>My name is {{ name() }}!</p>

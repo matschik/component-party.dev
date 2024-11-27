@@ -3,7 +3,6 @@ import { UserService } from "./user.service";
 import { UserProfileComponent } from "./user-profile.component";
 
 @Component({
-  standalone: true,
   imports: [UserProfileComponent],
   providers: [UserService],
   selector: "app-root",

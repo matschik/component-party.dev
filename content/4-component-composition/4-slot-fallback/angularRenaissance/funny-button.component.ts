@@ -1,7 +1,6 @@
 import { Component, ContentChild, TemplateRef } from "@angular/core";
 
 @Component({
-  standalone: true,
   selector: "app-funny-button",
   styles: `
     button {
