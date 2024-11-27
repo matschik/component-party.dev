@@ -1,8 +1,7 @@
 import { Component } from "@angular/core";
 
 @Component({
-  standalone: true,
-  selector: "app-helloworld",
+  selector: "app-hello-world",
   template: `<h1>Hello world</h1>`,
 })
-export class HelloworldComponent {}
+export class HelloWorldComponent {}

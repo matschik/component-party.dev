@@ -2,7 +2,6 @@ import { Component, inject } from "@angular/core";
 import { UserService } from "./user.service";
 
 @Component({
-  standalone: true,
   selector: "app-users",
   template: `
     @let vm = userService.state();

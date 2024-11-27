@@ -3,8 +3,7 @@ import { Component, computed, signal } from "@angular/core";
 const TRAFFIC_LIGHTS = ["red", "orange", "green"];
 
 @Component({
-  standalone: true,
-  selector: "app-trafficlight",
+  selector: "app-traffic-light",
   template: `
     <button (click)="nextLight()">Next light</button>
     <p>Light is: {{ light() }}</p>
@@ -24,7 +23,7 @@ const TRAFFIC_LIGHTS = ["red", "orange", "green"];
     </p>
   `,
 })
-export class TrafficlightComponent {
+export class TrafficLightComponent {
   lightIndex = signal(0);
 
   light = computed(() => TRAFFIC_LIGHTS[this.lightIndex()]);

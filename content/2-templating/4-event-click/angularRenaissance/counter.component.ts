@@ -1,7 +1,6 @@
 import { Component, signal } from "@angular/core";
 
 @Component({
-  standalone: true,
   selector: "app-counter",
   template: `
     <p>Counter: {{ count() }}</p>

@@ -2,7 +2,6 @@ import { Component, signal } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 
 @Component({
-  standalone: true,
   imports: [FormsModule],
   selector: "app-input-hello",
   template: `

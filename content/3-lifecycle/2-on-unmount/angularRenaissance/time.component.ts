@@ -1,7 +1,6 @@
 import { Component, OnDestroy, signal } from "@angular/core";
 
 @Component({
-  standalone: true,
   selector: "app-time",
   template: `<p>Current time: {{ time() }}</p>`,
 })

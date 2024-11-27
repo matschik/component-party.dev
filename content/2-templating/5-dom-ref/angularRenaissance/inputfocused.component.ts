@@ -1,11 +1,10 @@
 import { afterNextRender, Component, ElementRef, viewChild } from "@angular/core";
 
 @Component({
-  standalone: true,
-  selector: "app-inputfocused",
+  selector: "app-input-focused",
   template: `<input type="text" #inputRef />`,
 })
-export class InputfocusedComponent {
+export class InputFocusedComponent {
   inputRef = viewChild.required<ElementRef<HTMLInputElement>>("inputRef");
 
   constructor() {
