@@ -25,7 +25,8 @@
     "@iconify-json/heroicons": "^1.2.1",
     "@lit/task": "^1.0.1",
     "classnames": "^2.5.1",
-    "radix3": "^1.1.2"
+    "radix3": "^1.1.2",
+    "zone.js": "~0.15.0"
   },
   "devDependencies": {
     "@angular-eslint/eslint-plugin": "^18.3.1",
@@ -55,11 +56,11 @@
     "codesandbox": "^2.2.3",
     "cypress": "^13.15.0",
     "ember-eslint-parser": "^0.5.2",
-    "eslint": "^8.57.1",
+    "eslint": "^8.57.0",
     "eslint-plugin-ember": "^12.2.1",
     "eslint-plugin-lit": "^1.15.0",
     "eslint-plugin-prettier": "^5.2.1",
-    "eslint-plugin-qwik": "^1.9.1",
+    "eslint-plugin-qwik": "^1.12.0",
     "eslint-plugin-react": "^7.37.1",
     "eslint-plugin-solid": "^0.14.3",
     "eslint-plugin-svelte": "^2.44.1",
@@ -69,6 +70,7 @@
     "folder-hash": "^4.0.4",
     "html-minifier-terser": "^7.2.0",
     "husky": "^9.1.6",
+    "imba": "2.0.0-alpha.238",
     "lint-staged": "^15.2.10",
     "lit": "^3.2.1",
     "lodash.kebabcase": "^4.1.1",
@@ -88,6 +90,7 @@
     "unocss": "^0.63.4",
     "vite": "^5.4.8",
     "vite-plugin-html": "^3.2.2",
+    "vite-plugin-imba": "^0.10.3",
     "vue": "^3.5.11"
   },
   "lint-staged": {
