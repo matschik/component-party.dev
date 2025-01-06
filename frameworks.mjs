@@ -475,6 +475,30 @@ const frameworks = [
     repositoryLink: "https://github.com/aurelia/framework",
     mainPackageName: "aurelia-framework",
   },
+  {
+    id: "imba",
+    title: "Imba",
+    frameworkName: "Imba",
+    isCurrentVersion: true,
+    img: "framework/imba.png",
+    eslint: {
+      files: ["**/*.imba"],
+      rules: {
+        rules: {
+          eqeqeq: "off",
+          "no-unused-vars": "error",
+          "prefer-const": ["error", { "ignoreReadBeforeAssign": true }]
+        },
+      },
+    },
+    playgroundURL: "https://playground.imba.io",
+    documentationURL: "https://imba.io/docs",
+    filesSorter(files) {
+      return sortAllFilenames(files, ["index.html", "app.imba"]);
+    },
+    repositoryLink: "https://github.com/imba/imba",
+    mainPackageName: "imba",
+  },
 ];
 
 export function matchFrameworkId(id) {

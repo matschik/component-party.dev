@@ -8,6 +8,7 @@ import FRAMEWORKS from "./frameworks.mjs";
 import pluginGenerateFrameworkContent from "./build/generateContentVitePlugin.js";
 import UnoCSS from "unocss/vite";
 import { svelteInspector } from "@sveltejs/vite-plugin-svelte-inspector";
+import { imba } from 'vite-plugin-imba'
 // @TODO: sitemap
 
 const footerNavigation = [
@@ -84,6 +85,7 @@ const templateDataDefaults = {
 export default defineConfig({
   plugins: [
     pluginGenerateFrameworkContent(),
+    imba(),
     svelte(),
     svelteInspector(), // https://github.com/sveltejs/vite-plugin-svelte/blob/main/docs/inspector.md
     generateHtmlPagesPlugin([
