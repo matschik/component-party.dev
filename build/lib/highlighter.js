@@ -1,9 +1,9 @@
-import { getHighlighter } from "shiki";
+import { createHighlighter } from "shiki";
 import MarkdownIt from "markdown-it";
 import Shiki from "@shikijs/markdown-it";
 import componentPartyShikiTheme from "./componentPartyShikiTheme.js";
 
-const highlighter = await getHighlighter({
+const highlighter = await createHighlighter({
   theme: componentPartyShikiTheme,
   langs: [
     "javascript",
