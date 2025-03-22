@@ -103,7 +103,7 @@ export default defineConfig({
     ]),
     UnoCSS(),
   ],
-  ignore: ["content"],
+  ignore: ["content/**/*"],
 });
 
 async function generateHtmlPagesPlugin(pages) {
