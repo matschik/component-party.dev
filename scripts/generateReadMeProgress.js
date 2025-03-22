@@ -1,51 +1,15 @@
 import fs from "fs/promises";
 import { packageDirectory } from "pkg-dir";
-import nodePath from "node:path";
+import path from "node:path";
 import kebabCase from "lodash.kebabcase";
 import FRAMEWORKS from "../frameworks.mjs";
 import prettier from "prettier";
 
 async function main() {
-  const codeContentDir = await parseContentDir();
-  const readmeContent = await fs.readFile("./README.md", "utf8");
+  const contentTree = await parseContentDir();
+  const readmeContent = await fs.readFile("README.md", "utf8");
 
-  let progressionContent = "";
-  for (const framework of FRAMEWORKS) {
-    function mdCheck(b) {
-      return b ? "x" : " ";
-    }
-
-    let list = "";
-    const allChecks = [];
-    for (const rootDir of codeContentDir) {
-      let sublist = "";
-      const checks = [];
-      for (const subdir of rootDir.children) {
-        const isChecked =
-          subdir.children.find((n) => n.dirName === framework.id)?.files
-            .length > 0;
-        checks.push(isChecked);
-        sublist += `   * [${mdCheck(isChecked)}] ${subdir.title}\n`;
-      }
-      list += `* [${mdCheck(checks.every((v) => v))}] ${rootDir.title}\n`;
-      list += sublist;
-      allChecks.push(...checks);
-    }
-
-    const percent = Math.ceil(
-      (allChecks.filter((v) => v).length / allChecks.length) * 100
-    );
-    let frameworkContent = `
-<details>
-  <summary>
-      <img width="18" height="18" src="public/${framework.img}" />
-      <b>${framework.title}</b>
-      <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/${percent}" />
-  </summary>
-  ${list}
-</details>`;
-    progressionContent += frameworkContent;
-  }
+  const progressionContent = await generateProgressionMarkdown(contentTree);
 
   const MARKER_START = "<!-- progression start -->";
   const MARKER_END = "<!-- progression end -->";
@@ -53,83 +17,118 @@ async function main() {
     `${MARKER_START}([\\s\\S]*?)${MARKER_END}`
   );
 
-  const newProgressionContent =
-    "\n" +
-    (await prettier.format(progressionContent, {
-      parser: "markdown",
-    }));
-
   const newReadmeContent = readmeContent.replace(
     progressionContentRegex,
-    `${MARKER_START}${newProgressionContent}${MARKER_END}`
+    `${MARKER_START}\n${progressionContent}\n${MARKER_END}`
   );
 
   await fs.writeFile("README.md", newReadmeContent);
 }
+
 main().catch(console.error);
 
 async function parseContentDir() {
   const rootDir = await packageDirectory();
-  const contentURL = `${rootDir}/content`;
-  const rootSectionNames = await fs.readdir(contentURL);
+  const contentPath = path.join(rootDir, "content");
+  const rootDirs = await fs.readdir(contentPath);
 
   function dirNameToTitle(dirName) {
-    return capitalize(dirName.split("-").splice(1).join(" "));
+    return capitalize(dirName.split("-").slice(1).join(" "));
   }
 
-  function capitalize(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+  function capitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
   }
 
-  const rootSections = [];
+  const sections = [];
 
-  for (const rootSectionName of rootSectionNames) {
-    const sectionPath = `${contentURL}/${rootSectionName}`;
-    const sections = [];
-    const subSectionDirNames = await fs.readdir(sectionPath);
+  for (const rootDirName of rootDirs) {
+    const rootSectionPath = path.join(contentPath, rootDirName);
+    const subDirs = await fs.readdir(rootSectionPath).catch(() => []);
+    const children = [];
 
-    for (const dirName of subSectionDirNames) {
-      const path = `${sectionPath}/${dirName}`;
+    for (const subDir of subDirs) {
+      const subDirPath = path.join(rootSectionPath, subDir);
+      const frameworks = await fs.readdir(subDirPath).catch(() => []);
+      const frameworkChildren = [];
 
-      const frameworkDirs = await fs.readdir(path);
-      const frameworkSections = [];
-      for (const frameworkDir of frameworkDirs) {
-        const frameworkPath = `${path}/${frameworkDir}`;
-        const files = [];
-        const fileNames = await fs.readdir(`${frameworkPath}`);
-
-        for (const fileName of fileNames) {
-          const filePath = `${frameworkPath}/${fileName}`;
-          const ext = nodePath.parse(filePath).ext.split(".").pop();
-          files.push({
-            path: filePath,
-            fileName,
-            ext,
-            //content: await fs.readFile(filePath, 'utf-8'),
-          });
-        }
-
-        frameworkSections.push({
-          dirName: frameworkDir,
-          path: frameworkPath,
-          files,
-        });
+      for (const fw of frameworks) {
+        const fwPath = path.join(subDirPath, fw);
+        const fileNames = await fs.readdir(fwPath).catch(() => []);
+        const files = fileNames.map((fileName) => ({
+          path: path.join(fwPath, fileName),
+          fileName,
+          ext: path.extname(fileName).slice(1),
+        }));
+        frameworkChildren.push({ dirName: fw, path: fwPath, files });
       }
 
-      const title = dirNameToTitle(dirName);
-      sections.push({
-        id: kebabCase(title),
-        path,
-        dirName,
-        title,
-        children: frameworkSections,
+      children.push({
+        id: kebabCase(dirNameToTitle(subDir)),
+        path: subDirPath,
+        dirName: subDir,
+        title: dirNameToTitle(subDir),
+        children: frameworkChildren,
       });
     }
 
-    rootSections.push({
-      title: dirNameToTitle(rootSectionName),
-      children: sections,
+    sections.push({
+      title: dirNameToTitle(rootDirName),
+      children,
     });
   }
-  return rootSections;
+
+  return sections;
+}
+
+function mdCheck(b) {
+  return b ? "x" : " ";
+}
+
+async function generateProgressionMarkdown(contentTree) {
+  let output = "";
+
+  for (const framework of FRAMEWORKS) {
+    const frameworkLines = [];
+    const allChecks = [];
+
+    for (const root of contentTree) {
+      const sectionChecks = [];
+      const subLines = [];
+
+      for (const sub of root.children) {
+        const fwEntry = sub.children.find((c) => c.dirName === framework.id);
+        const hasFiles = fwEntry?.files?.length > 0;
+        sectionChecks.push(!!hasFiles);
+        subLines.push(`   * [${mdCheck(hasFiles)}] ${sub.title}`);
+      }
+
+      frameworkLines.push(
+        `* [${mdCheck(sectionChecks.every(Boolean))}] ${root.title}`
+      );
+      frameworkLines.push(...subLines);
+      allChecks.push(...sectionChecks);
+    }
+
+    const percent = Math.ceil(
+      (allChecks.filter(Boolean).length / allChecks.length) * 100
+    );
+
+    const markdown = `
+<details>
+  <summary>
+    <img width="18" height="18" src="public/${framework.img}" />
+    <b>${framework.title}</b>
+    <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/${percent}" />
+  </summary>
+
+${frameworkLines.join("\n")}
+
+</details>
+    `;
+
+    output += markdown;
+  }
+
+  return prettier.format(output, { parser: "markdown" });
 }
