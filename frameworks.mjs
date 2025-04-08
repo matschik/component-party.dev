@@ -312,7 +312,7 @@ const frameworks = [
   },
   {
     id: "emberPolaris",
-    title: "Ember Polaris (preview)",
+    title: "Ember Polaris",
     frameworkName: "Ember",
     isCurrentVersion: false,
     img: "framework/ember.svg",
