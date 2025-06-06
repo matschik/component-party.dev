@@ -34,7 +34,7 @@ const frameworks = [
     isCurrentVersion: true,
     img: "framework/react.svg",
     eslint: {
-      files: ["**/react/*.jsx", "**/react/*.tsx"],
+      files: ["**/react/*.jsx"],
       extends: [
         "eslint:recommended",
         "plugin:react/recommended",
@@ -50,6 +50,43 @@ const frameworks = [
     documentationURL: "https://reactjs.org/docs/getting-started.html",
     filesSorter(files) {
       return sortAllFilenames(files, ["index.html", "main.jsx", "App.jsx"]);
+    },
+    repositoryLink: "https://github.com/facebook/react",
+    mainPackageName: "react",
+  },
+  {
+    id: "react-tsx",
+    title: "React (TSX)",
+    frameworkName: "React",
+    isCurrentVersion: false,
+    img: "framework/react.svg",
+    eslint: {
+      files: ["**/react-tsx/**/*.tsx"],
+      parser: "@typescript-eslint/parser",
+      parserOptions: {
+        project: ["./tsconfig.json"],
+      },
+      extends: [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:react/jsx-runtime",
+        "plugin:@typescript-eslint/recommended",
+      ],
+      settings: {
+        react: {
+          version: "detect",
+        },
+      },
+    },
+    playgroundURL: "https://codesandbox.io/s/new-typescript?file=/src/App.tsx",
+    documentationURL: "https://reactjs.org/docs/getting-started.html",
+    filesSorter(files) {
+      return sortAllFilenames(files, [
+        "index.html",
+        "main.tsx",
+        "App.tsx",
+        "Name.tsx",
+      ]);
     },
     repositoryLink: "https://github.com/facebook/react",
     mainPackageName: "react",
@@ -431,7 +468,7 @@ const frameworks = [
     isCurrentVersion: true,
     img: "framework/marko.svg",
     eslint: {
-      files: ["!**"], // Marko’s linter/prettyprinter doesn’t use eslint
+      files: ["!**"], // Marko's linter/prettyprinter doesn't use eslint
     },
     playgroundURL: "https://markojs.com/playground/",
     documentationURL: "https://markojs.com/docs/getting-started/",
