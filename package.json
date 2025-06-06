@@ -47,6 +47,7 @@
     "@unocss/preset-typography": "66.1.0-beta.12",
     "@unocss/preset-wind": "66.1.0-beta.12",
     "@unocss/reset": "66.1.0-beta.12",
+    "@vitejs/plugin-react": "^4.5.1",
     "aurelia": "2.0.0-beta.23",
     "aurelia-framework": "^1.4.1",
     "autoprefixer": "^10.4.21",
