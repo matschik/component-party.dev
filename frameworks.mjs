@@ -55,13 +55,13 @@ const frameworks = [
     mainPackageName: "react",
   },
   {
-    id: "react-tsx",
+    id: "reactTsx",
     title: "React (TSX)",
     frameworkName: "React",
     isCurrentVersion: false,
     img: "framework/react.svg",
     eslint: {
-      files: ["**/react-tsx/**/*.tsx"],
+      files: ["**/reactTsx/**/*.tsx"],
       parser: "@typescript-eslint/parser",
       parserOptions: {
         project: ["./tsconfig.json"],
