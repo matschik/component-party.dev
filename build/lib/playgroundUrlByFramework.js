@@ -92,16 +92,17 @@ export default {
 
     return generateURLFromData(data);
   },
-  marko: (contentByFilename) => {
-    const BASE_URL = "https://markojs.com/playground/#";
-
+  marko: async (contentByFilename) => {
+    let firstFile = true;
     const data = Object.entries(contentByFilename).map(([path, content]) => ({
-      name: nodePath.parse(path).base,
-      path: `/components/${path}`,
+      path: firstFile ? (firstFile = false) || "index.marko" : path,
       content,
     }));
 
-    return BASE_URL + compressToURL(JSON.stringify(data));
+    return (
+      "https://markojs.com/playground#" +
+      (await markoCompress(JSON.stringify(data)))
+    );
   },
 };
 
@@ -156,5 +157,32 @@ async function compress_and_encode_text(input) {
         buffer += String.fromCharCode(value[i]);
       }
     }
+  }
+}
+
+// method `compress` from https://github.com/marko-js/website/blob/main/src/util/hasher.ts#L8-L25
+export async function markoCompress(value) {
+  const stream = new CompressionStream("gzip");
+  const writer = stream.writable.getWriter();
+  writer.write(new TextEncoder().encode(value));
+  writer.close();
+
+  let result = "v2";
+  const reader = stream.readable.getReader();
+  try {
+    while (true) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      for (const byte of value) {
+        result += String.fromCharCode(byte);
+      }
+    }
+
+    return btoa(result)
+      .replace(/=+$/, "")
+      .replace(/\+/g, "-")
+      .replace(/\//g, "_");
+  } finally {
+    reader.releaseLock();
   }
 }

@@ -1,7 +1,7 @@
-<let/isHappy = true/>
+<let/isHappy=true>
 <p>Are you happy?</p>
 <AnswerButton
   onYes() { isHappy = true }
   onNo() { isHappy = false }
 />
-<p style={ fontSize: 50 }>${isHappy ? "😀" : "😥"}</p>
+<p style={ "font-size": 50 }>${isHappy ? "😀" : "😥"}</p>

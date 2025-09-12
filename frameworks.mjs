@@ -436,7 +436,7 @@ const frameworks = [
     playgroundURL: "https://markojs.com/playground/",
     documentationURL: "https://markojs.com/docs/getting-started/",
     filesSorter(files) {
-      return sortAllFilenames(files, ["index.marko", "App.marko"]);
+      return sortAllFilenames(files, ["index.html", "App.marko"]);
     },
     repositoryLink: "https://github.com/marko-js/marko",
     mainPackageName: "marko",
