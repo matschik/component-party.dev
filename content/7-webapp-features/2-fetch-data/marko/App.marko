@@ -1,11 +1,5 @@
-<await(fetch("https://randomuser.me/api/?results=3").then(res => res.json()))>
-  <@placeholder>
-    <p>Fetching users...</p>
-  </@placeholder>
-  <@catch|error|>
-    <p>An error occurred while fetching users</p>
-  </@catch>
-  <@then|{ results: users }|>
+<try>
+  <await|{ results: users }|=fetch("https://randomuser.me/api/?results=3").then(res => res.json())>
     <ul>
       <for|{ picture, name }| of=users>
         <li>
@@ -14,5 +8,11 @@
         </li>
       </for>
     </ul>
-  </@then>
-</await>
+  </await>
+  <@placeholder>
+    <p>Fetching users...</p>
+  </@placeholder>
+  <@catch|error|>
+    <p>An error occurred while fetching users</p>
+  </@catch>
+</try>

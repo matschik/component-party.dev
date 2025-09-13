@@ -1,13 +1,13 @@
-<let/user = {
+<let/user={
   id: 1,
   username: "unicorn42",
   email: "unicorn42@example.com",
-}/>
+}>
 <const/updateUsername(newUsername) {
   user = { ...user, username: newUsername };
-}/>
+}>
 
 <h1>Welcome back, ${user.username}</h1>
-<set={ ...user, updateUsername }>
+<context={ ...user, updateUsername }>
   <UserProfile />
-</set>
+</context>

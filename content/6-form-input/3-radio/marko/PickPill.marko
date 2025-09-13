@@ -1,21 +1,16 @@
-<let/picked = "red"/>
-<const/handleChange(event) {
-  picked = event.target.value;
-}/>
+<let/picked="red">
 
 <div>Picked: ${picked}</div>
 <input#blue-pill
   type="radio"
-  checked=picked === "blue"
   value="blue"
-  onChange=handleChange
-/>
+  checkedValue:=picked
+>
 <label for="blue-pill">Blue pill</label>
 
 <input#red-pill
   type="radio"
-  checked=picked === "red"
   value="red"
-  onChange=handleChange
-/>
+  checkedValue:=picked
+>
 <label for="red-pill">Red pill</label>
