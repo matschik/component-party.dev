@@ -482,7 +482,7 @@ const frameworks = [
     isCurrentVersion: true,
     img: "framework/ripple.png",
     eslint: {
-      files: ["**/ripple/**"],
+      files: ["!**"],
     },
     playgroundURL: "https://www.ripplejs.com/playground",
     documentationURL: "https://www.ripplejs.com/",
