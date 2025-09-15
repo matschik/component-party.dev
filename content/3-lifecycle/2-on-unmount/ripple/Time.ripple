@@ -1,0 +1,15 @@
+import { effect } from "ripple";
+
+export component Time() {
+  let $time = new Date().toLocaleTimeString();
+
+  effect(() => {
+    const timer = setInterval(() => {
+      $time = new Date().toLocaleTimeString();
+    }, 1000);
+
+    return () => clearInterval(timer);
+  });
+
+  <h1>{`Current time: ${$time}`}</h1>
+}
