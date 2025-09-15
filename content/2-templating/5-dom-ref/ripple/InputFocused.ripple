@@ -1,5 +1,7 @@
 export component InputFocused() {
-  const autofocus = (element) => element.focus()
+  function autofocus(element) {
+    element.focus();
+  }
 
   <input {@use autofocus} />
 }
