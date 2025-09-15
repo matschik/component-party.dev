@@ -1,0 +1,6 @@
+export component Name() {
+  let $name = "John";
+  $name = "Jane";
+
+  <h1>{`Hello ${$name}`}</h1>
+}

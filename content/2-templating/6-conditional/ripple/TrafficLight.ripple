@@ -1,0 +1,24 @@
+const TRAFFIC_LIGHTS = ["red", "orange", "green"];
+
+export component TrafficLight() {
+  let $lightIndex = 0;
+
+  const $light = TRAFFIC_LIGHTS[$lightIndex];
+
+  function nextLight() {
+    $lightIndex = ($lightIndex + 1) % TRAFFIC_LIGHTS.length;
+  }
+
+  <button onClick={nextLight}>{"Next light"}</button>
+  <p>{`Light is ${$light}`}</p>
+  <p>
+    {"You must"}
+    if ($light === "red") {
+      <span>{"STOP"}</span>
+    } else if ($light === "orange") {
+      <span>{"SLOW DOWN"}</span>
+    } else if ($light === "green") {
+      <span>{"GO"}</span>
+    }
+  </p>
+}

@@ -1,0 +1,10 @@
+export component Counter() {
+  let $count = 0;
+
+  function incrementCount() {
+    $count++;
+  }
+
+  <p>{`Count: ${$count}`}</p>
+  <button onClick={incrementCount}>{"+1"}</button>
+}

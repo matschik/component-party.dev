@@ -1,0 +1,10 @@
+export component InputFocused() {
+  let $inputElement;
+
+  const ref = node => {
+    $inputElement = node;
+    $inputElement.focus();
+  };
+
+  <input {@use ref} />
+}

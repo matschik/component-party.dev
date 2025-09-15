@@ -16,6 +16,7 @@ const highlighter = await createHighlighter({
     "vue",
     "marko",
   ],
+  langAlias: { ripple: "tsx" },
 });
 
 const md = MarkdownIt({
