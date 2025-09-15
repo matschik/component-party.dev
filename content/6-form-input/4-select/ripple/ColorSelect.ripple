@@ -1,0 +1,22 @@
+const colors = [
+  { id: 1, text: "red" },
+  { id: 2, text: "blue" },
+  { id: 3, text: "green" },
+  { id: 4, text: "gray", isDisabled: true },
+];
+
+export component ColorSelect() {
+  let $selectedColorId = 2;
+
+  function handleChange(event) {
+    $selectedColorId = event.target.value;
+  }
+
+  <select value={$selectedColorId} onChange={handleChange}>
+    for (const color of colors) {
+      <option value={color.id} disabled={color.isDisabled}>
+        {color.text}
+      </option>
+    }
+  </select>
+}

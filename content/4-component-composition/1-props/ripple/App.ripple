@@ -1,0 +1,10 @@
+import { UserProfile } from "./UserProfile.ripple";
+
+export component App() {
+  <UserProfile
+    name="John"
+    age={20}
+    favouriteColors={["green", "blue", "red"]}
+    isAvailable
+  />
+}

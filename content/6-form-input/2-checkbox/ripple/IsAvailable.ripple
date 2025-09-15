@@ -1,0 +1,15 @@
+export component IsAvailable() {
+  let $isAvailable = false;
+
+  function handleChange() {
+    $isAvailable = !$isAvailable;
+  }
+
+  <input 
+    id="is-available" 
+    type="checkbox" 
+    checked={$isAvailable} 
+    onChange={handleChange}
+  />
+  <label for="is-available">{`Is available`}</label>
+}
