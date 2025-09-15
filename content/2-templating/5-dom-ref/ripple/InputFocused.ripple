@@ -1,10 +1,5 @@
 export component InputFocused() {
-  let $inputElement;
+  const autofocus = (element) => element.focus()
 
-  const ref = node => {
-    $inputElement = node;
-    $inputElement.focus();
-  };
-
-  <input {@use ref} />
+  <input {@use autofocus} />
 }
