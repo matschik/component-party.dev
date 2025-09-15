@@ -480,14 +480,14 @@ const frameworks = [
     title: "Ripple",
     frameworkName: "Ripple",
     isCurrentVersion: true,
-    img: "framework/ripple.png",
+    img: "framework/ripple.svg",
     eslint: {
       files: ["!**"],
     },
     playgroundURL: "https://www.ripplejs.com/playground",
     documentationURL: "https://www.ripplejs.com/",
     filesSorter(files) {
-      return sortAllFilenames(files, ["index.html", "App.ripple"]);
+      return sortAllFilenames(files, ["index.html", "main.js", "App.ripple"]);
     },
     repositoryLink: "https://github.com/trueadm/ripple",
     mainPackageName: "ripple",
