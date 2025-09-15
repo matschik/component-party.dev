@@ -17,7 +17,7 @@ const highlighter = await createHighlighter({
     "marko",
   ],
   langAlias: {
-    ripple: "jsx",
+    ripple: "jsx", // until ripple is supported by shiki
   },
 });
 
