@@ -1,4 +1,4 @@
-export component Name() {
+export component DoubleCount() {
   let $count = 10;
   const $doubleCount = $count * 2;
 
