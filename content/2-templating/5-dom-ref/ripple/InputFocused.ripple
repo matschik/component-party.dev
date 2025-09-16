@@ -3,5 +3,5 @@ export component InputFocused() {
     element.focus();
   }
 
-  <input {@use autofocus} />
+  <input {ref autofocus} />
 }
