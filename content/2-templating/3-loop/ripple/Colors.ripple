@@ -1,4 +1,4 @@
-export component CssStyle() {
+export component Colors() {
   const colors = ["red", "green", "blue"];
 
   <ul>
