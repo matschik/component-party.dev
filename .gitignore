@@ -13,7 +13,6 @@ dist-ssr
 *.local
 
 # Lint
-.eslintcache
 
 # Editor directories and files
 .vscode/*

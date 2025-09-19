@@ -2,6 +2,7 @@ import generateContent from "./lib/generateContent.js";
 import { createFsCache } from "micache";
 import { hashElement } from "folder-hash";
 import chokidar from "chokidar";
+import { disposeHighlighter } from "./lib/highlighter.js";
 
 const contentDirFsCache = await createFsCache("pluginGenerateFrameworkContent");
 
@@ -53,6 +54,8 @@ export default function pluginGenerateFrameworkContent() {
     },
     async buildEnd() {
       fsContentWatcher && (await fsContentWatcher.close());
+      // Dispose of highlighter instances to prevent memory leaks
+      await disposeHighlighter();
     },
   };
 }

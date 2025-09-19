@@ -30,5 +30,4 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
-      # - run: pnpm run lint # uncomment when eslint is fixed
       - run: pnpm run build

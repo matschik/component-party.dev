@@ -3,36 +3,51 @@ import MarkdownIt from "markdown-it";
 import Shiki from "@shikijs/markdown-it";
 import componentPartyShikiTheme from "./componentPartyShikiTheme.js";
 
-const highlighter = await createHighlighter({
-  theme: componentPartyShikiTheme,
-  langs: [
-    "javascript",
-    "svelte",
-    "html",
-    "hbs",
-    "gjs",
-    "tsx",
-    "jsx",
-    "vue",
-    "marko",
-  ],
-  langAlias: {
-    ripple: "jsx", // until ripple is supported by shiki
-  },
-});
+// Singleton instances
+let highlighter = null;
+let md = null;
 
-const md = MarkdownIt({
-  html: true,
-});
+async function getHighlighter() {
+  if (!highlighter) {
+    highlighter = await createHighlighter({
+      theme: componentPartyShikiTheme,
+      langs: [
+        "javascript",
+        "svelte",
+        "html",
+        "hbs",
+        "gjs",
+        "tsx",
+        "jsx",
+        "vue",
+        "marko",
+      ],
+      langAlias: {
+        ripple: "jsx", // until ripple is supported by shiki
+      },
+    });
+  }
+  return highlighter;
+}
 
-md.use(
-  await Shiki({
-    theme: componentPartyShikiTheme,
-  })
-);
+async function getMarkdownIt() {
+  if (!md) {
+    md = MarkdownIt({
+      html: true,
+    });
+
+    md.use(
+      await Shiki({
+        theme: componentPartyShikiTheme,
+      }),
+    );
+  }
+  return md;
+}
 
 export async function codeToHighlightCodeHtml(code, lang) {
-  const html = await highlighter.codeToHtml(code, {
+  const highlighterInstance = await getHighlighter();
+  const html = await highlighterInstance.codeToHtml(code, {
     lang,
     theme: componentPartyShikiTheme,
   });
@@ -41,6 +56,16 @@ export async function codeToHighlightCodeHtml(code, lang) {
 }
 
 export async function markdownToHighlightedHtml(markdownText) {
-  const html = md.render(markdownText);
+  const mdInstance = await getMarkdownIt();
+  const html = mdInstance.render(markdownText);
   return html;
+}
+
+// Function to dispose of instances when no longer needed
+export async function disposeHighlighter() {
+  if (highlighter) {
+    await highlighter.dispose();
+    highlighter = null;
+  }
+  md = null;
 }

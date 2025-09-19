@@ -103,7 +103,16 @@ export default defineConfig({
     ]),
     UnoCSS(),
   ],
-  ignore: ["content/**/*"],
+  optimizeDeps: {
+    entries: ["src/**/*"],
+  },
+  build: {
+    rollupOptions: {
+      external: (id) => {
+        return id.includes("/content/");
+      },
+    },
+  },
 });
 
 async function generateHtmlPagesPlugin(pages) {
@@ -112,7 +121,7 @@ async function generateHtmlPagesPlugin(pages) {
   const template = {
     footer: await fs.readFile(
       path.resolve(__dirname, "build/template/footer.html"),
-      "utf8"
+      "utf8",
     ),
   };
 
@@ -121,7 +130,7 @@ async function generateHtmlPagesPlugin(pages) {
       for (const [templateName, templateContent] of Object.entries(template)) {
         html = html.replace(
           `<!--template:${templateName}-->`,
-          eta.renderString(templateContent, { navigations: footerNavigation })
+          eta.renderString(templateContent, { navigations: footerNavigation }),
         );
       }
       return html;
@@ -137,7 +146,7 @@ async function generateHtmlPagesPlugin(pages) {
       html = htmlTransform.include(html);
       if (ctx.server) {
         const matchedPage = pages.find(
-          (page) => ctx.originalUrl === filePathToUrl(page.outputPath)
+          (page) => ctx.originalUrl === filePathToUrl(page.outputPath),
         );
         if (matchedPage) {
           html = htmlTransform.render(html, matchedPage.templateData);
