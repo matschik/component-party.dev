@@ -6,7 +6,7 @@ export default function Colors() {
     view: () =>
       m(
         "ul",
-        colors.map((color, idx) => m("li", { key: idx }, color))
+        colors.map((color, idx) => m("li", { key: idx }, color)),
       ),
   };
 }

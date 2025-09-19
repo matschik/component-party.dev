@@ -31,7 +31,7 @@ export class ColorSelect extends LitElement {
               ?disabled=${color.isDisabled}
             >
               ${color.text}
-            </option>`
+            </option>`,
         )}
       </select>
     `;

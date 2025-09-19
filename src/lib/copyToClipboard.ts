@@ -1,4 +1,4 @@
-export default function copyToClipboard(value) {
+export default function copyToClipboard(value: string): boolean {
   const $textarea = document.createElement("textarea");
   $textarea.innerHTML = value;
   document.body.appendChild($textarea);
@@ -9,7 +9,7 @@ export default function copyToClipboard(value) {
     success = true;
   } catch (err) {
     alert(
-      "Oops, unable to copy to clipboard. Please check website permissions."
+      "Oops, unable to copy to clipboard. Please check website permissions.",
     );
   }
   $textarea.remove();

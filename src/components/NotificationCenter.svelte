@@ -1,48 +1,69 @@
-<script module>
-  import { writable } from "svelte/store";
-  const { subscribe, update } = writable([]);
+<script module lang="ts">
+  import { writable, type Writable } from "svelte/store";
+
+  interface Notification {
+    title: string;
+    dismissAfter?: number;
+    close?: () => void;
+  }
+
+  type Notifications = Notification[];
+
+  const { subscribe, update }: Writable<Notifications> = writable([]);
 
   const DISMISS_TIMEOUT_DEFAULT = 4 * 1000;
 
   export const notifications = {
     subscribe,
-    show(notification) {
-      notification = {
+    show(notification: Omit<Notification, "dismissAfter" | "close">): void {
+      const fullNotification: Notification = {
         ...notification,
         dismissAfter: DISMISS_TIMEOUT_DEFAULT,
         close() {
           notifications.dismiss(this);
         },
       };
-      update((notifications) => [notification, ...notifications]);
+      update((notifications) => [fullNotification, ...notifications]);
     },
-    dismiss(notification) {
+    dismiss(notification: Notification): void {
       update((notifications) =>
-        notifications.filter((t) => t !== notification)
+        notifications.filter((t) => t !== notification),
       );
     },
-    dismissAll() {
+    dismissAll(): void {
       update(() => []);
     },
   };
 
-  export function addNotificationsMethod(method, cb) {
-    notifications[method] = (...args) => {
+  export function addNotificationsMethod(
+    method: string,
+    cb: (...args: any[]) => Omit<Notification, "dismissAfter" | "close">,
+  ): void {
+    (notifications as any)[method] = (...args: any[]) => {
       const notification = cb(...args);
       notifications.show(notification);
     };
   }
 </script>
 
-<script>
-  let { zIndex = 20, notificationContainer } = $props();
+<script lang="ts">
+  interface Props {
+    zIndex?: number;
+    notificationContainer: (notification: {
+      title: string;
+      close: () => void;
+    }) => any;
+  }
 
-  function dismissAfter(_, notification) {
-    notification.dismissAfter &&
+  let { zIndex = 20, notificationContainer }: Props = $props();
+
+  function dismissAfter(_: any, notification: Notification): void {
+    if (notification.dismissAfter) {
       setTimeout(
         () => notifications.dismiss(notification),
-        notification.dismissAfter
+        notification.dismissAfter,
       );
+    }
   }
 </script>
 

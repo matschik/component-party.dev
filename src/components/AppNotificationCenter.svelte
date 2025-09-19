@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import NotificationCenter from "./NotificationCenter.svelte";
   import TransitionWithClass from "./TransitionWithClass.svelte";
 </script>

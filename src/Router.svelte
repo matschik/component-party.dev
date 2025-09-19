@@ -1,12 +1,27 @@
-<script>
+<script lang="ts">
   import { onMount, onDestroy, setContext } from "svelte";
-  import { writable } from "svelte/store";
+  import { writable, type Writable } from "svelte/store";
   import { createRouter } from "radix3";
+  import type { ComponentType } from "svelte";
 
-  let { routes = [] } = $props();
+  interface Route {
+    path: string;
+    component: any;
+  }
+
+  interface RoutePayload extends Route {
+    params?: Record<string, string>;
+  }
+
+  interface RouterContext {
+    currentRoute: Writable<RoutePayload>;
+    navigate: (path: string, state?: any) => void;
+  }
+
+  let { routes = [] }: { routes: Route[] } = $props();
 
   const router = createRouter({
-    routes: routes.reduce((acc, route) => {
+    routes: routes.reduce((acc: Record<string, Route>, route) => {
       acc[route.path] = {
         ...route,
       };
@@ -14,16 +29,19 @@
     }, {}),
   });
 
-  const currentRoute = writable({ component: null });
+  const currentRoute = writable<RoutePayload>({
+    path: "",
+    component: null as any,
+  });
 
-  function navigate(path, state) {
+  function navigate(path: string, state?: any): void {
     state = state || {};
     const urlParsed = new URL(path, window.location.origin);
     const routePayload = router.lookup(urlParsed.pathname);
 
     if (routePayload) {
       if (routePayload.component.toString().startsWith("class")) {
-        currentRoute.set(routePayload);
+        currentRoute.set(routePayload as RoutePayload);
         window.history.pushState(state, "", path);
       } else if (typeof routePayload.component === "function") {
         currentRoute.set({
@@ -39,19 +57,24 @@
     }
   }
 
-  window.onpopstate = () => {
+  window.onpopstate = (): void => {
     navigate(window.location.href);
   };
 
-  function handleClick(event) {
-    const target = event.target.closest("a[href]");
+  function handleClick(event: Event): void {
+    const target = (event.target as Element).closest(
+      "a[href]",
+    ) as HTMLAnchorElement | null;
     if (
       target &&
-      target.getAttribute("href").startsWith("/") &&
+      target.getAttribute("href")?.startsWith("/") &&
       target.getAttribute("target") !== "_blank"
     ) {
       event.preventDefault();
-      navigate(target.getAttribute("href"));
+      const href = target.getAttribute("href");
+      if (href) {
+        navigate(href);
+      }
     }
   }
 
@@ -64,7 +87,7 @@
     document.removeEventListener("click", handleClick);
   });
 
-  setContext("router", {
+  setContext<RouterContext>("router", {
     currentRoute,
     navigate,
   });

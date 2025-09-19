@@ -1,5 +1,10 @@
-<script>
-  const props = $props();
+<script lang="ts">
+  interface Props {
+    class?: string;
+    [key: string]: any;
+  }
+
+  const props: Props = $props();
 </script>
 
 <svg

@@ -11,20 +11,23 @@
     "preview": "vite preview",
     "format": "prettier --cache --ignore-path .gitignore --plugin-search-dir=. --write .",
     "format:check": "prettier --ignore-path .gitignore --plugin-search-dir=. . --check",
-    "build:content": "node scripts/generateContent.js",
-    "build:progress": "node scripts/generateReadMeProgress.js",
+    "build:content": "node scripts/generateContent.ts",
+    "build:progress": "node scripts/generateReadMeProgress.ts",
     "prepare": "lefthook install"
   },
   "dependencies": {
     "@iconify-json/heroicons": "^1.2.2",
-    "classnames": "^2.5.1",
-    "radix3": "^1.1.2"
+    "radix3": "^1.1.2",
+    "just-throttle": "^4.2.0"
   },
   "devDependencies": {
     "@matschik/lz-string": "^0.0.2",
     "@shikijs/markdown-it": "^3.13.0",
     "@sveltejs/vite-plugin-svelte": "6.2.0",
     "@sveltejs/vite-plugin-svelte-inspector": "5.0.1",
+    "@types/folder-hash": "^4.0.4",
+    "@types/html-minifier-terser": "^7.0.2",
+    "@types/markdown-it": "^14.1.2",
     "@unocss/preset-icons": "66.5.1",
     "@unocss/preset-typography": "66.5.1",
     "@unocss/preset-wind": "66.5.1",
@@ -34,8 +37,8 @@
     "eta": "^4.0.1",
     "folder-hash": "^4.1.1",
     "html-minifier-terser": "^7.2.0",
+    "just-kebab-case": "^4.2.0",
     "lefthook": "^1.13.1",
-    "lodash.kebabcase": "^4.1.1",
     "markdown-it": "^14.1.0",
     "micache": "^2.4.1",
     "package-directory": "^8.1.0",

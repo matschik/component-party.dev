@@ -7,6 +7,6 @@ export const UserProfile = () => ({
       m("p", `My name is ${name}!`),
       m("p", `My age is ${age}!`),
       m("p", `My favourite colors are ${favouriteColors.join(", ")}!`),
-      m("p", `I am ${isAvailable ? "available" : "not available"}`)
+      m("p", `I am ${isAvailable ? "available" : "not available"}`),
     ),
 });

@@ -1,14 +1,12 @@
 <script>
   import { SvelteMap, SvelteSet } from "svelte/reactivity";
-  import c from "classnames";
-
-  import FRAMEWORKS, { matchFrameworkId } from "../frameworks.mjs";
+  import FRAMEWORKS, { matchFrameworkId } from "../frameworks";
   import FrameworkLabel from "./components/FrameworkLabel.svelte";
   import { sections, snippets } from "./generatedContent/tree.js";
   import snippetsImporterByFrameworkId from "./generatedContent/framework/index.js";
   import CodeEditor from "./components/CodeEditor.svelte";
   import AppNotificationCenter from "./components/AppNotificationCenter.svelte";
-  import createLocaleStorage from "./lib/createLocaleStorage.js";
+  import createLocaleStorage from "./lib/createLocaleStorage.ts";
   import { getContext, onDestroy, onMount } from "svelte";
   import Header from "./components/Header.svelte";
   import Aside from "./components/Aside.svelte";
@@ -78,7 +76,7 @@
         handleInitialFrameworkIdsSelectedFromStorage({ useDefaults: false });
       } else {
         onMountCallbacks.add(() =>
-          handleInitialFrameworkIdsSelectedFromStorage({ useDefaults: true })
+          handleInitialFrameworkIdsSelectedFromStorage({ useDefaults: true }),
         );
       }
     } else if ($currentRoute.params?.versus) {
@@ -111,7 +109,7 @@
     const url = new URL(window.location.href);
 
     const frameworkIdsFromURLStr = url.searchParams.get(
-      FRAMEWORK_IDS_FROM_URL_KEY
+      FRAMEWORK_IDS_FROM_URL_KEY,
     );
 
     if (frameworkIdsFromURLStr) {
@@ -194,21 +192,21 @@
   let showBonusFrameworks = $state(false);
 
   const frameworksSelected = $derived(
-    [...frameworkIdsSelected].map(matchFrameworkId)
+    [...frameworkIdsSelected].map(matchFrameworkId),
   );
 
   const bonusFrameworks = $derived(
-    FRAMEWORKS_BONUS.filter((f) => !frameworkIdsSelected.has(f.id))
+    FRAMEWORKS_BONUS.filter((f) => !frameworkIdsSelected.has(f.id)),
   );
 
   const frameworksNotSelected = $derived(
-    FRAMEWORKS.filter((f) => !frameworkIdsSelected.has(f.id))
+    FRAMEWORKS.filter((f) => !frameworkIdsSelected.has(f.id)),
   );
 
   const headerFrameworks = $derived([
     ...frameworksSelected,
     ...frameworksNotSelected.filter(
-      (f) => !bonusFrameworks.find((bf) => bf.id === f.id)
+      (f) => !bonusFrameworks.find((bf) => bf.id === f.id),
     ),
     ...(showBonusFrameworks ? bonusFrameworks : []),
   ]);
@@ -230,12 +228,12 @@
           title={frameworkIdsSelected.has(framework.id)
             ? `Hide ${framework.title}`
             : `Display ${framework.title}`}
-          class={c(
+          class={[
             "text-sm flex-shrink-0 rounded border px-3 py-1 bg-gray-900 hover:bg-gray-800 transition-all mr-2",
             frameworkIdsSelected.has(framework.id)
               ? "border-blue-900"
-              : "opacity-70 border-opacity-50 border-gray-700"
-          )}
+              : "opacity-70 border-opacity-50 border-gray-700",
+          ]}
           onclick={() => {
             toggleFrameworkId(framework.id);
             if (isVersusFrameworks && $currentRoute.path !== "/") {

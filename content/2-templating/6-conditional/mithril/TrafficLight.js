@@ -24,7 +24,7 @@ export default function TrafficLight() {
         "div",
         m("button", { onclick: nextLight }, "Next light"),
         m("p", `Light is: ${currentLight()}`),
-        m("p", "You must ", m("span", instructions()))
+        m("p", "You must ", m("span", instructions())),
       ),
   };
 }

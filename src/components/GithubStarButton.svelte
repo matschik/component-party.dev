@@ -1,18 +1,28 @@
-<script>
+<script lang="ts">
   import { onMount } from "svelte";
   import createLocaleStorage from "../lib/createLocaleStorage";
   import GithubIcon from "./GithubIcon.svelte";
+
+  interface StarCountStorageData {
+    value: number;
+    fetchedAt: number;
+  }
+
+  interface GitHubApiResponse {
+    stargazers_count?: number;
+  }
 
   const REPOSITORY_PATH = "matschik/component-party.dev";
   const STAR_COUNT_EXPIRES_IN_MS = 1000 * 60 * 2;
 
   const starCountStorage = createLocaleStorage("github-star-count");
 
-  let starCount = $state(0);
-  let isFetchingStarCount = $state(false);
+  let starCount: number = $state(0);
+  let isFetchingStarCount: boolean = $state(false);
 
-  async function getRepoStarCount() {
-    const starCountStorageData = starCountStorage.getJSON();
+  async function getRepoStarCount(): Promise<void> {
+    const starCountStorageData: StarCountStorageData | null =
+      starCountStorage.getJSON();
     if (starCountStorageData) {
       starCount = starCountStorageData.value;
       if (
@@ -26,14 +36,14 @@
     isFetchingStarCount = true;
 
     // Github public API rate limit: 60 requests per hour
-    const data = await fetch(
+    const data: GitHubApiResponse = await fetch(
       `https://api.github.com/repos/${REPOSITORY_PATH}`,
       {
         headers: {
           Accept: "application/vnd.github.v3.star+json",
           Authorization: "",
         },
-      }
+      },
     )
       .finally(() => {
         isFetchingStarCount = false;
@@ -53,7 +63,7 @@
     getRepoStarCount();
   });
 
-  function onButtonClick() {
+  function onButtonClick(): void {
     starCountStorage.remove();
   }
 </script>

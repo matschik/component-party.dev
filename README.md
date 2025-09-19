@@ -433,7 +433,7 @@ How do we solve this ? Developers love having framework overview by examples. It
 <details>
   <summary>
     <img width="18" height="18" src="public/framework/ember.svg" />
-    <b>Ember Polaris (preview)</b>
+    <b>Ember Polaris</b>
     <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/91" />
   </summary>
 
@@ -655,6 +655,44 @@ How do we solve this ? Developers love having framework overview by examples. It
 - [ ] Webapp features
   - [ ] Render app
   - [x] Fetch data
+
+</details>
+    
+<details>
+  <summary>
+    <img width="18" height="18" src="public/framework/ripple.svg" />
+    <b>Ripple</b>
+    <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/91" />
+  </summary>
+
+- [x] Reactivity
+  - [x] Declare state
+  - [x] Update state
+  - [x] Computed state
+- [x] Templating
+  - [x] Minimal template
+  - [x] Styling
+  - [x] Loop
+  - [x] Event click
+  - [x] Dom ref
+  - [x] Conditional
+- [x] Lifecycle
+  - [x] On mount
+  - [x] On unmount
+- [ ] Component composition
+  - [x] Props
+  - [x] Emit to parent
+  - [x] Slot
+  - [x] Slot fallback
+  - [ ] Context
+- [x] Form input
+  - [x] Input text
+  - [x] Checkbox
+  - [x] Radio
+  - [x] Select
+- [ ] Webapp features
+  - [x] Render app
+  - [ ] Fetch data
 
 </details>
 

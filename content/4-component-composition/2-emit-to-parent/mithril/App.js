@@ -12,7 +12,7 @@ export default function App() {
         "",
         m("p", "Are you happy?"),
         m("p", { style: { fontSize: 50 } }, isHappy ? "😀" : "😥"),
-        m(AnswerButton, { onYes: onAnswerYes, onNo: onAnswerNo })
+        m(AnswerButton, { onYes: onAnswerYes, onNo: onAnswerNo }),
       ),
   };
 }

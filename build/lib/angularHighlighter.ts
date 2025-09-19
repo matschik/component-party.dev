@@ -1,12 +1,15 @@
-import { codeToHighlightCodeHtml } from "./highlighter.js";
+import { codeToHighlightCodeHtml } from "./highlighter.ts";
 
-export function mustUseAngularHighlighter(fileContent) {
+export function mustUseAngularHighlighter(fileContent: string): boolean {
   return (
     fileContent.includes("@angular/core") && fileContent.includes("template")
   );
 }
 
-export async function highlightAngularComponent(fileContent, fileExt) {
+export async function highlightAngularComponent(
+  fileContent: string,
+  fileExt: string,
+): Promise<string> {
   const templateCode = getAngularTemplateCode(fileContent);
 
   let codeHighlighted = "";
@@ -15,26 +18,26 @@ export async function highlightAngularComponent(fileContent, fileExt) {
       removeAngularTemplateContent(fileContent);
     const templateCodeHighlighted = await codeToHighlightCodeHtml(
       templateCode,
-      "html"
+      "html",
     );
 
     const componentWithoutTemplateHighlighted = await codeToHighlightCodeHtml(
       componentWithEmptyTemplate,
-      fileExt
+      fileExt,
     );
 
     codeHighlighted = componentWithoutTemplateHighlighted.replace(
       "template",
-      "template: `" + removeCodeWrapper(templateCodeHighlighted) + "`,"
+      "template: `" + removeCodeWrapper(templateCodeHighlighted) + "`,",
     );
   } else {
-    codeHighlighted = codeToHighlightCodeHtml(fileContent, fileExt);
+    codeHighlighted = await codeToHighlightCodeHtml(fileContent, fileExt);
   }
 
   return codeHighlighted;
 }
 
-function getAngularTemplateCode(fileContent) {
+function getAngularTemplateCode(fileContent: string): string {
   // regex to grab what is inside angular component template inside backticks
   const regex = /template:\s*`([\s\S]*?)`/gm;
 
@@ -46,17 +49,17 @@ function getAngularTemplateCode(fileContent) {
   return "";
 }
 
-function removeAngularTemplateContent(fileContent) {
+function removeAngularTemplateContent(fileContent: string): string {
   const componentWithoutContentInsideTemplate = fileContent.replace(
     /template:\s*`([\s\S]*?)([^*])`,?/gm,
-    "template"
+    "template",
   );
 
   return componentWithoutContentInsideTemplate;
 }
 
-function removeCodeWrapper(html) {
+function removeCodeWrapper(html: string): string {
   const regexForWrapper = /<pre([\s\S]*?)><code>([\s\S]*?)<\/code><\/pre>/gm;
   const code = regexForWrapper.exec(html);
-  return code[2];
+  return code ? code[2] : "";
 }

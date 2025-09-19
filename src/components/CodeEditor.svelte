@@ -1,19 +1,32 @@
-<script>
-  import c from "classnames";
+<script lang="ts">
   import { notifications } from "./NotificationCenter.svelte";
-  import copyToClipboard from "../lib/copyToClipboard.js";
+  import copyToClipboard from "../lib/copyToClipboard.ts";
 
-  const { files = [], snippetEditHref } = $props();
+  interface File {
+    fileName: string;
+    contentHtml: string;
+  }
 
-  let codeSnippetEl = $state();
+  interface Props {
+    files: File[];
+    snippetEditHref?: string;
+  }
 
-  let filenameSelected = $state(files.length > 0 && files[0]?.fileName);
+  const { files = [], snippetEditHref }: Props = $props();
 
-  const snippet = $derived(
-    filenameSelected && files.find((s) => s.fileName === filenameSelected)
+  let codeSnippetEl: HTMLElement | undefined = $state();
+
+  let filenameSelected: string | undefined = $state(
+    files.length > 0 ? files[0]?.fileName : undefined,
   );
 
-  function copySnippet() {
+  const snippet: File | undefined = $derived(
+    filenameSelected
+      ? files.find((s) => s.fileName === filenameSelected)
+      : undefined,
+  );
+
+  function copySnippet(): void {
     if (codeSnippetEl) {
       copyToClipboard(codeSnippetEl.innerText);
       notifications.show({
@@ -26,10 +39,10 @@
 <div class="flex space-x-1 items-center ml-0 overflow-x-auto">
   {#each files as file (file.fileName)}
     <button
-      class={c(
+      class={[
         "bg-[#0d1117] py-1.5 px-3 flex-shrink-0 text-xs rounded-t inline-block",
-        filenameSelected !== file.fileName && "opacity-60"
-      )}
+        filenameSelected !== file.fileName && "opacity-60",
+      ]}
       onclick={() => {
         filenameSelected = file.fileName;
       }}
@@ -44,7 +57,9 @@
     bind:this={codeSnippetEl}
     class="bg-[#0d1117] px-4 py-3 text-sm overflow-auto"
   >
-    {@html snippet.contentHtml}
+    {#if snippet}
+      {@html snippet.contentHtml}
+    {/if}
   </div>
   <div
     class="absolute hidden group-hover:block transition-all top-0 right-0 mt-2 mr-2"

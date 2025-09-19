@@ -18,6 +18,6 @@ export const FunnyButton = () => ({
           outline: "0",
         },
       },
-      m(children)
+      m(children),
     ),
 });

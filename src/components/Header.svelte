@@ -1,11 +1,16 @@
-<script>
+<script lang="ts">
   import { notifications } from "./NotificationCenter.svelte";
   import GithubStarButton from "./GithubStarButton.svelte";
-  import copyToClipboard from "../lib/copyToClipboard.js";
+  import copyToClipboard from "../lib/copyToClipboard.ts";
+  import type { Framework } from "../../frameworks";
 
-  let { frameworksSelected = [] } = $props();
+  interface Props {
+    frameworksSelected: Framework[];
+  }
 
-  function copyShareLink() {
+  let { frameworksSelected = [] }: Props = $props();
+
+  function copyShareLink(): void {
     if (frameworksSelected.length === 0) {
       return;
     }

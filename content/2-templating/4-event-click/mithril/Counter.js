@@ -8,7 +8,7 @@ export default function Counter() {
       m(
         "div",
         m("p", `Counter: ${count}`),
-        m("button", { onclick: incrementCount }, "+1")
+        m("button", { onclick: incrementCount }, "+1"),
       ),
   };
 }
