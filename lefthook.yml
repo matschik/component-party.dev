@@ -1,0 +1,6 @@
+pre-commit:
+  commands:
+    format:
+      run: pnpm prettier --cache --ignore-path .gitignore --plugin-search-dir=. --write {staged_files}
+      glob: "*.{js,ts,svelte,html,md,css}"
+      stage_fixed: true

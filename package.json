@@ -13,7 +13,7 @@
     "format:check": "prettier --ignore-path .gitignore --plugin-search-dir=. . --check",
     "build:content": "node scripts/generateContent.js",
     "build:progress": "node scripts/generateReadMeProgress.js",
-    "prepare": "husky"
+    "prepare": "lefthook install"
   },
   "dependencies": {
     "@iconify-json/heroicons": "^1.2.2",
@@ -35,8 +35,7 @@
     "eta": "^4.0.1",
     "folder-hash": "^4.1.1",
     "html-minifier-terser": "^7.2.0",
-    "husky": "^9.1.7",
-    "lint-staged": "^16.1.6",
+    "lefthook": "^1.13.1",
     "lodash.kebabcase": "^4.1.1",
     "markdown-it": "^14.1.0",
     "micache": "^2.4.1",
@@ -50,9 +49,6 @@
     "unocss": "66.5.1",
     "vite": "^7.1.6",
     "vite-plugin-html": "^3.2.2"
-  },
-  "lint-staged": {
-    "*.{js,ts,svelte,html,md,css}": "prettier --cache --write"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
