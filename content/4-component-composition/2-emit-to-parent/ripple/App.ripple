@@ -1,17 +1,19 @@
+
+import { track } from "ripple";
 import { AnswerButton } from "./AnswerButton.ripple";
 
 export component App() {
-  let $isHappy = true;
+  let isHappy = track(true);
 
   function onAnswerNo() {
-    $isHappy = false;
+    @isHappy = false;
   }
 
   function onAnswerYes() {
-    $isHappy = true;
+    @isHappy = true;
   }
 
   <p>{`Are you happy?`}</p>
   <AnswerButton onYes={onAnswerYes} onNo={onAnswerNo} />
-  <p style="font-size: 50px;">{$isHappy ? "😀" : "😥"}</p>
+  <p style="font-size: 50px;">{@isHappy ? "😀" : "😥"}</p>
 }

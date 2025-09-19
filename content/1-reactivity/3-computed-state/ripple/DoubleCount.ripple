@@ -1,6 +1,8 @@
-export component DoubleCount() {
-  let $count = 10;
-  const $doubleCount = $count * 2;
+import { track } from "ripple";
 
-  <div>{$doubleCount}</div>
+export component DoubleCount() {
+  let count = track(10);
+  const doubleCount = track(() => @count * 2);
+
+  <div>{@doubleCount}</div>
 }

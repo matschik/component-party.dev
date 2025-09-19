@@ -1,5 +1,7 @@
-export component Name() {
-  let $name = "John";
+import { track } from "ripple";
 
-  <h1>{`Hello ${$name}`}</h1>
+export component Name() {
+  let name = track("John");
+
+  <h1>{`Hello ${@name}`}</h1>
 }

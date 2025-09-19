@@ -1,10 +1,12 @@
+import { track } from "ripple";
+
 export component InputHello() {
-  let $text = "Hello world";
+  let text = track("Hello world");
 
   function handleChange(event) {
-    $text = event.target.value;
+    @text = event.target.value;
   }
 
-  <p>{$text}</p>
-  <input value={$text} onInput={handleChange} />
+  <p>{@text}</p>
+  <input value={@text} onInput={handleChange} />
 }
