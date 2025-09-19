@@ -16,6 +16,9 @@ const highlighter = await createHighlighter({
     "vue",
     "marko",
   ],
+  langAlias: {
+    ripple: "jsx", // until ripple is supported by shiki
+  },
 });
 
 const md = MarkdownIt({

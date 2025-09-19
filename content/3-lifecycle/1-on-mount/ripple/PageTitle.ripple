@@ -1,0 +1,11 @@
+import { effect } from "ripple";
+
+export component PageTitle() {
+  let $pageTitle = "";
+
+  effect(() => {
+    $pageTitle = document.title;
+  });
+
+  <h1>{`Page title: ${$pageTitle}`}</h1>
+}

@@ -1,0 +1,17 @@
+import { track } from "ripple";
+
+export component IsAvailable() {
+  let isAvailable = track(false);
+
+  function handleChange() {
+    @isAvailable = !@isAvailable;
+  }
+
+  <input 
+    id="is-available" 
+    type="checkbox" 
+    checked={@isAvailable} 
+    onChange={handleChange}
+  />
+  <label for="is-available">{`Is available`}</label>
+}

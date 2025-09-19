@@ -1,0 +1,9 @@
+export component Colors() {
+  const colors = ["red", "green", "blue"];
+
+  <ul>
+    for (const color of colors) {
+      <li>{color}</li>
+    }
+  </ul>
+}

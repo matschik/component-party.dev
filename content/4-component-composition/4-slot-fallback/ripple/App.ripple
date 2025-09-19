@@ -1,0 +1,6 @@
+import { FunnyButton } from "./FunnyButton.ripple";
+
+export component App() {
+  <FunnyButton />
+  <FunnyButton>{"I got content!"}</FunnyButton>
+}

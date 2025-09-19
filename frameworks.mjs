@@ -475,6 +475,23 @@ const frameworks = [
     repositoryLink: "https://github.com/aurelia/framework",
     mainPackageName: "aurelia-framework",
   },
+  {
+    id: "ripple",
+    title: "Ripple",
+    frameworkName: "Ripple",
+    isCurrentVersion: true,
+    img: "framework/ripple.svg",
+    eslint: {
+      files: ["!**"],
+    },
+    playgroundURL: "https://www.ripplejs.com/playground",
+    documentationURL: "https://www.ripplejs.com/",
+    filesSorter(files) {
+      return sortAllFilenames(files, ["index.html", "main.js", "App.ripple"]);
+    },
+    repositoryLink: "https://github.com/trueadm/ripple",
+    mainPackageName: "ripple",
+  },
 ];
 
 export function matchFrameworkId(id) {
