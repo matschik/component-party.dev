@@ -1,6 +1,13 @@
 import nodePath from "node:path";
-import { compressToURL } from "@matschik/lz-string";
-import { getParameters } from "codesandbox/lib/api/define.js";
+import { compressToURL, compressToBase64 } from "@matschik/lz-string";
+
+// Replacement for codesandbox's getParameters function
+function getParameters(parameters) {
+  return compressToBase64(JSON.stringify(parameters))
+    .replace(/\+/g, "-") // Convert '+' to '-'
+    .replace(/\//g, "_") // Convert '/' to '_'
+    .replace(/=+$/, ""); // Remove ending '='
+}
 
 export default {
   vue3: (contentByFilename) => {
