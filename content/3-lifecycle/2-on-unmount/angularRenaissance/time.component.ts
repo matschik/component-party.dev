@@ -9,7 +9,7 @@ export class TimeComponent implements OnDestroy {
 
   timer = setInterval(
     () => this.time.set(new Date().toLocaleTimeString()),
-    1000
+    1000,
   );
 
   ngOnDestroy() {

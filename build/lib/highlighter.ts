@@ -1,15 +1,17 @@
 import { createHighlighter } from "shiki";
 import MarkdownIt from "markdown-it";
-import Shiki from "@shikijs/markdown-it";
-import componentPartyShikiTheme from "./componentPartyShikiTheme.js";
+import { fromHighlighter } from "@shikijs/markdown-it/core";
+import componentPartyShikiTheme from "./componentPartyShikiTheme.ts";
 
 // Singleton instances
-let highlighter = null;
-let md = null;
+let highlighter: any = null;
+let md: any = null;
+let highlighterPromise: Promise<any> | null = null;
 
 async function getHighlighter() {
-  if (!highlighter) {
-    highlighter = await createHighlighter({
+  if (!highlighterPromise) {
+    highlighterPromise = createHighlighter({
+      // @ts-ignore - Custom theme configuration
       theme: componentPartyShikiTheme,
       langs: [
         "javascript",
@@ -27,6 +29,11 @@ async function getHighlighter() {
       },
     });
   }
+
+  if (!highlighter) {
+    highlighter = await highlighterPromise;
+  }
+
   return highlighter;
 }
 
@@ -36,8 +43,10 @@ async function getMarkdownIt() {
       html: true,
     });
 
+    const highlighterInstance = await getHighlighter();
     md.use(
-      await Shiki({
+      fromHighlighter(highlighterInstance, {
+        // @ts-ignore - Custom theme configuration
         theme: componentPartyShikiTheme,
       }),
     );
@@ -45,27 +54,34 @@ async function getMarkdownIt() {
   return md;
 }
 
-export async function codeToHighlightCodeHtml(code, lang) {
+export async function codeToHighlightCodeHtml(
+  code: string,
+  lang: string,
+): Promise<string> {
   const highlighterInstance = await getHighlighter();
   const html = await highlighterInstance.codeToHtml(code, {
     lang,
+    // @ts-ignore - Custom theme configuration
     theme: componentPartyShikiTheme,
   });
 
   return html;
 }
 
-export async function markdownToHighlightedHtml(markdownText) {
+export async function markdownToHighlightedHtml(
+  markdownText: string,
+): Promise<string> {
   const mdInstance = await getMarkdownIt();
   const html = mdInstance.render(markdownText);
   return html;
 }
 
 // Function to dispose of instances when no longer needed
-export async function disposeHighlighter() {
+export async function disposeHighlighter(): Promise<void> {
   if (highlighter) {
     await highlighter.dispose();
     highlighter = null;
   }
+  highlighterPromise = null;
   md = null;
 }

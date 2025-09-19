@@ -1,11 +1,19 @@
-<script>
-  import FRAMEWORKS from "../../frameworks.mjs";
+<script lang="ts">
+  import FRAMEWORKS from "../../frameworks";
+  import type { Framework } from "../../frameworks";
 
-  let { id, size = 20 } = $props();
+  interface Props {
+    id: string;
+    size?: number;
+  }
 
-  const framework = $derived(FRAMEWORKS.find((f) => f.id === id));
+  let { id, size = 20 }: Props = $props();
 
-  const baseURL = import.meta.env.DEV
+  const framework: Framework | undefined = $derived(
+    FRAMEWORKS.find((f) => f.id === id),
+  );
+
+  const baseURL: string = import.meta.env.DEV
     ? "/"
     : "https://raw.githubusercontent.com/matschik/component-party/main/public/";
 </script>

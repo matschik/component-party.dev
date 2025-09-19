@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "lib": ["ES2022"],
     "module": "ESNext",
     "skipLibCheck": true,
     "moduleResolution": "bundler",
@@ -9,7 +9,6 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "preserve",
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -19,12 +18,11 @@
     "forceConsistentCasingInFileNames": true
   },
   "include": [
-    "src/**/*",
+    "vite.config.ts",
+    "svelte.config.ts",
     "build/**/*",
     "scripts/**/*",
-    "types/**/*",
-    "*.ts",
-    "*.mts"
+    "frameworks.ts"
   ],
-  "exclude": ["node_modules", "dist", "content"]
+  "exclude": ["node_modules", "dist", "content", "src"]
 }

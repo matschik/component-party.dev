@@ -1,14 +1,32 @@
-function sortAllFilenames(files, filenamesSorted) {
+interface File {
+  fileName: string;
+  [key: string]: any;
+}
+
+function sortAllFilenames(files: File[], filenamesSorted: string[]): File[] {
   return [
     ...filenamesSorted.map((filename) =>
-      files.find(({ fileName }) => fileName === filename)
+      files.find(({ fileName }) => fileName === filename),
     ),
     ...(files.filter(({ fileName }) => !filenamesSorted.includes(fileName)) ||
       []),
-  ].filter(Boolean);
+  ].filter(Boolean) as File[];
 }
 
-const frameworks = [
+export interface Framework {
+  id: string;
+  title: string;
+  frameworkName: string;
+  isCurrentVersion: boolean;
+  img: string;
+  playgroundURL: string;
+  documentationURL: string;
+  filesSorter: (files: File[]) => File[];
+  repositoryLink: string;
+  mainPackageName: string;
+}
+
+const frameworks: Framework[] = [
   {
     id: "svelte5",
     title: "Svelte 5",
@@ -284,9 +302,9 @@ const frameworks = [
   },
 ];
 
-export function matchFrameworkId(id) {
+export function matchFrameworkId(id: string): Framework | undefined {
   return frameworks.find(
-    (framework) => framework.id === id
+    (framework) => framework.id === id,
     // ||(framework.isCurrentVersion &&
     //   framework.frameworkName.toLowerCase() === id)
   );

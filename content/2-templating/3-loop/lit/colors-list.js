@@ -12,7 +12,7 @@ export class ColorsList extends LitElement {
         ${repeat(
           this.colors,
           (color) => color,
-          (color) => html`<li>${color}</li>`
+          (color) => html`<li>${color}</li>`,
         )}
       </ul>
     `;

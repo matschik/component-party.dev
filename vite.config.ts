@@ -4,8 +4,8 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { Eta } from "eta";
 import { minify as htmlMinify } from "html-minifier-terser";
-import FRAMEWORKS from "./frameworks.mjs";
-import pluginGenerateFrameworkContent from "./build/generateContentVitePlugin.js";
+import FRAMEWORKS from "./frameworks";
+import pluginGenerateFrameworkContent from "./build/generateContentVitePlugin";
 import UnoCSS from "unocss/vite";
 import { svelteInspector } from "@sveltejs/vite-plugin-svelte-inspector";
 // @TODO: sitemap
@@ -115,7 +115,7 @@ export default defineConfig({
   },
 });
 
-async function generateHtmlPagesPlugin(pages) {
+async function generateHtmlPagesPlugin(pages: any[]) {
   const eta = new Eta({ views: "." });
 
   const template = {
@@ -126,7 +126,7 @@ async function generateHtmlPagesPlugin(pages) {
   };
 
   const htmlTransform = {
-    include(html) {
+    include(html: string) {
       for (const [templateName, templateContent] of Object.entries(template)) {
         html = html.replace(
           `<!--template:${templateName}-->`,
@@ -135,14 +135,14 @@ async function generateHtmlPagesPlugin(pages) {
       }
       return html;
     },
-    render(htmlEta, data) {
+    render(htmlEta: string, data: any) {
       return eta.renderString(htmlEta, data);
     },
   };
 
   return {
     name: "generate-html-pages",
-    transformIndexHtml(html, ctx) {
+    transformIndexHtml(html: string, ctx: any) {
       html = htmlTransform.include(html);
       if (ctx.server) {
         const matchedPage = pages.find(
@@ -167,14 +167,14 @@ async function generateHtmlPagesPlugin(pages) {
         const compiledHtml = eta.renderString(templateContent, templateData);
         const minifiedHtml = await htmlMinify(compiledHtml);
         const dirPath = path.dirname(outputPath);
-        await fs.mkdir(dirPath, { recursive: true, force: true });
+        await fs.mkdir(dirPath, { recursive: true });
         await fs.writeFile(outputPath, minifiedHtml, "utf8");
       }
     },
   };
 }
 
-function filePathToUrl(filePath) {
+function filePathToUrl(filePath: string) {
   let normalizedPath = path.normalize(filePath);
   let baseName = path.basename(normalizedPath);
 

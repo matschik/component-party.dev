@@ -1,20 +1,60 @@
 import fs from "node:fs/promises";
 import { packageDirectory } from "package-directory";
 import path from "node:path";
-import kebabCase from "lodash.kebabcase";
-import FRAMEWORKS from "../../frameworks.mjs";
-import playgroundUrlByFramework from "./playgroundUrlByFramework.js";
+import FRAMEWORKS from "../../frameworks.ts";
+import playgroundUrlByFramework from "./playgroundUrlByFramework.ts";
 import prettier from "prettier";
 import {
   highlightAngularComponent,
   mustUseAngularHighlighter,
-} from "./angularHighlighter.js";
+} from "./angularHighlighter.ts";
 import {
   codeToHighlightCodeHtml,
   markdownToHighlightedHtml,
-} from "./highlighter.js";
+} from "./highlighter.ts";
+import { kebabCase } from "../../scripts/utils.ts";
 
-async function pathExists(path) {
+interface File {
+  fileName: string;
+  ext: string;
+  content?: string;
+  contentHtml: string;
+}
+
+interface FrameworkFile {
+  fileName: string;
+  [key: string]: any;
+}
+
+interface FrameworkSnippet {
+  frameworkId: string;
+  snippetId: string;
+  files: File[];
+  playgroundURL: string;
+  markdownFiles: File[];
+  snippetEditHref: string;
+}
+
+interface Section {
+  sectionId: string;
+  sectionDirName: string;
+  title: string;
+}
+
+interface Snippet {
+  sectionId: string;
+  snippetId: string;
+  snippetDirName: string;
+  sectionDirName: string;
+  title: string;
+}
+
+interface TreePayload {
+  sections: Section[];
+  snippets: Snippet[];
+}
+
+async function pathExists(path: string): Promise<boolean> {
   try {
     await fs.access(path);
     return true;
@@ -23,17 +63,20 @@ async function pathExists(path) {
   }
 }
 
-export default async function generateContent() {
+export default async function generateContent(): Promise<void> {
   const rootDir = await packageDirectory();
+  if (!rootDir) {
+    throw new Error("Could not find package directory");
+  }
   const contentPath = path.join(rootDir, "content");
   const sectionDirNames = await fs.readdir(contentPath);
 
-  const treePayload = {
+  const treePayload: TreePayload = {
     sections: [],
     snippets: [],
   };
 
-  const byFrameworkId = {};
+  const byFrameworkId: Record<string, FrameworkSnippet[]> = {};
 
   for (const sectionDirName of sectionDirNames) {
     const sectionTitle = dirNameToTitle(sectionDirName);
@@ -64,8 +107,8 @@ export default async function generateContent() {
       const frameworkIds = FRAMEWORKS.map(({ id }) => id);
 
       await Promise.all(
-        frameworkIds.map(async (frameworkId) => {
-          const frameworkSnippet = {
+        frameworkIds.map(async (frameworkId: string) => {
+          const frameworkSnippet: FrameworkSnippet = {
             frameworkId,
             snippetId,
             files: [],
@@ -83,10 +126,10 @@ export default async function generateContent() {
 
           for (const codeFileName of codeFileNames) {
             const codeFilePath = path.join(codeFilesDirPath, codeFileName);
-            const ext = path.parse(codeFilePath).ext.split(".").pop();
+            const ext = path.parse(codeFilePath).ext.split(".").pop() || "";
             const content = await fs.readFile(codeFilePath, "utf-8");
 
-            const file = {
+            const file: File = {
               fileName: codeFileName,
               ext,
               content,
@@ -106,10 +149,14 @@ export default async function generateContent() {
           }
 
           if (frameworkSnippet.files.length > 0) {
-            const { filesSorter } = FRAMEWORKS.find(
+            const frameworkConfig = FRAMEWORKS.find(
               (f) => f.id === frameworkId,
             );
-            frameworkSnippet.files = filesSorter(frameworkSnippet.files);
+            if (frameworkConfig) {
+              frameworkSnippet.files = frameworkConfig.filesSorter(
+                frameworkSnippet.files as FrameworkFile[],
+              ) as File[];
+            }
             const playgroundURL = await generatePlaygroundURL(
               frameworkId,
               frameworkSnippet.files,
@@ -122,8 +169,9 @@ export default async function generateContent() {
 
             // Remove content key, not used anymore
             frameworkSnippet.files = frameworkSnippet.files.map((file) => ({
-              ...file,
-              content: undefined,
+              fileName: file.fileName,
+              ext: file.ext,
+              contentHtml: file.contentHtml,
             }));
           }
 
@@ -193,31 +241,40 @@ export default async function generateContent() {
   );
 }
 
-function dirNameToTitle(dirName) {
+function dirNameToTitle(dirName: string): string {
   return capitalize(dirName.split("-").splice(1).join(" "));
 }
 
-function capitalize(string) {
+function capitalize(string: string): string {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-async function writeJsFile(filepath, jsCode) {
+async function writeJsFile(filepath: string, jsCode: string): Promise<void> {
   const codeFormatted = await prettier.format(jsCode, { parser: "babel" });
   await fs.writeFile(filepath, codeFormatted);
 }
 
-async function generatePlaygroundURL(frameworkId, files, title) {
+async function generatePlaygroundURL(
+  frameworkId: string,
+  files: File[],
+  title: string,
+): Promise<string | undefined> {
   const frameworkIdPlayground = playgroundUrlByFramework[frameworkId];
   if (!frameworkIdPlayground) {
     return;
   }
 
   const frameworkConfig = FRAMEWORKS.find((f) => f.id === frameworkId);
+  if (!frameworkConfig) {
+    return;
+  }
 
   const contentByFilename = frameworkConfig
-    .filesSorter(files)
-    .reduce((acc, file) => {
-      acc[file.fileName] = file.content;
+    .filesSorter(files as any)
+    .reduce((acc: Record<string, string>, file) => {
+      if (file.content) {
+        acc[file.fileName] = file.content;
+      }
       return acc;
     }, {});
 

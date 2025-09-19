@@ -20,9 +20,9 @@ export default function PickPill() {
               value: pill,
               onchange: handleChange,
             }),
-            m("label", { for: pill }, pill)
-          )
-        )
+            m("label", { for: pill }, pill),
+          ),
+        ),
       ),
   };
 }

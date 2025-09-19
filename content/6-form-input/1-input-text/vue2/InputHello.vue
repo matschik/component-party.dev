@@ -11,6 +11,6 @@ export default {
 <template>
   <div>
     <p>{{ text }}</p>
-    <input v-model="text">
+    <input v-model="text" />
   </div>
 </template>

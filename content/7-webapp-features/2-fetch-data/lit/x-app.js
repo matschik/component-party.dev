@@ -18,7 +18,7 @@ export class XApp extends LitElement {
                 <img src=${user.picture.thumbnail} alt="user" />
                 <p>${user.name.first} ${user.name.last}</p>
               </li>
-            `
+            `,
           )}
         </ul>
       `,

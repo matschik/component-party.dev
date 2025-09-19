@@ -5,7 +5,7 @@ import presetIcons from "@unocss/preset-icons";
 
 export default defineConfig({
   content: {
-    filesystem: ["build/template/*.html"],
+    filesystem: ["src/**/*.{html,js,ts,svelte}", "build/template/*.html"],
   },
   presets: [presetIcons(), presetWind(), presetTypography()],
 });

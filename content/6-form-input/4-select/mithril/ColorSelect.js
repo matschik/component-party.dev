@@ -17,8 +17,8 @@ export default function ColorSelect() {
         "select",
         { value: selectedColorId, onchange: handleSelect },
         colors.map(({ id, text, isDisabled }) =>
-          m("option", { key: id, id, disabled: isDisabled, value: id }, text)
-        )
+          m("option", { key: id, id, disabled: isDisabled, value: id }, text),
+        ),
       ),
   };
 }

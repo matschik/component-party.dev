@@ -1,11 +1,36 @@
 import fs from "fs/promises";
 import { packageDirectory } from "package-directory";
 import path from "node:path";
-import kebabCase from "lodash.kebabcase";
-import FRAMEWORKS from "../frameworks.mjs";
+import FRAMEWORKS from "../frameworks.ts";
 import prettier from "prettier";
+import { kebabCase } from "./utils.ts";
 
-async function main() {
+interface File {
+  path: string;
+  fileName: string;
+  ext: string;
+}
+
+interface FrameworkChild {
+  dirName: string;
+  path: string;
+  files: File[];
+}
+
+interface SubSection {
+  id: string;
+  path: string;
+  dirName: string;
+  title: string;
+  children: FrameworkChild[];
+}
+
+interface Section {
+  title: string;
+  children: SubSection[];
+}
+
+async function main(): Promise<void> {
   const contentTree = await parseContentDir();
   const readmeContent = await fs.readFile("README.md", "utf8");
 
@@ -27,35 +52,38 @@ async function main() {
 
 main().catch(console.error);
 
-async function parseContentDir() {
+async function parseContentDir(): Promise<Section[]> {
   const rootDir = await packageDirectory();
+  if (!rootDir) {
+    throw new Error("Could not find package directory");
+  }
   const contentPath = path.join(rootDir, "content");
   const rootDirs = await fs.readdir(contentPath);
 
-  function dirNameToTitle(dirName) {
+  function dirNameToTitle(dirName: string): string {
     return capitalize(dirName.split("-").slice(1).join(" "));
   }
 
-  function capitalize(str) {
+  function capitalize(str: string): string {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
 
-  const sections = [];
+  const sections: Section[] = [];
 
   for (const rootDirName of rootDirs) {
     const rootSectionPath = path.join(contentPath, rootDirName);
     const subDirs = await fs.readdir(rootSectionPath).catch(() => []);
-    const children = [];
+    const children: SubSection[] = [];
 
     for (const subDir of subDirs) {
       const subDirPath = path.join(rootSectionPath, subDir);
       const frameworks = await fs.readdir(subDirPath).catch(() => []);
-      const frameworkChildren = [];
+      const frameworkChildren: FrameworkChild[] = [];
 
       for (const fw of frameworks) {
         const fwPath = path.join(subDirPath, fw);
         const fileNames = await fs.readdir(fwPath).catch(() => []);
-        const files = fileNames.map((fileName) => ({
+        const files: File[] = fileNames.map((fileName) => ({
           path: path.join(fwPath, fileName),
           fileName,
           ext: path.extname(fileName).slice(1),
@@ -81,24 +109,26 @@ async function parseContentDir() {
   return sections;
 }
 
-function mdCheck(b) {
+function mdCheck(b: boolean): string {
   return b ? "x" : " ";
 }
 
-async function generateProgressionMarkdown(contentTree) {
+async function generateProgressionMarkdown(
+  contentTree: Section[],
+): Promise<string> {
   let output = "";
 
   for (const framework of FRAMEWORKS) {
-    const frameworkLines = [];
-    const allChecks = [];
+    const frameworkLines: string[] = [];
+    const allChecks: boolean[] = [];
 
     for (const root of contentTree) {
-      const sectionChecks = [];
-      const subLines = [];
+      const sectionChecks: boolean[] = [];
+      const subLines: string[] = [];
 
       for (const sub of root.children) {
         const fwEntry = sub.children.find((c) => c.dirName === framework.id);
-        const hasFiles = fwEntry?.files?.length > 0;
+        const hasFiles = (fwEntry?.files?.length ?? 0) > 0;
         sectionChecks.push(!!hasFiles);
         subLines.push(`   * [${mdCheck(hasFiles)}] ${sub.title}`);
       }

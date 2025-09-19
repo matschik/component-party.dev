@@ -6,7 +6,7 @@ import { FormsModule } from "@angular/forms";
   selector: "app-color-select",
   template: `
     <select [(ngModel)]="selectedColorId">
-      @for (let color of colors; track: color) {
+      @for (let color of colors; track color) {
         <option [value]="color.id" [disabled]="color.isDisabled">
           {{ color.text }}
         </option>

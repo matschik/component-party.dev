@@ -1,14 +1,13 @@
-<script>
-  import c from "classnames";
+<script lang="ts">
   import { sections, snippets } from "../generatedContent/tree.js";
   import { onMount, onDestroy } from "svelte";
-  import throttle from "../lib/throttle.js";
+  import throttle from "just-throttle";
 
-  let largestVisibleSnippetId = $state(null);
+  let largestVisibleSnippetId: string | null = $state(null);
 
-  function getLargestElement(elements) {
+  function getLargestElement(elements: NodeListOf<Element>): Element | null {
     let largestArea = 0;
-    let largestElement = null;
+    let largestElement: Element | null = null;
 
     for (const element of elements) {
       const rect = element.getBoundingClientRect();
@@ -30,13 +29,14 @@
     return largestElement;
   }
 
-  function listenLargestSnippetOnScroll() {
-    function onScroll() {
+  function listenLargestSnippetOnScroll(): () => void {
+    function onScroll(): void {
       const largestSnippet = getLargestElement(
-        document.querySelectorAll("[data-snippet-id]")
+        document.querySelectorAll("[data-snippet-id]"),
       );
       if (largestSnippet) {
-        largestVisibleSnippetId = largestSnippet.dataset.snippetId;
+        largestVisibleSnippetId =
+          largestSnippet.getAttribute("data-snippet-id");
       } else {
         largestVisibleSnippetId = null;
       }
@@ -51,7 +51,7 @@
     };
   }
 
-  let unlistenLargestSnippetOnScroll;
+  let unlistenLargestSnippetOnScroll: (() => void) | undefined;
 
   onMount(() => {
     unlistenLargestSnippetOnScroll = listenLargestSnippetOnScroll();
@@ -71,30 +71,30 @@
         <li>
           <a
             href={`#${section.sectionId}`}
-            class={c(
+            class={[
               "inline-block w-full py-1.5 px-4 text-white font-semibold opacity-90 hover:opacity-100 hover:bg-gray-800 rounded transition-opacity",
               {
                 "bg-gray-800":
                   largestVisibleSnippetId &&
                   largestVisibleSnippetId.startsWith(section.sectionId),
-              }
-            )}
+              },
+            ]}
           >
             {section.title}
           </a>
           <ul>
-            {#each snippets.filter((s) => s.sectionId === section.sectionId) as snippet}
+            {#each snippets.filter((s: any) => s.sectionId === section.sectionId) as snippet}
               {@const snippetPathId =
                 section.sectionId + "." + snippet.snippetId}
               <li>
                 <a
                   href={`#${snippetPathId}`}
-                  class={c(
+                  class={[
                     "inline-block w-full py-1.5 px-4 text-white font-medium hover:bg-gray-800 rounded hover:opacity-100 transition-opacity",
                     snippetPathId === largestVisibleSnippetId
                       ? "bg-gray-800 opacity-70"
-                      : "opacity-50"
-                  )}
+                      : "opacity-50",
+                  ]}
                 >
                   {snippet.title}
                 </a>

@@ -1,21 +1,21 @@
-import generateContent from "./lib/generateContent.js";
+import generateContent from "./lib/generateContent";
 import { createFsCache } from "micache";
 import { hashElement } from "folder-hash";
 import chokidar from "chokidar";
-import { disposeHighlighter } from "./lib/highlighter.js";
+import { disposeHighlighter } from "./lib/highlighter.ts";
 
 const contentDirFsCache = await createFsCache("pluginGenerateFrameworkContent");
 
 export default function pluginGenerateFrameworkContent() {
   const name = "generateFrameworkContent";
 
-  function logInfo(...args) {
+  function logInfo(...args: any[]) {
     console.info(`[${name}]`, ...args);
   }
 
   let buildIsRunning = false;
 
-  async function build() {
+  async function build(): Promise<void> {
     if (buildIsRunning) {
       return;
     }
@@ -24,7 +24,7 @@ export default function pluginGenerateFrameworkContent() {
     const contentDirHash =
       (await hashElement("content")).hash +
       (await hashElement("build")).hash +
-      (await hashElement("frameworks.mjs")).hash;
+      (await hashElement("frameworks.ts")).hash;
 
     const contentDirLastHash = await contentDirFsCache.get("contentDirHash");
     if (contentDirHash !== contentDirLastHash) {
@@ -37,14 +37,14 @@ export default function pluginGenerateFrameworkContent() {
     buildIsRunning = false;
   }
 
-  let fsContentWatcher;
+  let fsContentWatcher: chokidar.FSWatcher | undefined;
   if (process.env.NODE_ENV === "development") {
     fsContentWatcher = chokidar.watch(["content"]).on("change", build);
   }
 
   return {
     name,
-    async buildStart() {
+    async buildStart(): Promise<void> {
       try {
         await build();
       } catch (error) {
@@ -52,7 +52,7 @@ export default function pluginGenerateFrameworkContent() {
         throw error;
       }
     },
-    async buildEnd() {
+    async buildEnd(): Promise<void> {
       fsContentWatcher && (await fsContentWatcher.close());
       // Dispose of highlighter instances to prevent memory leaks
       await disposeHighlighter();

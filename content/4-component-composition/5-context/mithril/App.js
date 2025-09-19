@@ -15,7 +15,7 @@ export default function App() {
       m(
         "",
         m("h1", `Welcome Back, ${user.username}`),
-        m(UserProfile, { user, updateUsername })
+        m(UserProfile, { user, updateUsername }),
       ),
   };
 }

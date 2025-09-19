@@ -1,23 +1,49 @@
 import nodePath from "node:path";
 import { compressToURL, compressToBase64 } from "@matschik/lz-string";
 
+interface PlaygroundFunction {
+  (
+    contentByFilename: Record<string, string>,
+    title?: string,
+  ): string | Promise<string | undefined>;
+}
+
+interface SveltePlaygroundOptions {
+  version: number;
+  contentByFilename: Record<string, string>;
+  title?: string;
+}
+
+interface File {
+  name: string;
+  basename: string;
+  contents: string;
+  text: boolean;
+  type: string;
+}
+
+interface PlaygroundData {
+  title: string;
+  files: File[];
+}
+
 // Replacement for codesandbox's getParameters function
-function getParameters(parameters) {
+function getParameters(parameters: any): string {
   return compressToBase64(JSON.stringify(parameters))
     .replace(/\+/g, "-") // Convert '+' to '-'
     .replace(/\//g, "_") // Convert '/' to '_'
     .replace(/=+$/, ""); // Remove ending '='
 }
 
-export default {
-  vue3: (contentByFilename) => {
+const playgroundUrlByFramework: Record<string, PlaygroundFunction> = {
+  vue3: (contentByFilename: Record<string, string>) => {
     const BASE_URL = "https://sfc.vuejs.org/#";
 
-    function utoa(data) {
+    function utoa(data: string): string {
       return btoa(unescape(encodeURIComponent(data)));
     }
 
-    function generateURLFromData(data) {
+    function generateURLFromData(data: any): string {
       return `${BASE_URL}${utoa(JSON.stringify(data))}`;
     }
     const data = Object.assign({}, contentByFilename, {
@@ -28,21 +54,27 @@ export default {
     const url = generateURLFromData(data);
     return url;
   },
-  svelte4: async (contentByFilename, title) => {
+  svelte4: async (
+    contentByFilename: Record<string, string>,
+    title?: string,
+  ) => {
     return generateSveltePlaygroundURL({
       version: 4,
       contentByFilename,
       title,
     });
   },
-  svelte5: async (contentByFilename, title) => {
+  svelte5: async (
+    contentByFilename: Record<string, string>,
+    title?: string,
+  ) => {
     return generateSveltePlaygroundURL({
       version: 5,
       contentByFilename,
       title,
     });
   },
-  alpine: (contentByFilename) => {
+  alpine: (contentByFilename: Record<string, string>) => {
     const BASE_URL =
       "https://codesandbox.io/api/v1/sandboxes/define?embed=1&parameters=";
     const BASE_PREFIX = `<!DOCTYPE html>\n<html lang="en">\n  <head>\n    <meta charset="UTF-8" />\n    <meta name="viewport" content="width=device-width, initial-scale=1.0" />\n    <meta http-equiv="X-UA-Compatible" content="ie=edge" />\n    <title>Alpine.js Playground</title>\n    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>\n  </head>\n  <body>\n\n`;
@@ -56,9 +88,7 @@ export default {
         },
         "index.html": {
           content:
-            BASE_PREFIX +
-            (contentByFilename["index.html"]?.content || "") +
-            BASE_SUFFIX,
+            BASE_PREFIX + (contentByFilename["index.html"] || "") + BASE_SUFFIX,
         },
         "sandbox.config.json": {
           content: '{\n  "template": "static"\n}',
@@ -68,13 +98,13 @@ export default {
 
     return `${BASE_URL}${parameters}`;
   },
-  solid: (contentByFilename) => {
+  solid: (contentByFilename: Record<string, string>) => {
     const BASE_URL = "https://playground.solidjs.com/#";
     const SOURCE_PREFIX = `import { render } from "solid-js/web";\n`;
-    const getSourceSuffix = (componentName) =>
+    const getSourceSuffix = (componentName: string) =>
       `\n\nrender(() => <${componentName} />, document.getElementById("app"));\n`;
 
-    function generateURLFromData(data) {
+    function generateURLFromData(data: any): string {
       return `${BASE_URL}${compressToURL(JSON.stringify(data))}`;
     }
 
@@ -99,7 +129,7 @@ export default {
 
     return generateURLFromData(data);
   },
-  marko: async (contentByFilename) => {
+  marko: async (contentByFilename: Record<string, string>) => {
     let firstFile = true;
     const data = Object.entries(contentByFilename).map(([path, content]) => ({
       path: firstFile ? (firstFile = false) || "index.marko" : path,
@@ -113,11 +143,13 @@ export default {
   },
 };
 
+export default playgroundUrlByFramework;
+
 async function generateSveltePlaygroundURL({
   version,
   contentByFilename,
   title,
-}) {
+}: SveltePlaygroundOptions): Promise<string | undefined> {
   const BASE_URL = `https://svelte.dev/playground/untitled?version=${version}#`;
 
   const filenames = Object.keys(contentByFilename);
@@ -125,7 +157,7 @@ async function generateSveltePlaygroundURL({
     return;
   }
 
-  const files = filenames.map((filename, index) => {
+  const files: File[] = filenames.map((filename, index) => {
     const contents = contentByFilename[filename];
     const name = index === 0 ? "App.svelte" : nodePath.parse(filename).base;
     return {
@@ -137,9 +169,12 @@ async function generateSveltePlaygroundURL({
     };
   });
 
-  const payload = { title, files };
+  const payload: PlaygroundData = { title: title || "", files };
 
   const hash = await compress_and_encode_text(JSON.stringify(payload));
+  if (!hash) {
+    return;
+  }
 
   const url = `${BASE_URL}${hash}`;
 
@@ -147,7 +182,7 @@ async function generateSveltePlaygroundURL({
 }
 
 // method `compress_and_encode_text` from https://github.com/sveltejs/svelte.dev/blob/main/apps/svelte.dev/src/routes/(authed)/playground/%5Bid%5D/gzip.js
-async function compress_and_encode_text(input) {
+async function compress_and_encode_text(input: string): Promise<string> {
   const reader = new Blob([input])
     .stream()
     .pipeThrough(new CompressionStream("gzip"))
@@ -168,7 +203,7 @@ async function compress_and_encode_text(input) {
 }
 
 // method `compress` from https://github.com/marko-js/website/blob/main/src/util/hasher.ts#L8-L25
-export async function markoCompress(value) {
+export async function markoCompress(value: string): Promise<string> {
   const stream = new CompressionStream("gzip");
   const writer = stream.writable.getWriter();
   writer.write(new TextEncoder().encode(value));

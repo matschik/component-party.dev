@@ -4,10 +4,7 @@ const colors = ["red", "green", "blue"];
 
 <template>
   <ul>
-    <li
-      v-for="color in colors"
-      :key="color"
-    >
+    <li v-for="color in colors" :key="color">
       {{ color }}
     </li>
   </ul>
