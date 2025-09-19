@@ -1,5 +1,5 @@
 import fs from "node:fs/promises";
-import { packageDirectory } from "pkg-dir";
+import { packageDirectory } from "package-directory";
 import path from "node:path";
 import kebabCase from "lodash.kebabcase";
 import FRAMEWORKS from "../../frameworks.mjs";
@@ -107,13 +107,13 @@ export default async function generateContent() {
 
           if (frameworkSnippet.files.length > 0) {
             const { filesSorter } = FRAMEWORKS.find(
-              (f) => f.id === frameworkId
+              (f) => f.id === frameworkId,
             );
             frameworkSnippet.files = filesSorter(frameworkSnippet.files);
             const playgroundURL = await generatePlaygroundURL(
               frameworkId,
               frameworkSnippet.files,
-              title
+              title,
             );
 
             if (playgroundURL) {
@@ -132,7 +132,7 @@ export default async function generateContent() {
           }
 
           byFrameworkId[frameworkId].push(frameworkSnippet);
-        })
+        }),
       );
     }
   }
@@ -153,7 +153,7 @@ export default async function generateContent() {
     ${commentDisclaimer}
     export const sections = ${JSON.stringify(treePayload.sections, null, 2)};
     export const snippets = ${JSON.stringify(treePayload.snippets, null, 2)};
-  `
+  `,
   );
 
   if (!(await pathExists(frameworkDirPath))) {
@@ -164,16 +164,16 @@ export default async function generateContent() {
     Object.keys(byFrameworkId).map((frameworkId) => {
       const frameworkFilePath = path.join(
         frameworkDirPath,
-        `${frameworkId}.js`
+        `${frameworkId}.js`,
       );
       return writeJsFile(
         frameworkFilePath,
         `
         ${commentDisclaimer}
         export default ${JSON.stringify(byFrameworkId[frameworkId], null, 2)}
-        `
+        `,
       );
-    })
+    }),
   );
 
   await writeJsFile(
@@ -184,12 +184,12 @@ export default async function generateContent() {
         ${Object.keys(byFrameworkId)
           .map(
             (frameworkId) =>
-              `${frameworkId}: () => import("./${frameworkId}.js")`
+              `${frameworkId}: () => import("./${frameworkId}.js")`,
           )
           .join(",\n")}
         
     };
-    `
+    `,
   );
 }
 

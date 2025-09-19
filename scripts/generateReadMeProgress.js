@@ -1,5 +1,5 @@
 import fs from "fs/promises";
-import { packageDirectory } from "pkg-dir";
+import { packageDirectory } from "package-directory";
 import path from "node:path";
 import kebabCase from "lodash.kebabcase";
 import FRAMEWORKS from "../frameworks.mjs";
@@ -14,12 +14,12 @@ async function main() {
   const MARKER_START = "<!-- progression start -->";
   const MARKER_END = "<!-- progression end -->";
   const progressionContentRegex = new RegExp(
-    `${MARKER_START}([\\s\\S]*?)${MARKER_END}`
+    `${MARKER_START}([\\s\\S]*?)${MARKER_END}`,
   );
 
   const newReadmeContent = readmeContent.replace(
     progressionContentRegex,
-    `${MARKER_START}\n${progressionContent}\n${MARKER_END}`
+    `${MARKER_START}\n${progressionContent}\n${MARKER_END}`,
   );
 
   await fs.writeFile("README.md", newReadmeContent);
@@ -104,14 +104,14 @@ async function generateProgressionMarkdown(contentTree) {
       }
 
       frameworkLines.push(
-        `* [${mdCheck(sectionChecks.every(Boolean))}] ${root.title}`
+        `* [${mdCheck(sectionChecks.every(Boolean))}] ${root.title}`,
       );
       frameworkLines.push(...subLines);
       allChecks.push(...sectionChecks);
     }
 
     const percent = Math.ceil(
-      (allChecks.filter(Boolean).length / allChecks.length) * 100
+      (allChecks.filter(Boolean).length / allChecks.length) * 100,
     );
 
     const markdown = `
