@@ -77,5 +77,8 @@
     "onlyBuiltDependencies": [
       "esbuild"
     ]
+  },
+  "engines": {
+    "node": ">=22.18.0"
   }
 }
