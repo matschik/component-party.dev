@@ -22,7 +22,7 @@
 
   async function getRepoStarCount(): Promise<void> {
     const starCountStorageData: StarCountStorageData | null =
-      starCountStorage.getJSON();
+      starCountStorage.getJSON() as StarCountStorageData | null;
     if (starCountStorageData) {
       starCount = starCountStorageData.value;
       if (

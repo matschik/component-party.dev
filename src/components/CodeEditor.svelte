@@ -58,6 +58,7 @@
     class="bg-[#0d1117] px-4 py-3 text-sm overflow-auto"
   >
     {#if snippet}
+      <!-- eslint-disable-next-line svelte/no-at-html-tags -->
       {@html snippet.contentHtml}
     {/if}
   </div>

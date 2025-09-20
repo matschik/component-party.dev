@@ -7,7 +7,7 @@ export default function copyToClipboard(value: string): boolean {
   try {
     document.execCommand("copy");
     success = true;
-  } catch (err) {
+  } catch {
     alert(
       "Oops, unable to copy to clipboard. Please check website permissions.",
     );

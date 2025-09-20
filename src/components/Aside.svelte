@@ -58,7 +58,7 @@
   });
 
   onDestroy(() => {
-    unlistenLargestSnippetOnScroll && unlistenLargestSnippetOnScroll();
+    unlistenLargestSnippetOnScroll?.();
   });
 </script>
 
@@ -67,7 +67,7 @@
 >
   <nav class="w-full text-base py-2 pl-4 pb-20">
     <ul class="space-y-6">
-      {#each sections as section}
+      {#each sections as section (section.sectionId)}
         <li>
           <a
             href={`#${section.sectionId}`}
@@ -83,7 +83,7 @@
             {section.title}
           </a>
           <ul>
-            {#each snippets.filter((s: any) => s.sectionId === section.sectionId) as snippet}
+            {#each snippets.filter((s: any) => s.sectionId === section.sectionId) as snippet (snippet.snippetId)}
               {@const snippetPathId =
                 section.sectionId + "." + snippet.snippetId}
               <li>

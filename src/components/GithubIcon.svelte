@@ -1,7 +1,6 @@
 <script lang="ts">
   interface Props {
-    class?: string;
-    [key: string]: any;
+    [key: string]: unknown;
   }
 
   const props: Props = $props();

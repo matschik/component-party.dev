@@ -28,5 +28,5 @@
       alt={`logo of ${framework.title}`}
     />
   {/if}
-  <span class="flex-shrink-0">{framework.title}</span>
+  <span class="flex-shrink-0">{framework?.title || id}</span>
 </div>
