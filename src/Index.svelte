@@ -6,8 +6,7 @@
   import snippetsImporterByFrameworkId from "./generatedContent/framework/index.js";
   import CodeEditor from "./components/CodeEditor.svelte";
   import createLocaleStorage from "./lib/createLocaleStorage.ts";
-  import { onMount } from "svelte";
-  import { IsMounted } from "runed";
+  import { watch } from "runed";
   import Header from "./components/Header.svelte";
   import Aside from "./components/Aside.svelte";
   import {
@@ -15,7 +14,7 @@
     FRAMEWORK_SEPARATOR,
   } from "./constants.ts";
   import { searchParams } from "sv-router";
-  import { navigate, route } from "./router.ts";
+  import { navigate } from "./router.ts";
 
   interface File {
     fileName: string;
@@ -32,183 +31,72 @@
     snippetEditHref: string;
   }
 
-  const frameworkIdsStorage = createLocaleStorage("framework_display");
-
-  function hasSearchParams() {
-    return searchParams.has(FRAMEWORK_IDS_FROM_URL_KEY);
-  }
-
-  function getFrameworkIdsFromURL(
-    searchParamsOverride: string | null = null,
-  ): string[] {
-    const frameworkIdsFromURLStr = searchParamsOverride
-      ? new URLSearchParams(searchParamsOverride).get(
-          FRAMEWORK_IDS_FROM_URL_KEY,
-        )
-      : searchParams.get(FRAMEWORK_IDS_FROM_URL_KEY);
-
-    if (!frameworkIdsFromURLStr || typeof frameworkIdsFromURLStr !== "string") {
-      return [];
-    }
-
-    return frameworkIdsFromURLStr
-      .split(FRAMEWORK_SEPARATOR)
-      .filter(matchFrameworkId);
-  }
-
-  const SITE_TITLE = "Component Party";
-  const MAX_FRAMEWORK_NB_INITIAL_DISPLAYED = 9;
+  const MAX_FRAMEWORK_NOBONUS = 9;
   const DEFAULT_FRAMEWORKS = ["react", "svelte5"];
+  const FRAMEWORKS_BONUS = frameworks.slice(MAX_FRAMEWORK_NOBONUS);
+  const frameworkIdsStorage = createLocaleStorage<string[]>(
+    "framework_display",
+    [],
+  );
 
   const frameworkIdsSelected = new SvelteSet<string>();
+  const frameworkIdsSelectedArr = $derived([...frameworkIdsSelected]);
+  const frameworksSelected = $derived(
+    frameworkIdsSelectedArr.map((id: string) => matchFrameworkId(id)),
+  );
   const snippetsByFrameworkId = new SvelteMap<string, FrameworkSnippet[]>();
   let frameworkIdsSelectedInitialized = $state(false);
-  let isVersusFrameworks = $state(false);
-  let isUpdatingSearchParams = $state(false);
-  const isMounted = new IsMounted();
-
-  const frameworksBonus = frameworks.slice(MAX_FRAMEWORK_NB_INITIAL_DISPLAYED);
-
-  function handleRouteChange() {
-    window.scrollTo(0, 0);
-    isVersusFrameworks = false;
-    document.title = SITE_TITLE;
-
-    if (route.pathname === "/") {
-      if (isMounted.current) {
-        handleInitialFrameworkIdsSelectedFromStorage({ useDefaults: false });
-      }
-    } else {
-      navigate("/");
+  const isVersusFrameworks = $derived(frameworksSelected.length === 2);
+  const siteTitle = $derived(
+    isVersusFrameworks
+      ? `${frameworksSelected.map((f) => f!.title).join(" vs ")} - Component Party`
+      : "Component Party",
+  );
+  const frameworkIdsFromSearchParam = $derived.by(() => {
+    const value = searchParams.get(FRAMEWORK_IDS_FROM_URL_KEY);
+    if (typeof value === "string") {
+      return value.split(FRAMEWORK_SEPARATOR).filter(matchFrameworkId);
     }
-  }
-
-  let lastSearchParams = $state("");
-
-  // Use runes to reactively handle route changes
-  $effect(() => {
-    const mounted = isMounted.current;
-
-    if (mounted) {
-      // Handle route changes
-      handleRouteChange();
-
-      // Handle search parameter changes
-      handleSearchParamsChange();
-    }
+    return [];
   });
 
-  // Use runes to reactively handle search parameter changes
-  $effect(() => {
-    if (isMounted.current) {
-      handleSearchParamsChange();
-    }
-  });
-
-  function handleSearchParamsChange() {
-    if (
-      !isMounted.current ||
-      route.pathname !== "/" ||
-      isUpdatingSearchParams
-    ) {
-      return;
-    }
-
-    const currentSearchParams =
-      Object.keys(route.search).length > 0
-        ? new URLSearchParams(route.search as Record<string, string>).toString()
-        : "";
-    if (currentSearchParams === lastSearchParams) {
-      return;
-    }
-
-    lastSearchParams = currentSearchParams;
-
-    if (currentSearchParams) {
-      const frameworkIdsFromURL = getFrameworkIdsFromURL(currentSearchParams);
-      const currentSelections = [...frameworkIdsSelected].sort();
-      const urlSelections = frameworkIdsFromURL.sort();
-
-      // Only reset if the URL has different frameworks than what we currently have selected
-      // and we're not in the middle of a programmatic update
-      if (
-        JSON.stringify(currentSelections) !== JSON.stringify(urlSelections) &&
-        frameworkIdsSelectedInitialized
-      ) {
-        frameworkIdsSelectedInitialized = false;
-        frameworkIdsSelected.clear();
-        handleInitialFrameworkIdsSelectedFromStorage({ useDefaults: false });
-      }
-    }
-  }
-
-  function handleInitialFrameworkIdsSelectedFromStorage({
-    useDefaults,
-  }: {
-    useDefaults: boolean;
-  }) {
-    if (frameworkIdsSelectedInitialized) {
-      return;
-    }
-
-    let frameworkIdsToSelect = getFrameworkIdsFromURL();
-
-    if (frameworkIdsToSelect.length === 0) {
-      const frameworkIdsFromStorage = (
-        frameworkIdsStorage.getJSON() as string[] | null
-      )?.filter((id: string) => matchFrameworkId(id));
-
-      if (frameworkIdsFromStorage && frameworkIdsFromStorage.length > 0) {
-        redirectToHomeWithSearchParams(frameworkIdsFromStorage);
-        return;
-      }
-    }
-
-    if (frameworkIdsToSelect.length === 0 && useDefaults) {
-      frameworkIdsToSelect = DEFAULT_FRAMEWORKS;
-    }
-
-    selectFrameworks(frameworkIdsToSelect);
-    frameworkIdsSelectedInitialized = true;
-  }
-
-  function redirectToHomeWithSearchParams(frameworkIds: string[]) {
-    searchParams.set(
-      FRAMEWORK_IDS_FROM_URL_KEY,
-      frameworkIds.join(FRAMEWORK_SEPARATOR),
-    );
-  }
+  // handle on link click
+  watch(
+    [() => frameworkIdsFromSearchParam],
+    () => {
+      selectFrameworks(frameworkIdsFromSearchParam);
+    },
+    { lazy: true },
+  );
 
   function selectFrameworks(frameworkIds: string[]) {
+    frameworkIdsSelected.clear();
     for (const frameworkId of frameworkIds) {
       frameworkIdsSelected.add(frameworkId);
     }
-
-    if (frameworkIds.length === 2) {
-      isVersusFrameworks = true;
-      const frameworks = frameworkIds.map((id: string) => matchFrameworkId(id));
-      if (frameworks.every((f) => f)) {
-        document.title = `${frameworks.map((f) => f!.title).join(" vs ")} - ${SITE_TITLE}`;
-      }
-    }
+    navigateWithFrameworkSelection();
   }
 
-  onMount(() => {
-    if (hasSearchParams()) {
-      handleInitialFrameworkIdsSelectedFromStorage({ useDefaults: false });
+  function onInit() {
+    // From search param
+    if (frameworkIdsFromSearchParam.length > 0) {
+      selectFrameworks(frameworkIdsFromSearchParam);
+    } else if (frameworkIdsSelected.size === 0) {
+      // From local storage
+      const frameworkIdsFromStorage = frameworkIdsStorage
+        .getJSON()
+        .filter((id) => matchFrameworkId(id));
+
+      selectFrameworks(frameworkIdsFromStorage);
     } else {
-      const hasBeenInitialized = localStorage.getItem(
-        "framework_display_initialized",
-      );
-      if (!hasBeenInitialized) {
-        handleInitialFrameworkIdsSelectedFromStorage({ useDefaults: true });
-      }
+      // Default frameworks
+      selectFrameworks(DEFAULT_FRAMEWORKS);
     }
-  });
 
-  function saveFrameworkIdsSelectedOnStorage() {
-    frameworkIdsStorage.setJSON([...frameworkIdsSelected]);
+    frameworkIdsSelectedInitialized = true;
   }
+
+  onInit();
 
   function toggleFrameworkId(frameworkId: string) {
     if (frameworkIdsSelected.has(frameworkId)) {
@@ -216,69 +104,25 @@
     } else {
       frameworkIdsSelected.add(frameworkId);
     }
-
-    saveFrameworkIdsSelectedOnStorage();
-    updateUIAfterFrameworkToggle();
+    navigateWithFrameworkSelection();
   }
 
-  function updateUIAfterFrameworkToggle() {
-    if (isVersusFrameworks && frameworkIdsSelected.size > 2) {
-      // Clear only the framework search parameter, preserve others
-      isUpdatingSearchParams = true;
-      searchParams.delete(FRAMEWORK_IDS_FROM_URL_KEY);
-      setTimeout(() => {
-        isUpdatingSearchParams = false;
-      }, 0);
-      return;
-    }
-
+  async function navigateWithFrameworkSelection() {
     if (frameworkIdsSelected.size === 0) {
-      // Clear only the framework search parameter, preserve others
-      isUpdatingSearchParams = true;
       searchParams.delete(FRAMEWORK_IDS_FROM_URL_KEY);
-      setTimeout(() => {
-        isUpdatingSearchParams = false;
-      }, 0);
-      return;
-    }
-
-    updateURLWithFrameworkSelection();
-    updateTitleAndVersusMode();
-  }
-
-  function updateURLWithFrameworkSelection() {
-    isUpdatingSearchParams = true;
-    searchParams.set(
-      FRAMEWORK_IDS_FROM_URL_KEY,
-      [...frameworkIdsSelected].join(FRAMEWORK_SEPARATOR),
-    );
-    // Reset the flag after a brief delay to allow the search params to update
-    setTimeout(() => {
-      isUpdatingSearchParams = false;
-    }, 0);
-  }
-
-  function updateTitleAndVersusMode() {
-    if (frameworkIdsSelected.size === 2) {
-      const frameworks = [...frameworkIdsSelected].map((id: string) =>
-        matchFrameworkId(id),
-      );
-      if (frameworks.every((f) => f)) {
-        document.title = `${frameworks.map((f) => f!.title).join(" vs ")} - ${SITE_TITLE}`;
-        isVersusFrameworks = true;
-      }
     } else {
-      document.title = SITE_TITLE;
-      isVersusFrameworks = false;
+      searchParams.set(
+        FRAMEWORK_IDS_FROM_URL_KEY,
+        frameworkIdsSelectedArr.join(FRAMEWORK_SEPARATOR),
+      );
     }
   }
 
   let snippetsByFrameworkIdLoading = new SvelteSet<string>();
   let snippetsByFrameworkIdError = new SvelteSet<string>();
 
-  $effect(() => {
-    const frameworkIds = [...frameworkIdsSelected];
-    frameworkIds.map((frameworkId) => {
+  watch([() => frameworkIdsSelected.entries()], () => {
+    for (const frameworkId of frameworkIdsSelectedArr) {
       if (!snippetsByFrameworkId.has(frameworkId)) {
         snippetsByFrameworkIdError.delete(frameworkId);
         snippetsByFrameworkIdLoading.add(frameworkId);
@@ -300,21 +144,21 @@
             snippetsByFrameworkIdLoading.delete(frameworkId);
           });
       }
-    });
+    }
+
+    if (frameworkIdsSelected.size === 0) {
+      navigate("/");
+    }
   });
 
   let showBonusFrameworks = $state(false);
 
-  const frameworksSelected = $derived(
-    [...frameworkIdsSelected].map((id: string) => matchFrameworkId(id)),
-  );
-
   const bonusFrameworks = $derived(
-    frameworksBonus.filter((f) => !frameworkIdsSelected.has(f.id)),
+    FRAMEWORKS_BONUS.filter(({ id }) => !frameworkIdsSelected.has(id)),
   );
 
   const frameworksNotSelected = $derived(
-    frameworks.filter((f) => f && !frameworkIdsSelected.has(f.id)),
+    frameworks.filter(({ id }) => id && !frameworkIdsSelected.has(id)),
   );
 
   const headerFrameworks = $derived(
@@ -324,9 +168,13 @@
         (f) => f && !bonusFrameworks.find((bf) => bf.id === f.id),
       ),
       ...(showBonusFrameworks ? bonusFrameworks : []),
-    ].filter((f) => f) as NonNullable<(typeof frameworks)[0]>[],
+    ].filter((f): f is NonNullable<typeof f> => !!f),
   );
 </script>
+
+<svelte:head>
+  <title>{siteTitle}</title>
+</svelte:head>
 
 <Header />
 
@@ -335,7 +183,7 @@
   <div class="pb-8 w-10 grow">
     <div
       class="flex px-6 lg:px-20 py-2 sticky top-0 z-20 w-full backdrop-blur bg-gray-900/80 border-b border-gray-700 whitespace-nowrap overflow-x-auto"
-      data-framework-id-selected-list={[...frameworkIdsSelected].join(",")}
+      data-framework-id-selected-list={frameworkIdsSelectedArr.join(",")}
       data-testid="framework-selection-bar"
     >
       {#each headerFrameworks as framework (framework.id)}
@@ -353,6 +201,7 @@
             data-testid={`framework-button-${framework.id}`}
             onclick={() => {
               toggleFrameworkId(framework.id);
+              frameworkIdsStorage.setJSON(frameworkIdsSelectedArr);
             }}
           >
             <FrameworkLabel id={framework.id} size={16} />
@@ -362,27 +211,14 @@
       {#if bonusFrameworks.length > 0 && !showBonusFrameworks}
         <button
           title="show more frameworks"
-          class="opacity-70 text-sm flex-shrink-0 rounded border border-gray-700 px-3 py-1 border-opacity-50 bg-gray-900 hover:bg-gray-800 transition-all mr-2"
+          class="opacity-70 text-sm flex-shrink-0 rounded border border-gray-700 px-3 py-1 border-opacity-50 bg-gray-900 hover:bg-gray-800 transition-all mr-2 flex items-center justify-center"
           data-testid="show-more-frameworks-button"
           onclick={() => {
             showBonusFrameworks = !showBonusFrameworks;
           }}
           aria-label="show more frameworks"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="size-4"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
-            />
-          </svg>
+          <span class="iconify ph--dots-three size-4" aria-hidden="true"></span>
         </button>
       {/if}
     </div>
@@ -455,7 +291,7 @@
                         <div
                           class="grid grid-cols-1 2xl:grid-cols-2 gap-10 mt-4"
                         >
-                          {#each [...frameworkIdsSelected] as frameworkId (frameworkId)}
+                          {#each frameworkIdsSelectedArr as frameworkId (frameworkId)}
                             {@const framework = matchFrameworkId(frameworkId)}
                             {@const frameworkSnippet = snippetsByFrameworkId
                               .get(frameworkId)

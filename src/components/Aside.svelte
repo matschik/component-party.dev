@@ -1,6 +1,6 @@
 <script lang="ts">
   import { sections, snippets } from "../generatedContent/tree.js";
-  import { onMount, onDestroy } from "svelte";
+  import { onMount } from "svelte";
   import throttle from "just-throttle";
 
   let largestVisibleSnippetId: string = $state("");
@@ -55,10 +55,8 @@
 
   onMount(() => {
     unlistenLargestSnippetOnScroll = listenLargestSnippetOnScroll();
-  });
 
-  onDestroy(() => {
-    unlistenLargestSnippetOnScroll?.();
+    return () => unlistenLargestSnippetOnScroll?.();
   });
 </script>
 

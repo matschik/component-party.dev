@@ -86,13 +86,11 @@ test.describe("Framework Comparison", () => {
     // Check for error message using test ID - look for any error snippet
     const errorSnippets = page.locator('[data-testid*="error-snippet"]');
     const errorCount = await errorSnippets.count();
-    console.log("Error snippet count:", errorCount);
 
     // If no error snippets found, let's check what's actually rendered
     if (errorCount === 0) {
       const loadingSnippets = page.locator('[data-testid*="loading-snippet"]');
       const loadingCount = await loadingSnippets.count();
-      console.log("Loading snippet count:", loadingCount);
 
       // For now, let's just verify that Angular was selected and the test completed
       const selectedFrameworks = await page.getAttribute(

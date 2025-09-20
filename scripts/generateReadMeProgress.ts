@@ -3,7 +3,7 @@ import { packageDirectory } from "package-directory";
 import path from "node:path";
 import { frameworks } from "../frameworks.ts";
 import prettier from "prettier";
-import { kebabCase } from "./utils.ts";
+import kebabCase from "just-kebab-case";
 
 interface File {
   path: string;

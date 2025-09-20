@@ -14,7 +14,10 @@
   const REPOSITORY_PATH = "matschik/component-party.dev";
   const STAR_COUNT_EXPIRES_IN_MS = 1000 * 60 * 2;
 
-  const starCountStorage = createLocaleStorage("github-star-count");
+  const starCountStorage = createLocaleStorage("github-star-count", {
+    value: 0,
+    fetchedAt: 0,
+  });
 
   let starCount: number = $state(0);
   let isFetchingStarCount: boolean = $state(false);

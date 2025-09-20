@@ -19,6 +19,9 @@ dist
 dist-ssr
 *.local
 
+# Prettier cache
+.cache
+
 # Lint
 
 # Editor directories and files

@@ -1,36 +1,32 @@
-interface LocalStorageAPI {
-  get(): string | null;
-  getJSON(): unknown;
-  setJSON(o: unknown): void;
-  set(v: string): void;
-  remove(): void;
-}
-
-export default function createLocaleStorage(k: string): LocalStorageAPI {
+export default function createLocaleStorage<T = unknown>(
+  k: string,
+  defaultValue: T,
+) {
   function get(): string | null {
     return localStorage.getItem(k);
   }
 
   return {
     get,
-    getJSON(): unknown {
+    getJSON(): T {
       const value = get();
       if (value) {
         try {
-          return JSON.parse(value);
+          return JSON.parse(value) as T;
         } catch (err) {
           console.error({ getJSONErr: err });
-          return undefined;
+          return defaultValue;
         }
       }
+      return defaultValue;
     },
-    setJSON(o: unknown): void {
+    setJSON(o: T) {
       this.set(JSON.stringify(o));
     },
-    set(v: string): void {
+    set(v: string) {
       localStorage.setItem(k, v);
     },
-    remove(): void {
+    remove() {
       localStorage.removeItem(k);
     },
   };

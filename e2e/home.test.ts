@@ -75,7 +75,7 @@ test.describe("Homepage", () => {
     await reactButton.click();
 
     // Wait for the selection to update
-    await page.waitForTimeout(100);
+    await page.waitForTimeout(500);
 
     // Verify React is no longer selected
     const selectedFrameworks = await page.getAttribute(
@@ -86,6 +86,9 @@ test.describe("Homepage", () => {
 
     // Click again to reselect React
     await reactButton.click();
+
+    // Wait for the selection to update
+    await page.waitForTimeout(500);
 
     // Verify React is selected again
     const selectedFrameworksAfter = await page.getAttribute(
