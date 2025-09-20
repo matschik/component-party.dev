@@ -4,7 +4,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { Eta } from "eta";
 import { minify as htmlMinify } from "html-minifier-terser";
-import FRAMEWORKS from "./frameworks";
+import { frameworks } from "./frameworks";
 import pluginGenerateFrameworkContent from "./build/generateContentVitePlugin";
 import { svelteInspector } from "@sveltejs/vite-plugin-svelte-inspector";
 import tailwindcss from "@tailwindcss/vite";
@@ -76,12 +76,17 @@ const footerLinks = footerNavigation.map((n) => n.links).flat();
 const templateDataDefaults = {
   title: "Component Party",
   url: "https://component-party.dev/",
-  description: `Web component JS frameworks overview by their syntax and features: ${FRAMEWORKS.map((f) => f.title).join(", ")}`,
+  description: `Web component JS frameworks overview by their syntax and features: ${frameworks.map((f) => f.title).join(", ")}`,
   image: "https://component-party.dev/banner2.png",
 };
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  resolve: {
+    alias: {
+      "@frameworks": path.resolve(__dirname, "frameworks"),
+    },
+  },
   plugins: [
     pluginGenerateFrameworkContent(),
     svelte(),

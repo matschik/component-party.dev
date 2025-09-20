@@ -1,7 +1,7 @@
 import fs from "node:fs/promises";
 import { packageDirectory } from "package-directory";
 import path from "node:path";
-import FRAMEWORKS from "../../frameworks.ts";
+import { frameworks } from "../../frameworks.ts";
 import playgroundUrlByFramework from "./playgroundUrlByFramework.ts";
 import prettier from "prettier";
 import {
@@ -104,7 +104,7 @@ export default async function generateContent(): Promise<void> {
       });
 
       const frameworksDirPath = path.join(snippetsDirPath, snippetDirName);
-      const frameworkIds = FRAMEWORKS.map(({ id }) => id);
+      const frameworkIds = frameworks.map(({ id }) => id);
 
       await Promise.all(
         frameworkIds.map(async (frameworkId: string) => {
@@ -149,7 +149,7 @@ export default async function generateContent(): Promise<void> {
           }
 
           if (frameworkSnippet.files.length > 0) {
-            const frameworkConfig = FRAMEWORKS.find(
+            const frameworkConfig = frameworks.find(
               (f) => f.id === frameworkId,
             );
             if (frameworkConfig) {
@@ -264,7 +264,7 @@ async function generatePlaygroundURL(
     return;
   }
 
-  const frameworkConfig = FRAMEWORKS.find((f) => f.id === frameworkId);
+  const frameworkConfig = frameworks.find((f) => f.id === frameworkId);
   if (!frameworkConfig) {
     return;
   }

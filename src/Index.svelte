@@ -4,7 +4,7 @@
     SvelteSet,
     SvelteURLSearchParams,
   } from "svelte/reactivity";
-  import FRAMEWORKS, { matchFrameworkId } from "../frameworks";
+  import { frameworks, matchFrameworkId } from "@frameworks";
   import FrameworkLabel from "./components/FrameworkLabel.svelte";
   import { sections, snippets } from "./generatedContent/tree.js";
   import snippetsImporterByFrameworkId from "./generatedContent/framework/index.js";
@@ -44,7 +44,7 @@
   const FRAMEWORK_IDS_FROM_URL_KEY = "f";
   const SITE_TITLE = "Component Party";
   const MAX_FRAMEWORK_NB_INITIAL_DISPLAYED = 9;
-  const FRAMEWORKS_BONUS = FRAMEWORKS.slice(MAX_FRAMEWORK_NB_INITIAL_DISPLAYED);
+  const frameworksBonus = frameworks.slice(MAX_FRAMEWORK_NB_INITIAL_DISPLAYED);
 
   const frameworkIdsSelected = new SvelteSet();
   const snippetsByFrameworkId = new SvelteMap();
@@ -199,11 +199,11 @@
   );
 
   const bonusFrameworks = $derived(
-    FRAMEWORKS_BONUS.filter((f) => !frameworkIdsSelected.has(f.id)),
+    frameworksBonus.filter((f) => !frameworkIdsSelected.has(f.id)),
   );
 
   const frameworksNotSelected = $derived(
-    FRAMEWORKS.filter((f) => !frameworkIdsSelected.has(f.id)),
+    frameworks.filter((f) => !frameworkIdsSelected.has(f.id)),
   );
 
   const headerFrameworks = $derived([
