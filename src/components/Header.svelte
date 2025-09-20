@@ -43,7 +43,10 @@
             aria-label="Copy framework selection link"
             onclick={copyShareLink}
           >
-            <div class="i-heroicons:link size-[1.3rem] sm:size-[1.1rem]"></div>
+            <span
+              class="iconify ph--link size-[1.3rem] sm:size-[1.1rem]"
+              aria-hidden="true"
+            ></span>
             <span class="hidden sm:inline">Share</span>
           </button>
         {/if}

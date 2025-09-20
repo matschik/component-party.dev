@@ -6,8 +6,8 @@ import { Eta } from "eta";
 import { minify as htmlMinify } from "html-minifier-terser";
 import FRAMEWORKS from "./frameworks";
 import pluginGenerateFrameworkContent from "./build/generateContentVitePlugin";
-import UnoCSS from "unocss/vite";
 import { svelteInspector } from "@sveltejs/vite-plugin-svelte-inspector";
+import tailwindcss from "@tailwindcss/vite";
 // @TODO: sitemap
 
 const footerNavigation = [
@@ -101,7 +101,7 @@ export default defineConfig({
         templateData: templateDataDefaults,
       },
     ]),
-    UnoCSS(),
+    tailwindcss(),
   ],
   optimizeDeps: {
     entries: ["src/**/*"],

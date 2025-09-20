@@ -1,3 +1,17 @@
+@import "tailwindcss";
+@plugin "@iconify/tailwind4";
+@plugin "@iconify/tailwind4" {
+  prefix: "iconify";
+  prefixes: ph, simple-icons;
+}
+
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
 @supports (backdrop-filter: blur(10px)) {
   [class*="bg-"].backdrop-blur {
     background-color: rgba(0, 0, 0, 0);

@@ -1,7 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import createLocaleStorage from "../lib/createLocaleStorage";
-  import GithubIcon from "./GithubIcon.svelte";
 
   interface StarCountStorageData {
     value: number;
@@ -76,7 +75,10 @@
   onclick={onButtonClick}
 >
   <span class="flex items-center px-3 sm:space-x-2">
-    <GithubIcon class="size-[1.3rem] sm:size-[1.1rem]" />
+    <span
+      class="iconify simple-icons--github size-[1.3rem] sm:size-[1.1rem]"
+      aria-hidden="true"
+    ></span>
     <span class="hidden sm:inline">Star</span>
   </span>
   {#if isFetchingStarCount || starCount !== 0}
@@ -84,26 +86,10 @@
       class="hidden h-full items-center justify-center px-3 sm:flex border-[#373b43] sm:border-l"
     >
       {#if isFetchingStarCount && starCount === 0}
-        <svg
-          class="animate-spin size-4 mx-1"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-        >
-          <circle
-            class="opacity-25"
-            cx="12"
-            cy="12"
-            r="10"
-            stroke="currentColor"
-            stroke-width="4"
-          />
-          <path
-            class="opacity-75"
-            fill="currentColor"
-            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-          />
-        </svg>
+        <span
+          class="iconify ph--spinner animate-spin size-4 mx-1"
+          aria-hidden="true"
+        ></span>
       {:else}
         <span>{starCount}</span>
       {/if}

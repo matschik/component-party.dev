@@ -14,7 +14,6 @@
   import { getContext, onDestroy, onMount } from "svelte";
   import Header from "./components/Header.svelte";
   import Aside from "./components/Aside.svelte";
-  import GithubIcon from "./components/GithubIcon.svelte";
 
   const { currentRoute, navigate } = getContext("router");
 
@@ -245,7 +244,7 @@
             }
           }}
         >
-          <FrameworkLabel id={framework.id} size={15} />
+          <FrameworkLabel id={framework.id} size={16} />
         </button>
       {/each}
       {#if bonusFrameworks.length > 0 && !showBonusFrameworks}
@@ -280,7 +279,10 @@
         {#if frameworkIdsSelected.size === 0}
           <div class="space-y-4">
             <div class="flex justify-center">
-              <div class="i-heroicons:arrow-up size-6 animate-bounce"></div>
+              <span
+                class="iconify ph--arrow-up size-6 animate-bounce"
+                aria-hidden="true"
+              ></span>
             </div>
             <div class="flex justify-center">
               <p
@@ -367,9 +369,10 @@
                                           aria-label={`Open playground for ${framework.title}`}
                                           tabindex="-1"
                                         >
-                                          <div
-                                            class="i-heroicons:play size-4"
-                                          ></div>
+                                          <span
+                                            class="iconify ph--play size-4"
+                                            aria-hidden="true"
+                                          ></span>
                                         </button>
                                       </a>
                                     {/if}
@@ -422,7 +425,10 @@
                                               >
                                                 <span>Contribute on Github</span
                                                 >
-                                                <GithubIcon class="h-5 w-5" />
+                                                <span
+                                                  class="iconify simple-icons--github size-5"
+                                                  aria-hidden="true"
+                                                ></span>
                                               </button>
                                             </a>
                                           </div>
