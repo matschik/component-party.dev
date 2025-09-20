@@ -2,7 +2,7 @@
   import { notifications } from "./NotificationCenter.svelte";
   import GithubStarButton from "./GithubStarButton.svelte";
   import copyToClipboard from "../lib/copyToClipboard.ts";
-  import type { Framework } from "../../frameworks";
+  import type { Framework } from "@frameworks";
 
   interface Props {
     frameworksSelected: Framework[];

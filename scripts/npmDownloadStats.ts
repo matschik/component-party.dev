@@ -1,4 +1,4 @@
-import frameworks from "../frameworks";
+import { frameworks } from "../frameworks";
 
 const mainPackageNames = frameworks.map((f) => f.mainPackageName);
 

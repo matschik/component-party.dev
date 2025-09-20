@@ -1,6 +1,6 @@
 <script lang="ts">
-  import FRAMEWORKS from "../../frameworks";
-  import type { Framework } from "../../frameworks";
+  import { frameworks } from "@frameworks";
+  import type { Framework } from "@frameworks";
 
   interface Props {
     id: string;
@@ -10,7 +10,7 @@
   let { id, size = 20 }: Props = $props();
 
   const framework: Framework | undefined = $derived(
-    FRAMEWORKS.find((f) => f.id === id),
+    frameworks.find((f) => f.id === id),
   );
 
   const baseURL: string = import.meta.env.DEV
