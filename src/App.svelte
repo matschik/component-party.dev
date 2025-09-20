@@ -1,17 +1,6 @@
 <script lang="ts">
-  import Router from "./Router.svelte";
-  import Index from "./Index.svelte";
-  import type { ComponentType } from "svelte";
-
-  interface Route {
-    path: string;
-    component: () => ComponentType;
-  }
-
-  const routes: Route[] = [
-    { path: "/", component: () => Index },
-    { path: "/compare/:versus", component: () => Index },
-  ];
+  import { Router } from "sv-router";
+  import "./router.ts";
 </script>
 
-<Router {routes} />
+<Router />

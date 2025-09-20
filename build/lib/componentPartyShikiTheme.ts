@@ -1,35 +1,19 @@
-export default {
+import { type ThemeRegistration } from "shiki";
+
+export const componentPartyShikiTheme = {
   name: "one-dark-pro-for-component-party",
   type: "dark",
   semanticHighlighting: true,
   semanticTokenColors: {
-    enumMember: {
-      foreground: "#56b6c2",
-    },
-    "variable.constant": {
-      foreground: "#d19a66",
-    },
-    "variable.defaultLibrary": {
-      foreground: "#e5c07b",
-    },
-    "variable:dart": {
-      foreground: "#d19a66",
-    },
-    "property:dart": {
-      foreground: "#d19a66",
-    },
-    "annotation:dart": {
-      foreground: "#d19a66",
-    },
-    "parameter.label:dart": {
-      foreground: "#abb2bf",
-    },
-    macro: {
-      foreground: "#d19a66",
-    },
-    tomlArrayKey: {
-      foreground: "#e5c07b",
-    },
+    enumMember: "#56b6c2",
+    "variable.constant": "#d19a66",
+    "variable.defaultLibrary": "#e5c07b",
+    "variable:dart": "#d19a66",
+    "property:dart": "#d19a66",
+    "annotation:dart": "#d19a66",
+    "parameter.label:dart": "#abb2bf",
+    macro: "#d19a66",
+    tomlArrayKey: "#e5c07b",
   },
   tokenColors: [
     {
@@ -2110,4 +2094,4 @@ export default {
     "walkThrough.embeddedEditorBackground": "#2e3440",
     "welcomePage.buttonHoverBackground": "#404754",
   },
-};
+} as const satisfies ThemeRegistration;

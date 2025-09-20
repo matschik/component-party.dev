@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { notifications } from "./NotificationCenter.svelte";
   import copyToClipboard from "../lib/copyToClipboard.ts";
 
   interface File {
@@ -10,9 +9,14 @@
   interface Props {
     files: File[];
     snippetEditHref?: string;
+    "data-testid"?: string;
   }
 
-  const { files = [], snippetEditHref }: Props = $props();
+  const {
+    files = [],
+    snippetEditHref,
+    "data-testid": dataTestId,
+  }: Props = $props();
 
   let codeSnippetEl: HTMLElement | undefined = $state();
 
@@ -29,14 +33,14 @@
   function copySnippet(): void {
     if (codeSnippetEl) {
       copyToClipboard(codeSnippetEl.innerText);
-      notifications.show({
-        title: "Snippet copied to clipboard",
-      });
     }
   }
 </script>
 
-<div class="flex space-x-1 items-center ml-0 overflow-x-auto">
+<div
+  class="flex space-x-1 items-center ml-0 overflow-x-auto"
+  data-testid={dataTestId}
+>
   {#each files as file (file.fileName)}
     <button
       class={[

@@ -3,7 +3,7 @@
   import { onMount, onDestroy } from "svelte";
   import throttle from "just-throttle";
 
-  let largestVisibleSnippetId: string | null = $state(null);
+  let largestVisibleSnippetId: string = $state("");
 
   function getLargestElement(elements: NodeListOf<Element>): Element | null {
     let largestArea = 0;
@@ -36,9 +36,9 @@
       );
       if (largestSnippet) {
         largestVisibleSnippetId =
-          largestSnippet.getAttribute("data-snippet-id");
+          largestSnippet.getAttribute("data-snippet-id") ?? "";
       } else {
-        largestVisibleSnippetId = null;
+        largestVisibleSnippetId = "";
       }
     }
 

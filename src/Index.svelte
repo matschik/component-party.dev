@@ -1,165 +1,216 @@
-<script>
-  import {
-    SvelteMap,
-    SvelteSet,
-    SvelteURLSearchParams,
-  } from "svelte/reactivity";
+<script lang="ts">
+  import { SvelteMap, SvelteSet } from "svelte/reactivity";
   import { frameworks, matchFrameworkId } from "@frameworks";
   import FrameworkLabel from "./components/FrameworkLabel.svelte";
   import { sections, snippets } from "./generatedContent/tree.js";
   import snippetsImporterByFrameworkId from "./generatedContent/framework/index.js";
   import CodeEditor from "./components/CodeEditor.svelte";
-  import AppNotificationCenter from "./components/AppNotificationCenter.svelte";
   import createLocaleStorage from "./lib/createLocaleStorage.ts";
-  import { getContext, onDestroy, onMount } from "svelte";
+  import { onMount } from "svelte";
+  import { IsMounted } from "runed";
   import Header from "./components/Header.svelte";
   import Aside from "./components/Aside.svelte";
+  import {
+    FRAMEWORK_IDS_FROM_URL_KEY,
+    FRAMEWORK_SEPARATOR,
+  } from "./constants.ts";
+  import { searchParams } from "sv-router";
+  import { navigate, route } from "./router.ts";
 
-  const { currentRoute, navigate } = getContext("router");
+  interface File {
+    fileName: string;
+    contentHtml: string;
+    [key: string]: unknown;
+  }
+
+  interface FrameworkSnippet {
+    frameworkId: string;
+    snippetId: string;
+    files: File[];
+    playgroundURL: string;
+    markdownFiles: File[];
+    snippetEditHref: string;
+  }
 
   const frameworkIdsStorage = createLocaleStorage("framework_display");
 
-  function removeSearchParamKeyFromURL(k) {
-    // Get the current search params as an object
-    const searchParams = new SvelteURLSearchParams(window.location.search);
-
-    if (!searchParams.has(k)) {
-      // The key doesn't exist, so don't do anything
-      return;
-    }
-
-    // Remove the parameter you want to remove
-    searchParams.delete(k);
-
-    let newUrl = window.location.pathname;
-    if (searchParams.toString().length > 0) {
-      // There are still search params, so include the `?` character
-      newUrl += `?${searchParams}`;
-    }
-
-    // Update the URL without reloading the page
-    history.replaceState({}, "", newUrl);
+  function hasSearchParams() {
+    return searchParams.has(FRAMEWORK_IDS_FROM_URL_KEY);
   }
 
-  const FRAMEWORK_IDS_FROM_URL_KEY = "f";
+  function getFrameworkIdsFromURL(
+    searchParamsOverride: string | null = null,
+  ): string[] {
+    const frameworkIdsFromURLStr = searchParamsOverride
+      ? new URLSearchParams(searchParamsOverride).get(
+          FRAMEWORK_IDS_FROM_URL_KEY,
+        )
+      : searchParams.get(FRAMEWORK_IDS_FROM_URL_KEY);
+
+    if (!frameworkIdsFromURLStr || typeof frameworkIdsFromURLStr !== "string") {
+      return [];
+    }
+
+    return frameworkIdsFromURLStr
+      .split(FRAMEWORK_SEPARATOR)
+      .filter(matchFrameworkId);
+  }
+
   const SITE_TITLE = "Component Party";
   const MAX_FRAMEWORK_NB_INITIAL_DISPLAYED = 9;
-  const frameworksBonus = frameworks.slice(MAX_FRAMEWORK_NB_INITIAL_DISPLAYED);
+  const DEFAULT_FRAMEWORKS = ["react", "svelte5"];
 
-  const frameworkIdsSelected = new SvelteSet();
-  const snippetsByFrameworkId = new SvelteMap();
+  const frameworkIdsSelected = new SvelteSet<string>();
+  const snippetsByFrameworkId = new SvelteMap<string, FrameworkSnippet[]>();
   let frameworkIdsSelectedInitialized = $state(false);
   let isVersusFrameworks = $state(false);
-  let onMountCallbacks = new SvelteSet();
-  let isMounted = $state(false);
+  let isUpdatingSearchParams = $state(false);
+  const isMounted = new IsMounted();
 
-  function handleVersus(versus) {
-    const fids = versus.split("-vs-");
+  const frameworksBonus = frameworks.slice(MAX_FRAMEWORK_NB_INITIAL_DISPLAYED);
 
-    if (fids.length !== 2) {
-      return;
-    }
-
-    const frameworks = fids.map(matchFrameworkId);
-
-    if (frameworks.some((f) => !f)) {
-      return;
-    }
-
-    return frameworks;
-  }
-
-  const unsubscribeCurrentRoute = currentRoute.subscribe(($currentRoute) => {
+  function handleRouteChange() {
     window.scrollTo(0, 0);
     isVersusFrameworks = false;
     document.title = SITE_TITLE;
 
-    if ($currentRoute.path === "/") {
-      if (isMounted) {
+    if (route.pathname === "/") {
+      if (isMounted.current) {
         handleInitialFrameworkIdsSelectedFromStorage({ useDefaults: false });
-      } else {
-        onMountCallbacks.add(() =>
-          handleInitialFrameworkIdsSelectedFromStorage({ useDefaults: true }),
-        );
-      }
-    } else if ($currentRoute.params?.versus) {
-      const versusFrameworks = handleVersus($currentRoute.params.versus);
-      if (versusFrameworks) {
-        isVersusFrameworks = true;
-        for (const versusFramework of versusFrameworks) {
-          frameworkIdsSelected.add(versusFramework.id);
-        }
-        frameworkIdsSelectedInitialized = true;
-        document.title = `${versusFrameworks
-          .map((f) => f.title)
-          .join(" vs ")} - ${SITE_TITLE}`;
-      } else {
-        navigate("/");
       }
     } else {
       navigate("/");
     }
+  }
+
+  let lastSearchParams = $state("");
+
+  // Use runes to reactively handle route changes
+  $effect(() => {
+    const mounted = isMounted.current;
+
+    if (mounted) {
+      // Handle route changes
+      handleRouteChange();
+
+      // Handle search parameter changes
+      handleSearchParamsChange();
+    }
   });
 
-  onDestroy(unsubscribeCurrentRoute);
+  // Use runes to reactively handle search parameter changes
+  $effect(() => {
+    if (isMounted.current) {
+      handleSearchParamsChange();
+    }
+  });
 
-  function handleInitialFrameworkIdsSelectedFromStorage({ useDefaults }) {
+  function handleSearchParamsChange() {
+    if (
+      !isMounted.current ||
+      route.pathname !== "/" ||
+      isUpdatingSearchParams
+    ) {
+      return;
+    }
+
+    const currentSearchParams =
+      Object.keys(route.search).length > 0
+        ? new URLSearchParams(route.search as Record<string, string>).toString()
+        : "";
+    if (currentSearchParams === lastSearchParams) {
+      return;
+    }
+
+    lastSearchParams = currentSearchParams;
+
+    if (currentSearchParams) {
+      const frameworkIdsFromURL = getFrameworkIdsFromURL(currentSearchParams);
+      const currentSelections = [...frameworkIdsSelected].sort();
+      const urlSelections = frameworkIdsFromURL.sort();
+
+      // Only reset if the URL has different frameworks than what we currently have selected
+      // and we're not in the middle of a programmatic update
+      if (
+        JSON.stringify(currentSelections) !== JSON.stringify(urlSelections) &&
+        frameworkIdsSelectedInitialized
+      ) {
+        frameworkIdsSelectedInitialized = false;
+        frameworkIdsSelected.clear();
+        handleInitialFrameworkIdsSelectedFromStorage({ useDefaults: false });
+      }
+    }
+  }
+
+  function handleInitialFrameworkIdsSelectedFromStorage({
+    useDefaults,
+  }: {
+    useDefaults: boolean;
+  }) {
     if (frameworkIdsSelectedInitialized) {
       return;
     }
-    let frameworkIdsSelectedOnInit = [];
 
-    const url = new URL(window.location.href);
+    let frameworkIdsToSelect = getFrameworkIdsFromURL();
 
-    const frameworkIdsFromURLStr = url.searchParams.get(
-      FRAMEWORK_IDS_FROM_URL_KEY,
-    );
+    if (frameworkIdsToSelect.length === 0) {
+      const frameworkIdsFromStorage = (
+        frameworkIdsStorage.getJSON() as string[] | null
+      )?.filter((id: string) => matchFrameworkId(id));
 
-    if (frameworkIdsFromURLStr) {
-      const frameworkIdsFromURL = frameworkIdsFromURLStr
-        .split(",")
-        .filter(matchFrameworkId);
-      if (frameworkIdsFromURL.length > 0) {
-        frameworkIdsSelectedOnInit = frameworkIdsFromURL;
-      } else {
-        removeSearchParamKeyFromURL(FRAMEWORK_IDS_FROM_URL_KEY);
+      if (frameworkIdsFromStorage && frameworkIdsFromStorage.length > 0) {
+        redirectToHomeWithSearchParams(frameworkIdsFromStorage);
+        return;
       }
     }
 
-    if (frameworkIdsSelectedOnInit.length === 0) {
-      const frameworkIdsFromStorage = frameworkIdsStorage
-        .getJSON()
-        ?.filter(matchFrameworkId);
-      if (frameworkIdsFromStorage?.length > 0) {
-        frameworkIdsSelectedOnInit = frameworkIdsFromStorage;
-      }
+    if (frameworkIdsToSelect.length === 0 && useDefaults) {
+      frameworkIdsToSelect = DEFAULT_FRAMEWORKS;
     }
 
-    if (useDefaults && frameworkIdsSelectedOnInit.length === 0) {
-      frameworkIdsSelectedOnInit = ["react", "svelte5"];
-    }
-
-    for (const fid of frameworkIdsSelectedOnInit) {
-      frameworkIdsSelected.add(fid);
-    }
-
+    selectFrameworks(frameworkIdsToSelect);
     frameworkIdsSelectedInitialized = true;
   }
 
-  onMount(() => {
-    isMounted = true;
-    for (const callback of onMountCallbacks) {
-      callback();
+  function redirectToHomeWithSearchParams(frameworkIds: string[]) {
+    searchParams.set(
+      FRAMEWORK_IDS_FROM_URL_KEY,
+      frameworkIds.join(FRAMEWORK_SEPARATOR),
+    );
+  }
+
+  function selectFrameworks(frameworkIds: string[]) {
+    for (const frameworkId of frameworkIds) {
+      frameworkIdsSelected.add(frameworkId);
     }
-    onMountCallbacks.clear();
+
+    if (frameworkIds.length === 2) {
+      isVersusFrameworks = true;
+      const frameworks = frameworkIds.map((id: string) => matchFrameworkId(id));
+      if (frameworks.every((f) => f)) {
+        document.title = `${frameworks.map((f) => f!.title).join(" vs ")} - ${SITE_TITLE}`;
+      }
+    }
+  }
+
+  onMount(() => {
+    if (hasSearchParams()) {
+      handleInitialFrameworkIdsSelectedFromStorage({ useDefaults: false });
+    } else {
+      const hasBeenInitialized = localStorage.getItem(
+        "framework_display_initialized",
+      );
+      if (!hasBeenInitialized) {
+        handleInitialFrameworkIdsSelectedFromStorage({ useDefaults: true });
+      }
+    }
   });
 
   function saveFrameworkIdsSelectedOnStorage() {
     frameworkIdsStorage.setJSON([...frameworkIdsSelected]);
-    removeSearchParamKeyFromURL(FRAMEWORK_IDS_FROM_URL_KEY);
   }
 
-  function toggleFrameworkId(frameworkId) {
+  function toggleFrameworkId(frameworkId: string) {
     if (frameworkIdsSelected.has(frameworkId)) {
       frameworkIdsSelected.delete(frameworkId);
     } else {
@@ -167,21 +218,81 @@
     }
 
     saveFrameworkIdsSelectedOnStorage();
+    updateUIAfterFrameworkToggle();
   }
 
-  let snippetsByFrameworkIdLoading = new SvelteSet();
-  let snippetsByFrameworkIdError = new SvelteSet();
+  function updateUIAfterFrameworkToggle() {
+    if (isVersusFrameworks && frameworkIdsSelected.size > 2) {
+      // Clear only the framework search parameter, preserve others
+      isUpdatingSearchParams = true;
+      searchParams.delete(FRAMEWORK_IDS_FROM_URL_KEY);
+      setTimeout(() => {
+        isUpdatingSearchParams = false;
+      }, 0);
+      return;
+    }
+
+    if (frameworkIdsSelected.size === 0) {
+      // Clear only the framework search parameter, preserve others
+      isUpdatingSearchParams = true;
+      searchParams.delete(FRAMEWORK_IDS_FROM_URL_KEY);
+      setTimeout(() => {
+        isUpdatingSearchParams = false;
+      }, 0);
+      return;
+    }
+
+    updateURLWithFrameworkSelection();
+    updateTitleAndVersusMode();
+  }
+
+  function updateURLWithFrameworkSelection() {
+    isUpdatingSearchParams = true;
+    searchParams.set(
+      FRAMEWORK_IDS_FROM_URL_KEY,
+      [...frameworkIdsSelected].join(FRAMEWORK_SEPARATOR),
+    );
+    // Reset the flag after a brief delay to allow the search params to update
+    setTimeout(() => {
+      isUpdatingSearchParams = false;
+    }, 0);
+  }
+
+  function updateTitleAndVersusMode() {
+    if (frameworkIdsSelected.size === 2) {
+      const frameworks = [...frameworkIdsSelected].map((id: string) =>
+        matchFrameworkId(id),
+      );
+      if (frameworks.every((f) => f)) {
+        document.title = `${frameworks.map((f) => f!.title).join(" vs ")} - ${SITE_TITLE}`;
+        isVersusFrameworks = true;
+      }
+    } else {
+      document.title = SITE_TITLE;
+      isVersusFrameworks = false;
+    }
+  }
+
+  let snippetsByFrameworkIdLoading = new SvelteSet<string>();
+  let snippetsByFrameworkIdError = new SvelteSet<string>();
 
   $effect(() => {
-    [...frameworkIdsSelected].map((frameworkId) => {
+    const frameworkIds = [...frameworkIdsSelected];
+    frameworkIds.map((frameworkId) => {
       if (!snippetsByFrameworkId.has(frameworkId)) {
         snippetsByFrameworkIdError.delete(frameworkId);
         snippetsByFrameworkIdLoading.add(frameworkId);
 
         snippetsImporterByFrameworkId[frameworkId]()
-          .then(({ default: frameworkSnippets }) => {
-            snippetsByFrameworkId.set(frameworkId, frameworkSnippets);
-          })
+          .then(
+            ({
+              default: frameworkSnippets,
+            }: {
+              default: FrameworkSnippet[];
+            }) => {
+              snippetsByFrameworkId.set(frameworkId, frameworkSnippets);
+            },
+          )
           .catch(() => {
             snippetsByFrameworkIdError.add(frameworkId);
           })
@@ -195,7 +306,7 @@
   let showBonusFrameworks = $state(false);
 
   const frameworksSelected = $derived(
-    [...frameworkIdsSelected].map(matchFrameworkId),
+    [...frameworkIdsSelected].map((id: string) => matchFrameworkId(id)),
   );
 
   const bonusFrameworks = $derived(
@@ -203,21 +314,21 @@
   );
 
   const frameworksNotSelected = $derived(
-    frameworks.filter((f) => !frameworkIdsSelected.has(f.id)),
+    frameworks.filter((f) => f && !frameworkIdsSelected.has(f.id)),
   );
 
-  const headerFrameworks = $derived([
-    ...frameworksSelected,
-    ...frameworksNotSelected.filter(
-      (f) => !bonusFrameworks.find((bf) => bf.id === f.id),
-    ),
-    ...(showBonusFrameworks ? bonusFrameworks : []),
-  ]);
+  const headerFrameworks = $derived(
+    [
+      ...frameworksSelected.filter((f) => f),
+      ...frameworksNotSelected.filter(
+        (f) => f && !bonusFrameworks.find((bf) => bf.id === f.id),
+      ),
+      ...(showBonusFrameworks ? bonusFrameworks : []),
+    ].filter((f) => f) as NonNullable<(typeof frameworks)[0]>[],
+  );
 </script>
 
-<AppNotificationCenter />
-
-<Header {frameworksSelected} />
+<Header />
 
 <div class="flex border-b border-gray-700">
   <Aside />
@@ -225,32 +336,34 @@
     <div
       class="flex px-6 lg:px-20 py-2 sticky top-0 z-20 w-full backdrop-blur bg-gray-900/80 border-b border-gray-700 whitespace-nowrap overflow-x-auto"
       data-framework-id-selected-list={[...frameworkIdsSelected].join(",")}
+      data-testid="framework-selection-bar"
     >
       {#each headerFrameworks as framework (framework.id)}
-        <button
-          title={frameworkIdsSelected.has(framework.id)
-            ? `Hide ${framework.title}`
-            : `Display ${framework.title}`}
-          class={[
-            "text-sm flex-shrink-0 rounded border px-3 py-1 bg-gray-900 hover:bg-gray-800 transition-all mr-2",
-            frameworkIdsSelected.has(framework.id)
-              ? "border-blue-900"
-              : "opacity-70 border-opacity-50 border-gray-700",
-          ]}
-          onclick={() => {
-            toggleFrameworkId(framework.id);
-            if (isVersusFrameworks && $currentRoute.path !== "/") {
-              navigate("/");
-            }
-          }}
-        >
-          <FrameworkLabel id={framework.id} size={16} />
-        </button>
+        {#if framework}
+          <button
+            title={frameworkIdsSelected.has(framework.id)
+              ? `Hide ${framework.title}`
+              : `Display ${framework.title}`}
+            class={[
+              "text-sm flex-shrink-0 rounded border px-3 py-1 bg-gray-900 hover:bg-gray-800 transition-all mr-2",
+              frameworkIdsSelected.has(framework.id)
+                ? "border-blue-900"
+                : "opacity-70 border-opacity-50 border-gray-700",
+            ]}
+            data-testid={`framework-button-${framework.id}`}
+            onclick={() => {
+              toggleFrameworkId(framework.id);
+            }}
+          >
+            <FrameworkLabel id={framework.id} size={16} />
+          </button>
+        {/if}
       {/each}
       {#if bonusFrameworks.length > 0 && !showBonusFrameworks}
         <button
           title="show more frameworks"
           class="opacity-70 text-sm flex-shrink-0 rounded border border-gray-700 px-3 py-1 border-opacity-50 bg-gray-900 hover:bg-gray-800 transition-all mr-2"
+          data-testid="show-more-frameworks-button"
           onclick={() => {
             showBonusFrameworks = !showBonusFrameworks;
           }}
@@ -277,7 +390,7 @@
     <main class="relative pt-6">
       <div>
         {#if frameworkIdsSelected.size === 0}
-          <div class="space-y-4">
+          <div class="space-y-4" data-testid="empty-state">
             <div class="flex justify-center">
               <span
                 class="iconify ph--arrow-up size-6 animate-bounce"
@@ -287,6 +400,7 @@
             <div class="flex justify-center">
               <p
                 class="text-lg opacity-80 flex items-center text-center space-x-3"
+                data-testid="empty-state-message"
               >
                 <img src="/popper.svg" alt="logo" class="size-6" />
                 <span>
@@ -303,6 +417,7 @@
                 <h1
                   id={section.sectionId}
                   class="header-anchor text-2xl font-bold"
+                  data-testid={`section-${section.sectionId}`}
                 >
                   {section.title}
                   <a
@@ -318,9 +433,14 @@
                   {#each snippets.filter((s) => s.sectionId === section.sectionId) as snippet (snippet.snippetId)}
                     {@const snippetPathId =
                       section.sectionId + "." + snippet.snippetId}
-                    <div id={snippetPathId} data-snippet-id={snippetPathId}>
+                    <div
+                      id={snippetPathId}
+                      data-snippet-id={snippetPathId}
+                      data-testid={`snippet-${snippetPathId}`}
+                    >
                       <h2
                         class="header-anchor sticky py-2 top-[2.94rem] z-10 bg-[var(--bg-color)] font-semibold text-xl"
+                        data-testid={`snippet-title-${snippetPathId}`}
                       >
                         {snippet.title}
                         <a
@@ -339,140 +459,166 @@
                             {@const framework = matchFrameworkId(frameworkId)}
                             {@const frameworkSnippet = snippetsByFrameworkId
                               .get(frameworkId)
-                              ?.find((s) => s.snippetId === snippet.snippetId)}
+                              ?.find(
+                                (s: FrameworkSnippet) =>
+                                  s.snippetId === snippet.snippetId,
+                              )}
                             {@const frameworkSnippetIsLoading =
                               snippetsByFrameworkIdLoading.has(frameworkId)}
                             {@const frameworkSnippetIsError =
                               snippetsByFrameworkIdError.has(frameworkId)}
 
-                            <div>
+                            {#if framework}
                               <div
-                                class="flex justify-between items-center space-x-3"
+                                data-testid={`framework-snippet-${frameworkId}-${snippet.snippetId}`}
                               >
-                                <h3
-                                  style="margin-top: 0rem; margin-bottom: 0rem;"
+                                <div
+                                  class="flex justify-between items-center space-x-3"
                                 >
-                                  <FrameworkLabel id={framework.id} />
-                                </h3>
-                                {#if frameworkSnippet}
-                                  <div class="flex items-center space-x-3">
-                                    {#if frameworkSnippet.playgroundURL}
-                                      <a
-                                        href={frameworkSnippet.playgroundURL}
-                                        target="_blank"
-                                        rel="noreferrer"
-                                        aria-label={`Open playground for ${framework.title}`}
-                                      >
-                                        <button
-                                          class="opacity-50 hover:opacity-100 bg-gray-800 hover:bg-gray-700 py-1 px-2 rounded transition-all flex items-center gap-x-2"
-                                          title={`Open playground for ${framework.title}`}
+                                  <h3
+                                    style="margin-top: 0rem; margin-bottom: 0rem;"
+                                    data-testid={`framework-title-${frameworkId}-${snippet.snippetId}`}
+                                  >
+                                    <FrameworkLabel id={framework.id} />
+                                  </h3>
+                                  {#if frameworkSnippet}
+                                    <div class="flex items-center space-x-3">
+                                      {#if frameworkSnippet.playgroundURL}
+                                        <a
+                                          href={frameworkSnippet.playgroundURL}
+                                          target="_blank"
+                                          rel="noreferrer"
                                           aria-label={`Open playground for ${framework.title}`}
-                                          tabindex="-1"
                                         >
-                                          <span
-                                            class="iconify ph--play size-4"
-                                            aria-hidden="true"
-                                          ></span>
-                                        </button>
-                                      </a>
-                                    {/if}
-                                  </div>
-                                {/if}
-                              </div>
-                              <div class="mt-2">
-                                {#if frameworkSnippet}
-                                  {#if frameworkSnippet.files.length > 0}
-                                    <CodeEditor
-                                      files={frameworkSnippet.files}
-                                      snippetEditHref={frameworkSnippet.snippetEditHref}
-                                    />
-                                  {:else}
-                                    <div
-                                      class="bg-gray-800 text-white rounded-md mx-auto"
-                                    >
+                                          <button
+                                            class="opacity-50 hover:opacity-100 bg-gray-800 hover:bg-gray-700 py-1 px-2 rounded transition-all flex items-center gap-x-2"
+                                            title={`Open playground for ${framework.title}`}
+                                            aria-label={`Open playground for ${framework.title}`}
+                                            data-testid={`playground-button-${frameworkId}-${snippet.snippetId}`}
+                                            tabindex="-1"
+                                          >
+                                            <span
+                                              class="iconify ph--play size-4"
+                                              aria-hidden="true"
+                                            ></span>
+                                          </button>
+                                        </a>
+                                      {/if}
+                                    </div>
+                                  {/if}
+                                </div>
+                                <div class="mt-2">
+                                  {#if frameworkSnippet}
+                                    {#if frameworkSnippet.files.length > 0}
+                                      <CodeEditor
+                                        files={frameworkSnippet.files}
+                                        snippetEditHref={frameworkSnippet.snippetEditHref}
+                                        data-testid={`code-editor-${frameworkId}-${snippet.snippetId}`}
+                                      />
+                                    {:else}
                                       <div
-                                        class="text-center py-8 px-4 sm:px-6"
+                                        class="bg-gray-800 text-white rounded-md mx-auto"
+                                        data-testid={`missing-snippet-${frameworkId}-${snippet.snippetId}`}
                                       >
-                                        <div>
-                                          <span
-                                            class="block text-2xl tracking-tight font-bold"
-                                          >
-                                            Missing snippet
-                                          </span>
-                                          <span
-                                            class="block text-lg mt-1 font-semibold space-x-1"
-                                          >
-                                            <span>
-                                              Help us to improve Component Party
-                                            </span>
-                                            <img
-                                              src="/popper.svg"
-                                              alt="logo"
-                                              class="size-5 m-0 inline-block"
-                                            />
-                                          </span>
-                                        </div>
-                                        <div class="mt-6 flex justify-center">
-                                          <div
-                                            class="inline-flex rounded-md shadow"
-                                          >
-                                            <a
-                                              class="inline-flex space-x-2 items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-[#161b22] hover:bg-[#161b22]/80 no-underline"
-                                              href={frameworkSnippet.snippetEditHref}
+                                        <div
+                                          class="text-center py-8 px-4 sm:px-6"
+                                        >
+                                          <div>
+                                            <span
+                                              class="block text-2xl tracking-tight font-bold"
+                                              data-testid="missing-snippet-title"
                                             >
-                                              <button
-                                                class="flex items-center space-x-3"
+                                              Missing snippet
+                                            </span>
+                                            <span
+                                              class="block text-lg mt-1 font-semibold space-x-1"
+                                              data-testid="missing-snippet-message"
+                                            >
+                                              <span>
+                                                Help us to improve Component
+                                                Party
+                                              </span>
+                                              <img
+                                                src="/popper.svg"
+                                                alt="logo"
+                                                class="size-5 m-0 inline-block"
+                                              />
+                                            </span>
+                                          </div>
+                                          <div class="mt-6 flex justify-center">
+                                            <div
+                                              class="inline-flex rounded-md shadow"
+                                            >
+                                              <a
+                                                class="inline-flex space-x-2 items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-[#161b22] hover:bg-[#161b22]/80 no-underline"
+                                                href={frameworkSnippet.snippetEditHref}
+                                                data-testid={`contribute-link-${frameworkId}-${snippet.snippetId}`}
                                               >
-                                                <span>Contribute on Github</span
+                                                <button
+                                                  class="flex items-center space-x-3"
                                                 >
-                                                <span
-                                                  class="iconify simple-icons--github size-5"
-                                                  aria-hidden="true"
-                                                ></span>
-                                              </button>
-                                            </a>
+                                                  <span
+                                                    >Contribute on Github</span
+                                                  >
+                                                  <span
+                                                    class="iconify simple-icons--github size-5"
+                                                    aria-hidden="true"
+                                                  ></span>
+                                                </button>
+                                              </a>
+                                            </div>
                                           </div>
                                         </div>
                                       </div>
-                                    </div>
-                                  {/if}
-                                {:else if frameworkSnippetIsLoading}
-                                  <div role="status">
+                                    {/if}
+                                  {:else if frameworkSnippetIsLoading}
                                     <div
-                                      class="w-75px h-23px bg-[#0d1117] py-3 px-4 rounded-t"
+                                      role="status"
+                                      data-testid={`loading-snippet-${frameworkId}-${snippet.snippetId}`}
                                     >
                                       <div
-                                        class="h-2.5 rounded-full bg-gray-700 w-10 animate-pulse"
-                                      ></div>
-                                    </div>
-                                    <div
-                                      class="w-full h-164px bg-[#0d1117] px-4 py-7"
-                                    >
-                                      <div class="max-w-sm animate-pulse">
+                                        class="w-75px h-23px bg-[#0d1117] py-3 px-4 rounded-t"
+                                      >
                                         <div
-                                          class="h-3.5 rounded-full bg-gray-700 w-48 mb-4"
+                                          class="h-2.5 rounded-full bg-gray-700 w-10 animate-pulse"
                                         ></div>
-                                        <div
-                                          class="h-3.5 rounded-full bg-gray-700 max-w-[360px] mb-2.5"
-                                        ></div>
-                                        <div
-                                          class="h-3.5 rounded-full bg-gray-700 mb-4"
-                                        ></div>
-                                        <div
-                                          class="h-3.5 rounded-full bg-gray-700 max-w-[330px] mb-2.5"
-                                        ></div>
-                                        <span class="sr-only">Loading...</span>
+                                      </div>
+                                      <div
+                                        class="w-full h-164px bg-[#0d1117] px-4 py-7"
+                                      >
+                                        <div class="max-w-sm animate-pulse">
+                                          <div
+                                            class="h-3.5 rounded-full bg-gray-700 w-48 mb-4"
+                                          ></div>
+                                          <div
+                                            class="h-3.5 rounded-full bg-gray-700 max-w-[360px] mb-2.5"
+                                          ></div>
+                                          <div
+                                            class="h-3.5 rounded-full bg-gray-700 mb-4"
+                                          ></div>
+                                          <div
+                                            class="h-3.5 rounded-full bg-gray-700 max-w-[330px] mb-2.5"
+                                          ></div>
+                                          <span
+                                            class="sr-only"
+                                            data-testid="loading-text"
+                                            >Loading...</span
+                                          >
+                                        </div>
                                       </div>
                                     </div>
-                                  </div>
-                                {:else if frameworkSnippetIsError}
-                                  <p class="text-orange-500">
-                                    Error loading snippets. Please reload the
-                                    page.
-                                  </p>
-                                {/if}
+                                  {:else if frameworkSnippetIsError}
+                                    <p
+                                      class="text-orange-500"
+                                      data-testid={`error-snippet-${frameworkId}-${snippet.snippetId}`}
+                                    >
+                                      Error loading snippets. Please reload the
+                                      page.
+                                    </p>
+                                  {/if}
+                                </div>
                               </div>
-                            </div>
+                            {/if}
                           {/each}
                         </div>
                       {/if}

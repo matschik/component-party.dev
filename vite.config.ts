@@ -8,55 +8,72 @@ import { frameworks } from "./frameworks";
 import pluginGenerateFrameworkContent from "./build/generateContentVitePlugin";
 import { svelteInspector } from "@sveltejs/vite-plugin-svelte-inspector";
 import tailwindcss from "@tailwindcss/vite";
+import { FRAMEWORK_SEPARATOR } from "./src/constants.ts";
 // @TODO: sitemap
+
+// Helper function to create framework comparison URLs
+const createFrameworkUrl = (frameworks: string[]) =>
+  `/?f=${frameworks.join(FRAMEWORK_SEPARATOR)}`;
 
 const footerNavigation = [
   {
     title: "Most Popular Frameworks",
     links: [
-      { name: "React vs Vue", url: "/compare/react-vs-vue" },
+      { name: "React vs Vue", url: createFrameworkUrl(["react", "vue3"]) },
       {
         name: "React vs Angular",
-        url: "/compare/react-vs-angular-renaissance",
+        url: createFrameworkUrl(["react", "angularRenaissance"]),
       },
-      { name: "Vue vs React", url: "/compare/vue-vs-react" },
-      { name: "Vue vs Angular", url: "/compare/vue-vs-angular-renaissance" },
+      { name: "Vue vs React", url: createFrameworkUrl(["vue3", "react"]) },
+      {
+        name: "Vue vs Angular",
+        url: createFrameworkUrl(["vue3", "angularRenaissance"]),
+      },
       {
         name: "Angular vs React",
-        url: "/compare/angular-renaissance-vs-react",
+        url: createFrameworkUrl(["angularRenaissance", "react"]),
       },
-      { name: "Angular vs Vue", url: "/compare/angular-renaissance-vs-vue" },
+      {
+        name: "Angular vs Vue",
+        url: createFrameworkUrl(["angularRenaissance", "vue3"]),
+      },
     ],
   },
   {
     title: "Popular frameworks vs Rising frameworks",
     links: [
-      { name: "React vs Svelte", url: "/compare/react-vs-svelte" },
-      { name: "React vs Solid", url: "/compare/react-vs-solid" },
-      { name: "Vue vs Svelte", url: "/compare/vue-vs-svelte" },
-      { name: "Vue vs Solid", url: "/compare/vue-vs-solid" },
+      {
+        name: "React vs Svelte",
+        url: createFrameworkUrl(["react", "svelte5"]),
+      },
+      { name: "React vs Solid", url: createFrameworkUrl(["react", "solid"]) },
+      { name: "Vue vs Svelte", url: createFrameworkUrl(["vue3", "svelte5"]) },
+      { name: "Vue vs Solid", url: createFrameworkUrl(["vue3", "solid"]) },
       {
         name: "Angular vs Svelte",
-        url: "/compare/angular-renaissance-vs-svelte",
+        url: createFrameworkUrl(["angularRenaissance", "svelte5"]),
       },
       {
         name: "Angular vs Solid",
-        url: "/compare/angular-renaissance-vs-solid",
+        url: createFrameworkUrl(["angularRenaissance", "solid"]),
       },
     ],
   },
   {
     title: "Comparing Legacy version & Current Version",
     links: [
-      { name: "Svelte 4 vs Svelte 5", url: "/compare/svelte4-vs-svelte5" },
-      { name: "Vue 2 vs Vue 3", url: "/compare/vue2-vs-vue3" },
+      {
+        name: "Svelte 4 vs Svelte 5",
+        url: createFrameworkUrl(["svelte4", "svelte5"]),
+      },
+      { name: "Vue 2 vs Vue 3", url: createFrameworkUrl(["vue2", "vue3"]) },
       {
         name: "Angular vs Angular Renaissance",
-        url: "/compare/angular-vs-angularRenaissance",
+        url: createFrameworkUrl(["angular", "angularRenaissance"]),
       },
       {
         name: "Aurelia 1 vs Aurelia 2",
-        url: "/compare/aurelia1-vs-aurelia2",
+        url: createFrameworkUrl(["aurelia1", "aurelia2"]),
       },
     ],
   },
@@ -65,13 +82,11 @@ const footerNavigation = [
     links: [
       {
         name: "Ember Octane vs Ember Polaris",
-        url: "/compare/emberOctane-vs-emberPolaris",
+        url: createFrameworkUrl(["emberOctane", "emberPolaris"]),
       },
     ],
   },
 ];
-
-const footerLinks = footerNavigation.map((n) => n.links).flat();
 
 const templateDataDefaults = {
   title: "Component Party",
@@ -92,18 +107,13 @@ export default defineConfig({
     svelte(),
     svelteInspector(), // https://github.com/sveltejs/vite-plugin-svelte/blob/main/docs/inspector.md
     generateHtmlPagesPlugin([
-      ...footerLinks.map((link) => ({
-        outputPath: `${link.url}.html`,
-        template: "dist/index.html",
-        templateData: {
-          ...templateDataDefaults,
-          title: `${link.name} - ${templateDataDefaults.title}`,
-        },
-      })),
       {
         outputPath: "index.html",
         template: "dist/index.html",
-        templateData: templateDataDefaults,
+        templateData: {
+          ...templateDataDefaults,
+          navigations: footerNavigation,
+        },
       },
     ]),
     tailwindcss(),

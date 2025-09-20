@@ -12,7 +12,7 @@ import {
   codeToHighlightCodeHtml,
   markdownToHighlightedHtml,
 } from "./highlighter.ts";
-import { kebabCase } from "../../scripts/utils.ts";
+import kebabCase from "just-kebab-case";
 
 interface File {
   fileName: string;

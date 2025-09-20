@@ -8,6 +8,12 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Package manager files
+package-lock.json
+yarn.lock
+.npm
+.yarn
+
 node_modules
 dist
 dist-ssr
@@ -31,3 +37,6 @@ src/generatedContent
 archive
 
 vite.config.js.timestamp*
+
+playwright-report
+test-results

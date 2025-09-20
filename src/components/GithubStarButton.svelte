@@ -22,6 +22,20 @@
   async function getRepoStarCount(): Promise<void> {
     const starCountStorageData: StarCountStorageData | null =
       starCountStorage.getJSON() as StarCountStorageData | null;
+
+    // Skip API request in development mode
+    if (import.meta.env.DEV) {
+      if (starCountStorageData) {
+        starCount = starCountStorageData.value;
+      }
+      return;
+    }
+
+    // Skip API request if there's no value in local storage
+    if (!starCountStorageData) {
+      return;
+    }
+
     if (starCountStorageData) {
       starCount = starCountStorageData.value;
       if (
