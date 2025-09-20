@@ -37,9 +37,11 @@
 
   export function addNotificationsMethod(
     method: string,
-    cb: (...args: any[]) => Omit<Notification, "dismissAfter" | "close">,
+    cb: (...args: unknown[]) => Omit<Notification, "dismissAfter" | "close">,
   ): void {
-    (notifications as any)[method] = (...args: any[]) => {
+    (notifications as Record<string, unknown>)[method] = (
+      ...args: unknown[]
+    ) => {
       const notification = cb(...args);
       notifications.show(notification);
     };
@@ -47,17 +49,16 @@
 </script>
 
 <script lang="ts">
+  import type { Snippet } from "svelte";
+
   interface Props {
     zIndex?: number;
-    notificationContainer: (notification: {
-      title: string;
-      close: () => void;
-    }) => any;
+    notificationContainer: Snippet<[{ title: string; close?: () => void }]>;
   }
 
   let { zIndex = 20, notificationContainer }: Props = $props();
 
-  function dismissAfter(_: any, notification: Notification): void {
+  function dismissAfter(_: unknown, notification: Notification): void {
     if (notification.dismissAfter) {
       setTimeout(
         () => notifications.dismiss(notification),

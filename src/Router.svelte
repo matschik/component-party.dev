@@ -2,11 +2,12 @@
   import { onMount, onDestroy, setContext } from "svelte";
   import { writable, type Writable } from "svelte/store";
   import { createRouter } from "radix3";
+
   import type { ComponentType } from "svelte";
 
   interface Route {
     path: string;
-    component: any;
+    component: () => ComponentType;
   }
 
   interface RoutePayload extends Route {
@@ -14,8 +15,8 @@
   }
 
   interface RouterContext {
-    currentRoute: Writable<RoutePayload>;
-    navigate: (path: string, state?: any) => void;
+    currentRoute: Writable<RoutePayload | null>;
+    navigate: (path: string, state?: unknown) => void;
   }
 
   let { routes = [] }: { routes: Route[] } = $props();
@@ -29,23 +30,18 @@
     }, {}),
   });
 
-  const currentRoute = writable<RoutePayload>({
-    path: "",
-    component: null as any,
-  });
+  const currentRoute = writable<RoutePayload | null>(null);
 
-  function navigate(path: string, state?: any): void {
+  function navigate(path: string, state?: unknown): void {
     state = state || {};
     const urlParsed = new URL(path, window.location.origin);
     const routePayload = router.lookup(urlParsed.pathname);
 
     if (routePayload) {
-      if (routePayload.component.toString().startsWith("class")) {
-        currentRoute.set(routePayload as RoutePayload);
-        window.history.pushState(state, "", path);
-      } else if (typeof routePayload.component === "function") {
+      if (typeof routePayload.component === "function") {
         currentRoute.set({
           ...routePayload,
+          path: urlParsed.pathname,
           component: routePayload.component,
         });
         window.history.pushState(state, "", path);
@@ -93,6 +89,7 @@
   });
 </script>
 
-{#if $currentRoute.component}
-  {@render $currentRoute.component()}
+{#if $currentRoute?.component}
+  {@const Component = $currentRoute.component()}
+  <Component />
 {/if}

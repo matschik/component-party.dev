@@ -1,6 +1,6 @@
 interface File {
   fileName: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 function sortAllFilenames(files: File[], filenamesSorted: string[]): File[] {

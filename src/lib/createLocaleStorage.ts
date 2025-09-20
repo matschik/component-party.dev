@@ -1,7 +1,7 @@
 interface LocalStorageAPI {
   get(): string | null;
-  getJSON(): any;
-  setJSON(o: any): void;
+  getJSON(): unknown;
+  setJSON(o: unknown): void;
   set(v: string): void;
   remove(): void;
 }
@@ -13,7 +13,7 @@ export default function createLocaleStorage(k: string): LocalStorageAPI {
 
   return {
     get,
-    getJSON(): any {
+    getJSON(): unknown {
       const value = get();
       if (value) {
         try {
@@ -24,7 +24,7 @@ export default function createLocaleStorage(k: string): LocalStorageAPI {
         }
       }
     },
-    setJSON(o: any): void {
+    setJSON(o: unknown): void {
       this.set(JSON.stringify(o));
     },
     set(v: string): void {

@@ -28,7 +28,7 @@ interface PlaygroundData {
 }
 
 // Replacement for codesandbox's getParameters function
-function getParameters(parameters: any): string {
+function getParameters(parameters: unknown): string {
   return compressToBase64(JSON.stringify(parameters))
     .replace(/\+/g, "-") // Convert '+' to '-'
     .replace(/\//g, "_") // Convert '/' to '_'
@@ -43,7 +43,7 @@ const playgroundUrlByFramework: Record<string, PlaygroundFunction> = {
       return btoa(unescape(encodeURIComponent(data)));
     }
 
-    function generateURLFromData(data: any): string {
+    function generateURLFromData(data: unknown): string {
       return `${BASE_URL}${utoa(JSON.stringify(data))}`;
     }
     const data = Object.assign({}, contentByFilename, {
@@ -104,7 +104,7 @@ const playgroundUrlByFramework: Record<string, PlaygroundFunction> = {
     const getSourceSuffix = (componentName: string) =>
       `\n\nrender(() => <${componentName} />, document.getElementById("app"));\n`;
 
-    function generateURLFromData(data: any): string {
+    function generateURLFromData(data: unknown): string {
       return `${BASE_URL}${compressToURL(JSON.stringify(data))}`;
     }
 
@@ -132,7 +132,7 @@ const playgroundUrlByFramework: Record<string, PlaygroundFunction> = {
   marko: async (contentByFilename: Record<string, string>) => {
     let firstFile = true;
     const data = Object.entries(contentByFilename).map(([path, content]) => ({
-      path: firstFile ? (firstFile = false) || "index.marko" : path,
+      path: firstFile ? ((firstFile = false), "index.marko") : path,
       content,
     }));
 

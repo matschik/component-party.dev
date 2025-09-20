@@ -1,7 +1,7 @@
 import generateContent from "./lib/generateContent";
 import { createFsCache } from "micache";
 import { hashElement } from "folder-hash";
-import chokidar from "chokidar";
+import chokidar, { type FSWatcher } from "chokidar";
 import { disposeHighlighter } from "./lib/highlighter.ts";
 
 const contentDirFsCache = await createFsCache("pluginGenerateFrameworkContent");
@@ -9,7 +9,7 @@ const contentDirFsCache = await createFsCache("pluginGenerateFrameworkContent");
 export default function pluginGenerateFrameworkContent() {
   const name = "generateFrameworkContent";
 
-  function logInfo(...args: any[]) {
+  function logInfo(...args: unknown[]) {
     console.info(`[${name}]`, ...args);
   }
 
@@ -37,7 +37,7 @@ export default function pluginGenerateFrameworkContent() {
     buildIsRunning = false;
   }
 
-  let fsContentWatcher: chokidar.FSWatcher | undefined;
+  let fsContentWatcher: FSWatcher | undefined;
   if (process.env.NODE_ENV === "development") {
     fsContentWatcher = chokidar.watch(["content"]).on("change", build);
   }
@@ -53,7 +53,7 @@ export default function pluginGenerateFrameworkContent() {
       }
     },
     async buildEnd(): Promise<void> {
-      fsContentWatcher && (await fsContentWatcher.close());
+      await fsContentWatcher?.close();
       // Dispose of highlighter instances to prevent memory leaks
       await disposeHighlighter();
     },

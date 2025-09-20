@@ -7,7 +7,7 @@
     leaveFrom?: string;
     leaveTo?: string;
     class?: string;
-    children: () => any;
+    children?: import("svelte").Snippet;
   }
 
   let {
@@ -81,5 +81,5 @@
 </script>
 
 <div in:onEnter out:onLeave class={className}>
-  {@render children()}
+  {@render children?.()}
 </div>

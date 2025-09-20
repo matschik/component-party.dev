@@ -23,7 +23,7 @@ interface File {
 
 interface FrameworkFile {
   fileName: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 interface FrameworkSnippet {
@@ -58,7 +58,7 @@ async function pathExists(path: string): Promise<boolean> {
   try {
     await fs.access(path);
     return true;
-  } catch (error) {
+  } catch {
     return false;
   }
 }
@@ -154,8 +154,8 @@ export default async function generateContent(): Promise<void> {
             );
             if (frameworkConfig) {
               frameworkSnippet.files = frameworkConfig.filesSorter(
-                frameworkSnippet.files as FrameworkFile[],
-              ) as File[];
+                frameworkSnippet.files as unknown as FrameworkFile[],
+              ) as unknown as File[];
             }
             const playgroundURL = await generatePlaygroundURL(
               frameworkId,
@@ -270,10 +270,12 @@ async function generatePlaygroundURL(
   }
 
   const contentByFilename = frameworkConfig
-    .filesSorter(files as any)
+    .filesSorter(files as unknown as FrameworkFile[])
     .reduce((acc: Record<string, string>, file) => {
-      if (file.content) {
-        acc[file.fileName] = file.content;
+      if ((file as { content?: string }).content) {
+        acc[(file as { fileName: string }).fileName] = (
+          file as unknown as { content: string }
+        ).content;
       }
       return acc;
     }, {});

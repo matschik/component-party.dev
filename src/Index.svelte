@@ -1,5 +1,9 @@
 <script>
-  import { SvelteMap, SvelteSet } from "svelte/reactivity";
+  import {
+    SvelteMap,
+    SvelteSet,
+    SvelteURLSearchParams,
+  } from "svelte/reactivity";
   import FRAMEWORKS, { matchFrameworkId } from "../frameworks";
   import FrameworkLabel from "./components/FrameworkLabel.svelte";
   import { sections, snippets } from "./generatedContent/tree.js";
@@ -18,7 +22,7 @@
 
   function removeSearchParamKeyFromURL(k) {
     // Get the current search params as an object
-    const searchParams = new URLSearchParams(window.location.search);
+    const searchParams = new SvelteURLSearchParams(window.location.search);
 
     if (!searchParams.has(k)) {
       // The key doesn't exist, so don't do anything
@@ -43,11 +47,11 @@
   const MAX_FRAMEWORK_NB_INITIAL_DISPLAYED = 9;
   const FRAMEWORKS_BONUS = FRAMEWORKS.slice(MAX_FRAMEWORK_NB_INITIAL_DISPLAYED);
 
-  let frameworkIdsSelected = $state(new SvelteSet());
-  let snippetsByFrameworkId = $state(new SvelteMap());
+  const frameworkIdsSelected = new SvelteSet();
+  const snippetsByFrameworkId = new SvelteMap();
   let frameworkIdsSelectedInitialized = $state(false);
   let isVersusFrameworks = $state(false);
-  let onMountCallbacks = $state(new SvelteSet());
+  let onMountCallbacks = new SvelteSet();
   let isMounted = $state(false);
 
   function handleVersus(versus) {
@@ -162,12 +166,12 @@
     } else {
       frameworkIdsSelected.add(frameworkId);
     }
-    frameworkIdsSelected = frameworkIdsSelected;
+
     saveFrameworkIdsSelectedOnStorage();
   }
 
-  let snippetsByFrameworkIdLoading = $state(new SvelteSet());
-  let snippetsByFrameworkIdError = $state(new SvelteSet());
+  let snippetsByFrameworkIdLoading = new SvelteSet();
+  let snippetsByFrameworkIdError = new SvelteSet();
 
   $effect(() => {
     [...frameworkIdsSelected].map((frameworkId) => {
@@ -223,7 +227,7 @@
       class="flex px-6 lg:px-20 py-2 sticky top-0 z-20 w-full backdrop-blur bg-gray-900/80 border-b border-gray-700 whitespace-nowrap overflow-x-auto"
       data-framework-id-selected-list={[...frameworkIdsSelected].join(",")}
     >
-      {#each headerFrameworks as framework}
+      {#each headerFrameworks as framework (framework.id)}
         <button
           title={frameworkIdsSelected.has(framework.id)
             ? `Hide ${framework.title}`
@@ -292,7 +296,7 @@
           </div>
         {:else}
           <div class="space-y-20">
-            {#each sections as section}
+            {#each sections as section (section.sectionId)}
               <div class="px-6 md:px-14 lg:px-20 max-w-full">
                 <h1
                   id={section.sectionId}
@@ -309,7 +313,7 @@
                 </h1>
 
                 <div class="space-y-8 mt-2">
-                  {#each snippets.filter((s) => s.sectionId === section.sectionId) as snippet}
+                  {#each snippets.filter((s) => s.sectionId === section.sectionId) as snippet (snippet.snippetId)}
                     {@const snippetPathId =
                       section.sectionId + "." + snippet.snippetId}
                     <div id={snippetPathId} data-snippet-id={snippetPathId}>

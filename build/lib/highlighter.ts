@@ -1,17 +1,27 @@
-import { createHighlighter } from "shiki";
+import {
+  createHighlighter,
+  type HighlighterGeneric,
+  type BundledTheme,
+  type BundledLanguage,
+} from "shiki";
 import MarkdownIt from "markdown-it";
 import { fromHighlighter } from "@shikijs/markdown-it/core";
 import componentPartyShikiTheme from "./componentPartyShikiTheme.ts";
 
 // Singleton instances
-let highlighter: any = null;
-let md: any = null;
-let highlighterPromise: Promise<any> | null = null;
+let highlighter: HighlighterGeneric<BundledTheme, BundledLanguage> | null =
+  null;
+let md: MarkdownIt | null = null;
+let highlighterPromise: Promise<
+  HighlighterGeneric<BundledTheme, BundledLanguage>
+> | null = null;
 
-async function getHighlighter() {
+async function getHighlighter(): Promise<
+  HighlighterGeneric<BundledTheme, BundledLanguage>
+> {
   if (!highlighterPromise) {
     highlighterPromise = createHighlighter({
-      // @ts-ignore - Custom theme configuration
+      // @ts-expect-error - Custom theme configuration
       theme: componentPartyShikiTheme,
       langs: [
         "javascript",
@@ -37,7 +47,7 @@ async function getHighlighter() {
   return highlighter;
 }
 
-async function getMarkdownIt() {
+async function getMarkdownIt(): Promise<MarkdownIt> {
   if (!md) {
     md = MarkdownIt({
       html: true,
@@ -46,7 +56,7 @@ async function getMarkdownIt() {
     const highlighterInstance = await getHighlighter();
     md.use(
       fromHighlighter(highlighterInstance, {
-        // @ts-ignore - Custom theme configuration
+        // @ts-expect-error - Custom theme configuration
         theme: componentPartyShikiTheme,
       }),
     );
@@ -61,8 +71,7 @@ export async function codeToHighlightCodeHtml(
   const highlighterInstance = await getHighlighter();
   const html = await highlighterInstance.codeToHtml(code, {
     lang,
-    // @ts-ignore - Custom theme configuration
-    theme: componentPartyShikiTheme,
+    theme: componentPartyShikiTheme as BundledTheme,
   });
 
   return html;

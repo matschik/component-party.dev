@@ -115,7 +115,7 @@ export default defineConfig({
   },
 });
 
-async function generateHtmlPagesPlugin(pages: any[]) {
+async function generateHtmlPagesPlugin(pages: unknown[]) {
   const eta = new Eta({ views: "." });
 
   const template = {
@@ -135,21 +135,26 @@ async function generateHtmlPagesPlugin(pages: any[]) {
       }
       return html;
     },
-    render(htmlEta: string, data: any) {
-      return eta.renderString(htmlEta, data);
+    render(htmlEta: string, data: unknown) {
+      return eta.renderString(htmlEta, data as object);
     },
   };
 
   return {
     name: "generate-html-pages",
-    transformIndexHtml(html: string, ctx: any) {
+    transformIndexHtml(html: string, ctx: unknown) {
       html = htmlTransform.include(html);
-      if (ctx.server) {
+      if ((ctx as { server?: unknown }).server) {
         const matchedPage = pages.find(
-          (page) => ctx.originalUrl === filePathToUrl(page.outputPath),
+          (page: unknown) =>
+            (ctx as { originalUrl?: string }).originalUrl ===
+            filePathToUrl((page as { outputPath: string }).outputPath),
         );
         if (matchedPage) {
-          html = htmlTransform.render(html, matchedPage.templateData);
+          html = htmlTransform.render(
+            html,
+            (matchedPage as { templateData: unknown }).templateData,
+          );
         } else {
           html = htmlTransform.render(html, templateDataDefaults);
         }
@@ -158,10 +163,16 @@ async function generateHtmlPagesPlugin(pages: any[]) {
     },
     async closeBundle() {
       for (const page of pages) {
-        const template = page.template || "index.html";
-        const templateData = page.templateData || {};
+        const template =
+          (page as { template?: string }).template || "index.html";
+        const templateData =
+          (page as { templateData?: unknown }).templateData || {};
         const templatePath = path.join(__dirname, template);
-        const outputPath = path.join(__dirname, "dist", page.outputPath);
+        const outputPath = path.join(
+          __dirname,
+          "dist",
+          (page as { outputPath: string }).outputPath,
+        );
 
         const templateContent = await fs.readFile(templatePath, "utf8");
         const compiledHtml = eta.renderString(templateContent, templateData);
@@ -175,8 +186,8 @@ async function generateHtmlPagesPlugin(pages: any[]) {
 }
 
 function filePathToUrl(filePath: string) {
-  let normalizedPath = path.normalize(filePath);
-  let baseName = path.basename(normalizedPath);
+  const normalizedPath = path.normalize(filePath);
+  const baseName = path.basename(normalizedPath);
 
   if (baseName === "index.html") {
     return path.dirname(normalizedPath) === "."
