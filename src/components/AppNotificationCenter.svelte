@@ -17,7 +17,10 @@
       <div class="p-4">
         <div class="flex items-start">
           <div class="flex-shrink-0">
-            <div class="i-heroicons:check-circle size-6 text-green-400"></div>
+            <span
+              class="iconify ph--check-circle size-6 text-green-400"
+              aria-hidden="true"
+            ></span>
           </div>
           <div class="ml-3 w-0 flex-1 pt-0.5">
             <p class="text-sm font-medium">
@@ -30,7 +33,7 @@
               onclick={close}
             >
               <span class="sr-only">Close</span>
-              <div class="i-heroicons:x-mark size-5"></div>
+              <span class="iconify ph--x size-5" aria-hidden="true"></span>
             </button>
           </div>
         </div>

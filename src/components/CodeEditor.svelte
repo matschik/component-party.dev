@@ -71,9 +71,9 @@
         target="_blank"
         rel="noreferrer"
         aria-label="Edit on Github"
-        class="px-1.5 bg-[#0d1117] py-1 rounded border opacity-60 hover:opacity-90"
+        class="bg-[#0d1117] rounded border opacity-60 hover:opacity-90"
       >
-        <div class="i-heroicons:pencil size-4"></div>
+        <span class="iconify ph--pencil size-4" aria-hidden="true"></span>
       </a>
       <button
         class="px-1.5 bg-[#0d1117] py-1 rounded border opacity-60 hover:opacity-90"
@@ -81,7 +81,7 @@
         aria-label="Copy to clipboard"
         onclick={copySnippet}
       >
-        <div class="i-heroicons:clipboard-document size-4"></div>
+        <span class="iconify ph--clipboard size-4" aria-hidden="true"></span>
       </button>
     </div>
   </div>
