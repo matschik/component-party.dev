@@ -1,10 +1,12 @@
+import { track } from "ripple";
+
 export component Counter() {
-  let $count = 0;
+  let count = track(0);
 
   function incrementCount() {
-    $count++;
+    @count++;
   }
 
-  <p>{`Count: ${$count}`}</p>
+  <p>{`Count: ${@count}`}</p>
   <button onClick={incrementCount}>{"+1"}</button>
 }
