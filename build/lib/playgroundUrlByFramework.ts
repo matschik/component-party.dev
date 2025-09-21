@@ -1,5 +1,5 @@
 import nodePath from "node:path";
-import { compressToURL, compressToBase64 } from "@matschik/lz-string";
+import LZString from "lz-string";
 
 interface PlaygroundFunction {
   (
@@ -29,7 +29,7 @@ interface PlaygroundData {
 
 // Replacement for codesandbox's getParameters function
 function getParameters(parameters: unknown): string {
-  return compressToBase64(JSON.stringify(parameters))
+  return LZString.compressToBase64(JSON.stringify(parameters))
     .replace(/\+/g, "-") // Convert '+' to '-'
     .replace(/\//g, "_") // Convert '/' to '_'
     .replace(/=+$/, ""); // Remove ending '='
@@ -105,7 +105,7 @@ const playgroundUrlByFramework: Record<string, PlaygroundFunction> = {
       `\n\nrender(() => <${componentName} />, document.getElementById("app"));\n`;
 
     function generateURLFromData(data: unknown): string {
-      return `${BASE_URL}${compressToURL(JSON.stringify(data))}`;
+      return `${BASE_URL}${LZString.compressToEncodedURIComponent(JSON.stringify(data))}`;
     }
 
     const data = Object.keys(contentByFilename).map((filename) => {
