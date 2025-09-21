@@ -253,7 +253,7 @@
           <div class="space-y-20">
             {#each sections as section (section.sectionId)}
               <div class="px-6 md:px-14 lg:px-20 max-w-full">
-                <h1
+                <h2
                   id={section.sectionId}
                   class="header-anchor text-2xl font-bold"
                   data-testid={`section-${section.sectionId}`}
@@ -266,7 +266,7 @@
                   >
                     #
                   </a>
-                </h1>
+                </h2>
 
                 <div class="space-y-8 mt-2">
                   {#each snippets.filter((s) => s.sectionId === section.sectionId) as snippet (snippet.snippetId)}
@@ -277,7 +277,7 @@
                       data-snippet-id={snippetPathId}
                       data-testid={`snippet-${snippetPathId}`}
                     >
-                      <h2
+                      <h3
                         class="header-anchor sticky py-2 top-[2.94rem] z-10 bg-[var(--bg-color)] font-semibold text-xl"
                         data-testid={`snippet-title-${snippetPathId}`}
                       >
@@ -289,7 +289,7 @@
                         >
                           #
                         </a>
-                      </h2>
+                      </h3>
                       {#if frameworkIdsSelectedInitialized}
                         <div
                           class="grid grid-cols-1 xl:grid-cols-2 gap-y-4 xl:gap-y-8 gap-x-10 mt-2"
@@ -315,7 +315,7 @@
                                   class="flex justify-between items-center space-x-3"
                                 >
                                   <h3
-                                    style="margin-top: 0rem; margin-bottom: 0rem;"
+                                    class="m-0"
                                     data-testid={`framework-title-${frameworkId}-${snippet.snippetId}`}
                                   >
                                     <FrameworkLabel id={framework.id} />
@@ -327,20 +327,15 @@
                                           href={frameworkSnippet.playgroundURL}
                                           target="_blank"
                                           rel="noreferrer"
+                                          class="opacity-50 hover:opacity-100 bg-gray-800 hover:bg-gray-700 py-1 px-2 rounded transition-all flex items-center gap-x-2"
+                                          title={`Open playground for ${framework.title}`}
                                           aria-label={`Open playground for ${framework.title}`}
+                                          data-testid={`playground-button-${frameworkId}-${snippet.snippetId}`}
                                         >
-                                          <button
-                                            class="opacity-50 hover:opacity-100 bg-gray-800 hover:bg-gray-700 py-1 px-2 rounded transition-all flex items-center gap-x-2"
-                                            title={`Open playground for ${framework.title}`}
-                                            aria-label={`Open playground for ${framework.title}`}
-                                            data-testid={`playground-button-${frameworkId}-${snippet.snippetId}`}
-                                            tabindex="-1"
-                                          >
-                                            <span
-                                              class="iconify ph--play size-4"
-                                              aria-hidden="true"
-                                            ></span>
-                                          </button>
+                                          <span
+                                            class="iconify ph--play size-4"
+                                            aria-hidden="true"
+                                          ></span>
                                         </a>
                                       {/if}
                                     </div>
@@ -487,6 +482,6 @@
   }
 
   .header-anchor:hover > a {
-    opacity: 100;
+    opacity: 1;
   }
 </style>

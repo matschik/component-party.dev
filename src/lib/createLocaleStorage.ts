@@ -14,7 +14,11 @@ export default function createLocaleStorage<T = unknown>(
         try {
           return JSON.parse(value) as T;
         } catch (err) {
-          console.error({ getJSONErr: err });
+          console.error("Failed to parse localStorage value:", {
+            key: k,
+            value,
+            error: err,
+          });
           return defaultValue;
         }
       }

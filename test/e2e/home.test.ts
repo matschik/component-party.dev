@@ -77,7 +77,7 @@ test.describe("Homepage", () => {
     await testHelpers.waitForContentToLoad();
 
     // Check that we have content sections
-    await expect(page.getByRole("heading", { level: 1 })).toHaveCount(7); // 6 main sections + 1 header
+    await expect(page.getByTestId(/^section-/)).toHaveCount(6); // 6 sections
 
     // Check for specific sections using test IDs
     await expect(page.getByTestId("section-reactivity")).toBeVisible();
