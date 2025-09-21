@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  NODE_OPTIONS: --max_old_space_size=4096
+
+jobs:
+  build-and-test:
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js and pnpm
+        uses: ./.github/actions/setup-node-pnpm
+
+      - name: Build application
+        run: pnpm run build
+
+      - name: Run checks
+        run: pnpm check:ci
+
+      - name: Install Playwright Chromium
+        run: pnpm run test:e2e:install
+
+      - name: Run Playwright tests
+        run: pnpm run test:e2e
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30

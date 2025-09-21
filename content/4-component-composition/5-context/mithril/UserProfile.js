@@ -15,8 +15,8 @@ export default function UserProfile() {
         m(
           "button",
           { onclick: () => updateUsername("Jane") },
-          "Update username to Jane"
-        )
+          "Update username to Jane",
+        ),
       ),
   };
 }

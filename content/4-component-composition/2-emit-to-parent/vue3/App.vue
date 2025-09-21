@@ -15,10 +15,7 @@ function onAnswerYes() {
 
 <template>
   <p>Are you happy?</p>
-  <AnswerButton
-    @yes="onAnswerYes"
-    @no="onAnswerNo"
-  />
+  <AnswerButton @yes="onAnswerYes" @no="onAnswerNo" />
   <p style="font-size: 50px">
     {{ isHappy ? "😀" : "😥" }}
   </p>

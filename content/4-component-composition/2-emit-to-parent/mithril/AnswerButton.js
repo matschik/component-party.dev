@@ -4,6 +4,6 @@ export const AnswerButton = ({ attrs: { onYes, onNo } }) => ({
     m(
       "div",
       m("button", { onclick: onYes }, "YES"),
-      m("button", { onclick: onNo }, "NO")
+      m("button", { onclick: onNo }, "NO"),
     ),
 });

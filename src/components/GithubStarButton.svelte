@@ -1,18 +1,33 @@
-<script>
-  import { onMount } from "svelte";
+<script lang="ts">
   import createLocaleStorage from "../lib/createLocaleStorage";
-  import GithubIcon from "./GithubIcon.svelte";
+
+  interface StarCountStorageData {
+    value: string;
+    fetchedAt: number;
+  }
+
+  interface ShieldsApiResponse {
+    schemaVersion: number;
+    label: string;
+    message: string;
+    color: string;
+  }
 
   const REPOSITORY_PATH = "matschik/component-party.dev";
-  const STAR_COUNT_EXPIRES_IN_MS = 1000 * 60 * 2;
+  const STAR_COUNT_EXPIRES_IN_MS = 1000 * 60 * 5; // Shields.io caches for 5-15 minutes
 
-  const starCountStorage = createLocaleStorage("github-star-count");
+  const starCountStorage = createLocaleStorage("github-star-count-v2", {
+    value: "0",
+    fetchedAt: 0,
+  });
 
-  let starCount = $state(0);
-  let isFetchingStarCount = $state(false);
+  let starCount: string = $state("0");
+  let isFetchingStarCount: boolean = $state(false);
 
-  async function getRepoStarCount() {
-    const starCountStorageData = starCountStorage.getJSON();
+  async function getRepoStarCount(): Promise<void> {
+    const starCountStorageData: StarCountStorageData | null =
+      starCountStorage.getJSON() as StarCountStorageData | null;
+
     if (starCountStorageData) {
       starCount = starCountStorageData.value;
       if (
@@ -25,35 +40,38 @@
 
     isFetchingStarCount = true;
 
-    // Github public API rate limit: 60 requests per hour
-    const data = await fetch(
-      `https://api.github.com/repos/${REPOSITORY_PATH}`,
-      {
-        headers: {
-          Accept: "application/vnd.github.v3.star+json",
-          Authorization: "",
+    try {
+      // Using Shields.io JSON endpoint - no rate limits, cached for 5-15 minutes
+      const data: ShieldsApiResponse = await fetch(
+        `https://img.shields.io/github/stars/${REPOSITORY_PATH}.json`,
+        {
+          headers: {
+            Accept: "application/json",
+          },
         },
-      }
-    )
-      .finally(() => {
-        isFetchingStarCount = false;
-      })
-      .then((r) => r.json());
+      )
+        .finally(() => {
+          isFetchingStarCount = false;
+        })
+        .then((r) => r.json());
 
-    if (data.stargazers_count) {
-      starCount = data.stargazers_count;
-      starCountStorage.setJSON({
-        value: starCount,
-        fetchedAt: Date.now(),
-      });
+      if (data.message) {
+        // Use the formatted string directly from Shields.io (e.g., "3.1k", "500")
+        starCount = data.message;
+        starCountStorage.setJSON({
+          value: starCount,
+          fetchedAt: Date.now(),
+        });
+      }
+    } catch (error) {
+      console.warn("Failed to fetch star count from Shields.io:", error);
+      // Keep the existing cached value if available
     }
   }
 
-  onMount(() => {
-    getRepoStarCount();
-  });
+  getRepoStarCount();
 
-  function onButtonClick() {
+  function onButtonClick(): void {
     starCountStorage.remove();
   }
 </script>
@@ -66,34 +84,21 @@
   onclick={onButtonClick}
 >
   <span class="flex items-center px-3 sm:space-x-2">
-    <GithubIcon class="size-[1.3rem] sm:size-[1.1rem]" />
+    <span
+      class="iconify simple-icons--github size-[1.3rem] sm:size-[1.1rem]"
+      aria-hidden="true"
+    ></span>
     <span class="hidden sm:inline">Star</span>
   </span>
-  {#if isFetchingStarCount || starCount !== 0}
+  {#if isFetchingStarCount || starCount !== "0"}
     <div
       class="hidden h-full items-center justify-center px-3 sm:flex border-[#373b43] sm:border-l"
     >
-      {#if isFetchingStarCount && starCount === 0}
-        <svg
-          class="animate-spin size-4 mx-1"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-        >
-          <circle
-            class="opacity-25"
-            cx="12"
-            cy="12"
-            r="10"
-            stroke="currentColor"
-            stroke-width="4"
-          />
-          <path
-            class="opacity-75"
-            fill="currentColor"
-            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-          />
-        </svg>
+      {#if isFetchingStarCount && starCount === "0"}
+        <span
+          class="iconify ph--spinner animate-spin size-4 mx-1"
+          aria-hidden="true"
+        ></span>
       {:else}
         <span>{starCount}</span>
       {/if}

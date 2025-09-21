@@ -1,4 +1,15 @@
-<script>
+<script lang="ts">
+  interface Props {
+    enter?: string;
+    enterFrom?: string;
+    enterTo?: string;
+    leave?: string;
+    leaveFrom?: string;
+    leaveTo?: string;
+    class?: string;
+    children?: import("svelte").Snippet;
+  }
+
   let {
     enter = "transition ease-out duration-100",
     enterFrom = "transform opacity-0 scale-95",
@@ -8,7 +19,7 @@
     leaveTo = "transform opacity-0 scale-95",
     class: className = undefined,
     children,
-  } = $props();
+  }: Props = $props();
 
   const onEnter = createTransitionWithClasses("enter", {
     from: enter,
@@ -22,22 +33,25 @@
     to: leaveFrom,
   });
 
-  function createTransitionWithClasses(type, { from, active, to }) {
+  function createTransitionWithClasses(
+    type: "enter" | "leave",
+    { from, active, to }: { from: string; active: string; to: string },
+  ) {
     if (!["enter", "leave"].includes(type)) {
       throw Error(`Transition type must be 'enter' or 'leave', not ${type}`);
     }
     const durationClass = from
       .split(" ")
       .find((cssClass) => cssClass.startsWith("duration-"));
-    const duration = Number(durationClass.split("-").pop());
+    const duration = Number(durationClass?.split("-").pop());
 
     if (!durationClass || Number.isNaN(duration)) {
       throw Error(
-        `First classes need to have a valid duration class as: duration-X. Found '${durationClass}'`
+        `First classes need to have a valid duration class as: duration-X. Found '${durationClass}'`,
       );
     }
 
-    return (node) => {
+    return (node: Element) => {
       if (type === "leave") {
         node.classList.remove(...enter.split(" "));
         node.classList.remove(...enterFrom.split(" "));
@@ -46,7 +60,7 @@
 
       return {
         duration,
-        tick: (t) => {
+        tick: (t: number) => {
           if (
             (type === "enter" && t >= 0 && t !== 1) ||
             (type === "leave" && t < 1 && t !== 0)
@@ -67,5 +81,5 @@
 </script>
 
 <div in:onEnter out:onLeave class={className}>
-  {@render children()}
+  {@render children?.()}
 </div>

@@ -3,7 +3,7 @@ import { mergeProps } from "solid-js";
 export default function UserProfile(props) {
   const merged = mergeProps(
     { name: "", age: null, favouriteColors: [], isAvailable: false },
-    props
+    props,
   );
 
   return (

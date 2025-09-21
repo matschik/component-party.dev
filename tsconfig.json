@@ -1,20 +1,34 @@
 {
-  "compileOnSave": false,
   "compilerOptions": {
-    "allowJs": true,
-    "baseUrl": "./",
-    "outDir": "./dist/out-tsc",
-    "declaration": false,
-    "downlevelIteration": true,
-    "experimentalDecorators": true,
-    "moduleResolution": "node",
-    "importHelpers": true,
-    "target": "es2015",
-    "module": "es2020",
-    "lib": ["es2018", "dom"],
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "preserve",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@frameworks": ["./frameworks.ts"]
     }
   },
-  "exclude": ["node_modules", "dist"]
+  "include": [
+    "src/**/*",
+    "build/**/*",
+    "scripts/**/*",
+    "types/**/*",
+    "*.ts",
+    "*.mts"
+  ],
+  "exclude": ["node_modules", "dist", "content"]
 }

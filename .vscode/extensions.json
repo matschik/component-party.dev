@@ -1,9 +1,7 @@
 {
   "recommendations": [
     "esbenp.prettier-vscode",
-    "dbaeumer.vscode-eslint",
     "svelte.svelte-vscode",
-    "antfu.unocss"
-  ],
-  "unwantedRecommendations": []
+    "bradlc.vscode-tailwindcss"
+  ]
 }

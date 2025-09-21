@@ -9,7 +9,7 @@ export default function App() {
     isLoading = true;
     try {
       const { results } = await m.request(
-        "https://randomuser.me/api/?results=3"
+        "https://randomuser.me/api/?results=3",
       );
       users = results;
     } catch (err) {
@@ -28,8 +28,8 @@ export default function App() {
           "li",
           { key: user.login.uuid },
           m("img", { src: user.picture.thumbnail, alt: "user" }),
-          m("p", `${user.name.first} ${user.name.last}`)
-        )
+          m("p", `${user.name.first} ${user.name.last}`),
+        ),
       );
     },
   };
