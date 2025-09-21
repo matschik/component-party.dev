@@ -417,20 +417,9 @@ async function generateRedirectsFile(rootDir: string): Promise<void> {
     }
   }
 
-  // Generate dynamic redirects for comma-separated patterns using placeholders
-  const dynamicRedirects = [
-    // Single framework redirects (static for better performance)
-    ...frameworkIds.map((id) => `/?f=${id} / 301`),
-    // Dynamic redirects for comma-separated patterns - matches any comma-separated values
-    // This will catch patterns like /?f=react,vue3,angular or /?f=mithril,alpine,etc
-    "/?f=:frameworks / 301",
-  ];
-
-  redirects.push(...dynamicRedirects);
-
-  // Add specific compare patterns that don't match our framework pairs
-  const specificCompareRedirects = ["/compare/emberPolaris-vs-angular / 301"];
-  redirects.push(...specificCompareRedirects);
+  // Note: Removed problematic dynamic redirects that were causing infinite loops
+  // The /?f=:frameworks rule was too broad and redirected legitimate framework URLs
+  // Specific compare patterns are handled by the individual framework comparison redirects above
 
   const redirectsContent = `# File generated from "node scripts/generateContent.js", DO NOT EDIT/COMMIT
 ${redirects.join("\n")}
