@@ -78,15 +78,14 @@
   }
 
   function onInit() {
+    const frameworkIdsFromStorage = frameworkIdsStorage
+      .getJSON()
+      .filter((id) => matchFrameworkId(id));
+
     // From search param
     if (frameworkIdsFromSearchParam.length > 0) {
       selectFrameworks(frameworkIdsFromSearchParam);
-    } else if (frameworkIdsSelected.size === 0) {
-      // From local storage
-      const frameworkIdsFromStorage = frameworkIdsStorage
-        .getJSON()
-        .filter((id) => matchFrameworkId(id));
-
+    } else if (frameworkIdsFromStorage.length > 0) {
       selectFrameworks(frameworkIdsFromStorage);
     } else {
       // Default frameworks

@@ -728,7 +728,7 @@ We believe that deep understanding should precede optimization, enabling learner
 
 ## 🧑‍💻 Contributors
 
-This project exists thanks to all the people who contribute. \[[Contribute](CONTRIBUTING.md)].
+This project exists thanks to all the people who contribute. [Contribute](./CONTRIBUTING.md)
 [![Contributors](https://opencollective.com/component-party/contributors.svg?width=890&button=false)](https://github.com/matschik/component-party/graphs/contributors)
 
 ## ⚖️ License

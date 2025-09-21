@@ -31,7 +31,7 @@
     "just-throttle": "^4.2.0",
     "lz-string": "^1.5.0",
     "runed": "^0.32.0",
-    "sv-router": "^0.9.0"
+    "sv-router": "^0.10.0"
   },
   "devDependencies": {
     "@eslint/compat": "^1.3.2",
