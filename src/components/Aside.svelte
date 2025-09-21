@@ -78,7 +78,7 @@
 </script>
 
 <aside
-  class="no-scroll hidden lg:block sticky flex-shrink-0 w-[300px] overflow-y-auto top-0 pr-8 max-h-screen border-r border-gray-700"
+  class="no-scroll hidden lg:block sticky flex-shrink-0 w-[240px] overflow-y-auto top-0 pr-8 max-h-screen border-r border-gray-700"
 >
   <nav class="w-full text-base py-2 pl-4 pb-20">
     <ul class="space-y-6">

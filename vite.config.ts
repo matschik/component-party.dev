@@ -6,6 +6,7 @@ import { Eta } from "eta";
 import { minify as htmlMinify } from "html-minifier-terser";
 import { frameworks } from "./frameworks";
 import pluginGenerateFrameworkContent from "./build/generateContentVitePlugin";
+import generateSitemap from "./scripts/generateSitemap";
 import { svelteInspector } from "@sveltejs/vite-plugin-svelte-inspector";
 import tailwindcss from "@tailwindcss/vite";
 import { FRAMEWORK_SEPARATOR } from "./src/constants.ts";
@@ -91,8 +92,11 @@ const footerNavigation = [
 const templateDataDefaults = {
   title: "Component Party",
   url: "https://component-party.dev/",
-  description: `Web component JS frameworks overview by their syntax and features: ${frameworks.map((f) => f.title).join(", ")}`,
+  description: `Compare JavaScript frameworks side-by-side: React, Vue, Angular, Svelte, Solid.js, and more. See syntax differences, features, and code examples for web development frameworks.`,
+  keywords:
+    "JavaScript frameworks, React, Vue, Angular, Svelte, Solid.js, framework comparison, web development, frontend frameworks, component libraries, JavaScript libraries, code comparison, programming tools, developer tools, web components, JSX, TypeScript, modern JavaScript",
   image: "https://component-party.dev/banner2.png",
+  frameworkCount: frameworks.length,
 };
 
 // https://vitejs.dev/config/
@@ -126,7 +130,22 @@ export default defineConfig({
       external: (id) => {
         return id.includes("/content/");
       },
+      output: {
+        manualChunks: {
+          vendor: ["svelte"],
+          frameworks: ["@frameworks"],
+        },
+      },
     },
+    minify: "terser",
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+    },
+    sourcemap: false,
+    target: "esnext",
   },
 });
 
@@ -177,6 +196,9 @@ async function generateHtmlPagesPlugin(pages: unknown[]) {
       return html;
     },
     async closeBundle() {
+      // Generate sitemap
+      await generateSitemap();
+
       for (const page of pages) {
         const template =
           (page as { template?: string }).template || "index.html";

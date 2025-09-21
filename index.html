@@ -1,9 +1,12 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title><%= it.title %></title>
     <link rel="icon" href="/favicon.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="canonical" href="<%= it.url %>" />
     <link
       rel="preload"
       href="/font/Mona-Sans.woff2"
@@ -12,9 +15,34 @@
       crossorigin=""
     />
 
+    <!-- DNS Prefetch for external resources -->
+    <link rel="dns-prefetch" href="//github.com" />
+    <link rel="dns-prefetch" href="//codesandbox.io" />
+    <link rel="dns-prefetch" href="//play.vuejs.org" />
+    <link rel="dns-prefetch" href="//svelte.dev" />
+    <link rel="dns-prefetch" href="//playground.solidjs.com" />
+    <link rel="dns-prefetch" href="//qwik.builder.io" />
+    <link rel="dns-prefetch" href="//lit.dev" />
+    <link rel="dns-prefetch" href="//ember-twiddle.com" />
+    <link rel="dns-prefetch" href="//markojs.com" />
+    <link rel="dns-prefetch" href="//stackblitz.com" />
+    <link rel="dns-prefetch" href="//www.ripplejs.com" />
+
+    <!-- Preconnect to critical external domains -->
+    <link rel="preconnect" href="https://github.com" crossorigin />
+    <link rel="preconnect" href="https://codesandbox.io" crossorigin />
+
     <!-- Primary Meta Tags -->
     <meta name="title" content="<%= it.title %>" />
     <meta name="description" content="<%= it.description %>" />
+    <meta name="keywords" content="<%= it.keywords %>" />
+    <meta name="author" content="Component Party" />
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="bingbot" content="index, follow" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -22,6 +50,14 @@
     <meta property="og:title" content="<%= it.title %>" />
     <meta property="og:description" content="<%= it.description %>" />
     <meta property="og:image" content="<%= it.image %>" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="<%= it.title %> - JavaScript Framework Comparison"
+    />
+    <meta property="og:site_name" content="Component Party" />
+    <meta property="og:locale" content="en_US" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
@@ -29,6 +65,101 @@
     <meta property="twitter:title" content="<%= it.title %>" />
     <meta property="twitter:description" content="<%= it.description %>" />
     <meta property="twitter:image" content="<%= it.image %>" />
+    <meta
+      property="twitter:image:alt"
+      content="<%= it.title %> - JavaScript Framework Comparison"
+    />
+    <meta property="twitter:creator" content="@componentparty" />
+    <meta property="twitter:site" content="@componentparty" />
+
+    <!-- Additional SEO Meta Tags -->
+    <meta name="theme-color" content="#111827" />
+    <meta name="msapplication-TileColor" content="#111827" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="Component Party" />
+    <meta name="application-name" content="Component Party" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Component Party",
+        "description": "<%= it.description %>",
+        "url": "<%= it.url %>",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "author": {
+          "@type": "Organization",
+          "name": "Component Party",
+          "url": "https://component-party.dev"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Component Party",
+          "url": "https://component-party.dev",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://component-party.dev/popper.svg"
+          }
+        },
+        "keywords": "<%= it.keywords %>",
+        "inLanguage": "en-US",
+        "isAccessibleForFree": true,
+        "browserRequirements": "Requires JavaScript. Requires HTML5.",
+        "softwareVersion": "2.0.0",
+        "datePublished": "2024-01-01",
+        "dateModified": "2024-12-01",
+        "mainEntity": {
+          "@type": "ItemList",
+          "name": "JavaScript Frameworks Comparison",
+          "description": "A comprehensive comparison of popular JavaScript frameworks and libraries",
+          "numberOfItems": "<%= it.frameworkCount || '20+' %>",
+          "itemListElement": [
+            {
+              "@type": "SoftwareApplication",
+              "name": "React",
+              "description": "A JavaScript library for building user interfaces",
+              "applicationCategory": "WebApplication",
+              "operatingSystem": "Web Browser"
+            },
+            {
+              "@type": "SoftwareApplication",
+              "name": "Vue.js",
+              "description": "A progressive JavaScript framework for building user interfaces",
+              "applicationCategory": "WebApplication",
+              "operatingSystem": "Web Browser"
+            },
+            {
+              "@type": "SoftwareApplication",
+              "name": "Angular",
+              "description": "A platform and framework for building single-page client applications",
+              "applicationCategory": "WebApplication",
+              "operatingSystem": "Web Browser"
+            },
+            {
+              "@type": "SoftwareApplication",
+              "name": "Svelte",
+              "description": "A radical new approach to building user interfaces",
+              "applicationCategory": "WebApplication",
+              "operatingSystem": "Web Browser"
+            }
+          ]
+        }
+      }
+    </script>
+
     <style>
       @font-face {
         font-family: "Mona Sans";

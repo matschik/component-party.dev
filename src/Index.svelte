@@ -173,6 +173,58 @@
 
 <svelte:head>
   <title>{siteTitle}</title>
+  <meta
+    name="description"
+    content={isVersusFrameworks
+      ? `Compare ${frameworksSelected
+          .map((f) => f?.title)
+          .filter(Boolean)
+          .join(
+            " vs ",
+          )} frameworks side-by-side. See syntax differences, features, and code examples for ${frameworksSelected
+          .map((f) => f?.title)
+          .filter(Boolean)
+          .join(" and ")}.`
+      : "Compare JavaScript frameworks side-by-side: React, Vue, Angular, Svelte, Solid.js, and more. See syntax differences, features, and code examples for web development frameworks."}
+  />
+  <meta
+    name="keywords"
+    content={isVersusFrameworks
+      ? frameworksSelected
+          .map((f) => f?.title)
+          .filter(Boolean)
+          .join(", ") +
+        ", framework comparison, JavaScript frameworks, web development, frontend development, code comparison"
+      : "JavaScript frameworks, React, Vue, Angular, Svelte, Solid.js, framework comparison, web development, frontend frameworks, component libraries, JavaScript libraries, code comparison, programming tools, developer tools, web components, JSX, TypeScript, modern JavaScript"}
+  />
+  {#if isVersusFrameworks}
+    <meta property="og:title" content={siteTitle} />
+    <meta
+      property="og:description"
+      content="Compare {frameworksSelected
+        .map((f) => f?.title)
+        .filter(Boolean)
+        .join(
+          ' vs ',
+        )} frameworks side-by-side. See syntax differences, features, and code examples for {frameworksSelected
+        .map((f) => f?.title)
+        .filter(Boolean)
+        .join(' and ')}."
+    />
+    <meta property="twitter:title" content={siteTitle} />
+    <meta
+      property="twitter:description"
+      content="Compare {frameworksSelected
+        .map((f) => f?.title)
+        .filter(Boolean)
+        .join(
+          ' vs ',
+        )} frameworks side-by-side. See syntax differences, features, and code examples for {frameworksSelected
+        .map((f) => f?.title)
+        .filter(Boolean)
+        .join(' and ')}."
+    />
+  {/if}
 </svelte:head>
 
 <Header />
@@ -229,7 +281,11 @@
     <main class="relative pt-6">
       <div>
         {#if frameworkIdsSelected.size === 0}
-          <div class="space-y-4" data-testid="empty-state">
+          <section
+            class="space-y-4"
+            data-testid="empty-state"
+            aria-labelledby="empty-state-heading"
+          >
             <div class="flex justify-center">
               <span
                 class="iconify ph--arrow-up size-6 animate-bounce"
@@ -237,18 +293,29 @@
               ></span>
             </div>
             <div class="flex justify-center">
+              <h1 id="empty-state-heading" class="sr-only">
+                Select Frameworks to Compare
+              </h1>
               <p
                 class="text-lg opacity-80 flex items-center text-center space-x-3"
                 data-testid="empty-state-message"
               >
-                <img src="/popper.svg" alt="logo" class="size-6" />
+                <img
+                  src="/popper.svg"
+                  alt="Component Party logo"
+                  class="size-6"
+                />
                 <span>
                   Please select a framework to view framework's snippets
                 </span>
-                <img src="/popper.svg" alt="logo" class="size-6" />
+                <img
+                  src="/popper.svg"
+                  alt="Component Party logo"
+                  class="size-6"
+                />
               </p>
             </div>
-          </div>
+          </section>
         {:else}
           <div class="space-y-20">
             {#each sections as section (section.sectionId)}
