@@ -44,7 +44,7 @@
   {#each files as file (file.fileName)}
     <button
       class={[
-        "bg-[#0d1117] py-1.5 px-3 flex-shrink-0 text-xs rounded-t inline-block",
+        "bg-[#0d1117] py-1.5 px-3 flex-shrink-0 text-xs rounded-t inline-block transition-all duration-200 hover:opacity-100",
         filenameSelected !== file.fileName && "opacity-60",
       ]}
       onclick={() => {
@@ -75,12 +75,12 @@
         target="_blank"
         rel="noreferrer"
         aria-label="Edit on Github"
-        class="bg-[#0d1117] rounded border opacity-60 hover:opacity-90"
+        class="bg-[#0d1117] rounded border opacity-60 hover:opacity-90 transition-all duration-200 p-1 flex items-center justify-center"
       >
         <span class="iconify ph--pencil size-4" aria-hidden="true"></span>
       </a>
       <button
-        class="px-1.5 bg-[#0d1117] py-1 rounded border opacity-60 hover:opacity-90"
+        class="bg-[#0d1117] rounded border opacity-60 hover:opacity-90 transition-all duration-200 p-1 flex items-center justify-center"
         title="Copy to clipboard"
         aria-label="Copy to clipboard"
         onclick={copySnippet}
