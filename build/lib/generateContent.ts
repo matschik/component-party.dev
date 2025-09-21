@@ -133,7 +133,7 @@ export default async function generateContent(
     );
 
     if (!shouldRegenerate) {
-      console.log("Generated content is up to date, skipping generation.");
+      console.info("Generated content is up to date, skipping generation.");
       return;
     }
   }
@@ -343,6 +343,9 @@ export default async function generateContent(
     export default snippetsImporterByFrameworkId;
   `,
   );
+
+  // Generate _redirects file for Cloudflare Pages
+  await generateRedirectsFile(rootDir);
 }
 
 function dirNameToTitle(dirName: string): string {
@@ -394,4 +397,50 @@ async function generatePlaygroundURL(
   const playgroundURL = await frameworkIdPlayground(contentByFilename, title);
 
   return playgroundURL;
+}
+
+async function generateRedirectsFile(rootDir: string): Promise<void> {
+  // Generate all possible framework combinations
+  const frameworkIds = frameworks.map((f) => f.id);
+  const redirects: string[] = [];
+
+  // Generate redirects for all framework pairs (both directions)
+  for (let i = 0; i < frameworkIds.length; i++) {
+    for (let j = 0; j < frameworkIds.length; j++) {
+      if (i !== j) {
+        const framework1 = frameworkIds[i];
+        const framework2 = frameworkIds[j];
+        const redirectPath = `/compare/${framework1}-vs-${framework2}`;
+        const targetUrl = `/?f=${framework1}-${framework2}`;
+        redirects.push(`${redirectPath} ${targetUrl} 301`);
+      }
+    }
+  }
+
+  // Generate dynamic redirects for comma-separated patterns using placeholders
+  const dynamicRedirects = [
+    // Single framework redirects (static for better performance)
+    ...frameworkIds.map((id) => `/?f=${id} / 301`),
+    // Dynamic redirects for comma-separated patterns - matches any comma-separated values
+    // This will catch patterns like /?f=react,vue3,angular or /?f=mithril,alpine,etc
+    "/?f=:frameworks / 301",
+  ];
+
+  redirects.push(...dynamicRedirects);
+
+  // Add specific compare patterns that don't match our framework pairs
+  const specificCompareRedirects = ["/compare/emberPolaris-vs-angular / 301"];
+  redirects.push(...specificCompareRedirects);
+
+  const redirectsContent = `# File generated from "node scripts/generateContent.js", DO NOT EDIT/COMMIT
+${redirects.join("\n")}
+`;
+
+  const publicDir = path.join(rootDir, "public");
+  const redirectsFilePath = path.join(publicDir, "_redirects");
+
+  await fs.writeFile(redirectsFilePath, redirectsContent);
+  console.info(
+    `Generated _redirects file for Cloudflare Pages with ${redirects.length} redirects`,
+  );
 }
