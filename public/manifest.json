@@ -18,7 +18,7 @@
       "purpose": "any maskable"
     },
     {
-      "src": "/favicon.png", 
+      "src": "/favicon.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
@@ -48,7 +48,7 @@
     },
     {
       "name": "React vs Angular",
-      "short_name": "React vs Angular", 
+      "short_name": "React vs Angular",
       "description": "Compare React and Angular frameworks",
       "url": "/?f=react,angularRenaissance",
       "icons": [
@@ -61,7 +61,7 @@
     {
       "name": "Vue vs Svelte",
       "short_name": "Vue vs Svelte",
-      "description": "Compare Vue.js and Svelte frameworks", 
+      "description": "Compare Vue.js and Svelte frameworks",
       "url": "/?f=vue3,svelte5",
       "icons": [
         {

@@ -10,7 +10,6 @@ import generateSitemap from "./scripts/generateSitemap";
 import { svelteInspector } from "@sveltejs/vite-plugin-svelte-inspector";
 import tailwindcss from "@tailwindcss/vite";
 import { FRAMEWORK_SEPARATOR } from "./src/constants.ts";
-// @TODO: sitemap
 
 // Helper function to create framework comparison URLs
 const createFrameworkUrl = (frameworks: string[]) =>

@@ -4,15 +4,15 @@ on:
   workflow_call:
     inputs:
       node-version:
-        description: 'Node.js version to use'
+        description: "Node.js version to use"
         required: false
         type: string
-        default: '22.18.0'
+        default: "22.18.0"
       pnpm-version:
-        description: 'pnpm version to use'
+        description: "pnpm version to use"
         required: false
         type: string
-        default: '10.14.0'
+        default: "10.14.0"
 
 jobs:
   setup:
@@ -30,7 +30,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ inputs.node-version }}
-          cache: 'pnpm'
+          cache: "pnpm"
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile

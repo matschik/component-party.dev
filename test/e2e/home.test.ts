@@ -28,7 +28,7 @@ test.describe("Homepage", () => {
     expect(selectedFrameworks).toContain("svelte5");
   });
 
-  test("should allow toggling framework selection", async ({ page }) => {
+  test("should allow toggling framework selection", async () => {
     // Wait for frameworks to load
     await testHelpers.waitForFrameworksToLoad();
 

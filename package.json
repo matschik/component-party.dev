@@ -17,7 +17,6 @@
     "build:content": "node scripts/generateContent.ts --no-cache",
     "build:progress": "node scripts/generateReadMeProgress.ts",
     "build:sitemap": "node scripts/generateSitemap.ts",
-    "test:content-hook": "node scripts/checkContentChanges.ts",
     "prepare": "lefthook install",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
