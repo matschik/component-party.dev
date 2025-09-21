@@ -66,6 +66,9 @@ importers:
       chokidar:
         specifier: ^4.0.3
         version: 4.0.3
+      eslint:
+        specifier: ^9.36.0
+        version: 9.36.0(jiti@2.5.1)
       eslint-config-prettier:
         specifier: ^10.1.8
         version: 10.1.8(eslint@9.36.0(jiti@2.5.1))
