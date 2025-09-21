@@ -6,7 +6,6 @@ export class TestHelpers {
   async clearFrameworkSelection() {
     await this.page.evaluate(() => {
       localStorage.removeItem("framework_display");
-      localStorage.setItem("framework_display_initialized", "true");
     });
     await this.page.reload();
   }
@@ -33,6 +32,35 @@ export class TestHelpers {
     const button = this.page.getByTestId(`framework-button-${frameworkId}`);
     await expect(button).toBeVisible();
     await button.click();
+  }
+
+  async deselectFramework(frameworkId: string) {
+    const button = this.page.getByTestId(`framework-button-${frameworkId}`);
+    await expect(button).toBeVisible();
+    await button.click();
+  }
+
+  async toggleFramework(frameworkId: string) {
+    const button = this.page.getByTestId(`framework-button-${frameworkId}`);
+    await expect(button).toBeVisible();
+    await button.click();
+  }
+
+  async selectFrameworks(frameworkIds: string[]) {
+    for (const frameworkId of frameworkIds) {
+      await this.selectFramework(frameworkId);
+    }
+  }
+
+  async deselectFrameworks(frameworkIds: string[]) {
+    for (const frameworkId of frameworkIds) {
+      await this.deselectFramework(frameworkId);
+    }
+  }
+
+  async deselectAllFrameworks() {
+    const selectedFrameworks = await this.getSelectedFrameworks();
+    await this.deselectFrameworks(selectedFrameworks);
   }
 
   async getFrameworkButton(frameworkId: string) {

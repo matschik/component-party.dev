@@ -15,6 +15,7 @@ test.describe("Integration Tests", () => {
   }) => {
     // Start with no frameworks selected
     await helpers.clearFrameworkSelection();
+    await helpers.deselectAllFrameworks();
 
     // Verify empty state using test ID
     await expect(page.getByTestId("empty-state")).toBeVisible();
@@ -70,8 +71,8 @@ test.describe("Integration Tests", () => {
     // Add another framework
     await helpers.selectFramework("svelte5");
 
-    // Should navigate back to home
-    await expect(page).toHaveURL("/");
+    // Should navigate back to home (with framework parameters)
+    await expect(page).toHaveURL(/\/\?f=/);
 
     // Verify all three frameworks are selected
     const updatedFrameworks = await helpers.getSelectedFrameworks();

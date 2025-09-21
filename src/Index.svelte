@@ -200,7 +200,11 @@
             data-testid={`framework-button-${framework.id}`}
             onclick={() => {
               toggleFrameworkId(framework.id);
-              frameworkIdsStorage.setJSON(frameworkIdsSelectedArr);
+              if (frameworkIdsSelectedArr.length === 0) {
+                frameworkIdsStorage.remove();
+              } else {
+                frameworkIdsStorage.setJSON(frameworkIdsSelectedArr);
+              }
             }}
           >
             <FrameworkLabel id={framework.id} size={16} />
