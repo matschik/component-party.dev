@@ -59,7 +59,7 @@
 <div class="relative group">
   <div
     bind:this={codeSnippetEl}
-    class="bg-[#0d1117] px-4 py-3 text-sm overflow-auto"
+    class="bg-[#0d1117] px-4 py-3 text-sm overflow-auto rounded-b rounded-tr"
   >
     {#if snippet}
       <!-- eslint-disable-next-line svelte/no-at-html-tags -->

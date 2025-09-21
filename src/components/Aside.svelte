@@ -8,6 +8,7 @@
   function getLargestElement(elements: NodeListOf<Element>): Element | null {
     let largestArea = 0;
     let largestElement: Element | null = null;
+    let firstFullyVisibleElement: Element | null = null;
 
     for (const element of elements) {
       const rect = element.getBoundingClientRect();
@@ -19,6 +20,19 @@
       if (visibleWidth > 0 && visibleHeight > 0) {
         const area = visibleWidth * visibleHeight;
 
+        // Check if element is fully visible
+        const isFullyVisible =
+          rect.top >= 0 &&
+          rect.left >= 0 &&
+          rect.bottom <= window.innerHeight &&
+          rect.right <= window.innerWidth;
+
+        // Prioritize first fully visible element
+        if (isFullyVisible && !firstFullyVisibleElement) {
+          firstFullyVisibleElement = element;
+        }
+
+        // Track largest element as fallback
         if (area > largestArea) {
           largestArea = area;
           largestElement = element;
@@ -26,11 +40,22 @@
       }
     }
 
-    return largestElement;
+    // Return first fully visible element if found, otherwise largest element
+    return firstFullyVisibleElement || largestElement;
   }
 
-  function listenLargestSnippetOnScroll(): () => void {
-    function onScroll(): void {
+  function scrollToElement(elementId: string) {
+    const target = document.getElementById(elementId);
+    if (target) {
+      // Update URL hash
+      window.history.pushState(null, "", `#${elementId}`);
+      // Scroll to target
+      target.scrollIntoView({ block: "start" });
+    }
+  }
+
+  onMount(function listenLargestSnippetOnScroll() {
+    function onScroll() {
       const largestSnippet = getLargestElement(
         document.querySelectorAll("[data-snippet-id]"),
       );
@@ -49,14 +74,6 @@
     return () => {
       document.removeEventListener("scroll", throttleOnScroll);
     };
-  }
-
-  let unlistenLargestSnippetOnScroll: (() => void) | undefined;
-
-  onMount(() => {
-    unlistenLargestSnippetOnScroll = listenLargestSnippetOnScroll();
-
-    return () => unlistenLargestSnippetOnScroll?.();
   });
 </script>
 
@@ -67,35 +84,35 @@
     <ul class="space-y-6">
       {#each sections as section (section.sectionId)}
         <li>
-          <a
-            href={`#${section.sectionId}`}
+          <button
             class={[
-              "inline-block w-full py-1.5 px-4 text-white font-semibold opacity-90 hover:opacity-100 hover:bg-gray-800 rounded transition-opacity",
+              "inline-block w-full py-1.5 px-4 text-white font-semibold opacity-90 hover:opacity-100 hover:bg-gray-800 rounded transition-opacity text-left",
               {
                 "bg-gray-800":
                   largestVisibleSnippetId &&
                   largestVisibleSnippetId.startsWith(section.sectionId),
               },
             ]}
+            onclick={() => scrollToElement(section.sectionId)}
           >
             {section.title}
-          </a>
+          </button>
           <ul>
             {#each snippets.filter((s: any) => s.sectionId === section.sectionId) as snippet (snippet.snippetId)}
               {@const snippetPathId =
                 section.sectionId + "." + snippet.snippetId}
               <li>
-                <a
-                  href={`#${snippetPathId}`}
+                <button
                   class={[
-                    "inline-block w-full py-1.5 px-4 text-white font-medium hover:bg-gray-800 rounded hover:opacity-100 transition-opacity",
+                    "inline-block w-full py-1.5 px-4 text-white font-medium hover:bg-gray-800 rounded hover:opacity-100 transition-opacity text-left",
                     snippetPathId === largestVisibleSnippetId
                       ? "bg-gray-800 opacity-70"
                       : "opacity-50",
                   ]}
+                  onclick={() => scrollToElement(snippetPathId)}
                 >
                   {snippet.title}
-                </a>
+                </button>
               </li>
             {/each}
           </ul>
