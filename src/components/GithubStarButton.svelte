@@ -1,25 +1,27 @@
 <script lang="ts">
-  import { onMount } from "svelte";
   import createLocaleStorage from "../lib/createLocaleStorage";
 
   interface StarCountStorageData {
-    value: number;
+    value: string;
     fetchedAt: number;
   }
 
-  interface GitHubApiResponse {
-    stargazers_count?: number;
+  interface ShieldsApiResponse {
+    schemaVersion: number;
+    label: string;
+    message: string;
+    color: string;
   }
 
   const REPOSITORY_PATH = "matschik/component-party.dev";
-  const STAR_COUNT_EXPIRES_IN_MS = 1000 * 60 * 2;
+  const STAR_COUNT_EXPIRES_IN_MS = 1000 * 60 * 5; // Shields.io caches for 5-15 minutes
 
-  const starCountStorage = createLocaleStorage("github-star-count", {
-    value: 0,
+  const starCountStorage = createLocaleStorage("github-star-count-v2", {
+    value: "0",
     fetchedAt: 0,
   });
 
-  let starCount: number = $state(0);
+  let starCount: string = $state("0");
   let isFetchingStarCount: boolean = $state(false);
 
   async function getRepoStarCount(): Promise<void> {
@@ -38,33 +40,36 @@
 
     isFetchingStarCount = true;
 
-    // Github public API rate limit: 60 requests per hour
-    const data: GitHubApiResponse = await fetch(
-      `https://api.github.com/repos/${REPOSITORY_PATH}`,
-      {
-        headers: {
-          Accept: "application/vnd.github.v3.star+json",
-          Authorization: "",
+    try {
+      // Using Shields.io JSON endpoint - no rate limits, cached for 5-15 minutes
+      const data: ShieldsApiResponse = await fetch(
+        `https://img.shields.io/github/stars/${REPOSITORY_PATH}.json`,
+        {
+          headers: {
+            Accept: "application/json",
+          },
         },
-      },
-    )
-      .finally(() => {
-        isFetchingStarCount = false;
-      })
-      .then((r) => r.json());
+      )
+        .finally(() => {
+          isFetchingStarCount = false;
+        })
+        .then((r) => r.json());
 
-    if (data.stargazers_count) {
-      starCount = data.stargazers_count;
-      starCountStorage.setJSON({
-        value: starCount,
-        fetchedAt: Date.now(),
-      });
+      if (data.message) {
+        // Use the formatted string directly from Shields.io (e.g., "3.1k", "500")
+        starCount = data.message;
+        starCountStorage.setJSON({
+          value: starCount,
+          fetchedAt: Date.now(),
+        });
+      }
+    } catch (error) {
+      console.warn("Failed to fetch star count from Shields.io:", error);
+      // Keep the existing cached value if available
     }
   }
 
-  onMount(() => {
-    getRepoStarCount();
-  });
+  getRepoStarCount();
 
   function onButtonClick(): void {
     starCountStorage.remove();
@@ -85,11 +90,11 @@
     ></span>
     <span class="hidden sm:inline">Star</span>
   </span>
-  {#if isFetchingStarCount || starCount !== 0}
+  {#if isFetchingStarCount || starCount !== "0"}
     <div
       class="hidden h-full items-center justify-center px-3 sm:flex border-[#373b43] sm:border-l"
     >
-      {#if isFetchingStarCount && starCount === 0}
+      {#if isFetchingStarCount && starCount === "0"}
         <span
           class="iconify ph--spinner animate-spin size-4 mx-1"
           aria-hidden="true"
