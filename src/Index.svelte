@@ -288,7 +288,7 @@
                       </h2>
                       {#if frameworkIdsSelectedInitialized}
                         <div
-                          class="grid grid-cols-1 2xl:grid-cols-2 gap-y-4 2xl:gap-y-8 gap-x-10 mt-2"
+                          class="grid grid-cols-1 xl:grid-cols-2 gap-y-4 xl:gap-y-8 gap-x-10 mt-2"
                         >
                           {#each frameworkIdsSelectedArr as frameworkId (frameworkId)}
                             {@const framework = matchFrameworkId(frameworkId)}

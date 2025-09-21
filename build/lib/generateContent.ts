@@ -63,12 +63,81 @@ async function pathExists(path: string): Promise<boolean> {
   }
 }
 
-export default async function generateContent(): Promise<void> {
+async function shouldRegenerateFiles(
+  contentPath: string,
+  generatedContentDirPath: string,
+  frameworkDirPath: string,
+): Promise<boolean> {
+  // Check if any generated files exist
+  const treeFilePath = path.join(generatedContentDirPath, "tree.js");
+  const treeDtsFilePath = path.join(generatedContentDirPath, "tree.d.ts");
+  const frameworkIndexPath = path.join(frameworkDirPath, "index.js");
+  const frameworkIndexDtsPath = path.join(frameworkDirPath, "index.d.ts");
+
+  const generatedFilesExist = await Promise.all([
+    pathExists(treeFilePath),
+    pathExists(treeDtsFilePath),
+    pathExists(frameworkIndexPath),
+    pathExists(frameworkIndexDtsPath),
+  ]);
+
+  // If any generated file is missing, regenerate
+  if (!generatedFilesExist.every(Boolean)) {
+    return true;
+  }
+
+  // Get the modification time of the content directory
+  const contentStats = await fs.stat(contentPath);
+  const contentModTime = contentStats.mtime;
+
+  // Check if any generated file is older than the content directory
+  const generatedFilePaths = [
+    treeFilePath,
+    treeDtsFilePath,
+    frameworkIndexPath,
+    frameworkIndexDtsPath,
+  ];
+
+  for (const filePath of generatedFilePaths) {
+    try {
+      const fileStats = await fs.stat(filePath);
+      if (fileStats.mtime < contentModTime) {
+        return true;
+      }
+    } catch {
+      // If we can't stat a file, regenerate to be safe
+      return true;
+    }
+  }
+
+  return false;
+}
+
+export default async function generateContent(
+  options: { noCache?: boolean } = {},
+): Promise<void> {
   const rootDir = await packageDirectory();
   if (!rootDir) {
     throw new Error("Could not find package directory");
   }
   const contentPath = path.join(rootDir, "content");
+  const generatedContentDirPath = path.join(rootDir, "src/generatedContent");
+  const frameworkDirPath = path.join(generatedContentDirPath, "framework");
+
+  // Check if we should skip generation due to cache
+  if (!options.noCache) {
+    const shouldRegenerate = await shouldRegenerateFiles(
+      contentPath,
+      generatedContentDirPath,
+      frameworkDirPath,
+    );
+
+    if (!shouldRegenerate) {
+      console.log("Generated content is up to date, skipping generation.");
+      return;
+    }
+  }
+
   const sectionDirNames = await fs.readdir(contentPath);
 
   const treePayload: TreePayload = {
@@ -185,10 +254,10 @@ export default async function generateContent(): Promise<void> {
     }
   }
 
-  const generatedContentDirPath = path.join(rootDir, "src/generatedContent");
-  const frameworkDirPath = path.join(generatedContentDirPath, "framework");
   const treeFilePath = path.join(generatedContentDirPath, "tree.js");
+  const treeDtsFilePath = path.join(generatedContentDirPath, "tree.d.ts");
   const frameworkIndexPath = path.join(frameworkDirPath, "index.js");
+  const frameworkIndexDtsPath = path.join(frameworkDirPath, "index.d.ts");
   const commentDisclaimer = `// File generated from "node scripts/generateContent.js", DO NOT EDIT/COMMIT`;
 
   if (!(await pathExists(generatedContentDirPath))) {
@@ -201,6 +270,29 @@ export default async function generateContent(): Promise<void> {
     ${commentDisclaimer}
     export const sections = ${JSON.stringify(treePayload.sections, null, 2)};
     export const snippets = ${JSON.stringify(treePayload.snippets, null, 2)};
+  `,
+  );
+
+  await writeDtsFile(
+    treeDtsFilePath,
+    `
+    ${commentDisclaimer}
+    export interface Section {
+      sectionId: string;
+      sectionDirName: string;
+      title: string;
+    }
+
+    export interface Snippet {
+      sectionId: string;
+      snippetId: string;
+      snippetDirName: string;
+      sectionDirName: string;
+      title: string;
+    }
+
+    export declare const sections: Section[];
+    export declare const snippets: Snippet[];
   `,
   );
 
@@ -239,6 +331,18 @@ export default async function generateContent(): Promise<void> {
     };
     `,
   );
+
+  await writeDtsFile(
+    frameworkIndexDtsPath,
+    `
+    ${commentDisclaimer}
+    declare const snippetsImporterByFrameworkId: {
+      [key: string]: () => Promise<any>;
+    };
+
+    export default snippetsImporterByFrameworkId;
+  `,
+  );
 }
 
 function dirNameToTitle(dirName: string): string {
@@ -251,6 +355,13 @@ function capitalize(string: string): string {
 
 async function writeJsFile(filepath: string, jsCode: string): Promise<void> {
   const codeFormatted = await prettier.format(jsCode, { parser: "babel" });
+  await fs.writeFile(filepath, codeFormatted);
+}
+
+async function writeDtsFile(filepath: string, dtsCode: string): Promise<void> {
+  const codeFormatted = await prettier.format(dtsCode, {
+    parser: "typescript",
+  });
   await fs.writeFile(filepath, codeFormatted);
 }
 

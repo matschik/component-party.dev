@@ -4,3 +4,7 @@ pre-commit:
       run: pnpm _format --write {staged_files}
       glob: "*.{js,ts,svelte,html,md,css}"
       stage_fixed: true
+    update-readme-progress:
+      run: node scripts/generateReadMeProgress.ts && git add README.md
+      glob: "content/**/*"
+      fail_text: "Failed to update README progress"
