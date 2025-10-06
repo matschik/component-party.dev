@@ -15,12 +15,16 @@ export component TrafficLight() {
   <p>{`Light is ${@light}`}</p>
   <p>
     {"You must "}
-    if (@light === "red") {
-      <span>{"STOP"}</span>
-    } else if (@light === "orange") {
-      <span>{"SLOW DOWN"}</span>
-    } else if (@light === "green") {
-      <span>{"GO"}</span>
+    switch (@light) {
+      case "red":
+        <span>{"STOP"}</span>;
+        break;
+      case "orange":
+        <span>{"SLOW DOWN"}</span>;
+        break;
+      case "green":
+        <span>{"GO"}</span>;
+        break;
     }
   </p>
 }
