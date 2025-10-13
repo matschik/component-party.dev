@@ -7,11 +7,10 @@ class State {
   @tracked data = null;
 }
 
-function getUsers() {
+function fetchUsers() {
   let state = new State();
   
   async function fetchData() {
-    state.isLoading = true;
     try {
       let response = await fetch("https://randomuser.me/api/?results=3");
       let { results: users } = await response.json();
@@ -29,8 +28,6 @@ function getUsers() {
 }
 
 export default class App extends Component {
-  fetchUsers = () => getUsers();
-
   <template>
     {{#let (this.fetchUsers) as |request|}}
       {{#if request.isLoading}}
