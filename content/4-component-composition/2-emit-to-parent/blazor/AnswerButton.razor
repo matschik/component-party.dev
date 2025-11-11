@@ -1,0 +1,8 @@
+<button @onclick="OnYes">YES</button>
+<button @onclick="OnNo">NO</button>
+@code {
+    [Parameter]
+    public EventCallback OnYes { get; set; }
+    [Parameter]
+    public EventCallback OnNo { get; set; }
+}

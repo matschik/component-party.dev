@@ -1,0 +1,28 @@
+<button @onclick="NextLight">Next light</button>
+<p>Light is: @light</p>
+<p>
+    You must
+    @if (light == "red")
+    {
+        <span>STOP</span>
+    }
+    else if (light == "orange")
+    {
+        <span>SLOW DOWN</span>
+    }
+    else if (light == "green")
+    {
+        <span>GO</span>
+    }
+</p>
+
+@code {
+    private readonly string[] trafficLights = { "red", "orange", "green" };
+    private int lightIndex = 0;
+    private string light => trafficLights[lightIndex];
+
+    private void NextLight()
+    {
+        lightIndex = (lightIndex + 1) % trafficLights.Length;
+    }
+}

@@ -1,0 +1,16 @@
+<div>
+    <h2>My Profile</h2>
+    <p>Username: @user?.Username</p>
+    <p>Email: @user?.Email</p>
+    <button @onclick="UpdateUsername">Update username to Jane</button>
+</div>
+
+@code {
+    [CascadingParameter]
+    private App.UserInfo? user { get; set; }
+
+    private void UpdateUsername()
+    {
+        user?.UpdateUsername("Jane");
+    }
+}
