@@ -136,6 +136,22 @@ export const frameworks: Framework[] = [
     releaseDate: "2021-05-27",
   },
   {
+    id: "emberPolaris",
+    title: "Ember Polaris",
+    frameworkName: "Ember",
+    frameworkNameId: "ember",
+    isLatestStable: false,
+    img: "framework/ember.svg",
+    playgroundURL: "http://new.emberjs.com",
+    documentationURL: "https://emberjs.com",
+    filesSorter(files) {
+      return sortAllFilenames(files, ["index.html", "app.hbs", "app.js"]);
+    },
+    repositoryLink: "https://github.com/emberjs/ember.js",
+    mainPackageName: "ember-source",
+    releaseDate: "2024-12-01",
+  },
+  {
     id: "emberOctane",
     title: "Ember Octane",
     frameworkName: "Ember",
@@ -214,22 +230,6 @@ export const frameworks: Framework[] = [
     repositoryLink: "https://github.com/alpinejs/alpine",
     mainPackageName: "alpinejs",
     releaseDate: "2019-11-06",
-  },
-  {
-    id: "emberPolaris",
-    title: "Ember Polaris",
-    frameworkName: "Ember",
-    frameworkNameId: "ember",
-    isLatestStable: false,
-    img: "framework/ember.svg",
-    playgroundURL: "http://new.emberjs.com",
-    documentationURL: "https://emberjs.com",
-    filesSorter(files) {
-      return sortAllFilenames(files, ["index.html", "app.hbs", "app.js"]);
-    },
-    repositoryLink: "https://github.com/emberjs/ember.js",
-    mainPackageName: "ember-source",
-    releaseDate: "2024-12-01",
   },
   {
     id: "mithril",

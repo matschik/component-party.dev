@@ -37,6 +37,14 @@ const footerNavigation = [
         name: "Angular vs Vue",
         url: createFrameworkUrl(["angularRenaissance", "vue3"]),
       },
+      {
+        name: "Ember vs React",
+        url: createFrameworkUrl(["emberPolaris", "react"]),
+      },
+      {
+        name: "Ember vs Vue",
+        url: createFrameworkUrl(["emberPolaris", "vue3"]),
+      },
     ],
   },
   {
