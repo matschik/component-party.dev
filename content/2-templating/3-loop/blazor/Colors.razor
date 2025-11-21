@@ -1,0 +1,10 @@
+<ul>
+    @foreach (var color in colors)
+    {
+        <li>@color</li>
+    }
+</ul>
+
+@code {
+    private string[] colors = { "red", "green", "blue" };
+}

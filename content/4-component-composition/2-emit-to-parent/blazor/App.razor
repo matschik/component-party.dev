@@ -1,0 +1,17 @@
+<p>Are you happy?</p>
+<AnswerButton OnYes="OnAnswerYes" OnNo="OnAnswerNo" />
+<p style="font-size: 50px;">@(isHappy ? "😀" : "😥")</p>
+
+@code {
+    private bool isHappy = true;
+
+    private void OnAnswerNo()
+    {
+        isHappy = false;
+    }
+
+    private void OnAnswerYes()
+    {
+        isHappy = true;
+    }
+}

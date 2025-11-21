@@ -2,229 +2,235 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://component-party.dev/</loc>
-    <lastmod>2025-09-21</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>https://component-party.dev/?f=svelte5</loc>
-    <lastmod>2025-09-21</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://component-party.dev/?f=react</loc>
-    <lastmod>2025-09-21</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://component-party.dev/?f=vue3</loc>
-    <lastmod>2025-09-21</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://component-party.dev/?f=angularRenaissance</loc>
-    <lastmod>2025-09-21</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://component-party.dev/?f=angular</loc>
-    <lastmod>2025-09-21</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://component-party.dev/?f=lit</loc>
-    <lastmod>2025-09-21</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://component-party.dev/?f=emberOctane</loc>
-    <lastmod>2025-09-21</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://component-party.dev/?f=solid</loc>
-    <lastmod>2025-09-21</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://component-party.dev/?f=svelte4</loc>
-    <lastmod>2025-09-21</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://component-party.dev/?f=vue2</loc>
-    <lastmod>2025-09-21</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://component-party.dev/?f=alpine</loc>
-    <lastmod>2025-09-21</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://component-party.dev/?f=emberPolaris</loc>
-    <lastmod>2025-09-21</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://component-party.dev/?f=mithril</loc>
-    <lastmod>2025-09-21</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://component-party.dev/?f=aurelia2</loc>
-    <lastmod>2025-09-21</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://component-party.dev/?f=qwik</loc>
-    <lastmod>2025-09-21</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://component-party.dev/?f=marko</loc>
-    <lastmod>2025-09-21</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://component-party.dev/?f=aurelia1</loc>
-    <lastmod>2025-09-21</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://component-party.dev/?f=ripple</loc>
-    <lastmod>2025-09-21</lastmod>
+    <lastmod>2025-11-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://component-party.dev/?f=blazor</loc>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://component-party.dev/?f=react,vue3</loc>
-    <lastmod>2025-09-21</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://component-party.dev/?f=react,angularRenaissance</loc>
-    <lastmod>2025-09-21</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://component-party.dev/?f=react,svelte5</loc>
-    <lastmod>2025-09-21</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://component-party.dev/?f=react,solid</loc>
-    <lastmod>2025-09-21</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://component-party.dev/?f=vue3,angularRenaissance</loc>
-    <lastmod>2025-09-21</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://component-party.dev/?f=vue3,svelte5</loc>
-    <lastmod>2025-09-21</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://component-party.dev/?f=vue3,solid</loc>
-    <lastmod>2025-09-21</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://component-party.dev/?f=angularRenaissance,svelte5</loc>
-    <lastmod>2025-09-21</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://component-party.dev/?f=angularRenaissance,solid</loc>
-    <lastmod>2025-09-21</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://component-party.dev/?f=svelte5,solid</loc>
-    <lastmod>2025-09-21</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://component-party.dev/?f=react,vue3,angularRenaissance</loc>
-    <lastmod>2025-09-21</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://component-party.dev/?f=react,svelte5,solid</loc>
-    <lastmod>2025-09-21</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://component-party.dev/?f=vue3,svelte5,solid</loc>
-    <lastmod>2025-09-21</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://component-party.dev/?f=react,vue3,svelte5</loc>
-    <lastmod>2025-09-21</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://component-party.dev/?f=svelte4,svelte5</loc>
-    <lastmod>2025-09-21</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://component-party.dev/?f=vue2,vue3</loc>
-    <lastmod>2025-09-21</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://component-party.dev/?f=angular,angularRenaissance</loc>
-    <lastmod>2025-09-21</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://component-party.dev/?f=aurelia1,aurelia2</loc>
-    <lastmod>2025-09-21</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://component-party.dev/?f=emberOctane,emberPolaris</loc>
-    <lastmod>2025-09-21</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

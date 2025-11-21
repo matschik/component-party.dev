@@ -1,0 +1,13 @@
+<input type="text" @ref="inputElement" />
+
+@code {
+    private ElementReference inputElement;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await inputElement.FocusAsync();
+        }
+    }
+}

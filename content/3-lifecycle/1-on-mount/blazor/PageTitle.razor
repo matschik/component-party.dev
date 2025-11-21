@@ -1,0 +1,12 @@
+<p>Page title: @pageTitle</p>
+
+@inject IJSRuntime JSRuntime
+
+@code {
+    private string pageTitle = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        pageTitle = await JSRuntime.InvokeAsync<string>("eval", "document.title");
+    }
+}

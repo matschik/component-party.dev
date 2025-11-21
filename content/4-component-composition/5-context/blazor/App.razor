@@ -1,0 +1,25 @@
+<h1>Welcome back, @user.Username</h1>
+<CascadingValue Value="@user">
+    <UserProfile />
+</CascadingValue>
+
+@code {
+    private UserInfo user = new()
+    {
+        Id = 1,
+        Username = "unicorn42",
+        Email = "unicorn42@example.com"
+    };
+
+    public class UserInfo
+    {
+        public int Id { get; set; }
+        public string Username { get; set; } = "";
+        public string Email { get; set; } = "";
+        
+        public void UpdateUsername(string newUsername)
+        {
+            Username = newUsername;
+        }
+    }
+}
