@@ -20,9 +20,11 @@
 
   let codeSnippetEl: HTMLElement | undefined = $state();
 
-  let filenameSelected: string | undefined = $state(
-    files.length > 0 ? files[0]?.fileName : undefined,
-  );
+  let filenameSelected: string | undefined = $state();
+
+  $effect(() => {
+    filenameSelected = files.length > 0 ? files[0]?.fileName : undefined;
+  });
 
   const snippet: File | undefined = $derived(
     filenameSelected
