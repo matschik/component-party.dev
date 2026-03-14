@@ -5,8 +5,8 @@ import AnswerButton from "./answer-button";
 export default class App extends Component {
   @tracked isHappy = true;
 
-  handleYes = () => (this.isHappy = true);
-  handleNo = () => (this.isHappy = false);
+  handleYes = () => this.isHappy = true;
+  handleNo = () => this.isHappy = false;
 
   <template>
     <p>Are you happy?</p>
