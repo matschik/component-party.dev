@@ -21,17 +21,21 @@
     children,
   }: Props = $props();
 
-  const onEnter = createTransitionWithClasses("enter", {
-    from: enter,
-    active: enterFrom,
-    to: enterTo,
-  });
+  const onEnter = $derived(
+    createTransitionWithClasses("enter", {
+      from: enter,
+      active: enterFrom,
+      to: enterTo,
+    }),
+  );
 
-  const onLeave = createTransitionWithClasses("leave", {
-    from: leave,
-    active: leaveTo,
-    to: leaveFrom,
-  });
+  const onLeave = $derived(
+    createTransitionWithClasses("leave", {
+      from: leave,
+      active: leaveTo,
+      to: leaveFrom,
+    }),
+  );
 
   function createTransitionWithClasses(
     type: "enter" | "leave",

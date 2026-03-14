@@ -20,11 +20,12 @@
 
   let codeSnippetEl: HTMLElement | undefined = $state();
 
-  let filenameSelected: string | undefined = $state();
+  let filenameSelectedOverride: string | undefined = $state();
 
-  $effect(() => {
-    filenameSelected = files.length > 0 ? files[0]?.fileName : undefined;
-  });
+  let filenameSelected: string | undefined = $derived(
+    filenameSelectedOverride ??
+      (files.length > 0 ? files[0]?.fileName : undefined),
+  );
 
   const snippet: File | undefined = $derived(
     filenameSelected
@@ -46,11 +47,11 @@
   {#each files as file (file.fileName)}
     <button
       class={[
-        "bg-[#0d1117] py-1.5 px-3 flex-shrink-0 text-xs rounded-t inline-block transition-all duration-200 hover:opacity-100",
+        "bg-[#0d1117] py-1.5 px-3 shrink-0 text-xs rounded-t inline-block transition-all duration-200 hover:opacity-100",
         filenameSelected !== file.fileName && "opacity-60",
       ]}
       onclick={() => {
-        filenameSelected = file.fileName;
+        filenameSelectedOverride = file.fileName;
       }}
     >
       {file.fileName}

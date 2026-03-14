@@ -24,9 +24,9 @@
       src={baseURL + framework.img}
       width={size}
       height={size}
-      class="flex-shrink-0"
+      class="shrink-0"
       alt={`logo of ${framework.title}`}
     />
   {/if}
-  <span class="flex-shrink-0 inline-block">{framework?.title || id}</span>
+  <span class="shrink-0 inline-block">{framework?.title || id}</span>
 </div>

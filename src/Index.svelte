@@ -244,7 +244,7 @@
               ? `Hide ${framework.title}`
               : `Display ${framework.title}`}
             class={[
-              "text-sm flex-shrink-0 rounded border px-3 py-1 bg-gray-900 hover:bg-gray-800 transition-all mr-2",
+              "text-sm shrink-0 rounded border px-3 py-1 bg-gray-900 hover:bg-gray-800 transition-all mr-2",
               frameworkIdsSelected.has(framework.id)
                 ? "border-blue-900"
                 : "opacity-70 border-opacity-50 border-gray-700",
@@ -266,7 +266,7 @@
       {#if bonusFrameworks.length > 0 && !showBonusFrameworks}
         <button
           title="show more frameworks"
-          class="opacity-70 text-sm flex-shrink-0 rounded border border-gray-700 px-3 py-1 border-opacity-50 bg-gray-900 hover:bg-gray-800 transition-all mr-2 flex items-center justify-center"
+          class="opacity-70 text-sm shrink-0 rounded border border-gray-700 px-3 py-1 border-opacity-50 bg-gray-900 hover:bg-gray-800 transition-all mr-2 flex items-center justify-center"
           data-testid="show-more-frameworks-button"
           onclick={() => {
             showBonusFrameworks = !showBonusFrameworks;

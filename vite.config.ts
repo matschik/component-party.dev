@@ -137,12 +137,7 @@ export default defineConfig({
       external: (id) => {
         return id.includes("/content/");
       },
-      output: {
-        manualChunks: {
-          vendor: ["svelte"],
-          frameworks: ["@frameworks"],
-        },
-      },
+      output: {},
     },
     minify: "terser",
     terserOptions: {

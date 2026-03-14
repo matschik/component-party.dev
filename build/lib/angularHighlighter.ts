@@ -12,7 +12,7 @@ export async function highlightAngularComponent(
 ): Promise<string> {
   const templateCode = getAngularTemplateCode(fileContent);
 
-  let codeHighlighted = "";
+  let codeHighlighted;
   if (templateCode) {
     const componentWithEmptyTemplate =
       removeAngularTemplateContent(fileContent);
