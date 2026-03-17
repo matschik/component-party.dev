@@ -329,12 +329,12 @@ export const frameworks: Framework[] = [
     frameworkNameId: "ripple",
     isLatestStable: true,
     img: "framework/ripple.svg",
-    playgroundURL: "https://www.ripplejs.com/playground",
-    documentationURL: "https://www.ripplejs.com/",
+    playgroundURL: "https://www.ripple-ts.com/playground",
+    documentationURL: "https://www.ripple-ts.com/",
     filesSorter(files) {
       return sortAllFilenames(files, ["index.html", "main.js", "App.ripple"]);
     },
-    repositoryLink: "https://github.com/trueadm/ripple",
+    repositoryLink: "https://github.com/Ripple-TS/ripple",
     mainPackageName: "ripple",
     releaseDate: "2023-01-01",
   },

@@ -1,0 +1,20 @@
+import { useFetchUsers } from "./useFetchUsers.ripple";
+
+export component App() {
+  const data = useFetchUsers();
+
+  if(data.isLoading) {
+    <p>{"Fetching users..."}</p>
+  } else if(data.error) {
+    <p>{"An error occurred while fetching users"}</p>
+  } else if(data.users) {
+    <ul>
+      for(const user of data.users) {
+        <li>
+          <img src={user.picture.thumbnail} alt="user" />
+          <p>{`${user.name.first} ${user.name.last}`}</p>
+        </li>
+      }
+    </ul>
+  }
+}
