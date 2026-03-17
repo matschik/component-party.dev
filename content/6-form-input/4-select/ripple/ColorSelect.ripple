@@ -1,4 +1,4 @@
-import { track } from "ripple";
+import { bindValue } from "ripple";
 
 const colors = [
   { id: 1, text: "red" },
@@ -8,13 +8,9 @@ const colors = [
 ];
 
 export component ColorSelect() {
-  let selectedColorId = track(2);
+  let selectedColorId = #ripple.track(2);
 
-  function handleChange(event) {
-    @selectedColorId = event.target.value;
-  }
-
-  <select value={@selectedColorId} onChange={handleChange}>
+  <select {ref bindValue(selectedColorId)}>
     for (const color of colors) {
       <option value={color.id} disabled={color.isDisabled}>
         {color.text}

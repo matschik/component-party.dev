@@ -1,7 +1,5 @@
-import { track } from "ripple";
-
 export component Counter() {
-  let count = track(0);
+  let count = #ripple.track(0);
 
   function incrementCount() {
     @count++;

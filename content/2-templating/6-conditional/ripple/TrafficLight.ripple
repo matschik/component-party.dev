@@ -1,9 +1,7 @@
-import { track } from "ripple";
-
 const TRAFFIC_LIGHTS = ["red", "orange", "green"];
 
 export component TrafficLight() {
-  let lightIndex = track(0);
+  let lightIndex = #ripple.track(0);
 
   const light = track(() => TRAFFIC_LIGHTS[@lightIndex]);
 

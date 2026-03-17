@@ -5,7 +5,7 @@ interface PlaygroundFunction {
   (
     contentByFilename: Record<string, string>,
     title?: string,
-  ): string | Promise<string | undefined>;
+  ): string | undefined | Promise<string | undefined>;
 }
 
 interface SveltePlaygroundOptions {
@@ -141,6 +141,9 @@ const playgroundUrlByFramework: Record<string, PlaygroundFunction> = {
       (await markoCompress(JSON.stringify(data)))
     );
   },
+  ripple: (contentByFilename: Record<string, string>, title?: string) => {
+    return generateRipplePlaygroundURL(contentByFilename, title);
+  },
 };
 
 export default playgroundUrlByFramework;
@@ -227,4 +230,127 @@ export async function markoCompress(value: string): Promise<string> {
   } finally {
     reader.releaseLock();
   }
+}
+
+function generateRipplePlaygroundURL(
+  contentByFilename: Record<string, string>,
+  title?: string,
+): string | undefined {
+  function mergeRippleFiles(sourceByFilename: Record<string, string>): string {
+    const scriptFilenames = Object.keys(sourceByFilename).filter(
+      (filename) =>
+        filename.endsWith(".ripple") ||
+        filename.endsWith(".js") ||
+        filename.endsWith(".ts"),
+    );
+
+    if (scriptFilenames.length === 0) {
+      return "";
+    }
+
+    return scriptFilenames
+      .map((filename) =>
+        stripLocalRippleImports(sourceByFilename[filename]).trim(),
+      )
+      .filter(Boolean)
+      .join("\n\n");
+  }
+
+  function stripLocalRippleImports(source: string): string {
+    return source.replace(
+      /^\s*import\s+[^"']+from\s+["'](.+?)["'];?\s*$/gm,
+      (fullMatch: string, specifier: string) => {
+        return specifier.startsWith(".") && isLocalScriptImport(specifier)
+          ? ""
+          : fullMatch;
+      },
+    );
+  }
+
+  function isLocalScriptImport(specifier: string): boolean {
+    return (
+      specifier.endsWith(".ripple") ||
+      specifier.endsWith(".js") ||
+      specifier.endsWith(".ts")
+    );
+  }
+
+  const filenames = Object.keys(contentByFilename);
+  if (filenames.some((filename) => filename.includes(".html"))) {
+    return;
+  }
+
+  const config = {
+    title: title || "",
+    description: "",
+    head: '<meta charset="UTF-8" />\n<meta name="viewport" content="width=device-width, initial-scale=1.0" />',
+    htmlAttrs: 'lang="en" class=""',
+    tags: [],
+    activeEditor: "script",
+    markup: {
+      language: "html",
+      content: `<script type="module">
+	import { mount } from 'ripple';
+	import * as script from "./script.ripple";
+
+  const exports = Object.keys(script);
+  const App = exports.length === 1
+		? script[exports[0]]
+		: (script.default || script.App || script[exports.find(function (name) {
+      return typeof script[name] === 'function';
+    })]);
+
+  if (typeof App !== 'function') {
+    throw new Error('No valid export found');
+  }
+
+  mount(App, {
+    target: document.body.appendChild(document.createElement('div')),
+  });
+</script>`,
+    },
+    style: {
+      language: "css",
+      content: "",
+      hiddenContent:
+        "body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; background: hsl(0, 0%, 18%); color: #fff }",
+    },
+    script: {
+      language: "ripple",
+      content: mergeRippleFiles(contentByFilename),
+    },
+    stylesheets: [],
+    scripts: [],
+    cssPreset: "",
+    processors: [],
+    customSettings: {
+      ripple: {
+        version: "0.3.3",
+      },
+    },
+    imports: {},
+    types: {},
+    tests: {
+      language: "typescript",
+      content: "",
+    },
+    tools: {
+      enabled: "all",
+      active: "console",
+      status: "closed",
+    },
+  };
+
+  const url = new URL("https://www.ripple-ts.com/playground");
+  url.searchParams.set("v", "0.3.3");
+  url.searchParams.set("title", title || "");
+
+  const hashParams = new URLSearchParams();
+  hashParams.set(
+    "config",
+    `code/${LZString.compressToEncodedURIComponent(JSON.stringify(config))}`,
+  );
+
+  url.hash = hashParams.toString();
+  return url.toString();
 }
