@@ -723,7 +723,7 @@ We believe that deep understanding should precede optimization, enabling learner
 1.  Fork the project and create a new branch
 2.  Add the new framework SVG logo in `public/framework`
 3.  In `frameworks.ts`, add a new entry with SVG link
-4.  If the framework needs a language syntax highlight, add it to the call to `getHighlighter`’s `langs` argument in `build/lib/generateContent.ts`
+4.  If the framework needs a language syntax highlight, add it to the call to `getHighlighter`’s `langs` argument in `build/lib/highlighter.ts`
 5.  To make a playground link in `build/lib/playgroundUrlByFramework.ts`.
 
 ## 🧑‍💻 Contributors
