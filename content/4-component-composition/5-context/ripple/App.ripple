@@ -1,0 +1,14 @@
+import { UserContext } from "./UserContext.ripple";
+
+export component App() {
+  const user = #ripple{
+    id: 1,
+    username: "unicorn42",
+    email: "unicorn42@example.com",
+  };
+
+  UserContext.set(user);
+
+  <h1>{`Welcome back, ${@user.username}`}</h1>
+  <UserProfile />
+}

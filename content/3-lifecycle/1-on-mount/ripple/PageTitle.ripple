@@ -1,9 +1,7 @@
-import { track, effect } from "ripple";
-
 export component PageTitle() {
-  let pageTitle = track("");
+  let pageTitle = #ripple.track("");
 
-  effect(() => {
+  #ripple.effect(() => {
     @pageTitle = document.title;
   });
 
