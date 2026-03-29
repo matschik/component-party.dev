@@ -1,0 +1,12 @@
+import { UserContext } from "./UserContext.ripple";
+
+export component UserProfile() {
+  const user = UserContext.get();
+
+  <h2>{"My Profile"}</h2>
+  <p>{`Username: ${user.username}`}</p>
+  <p>{`Email: ${user.email}`}</p>
+  <button onclick={() => (user.username = "Jane")}>
+    {"Update username to Jane"}
+  </button>
+}

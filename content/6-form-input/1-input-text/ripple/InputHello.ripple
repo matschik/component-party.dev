@@ -1,12 +1,8 @@
-import { track } from "ripple";
+import { bindValue } from "ripple";
 
 export component InputHello() {
-  let text = track("Hello world");
-
-  function handleChange(event) {
-    @text = event.target.value;
-  }
+  let text = #ripple.track("Hello world");
 
   <p>{@text}</p>
-  <input value={@text} onInput={handleChange} />
+  <input {ref bindValue(text)} />
 }

@@ -1,9 +1,7 @@
-
-import { track } from "ripple";
 import { AnswerButton } from "./AnswerButton.ripple";
 
 export component App() {
-  let isHappy = track(true);
+  let isHappy = #ripple.track(true);
 
   function onAnswerNo() {
     @isHappy = false;

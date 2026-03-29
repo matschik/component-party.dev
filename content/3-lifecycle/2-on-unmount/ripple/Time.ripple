@@ -1,9 +1,7 @@
-import { track, effect } from "ripple";
-
 export component Time() {
-  let time = track(new Date().toLocaleTimeString());
+  let time = #ripple.track(new Date().toLocaleTimeString());
 
-  effect(() => {
+  #ripple.effect(() => {
     const timer = setInterval(() => {
       @time = new Date().toLocaleTimeString();
     }, 1000);
