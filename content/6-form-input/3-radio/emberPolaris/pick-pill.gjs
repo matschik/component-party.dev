@@ -1,7 +1,5 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
-import { on } from '@ember/modifier';
-import { eq } from 'ember-truth-helpers';
 
 export default class PickPill extends Component {
   @tracked picked = "red";
