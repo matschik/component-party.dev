@@ -1,0 +1,31 @@
+@implements IDisposable
+
+<p>Current time: @currentTime</p>
+
+@code {
+    private string currentTime = string.Empty;
+    private Timer? timer;
+
+    protected override void OnInitialized()
+    {
+        currentTime = DateTime.Now.ToLongTimeString();
+        
+        timer = new Timer(
+            callback: _ => UpdateTime(),
+            state: null,
+            dueTime: TimeSpan.Zero,
+            period: TimeSpan.FromSeconds(1)
+        );
+    }
+
+    private void UpdateTime()
+    {
+        currentTime = DateTime.Now.ToLongTimeString();
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        timer?.Dispose();
+    }
+}

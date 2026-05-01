@@ -338,6 +338,23 @@ export const frameworks: Framework[] = [
     mainPackageName: "ripple",
     releaseDate: "2023-01-01",
   },
+  {
+    id: "blazor",
+    title: "Blazor",
+    frameworkName: "Blazor",
+    frameworkNameId: "blazor",
+    isLatestStable: true,
+    img: "framework/blazor.svg",
+    playgroundURL: "https://try.dot.net/",
+    documentationURL:
+      "https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor",
+    filesSorter(files) {
+      return sortAllFilenames(files, ["App.razor", "App.razor.cs"]);
+    },
+    repositoryLink: "https://github.com/dotnet/aspnetcore",
+    mainPackageName: "Microsoft.AspNetCore.Components.Web",
+    releaseDate: "2018-09-01",
+  },
 ];
 
 export function matchFrameworkId(id: string): Framework | undefined {

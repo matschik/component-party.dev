@@ -1,0 +1,25 @@
+<select @bind="selectedColorId">
+    @foreach (var color in colors)
+    {
+        <option value="@color.Id" disabled="@color.IsDisabled">@color.Text</option>
+    }
+</select>
+
+@code {
+    private class ColorOption
+    {
+        public int Id { get; set; }
+        public string Text { get; set; } = "";
+        public bool IsDisabled { get; set; }
+    }
+
+    private readonly ColorOption[] colors = new[]
+    {
+        new ColorOption { Id = 1, Text = "red" },
+        new ColorOption { Id = 2, Text = "blue" },
+        new ColorOption { Id = 3, Text = "green" },
+        new ColorOption { Id = 4, Text = "gray", IsDisabled = true }
+    };
+
+    private int selectedColorId = 2;
+}
