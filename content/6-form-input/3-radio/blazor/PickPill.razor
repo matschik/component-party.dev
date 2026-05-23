@@ -1,0 +1,19 @@
+<div>Picked: @picked</div>
+
+<input id="blue-pill" 
+       type="radio" 
+       name="pill" 
+       value="blue" @onchange="@(() => picked = "blue")" 
+       checked="@(picked == "blue")" />
+<label for="blue-pill">Blue pill</label>
+
+<input id="red-pill" 
+       type="radio" 
+       name="pill" 
+       value="red" @onchange="@(() => picked = "red")" 
+       checked="@(picked == "red")" />
+<label for="red-pill">Red pill</label>
+
+@code {
+    private string picked = "red";
+}

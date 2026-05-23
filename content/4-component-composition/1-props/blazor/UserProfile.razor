@@ -1,0 +1,18 @@
+<p>My name is @Name!</p>
+<p>My age is @Age!</p>
+<p>My favourite colors are @string.Join(", ", FavouriteColors)!</p>
+<p>I am @(IsAvailable ? "available" : "not available")</p>
+
+@code {
+    [Parameter]
+    public string Name { get; set; } = "";
+
+    [Parameter]
+    public int Age { get; set; }
+
+    [Parameter]
+    public string[] FavouriteColors { get; set; } = Array.Empty<string>();
+
+    [Parameter]
+    public bool IsAvailable { get; set; }
+}

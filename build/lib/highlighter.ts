@@ -32,9 +32,12 @@ async function getHighlighter(): Promise<
         "jsx",
         "vue",
         "marko",
+        "csharp",
       ],
       langAlias: {
-        ripple: "jsx", // until ripple is supported by shiki
+        ripple: "jsx",
+        razor: "csharp", // Csharp might not be ideal, but better? than nothing
+        cs: "csharp",
       },
     });
   }
