@@ -1,6 +1,0 @@
-export component DoubleCount() {
-  let count = #ripple.track(10);
-  const doubleCount = #ripple.track(() => @count * 2);
-
-  <div>{@doubleCount}</div>
-}

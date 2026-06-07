@@ -1,6 +1,0 @@
-export component Name() {
-  let name = #ripple.track("John");
-  @name = "Jane";
-
-  <h1>{`Hello ${@name}`}</h1>
-}

@@ -239,7 +239,7 @@ function generateRipplePlaygroundURL(
   function mergeRippleFiles(sourceByFilename: Record<string, string>): string {
     const scriptFilenames = Object.keys(sourceByFilename).filter(
       (filename) =>
-        filename.endsWith(".ripple") ||
+        filename.endsWith(".tsrx") ||
         filename.endsWith(".js") ||
         filename.endsWith(".ts"),
     );
@@ -269,7 +269,7 @@ function generateRipplePlaygroundURL(
 
   function isLocalScriptImport(specifier: string): boolean {
     return (
-      specifier.endsWith(".ripple") ||
+      specifier.endsWith(".tsrx") ||
       specifier.endsWith(".js") ||
       specifier.endsWith(".ts")
     );
@@ -291,7 +291,7 @@ function generateRipplePlaygroundURL(
       language: "html",
       content: `<script type="module">
 	import { mount } from 'ripple';
-	import * as script from "./script.ripple";
+	import * as script from "./script.tsrx";
 
   const exports = Object.keys(script);
   const App = exports.length === 1
@@ -325,7 +325,7 @@ function generateRipplePlaygroundURL(
     processors: [],
     customSettings: {
       ripple: {
-        version: "0.3.3",
+        version: "0.3.72",
       },
     },
     imports: {},
@@ -342,7 +342,7 @@ function generateRipplePlaygroundURL(
   };
 
   const url = new URL("https://www.ripple-ts.com/playground");
-  url.searchParams.set("v", "0.3.3");
+  url.searchParams.set("v", "0.3.72");
   url.searchParams.set("title", title || "");
 
   const hashParams = new URLSearchParams();

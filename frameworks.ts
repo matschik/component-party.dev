@@ -332,7 +332,7 @@ export const frameworks: Framework[] = [
     playgroundURL: "https://www.ripple-ts.com/playground",
     documentationURL: "https://www.ripple-ts.com/",
     filesSorter(files) {
-      return sortAllFilenames(files, ["index.html", "main.js", "App.ripple"]);
+      return sortAllFilenames(files, ["index.html", "main.js", "App.tsrx"]);
     },
     repositoryLink: "https://github.com/Ripple-TS/ripple",
     mainPackageName: "ripple",

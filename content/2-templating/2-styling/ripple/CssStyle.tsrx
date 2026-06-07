@@ -1,0 +1,12 @@
+export default function CssStyle() {
+  return <>
+    <h1 class="title">"I am red"</h1>
+    <button style={{ fontSize: "10rem" }}>"I am a button"</button>
+
+    <style>
+      .title {
+        color: red;
+      }
+    </style>
+  </>;
+}

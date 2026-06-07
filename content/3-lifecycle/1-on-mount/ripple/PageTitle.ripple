@@ -1,9 +1,0 @@
-export component PageTitle() {
-  let pageTitle = #ripple.track("");
-
-  #ripple.effect(() => {
-    @pageTitle = document.title;
-  });
-
-  <h1>{`Page title: ${@pageTitle}`}</h1>
-}

@@ -1,8 +1,0 @@
-import { bindValue } from "ripple";
-
-export component InputHello() {
-  let text = #ripple.track("Hello world");
-
-  <p>{@text}</p>
-  <input {ref bindValue(text)} />
-}
