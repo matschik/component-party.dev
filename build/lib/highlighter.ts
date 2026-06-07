@@ -34,7 +34,7 @@ async function getHighlighter(): Promise<
         "marko",
       ],
       langAlias: {
-        ripple: "jsx", // until ripple is supported by shiki
+        tsrx: "jsx",
       },
     });
   }
