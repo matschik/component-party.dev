@@ -24,11 +24,20 @@
   let starCount: string = $state("0");
   let isFetchingStarCount: boolean = $state(false);
 
+  // Shields.io normally returns a plain or metric-formatted number in `message`
+  // ("500", "3.1k", "1,234", "1.2M"). But when its GitHub token pool is
+  // exhausted it returns an error sentence there instead (e.g. "Unable to
+  // select next GitHub token from pool" — see badges/shields#11496). Only trust
+  // values that look like a count so we never display or cache that error.
+  function isValidStarCount(message: string): boolean {
+    return /^[\d,.]+\s*[kMGTPEZY]?$/i.test(message.trim());
+  }
+
   async function getRepoStarCount(): Promise<void> {
     const starCountStorageData: StarCountStorageData | null =
       starCountStorage.getJSON() as StarCountStorageData | null;
 
-    if (starCountStorageData) {
+    if (starCountStorageData && isValidStarCount(starCountStorageData.value)) {
       starCount = starCountStorageData.value;
       if (
         starCountStorageData.fetchedAt >
@@ -55,7 +64,7 @@
         })
         .then((r) => r.json());
 
-      if (data.message) {
+      if (data.message && isValidStarCount(data.message)) {
         // Use the formatted string directly from Shields.io (e.g., "3.1k", "500")
         starCount = data.message;
         starCountStorage.setJSON({
@@ -63,6 +72,7 @@
           fetchedAt: Date.now(),
         });
       }
+      // Otherwise keep the previous cached value and never persist the error.
     } catch (error) {
       console.warn("Failed to fetch star count from Shields.io:", error);
       // Keep the existing cached value if available
