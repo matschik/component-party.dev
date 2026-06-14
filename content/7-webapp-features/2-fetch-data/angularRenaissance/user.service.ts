@@ -1,36 +1,11 @@
-import { HttpClient } from "@angular/common/http";
-import { inject, Injectable, signal } from "@angular/core";
-
-export interface UsersState {
-  users: User[];
-  error: string | null;
-  loading: boolean;
-}
-
-export const initialState: UsersState = {
-  users: [],
-  error: null,
-  loading: false,
-};
+import { Injectable } from "@angular/core";
+import { httpResource } from "@angular/common/http";
 
 @Injectable({ providedIn: "root" })
 export class UserService {
-  private http = inject(HttpClient);
-
-  #state = signal<UsersState>(initialState);
-  state = this.#state.asReadonly();
-
-  loadUsers() {
-    this.#state.update((state) => ({ ...state, loading: true }));
-
-    this.http
-      .get<UserResponse>("https://randomuser.me/api/?results=3")
-      .subscribe({
-        next: ({ results }) =>
-          this.#state.update((state) => ({ ...state, users: results })),
-        error: (error) => this.#state.update((state) => ({ ...state, error })),
-      });
-  }
+  readonly usersResource = httpResource<UserResponse>(
+    () => "https://randomuser.me/api/?results=3",
+  );
 }
 
 export interface UserResponse {

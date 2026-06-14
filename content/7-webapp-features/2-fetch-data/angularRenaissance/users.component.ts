@@ -4,15 +4,16 @@ import { UserService } from "./user.service";
 @Component({
   selector: "app-users",
   template: `
-    @let vm = userService.state();
-
-    @if (vm.loading) {
+    @if (userService.usersResource.isLoading()) {
       <div>Fetching users...</div>
-    } @else if (vm.error) {
+    } @else if (userService.usersResource.error()) {
       <p>An error occurred while fetching users</p>
     } @else {
       <ul>
-        @for (user of vm.users; track user) {
+        @for (
+          user of userService.usersResource.value()?.results ?? [];
+          track user
+        ) {
           <li>
             <img [src]="user.picture.thumbnail" alt="user" />
             <p>{{ user.name.first }} {{ user.name.last }}</p>
@@ -26,8 +27,4 @@ import { UserService } from "./user.service";
 })
 export class UsersComponent {
   protected userService = inject(UserService);
-
-  constructor() {
-    this.userService.loadUsers();
-  }
 }
