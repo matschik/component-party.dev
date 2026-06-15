@@ -210,7 +210,7 @@ export default async function generateContent(
               frameworkSnippet.markdownFiles.push(file);
             } else {
               file.contentHtml = mustUseAngularHighlighter(content)
-                ? await highlightAngularComponent(content, ext)
+                ? await highlightAngularComponent(content)
                 : await codeToHighlightCodeHtml(content, ext);
 
               frameworkSnippet.files.push(file);

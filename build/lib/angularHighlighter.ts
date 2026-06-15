@@ -8,7 +8,6 @@ export function mustUseAngularHighlighter(fileContent: string): boolean {
 
 export async function highlightAngularComponent(
   fileContent: string,
-  fileExt: string,
 ): Promise<string> {
   const templateCode = getAngularTemplateCode(fileContent);
 
@@ -31,7 +30,7 @@ export async function highlightAngularComponent(
       "template: `" + removeCodeWrapper(templateCodeHighlighted) + "`,",
     );
   } else {
-    codeHighlighted = await codeToHighlightCodeHtml(fileContent, fileExt);
+    codeHighlighted = await codeToHighlightCodeHtml(fileContent, "angular-ts");
   }
 
   return codeHighlighted;
