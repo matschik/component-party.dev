@@ -4,10 +4,7 @@ import path from "node:path";
 import { frameworks } from "../../frameworks.ts";
 import playgroundUrlByFramework from "./playgroundUrlByFramework.ts";
 import prettier from "prettier";
-import {
-  highlightAngularComponent,
-  mustUseAngularHighlighter,
-} from "./angularHighlighter.ts";
+import { mustUseAngularHighlighter } from "./angularHighlighter.ts";
 import {
   codeToHighlightCodeHtml,
   markdownToHighlightedHtml,
@@ -210,7 +207,7 @@ export default async function generateContent(
               frameworkSnippet.markdownFiles.push(file);
             } else {
               file.contentHtml = mustUseAngularHighlighter(content)
-                ? await highlightAngularComponent(content)
+                ? await codeToHighlightCodeHtml(content, "angular-ts")
                 : await codeToHighlightCodeHtml(content, ext);
 
               frameworkSnippet.files.push(file);
