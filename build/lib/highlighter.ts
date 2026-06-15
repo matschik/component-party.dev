@@ -32,6 +32,8 @@ async function getHighlighter(): Promise<
         "jsx",
         "vue",
         "marko",
+        "angular-ts",
+        "angular-html",
       ],
       langAlias: {
         tsrx: "jsx",

@@ -18,12 +18,12 @@ export async function highlightAngularComponent(
       removeAngularTemplateContent(fileContent);
     const templateCodeHighlighted = await codeToHighlightCodeHtml(
       templateCode,
-      "html",
+      "angular-html",
     );
 
     const componentWithoutTemplateHighlighted = await codeToHighlightCodeHtml(
       componentWithEmptyTemplate,
-      fileExt,
+      "angular-ts",
     );
 
     codeHighlighted = componentWithoutTemplateHighlighted.replace(
