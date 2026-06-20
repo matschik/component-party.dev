@@ -1,10 +1,9 @@
 {
   "name": "component-party.dev",
-  "private": true,
   "version": "2.0.0",
-  "type": "module",
-  "packageManager": "pnpm@10.14.0",
+  "private": true,
   "repository": "github:matschik/component-party.dev",
+  "type": "module",
   "scripts": {
     "dev": "vp dev",
     "build": "vp build",
@@ -69,6 +68,10 @@
     "vite-plus": "latest",
     "vitest": "4.1.9"
   },
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "packageManager": "pnpm@10.14.0",
   "pnpm": {
     "onlyBuiltDependencies": [
       "esbuild"
@@ -77,8 +80,5 @@
       "vite": "npm:@voidzero-dev/vite-plus-core@latest",
       "vitest": "4.1.9"
     }
-  },
-  "engines": {
-    "node": ">=22.18.0"
   }
 }

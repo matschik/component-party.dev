@@ -5,14 +5,7 @@ import { frameworks } from "../frameworks.ts";
 interface SitemapUrl {
   loc: string;
   lastmod: string;
-  changefreq:
-    | "always"
-    | "hourly"
-    | "daily"
-    | "weekly"
-    | "monthly"
-    | "yearly"
-    | "never";
+  changefreq: "always" | "hourly" | "daily" | "weekly" | "monthly" | "yearly" | "never";
   priority: number;
 }
 
@@ -48,13 +41,7 @@ function generateFrameworkCombinations(): string[] {
   }
 
   // Add popular two-framework combinations
-  const popularFrameworks = [
-    "react",
-    "vue3",
-    "angularRenaissance",
-    "svelte5",
-    "solid",
-  ];
+  const popularFrameworks = ["react", "vue3", "angularRenaissance", "svelte5", "solid"];
   for (let i = 0; i < popularFrameworks.length; i++) {
     for (let j = i + 1; j < popularFrameworks.length; j++) {
       combinations.push(

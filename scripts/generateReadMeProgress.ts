@@ -38,9 +38,7 @@ async function main(): Promise<void> {
 
   const MARKER_START = "<!-- progression start -->";
   const MARKER_END = "<!-- progression end -->";
-  const progressionContentRegex = new RegExp(
-    `${MARKER_START}([\\s\\S]*?)${MARKER_END}`,
-  );
+  const progressionContentRegex = new RegExp(`${MARKER_START}([\\s\\S]*?)${MARKER_END}`);
 
   const newReadmeContent = readmeContent.replace(
     progressionContentRegex,
@@ -113,9 +111,7 @@ function mdCheck(b: boolean): string {
   return b ? "x" : " ";
 }
 
-async function generateProgressionMarkdown(
-  contentTree: Section[],
-): Promise<string> {
+async function generateProgressionMarkdown(contentTree: Section[]): Promise<string> {
   let output = "";
 
   for (const framework of frameworks) {
@@ -133,16 +129,12 @@ async function generateProgressionMarkdown(
         subLines.push(`   * [${mdCheck(hasFiles)}] ${sub.title}`);
       }
 
-      frameworkLines.push(
-        `* [${mdCheck(sectionChecks.every(Boolean))}] ${root.title}`,
-      );
+      frameworkLines.push(`* [${mdCheck(sectionChecks.every(Boolean))}] ${root.title}`);
       frameworkLines.push(...subLines);
       allChecks.push(...sectionChecks);
     }
 
-    const percent = Math.ceil(
-      (allChecks.filter(Boolean).length / allChecks.length) * 100,
-    );
+    const percent = Math.ceil((allChecks.filter(Boolean).length / allChecks.length) * 100);
 
     const markdown = `
 <details>

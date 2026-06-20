@@ -41,9 +41,7 @@ export default function pluginGenerateFrameworkContent() {
 
   return {
     name,
-    configureServer(server: {
-      httpServer?: { once(e: string, cb: () => void): void };
-    }): void {
+    configureServer(server: { httpServer?: { once(e: string, cb: () => void): void } }): void {
       fsContentWatcher = chokidar.watch(["content"]).on("change", build);
       server.httpServer?.once("close", () => {
         void fsContentWatcher?.close();

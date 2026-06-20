@@ -9,9 +9,7 @@
 
   let { id, size = 20 }: Props = $props();
 
-  const framework: Framework | undefined = $derived(
-    frameworks.find((f) => f.id === id),
-  );
+  const framework: Framework | undefined = $derived(frameworks.find((f) => f.id === id));
 
   const baseURL: string = import.meta.env.DEV
     ? "/"

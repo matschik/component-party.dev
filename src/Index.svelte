@@ -9,10 +9,7 @@
   import { watch } from "runed";
   import Header from "./components/Header.svelte";
   import Aside from "./components/Aside.svelte";
-  import {
-    FRAMEWORK_IDS_FROM_URL_KEY,
-    FRAMEWORK_SEPARATOR,
-  } from "./constants.ts";
+  import { FRAMEWORK_IDS_FROM_URL_KEY, FRAMEWORK_SEPARATOR } from "./constants.ts";
   import { searchParams } from "sv-router";
   import { navigate } from "./router.ts";
 
@@ -34,10 +31,7 @@
   const MAX_FRAMEWORK_NOBONUS = 9;
   const DEFAULT_FRAMEWORKS = ["react", "svelte5"];
   const FRAMEWORKS_BONUS = frameworks.slice(MAX_FRAMEWORK_NOBONUS);
-  const frameworkIdsStorage = createLocaleStorage<string[]>(
-    "framework_display",
-    [],
-  );
+  const frameworkIdsStorage = createLocaleStorage<string[]>("framework_display", []);
 
   const frameworkIdsSelected = new SvelteSet<string>();
   const frameworkIdsSelectedArr = $derived([...frameworkIdsSelected]);
@@ -127,15 +121,9 @@
         snippetsByFrameworkIdLoading.add(frameworkId);
 
         snippetsImporterByFrameworkId[frameworkId]()
-          .then(
-            ({
-              default: frameworkSnippets,
-            }: {
-              default: FrameworkSnippet[];
-            }) => {
-              snippetsByFrameworkId.set(frameworkId, frameworkSnippets);
-            },
-          )
+          .then(({ default: frameworkSnippets }: { default: FrameworkSnippet[] }) => {
+            snippetsByFrameworkId.set(frameworkId, frameworkSnippets);
+          })
           .catch(() => {
             snippetsByFrameworkIdError.add(frameworkId);
           })
@@ -163,9 +151,7 @@
   const headerFrameworks = $derived(
     [
       ...frameworksSelected.filter((f) => f),
-      ...frameworksNotSelected.filter(
-        (f) => f && !bonusFrameworks.find((bf) => bf.id === f.id),
-      ),
+      ...frameworksNotSelected.filter((f) => f && !bonusFrameworks.find((bf) => bf.id === f.id)),
       ...(showBonusFrameworks ? bonusFrameworks : []),
     ].filter((f): f is NonNullable<typeof f> => !!f),
   );
@@ -287,32 +273,17 @@
             aria-labelledby="empty-state-heading"
           >
             <div class="flex justify-center">
-              <span
-                class="iconify ph--arrow-up size-6 animate-bounce"
-                aria-hidden="true"
-              ></span>
+              <span class="iconify ph--arrow-up size-6 animate-bounce" aria-hidden="true"></span>
             </div>
             <div class="flex justify-center">
-              <h1 id="empty-state-heading" class="sr-only">
-                Select Frameworks to Compare
-              </h1>
+              <h1 id="empty-state-heading" class="sr-only">Select Frameworks to Compare</h1>
               <p
                 class="text-lg opacity-80 flex items-center text-center space-x-3"
                 data-testid="empty-state-message"
               >
-                <img
-                  src="/popper.svg"
-                  alt="Component Party logo"
-                  class="size-6"
-                />
-                <span>
-                  Please select a framework to view framework's snippets
-                </span>
-                <img
-                  src="/popper.svg"
-                  alt="Component Party logo"
-                  class="size-6"
-                />
+                <img src="/popper.svg" alt="Component Party logo" class="size-6" />
+                <span> Please select a framework to view framework's snippets </span>
+                <img src="/popper.svg" alt="Component Party logo" class="size-6" />
               </p>
             </div>
           </section>
@@ -326,19 +297,12 @@
                   data-testid={`section-${section.sectionId}`}
                 >
                   {section.title}
-                  <a
-                    href={"#" + section.sectionId}
-                    aria-hidden="true"
-                    tabindex="-1"
-                  >
-                    #
-                  </a>
+                  <a href={"#" + section.sectionId} aria-hidden="true" tabindex="-1"> # </a>
                 </h2>
 
                 <div class="space-y-8 mt-2">
                   {#each snippets.filter((s) => s.sectionId === section.sectionId) as snippet (snippet.snippetId)}
-                    {@const snippetPathId =
-                      section.sectionId + "." + snippet.snippetId}
+                    {@const snippetPathId = section.sectionId + "." + snippet.snippetId}
                     <div
                       id={snippetPathId}
                       data-snippet-id={snippetPathId}
@@ -349,13 +313,7 @@
                         data-testid={`snippet-title-${snippetPathId}`}
                       >
                         {snippet.title}
-                        <a
-                          href={"#" + snippetPathId}
-                          aria-hidden="true"
-                          tabindex="-1"
-                        >
-                          #
-                        </a>
+                        <a href={"#" + snippetPathId} aria-hidden="true" tabindex="-1"> # </a>
                       </h3>
                       {#if frameworkIdsSelectedInitialized}
                         <div
@@ -365,10 +323,7 @@
                             {@const framework = matchFrameworkId(frameworkId)}
                             {@const frameworkSnippet = snippetsByFrameworkId
                               .get(frameworkId)
-                              ?.find(
-                                (s: FrameworkSnippet) =>
-                                  s.snippetId === snippet.snippetId,
-                              )}
+                              ?.find((s: FrameworkSnippet) => s.snippetId === snippet.snippetId)}
                             {@const frameworkSnippetIsLoading =
                               snippetsByFrameworkIdLoading.has(frameworkId)}
                             {@const frameworkSnippetIsError =
@@ -378,9 +333,7 @@
                               <div
                                 data-testid={`framework-snippet-${frameworkId}-${snippet.snippetId}`}
                               >
-                                <div
-                                  class="flex justify-between items-center space-x-3"
-                                >
+                                <div class="flex justify-between items-center space-x-3">
                                   <h3
                                     class="m-0"
                                     data-testid={`framework-title-${frameworkId}-${snippet.snippetId}`}
@@ -399,9 +352,7 @@
                                           aria-label={`Open playground for ${framework.title}`}
                                           data-testid={`playground-button-${frameworkId}-${snippet.snippetId}`}
                                         >
-                                          <span
-                                            class="iconify ph--play size-4"
-                                            aria-hidden="true"
+                                          <span class="iconify ph--play size-4" aria-hidden="true"
                                           ></span>
                                         </a>
                                       {/if}
@@ -421,9 +372,7 @@
                                         class="bg-gray-800 text-white rounded-md mx-auto"
                                         data-testid={`missing-snippet-${frameworkId}-${snippet.snippetId}`}
                                       >
-                                        <div
-                                          class="text-center py-8 px-4 sm:px-6"
-                                        >
+                                        <div class="text-center py-8 px-4 sm:px-6">
                                           <div>
                                             <span
                                               class="block text-2xl tracking-tight font-bold"
@@ -435,10 +384,7 @@
                                               class="block text-lg mt-1 font-semibold space-x-1"
                                               data-testid="missing-snippet-message"
                                             >
-                                              <span>
-                                                Help us to improve Component
-                                                Party
-                                              </span>
+                                              <span> Help us to improve Component Party </span>
                                               <img
                                                 src="/popper.svg"
                                                 alt="logo"
@@ -447,20 +393,14 @@
                                             </span>
                                           </div>
                                           <div class="mt-6 flex justify-center">
-                                            <div
-                                              class="inline-flex rounded-md shadow"
-                                            >
+                                            <div class="inline-flex rounded-md shadow">
                                               <a
                                                 class="inline-flex space-x-2 items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-[#161b22] hover:bg-[#161b22]/80 no-underline"
                                                 href={frameworkSnippet.snippetEditHref}
                                                 data-testid={`contribute-link-${frameworkId}-${snippet.snippetId}`}
                                               >
-                                                <button
-                                                  class="flex items-center space-x-3"
-                                                >
-                                                  <span
-                                                    >Contribute on Github</span
-                                                  >
+                                                <button class="flex items-center space-x-3">
+                                                  <span>Contribute on Github</span>
                                                   <span
                                                     class="iconify simple-icons--github size-5"
                                                     aria-hidden="true"
@@ -477,16 +417,12 @@
                                       role="status"
                                       data-testid={`loading-snippet-${frameworkId}-${snippet.snippetId}`}
                                     >
-                                      <div
-                                        class="w-75px h-23px bg-[#0d1117] py-3 px-4 rounded-t"
-                                      >
+                                      <div class="w-75px h-23px bg-[#0d1117] py-3 px-4 rounded-t">
                                         <div
                                           class="h-2.5 rounded-full bg-gray-700 w-10 animate-pulse"
                                         ></div>
                                       </div>
-                                      <div
-                                        class="w-full h-164px bg-[#0d1117] px-4 py-7"
-                                      >
+                                      <div class="w-full h-164px bg-[#0d1117] px-4 py-7">
                                         <div class="max-w-sm animate-pulse">
                                           <div
                                             class="h-3.5 rounded-full bg-gray-700 w-48 mb-4"
@@ -494,15 +430,11 @@
                                           <div
                                             class="h-3.5 rounded-full bg-gray-700 max-w-[360px] mb-2.5"
                                           ></div>
-                                          <div
-                                            class="h-3.5 rounded-full bg-gray-700 mb-4"
-                                          ></div>
+                                          <div class="h-3.5 rounded-full bg-gray-700 mb-4"></div>
                                           <div
                                             class="h-3.5 rounded-full bg-gray-700 max-w-[330px] mb-2.5"
                                           ></div>
-                                          <span
-                                            class="sr-only"
-                                            data-testid="loading-text"
+                                          <span class="sr-only" data-testid="loading-text"
                                             >Loading...</span
                                           >
                                         </div>
@@ -513,8 +445,7 @@
                                       class="text-orange-500"
                                       data-testid={`error-snippet-${frameworkId}-${snippet.snippetId}`}
                                     >
-                                      Error loading snippets. Please reload the
-                                      page.
+                                      Error loading snippets. Please reload the page.
                                     </p>
                                   {/if}
                                 </div>

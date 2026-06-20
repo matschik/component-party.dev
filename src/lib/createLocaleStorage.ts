@@ -1,7 +1,4 @@
-export default function createLocaleStorage<T = unknown>(
-  k: string,
-  defaultValue: T,
-) {
+export default function createLocaleStorage<T = unknown>(k: string, defaultValue: T) {
   function get(): string | null {
     return localStorage.getItem(k);
   }

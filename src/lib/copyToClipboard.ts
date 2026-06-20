@@ -8,9 +8,7 @@ export default function copyToClipboard(value: string): boolean {
     document.execCommand("copy");
     success = true;
   } catch {
-    alert(
-      "Oops, unable to copy to clipboard. Please check website permissions.",
-    );
+    alert("Oops, unable to copy to clipboard. Please check website permissions.");
   }
   $textarea.remove();
   return success;

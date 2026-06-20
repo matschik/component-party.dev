@@ -17,12 +17,6 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": [
-    "vite.config.ts",
-    "svelte.config.ts",
-    "build/**/*",
-    "scripts/**/*",
-    "frameworks.ts"
-  ],
+  "include": ["vite.config.ts", "svelte.config.ts", "build/**/*", "scripts/**/*", "frameworks.ts"],
   "exclude": ["node_modules", "dist", "content", "src"]
 }

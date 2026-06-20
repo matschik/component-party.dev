@@ -9,16 +9,11 @@ import { fromHighlighter } from "@shikijs/markdown-it/core";
 import { componentPartyShikiTheme } from "./componentPartyShikiTheme.ts";
 
 // Singleton instances
-let highlighter: HighlighterGeneric<BundledLanguage, BundledTheme> | null =
-  null;
+let highlighter: HighlighterGeneric<BundledLanguage, BundledTheme> | null = null;
 let md: MarkdownIt | null = null;
-let highlighterPromise: Promise<
-  HighlighterGeneric<BundledLanguage, BundledTheme>
-> | null = null;
+let highlighterPromise: Promise<HighlighterGeneric<BundledLanguage, BundledTheme>> | null = null;
 
-async function getHighlighter(): Promise<
-  HighlighterGeneric<BundledLanguage, BundledTheme>
-> {
+async function getHighlighter(): Promise<HighlighterGeneric<BundledLanguage, BundledTheme>> {
   if (!highlighterPromise) {
     highlighterPromise = createHighlighter({
       themes: [componentPartyShikiTheme],
@@ -64,10 +59,7 @@ async function getMarkdownIt(): Promise<MarkdownIt> {
   return md;
 }
 
-export async function codeToHighlightCodeHtml(
-  code: string,
-  lang: string,
-): Promise<string> {
+export async function codeToHighlightCodeHtml(code: string, lang: string): Promise<string> {
   const highlighterInstance = await getHighlighter();
   const html = await highlighterInstance.codeToHtml(code, {
     lang,
@@ -77,9 +69,7 @@ export async function codeToHighlightCodeHtml(
   return html;
 }
 
-export async function markdownToHighlightedHtml(
-  markdownText: string,
-): Promise<string> {
+export async function markdownToHighlightedHtml(markdownText: string): Promise<string> {
   const mdInstance = await getMarkdownIt();
   const html = mdInstance.render(markdownText);
   return html;

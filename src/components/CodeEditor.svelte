@@ -12,25 +12,18 @@
     "data-testid"?: string;
   }
 
-  const {
-    files = [],
-    snippetEditHref,
-    "data-testid": dataTestId,
-  }: Props = $props();
+  const { files = [], snippetEditHref, "data-testid": dataTestId }: Props = $props();
 
   let codeSnippetEl: HTMLElement | undefined = $state();
 
   let filenameSelectedOverride: string | undefined = $state();
 
   let filenameSelected: string | undefined = $derived(
-    filenameSelectedOverride ??
-      (files.length > 0 ? files[0]?.fileName : undefined),
+    filenameSelectedOverride ?? (files.length > 0 ? files[0]?.fileName : undefined),
   );
 
   const snippet: File | undefined = $derived(
-    filenameSelected
-      ? files.find((s) => s.fileName === filenameSelected)
-      : undefined,
+    filenameSelected ? files.find((s) => s.fileName === filenameSelected) : undefined,
   );
 
   function copySnippet(): void {
@@ -40,10 +33,7 @@
   }
 </script>
 
-<div
-  class="flex space-x-1 items-center ml-0 overflow-x-auto"
-  data-testid={dataTestId}
->
+<div class="flex space-x-1 items-center ml-0 overflow-x-auto" data-testid={dataTestId}>
   {#each files as file (file.fileName)}
     <button
       class={[
@@ -69,9 +59,7 @@
       {@html snippet.contentHtml}
     {/if}
   </div>
-  <div
-    class="absolute hidden group-hover:block transition-all top-0 right-0 mt-2 mr-2"
-  >
+  <div class="absolute hidden group-hover:block transition-all top-0 right-0 mt-2 mr-2">
     <div class="flex items-center space-x-3">
       <a
         href={snippetEditHref}

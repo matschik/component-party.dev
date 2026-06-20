@@ -1,7 +1,3 @@
 {
-  "recommendations": [
-    "esbenp.prettier-vscode",
-    "svelte.svelte-vscode",
-    "bradlc.vscode-tailwindcss"
-  ]
+  "recommendations": ["esbenp.prettier-vscode", "svelte.svelte-vscode", "bradlc.vscode-tailwindcss"]
 }

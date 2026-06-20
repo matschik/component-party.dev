@@ -54,9 +54,7 @@ test.describe("Integration Tests", () => {
     // Code editors might not be present in all snippets, so we just check that the test completed successfully
   });
 
-  test("should handle versus mode navigation and framework switching", async ({
-    page,
-  }) => {
+  test("should handle versus mode navigation and framework switching", async ({ page }) => {
     // Navigate to versus mode using search parameters
     await page.goto("/?f=react-vue3");
 
@@ -88,8 +86,7 @@ test.describe("Integration Tests", () => {
 
     // Wait for the framework to be selected and saved
     await helpers.waitForFrameworksToLoad();
-    const selectedFrameworksBeforeReload =
-      await helpers.getSelectedFrameworks();
+    const selectedFrameworksBeforeReload = await helpers.getSelectedFrameworks();
     expect(selectedFrameworksBeforeReload).toContain("vue3");
 
     // Reload the page

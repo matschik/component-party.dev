@@ -54,20 +54,14 @@ const playgroundUrlByFramework: Record<string, PlaygroundFunction> = {
     const url = generateURLFromData(data);
     return url;
   },
-  svelte4: async (
-    contentByFilename: Record<string, string>,
-    title?: string,
-  ) => {
+  svelte4: async (contentByFilename: Record<string, string>, title?: string) => {
     return generateSveltePlaygroundURL({
       version: 4,
       contentByFilename,
       title,
     });
   },
-  svelte5: async (
-    contentByFilename: Record<string, string>,
-    title?: string,
-  ) => {
+  svelte5: async (contentByFilename: Record<string, string>, title?: string) => {
     return generateSveltePlaygroundURL({
       version: 5,
       contentByFilename,
@@ -75,8 +69,7 @@ const playgroundUrlByFramework: Record<string, PlaygroundFunction> = {
     });
   },
   alpine: (contentByFilename: Record<string, string>) => {
-    const BASE_URL =
-      "https://codesandbox.io/api/v1/sandboxes/define?embed=1&parameters=";
+    const BASE_URL = "https://codesandbox.io/api/v1/sandboxes/define?embed=1&parameters=";
     const BASE_PREFIX = `<!DOCTYPE html>\n<html lang="en">\n  <head>\n    <meta charset="UTF-8" />\n    <meta name="viewport" content="width=device-width, initial-scale=1.0" />\n    <meta http-equiv="X-UA-Compatible" content="ie=edge" />\n    <title>Alpine.js Playground</title>\n    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>\n  </head>\n  <body>\n\n`;
     const BASE_SUFFIX = `\n  </body>\n</html>`;
 
@@ -87,8 +80,7 @@ const playgroundUrlByFramework: Record<string, PlaygroundFunction> = {
           content: { dependencies: {} },
         },
         "index.html": {
-          content:
-            BASE_PREFIX + (contentByFilename["index.html"] || "") + BASE_SUFFIX,
+          content: BASE_PREFIX + (contentByFilename["index.html"] || "") + BASE_SUFFIX,
         },
         "sandbox.config.json": {
           content: '{\n  "template": "static"\n}',
@@ -124,8 +116,7 @@ const playgroundUrlByFramework: Record<string, PlaygroundFunction> = {
     const mainComponentName = mainFile.name;
     mainFile.name = "main";
     mainFile.type = "tsx";
-    mainFile.source =
-      SOURCE_PREFIX + mainFile.source + getSourceSuffix(mainComponentName);
+    mainFile.source = SOURCE_PREFIX + mainFile.source + getSourceSuffix(mainComponentName);
 
     return generateURLFromData(data);
   },
@@ -136,10 +127,7 @@ const playgroundUrlByFramework: Record<string, PlaygroundFunction> = {
       content,
     }));
 
-    return (
-      "https://markojs.com/playground#" +
-      (await markoCompress(JSON.stringify(data)))
-    );
+    return "https://markojs.com/playground#" + (await markoCompress(JSON.stringify(data)));
   },
   ripple: (contentByFilename: Record<string, string>, title?: string) => {
     return generateRipplePlaygroundURL(contentByFilename, title);
@@ -186,10 +174,7 @@ async function generateSveltePlaygroundURL({
 
 // method `compress_and_encode_text` from https://github.com/sveltejs/svelte.dev/blob/main/apps/svelte.dev/src/routes/(authed)/playground/%5Bid%5D/gzip.js
 async function compress_and_encode_text(input: string): Promise<string> {
-  const reader = new Blob([input])
-    .stream()
-    .pipeThrough(new CompressionStream("gzip"))
-    .getReader();
+  const reader = new Blob([input]).stream().pipeThrough(new CompressionStream("gzip")).getReader();
   let buffer = "";
   for (;;) {
     const { done, value } = await reader.read();
@@ -223,10 +208,7 @@ export async function markoCompress(value: string): Promise<string> {
       }
     }
 
-    return btoa(result)
-      .replace(/=+$/, "")
-      .replace(/\+/g, "-")
-      .replace(/\//g, "_");
+    return btoa(result).replace(/=+$/, "").replace(/\+/g, "-").replace(/\//g, "_");
   } finally {
     reader.releaseLock();
   }
@@ -239,9 +221,7 @@ function generateRipplePlaygroundURL(
   function mergeRippleFiles(sourceByFilename: Record<string, string>): string {
     const scriptFilenames = Object.keys(sourceByFilename).filter(
       (filename) =>
-        filename.endsWith(".tsrx") ||
-        filename.endsWith(".js") ||
-        filename.endsWith(".ts"),
+        filename.endsWith(".tsrx") || filename.endsWith(".js") || filename.endsWith(".ts"),
     );
 
     if (scriptFilenames.length === 0) {
@@ -249,9 +229,7 @@ function generateRipplePlaygroundURL(
     }
 
     return scriptFilenames
-      .map((filename) =>
-        stripLocalRippleImports(sourceByFilename[filename]).trim(),
-      )
+      .map((filename) => stripLocalRippleImports(sourceByFilename[filename]).trim())
       .filter(Boolean)
       .join("\n\n");
   }
@@ -260,19 +238,13 @@ function generateRipplePlaygroundURL(
     return source.replace(
       /^\s*import\s+[^"']+from\s+["'](.+?)["'];?\s*$/gm,
       (fullMatch: string, specifier: string) => {
-        return specifier.startsWith(".") && isLocalScriptImport(specifier)
-          ? ""
-          : fullMatch;
+        return specifier.startsWith(".") && isLocalScriptImport(specifier) ? "" : fullMatch;
       },
     );
   }
 
   function isLocalScriptImport(specifier: string): boolean {
-    return (
-      specifier.endsWith(".tsrx") ||
-      specifier.endsWith(".js") ||
-      specifier.endsWith(".ts")
-    );
+    return specifier.endsWith(".tsrx") || specifier.endsWith(".js") || specifier.endsWith(".ts");
   }
 
   const filenames = Object.keys(contentByFilename);

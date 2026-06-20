@@ -39,10 +39,7 @@
 
     if (starCountStorageData && isValidStarCount(starCountStorageData.value)) {
       starCount = starCountStorageData.value;
-      if (
-        starCountStorageData.fetchedAt >
-        Date.now() - STAR_COUNT_EXPIRES_IN_MS
-      ) {
+      if (starCountStorageData.fetchedAt > Date.now() - STAR_COUNT_EXPIRES_IN_MS) {
         return;
       }
     }
@@ -94,9 +91,7 @@
   onclick={onButtonClick}
 >
   <span class="flex items-center px-3 sm:space-x-2">
-    <span
-      class="iconify simple-icons--github size-[1.3rem] sm:size-[1.1rem]"
-      aria-hidden="true"
+    <span class="iconify simple-icons--github size-[1.3rem] sm:size-[1.1rem]" aria-hidden="true"
     ></span>
     <span class="hidden sm:inline">Star</span>
   </span>
@@ -105,10 +100,7 @@
       class="hidden h-full items-center justify-center px-3 sm:flex border-[#373b43] sm:border-l"
     >
       {#if isFetchingStarCount && starCount === "0"}
-        <span
-          class="iconify ph--spinner animate-spin size-4 mx-1"
-          aria-hidden="true"
-        ></span>
+        <span class="iconify ph--spinner animate-spin size-4 mx-1" aria-hidden="true"></span>
       {:else}
         <span>{starCount}</span>
       {/if}
