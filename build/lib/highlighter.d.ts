@@ -1,7 +1,4 @@
-export function codeToHighlightCodeHtml(
-  code: string,
-  language: string,
-): Promise<string>;
+export function codeToHighlightCodeHtml(code: string, language: string): Promise<string>;
 
 export function markdownToHighlightedHtml(markdown: string): Promise<string>;
 

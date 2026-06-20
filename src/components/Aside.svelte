@@ -12,10 +12,8 @@
 
     for (const element of elements) {
       const rect = element.getBoundingClientRect();
-      const visibleWidth =
-        Math.min(rect.right, window.innerWidth) - Math.max(rect.left, 0);
-      const visibleHeight =
-        Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
+      const visibleWidth = Math.min(rect.right, window.innerWidth) - Math.max(rect.left, 0);
+      const visibleHeight = Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
 
       if (visibleWidth > 0 && visibleHeight > 0) {
         const area = visibleWidth * visibleHeight;
@@ -56,12 +54,9 @@
 
   onMount(function listenLargestSnippetOnScroll() {
     function onScroll() {
-      const largestSnippet = getLargestElement(
-        document.querySelectorAll("[data-snippet-id]"),
-      );
+      const largestSnippet = getLargestElement(document.querySelectorAll("[data-snippet-id]"));
       if (largestSnippet) {
-        largestVisibleSnippetId =
-          largestSnippet.getAttribute("data-snippet-id") ?? "";
+        largestVisibleSnippetId = largestSnippet.getAttribute("data-snippet-id") ?? "";
       } else {
         largestVisibleSnippetId = "";
       }
@@ -89,8 +84,7 @@
               "inline-block w-full py-1.5 px-4 text-white font-semibold opacity-90 hover:opacity-100 hover:bg-gray-800 rounded transition-opacity text-left",
               {
                 "bg-gray-800":
-                  largestVisibleSnippetId &&
-                  largestVisibleSnippetId.startsWith(section.sectionId),
+                  largestVisibleSnippetId && largestVisibleSnippetId.startsWith(section.sectionId),
               },
             ]}
             onclick={() => scrollToElement(section.sectionId)}
@@ -99,8 +93,7 @@
           </button>
           <ul>
             {#each snippets.filter((s: any) => s.sectionId === section.sectionId) as snippet (snippet.snippetId)}
-              {@const snippetPathId =
-                section.sectionId + "." + snippet.snippetId}
+              {@const snippetPathId = section.sectionId + "." + snippet.snippetId}
               <li>
                 <button
                   class={[

@@ -5,10 +5,7 @@ import { frameworks } from "../../frameworks.ts";
 import playgroundUrlByFramework from "./playgroundUrlByFramework.ts";
 import prettier from "prettier";
 import { mustUseAngularHighlighter } from "./angularHighlighter.ts";
-import {
-  codeToHighlightCodeHtml,
-  markdownToHighlightedHtml,
-} from "./highlighter.ts";
+import { codeToHighlightCodeHtml, markdownToHighlightedHtml } from "./highlighter.ts";
 import kebabCase from "just-kebab-case";
 
 interface File {
@@ -110,9 +107,7 @@ async function shouldRegenerateFiles(
   return false;
 }
 
-export default async function generateContent(
-  options: { noCache?: boolean } = {},
-): Promise<void> {
+export default async function generateContent(options: { noCache?: boolean } = {}): Promise<void> {
   const rootDir = await packageDirectory();
   if (!rootDir) {
     throw new Error("Could not find package directory");
@@ -215,9 +210,7 @@ export default async function generateContent(
           }
 
           if (frameworkSnippet.files.length > 0) {
-            const frameworkConfig = frameworks.find(
-              (f) => f.id === frameworkId,
-            );
+            const frameworkConfig = frameworks.find((f) => f.id === frameworkId);
             if (frameworkConfig) {
               frameworkSnippet.files = frameworkConfig.filesSorter(
                 frameworkSnippet.files as unknown as FrameworkFile[],
@@ -299,10 +292,7 @@ export default async function generateContent(
 
   await Promise.all(
     Object.keys(byFrameworkId).map((frameworkId) => {
-      const frameworkFilePath = path.join(
-        frameworkDirPath,
-        `${frameworkId}.js`,
-      );
+      const frameworkFilePath = path.join(frameworkDirPath, `${frameworkId}.js`);
       return writeJsFile(
         frameworkFilePath,
         `
@@ -319,10 +309,7 @@ export default async function generateContent(
     ${commentDisclaimer}
     export default {
         ${Object.keys(byFrameworkId)
-          .map(
-            (frameworkId) =>
-              `${frameworkId}: () => import("./${frameworkId}.js")`,
-          )
+          .map((frameworkId) => `${frameworkId}: () => import("./${frameworkId}.js")`)
           .join(",\n")}
         
     };
@@ -426,7 +413,5 @@ ${redirects.join("\n")}
   const redirectsFilePath = path.join(publicDir, "_redirects");
 
   await fs.writeFile(redirectsFilePath, redirectsContent);
-  console.info(
-    `Generated _redirects file for Cloudflare Pages with ${redirects.length} redirects`,
-  );
+  console.info(`Generated _redirects file for Cloudflare Pages with ${redirects.length} redirects`);
 }

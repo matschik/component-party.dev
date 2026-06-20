@@ -7,9 +7,7 @@ test.describe("Framework Comparison", () => {
     await page.waitForSelector('[data-testid="framework-selection-bar"]');
   });
 
-  test("should display versus mode for framework comparison URLs", async ({
-    page,
-  }) => {
+  test("should display versus mode for framework comparison URLs", async ({ page }) => {
     // Navigate to a versus URL using search parameters
     await page.goto("/?f=react-vue3");
 
@@ -43,9 +41,7 @@ test.describe("Framework Comparison", () => {
     expect(selectedFrameworks).toContain("svelte5");
   });
 
-  test("should display code snippets for multiple frameworks", async ({
-    page,
-  }) => {
+  test("should display code snippets for multiple frameworks", async ({ page }) => {
     // Select multiple frameworks using test ID
     const vueButton = page.getByTestId("framework-button-vue3");
     await vueButton.click();
@@ -57,15 +53,11 @@ test.describe("Framework Comparison", () => {
 
     // Check that we have multiple framework columns in the first snippet
     const firstSnippet = page.locator('[data-testid^="snippet-"]').first();
-    const frameworkColumns = firstSnippet.locator(
-      '[data-testid^="framework-snippet-"]',
-    );
+    const frameworkColumns = firstSnippet.locator('[data-testid^="framework-snippet-"]');
     await expect(frameworkColumns).toHaveCount(3); // React, Svelte 5, Vue 3
   });
 
-  test("should handle framework loading errors gracefully", async ({
-    page,
-  }) => {
+  test("should handle framework loading errors gracefully", async ({ page }) => {
     // Mock a framework loading error for Angular specifically
     await page.route("**/framework/angular*.js", (route) => {
       route.abort("failed");

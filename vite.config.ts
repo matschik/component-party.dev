@@ -1,4 +1,4 @@
-import { defineConfig } from "vite";
+import { defineConfig } from "vite-plus";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
 import fs from "node:fs/promises";
 import path from "node:path";
@@ -12,8 +12,7 @@ import tailwindcss from "@tailwindcss/vite";
 import { FRAMEWORK_SEPARATOR } from "./src/constants.ts";
 
 // Helper function to create framework comparison URLs
-const createFrameworkUrl = (frameworks: string[]) =>
-  `/?f=${frameworks.join(FRAMEWORK_SEPARATOR)}`;
+const createFrameworkUrl = (frameworks: string[]) => `/?f=${frameworks.join(FRAMEWORK_SEPARATOR)}`;
 
 const footerNavigation = [
   {
@@ -149,6 +148,36 @@ export default defineConfig({
     sourcemap: false,
     target: "esnext",
   },
+  lint: {
+    plugins: ["typescript", "unicorn"],
+    jsPlugins: ["eslint-plugin-svelte"],
+    categories: {
+      correctness: "off",
+    },
+    env: {
+      builtin: true,
+      browser: true,
+      node: true,
+    },
+  },
+  fmt: {
+    // Enable .svelte formatting via the bundled prettier-plugin-svelte
+    // (requires the `svelte` package, already a dependency).
+    svelte: true,
+    // Framework comparison examples (content/**) are the displayed corpus and
+    // are kept Prettier-formatted by the content build pipeline; src/generatedContent
+    // is generated. Exclude both so Oxfmt only touches app/project code.
+    ignorePatterns: ["content/**", "src/generatedContent/**"],
+  },
+  staged: {
+    "*.{js,ts,svelte,html,md,css}": "vp fmt --write",
+    // Regenerate README progress when content changes (filenames are ignored
+    // by the wrapped command; sh -c receives them as positional args).
+    "content/**/*": "sh -c 'vp node scripts/generateReadMeProgress.ts && git add README.md'",
+  },
+  test: {
+    include: ["src/**/*.{test,spec}.{js,ts}"],
+  },
 });
 
 async function generateHtmlPagesPlugin(pages: unknown[]) {
@@ -202,10 +231,8 @@ async function generateHtmlPagesPlugin(pages: unknown[]) {
       await generateSitemap();
 
       for (const page of pages) {
-        const template =
-          (page as { template?: string }).template || "index.html";
-        const templateData =
-          (page as { templateData?: unknown }).templateData || {};
+        const template = (page as { template?: string }).template || "index.html";
+        const templateData = (page as { templateData?: unknown }).templateData || {};
         const templatePath = path.join(import.meta.dirname, template);
         const outputPath = path.join(
           import.meta.dirname,
@@ -229,9 +256,7 @@ function filePathToUrl(filePath: string) {
   const baseName = path.basename(normalizedPath);
 
   if (baseName === "index.html") {
-    return path.dirname(normalizedPath) === "."
-      ? "/"
-      : path.dirname(normalizedPath) + "/";
+    return path.dirname(normalizedPath) === "." ? "/" : path.dirname(normalizedPath) + "/";
   } else {
     return normalizedPath.replace(/.html$/, "");
   }

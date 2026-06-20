@@ -11,9 +11,7 @@ test.describe("Homepage", () => {
 
   test("should display the main header and navigation", async ({ page }) => {
     await expect(page.getByRole("banner")).toBeVisible();
-    await expect(
-      page.getByRole("heading", { name: "Component Party" }),
-    ).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Component Party" })).toBeVisible();
   });
 
   test("should display default frameworks on first visit", async () => {
@@ -67,9 +65,7 @@ test.describe("Homepage", () => {
     );
   });
 
-  test("should display content sections when frameworks are selected", async ({
-    page,
-  }) => {
+  test("should display content sections when frameworks are selected", async ({ page }) => {
     // Wait for frameworks to be selected
     await testHelpers.waitForFrameworksToLoad();
 

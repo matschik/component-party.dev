@@ -5,11 +5,8 @@ interface File {
 
 function sortAllFilenames(files: File[], filenamesSorted: string[]): File[] {
   return [
-    ...filenamesSorted.map((filename) =>
-      files.find(({ fileName }) => fileName === filename),
-    ),
-    ...(files.filter(({ fileName }) => !filenamesSorted.includes(fileName)) ||
-      []),
+    ...filenamesSorted.map((filename) => files.find(({ fileName }) => fileName === filename)),
+    ...(files.filter(({ fileName }) => !filenamesSorted.includes(fileName)) || []),
   ].filter(Boolean) as File[];
 }
 
@@ -254,16 +251,10 @@ export const frameworks: Framework[] = [
     frameworkNameId: "aurelia",
     isLatestStable: true,
     img: "framework/aurelia.svg",
-    playgroundURL:
-      "https://stackblitz.com/edit/au2-conventions?file=src%2Fmy-app.html",
+    playgroundURL: "https://stackblitz.com/edit/au2-conventions?file=src%2Fmy-app.html",
     documentationURL: "http://docs.aurelia.io",
     filesSorter(files) {
-      return sortAllFilenames(files, [
-        "index.html",
-        "main.ts",
-        "app.html",
-        "app.ts",
-      ]);
+      return sortAllFilenames(files, ["index.html", "main.ts", "app.html", "app.ts"]);
     },
     repositoryLink: "https://github.com/aurelia/aurelia",
     mainPackageName: "aurelia",
@@ -311,12 +302,7 @@ export const frameworks: Framework[] = [
     playgroundURL: "https://codesandbox.io/s/ppmy26opw7",
     documentationURL: "http://aurelia.io/docs/",
     filesSorter(files) {
-      return sortAllFilenames(files, [
-        "index.html",
-        "main.ts",
-        "app.html",
-        "app.ts",
-      ]);
+      return sortAllFilenames(files, ["index.html", "main.ts", "app.html", "app.ts"]);
     },
     repositoryLink: "https://github.com/aurelia/framework",
     mainPackageName: "aurelia-framework",
@@ -358,12 +344,8 @@ export function matchFrameworkId(id: string): Framework | undefined {
 /**
  * Get all frameworks that belong to a specific framework name
  */
-export function getFrameworksByFrameworkName(
-  frameworkNameId: string,
-): Framework[] {
-  return frameworks.filter(
-    (framework) => framework.frameworkNameId === frameworkNameId,
-  );
+export function getFrameworksByFrameworkName(frameworkNameId: string): Framework[] {
+  return frameworks.filter((framework) => framework.frameworkNameId === frameworkNameId);
 }
 
 /**
@@ -373,8 +355,7 @@ export function getLatestStableFrameworkByFrameworkName(
   frameworkNameId: string,
 ): Framework | undefined {
   return frameworks.find(
-    (framework) =>
-      framework.frameworkNameId === frameworkNameId && framework.isLatestStable,
+    (framework) => framework.frameworkNameId === frameworkNameId && framework.isLatestStable,
   );
 }
 

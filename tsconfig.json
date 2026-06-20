@@ -17,18 +17,10 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "baseUrl": ".",
     "paths": {
       "@frameworks": ["./frameworks.ts"]
     }
   },
-  "include": [
-    "src/**/*",
-    "build/**/*",
-    "scripts/**/*",
-    "types/**/*",
-    "*.ts",
-    "*.mts"
-  ],
+  "include": ["src/**/*", "build/**/*", "scripts/**/*", "types/**/*", "*.ts", "*.mts"],
   "exclude": ["node_modules", "dist", "content"]
 }

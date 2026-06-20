@@ -44,9 +44,7 @@
     if (!["enter", "leave"].includes(type)) {
       throw Error(`Transition type must be 'enter' or 'leave', not ${type}`);
     }
-    const durationClass = from
-      .split(" ")
-      .find((cssClass) => cssClass.startsWith("duration-"));
+    const durationClass = from.split(" ").find((cssClass) => cssClass.startsWith("duration-"));
     const duration = Number(durationClass?.split("-").pop());
 
     if (!durationClass || Number.isNaN(duration)) {
@@ -65,10 +63,7 @@
       return {
         duration,
         tick: (t: number) => {
-          if (
-            (type === "enter" && t >= 0 && t !== 1) ||
-            (type === "leave" && t < 1 && t !== 0)
-          ) {
+          if ((type === "enter" && t >= 0 && t !== 1) || (type === "leave" && t < 1 && t !== 0)) {
             node.classList.remove(...from.split(" "));
             node.classList.add(...from.split(" "));
 

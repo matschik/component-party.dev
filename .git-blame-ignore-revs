@@ -1,0 +1,8 @@
+# Revisions to ignore in `git blame`.
+#
+# Enable locally with:
+#   git config blame.ignoreRevsFile .git-blame-ignore-revs
+# GitHub/GitLab pick this file up automatically.
+
+# style: reformat with prettier (wider printWidth)
+dc5d58c798e8c6d2d4674db58c262564e69cd779

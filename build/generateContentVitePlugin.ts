@@ -38,12 +38,15 @@ export default function pluginGenerateFrameworkContent() {
   }
 
   let fsContentWatcher: FSWatcher | undefined;
-  if (process.env.NODE_ENV === "development") {
-    fsContentWatcher = chokidar.watch(["content"]).on("change", build);
-  }
 
   return {
     name,
+    configureServer(server: { httpServer?: { once(e: string, cb: () => void): void } }): void {
+      fsContentWatcher = chokidar.watch(["content"]).on("change", build);
+      server.httpServer?.once("close", () => {
+        void fsContentWatcher?.close();
+      });
+    },
     async buildStart(): Promise<void> {
       try {
         await build();

@@ -711,6 +711,12 @@ pnpm run dev
 
 This project requires Node.js to be `v22.18.0` or higher.
 
+Bulk formatting commits are listed in `.git-blame-ignore-revs` so they don't clutter `git blame`. Enable it locally with:
+
+```bash
+git config blame.ignoreRevsFile .git-blame-ignore-revs
+```
+
 ### Principle when add/edit a framework snippet
 
 > Clarity is better than optimization for Component Party
