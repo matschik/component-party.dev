@@ -37,10 +37,14 @@ function logoPngDataUri(imgRelPath: string, size = 180): string {
   return `data:image/png;base64,${Buffer.from(png).toString("base64")}`;
 }
 
+let popperCache: string | null = null;
 function popperDataUri(size = 40): string {
-  const svg = readFileSync(path.join(STATIC_DIR, "popper.svg"), "utf8");
-  const png = new Resvg(svg, { fitTo: { mode: "width", value: size } }).render().asPng();
-  return `data:image/png;base64,${Buffer.from(png).toString("base64")}`;
+  if (!popperCache) {
+    const svg = readFileSync(path.join(STATIC_DIR, "popper.svg"), "utf8");
+    const png = new Resvg(svg, { fitTo: { mode: "width", value: size } }).render().asPng();
+    popperCache = `data:image/png;base64,${Buffer.from(png).toString("base64")}`;
+  }
+  return popperCache;
 }
 
 const text = (value: string, style: Record<string, unknown>) => ({
@@ -59,7 +63,7 @@ const column = (title: string, imgRel: string) => ({
       width: "420px",
     },
     children: [
-      { type: "img", props: { src: logoPngDataUri(imgRel), width: 180, height: 180 } },
+      { type: "img", props: { src: logoPngDataUri(imgRel), width: 180, height: 180, alt: "" } },
       text(title, { fontSize: "64px", fontWeight: 700, color: "white" }),
     ],
   },
@@ -108,7 +112,7 @@ export async function renderComparisonOgPng(opts: {
           props: {
             style: { display: "flex", flexDirection: "row", alignItems: "center", gap: "14px" },
             children: [
-              { type: "img", props: { src: popperDataUri(40), width: 40, height: 40 } },
+              { type: "img", props: { src: popperDataUri(40), width: 40, height: 40, alt: "" } },
               text("Component Party", { fontSize: "32px", color: "#9ca3af" }),
             ],
           },
