@@ -1,5 +1,5 @@
 <script lang="ts">
-  import createLocaleStorage from "../lib/createLocaleStorage";
+  import createLocaleStorage from "$lib/createLocaleStorage";
 
   interface StarCountStorageData {
     value: string;

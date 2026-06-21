@@ -1,7 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { frameworks } from "../frameworks.ts";
-import { FRAMEWORK_SEPARATOR } from "../src/constants.ts";
+import { FRAMEWORK_SEPARATOR } from "../src/lib/constants.ts";
 
 interface SitemapUrl {
   loc: string;

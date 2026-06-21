@@ -7,9 +7,9 @@
   import CodeEditor from "./components/CodeEditor.svelte";
   import createLocaleStorage from "./lib/createLocaleStorage.ts";
   import { watch } from "runed";
-  import Header from "./components/Header.svelte";
+  import Header from "./lib/components/Header.svelte";
   import Aside from "./components/Aside.svelte";
-  import { FRAMEWORK_IDS_FROM_URL_KEY, FRAMEWORK_SEPARATOR } from "./constants.ts";
+  import { FRAMEWORK_IDS_FROM_URL_KEY, FRAMEWORK_SEPARATOR } from "./lib/constants.ts";
   import { searchParams } from "sv-router";
   import { navigate } from "./router.ts";
 

@@ -1,19 +1,21 @@
-import { describe, expect, it } from "vite-plus/test";
-import { FRAMEWORK_SEPARATOR } from "../constants.ts";
+import { describe, it, expect } from "vitest";
+import { createComparisonPath, parseComparison } from "./frameworkUrl";
 
-// Mirrors the framework-comparison URL encoding used to build comparison links.
-const createFrameworkUrl = (frameworks: string[]) => `/?f=${frameworks.join(FRAMEWORK_SEPARATOR)}`;
-
-const parseFrameworksFromUrl = (query: string) =>
-  query.replace(/^\/\?f=/, "").split(FRAMEWORK_SEPARATOR);
-
-describe("framework comparison url", () => {
-  it("encodes a list of frameworks with the separator", () => {
-    expect(createFrameworkUrl(["react", "vue3"])).toBe("/?f=react-vue3");
+describe("frameworkUrl", () => {
+  it("builds a canonical comparison path", () => {
+    expect(createComparisonPath("react", "vue3")).toBe("/compare/react-vs-vue3/");
   });
-
-  it("round-trips through encode/parse", () => {
-    const frameworks = ["react", "vue3", "svelte5"];
-    expect(parseFrameworksFromUrl(createFrameworkUrl(frameworks))).toEqual(frameworks);
+  it("parses a valid comparison param to canonical ids", () => {
+    expect(parseComparison("react-vs-vue3")).toEqual(["react", "vue3"]);
+  });
+  it("maps a name alias to the latest stable id", () => {
+    expect(parseComparison("react-vs-vue")).toEqual(["react", "vue3"]);
+  });
+  it("returns null for an unknown framework", () => {
+    expect(parseComparison("react-vs-nope")).toBeNull();
+  });
+  it("returns null when not exactly two parts", () => {
+    expect(parseComparison("react")).toBeNull();
+    expect(parseComparison("a-vs-b-vs-c")).toBeNull();
   });
 });
