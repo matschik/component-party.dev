@@ -34,7 +34,11 @@ export default defineConfig({
     "content/**/*": "sh -c 'vp node scripts/generateReadMeProgress.ts && git add README.md'",
   },
   test: {
-    include: ["src/**/*.{test,spec}.{js,ts}", "test/**/*.{test,spec}.{js,ts}"],
+    include: [
+      "src/**/*.{test,spec}.{js,ts}",
+      "test/**/*.{test,spec}.{js,ts}",
+      "build/**/*.{test,spec}.{js,ts}",
+    ],
     exclude: ["test/e2e/**"],
   },
 });
