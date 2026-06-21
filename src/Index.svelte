@@ -33,6 +33,23 @@
   const FRAMEWORKS_BONUS = frameworks.slice(MAX_FRAMEWORK_NOBONUS);
   const frameworkIdsStorage = createLocaleStorage<string[]>("framework_display", []);
 
+  // Map raw URL/storage tokens to canonical framework ids (e.g. "vue" -> "vue3"),
+  // dropping unknown ids and de-duplicating. Keeps non-canonical tokens out of the
+  // selection set, since the snippet importer is keyed only by canonical id and
+  // calling an undefined importer would throw synchronously (uncatchable here).
+  function normalizeFrameworkIds(ids: string[]): string[] {
+    const canonical: string[] = [];
+    const seen = new Set<string>();
+    for (const id of ids) {
+      const framework = matchFrameworkId(id);
+      if (framework && !seen.has(framework.id)) {
+        seen.add(framework.id);
+        canonical.push(framework.id);
+      }
+    }
+    return canonical;
+  }
+
   const frameworkIdsSelected = new SvelteSet<string>();
   const frameworkIdsSelectedArr = $derived([...frameworkIdsSelected]);
   const frameworksSelected = $derived(
@@ -49,7 +66,7 @@
   const frameworkIdsFromSearchParam = $derived.by(() => {
     const value = searchParams.get(FRAMEWORK_IDS_FROM_URL_KEY);
     if (typeof value === "string") {
-      return value.split(FRAMEWORK_SEPARATOR).filter(matchFrameworkId);
+      return normalizeFrameworkIds(value.split(FRAMEWORK_SEPARATOR));
     }
     return [];
   });
@@ -72,9 +89,7 @@
   }
 
   function onInit() {
-    const frameworkIdsFromStorage = frameworkIdsStorage
-      .getJSON()
-      .filter((id) => matchFrameworkId(id));
+    const frameworkIdsFromStorage = normalizeFrameworkIds(frameworkIdsStorage.getJSON());
 
     // From search param
     if (frameworkIdsFromSearchParam.length > 0) {
@@ -117,10 +132,17 @@
   watch([() => frameworkIdsSelected.entries()], () => {
     for (const frameworkId of frameworkIdsSelectedArr) {
       if (!snippetsByFrameworkId.has(frameworkId)) {
+        const importSnippets = snippetsImporterByFrameworkId[frameworkId];
+        if (!importSnippets) {
+          // Defensive: ids are normalized before reaching here, but guard against
+          // a missing importer key rather than throwing on undefined().
+          snippetsByFrameworkIdError.add(frameworkId);
+          continue;
+        }
         snippetsByFrameworkIdError.delete(frameworkId);
         snippetsByFrameworkIdLoading.add(frameworkId);
 
-        snippetsImporterByFrameworkId[frameworkId]()
+        importSnippets()
           .then(({ default: frameworkSnippets }: { default: FrameworkSnippet[] }) => {
             snippetsByFrameworkId.set(frameworkId, frameworkSnippets);
           })
