@@ -11,9 +11,10 @@
 
   const framework: Framework | undefined = $derived(frameworks.find((f) => f.id === id));
 
-  const baseURL: string = import.meta.env.DEV
-    ? "/"
-    : "https://raw.githubusercontent.com/matschik/component-party/main/public/";
+  // Framework logos ship with the site (static/ -> /framework/*.svg), so serve
+  // them from the site itself in every environment. (Previously prod loaded them
+  // from raw.githubusercontent .../public/, which broke when public/ -> static/.)
+  const baseURL = "/";
 </script>
 
 <div class="flex items-center space-x-1.5">

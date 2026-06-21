@@ -139,7 +139,7 @@ async function generateProgressionMarkdown(contentTree: Section[]): Promise<stri
     const markdown = `
 <details>
   <summary>
-    <img width="18" height="18" src="public/${framework.img}" />
+    <img width="18" height="18" src="static/${framework.img}" />
     <b>${framework.title}</b>
     <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/${percent}" />
   </summary>
