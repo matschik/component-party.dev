@@ -33,9 +33,9 @@
       <div class="mt-16 grid grid-cols-1 sm:grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
         {#each footerNavigation as group}
           <div class="md:grid md:gap-8">
-            <aside>
+            <div>
               <h3 class="text-sm font-semibold leading-6 text-white">{group.title}</h3>
-              <nav>
+              <nav aria-label={group.title}>
                 <ul role="list" class="mt-2 space-y-2">
                   {#each group.links as link}
                     <li>
@@ -46,7 +46,7 @@
                   {/each}
                 </ul>
               </nav>
-            </aside>
+            </div>
           </div>
         {/each}
       </div>

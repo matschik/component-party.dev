@@ -1,5 +1,10 @@
 import { describe, it, expect } from "vitest";
-import { createComparisonPath, parseComparison } from "./frameworkUrl";
+import {
+  createComparisonPath,
+  parseComparison,
+  createSearchParamUrl,
+  BASE_URL,
+} from "./frameworkUrl";
 
 describe("frameworkUrl", () => {
   it("builds a canonical comparison path", () => {
@@ -17,5 +22,11 @@ describe("frameworkUrl", () => {
   it("returns null when not exactly two parts", () => {
     expect(parseComparison("react")).toBeNull();
     expect(parseComparison("a-vs-b-vs-c")).toBeNull();
+  });
+  it("builds a search param URL from framework ids", () => {
+    expect(createSearchParamUrl(["react", "vue3"])).toBe("/?f=react-vue3");
+  });
+  it("exports the correct base URL", () => {
+    expect(BASE_URL).toBe("https://component-party.dev");
   });
 });
