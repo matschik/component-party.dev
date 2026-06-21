@@ -69,7 +69,8 @@
   "packageManager": "pnpm@10.14.0",
   "pnpm": {
     "onlyBuiltDependencies": [
-      "esbuild"
+      "esbuild",
+      "@resvg/resvg-js"
     ],
     "overrides": {
       "vite": "npm:@voidzero-dev/vite-plus-core@0.2.1",
