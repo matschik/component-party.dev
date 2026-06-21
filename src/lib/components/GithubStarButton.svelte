@@ -1,5 +1,6 @@
 <script lang="ts">
   import createLocaleStorage from "$lib/createLocaleStorage";
+  import { browser } from "$app/environment";
 
   interface StarCountStorageData {
     value: string;
@@ -76,7 +77,12 @@
     }
   }
 
-  getRepoStarCount();
+  // Only fetch on the client — localStorage and fetch are not available during SSR
+  $effect(() => {
+    if (browser) {
+      void getRepoStarCount();
+    }
+  });
 
   function onButtonClick(): void {
     starCountStorage.remove();

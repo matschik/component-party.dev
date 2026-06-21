@@ -6,7 +6,7 @@ const config = {
   preprocess: vitePreprocess(),
   kit: {
     adapter: adapter({ pages: "dist", assets: "dist", fallback: undefined }),
-    alias: { "@frameworks": "./frameworks" },
+    alias: { "@frameworks": "./frameworks", $generated: "./src/generatedContent" },
     prerender: { handleHttpError: "fail", handleMissingId: "fail" },
   },
 };

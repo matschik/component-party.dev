@@ -1,5 +1,6 @@
 export default function createLocaleStorage<T = unknown>(k: string, defaultValue: T) {
   function get(): string | null {
+    if (typeof localStorage === "undefined") return null;
     return localStorage.getItem(k);
   }
 
@@ -25,9 +26,11 @@ export default function createLocaleStorage<T = unknown>(k: string, defaultValue
       this.set(JSON.stringify(o));
     },
     set(v: string) {
+      if (typeof localStorage === "undefined") return;
       localStorage.setItem(k, v);
     },
     remove() {
+      if (typeof localStorage === "undefined") return;
       localStorage.removeItem(k);
     },
   };
