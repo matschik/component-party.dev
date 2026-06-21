@@ -278,6 +278,7 @@
                   {#each snippets.filter((s) => s.sectionId === section.sectionId) as snippet (snippet.snippetId)}
                     {@const snippetPathId = section.sectionId + "." + snippet.snippetId}
                     <div
+                      class="snippet-cv"
                       id={snippetPathId}
                       data-snippet-id={snippetPathId}
                       data-testid={`snippet-${snippetPathId}`}
@@ -391,7 +392,7 @@
                                         class="h-2.5 rounded-full bg-gray-700 w-10 animate-pulse"
                                       ></div>
                                     </div>
-                                    <div class="w-full h-164px bg-[#0d1117] px-4 py-7">
+                                    <div class="w-full h-40 bg-[#0d1117] px-4 py-7">
                                       <div class="max-w-sm animate-pulse">
                                         <div class="h-3.5 rounded-full bg-gray-700 w-48 mb-4"></div>
                                         <div
@@ -447,5 +448,13 @@
 
   .header-anchor:hover > a {
     opacity: 1;
+  }
+
+  /* M6: skip layout/paint for off-screen snippets (big DOMs with many
+     frameworks). `auto` remembers the real size once measured; the estimate is
+     a first-paint placeholder. The sticky title lives inside and keeps working. */
+  .snippet-cv {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 600px;
   }
 </style>
