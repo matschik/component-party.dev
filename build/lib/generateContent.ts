@@ -330,9 +330,6 @@ export default async function generateContent(options: { noCache?: boolean } = {
     export default snippetsImporterByFrameworkId;
   `,
   );
-
-  // Generate _redirects file for Cloudflare Pages
-  await generateRedirectsFile(rootDir);
 }
 
 function dirNameToTitle(dirName: string): string {
@@ -384,37 +381,4 @@ async function generatePlaygroundURL(
   const playgroundURL = await frameworkIdPlayground(contentByFilename, title);
 
   return playgroundURL;
-}
-
-async function generateRedirectsFile(rootDir: string): Promise<void> {
-  // Generate all possible framework combinations
-  const frameworkIds = frameworks.map((f) => f.id);
-  const redirects: string[] = [];
-
-  // Generate redirects for all framework pairs (both directions)
-  for (let i = 0; i < frameworkIds.length; i++) {
-    for (let j = 0; j < frameworkIds.length; j++) {
-      if (i !== j) {
-        const framework1 = frameworkIds[i];
-        const framework2 = frameworkIds[j];
-        const redirectPath = `/compare/${framework1}-vs-${framework2}`;
-        const targetUrl = `/?f=${framework1}-${framework2}`;
-        redirects.push(`${redirectPath} ${targetUrl} 301`);
-      }
-    }
-  }
-
-  // Note: Removed problematic dynamic redirects that were causing infinite loops
-  // The /?f=:frameworks rule was too broad and redirected legitimate framework URLs
-  // Specific compare patterns are handled by the individual framework comparison redirects above
-
-  const redirectsContent = `# File generated from "node scripts/generateContent.js", DO NOT EDIT/COMMIT
-${redirects.join("\n")}
-`;
-
-  const publicDir = path.join(rootDir, "public");
-  const redirectsFilePath = path.join(publicDir, "_redirects");
-
-  await fs.writeFile(redirectsFilePath, redirectsContent);
-  console.info(`Generated _redirects file for Cloudflare Pages with ${redirects.length} redirects`);
 }

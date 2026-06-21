@@ -2,9 +2,15 @@ import { defineConfig } from "vite-plus";
 import { sveltekit } from "@sveltejs/kit/vite";
 import tailwindcss from "@tailwindcss/vite";
 import pluginGenerateFrameworkContent from "./build/generateContentVitePlugin";
+import generateRedirectsVitePlugin from "./build/generateRedirectsVitePlugin";
 
 export default defineConfig({
-  plugins: [pluginGenerateFrameworkContent(), tailwindcss(), sveltekit()],
+  plugins: [
+    pluginGenerateFrameworkContent(),
+    tailwindcss(),
+    sveltekit(),
+    generateRedirectsVitePlugin(),
+  ],
   build: {
     minify: "terser",
     terserOptions: { compress: { drop_console: true, drop_debugger: true } },
