@@ -10,12 +10,12 @@ function sortAllFilenames(files: File[], filenamesSorted: string[]): File[] {
   ].filter(Boolean) as File[];
 }
 
-export interface Framework {
+/**
+ * A specific released version of a framework, e.g. "Svelte 5" or "Vue 3".
+ */
+export interface FrameworkVersion {
   id: string;
   title: string;
-  frameworkName: string;
-  frameworkNameId: string;
-  isLatestStable: boolean;
   img: string;
   playgroundURL: string;
   documentationURL: string;
@@ -25,13 +25,22 @@ export interface Framework {
   releaseDate: string;
 }
 
-export const frameworks: Framework[] = [
+/**
+ * A framework family, e.g. "Svelte". The generic name (`id`) resolves to the
+ * version referenced by `latestStable`, which is the single source of truth for
+ * "which version is the current stable one" — making multiple-stable states
+ * unrepresentable.
+ */
+export interface Framework {
+  id: string;
+  name: string;
+  latestStable: string;
+}
+
+export const frameworkVersions: FrameworkVersion[] = [
   {
     id: "svelte5",
     title: "Svelte 5",
-    frameworkName: "Svelte",
-    frameworkNameId: "svelte",
-    isLatestStable: false,
     img: "framework/svelte.svg",
     playgroundURL: "https://svelte.dev/playground",
     documentationURL: "https://svelte.dev",
@@ -45,9 +54,6 @@ export const frameworks: Framework[] = [
   {
     id: "react",
     title: "React",
-    frameworkName: "React",
-    frameworkNameId: "react",
-    isLatestStable: true,
     img: "framework/react.svg",
     playgroundURL: "https://codesandbox.io/s/mystifying-goldberg-6wx04b",
     documentationURL: "https://reactjs.org",
@@ -61,9 +67,6 @@ export const frameworks: Framework[] = [
   {
     id: "vue3",
     title: "Vue 3",
-    frameworkName: "Vue",
-    frameworkNameId: "vue",
-    isLatestStable: true,
     img: "framework/vue.svg",
     playgroundURL: "https://play.vuejs.org/",
     documentationURL: "https://vuejs.org/guide",
@@ -77,9 +80,6 @@ export const frameworks: Framework[] = [
   {
     id: "angularRenaissance",
     title: "Angular Renaissance",
-    frameworkName: "Angular",
-    frameworkNameId: "angular",
-    isLatestStable: true,
     img: "framework/angular-renaissance.svg",
     playgroundURL: "https://codesandbox.io/s/angular",
     documentationURL: "https://angular.io/docs",
@@ -98,9 +98,6 @@ export const frameworks: Framework[] = [
   {
     id: "angular",
     title: "Angular",
-    frameworkName: "Angular",
-    frameworkNameId: "angular",
-    isLatestStable: false,
     img: "framework/angular.svg",
     playgroundURL: "https://codesandbox.io/s/angular",
     documentationURL: "https://angular.io/docs",
@@ -119,9 +116,6 @@ export const frameworks: Framework[] = [
   {
     id: "lit",
     title: "Lit",
-    frameworkName: "Lit",
-    frameworkNameId: "lit",
-    isLatestStable: true,
     img: "framework/lit.svg",
     playgroundURL: "https://lit.dev/playground",
     documentationURL: "https://lit.dev",
@@ -135,9 +129,6 @@ export const frameworks: Framework[] = [
   {
     id: "emberPolaris",
     title: "Ember Polaris",
-    frameworkName: "Ember",
-    frameworkNameId: "ember",
-    isLatestStable: false,
     img: "framework/ember.svg",
     playgroundURL: "http://new.emberjs.com",
     documentationURL: "https://emberjs.com",
@@ -151,9 +142,6 @@ export const frameworks: Framework[] = [
   {
     id: "emberOctane",
     title: "Ember Octane",
-    frameworkName: "Ember",
-    frameworkNameId: "ember",
-    isLatestStable: true,
     img: "framework/ember.svg",
     playgroundURL: "https://ember-twiddle.com",
     documentationURL: "https://emberjs.com",
@@ -167,9 +155,6 @@ export const frameworks: Framework[] = [
   {
     id: "solid",
     title: "Solid.js",
-    frameworkName: "Solid",
-    frameworkNameId: "solid",
-    isLatestStable: true,
     img: "framework/solid.svg",
     playgroundURL: "https://playground.solidjs.com/",
     documentationURL: "https://www.solidjs.com/",
@@ -183,9 +168,6 @@ export const frameworks: Framework[] = [
   {
     id: "svelte4",
     title: "Svelte 4",
-    frameworkName: "Svelte",
-    frameworkNameId: "svelte",
-    isLatestStable: true,
     img: "framework/svelte.svg",
     playgroundURL: "https://svelte.dev/repl",
     documentationURL: "https://svelte.dev/",
@@ -199,9 +181,6 @@ export const frameworks: Framework[] = [
   {
     id: "vue2",
     title: "Vue 2",
-    frameworkName: "Vue",
-    frameworkNameId: "vue",
-    isLatestStable: false,
     img: "framework/vue.svg",
     playgroundURL: "",
     documentationURL: "https://v2.vuejs.org",
@@ -215,9 +194,6 @@ export const frameworks: Framework[] = [
   {
     id: "alpine",
     title: "Alpine",
-    frameworkName: "Alpine",
-    frameworkNameId: "alpine",
-    isLatestStable: true,
     img: "framework/alpine.svg",
     playgroundURL: "https://codesandbox.io/s/7br3q8",
     documentationURL: "https://alpinejs.dev/start-here",
@@ -231,9 +207,6 @@ export const frameworks: Framework[] = [
   {
     id: "mithril",
     title: "Mithril",
-    frameworkName: "Mithril",
-    frameworkNameId: "mithril",
-    isLatestStable: true,
     img: "framework/mithril.svg",
     playgroundURL: "https://codesandbox.io/s/q99qzov66",
     documentationURL: "https://mithril.js.org/",
@@ -247,9 +220,6 @@ export const frameworks: Framework[] = [
   {
     id: "aurelia2",
     title: "Aurelia 2",
-    frameworkName: "Aurelia",
-    frameworkNameId: "aurelia",
-    isLatestStable: true,
     img: "framework/aurelia.svg",
     playgroundURL: "https://stackblitz.com/edit/au2-conventions?file=src%2Fmy-app.html",
     documentationURL: "http://docs.aurelia.io",
@@ -263,9 +233,6 @@ export const frameworks: Framework[] = [
   {
     id: "qwik",
     title: "Qwik",
-    frameworkName: "Qwik",
-    frameworkNameId: "qwik",
-    isLatestStable: true,
     img: "framework/qwik.svg",
     playgroundURL: "https://qwik.builder.io/playground",
     documentationURL: "https://qwik.builder.io/docs/overview",
@@ -279,9 +246,6 @@ export const frameworks: Framework[] = [
   {
     id: "marko",
     title: "Marko",
-    frameworkName: "Marko",
-    frameworkNameId: "marko",
-    isLatestStable: true,
     img: "framework/marko.svg",
     playgroundURL: "https://markojs.com/playground/",
     documentationURL: "https://markojs.com/docs/getting-started/",
@@ -295,9 +259,6 @@ export const frameworks: Framework[] = [
   {
     id: "aurelia1",
     title: "Aurelia 1",
-    frameworkName: "Aurelia",
-    frameworkNameId: "aurelia",
-    isLatestStable: false,
     img: "framework/aurelia.svg",
     playgroundURL: "https://codesandbox.io/s/ppmy26opw7",
     documentationURL: "http://aurelia.io/docs/",
@@ -311,9 +272,6 @@ export const frameworks: Framework[] = [
   {
     id: "ripple",
     title: "Ripple",
-    frameworkName: "Ripple",
-    frameworkNameId: "ripple",
-    isLatestStable: true,
     img: "framework/ripple.svg",
     playgroundURL: "https://www.ripple-ts.com/playground",
     documentationURL: "https://www.ripple-ts.com/",
@@ -326,62 +284,80 @@ export const frameworks: Framework[] = [
   },
 ];
 
-export function matchFrameworkId(id: string): Framework | undefined {
-  // First try to find by exact ID
-  let framework = frameworks.find((f) => f.id === id);
+export const frameworks: Framework[] = [
+  { id: "svelte", name: "Svelte", latestStable: "svelte5" },
+  { id: "react", name: "React", latestStable: "react" },
+  { id: "vue", name: "Vue", latestStable: "vue3" },
+  { id: "angular", name: "Angular", latestStable: "angularRenaissance" },
+  { id: "lit", name: "Lit", latestStable: "lit" },
+  { id: "ember", name: "Ember", latestStable: "emberPolaris" },
+  { id: "solid", name: "Solid", latestStable: "solid" },
+  { id: "alpine", name: "Alpine", latestStable: "alpine" },
+  { id: "mithril", name: "Mithril", latestStable: "mithril" },
+  { id: "aurelia", name: "Aurelia", latestStable: "aurelia2" },
+  { id: "qwik", name: "Qwik", latestStable: "qwik" },
+  { id: "marko", name: "Marko", latestStable: "marko" },
+  { id: "ripple", name: "Ripple", latestStable: "ripple" },
+];
 
-  // If not found, try to find by framework name ID and return the latest stable version
-  if (!framework) {
-    const latestStable = getLatestStableFrameworkByFrameworkName(id);
-    if (latestStable) {
-      framework = latestStable;
+/**
+ * Invariants, validated at module load so a misconfiguration fails fast instead
+ * of silently resolving to the wrong version:
+ *  - version ids are unique,
+ *  - framework (family) ids are unique,
+ *  - each family's `latestStable` references an existing version.
+ */
+function assertValidFrameworksConfig(versions: FrameworkVersion[], families: Framework[]): void {
+  const errors: string[] = [];
+
+  const versionIds = new Set<string>();
+  for (const { id } of versions) {
+    if (versionIds.has(id)) errors.push(`duplicate version id "${id}"`);
+    versionIds.add(id);
+  }
+
+  const familyIds = new Set<string>();
+  for (const family of families) {
+    if (familyIds.has(family.id)) errors.push(`duplicate framework id "${family.id}"`);
+    familyIds.add(family.id);
+    if (!versionIds.has(family.latestStable)) {
+      errors.push(
+        `framework "${family.id}".latestStable points to unknown version "${family.latestStable}"`,
+      );
     }
   }
 
-  return framework;
+  if (errors.length > 0) {
+    throw new Error(`Invalid frameworks configuration:\n  - ${errors.join("\n  - ")}`);
+  }
+}
+
+assertValidFrameworksConfig(frameworkVersions, frameworks);
+
+/**
+ * Resolve an id to a concrete framework version. Accepts either a framework
+ * family id (e.g. "svelte" or "angular") or a version id (e.g. "svelte5").
+ *
+ * Family resolution takes precedence over version resolution: a generic name
+ * always maps to its latest stable version, even when a (legacy) version shares
+ * that id — e.g. "angular" resolves to Angular Renaissance, not the legacy
+ * "angular" version.
+ */
+export function matchFrameworkId(id: string): FrameworkVersion | undefined {
+  const family = frameworks.find((f) => f.id === id);
+  if (family) {
+    const stable = frameworkVersions.find((v) => v.id === family.latestStable);
+    if (stable) return stable;
+  }
+
+  return frameworkVersions.find((v) => v.id === id);
 }
 
 /**
- * Get all frameworks that belong to a specific framework name
+ * Get the latest stable version of a framework family, e.g. "svelte" -> Svelte 5.
  */
-export function getFrameworksByFrameworkName(frameworkNameId: string): Framework[] {
-  return frameworks.filter((framework) => framework.frameworkNameId === frameworkNameId);
-}
-
-/**
- * Get the latest stable framework for a given framework name
- */
-export function getLatestStableFrameworkByFrameworkName(
-  frameworkNameId: string,
-): Framework | undefined {
-  return frameworks.find(
-    (framework) => framework.frameworkNameId === frameworkNameId && framework.isLatestStable,
-  );
-}
-
-/**
- * Get all unique framework name IDs
- */
-export function getFrameworkNameIds(): string[] {
-  return [...new Set(frameworks.map((framework) => framework.frameworkNameId))];
-}
-
-/**
- * Get framework name information including all versions and latest stable
- */
-export function getFrameworkNameInfo(frameworkNameId: string): {
-  frameworkNameId: string;
-  frameworks: Framework[];
-  latestStable: Framework | undefined;
-  allVersions: string[];
-} {
-  const familyFrameworks = getFrameworksByFrameworkName(frameworkNameId);
-  const latestStable = getLatestStableFrameworkByFrameworkName(frameworkNameId);
-
-  return {
-    frameworkNameId,
-    frameworks: familyFrameworks,
-    latestStable,
-    allVersions: familyFrameworks.map((f) => f.id),
-  };
+export function getLatestStableVersion(frameworkId: string): FrameworkVersion | undefined {
+  const family = frameworks.find((f) => f.id === frameworkId);
+  if (!family) return undefined;
+  return frameworkVersions.find((v) => v.id === family.latestStable);
 }

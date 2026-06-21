@@ -1,6 +1,6 @@
-import { frameworks } from "../frameworks";
+import { frameworkVersions } from "../frameworks";
 
-const mainPackageNames = frameworks.map((f) => f.mainPackageName);
+const mainPackageNames = frameworkVersions.map((f) => f.mainPackageName);
 
 interface PackageDownloadStats {
   packageName: string;

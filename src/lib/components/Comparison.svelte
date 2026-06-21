@@ -1,7 +1,7 @@
 <script lang="ts">
   import { SvelteMap, SvelteSet } from "svelte/reactivity";
   import { untrack, onMount } from "svelte";
-  import { frameworks, matchFrameworkId } from "@frameworks";
+  import { frameworkVersions, matchFrameworkId } from "@frameworks";
   import FrameworkLabel from "$lib/components/FrameworkLabel.svelte";
   import { sections, snippets } from "$generated/tree.js";
   import snippetsImporterByFrameworkId from "$generated/framework/index.js";
@@ -24,7 +24,7 @@
   let { initialFrameworkIds, initialSnippets, persist = true }: Props = $props();
 
   const MAX_FRAMEWORK_NOBONUS = 9;
-  const FRAMEWORKS_BONUS = frameworks.slice(MAX_FRAMEWORK_NOBONUS);
+  const FRAMEWORKS_BONUS = frameworkVersions.slice(MAX_FRAMEWORK_NOBONUS);
   const frameworkIdsStorage = createLocaleStorage<string[]>("framework_display", []);
 
   // Map raw URL/storage tokens to canonical framework ids (e.g. "vue" -> "vue3"),
@@ -179,7 +179,7 @@
   );
 
   const frameworksNotSelected = $derived(
-    frameworks.filter(({ id }) => id && !frameworkIdsSelected.has(id)),
+    frameworkVersions.filter(({ id }) => id && !frameworkIdsSelected.has(id)),
   );
 
   const headerFrameworks = $derived(

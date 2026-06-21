@@ -1,7 +1,7 @@
 import fs from "node:fs/promises";
 import { packageDirectory } from "package-directory";
 import path from "node:path";
-import { frameworks } from "../../frameworks.ts";
+import { frameworkVersions } from "../../frameworks.ts";
 import playgroundUrlByFramework from "./playgroundUrlByFramework.ts";
 import prettier from "prettier";
 import { mustUseAngularHighlighter } from "./angularHighlighter.ts";
@@ -165,7 +165,7 @@ export default async function generateContent(options: { noCache?: boolean } = {
       });
 
       const frameworksDirPath = path.join(snippetsDirPath, snippetDirName);
-      const frameworkIds = frameworks.map(({ id }) => id);
+      const frameworkIds = frameworkVersions.map(({ id }) => id);
 
       await Promise.all(
         frameworkIds.map(async (frameworkId: string) => {
@@ -217,7 +217,7 @@ export default async function generateContent(options: { noCache?: boolean } = {
           }
 
           if (frameworkSnippet.files.length > 0) {
-            const frameworkConfig = frameworks.find((f) => f.id === frameworkId);
+            const frameworkConfig = frameworkVersions.find((f) => f.id === frameworkId);
             if (frameworkConfig) {
               frameworkSnippet.files = frameworkConfig.filesSorter(
                 frameworkSnippet.files as unknown as FrameworkFile[],
@@ -362,7 +362,7 @@ async function generatePlaygroundURL(
     return;
   }
 
-  const frameworkConfig = frameworks.find((f) => f.id === frameworkId);
+  const frameworkConfig = frameworkVersions.find((f) => f.id === frameworkId);
   if (!frameworkConfig) {
     return;
   }

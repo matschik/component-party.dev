@@ -1,7 +1,7 @@
 import fs from "fs/promises";
 import { packageDirectory } from "package-directory";
 import path from "node:path";
-import { frameworks } from "../frameworks.ts";
+import { frameworkVersions } from "../frameworks.ts";
 import prettier from "prettier";
 import kebabCase from "just-kebab-case";
 
@@ -114,7 +114,7 @@ function mdCheck(b: boolean): string {
 async function generateProgressionMarkdown(contentTree: Section[]): Promise<string> {
   let output = "";
 
-  for (const framework of frameworks) {
+  for (const framework of frameworkVersions) {
     const frameworkLines: string[] = [];
     const allChecks: boolean[] = [];
 

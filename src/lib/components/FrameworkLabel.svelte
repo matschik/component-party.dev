@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { frameworks } from "@frameworks";
-  import type { Framework } from "@frameworks";
+  import { matchFrameworkId } from "@frameworks";
+  import type { FrameworkVersion } from "@frameworks";
 
   interface Props {
     id: string;
@@ -9,7 +9,7 @@
 
   let { id, size = 20 }: Props = $props();
 
-  const framework: Framework | undefined = $derived(frameworks.find((f) => f.id === id));
+  const framework: FrameworkVersion | undefined = $derived(matchFrameworkId(id));
 
   // Framework logos ship with the site (static/ -> /framework/*.svg), so serve
   // them from the site itself in every environment. (Previously prod loaded them
