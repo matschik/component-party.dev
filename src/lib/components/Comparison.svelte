@@ -94,6 +94,10 @@
         frameworkIdsSelectedArr.join(FRAMEWORK_SEPARATOR),
       );
     }
+    // Skip navigation when URL would not change — avoids an infinite-reload loop
+    // that occurs in the static adapter when goto() causes a hard page reload and
+    // the watch re-fires with the same frameworkIdsFromSearchParam value.
+    if (url.toString() === page.url.toString()) return;
     await goto(url, { replaceState: true, keepFocus: true, noScroll: true });
   }
 

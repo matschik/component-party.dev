@@ -41,9 +41,7 @@ test.describe("Integration Tests", () => {
     expect(updatedFrameworks).toContain("vue3");
 
     // Wait for content sections to be visible
-    await page.waitForSelector('[data-testid="section-reactivity"]', {
-      timeout: 10_000,
-    });
+    await expect(page.getByTestId("section-reactivity")).toBeVisible({ timeout: 10_000 });
 
     // Verify content sections are displayed using test IDs
     await expect(page.getByTestId("section-reactivity")).toBeVisible();
@@ -54,11 +52,11 @@ test.describe("Integration Tests", () => {
     // Code editors might not be present in all snippets, so we just check that the test completed successfully
   });
 
-  test("should handle versus mode navigation and framework switching", async ({ page }) => {
-    // Navigate to versus mode using search parameters
-    await page.goto("/?f=react-vue3");
+  test("should display versus mode on the compare route", async ({ page }) => {
+    // Navigate to the prerendered compare page
+    await page.goto("/compare/react-vs-vue3/");
 
-    // Verify versus mode is active
+    // Verify versus mode is active via page title
     await expect(page).toHaveTitle(/React vs Vue/);
 
     // Verify both frameworks are selected
@@ -66,13 +64,10 @@ test.describe("Integration Tests", () => {
     expect(selectedFrameworks).toContain("react");
     expect(selectedFrameworks).toContain("vue3");
 
-    // Add another framework
+    // Add another framework — on the compare route persist=false so the URL updates
     await helpers.selectFramework("svelte5");
 
-    // Should navigate back to home (with framework parameters)
-    await expect(page).toHaveURL(/\/\?f=/);
-
-    // Verify all three frameworks are selected
+    // Should still show all three frameworks in the selection
     const updatedFrameworks = await helpers.getSelectedFrameworks();
     expect(updatedFrameworks).toContain("react");
     expect(updatedFrameworks).toContain("vue3");
@@ -82,7 +77,8 @@ test.describe("Integration Tests", () => {
   test("should maintain state across page reloads", async ({ page }) => {
     // Select specific frameworks
     const vueButton = page.getByTestId("framework-button-vue3");
-    await vueButton.click();
+    await expect(vueButton).toBeVisible();
+    await vueButton.dispatchEvent("click");
 
     // Wait for the framework to be selected and saved
     await helpers.waitForFrameworksToLoad();

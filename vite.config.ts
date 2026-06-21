@@ -30,5 +30,8 @@ export default defineConfig({
     "*.{js,ts,svelte,html,md,css}": "vp fmt --write",
     "content/**/*": "sh -c 'vp node scripts/generateReadMeProgress.ts && git add README.md'",
   },
-  test: { include: ["src/**/*.{test,spec}.{js,ts}"] },
+  test: {
+    include: ["src/**/*.{test,spec}.{js,ts}", "test/**/*.{test,spec}.{js,ts}"],
+    exclude: ["test/e2e/**"],
+  },
 });
