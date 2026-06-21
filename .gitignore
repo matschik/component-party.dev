@@ -41,6 +41,8 @@ archive
 
 vite.config.js.timestamp*
 
+.svelte-kit
+
 playwright-report
 test-results
 

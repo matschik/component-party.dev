@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="preload" href="/font/Mona-Sans.woff2" as="font" type="font/woff2" crossorigin="" />
+
+    <link rel="dns-prefetch" href="//github.com" />
+    <link rel="dns-prefetch" href="//codesandbox.io" />
+    <link rel="dns-prefetch" href="//play.vuejs.org" />
+    <link rel="dns-prefetch" href="//svelte.dev" />
+    <link rel="dns-prefetch" href="//playground.solidjs.com" />
+    <link rel="dns-prefetch" href="//qwik.builder.io" />
+    <link rel="dns-prefetch" href="//lit.dev" />
+    <link rel="dns-prefetch" href="//ember-twiddle.com" />
+    <link rel="dns-prefetch" href="//markojs.com" />
+    <link rel="dns-prefetch" href="//stackblitz.com" />
+    <link rel="dns-prefetch" href="//www.ripplejs.com" />
+    <link rel="preconnect" href="https://github.com" crossorigin />
+    <link rel="preconnect" href="https://codesandbox.io" crossorigin />
+
+    <meta name="author" content="Component Party" />
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    />
+    <meta name="theme-color" content="#111827" />
+    <meta name="apple-mobile-web-app-title" content="Component Party" />
+    <meta name="application-name" content="Component Party" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <style>
+      @font-face {
+        font-family: "Mona Sans";
+        src:
+          url("/font/Mona-Sans.woff2") format("woff2 supports variations"),
+          url("/font/Mona-Sans.woff2") format("woff2-variations");
+        font-weight: 400 500 600 700 800;
+        font-stretch: 75% 125%;
+        font-display: swap;
+      }
+      :root {
+        --bg-color: rgb(17 24 39);
+        color-scheme: dark;
+      }
+      html {
+        font-family: "Mona Sans";
+        background-color: var(--bg-color);
+        color: #fff;
+      }
+    </style>
+
+    %sveltekit.head%
+  </head>
+  <body data-sveltekit-preload-data="hover">
+    <div id="app" class="min-h-screen">%sveltekit.body%</div>
+  </body>
+</html>
