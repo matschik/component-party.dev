@@ -60,7 +60,7 @@ function logoImage(imgRelPath: string, box = 180): { src: string; width: number;
 // The "VS" graphic (raster PNG with transparency) used between the two columns.
 // Cached; sized to a target height preserving its native aspect ratio.
 let vsCache: { src: string; width: number; height: number } | null = null;
-function vsImage(targetHeight = 150): { src: string; width: number; height: number } {
+function vsImage(targetHeight = 110): { src: string; width: number; height: number } {
   if (!vsCache) {
     const buf = readFileSync(path.join(OG_ASSET_DIR, "vs.png"));
     const natW = buf.readUInt32BE(16);
