@@ -1,6 +1,6 @@
 <script lang="ts">
   import { SvelteMap, SvelteSet } from "svelte/reactivity";
-  import { untrack } from "svelte";
+  import { untrack, onMount } from "svelte";
   import { frameworks, matchFrameworkId } from "@frameworks";
   import FrameworkLabel from "$lib/components/FrameworkLabel.svelte";
   import { sections, snippets } from "$generated/tree.js";
@@ -52,8 +52,6 @@
   const snippetsByFrameworkId = new SvelteMap<string, FrameworkSnippet[]>(
     Object.entries(untrack(() => initialSnippets)),
   );
-  // Mark initialized synchronously so SSR renders code columns immediately
-  let frameworkIdsSelectedInitialized = $state(true);
 
   const frameworkIdsSelectedArr = $derived([...frameworkIdsSelected]);
   const frameworksSelected = $derived(
@@ -99,20 +97,12 @@
     await goto(url, { replaceState: true, keepFocus: true, noScroll: true });
   }
 
-  // On client mount: reconcile URL/localStorage with initial selection
-  $effect(() => {
-    if (!browser) return;
-
-    const fromSearchParam = normalizeFrameworkIds(
-      (page.url.searchParams.get(FRAMEWORK_IDS_FROM_URL_KEY) ?? "")
-        .split(FRAMEWORK_SEPARATOR)
-        .filter(Boolean),
-    );
-
-    if (fromSearchParam.length > 0) {
+  // On client mount: reconcile URL/localStorage with initial selection — runs once, client-only
+  onMount(() => {
+    if (frameworkIdsFromSearchParam.length > 0) {
       // URL takes precedence — select those frameworks
       frameworkIdsSelected.clear();
-      for (const id of fromSearchParam) {
+      for (const id of frameworkIdsFromSearchParam) {
         frameworkIdsSelected.add(id);
       }
     } else if (persist) {
@@ -295,143 +285,137 @@
                         {snippet.title}
                         <a href={"#" + snippetPathId} aria-hidden="true" tabindex="-1"> # </a>
                       </h3>
-                      {#if frameworkIdsSelectedInitialized}
-                        <div
-                          class="grid grid-cols-1 xl:grid-cols-2 gap-y-4 xl:gap-y-8 gap-x-10 mt-2"
-                        >
-                          {#each frameworkIdsSelectedArr as frameworkId (frameworkId)}
-                            {@const framework = matchFrameworkId(frameworkId)}
-                            {@const frameworkSnippet = snippetsByFrameworkId
-                              .get(frameworkId)
-                              ?.find((s: FrameworkSnippet) => s.snippetId === snippet.snippetId)}
-                            {@const frameworkSnippetIsLoading =
-                              snippetsByFrameworkIdLoading.has(frameworkId)}
-                            {@const frameworkSnippetIsError =
-                              snippetsByFrameworkIdError.has(frameworkId)}
+                      <div class="grid grid-cols-1 xl:grid-cols-2 gap-y-4 xl:gap-y-8 gap-x-10 mt-2">
+                        {#each frameworkIdsSelectedArr as frameworkId (frameworkId)}
+                          {@const framework = matchFrameworkId(frameworkId)}
+                          {@const frameworkSnippet = snippetsByFrameworkId
+                            .get(frameworkId)
+                            ?.find((s: FrameworkSnippet) => s.snippetId === snippet.snippetId)}
+                          {@const frameworkSnippetIsLoading =
+                            snippetsByFrameworkIdLoading.has(frameworkId)}
+                          {@const frameworkSnippetIsError =
+                            snippetsByFrameworkIdError.has(frameworkId)}
 
-                            {#if framework}
-                              <div
-                                data-testid={`framework-snippet-${frameworkId}-${snippet.snippetId}`}
-                              >
-                                <div class="flex justify-between items-center space-x-3">
-                                  <h4
-                                    class="m-0"
-                                    data-testid={`framework-title-${frameworkId}-${snippet.snippetId}`}
-                                  >
-                                    <FrameworkLabel id={framework.id} />
-                                  </h4>
-                                  {#if frameworkSnippet}
-                                    <div class="flex items-center space-x-3">
-                                      {#if frameworkSnippet.playgroundURL}
-                                        <a
-                                          href={frameworkSnippet.playgroundURL}
-                                          target="_blank"
-                                          rel="noreferrer"
-                                          class="opacity-50 hover:opacity-100 bg-gray-800 hover:bg-gray-700 py-1 px-2 rounded transition-all flex items-center gap-x-2"
-                                          title={`Open playground for ${framework.title}`}
-                                          aria-label={`Open playground for ${framework.title}`}
-                                          data-testid={`playground-button-${frameworkId}-${snippet.snippetId}`}
-                                        >
-                                          <span class="iconify ph--play size-4" aria-hidden="true"
-                                          ></span>
-                                        </a>
-                                      {/if}
-                                    </div>
-                                  {/if}
-                                </div>
-                                <div class="mt-2">
-                                  {#if frameworkSnippet}
-                                    {#if frameworkSnippet.files.length > 0}
-                                      <CodeEditor
-                                        files={frameworkSnippet.files}
-                                        snippetEditHref={frameworkSnippet.snippetEditHref}
-                                        data-testid={`code-editor-${frameworkId}-${snippet.snippetId}`}
-                                      />
-                                    {:else}
-                                      <div
-                                        class="bg-gray-800 text-white rounded-md mx-auto"
-                                        data-testid={`missing-snippet-${frameworkId}-${snippet.snippetId}`}
+                          {#if framework}
+                            <div
+                              data-testid={`framework-snippet-${frameworkId}-${snippet.snippetId}`}
+                            >
+                              <div class="flex justify-between items-center space-x-3">
+                                <h4
+                                  class="m-0"
+                                  data-testid={`framework-title-${frameworkId}-${snippet.snippetId}`}
+                                >
+                                  <FrameworkLabel id={framework.id} />
+                                </h4>
+                                {#if frameworkSnippet}
+                                  <div class="flex items-center space-x-3">
+                                    {#if frameworkSnippet.playgroundURL}
+                                      <a
+                                        href={frameworkSnippet.playgroundURL}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        class="opacity-50 hover:opacity-100 bg-gray-800 hover:bg-gray-700 py-1 px-2 rounded transition-all flex items-center gap-x-2"
+                                        title={`Open playground for ${framework.title}`}
+                                        aria-label={`Open playground for ${framework.title}`}
+                                        data-testid={`playground-button-${frameworkId}-${snippet.snippetId}`}
                                       >
-                                        <div class="text-center py-8 px-4 sm:px-6">
-                                          <div>
-                                            <span
-                                              class="block text-2xl tracking-tight font-bold"
-                                              data-testid="missing-snippet-title"
-                                            >
-                                              Missing snippet
-                                            </span>
-                                            <span
-                                              class="block text-lg mt-1 font-semibold space-x-1"
-                                              data-testid="missing-snippet-message"
-                                            >
-                                              <span> Help us to improve Component Party </span>
-                                              <img
-                                                src="/popper.svg"
-                                                alt="logo"
-                                                class="size-5 m-0 inline-block"
-                                              />
-                                            </span>
-                                          </div>
-                                          <div class="mt-6 flex justify-center">
-                                            <div class="inline-flex rounded-md shadow">
-                                              <a
-                                                class="inline-flex space-x-2 items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-[#161b22] hover:bg-[#161b22]/80 no-underline"
-                                                href={frameworkSnippet.snippetEditHref}
-                                                data-testid={`contribute-link-${frameworkId}-${snippet.snippetId}`}
-                                              >
-                                                <span>Contribute on Github</span>
-                                                <span
-                                                  class="iconify simple-icons--github size-5"
-                                                  aria-hidden="true"
-                                                ></span>
-                                              </a>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
+                                        <span class="iconify ph--play size-4" aria-hidden="true"
+                                        ></span>
+                                      </a>
                                     {/if}
-                                  {:else if frameworkSnippetIsLoading}
+                                  </div>
+                                {/if}
+                              </div>
+                              <div class="mt-2">
+                                {#if frameworkSnippet}
+                                  {#if frameworkSnippet.files.length > 0}
+                                    <CodeEditor
+                                      files={frameworkSnippet.files}
+                                      snippetEditHref={frameworkSnippet.snippetEditHref}
+                                      data-testid={`code-editor-${frameworkId}-${snippet.snippetId}`}
+                                    />
+                                  {:else}
                                     <div
-                                      role="status"
-                                      data-testid={`loading-snippet-${frameworkId}-${snippet.snippetId}`}
+                                      class="bg-gray-800 text-white rounded-md mx-auto"
+                                      data-testid={`missing-snippet-${frameworkId}-${snippet.snippetId}`}
                                     >
-                                      <div class="w-75px h-23px bg-[#0d1117] py-3 px-4 rounded-t">
-                                        <div
-                                          class="h-2.5 rounded-full bg-gray-700 w-10 animate-pulse"
-                                        ></div>
-                                      </div>
-                                      <div class="w-full h-164px bg-[#0d1117] px-4 py-7">
-                                        <div class="max-w-sm animate-pulse">
-                                          <div
-                                            class="h-3.5 rounded-full bg-gray-700 w-48 mb-4"
-                                          ></div>
-                                          <div
-                                            class="h-3.5 rounded-full bg-gray-700 max-w-[360px] mb-2.5"
-                                          ></div>
-                                          <div class="h-3.5 rounded-full bg-gray-700 mb-4"></div>
-                                          <div
-                                            class="h-3.5 rounded-full bg-gray-700 max-w-[330px] mb-2.5"
-                                          ></div>
-                                          <span class="sr-only" data-testid="loading-text"
-                                            >Loading...</span
+                                      <div class="text-center py-8 px-4 sm:px-6">
+                                        <div>
+                                          <span
+                                            class="block text-2xl tracking-tight font-bold"
+                                            data-testid="missing-snippet-title"
                                           >
+                                            Missing snippet
+                                          </span>
+                                          <span
+                                            class="block text-lg mt-1 font-semibold space-x-1"
+                                            data-testid="missing-snippet-message"
+                                          >
+                                            <span> Help us to improve Component Party </span>
+                                            <img
+                                              src="/popper.svg"
+                                              alt="logo"
+                                              class="size-5 m-0 inline-block"
+                                            />
+                                          </span>
+                                        </div>
+                                        <div class="mt-6 flex justify-center">
+                                          <div class="inline-flex rounded-md shadow">
+                                            <a
+                                              class="inline-flex space-x-2 items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-[#161b22] hover:bg-[#161b22]/80 no-underline"
+                                              href={frameworkSnippet.snippetEditHref}
+                                              data-testid={`contribute-link-${frameworkId}-${snippet.snippetId}`}
+                                            >
+                                              <span>Contribute on Github</span>
+                                              <span
+                                                class="iconify simple-icons--github size-5"
+                                                aria-hidden="true"
+                                              ></span>
+                                            </a>
+                                          </div>
                                         </div>
                                       </div>
                                     </div>
-                                  {:else if frameworkSnippetIsError}
-                                    <p
-                                      class="text-orange-500"
-                                      data-testid={`error-snippet-${frameworkId}-${snippet.snippetId}`}
-                                    >
-                                      Error loading snippets. Please reload the page.
-                                    </p>
                                   {/if}
-                                </div>
+                                {:else if frameworkSnippetIsLoading}
+                                  <div
+                                    role="status"
+                                    data-testid={`loading-snippet-${frameworkId}-${snippet.snippetId}`}
+                                  >
+                                    <div class="w-75px h-23px bg-[#0d1117] py-3 px-4 rounded-t">
+                                      <div
+                                        class="h-2.5 rounded-full bg-gray-700 w-10 animate-pulse"
+                                      ></div>
+                                    </div>
+                                    <div class="w-full h-164px bg-[#0d1117] px-4 py-7">
+                                      <div class="max-w-sm animate-pulse">
+                                        <div class="h-3.5 rounded-full bg-gray-700 w-48 mb-4"></div>
+                                        <div
+                                          class="h-3.5 rounded-full bg-gray-700 max-w-[360px] mb-2.5"
+                                        ></div>
+                                        <div class="h-3.5 rounded-full bg-gray-700 mb-4"></div>
+                                        <div
+                                          class="h-3.5 rounded-full bg-gray-700 max-w-[330px] mb-2.5"
+                                        ></div>
+                                        <span class="sr-only" data-testid="loading-text"
+                                          >Loading...</span
+                                        >
+                                      </div>
+                                    </div>
+                                  </div>
+                                {:else if frameworkSnippetIsError}
+                                  <p
+                                    class="text-orange-500"
+                                    data-testid={`error-snippet-${frameworkId}-${snippet.snippetId}`}
+                                  >
+                                    Error loading snippets. Please reload the page.
+                                  </p>
+                                {/if}
                               </div>
-                            {/if}
-                          {/each}
-                        </div>
-                      {/if}
+                            </div>
+                          {/if}
+                        {/each}
+                      </div>
                     </div>
                   {/each}
                 </div>
