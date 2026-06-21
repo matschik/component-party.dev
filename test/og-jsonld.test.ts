@@ -19,6 +19,11 @@ describe("OG images", () => {
     expect(html).toContain(
       'property="twitter:image" content="https://component-party.dev/og/react-vs-vue3.png"',
     );
+    expect(html).not.toContain('og:image" content="https://component-party.dev/banner2.png"');
+  });
+  it("home page og:image is banner2.png", async () => {
+    const home = await readFile(resolve(OUT, "index.html"), "utf8");
+    expect(home).toContain('og:image" content="https://component-party.dev/banner2.png"');
   });
 });
 

@@ -16,6 +16,10 @@
   <link rel="canonical" href={`${BASE_URL}/`} />
   <meta property="og:url" content={`${BASE_URL}/`} />
   <meta property="og:title" content="Component Party" />
+  <meta property="og:image" content={`${BASE_URL}/banner2.png`} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="twitter:image" content={`${BASE_URL}/banner2.png`} />
   {@html `<script type="application/ld+json">${JSON.stringify(webAppLd)}<\/script>`}
 </svelte:head>
 
