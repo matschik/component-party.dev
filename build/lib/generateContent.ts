@@ -169,6 +169,13 @@ export default async function generateContent(options: { noCache?: boolean } = {
 
       await Promise.all(
         frameworkIds.map(async (frameworkId: string) => {
+          // Initialize unconditionally so the early-return path below can push
+          // regardless of which snippet is processed first (otherwise the build
+          // only works by chance of processing order).
+          if (!byFrameworkId[frameworkId]) {
+            byFrameworkId[frameworkId] = [];
+          }
+
           const frameworkSnippet: FrameworkSnippet = {
             frameworkId,
             snippetId,
@@ -232,10 +239,6 @@ export default async function generateContent(options: { noCache?: boolean } = {
               ext: file.ext,
               contentHtml: file.contentHtml,
             }));
-          }
-
-          if (!byFrameworkId[frameworkId]) {
-            byFrameworkId[frameworkId] = [];
           }
 
           byFrameworkId[frameworkId].push(frameworkSnippet);
