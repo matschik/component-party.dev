@@ -4,6 +4,8 @@ import tailwindcss from "@tailwindcss/vite";
 import pluginGenerateFrameworkContent from "./build/generateContentVitePlugin";
 import generateRedirectsVitePlugin from "./build/generateRedirectsVitePlugin";
 
+const BUILD_DATE = process.env.BUILD_DATE || new Date().toISOString().slice(0, 10);
+
 export default defineConfig({
   plugins: [
     pluginGenerateFrameworkContent(),
@@ -11,6 +13,7 @@ export default defineConfig({
     sveltekit(),
     generateRedirectsVitePlugin(),
   ],
+  define: { __BUILD_DATE__: JSON.stringify(BUILD_DATE) },
   build: {
     minify: "terser",
     terserOptions: { compress: { drop_console: true, drop_debugger: true } },

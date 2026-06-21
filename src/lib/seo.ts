@@ -1,3 +1,5 @@
+export const SITE_PUBLISHED_DATE = "2024-01-01";
+
 export const WEBAPP_JSONLD = {
   "@context": "https://schema.org",
   "@type": "WebApplication",
