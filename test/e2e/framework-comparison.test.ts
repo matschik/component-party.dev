@@ -58,8 +58,10 @@ test.describe("Framework Comparison", () => {
   });
 
   test("should handle framework loading errors gracefully", async ({ page }) => {
-    // Mock a framework loading error for Angular specifically
-    await page.route("**/framework/angular*.js", (route) => {
+    // Block Angular's lazily-imported snippet chunk so its load rejects.
+    // Built chunks are emitted as /assets/angular-<hash>.js (the previous
+    // **/framework/angular*.js glob never matched, so this test was a no-op).
+    await page.route("**/angular-*.js", (route) => {
       route.abort("failed");
     });
 
@@ -67,28 +69,8 @@ test.describe("Framework Comparison", () => {
     const angularButton = page.getByTestId("framework-button-angular");
     await angularButton.click();
 
-    // Wait for content to load
-    await page.waitForSelector('[data-testid^="snippet-"]', {
-      timeout: 10_000,
-    });
-
-    // Wait for the error to appear
-    await page.waitForTimeout(5000);
-
-    // Check for error message using test ID - look for any error snippet
-    const errorSnippets = page.locator('[data-testid*="error-snippet"]');
-    const errorCount = await errorSnippets.count();
-
-    // If no error snippets found, let's check what's actually rendered
-    if (errorCount === 0) {
-      // For now, let's just verify that Angular was selected and the test completed
-      const selectedFrameworks = await page.getAttribute(
-        "[data-framework-id-selected-list]",
-        "data-framework-id-selected-list",
-      );
-      expect(selectedFrameworks).toContain("angular");
-    } else {
-      await expect(errorSnippets.first()).toBeVisible();
-    }
+    // The error state must surface for at least one Angular snippet.
+    const errorSnippets = page.locator('[data-testid^="error-snippet-angular"]');
+    await expect(errorSnippets.first()).toBeVisible({ timeout: 10_000 });
   });
 });

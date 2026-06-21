@@ -75,8 +75,9 @@ export class TestHelpers {
     return this.page.getByTestId(/snippet-/);
   }
 
-  async mockFrameworkLoadingFailure() {
-    await this.page.route("**/framework/*.js", (route) => {
+  async mockFrameworkLoadingFailure(frameworkId: string) {
+    // Built snippet chunks are emitted as /assets/<frameworkId>-<hash>.js.
+    await this.page.route(`**/${frameworkId}-*.js`, (route) => {
       route.abort("failed");
     });
   }
