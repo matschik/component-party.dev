@@ -45,5 +45,3 @@ vite.config.js.timestamp*
 
 playwright-report
 test-results
-
-public/_redirects
