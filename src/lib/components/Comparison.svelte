@@ -1,35 +1,29 @@
 <script lang="ts">
   import { SvelteMap, SvelteSet } from "svelte/reactivity";
+  import { untrack } from "svelte";
   import { frameworks, matchFrameworkId } from "@frameworks";
-  import FrameworkLabel from "./components/FrameworkLabel.svelte";
-  import { sections, snippets } from "./generatedContent/tree.js";
-  import snippetsImporterByFrameworkId from "./generatedContent/framework/index.js";
-  import CodeEditor from "./components/CodeEditor.svelte";
-  import createLocaleStorage from "./lib/createLocaleStorage.ts";
+  import FrameworkLabel from "$lib/components/FrameworkLabel.svelte";
+  import { sections, snippets } from "$generated/tree.js";
+  import snippetsImporterByFrameworkId from "$generated/framework/index.js";
+  import CodeEditor from "$lib/components/CodeEditor.svelte";
+  import createLocaleStorage from "$lib/createLocaleStorage";
   import { watch } from "runed";
-  import Header from "./lib/components/Header.svelte";
-  import Aside from "./components/Aside.svelte";
-  import { FRAMEWORK_IDS_FROM_URL_KEY, FRAMEWORK_SEPARATOR } from "./lib/constants.ts";
-  import { searchParams } from "sv-router";
-  import { navigate } from "./router.ts";
+  import Aside from "$lib/components/Aside.svelte";
+  import { FRAMEWORK_IDS_FROM_URL_KEY, FRAMEWORK_SEPARATOR } from "$lib/constants";
+  import { page } from "$app/state";
+  import { goto } from "$app/navigation";
+  import { browser } from "$app/environment";
+  import type { FrameworkSnippet } from "$lib/types";
 
-  interface File {
-    fileName: string;
-    contentHtml: string;
-    [key: string]: unknown;
+  interface Props {
+    initialFrameworkIds: string[];
+    initialSnippets: Record<string, FrameworkSnippet[]>;
+    persist?: boolean;
   }
 
-  interface FrameworkSnippet {
-    frameworkId: string;
-    snippetId: string;
-    files: File[];
-    playgroundURL: string;
-    markdownFiles: File[];
-    snippetEditHref: string;
-  }
+  let { initialFrameworkIds, initialSnippets, persist = true }: Props = $props();
 
   const MAX_FRAMEWORK_NOBONUS = 9;
-  const DEFAULT_FRAMEWORKS = ["react", "svelte5"];
   const FRAMEWORKS_BONUS = frameworks.slice(MAX_FRAMEWORK_NOBONUS);
   const frameworkIdsStorage = createLocaleStorage<string[]>("framework_display", []);
 
@@ -50,28 +44,31 @@
     return canonical;
   }
 
-  const frameworkIdsSelected = new SvelteSet<string>();
+  // Seed selection and snippets at setup time (runs during SSR) from props.
+  // untrack() reads the prop values without creating a reactive dependency —
+  // these are intentional one-time seeds so SSR renders code columns immediately.
+  // Prop changes after mount are not expected (routes supply different page instances).
+  const frameworkIdsSelected = new SvelteSet<string>(untrack(() => initialFrameworkIds));
+  const snippetsByFrameworkId = new SvelteMap<string, FrameworkSnippet[]>(
+    Object.entries(untrack(() => initialSnippets)),
+  );
+  // Mark initialized synchronously so SSR renders code columns immediately
+  let frameworkIdsSelectedInitialized = $state(true);
+
   const frameworkIdsSelectedArr = $derived([...frameworkIdsSelected]);
   const frameworksSelected = $derived(
     frameworkIdsSelectedArr.map((id: string) => matchFrameworkId(id)),
   );
-  const snippetsByFrameworkId = new SvelteMap<string, FrameworkSnippet[]>();
-  let frameworkIdsSelectedInitialized = $state(false);
-  const isVersusFrameworks = $derived(frameworksSelected.length === 2);
-  const siteTitle = $derived(
-    isVersusFrameworks
-      ? `${frameworksSelected.map((f) => f!.title).join(" vs ")} - Component Party`
-      : "Component Party",
-  );
+
   const frameworkIdsFromSearchParam = $derived.by(() => {
-    const value = searchParams.get(FRAMEWORK_IDS_FROM_URL_KEY);
+    const value = page.url.searchParams.get(FRAMEWORK_IDS_FROM_URL_KEY);
     if (typeof value === "string") {
       return normalizeFrameworkIds(value.split(FRAMEWORK_SEPARATOR));
     }
     return [];
   });
 
-  // handle on link click
+  // handle on link click (URL search param changes after initial load)
   watch(
     [() => frameworkIdsFromSearchParam],
     () => {
@@ -85,26 +82,50 @@
     for (const frameworkId of frameworkIds) {
       frameworkIdsSelected.add(frameworkId);
     }
-    navigateWithFrameworkSelection();
+    void navigateWithFrameworkSelection();
   }
 
-  function onInit() {
-    const frameworkIdsFromStorage = normalizeFrameworkIds(frameworkIdsStorage.getJSON());
-
-    // From search param
-    if (frameworkIdsFromSearchParam.length > 0) {
-      selectFrameworks(frameworkIdsFromSearchParam);
-    } else if (frameworkIdsFromStorage.length > 0) {
-      selectFrameworks(frameworkIdsFromStorage);
+  async function navigateWithFrameworkSelection() {
+    if (!browser) return;
+    const url = new URL(page.url);
+    if (frameworkIdsSelected.size === 0) {
+      url.searchParams.delete(FRAMEWORK_IDS_FROM_URL_KEY);
     } else {
-      // Default frameworks
-      selectFrameworks(DEFAULT_FRAMEWORKS);
+      url.searchParams.set(
+        FRAMEWORK_IDS_FROM_URL_KEY,
+        frameworkIdsSelectedArr.join(FRAMEWORK_SEPARATOR),
+      );
     }
-
-    frameworkIdsSelectedInitialized = true;
+    await goto(url, { replaceState: true, keepFocus: true, noScroll: true });
   }
 
-  onInit();
+  // On client mount: reconcile URL/localStorage with initial selection
+  $effect(() => {
+    if (!browser) return;
+
+    const fromSearchParam = normalizeFrameworkIds(
+      (page.url.searchParams.get(FRAMEWORK_IDS_FROM_URL_KEY) ?? "")
+        .split(FRAMEWORK_SEPARATOR)
+        .filter(Boolean),
+    );
+
+    if (fromSearchParam.length > 0) {
+      // URL takes precedence — select those frameworks
+      frameworkIdsSelected.clear();
+      for (const id of fromSearchParam) {
+        frameworkIdsSelected.add(id);
+      }
+    } else if (persist) {
+      const fromStorage = normalizeFrameworkIds(frameworkIdsStorage.getJSON());
+      if (fromStorage.length > 0) {
+        frameworkIdsSelected.clear();
+        for (const id of fromStorage) {
+          frameworkIdsSelected.add(id);
+        }
+        void navigateWithFrameworkSelection();
+      }
+    }
+  });
 
   function toggleFrameworkId(frameworkId: string) {
     if (frameworkIdsSelected.has(frameworkId)) {
@@ -112,23 +133,20 @@
     } else {
       frameworkIdsSelected.add(frameworkId);
     }
-    navigateWithFrameworkSelection();
-  }
-
-  async function navigateWithFrameworkSelection() {
-    if (frameworkIdsSelected.size === 0) {
-      searchParams.delete(FRAMEWORK_IDS_FROM_URL_KEY);
-    } else {
-      searchParams.set(
-        FRAMEWORK_IDS_FROM_URL_KEY,
-        frameworkIdsSelectedArr.join(FRAMEWORK_SEPARATOR),
-      );
+    if (persist && browser) {
+      if (frameworkIdsSelectedArr.length === 0) {
+        frameworkIdsStorage.remove();
+      } else {
+        frameworkIdsStorage.setJSON(frameworkIdsSelectedArr);
+      }
     }
+    void navigateWithFrameworkSelection();
   }
 
   let snippetsByFrameworkIdLoading = new SvelteSet<string>();
   let snippetsByFrameworkIdError = new SvelteSet<string>();
 
+  // Client-side lazy loading for frameworks not pre-seeded in initialSnippets
   watch([() => frameworkIdsSelected.entries()], () => {
     for (const frameworkId of frameworkIdsSelectedArr) {
       if (!snippetsByFrameworkId.has(frameworkId)) {
@@ -155,8 +173,8 @@
       }
     }
 
-    if (frameworkIdsSelected.size === 0) {
-      navigate("/");
+    if (frameworkIdsSelected.size === 0 && browser) {
+      void goto("/", { replaceState: true, keepFocus: true, noScroll: true });
     }
   });
 
@@ -178,64 +196,6 @@
     ].filter((f): f is NonNullable<typeof f> => !!f),
   );
 </script>
-
-<svelte:head>
-  <title>{siteTitle}</title>
-  <meta
-    name="description"
-    content={isVersusFrameworks
-      ? `Compare ${frameworksSelected
-          .map((f) => f?.title)
-          .filter(Boolean)
-          .join(
-            " vs ",
-          )} frameworks side-by-side. See syntax differences, features, and code examples for ${frameworksSelected
-          .map((f) => f?.title)
-          .filter(Boolean)
-          .join(" and ")}.`
-      : "Compare JavaScript frameworks side-by-side: React, Vue, Angular, Svelte, Solid.js, and more. See syntax differences, features, and code examples for web development frameworks."}
-  />
-  <meta
-    name="keywords"
-    content={isVersusFrameworks
-      ? frameworksSelected
-          .map((f) => f?.title)
-          .filter(Boolean)
-          .join(", ") +
-        ", framework comparison, JavaScript frameworks, web development, frontend development, code comparison"
-      : "JavaScript frameworks, React, Vue, Angular, Svelte, Solid.js, framework comparison, web development, frontend frameworks, component libraries, JavaScript libraries, code comparison, programming tools, developer tools, web components, JSX, TypeScript, modern JavaScript"}
-  />
-  {#if isVersusFrameworks}
-    <meta property="og:title" content={siteTitle} />
-    <meta
-      property="og:description"
-      content="Compare {frameworksSelected
-        .map((f) => f?.title)
-        .filter(Boolean)
-        .join(
-          ' vs ',
-        )} frameworks side-by-side. See syntax differences, features, and code examples for {frameworksSelected
-        .map((f) => f?.title)
-        .filter(Boolean)
-        .join(' and ')}."
-    />
-    <meta property="twitter:title" content={siteTitle} />
-    <meta
-      property="twitter:description"
-      content="Compare {frameworksSelected
-        .map((f) => f?.title)
-        .filter(Boolean)
-        .join(
-          ' vs ',
-        )} frameworks side-by-side. See syntax differences, features, and code examples for {frameworksSelected
-        .map((f) => f?.title)
-        .filter(Boolean)
-        .join(' and ')}."
-    />
-  {/if}
-</svelte:head>
-
-<Header />
 
 <div class="flex border-b border-gray-700">
   <Aside />
@@ -263,11 +223,6 @@
             aria-pressed={frameworkIdsSelected.has(framework.id)}
             onclick={() => {
               toggleFrameworkId(framework.id);
-              if (frameworkIdsSelectedArr.length === 0) {
-                frameworkIdsStorage.remove();
-              } else {
-                frameworkIdsStorage.setJSON(frameworkIdsSelectedArr);
-              }
             }}
           >
             <FrameworkLabel id={framework.id} size={16} />
