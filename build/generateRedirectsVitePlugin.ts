@@ -1,6 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
-import type { Plugin } from "vite";
+import type { Plugin, ResolvedConfig } from "vite";
 import { frameworks } from "../frameworks.ts";
 
 // canonicalPairs() uses the @frameworks alias which resolves at runtime via
@@ -18,20 +18,27 @@ function buildCanonicalPairs(): [string, string][] {
 }
 
 export default function generateRedirectsVitePlugin(): Plugin {
+  let resolvedOutDir = "dist";
+
   return {
     name: "generate-redirects",
     apply: "build" as const,
+    configResolved(config: ResolvedConfig) {
+      const outDir = config.build.outDir;
+      // Resolve outDir absolutely against project root (it may be relative)
+      resolvedOutDir = path.isAbsolute(outDir) ? outDir : path.resolve(config.root, outDir);
+    },
     async closeBundle() {
+      // Skip the SSR environment; write only once after the client build.
+      if (this.environment?.name !== "client") return;
+
       const pairs = buildCanonicalPairs();
       const lines = pairs.map(([a, b]) => `/compare/${b}-vs-${a}/ /compare/${a}-vs-${b}/ 301`);
-      const outDir = path.resolve(import.meta.dirname, "..", "dist");
-      const outPath = path.join(outDir, "_redirects");
+      const outPath = path.join(resolvedOutDir, "_redirects");
       try {
-        await fs.mkdir(outDir, { recursive: true });
+        await fs.mkdir(resolvedOutDir, { recursive: true });
         await fs.writeFile(outPath, lines.join("\n") + "\n", "utf8");
-        console.info(
-          `[generate-redirects] Written ${lines.length} inverse redirects → dist/_redirects`,
-        );
+        console.info(`[generate-redirects] Written ${lines.length} inverse redirects → _redirects`);
       } catch (err) {
         console.error("[generate-redirects] Failed to write _redirects:", err);
         throw err;

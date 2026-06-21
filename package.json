@@ -58,7 +58,6 @@
     "tslib": "^2.8.1",
     "typescript": "^6.0.3",
     "vite": "npm:@voidzero-dev/vite-plus-core@0.2.1",
-    "vite-plugin-html": "^3.2.2",
     "vite-plus": "0.2.1",
     "vitest": "4.1.9"
   },
