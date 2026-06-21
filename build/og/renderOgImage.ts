@@ -6,7 +6,8 @@ import { Resvg } from "@resvg/resvg-js";
 // Resolve paths relative to project root (process.cwd()) so they work both when
 // running directly from source and when bundled by Vite/SvelteKit for prerendering.
 const PROJECT_ROOT = process.cwd();
-const FONT_DIR = path.resolve(PROJECT_ROOT, "build/og/fonts");
+const OG_ASSET_DIR = path.resolve(PROJECT_ROOT, "build/og");
+const FONT_DIR = path.resolve(OG_ASSET_DIR, "fonts");
 const STATIC_DIR = path.resolve(PROJECT_ROOT, "static");
 
 // Match the family name + files chosen in Task 1.
@@ -54,6 +55,23 @@ function logoImage(imgRelPath: string, box = 180): { src: string; width: number;
   }
   const src = `data:image/png;base64,${Buffer.from(rendered.asPng()).toString("base64")}`;
   return { src, width: rendered.width / scale, height: rendered.height / scale };
+}
+
+// The "VS" graphic (raster PNG with transparency) used between the two columns.
+// Cached; sized to a target height preserving its native aspect ratio.
+let vsCache: { src: string; width: number; height: number } | null = null;
+function vsImage(targetHeight = 150): { src: string; width: number; height: number } {
+  if (!vsCache) {
+    const buf = readFileSync(path.join(OG_ASSET_DIR, "vs.png"));
+    const natW = buf.readUInt32BE(16);
+    const natH = buf.readUInt32BE(20);
+    vsCache = {
+      src: `data:image/png;base64,${buf.toString("base64")}`,
+      width: Math.round((natW / natH) * targetHeight),
+      height: targetHeight,
+    };
+  }
+  return vsCache;
 }
 
 let popperCache: string | null = null;
@@ -143,7 +161,13 @@ export async function renderComparisonOgPng(opts: {
             },
             children: [
               column(opts.titleA, opts.imgA),
-              text("vs", { fontSize: "56px", color: "#6b7280" }),
+              (() => {
+                const vs = vsImage();
+                return {
+                  type: "img",
+                  props: { src: vs.src, width: vs.width, height: vs.height, alt: "vs" },
+                };
+              })(),
               column(opts.titleB, opts.imgB),
             ],
           },
