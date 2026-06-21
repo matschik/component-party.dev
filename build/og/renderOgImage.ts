@@ -3,8 +3,11 @@ import path from "node:path";
 import satori from "satori";
 import { Resvg } from "@resvg/resvg-js";
 
-const FONT_DIR = path.resolve(import.meta.dirname, "fonts");
-const STATIC_DIR = path.resolve(import.meta.dirname, "..", "..", "static");
+// Resolve paths relative to project root (process.cwd()) so they work both when
+// running directly from source and when bundled by Vite/SvelteKit for prerendering.
+const PROJECT_ROOT = process.cwd();
+const FONT_DIR = path.resolve(PROJECT_ROOT, "build/og/fonts");
+const STATIC_DIR = path.resolve(PROJECT_ROOT, "static");
 
 // Match the family name + files chosen in Task 1.
 const FONT_FAMILY = "Mona Sans";

@@ -5,6 +5,7 @@
   const canonical = $derived(
     `${BASE_URL}${createComparisonPath(data.frameworkIds[0], data.frameworkIds[1])}`,
   );
+  const ogImage = $derived(`${BASE_URL}/og/${data.frameworkIds[0]}-vs-${data.frameworkIds[1]}.png`);
   const title = $derived(`${data.titleA} vs ${data.titleB} - Component Party`);
   const description = $derived(
     `Compare ${data.titleA} vs ${data.titleB} frameworks side-by-side. See syntax differences, features, and code examples for ${data.titleA} and ${data.titleB}.`,
@@ -18,8 +19,10 @@
   <meta property="og:url" content={canonical} />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
+  <meta property="og:image" content={ogImage} />
   <meta property="twitter:title" content={title} />
   <meta property="twitter:description" content={description} />
+  <meta property="twitter:image" content={ogImage} />
 </svelte:head>
 
 <Comparison
