@@ -244,6 +244,8 @@
       class="flex px-6 lg:px-20 py-2 sticky top-0 z-20 w-full backdrop-blur bg-gray-900/80 border-b border-gray-700 whitespace-nowrap overflow-x-auto"
       data-framework-id-selected-list={frameworkIdsSelectedArr.join(",")}
       data-testid="framework-selection-bar"
+      role="group"
+      aria-label="Select frameworks to compare"
     >
       {#each headerFrameworks as framework (framework.id)}
         {#if framework}
@@ -258,6 +260,7 @@
                 : "opacity-70 border-opacity-50 border-gray-700",
             ]}
             data-testid={`framework-button-${framework.id}`}
+            aria-pressed={frameworkIdsSelected.has(framework.id)}
             onclick={() => {
               toggleFrameworkId(framework.id);
               if (frameworkIdsSelectedArr.length === 0) {
@@ -356,12 +359,12 @@
                                 data-testid={`framework-snippet-${frameworkId}-${snippet.snippetId}`}
                               >
                                 <div class="flex justify-between items-center space-x-3">
-                                  <h3
+                                  <h4
                                     class="m-0"
                                     data-testid={`framework-title-${frameworkId}-${snippet.snippetId}`}
                                   >
                                     <FrameworkLabel id={framework.id} />
-                                  </h3>
+                                  </h4>
                                   {#if frameworkSnippet}
                                     <div class="flex items-center space-x-3">
                                       {#if frameworkSnippet.playgroundURL}
@@ -421,13 +424,11 @@
                                                 href={frameworkSnippet.snippetEditHref}
                                                 data-testid={`contribute-link-${frameworkId}-${snippet.snippetId}`}
                                               >
-                                                <button class="flex items-center space-x-3">
-                                                  <span>Contribute on Github</span>
-                                                  <span
-                                                    class="iconify simple-icons--github size-5"
-                                                    aria-hidden="true"
-                                                  ></span>
-                                                </button>
+                                                <span>Contribute on Github</span>
+                                                <span
+                                                  class="iconify simple-icons--github size-5"
+                                                  aria-hidden="true"
+                                                ></span>
                                               </a>
                                             </div>
                                           </div>

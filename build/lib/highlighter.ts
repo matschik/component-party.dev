@@ -31,7 +31,7 @@ async function getHighlighter(): Promise<HighlighterGeneric<BundledLanguage, Bun
         "angular-html",
       ],
       langAlias: {
-        tsrx: "jsx",
+        tsrx: "tsx",
       },
     });
   }

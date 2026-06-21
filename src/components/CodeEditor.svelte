@@ -59,7 +59,9 @@
       {@html snippet.contentHtml}
     {/if}
   </div>
-  <div class="absolute hidden group-hover:block transition-all top-0 right-0 mt-2 mr-2">
+  <div
+    class="absolute hidden group-hover:block group-focus-within:block transition-all top-0 right-0 mt-2 mr-2"
+  >
     <div class="flex items-center space-x-3">
       <a
         href={snippetEditHref}
