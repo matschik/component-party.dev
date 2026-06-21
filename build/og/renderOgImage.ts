@@ -89,6 +89,30 @@ const text = (value: string, style: Record<string, unknown>) => ({
   props: { style: { display: "flex", ...style }, children: value },
 });
 
+// Title typography. The title box has a constant height (room for up to
+// TITLE_MAX_LINES lines at full size), so whatever the title length every column
+// is the same height and the two logos stay vertically aligned. titleFontSize()
+// shrinks the font only when a title is long enough that it would otherwise need
+// more than TITLE_MAX_LINES lines — so long names (e.g. "Angular Renaissance",
+// "Ember Octane") and any future framework are handled automatically, with no
+// per-title tweaks.
+const TITLE_TEXT_WIDTH = 400; // usable width inside the 420px column
+const TITLE_MAX_FONT = 50;
+const TITLE_MIN_FONT = 30;
+const TITLE_MAX_LINES = 2;
+const TITLE_LINE_HEIGHT = 1.15;
+// Conservative average glyph advance (em) for Mona Sans Bold — intentionally
+// generous so width is never under-estimated (which would risk overflow).
+const TITLE_AVG_GLYPH_EM = 0.6;
+const TITLE_BOX_HEIGHT = Math.ceil(TITLE_MAX_FONT * TITLE_LINE_HEIGHT * TITLE_MAX_LINES);
+
+function titleFontSize(title: string): number {
+  const estLinesAtMax = (title.length * TITLE_AVG_GLYPH_EM * TITLE_MAX_FONT) / TITLE_TEXT_WIDTH;
+  if (estLinesAtMax <= TITLE_MAX_LINES) return TITLE_MAX_FONT;
+  const fitted = (TITLE_TEXT_WIDTH * TITLE_MAX_LINES) / (title.length * TITLE_AVG_GLYPH_EM);
+  return Math.max(TITLE_MIN_FONT, Math.floor(fitted));
+}
+
 const column = (title: string, imgRel: string) => {
   const logo = logoImage(imgRel);
   return {
@@ -122,7 +146,27 @@ const column = (title: string, imgRel: string) => {
             ],
           },
         },
-        text(title, { fontSize: "64px", fontWeight: 700, color: "white" }),
+        // Constant-height, center-aligned title box (see titleFontSize above):
+        // its fixed height keeps every column the same height, so a title that
+        // wraps to two lines never pushes its logo up relative to the other.
+        {
+          type: "div",
+          props: {
+            style: {
+              display: "flex",
+              width: "100%",
+              height: `${TITLE_BOX_HEIGHT}px`,
+              alignItems: "flex-start",
+              justifyContent: "center",
+              textAlign: "center",
+              fontSize: `${titleFontSize(title)}px`,
+              fontWeight: 700,
+              lineHeight: TITLE_LINE_HEIGHT,
+              color: "white",
+            },
+            children: title,
+          },
+        },
       ],
     },
   };
