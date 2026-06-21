@@ -28,7 +28,7 @@
 
   function copySnippet(): void {
     if (codeSnippetEl) {
-      copyToClipboard(codeSnippetEl.innerText);
+      void copyToClipboard(codeSnippetEl.innerText);
     }
   }
 </script>
