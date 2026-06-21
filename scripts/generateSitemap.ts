@@ -1,6 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { frameworks } from "../frameworks.ts";
+import { FRAMEWORK_SEPARATOR } from "../src/constants.ts";
 
 interface SitemapUrl {
   loc: string;
@@ -45,7 +46,7 @@ function generateFrameworkCombinations(): string[] {
   for (let i = 0; i < popularFrameworks.length; i++) {
     for (let j = i + 1; j < popularFrameworks.length; j++) {
       combinations.push(
-        `https://component-party.dev/?f=${popularFrameworks[i]},${popularFrameworks[j]}`,
+        `https://component-party.dev/?f=${popularFrameworks[i]}${FRAMEWORK_SEPARATOR}${popularFrameworks[j]}`,
       );
     }
   }
@@ -59,7 +60,7 @@ function generateFrameworkCombinations(): string[] {
   ];
 
   for (const combo of threeFrameworkCombos) {
-    combinations.push(`https://component-party.dev/?f=${combo.join(",")}`);
+    combinations.push(`https://component-party.dev/?f=${combo.join(FRAMEWORK_SEPARATOR)}`);
   }
 
   // Add version comparison pages
@@ -72,7 +73,7 @@ function generateFrameworkCombinations(): string[] {
   ];
 
   for (const [v1, v2] of versionComparisons) {
-    combinations.push(`https://component-party.dev/?f=${v1},${v2}`);
+    combinations.push(`https://component-party.dev/?f=${v1}${FRAMEWORK_SEPARATOR}${v2}`);
   }
 
   return combinations;
