@@ -63,9 +63,9 @@
     "tailwindcss": "^4.3.1",
     "tslib": "^2.8.1",
     "typescript": "^6.0.3",
-    "vite": "npm:@voidzero-dev/vite-plus-core@^0.2.1",
+    "vite": "npm:@voidzero-dev/vite-plus-core@0.2.1",
     "vite-plugin-html": "^3.2.2",
-    "vite-plus": "latest",
+    "vite-plus": "0.2.1",
     "vitest": "4.1.9"
   },
   "engines": {
@@ -77,7 +77,7 @@
       "esbuild"
     ],
     "overrides": {
-      "vite": "npm:@voidzero-dev/vite-plus-core@latest",
+      "vite": "npm:@voidzero-dev/vite-plus-core@0.2.1",
       "vitest": "4.1.9",
       "yaml": ">=2.8.3"
     }

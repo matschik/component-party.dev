@@ -5,7 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  vite: npm:@voidzero-dev/vite-plus-core@latest
+  vite: npm:@voidzero-dev/vite-plus-core@0.2.1
   vitest: 4.1.9
   yaml: '>=2.8.3'
 
@@ -114,13 +114,13 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
       vite:
-        specifier: npm:@voidzero-dev/vite-plus-core@latest
+        specifier: npm:@voidzero-dev/vite-plus-core@0.2.1
         version: '@voidzero-dev/vite-plus-core@0.2.1(@types/node@24.5.2)(esbuild@0.27.2)(jiti@2.7.0)(terser@5.48.0)(tsx@4.19.3)(typescript@6.0.3)(yaml@2.9.0)'
       vite-plugin-html:
         specifier: ^3.2.2
         version: 3.2.2(@voidzero-dev/vite-plus-core@0.2.1(@types/node@24.5.2)(esbuild@0.27.2)(jiti@2.7.0)(terser@5.48.0)(tsx@4.19.3)(typescript@6.0.3)(yaml@2.9.0))
       vite-plus:
-        specifier: latest
+        specifier: 0.2.1
         version: 0.2.1(@types/node@24.5.2)(@voidzero-dev/vite-plus-core@0.2.1(@types/node@24.5.2)(esbuild@0.27.2)(jiti@2.7.0)(terser@5.48.0)(tsx@4.19.3)(typescript@6.0.3)(yaml@2.9.0))(esbuild@0.27.2)(jiti@2.7.0)(svelte@5.56.3(@typescript-eslint/types@8.61.1))(terser@5.48.0)(tsx@4.19.3)(typescript@6.0.3)(yaml@2.9.0)
       vitest:
         specifier: 4.1.9
