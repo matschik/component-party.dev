@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { sections, snippets } from "../generatedContent/tree.js";
+  import { sections, snippets } from "$generated/tree.js";
   import { onMount } from "svelte";
   import throttle from "just-throttle";
 

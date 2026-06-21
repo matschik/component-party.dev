@@ -1,5 +1,5 @@
 <script lang="ts">
-  import copyToClipboard from "../lib/copyToClipboard.ts";
+  import copyToClipboard from "$lib/copyToClipboard";
 
   interface File {
     fileName: string;
