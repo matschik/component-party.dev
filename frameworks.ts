@@ -96,7 +96,7 @@ export const frameworkVersions: FrameworkVersion[] = [
     releaseDate: "2024-11-01",
   },
   {
-    id: "angular",
+    id: "angularClassic",
     title: "Angular",
     img: "framework/angular.svg",
     playgroundURL: "https://codesandbox.io/s/angular",

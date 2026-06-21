@@ -67,12 +67,12 @@ test.describe("Framework Comparison", () => {
     });
 
     // Add Angular — its snippet chunk will be requested and aborted.
-    const angularButton = page.getByTestId("framework-button-angular");
+    const angularButton = page.getByTestId("framework-button-angularClassic");
     await expect(angularButton).toBeVisible();
     await angularButton.dispatchEvent("click");
 
     // The error state must surface for at least one Angular snippet.
-    const errorSnippets = page.locator('[data-testid^="error-snippet-angular"]');
+    const errorSnippets = page.locator('[data-testid^="error-snippet-angularClassic"]');
     await expect(errorSnippets.first()).toBeVisible({ timeout: 10_000 });
   });
 });
