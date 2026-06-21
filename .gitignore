@@ -45,3 +45,6 @@ vite.config.js.timestamp*
 
 playwright-report
 test-results
+
+# Superpowers
+.superpowers
