@@ -4,6 +4,7 @@
   interface File {
     fileName: string;
     contentHtml: string;
+    lineCount: number;
   }
 
   interface Props {
@@ -13,6 +14,17 @@
   }
 
   const { files = [], snippetEditHref, "data-testid": dataTestId }: Props = $props();
+
+  // Snippet lines never wrap (overflow-auto / white-space: pre), so the source
+  // line count fully determines the body height. Reserve the tallest file's
+  // height so switching tabs never resizes the editor.
+  const LINE_HEIGHT_PX = 20; // text-sm
+  const BODY_PADDING_Y_PX = 24; // py-3 (12 × 2)
+  const bodyMinHeight = $derived(
+    files.length > 0
+      ? Math.max(...files.map((f) => f.lineCount)) * LINE_HEIGHT_PX + BODY_PADDING_Y_PX
+      : 0,
+  );
 
   let codeSnippetEl: HTMLElement | undefined = $state();
 
@@ -52,7 +64,8 @@
 <div class="relative group">
   <div
     bind:this={codeSnippetEl}
-    class="bg-[#0d1117] min-h-40 px-4 py-3 text-sm overflow-auto rounded-b rounded-tr"
+    class="bg-[#0d1117] px-4 py-3 text-sm overflow-auto rounded-b rounded-tr"
+    style={`min-height: ${bodyMinHeight}px`}
   >
     {#if snippet}
       <!-- eslint-disable-next-line svelte/no-at-html-tags -->

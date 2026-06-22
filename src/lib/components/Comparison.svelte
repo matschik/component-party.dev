@@ -58,6 +58,47 @@
     frameworkIdsSelectedArr.map((id: string) => matchFrameworkId(id)),
   );
 
+  // Precomputed snippet heights drive contain-intrinsic-size so off-screen
+  // content-visibility blocks reserve an accurate height (no scroll jump when
+  // they enter the viewport). Lines never wrap, so line count → height.
+  const LINE_HEIGHT_PX = 20;
+  const BODY_PADDING_Y_PX = 24;
+  const CELL_CHROME_PX = 64; // h4 framework label + mt-2 + tabs bar
+  const ROW_GAP_PX = 32; // xl:gap-y-8
+  const TITLE_PX = 52; // sticky h3 + grid mt-2
+  const FALLBACK_PX = 600; // frameworks not loaded yet (lazy)
+
+  // 1 column below xl, 2 columns at xl+. Unknown during SSR → assume the desktop
+  // 2-col layout (where content-visibility matters most); refine on the client.
+  let gridCols = $state(2);
+  onMount(() => {
+    const mql = window.matchMedia("(min-width: 1280px)");
+    const update = () => {
+      gridCols = mql.matches ? 2 : 1;
+    };
+    update();
+    mql.addEventListener("change", update);
+    return () => {
+      mql.removeEventListener("change", update);
+    };
+  });
+
+  function editorHeight(files: FrameworkSnippet["files"] | undefined): number {
+    if (!files?.length) return 0;
+    const maxLines = Math.max(...files.map((f) => f.lineCount));
+    return maxLines * LINE_HEIGHT_PX + BODY_PADDING_Y_PX + CELL_CHROME_PX;
+  }
+
+  function snippetIntrinsicHeight(snippetId: string): number {
+    const cells = frameworkIdsSelectedArr.map((fid) =>
+      snippetsByFrameworkId.get(fid)?.find((s) => s.snippetId === snippetId),
+    );
+    if (cells.every((c) => !c)) return FALLBACK_PX;
+    const rows = Math.ceil(cells.length / gridCols);
+    const cellMax = Math.max(0, ...cells.map((c) => editorHeight(c?.files)));
+    return TITLE_PX + rows * (cellMax + ROW_GAP_PX);
+  }
+
   const frameworkIdsFromSearchParam = $derived.by(() => {
     const value = page.url.searchParams.get(FRAMEWORK_IDS_FROM_URL_KEY);
     if (typeof value === "string") {
@@ -279,6 +320,7 @@
                     {@const snippetPathId = section.sectionId + "." + snippet.snippetId}
                     <div
                       class="snippet-cv"
+                      style={`contain-intrinsic-size: auto ${snippetIntrinsicHeight(snippet.snippetId)}px`}
                       id={snippetPathId}
                       data-snippet-id={snippetPathId}
                       data-testid={`snippet-${snippetPathId}`}
@@ -451,10 +493,11 @@
   }
 
   /* M6: skip layout/paint for off-screen snippets (big DOMs with many
-     frameworks). `auto` remembers the real size once measured; the estimate is
-     a first-paint placeholder. The sticky title lives inside and keeps working. */
+     frameworks). `auto` remembers the real size once measured. The intrinsic
+     size estimate is set inline per snippet (computed from line counts) so each
+     off-screen block reserves an accurate height. The sticky title lives inside
+     and keeps working. */
   .snippet-cv {
     content-visibility: auto;
-    contain-intrinsic-size: auto 600px;
   }
 </style>

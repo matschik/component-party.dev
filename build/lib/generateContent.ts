@@ -13,6 +13,7 @@ interface File {
   ext: string;
   content?: string;
   contentHtml: string;
+  lineCount: number;
 }
 
 interface FrameworkFile {
@@ -202,6 +203,9 @@ export default async function generateContent(options: { noCache?: boolean } = {
               ext,
               content,
               contentHtml: "",
+              // Lines never wrap in the rendered snippet (overflow-auto / white-space: pre),
+              // so the source line count fully determines the editor body height.
+              lineCount: content.replace(/\n+$/, "").split("\n").length,
             };
 
             if (ext === "md") {
@@ -238,6 +242,7 @@ export default async function generateContent(options: { noCache?: boolean } = {
               fileName: file.fileName,
               ext: file.ext,
               contentHtml: file.contentHtml,
+              lineCount: file.lineCount,
             }));
           }
 

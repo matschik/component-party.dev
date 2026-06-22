@@ -1,6 +1,7 @@
 export interface File {
   fileName: string;
   contentHtml: string;
+  lineCount: number;
   [key: string]: unknown;
 }
 
