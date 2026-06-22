@@ -54,7 +54,16 @@
 
   onMount(function listenLargestSnippetOnScroll() {
     function onScroll() {
-      const largestSnippet = getLargestElement(document.querySelectorAll("[data-snippet-id]"));
+      const snippetEls = document.querySelectorAll("[data-snippet-id]");
+
+      // At the very top, the first snippet is always the active one — nothing
+      // sits above it, so don't let the area heuristic pick a later snippet.
+      if (window.scrollY <= 0) {
+        largestVisibleSnippetId = snippetEls[0]?.getAttribute("data-snippet-id") ?? "";
+        return;
+      }
+
+      const largestSnippet = getLargestElement(snippetEls);
       if (largestSnippet) {
         largestVisibleSnippetId = largestSnippet.getAttribute("data-snippet-id") ?? "";
       } else {
@@ -65,6 +74,10 @@
     const throttleOnScroll = throttle(onScroll, 100);
 
     document.addEventListener("scroll", throttleOnScroll, { passive: true });
+
+    // Seed the active snippet on load so the first one is highlighted before any
+    // scroll happens (the scroll event would otherwise never fire at the top).
+    onScroll();
 
     return () => {
       document.removeEventListener("scroll", throttleOnScroll);
