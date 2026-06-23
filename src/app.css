@@ -25,3 +25,6 @@
 .no-scroll::-webkit-scrollbar {
   display: none; /* Chrome, Safari and Opera */
 }
+html {
+  scroll-padding-top: 60px; /* Approximate Header height with a horizontal scrollbar. */
+}
