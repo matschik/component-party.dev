@@ -1,7 +1,7 @@
 import fs from "fs/promises";
 import { packageDirectory } from "package-directory";
 import path from "node:path";
-import { frameworks } from "../frameworks.ts";
+import { frameworkVersions } from "../frameworks.ts";
 import prettier from "prettier";
 import kebabCase from "just-kebab-case";
 
@@ -38,9 +38,7 @@ async function main(): Promise<void> {
 
   const MARKER_START = "<!-- progression start -->";
   const MARKER_END = "<!-- progression end -->";
-  const progressionContentRegex = new RegExp(
-    `${MARKER_START}([\\s\\S]*?)${MARKER_END}`,
-  );
+  const progressionContentRegex = new RegExp(`${MARKER_START}([\\s\\S]*?)${MARKER_END}`);
 
   const newReadmeContent = readmeContent.replace(
     progressionContentRegex,
@@ -113,12 +111,10 @@ function mdCheck(b: boolean): string {
   return b ? "x" : " ";
 }
 
-async function generateProgressionMarkdown(
-  contentTree: Section[],
-): Promise<string> {
+async function generateProgressionMarkdown(contentTree: Section[]): Promise<string> {
   let output = "";
 
-  for (const framework of frameworks) {
+  for (const framework of frameworkVersions) {
     const frameworkLines: string[] = [];
     const allChecks: boolean[] = [];
 
@@ -133,21 +129,17 @@ async function generateProgressionMarkdown(
         subLines.push(`   * [${mdCheck(hasFiles)}] ${sub.title}`);
       }
 
-      frameworkLines.push(
-        `* [${mdCheck(sectionChecks.every(Boolean))}] ${root.title}`,
-      );
+      frameworkLines.push(`* [${mdCheck(sectionChecks.every(Boolean))}] ${root.title}`);
       frameworkLines.push(...subLines);
       allChecks.push(...sectionChecks);
     }
 
-    const percent = Math.ceil(
-      (allChecks.filter(Boolean).length / allChecks.length) * 100,
-    );
+    const percent = Math.ceil((allChecks.filter(Boolean).length / allChecks.length) * 100);
 
     const markdown = `
 <details>
   <summary>
-    <img width="18" height="18" src="public/${framework.img}" />
+    <img width="18" height="18" src="static/${framework.img}" />
     <b>${framework.title}</b>
     <img src="https://us-central1-progress-markdown.cloudfunctions.net/progress/${percent}" />
   </summary>

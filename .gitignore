@@ -41,7 +41,10 @@ archive
 
 vite.config.js.timestamp*
 
+.svelte-kit
+
 playwright-report
 test-results
 
-public/_redirects
+# Superpowers
+.superpowers

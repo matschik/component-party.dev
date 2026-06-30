@@ -1,34 +1,37 @@
 {
+  "extends": "./.svelte-kit/tsconfig.json",
   "compilerOptions": {
-    "target": "ES2022",
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
-    "skipLibCheck": true,
-    "moduleResolution": "bundler",
+    "allowJs": true,
+    "checkJs": true,
     "allowImportingTsExtensions": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "preserve",
+    "skipLibCheck": true,
+    "sourceMap": true,
     "strict": true,
+    "moduleResolution": "bundler",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "baseUrl": ".",
-    "paths": {
-      "@frameworks": ["./frameworks.ts"]
-    }
+    "noEmit": true
   },
   "include": [
-    "src/**/*",
-    "build/**/*",
-    "scripts/**/*",
-    "types/**/*",
-    "*.ts",
-    "*.mts"
-  ],
-  "exclude": ["node_modules", "dist", "content"]
+    ".svelte-kit/ambient.d.ts",
+    ".svelte-kit/env.d.ts",
+    ".svelte-kit/non-ambient.d.ts",
+    ".svelte-kit/types/**/$types.d.ts",
+    "vite.config.js",
+    "vite.config.ts",
+    "src/**/*.js",
+    "src/**/*.ts",
+    "src/**/*.svelte",
+    "build/**/*.ts",
+    "scripts/**/*.ts",
+    "types/**/*.ts",
+    "test/**/*.js",
+    "test/**/*.ts",
+    "test/**/*.svelte",
+    "frameworks.ts"
+  ]
 }

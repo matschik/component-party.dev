@@ -11,9 +11,7 @@ test.describe("Homepage", () => {
 
   test("should display the main header and navigation", async ({ page }) => {
     await expect(page.getByRole("banner")).toBeVisible();
-    await expect(
-      page.getByRole("heading", { name: "Component Party" }),
-    ).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Component Party" })).toBeVisible();
   });
 
   test("should display default frameworks on first visit", async () => {
@@ -28,37 +26,32 @@ test.describe("Homepage", () => {
     expect(selectedFrameworks).toContain("svelte5");
   });
 
-  test("should allow toggling framework selection", async () => {
-    // Wait for frameworks to load
+  test("should allow toggling framework selection via URL params", async ({ page }) => {
+    // Navigate to home with only svelte5 (react deselected)
+    await page.goto("/?f=svelte5");
     await testHelpers.waitForFrameworksToLoad();
 
-    // Deselect React
-    await testHelpers.deselectFramework("react");
+    // Verify React is not selected
+    const selectedWithoutReact = await testHelpers.getSelectedFrameworks();
+    expect(selectedWithoutReact).not.toContain("react");
+    expect(selectedWithoutReact).toContain("svelte5");
 
-    // Verify React is no longer selected
-    const selectedFrameworks = await testHelpers.getSelectedFrameworks();
-    expect(selectedFrameworks).not.toContain("react");
-
-    // Reselect React
-    await testHelpers.selectFramework("react");
-
-    // Wait for the selection to update
+    // Navigate to home with both frameworks (react re-selected)
+    await page.goto("/?f=react,svelte5");
     await testHelpers.waitForFrameworksToLoad();
 
     // Verify React is selected again
-    const selectedFrameworksAfter = await testHelpers.getSelectedFrameworks();
-    expect(selectedFrameworksAfter).toContain("react");
+    const selectedWithReact = await testHelpers.getSelectedFrameworks();
+    expect(selectedWithReact).toContain("react");
+    expect(selectedWithReact).toContain("svelte5");
   });
 
   test("should show framework selection prompt when no frameworks are selected", async ({
     page,
   }) => {
-    // Clear localStorage to simulate first visit
-    await testHelpers.clearFrameworkSelection();
-
+    // Navigate with empty framework param to show no-selection state
+    await page.goto("/");
     await testHelpers.waitForFrameworksToLoad();
-
-    // Deselect all frameworks
     await testHelpers.deselectAllFrameworks();
 
     await expect(page.getByTestId("empty-state")).toBeVisible();
@@ -67,9 +60,7 @@ test.describe("Homepage", () => {
     );
   });
 
-  test("should display content sections when frameworks are selected", async ({
-    page,
-  }) => {
+  test("should display content sections when frameworks are selected", async ({ page }) => {
     // Wait for frameworks to be selected
     await testHelpers.waitForFrameworksToLoad();
 

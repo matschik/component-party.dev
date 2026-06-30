@@ -253,8 +253,7 @@ export const componentPartyShikiTheme = {
     },
     {
       name: "java modifier.import",
-      scope:
-        "storage.modifier.import.java,storage.type.java,storage.type.generic.java",
+      scope: "storage.modifier.import.java,storage.type.java,storage.type.generic.java",
       settings: {
         foreground: "#e5c07b",
       },
@@ -296,8 +295,7 @@ export const componentPartyShikiTheme = {
     },
     {
       name: "support.constant.property-value.scss",
-      scope:
-        "support.constant.property-value.scss,support.constant.property-value.css",
+      scope: "support.constant.property-value.scss,support.constant.property-value.css",
       settings: {
         foreground: "#d19a66",
       },
@@ -340,8 +338,7 @@ export const componentPartyShikiTheme = {
     },
     {
       name: "js/ts module",
-      scope:
-        "support.module.node,support.type.object.module,support.module.node",
+      scope: "support.module.node,support.type.object.module,support.module.node",
       settings: {
         foreground: "#e5c07b",
       },
@@ -547,8 +544,7 @@ export const componentPartyShikiTheme = {
     },
     {
       name: "Compound Assignment Operators js/ts",
-      scope:
-        "keyword.operator.assignment.compound.js,keyword.operator.assignment.compound.ts",
+      scope: "keyword.operator.assignment.compound.js,keyword.operator.assignment.compound.ts",
       settings: {
         foreground: "#56b6c2",
       },
@@ -651,11 +647,7 @@ export const componentPartyShikiTheme = {
     },
     {
       name: "Class name",
-      scope: [
-        "entity.name.class",
-        "variable.other.class.js",
-        "variable.other.class.ts",
-      ],
+      scope: ["entity.name.class", "variable.other.class.js", "variable.other.class.ts"],
       settings: {
         foreground: "#e5c07b",
       },
@@ -846,8 +838,7 @@ export const componentPartyShikiTheme = {
     },
     {
       name: "Headings",
-      scope:
-        "markup.heading punctuation.definition.heading, entity.name.section",
+      scope: "markup.heading punctuation.definition.heading, entity.name.section",
       settings: {
         foreground: "#61afef",
       },
@@ -977,16 +968,14 @@ export const componentPartyShikiTheme = {
     },
     {
       name: "[VSCODE-CUSTOM] Markdown Underline Link/Image",
-      scope:
-        "markup.underline.link.markdown,markup.underline.link.image.markdown",
+      scope: "markup.underline.link.markdown,markup.underline.link.image.markdown",
       settings: {
         foreground: "#c678dd",
       },
     },
     {
       name: "[VSCODE-CUSTOM] Markdown Link Title/Description",
-      scope:
-        "string.other.link.title.markdown,string.other.link.description.markdown",
+      scope: "string.other.link.title.markdown,string.other.link.description.markdown",
       settings: {
         foreground: "#61afef",
       },
@@ -1042,8 +1031,7 @@ export const componentPartyShikiTheme = {
     },
     {
       name: "Embedded",
-      scope:
-        "punctuation.section.embedded.begin,punctuation.section.embedded.end",
+      scope: "punctuation.section.embedded.begin,punctuation.section.embedded.end",
       settings: {
         foreground: "#c678dd",
       },
@@ -1105,8 +1093,7 @@ export const componentPartyShikiTheme = {
     },
     {
       name: "Source Json Meta Structure Dictionary Json > String Quoted Json > Punctuation String",
-      scope:
-        "source.json meta.structure.dictionary.json > string.quoted.json > punctuation.string",
+      scope: "source.json meta.structure.dictionary.json > string.quoted.json > punctuation.string",
       settings: {
         foreground: "#e06c75",
       },
@@ -1143,16 +1130,14 @@ export const componentPartyShikiTheme = {
     },
     {
       name: "laravel blade tag",
-      scope:
-        "text.html.laravel-blade source.php.embedded.line.html entity.name.tag.laravel-blade",
+      scope: "text.html.laravel-blade source.php.embedded.line.html entity.name.tag.laravel-blade",
       settings: {
         foreground: "#c678dd",
       },
     },
     {
       name: "laravel blade @",
-      scope:
-        "text.html.laravel-blade source.php.embedded.line.html support.constant.laravel-blade",
+      scope: "text.html.laravel-blade source.php.embedded.line.html support.constant.laravel-blade",
       settings: {
         foreground: "#c678dd",
       },
@@ -1210,8 +1195,7 @@ export const componentPartyShikiTheme = {
     },
     {
       name: "php call-function",
-      scope:
-        "meta.function-call.php,meta.function-call.object.php,meta.function-call.static.php",
+      scope: "meta.function-call.php,meta.function-call.object.php,meta.function-call.static.php",
       settings: {
         foreground: "#61afef",
       },
@@ -1284,8 +1268,7 @@ export const componentPartyShikiTheme = {
     },
     {
       name: "python function support",
-      scope:
-        "support.token.decorator.python,meta.function.decorator.identifier.python",
+      scope: "support.token.decorator.python,meta.function.decorator.identifier.python",
       settings: {
         foreground: "#56b6c2",
       },
@@ -1801,10 +1784,7 @@ export const componentPartyShikiTheme = {
       },
     },
     {
-      scope: [
-        "constant.language.symbol.elixir",
-        "constant.language.symbol.double-quoted.elixir",
-      ],
+      scope: ["constant.language.symbol.elixir", "constant.language.symbol.double-quoted.elixir"],
       settings: {
         foreground: "#56b6c2",
       },
@@ -1844,10 +1824,7 @@ export const componentPartyShikiTheme = {
     },
     {
       name: "punctuation.section.embedded.begin.php",
-      scope: [
-        "punctuation.section.embedded.begin.php",
-        "punctuation.section.embedded.end.php",
-      ],
+      scope: ["punctuation.section.embedded.begin.php", "punctuation.section.embedded.end.php"],
       settings: {
         foreground: "#BE5046",
       },

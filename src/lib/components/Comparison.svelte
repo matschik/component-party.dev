@@ -1,0 +1,503 @@
+<script lang="ts">
+  import { SvelteMap, SvelteSet } from "svelte/reactivity";
+  import { untrack, onMount } from "svelte";
+  import { frameworkVersions, matchFrameworkId } from "@frameworks";
+  import FrameworkLabel from "$lib/components/FrameworkLabel.svelte";
+  import { sections, snippets } from "$generated/tree.js";
+  import snippetsImporterByFrameworkId from "$generated/framework/index.js";
+  import CodeEditor from "$lib/components/CodeEditor.svelte";
+  import createLocaleStorage from "$lib/createLocaleStorage";
+  import { watch } from "runed";
+  import Aside from "$lib/components/Aside.svelte";
+  import { FRAMEWORK_IDS_FROM_URL_KEY, FRAMEWORK_SEPARATOR } from "$lib/constants";
+  import { page } from "$app/state";
+  import { goto } from "$app/navigation";
+  import { browser } from "$app/environment";
+  import type { FrameworkSnippet } from "$lib/types";
+
+  interface Props {
+    initialFrameworkIds: string[];
+    initialSnippets: Record<string, FrameworkSnippet[]>;
+    persist?: boolean;
+  }
+
+  let { initialFrameworkIds, initialSnippets, persist = true }: Props = $props();
+
+  const MAX_FRAMEWORK_NOBONUS = 9;
+  const FRAMEWORKS_BONUS = frameworkVersions.slice(MAX_FRAMEWORK_NOBONUS);
+  const frameworkIdsStorage = createLocaleStorage<string[]>("framework_display", []);
+
+  // Map raw URL/storage tokens to canonical framework ids (e.g. "vue" -> "vue3"),
+  // dropping unknown ids and de-duplicating. Keeps non-canonical tokens out of the
+  // selection set, since the snippet importer is keyed only by canonical id and
+  // calling an undefined importer would throw synchronously (uncatchable here).
+  function normalizeFrameworkIds(ids: string[]): string[] {
+    const canonical: string[] = [];
+    const seen = new Set<string>();
+    for (const id of ids) {
+      const framework = matchFrameworkId(id);
+      if (framework && !seen.has(framework.id)) {
+        seen.add(framework.id);
+        canonical.push(framework.id);
+      }
+    }
+    return canonical;
+  }
+
+  // Seed selection and snippets at setup time (runs during SSR) from props.
+  // untrack() reads the prop values without creating a reactive dependency —
+  // these are intentional one-time seeds so SSR renders code columns immediately.
+  // Prop changes after mount are not expected (routes supply different page instances).
+  const frameworkIdsSelected = new SvelteSet<string>(untrack(() => initialFrameworkIds));
+  const snippetsByFrameworkId = new SvelteMap<string, FrameworkSnippet[]>(
+    Object.entries(untrack(() => initialSnippets)),
+  );
+
+  const frameworkIdsSelectedArr = $derived([...frameworkIdsSelected]);
+  const frameworksSelected = $derived(
+    frameworkIdsSelectedArr.map((id: string) => matchFrameworkId(id)),
+  );
+
+  // Precomputed snippet heights drive contain-intrinsic-size so off-screen
+  // content-visibility blocks reserve an accurate height (no scroll jump when
+  // they enter the viewport). Lines never wrap, so line count → height.
+  const LINE_HEIGHT_PX = 20;
+  const BODY_PADDING_Y_PX = 24;
+  const CELL_CHROME_PX = 64; // h4 framework label + mt-2 + tabs bar
+  const ROW_GAP_PX = 32; // xl:gap-y-8
+  const TITLE_PX = 52; // sticky h3 + grid mt-2
+  const FALLBACK_PX = 600; // frameworks not loaded yet (lazy)
+
+  // 1 column below xl, 2 columns at xl+. Unknown during SSR → assume the desktop
+  // 2-col layout (where content-visibility matters most); refine on the client.
+  let gridCols = $state(2);
+  onMount(() => {
+    const mql = window.matchMedia("(min-width: 1280px)");
+    const update = () => {
+      gridCols = mql.matches ? 2 : 1;
+    };
+    update();
+    mql.addEventListener("change", update);
+    return () => {
+      mql.removeEventListener("change", update);
+    };
+  });
+
+  function editorHeight(files: FrameworkSnippet["files"] | undefined): number {
+    if (!files?.length) return 0;
+    const maxLines = Math.max(...files.map((f) => f.lineCount));
+    return maxLines * LINE_HEIGHT_PX + BODY_PADDING_Y_PX + CELL_CHROME_PX;
+  }
+
+  function snippetIntrinsicHeight(snippetId: string): number {
+    const cells = frameworkIdsSelectedArr.map((fid) =>
+      snippetsByFrameworkId.get(fid)?.find((s) => s.snippetId === snippetId),
+    );
+    if (cells.every((c) => !c)) return FALLBACK_PX;
+    const rows = Math.ceil(cells.length / gridCols);
+    const cellMax = Math.max(0, ...cells.map((c) => editorHeight(c?.files)));
+    return TITLE_PX + rows * (cellMax + ROW_GAP_PX);
+  }
+
+  const frameworkIdsFromSearchParam = $derived.by(() => {
+    const value = page.url.searchParams.get(FRAMEWORK_IDS_FROM_URL_KEY);
+    if (typeof value === "string") {
+      return normalizeFrameworkIds(value.split(FRAMEWORK_SEPARATOR));
+    }
+    return [];
+  });
+
+  // handle on link click (URL search param changes after initial load)
+  watch(
+    [() => frameworkIdsFromSearchParam],
+    () => {
+      selectFrameworks(frameworkIdsFromSearchParam);
+    },
+    { lazy: true },
+  );
+
+  function selectFrameworks(frameworkIds: string[]) {
+    frameworkIdsSelected.clear();
+    for (const frameworkId of frameworkIds) {
+      frameworkIdsSelected.add(frameworkId);
+    }
+    void navigateWithFrameworkSelection();
+  }
+
+  async function navigateWithFrameworkSelection() {
+    if (!browser) return;
+    const url = new URL(page.url);
+    if (frameworkIdsSelected.size === 0) {
+      url.searchParams.delete(FRAMEWORK_IDS_FROM_URL_KEY);
+    } else {
+      url.searchParams.set(
+        FRAMEWORK_IDS_FROM_URL_KEY,
+        frameworkIdsSelectedArr.join(FRAMEWORK_SEPARATOR),
+      );
+    }
+    // Skip navigation when URL would not change — avoids an infinite-reload loop
+    // that occurs in the static adapter when goto() causes a hard page reload and
+    // the watch re-fires with the same frameworkIdsFromSearchParam value.
+    if (url.toString() === page.url.toString()) return;
+    await goto(url, { replaceState: true, keepFocus: true, noScroll: true });
+  }
+
+  // On client mount: reconcile URL/localStorage with initial selection — runs once, client-only
+  onMount(() => {
+    if (frameworkIdsFromSearchParam.length > 0) {
+      // URL takes precedence — select those frameworks
+      frameworkIdsSelected.clear();
+      for (const id of frameworkIdsFromSearchParam) {
+        frameworkIdsSelected.add(id);
+      }
+    } else if (persist) {
+      const fromStorage = normalizeFrameworkIds(frameworkIdsStorage.getJSON());
+      if (fromStorage.length > 0) {
+        frameworkIdsSelected.clear();
+        for (const id of fromStorage) {
+          frameworkIdsSelected.add(id);
+        }
+        void navigateWithFrameworkSelection();
+      }
+    }
+  });
+
+  function toggleFrameworkId(frameworkId: string) {
+    if (frameworkIdsSelected.has(frameworkId)) {
+      frameworkIdsSelected.delete(frameworkId);
+    } else {
+      frameworkIdsSelected.add(frameworkId);
+    }
+    if (persist && browser) {
+      if (frameworkIdsSelectedArr.length === 0) {
+        frameworkIdsStorage.remove();
+      } else {
+        frameworkIdsStorage.setJSON(frameworkIdsSelectedArr);
+      }
+    }
+    void navigateWithFrameworkSelection();
+  }
+
+  let snippetsByFrameworkIdLoading = new SvelteSet<string>();
+  let snippetsByFrameworkIdError = new SvelteSet<string>();
+
+  // Client-side lazy loading for frameworks not pre-seeded in initialSnippets
+  watch([() => frameworkIdsSelected.entries()], () => {
+    for (const frameworkId of frameworkIdsSelectedArr) {
+      if (!snippetsByFrameworkId.has(frameworkId)) {
+        const importSnippets = snippetsImporterByFrameworkId[frameworkId];
+        if (!importSnippets) {
+          // Defensive: ids are normalized before reaching here, but guard against
+          // a missing importer key rather than throwing on undefined().
+          snippetsByFrameworkIdError.add(frameworkId);
+          continue;
+        }
+        snippetsByFrameworkIdError.delete(frameworkId);
+        snippetsByFrameworkIdLoading.add(frameworkId);
+
+        importSnippets()
+          .then(({ default: frameworkSnippets }: { default: FrameworkSnippet[] }) => {
+            snippetsByFrameworkId.set(frameworkId, frameworkSnippets);
+          })
+          .catch(() => {
+            snippetsByFrameworkIdError.add(frameworkId);
+          })
+          .finally(() => {
+            snippetsByFrameworkIdLoading.delete(frameworkId);
+          });
+      }
+    }
+
+    if (frameworkIdsSelected.size === 0 && browser) {
+      void goto("/", { replaceState: true, keepFocus: true, noScroll: true });
+    }
+  });
+
+  let showBonusFrameworks = $state(false);
+
+  const bonusFrameworks = $derived(
+    FRAMEWORKS_BONUS.filter(({ id }) => !frameworkIdsSelected.has(id)),
+  );
+
+  const frameworksNotSelected = $derived(
+    frameworkVersions.filter(({ id }) => id && !frameworkIdsSelected.has(id)),
+  );
+
+  const headerFrameworks = $derived(
+    [
+      ...frameworksSelected.filter((f) => f),
+      ...frameworksNotSelected.filter((f) => f && !bonusFrameworks.find((bf) => bf.id === f.id)),
+      ...(showBonusFrameworks ? bonusFrameworks : []),
+    ].filter((f): f is NonNullable<typeof f> => !!f),
+  );
+</script>
+
+<div class="flex border-b border-gray-700">
+  <Aside />
+  <div class="pb-8 w-10 grow">
+    <div
+      class="flex px-6 lg:px-20 py-2 sticky top-0 z-20 w-full backdrop-blur bg-gray-900/80 border-b border-gray-700 whitespace-nowrap overflow-x-auto"
+      data-framework-id-selected-list={frameworkIdsSelectedArr.join(",")}
+      data-testid="framework-selection-bar"
+      role="group"
+      aria-label="Select frameworks to compare"
+    >
+      {#each headerFrameworks as framework (framework.id)}
+        {#if framework}
+          <button
+            title={frameworkIdsSelected.has(framework.id)
+              ? `Hide ${framework.title}`
+              : `Display ${framework.title}`}
+            class={[
+              "text-sm shrink-0 rounded border px-3 py-1 bg-gray-900 hover:bg-gray-800 transition-all mr-2",
+              frameworkIdsSelected.has(framework.id)
+                ? "border-blue-900"
+                : "opacity-70 border-opacity-50 border-gray-700",
+            ]}
+            data-testid={`framework-button-${framework.id}`}
+            aria-pressed={frameworkIdsSelected.has(framework.id)}
+            onclick={() => {
+              toggleFrameworkId(framework.id);
+            }}
+          >
+            <FrameworkLabel id={framework.id} size={16} />
+          </button>
+        {/if}
+      {/each}
+      {#if bonusFrameworks.length > 0 && !showBonusFrameworks}
+        <button
+          title="show more frameworks"
+          class="opacity-70 text-sm shrink-0 rounded border border-gray-700 px-3 py-1 border-opacity-50 bg-gray-900 hover:bg-gray-800 transition-all mr-2 flex items-center justify-center"
+          data-testid="show-more-frameworks-button"
+          onclick={() => {
+            showBonusFrameworks = !showBonusFrameworks;
+          }}
+          aria-label="show more frameworks"
+        >
+          <span class="iconify ph--dots-three size-4" aria-hidden="true"></span>
+        </button>
+      {/if}
+    </div>
+
+    <main class="relative pt-6">
+      <div>
+        {#if frameworkIdsSelected.size === 0}
+          <section
+            class="space-y-4"
+            data-testid="empty-state"
+            aria-labelledby="empty-state-heading"
+          >
+            <div class="flex justify-center">
+              <span class="iconify ph--arrow-up size-6 animate-bounce" aria-hidden="true"></span>
+            </div>
+            <div class="flex justify-center">
+              <h1 id="empty-state-heading" class="sr-only">Select Frameworks to Compare</h1>
+              <p
+                class="text-lg opacity-80 flex items-center text-center space-x-3"
+                data-testid="empty-state-message"
+              >
+                <img src="/popper.svg" alt="Component Party logo" class="size-6" />
+                <span> Please select a framework to view framework's snippets </span>
+                <img src="/popper.svg" alt="Component Party logo" class="size-6" />
+              </p>
+            </div>
+          </section>
+        {:else}
+          <div class="space-y-20">
+            {#each sections as section (section.sectionId)}
+              <div class="px-6 md:px-14 lg:px-20 max-w-full">
+                <h2
+                  id={section.sectionId}
+                  class="header-anchor text-2xl font-bold"
+                  data-testid={`section-${section.sectionId}`}
+                >
+                  {section.title}
+                  <a href={"#" + section.sectionId} aria-hidden="true" tabindex="-1"> # </a>
+                </h2>
+
+                <div class="space-y-8 mt-2">
+                  {#each snippets.filter((s) => s.sectionId === section.sectionId) as snippet (snippet.snippetId)}
+                    {@const snippetPathId = section.sectionId + "." + snippet.snippetId}
+                    <div
+                      class="snippet-cv"
+                      style={`contain-intrinsic-size: auto ${snippetIntrinsicHeight(snippet.snippetId)}px`}
+                      id={snippetPathId}
+                      data-snippet-id={snippetPathId}
+                      data-testid={`snippet-${snippetPathId}`}
+                    >
+                      <h3
+                        class="header-anchor sticky py-2 top-[2.94rem] z-10 bg-[var(--bg-color)] font-semibold text-xl"
+                        data-testid={`snippet-title-${snippetPathId}`}
+                      >
+                        {snippet.title}
+                        <a href={"#" + snippetPathId} aria-hidden="true" tabindex="-1"> # </a>
+                      </h3>
+                      <div class="grid grid-cols-1 xl:grid-cols-2 gap-y-4 xl:gap-y-8 gap-x-10 mt-2">
+                        {#each frameworkIdsSelectedArr as frameworkId (frameworkId)}
+                          {@const framework = matchFrameworkId(frameworkId)}
+                          {@const frameworkSnippet = snippetsByFrameworkId
+                            .get(frameworkId)
+                            ?.find((s: FrameworkSnippet) => s.snippetId === snippet.snippetId)}
+                          {@const frameworkSnippetIsLoading =
+                            snippetsByFrameworkIdLoading.has(frameworkId)}
+                          {@const frameworkSnippetIsError =
+                            snippetsByFrameworkIdError.has(frameworkId)}
+
+                          {#if framework}
+                            <div
+                              data-testid={`framework-snippet-${frameworkId}-${snippet.snippetId}`}
+                            >
+                              <div class="flex justify-between items-center space-x-3">
+                                <h4
+                                  class="m-0"
+                                  data-testid={`framework-title-${frameworkId}-${snippet.snippetId}`}
+                                >
+                                  <FrameworkLabel id={framework.id} />
+                                </h4>
+                                {#if frameworkSnippet}
+                                  <div class="flex items-center space-x-3">
+                                    {#if frameworkSnippet.playgroundURL}
+                                      <a
+                                        href={frameworkSnippet.playgroundURL}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        class="opacity-50 hover:opacity-100 bg-gray-800 hover:bg-gray-700 py-1 px-2 rounded transition-all flex items-center gap-x-2"
+                                        title={`Open playground for ${framework.title}`}
+                                        aria-label={`Open playground for ${framework.title}`}
+                                        data-testid={`playground-button-${frameworkId}-${snippet.snippetId}`}
+                                      >
+                                        <span class="iconify ph--play size-4" aria-hidden="true"
+                                        ></span>
+                                      </a>
+                                    {/if}
+                                  </div>
+                                {/if}
+                              </div>
+                              <div class="mt-2">
+                                {#if frameworkSnippet}
+                                  {#if frameworkSnippet.files.length > 0}
+                                    <CodeEditor
+                                      files={frameworkSnippet.files}
+                                      snippetEditHref={frameworkSnippet.snippetEditHref}
+                                      data-testid={`code-editor-${frameworkId}-${snippet.snippetId}`}
+                                    />
+                                  {:else}
+                                    <div
+                                      class="bg-gray-800 text-white rounded-md mx-auto"
+                                      data-testid={`missing-snippet-${frameworkId}-${snippet.snippetId}`}
+                                    >
+                                      <div class="text-center py-8 px-4 sm:px-6">
+                                        <div>
+                                          <span
+                                            class="block text-2xl tracking-tight font-bold"
+                                            data-testid="missing-snippet-title"
+                                          >
+                                            Missing snippet
+                                          </span>
+                                          <span
+                                            class="block text-lg mt-1 font-semibold space-x-1"
+                                            data-testid="missing-snippet-message"
+                                          >
+                                            <span> Help us to improve Component Party </span>
+                                            <img
+                                              src="/popper.svg"
+                                              alt="logo"
+                                              class="size-5 m-0 inline-block"
+                                            />
+                                          </span>
+                                        </div>
+                                        <div class="mt-6 flex justify-center">
+                                          <div class="inline-flex rounded-md shadow">
+                                            <a
+                                              class="inline-flex space-x-2 items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-[#161b22] hover:bg-[#161b22]/80 no-underline"
+                                              href={frameworkSnippet.snippetEditHref}
+                                              data-testid={`contribute-link-${frameworkId}-${snippet.snippetId}`}
+                                            >
+                                              <span>Contribute on Github</span>
+                                              <span
+                                                class="iconify simple-icons--github size-5"
+                                                aria-hidden="true"
+                                              ></span>
+                                            </a>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  {/if}
+                                {:else if frameworkSnippetIsLoading}
+                                  <div
+                                    role="status"
+                                    data-testid={`loading-snippet-${frameworkId}-${snippet.snippetId}`}
+                                  >
+                                    <div class="w-75px h-23px bg-[#0d1117] py-3 px-4 rounded-t">
+                                      <div
+                                        class="h-2.5 rounded-full bg-gray-700 w-10 animate-pulse"
+                                      ></div>
+                                    </div>
+                                    <div class="w-full h-40 bg-[#0d1117] px-4 py-7">
+                                      <div class="max-w-sm animate-pulse">
+                                        <div class="h-3.5 rounded-full bg-gray-700 w-48 mb-4"></div>
+                                        <div
+                                          class="h-3.5 rounded-full bg-gray-700 max-w-[360px] mb-2.5"
+                                        ></div>
+                                        <div class="h-3.5 rounded-full bg-gray-700 mb-4"></div>
+                                        <div
+                                          class="h-3.5 rounded-full bg-gray-700 max-w-[330px] mb-2.5"
+                                        ></div>
+                                        <span class="sr-only" data-testid="loading-text"
+                                          >Loading...</span
+                                        >
+                                      </div>
+                                    </div>
+                                  </div>
+                                {:else if frameworkSnippetIsError}
+                                  <p
+                                    class="text-orange-500"
+                                    data-testid={`error-snippet-${frameworkId}-${snippet.snippetId}`}
+                                  >
+                                    Error loading snippets. Please reload the page.
+                                  </p>
+                                {/if}
+                              </div>
+                            </div>
+                          {/if}
+                        {/each}
+                      </div>
+                    </div>
+                  {/each}
+                </div>
+              </div>
+            {/each}
+          </div>
+        {/if}
+      </div>
+    </main>
+  </div>
+</div>
+
+<style>
+  .header-anchor > a {
+    float: left;
+    margin-left: -0.87em;
+    padding-right: 0.23em;
+    font-weight: 500;
+    transition:
+      color 0.25s,
+      opacity 0.25s;
+    opacity: 0;
+    text-decoration: none;
+  }
+
+  .header-anchor:hover > a {
+    opacity: 1;
+  }
+
+  /* M6: skip layout/paint for off-screen snippets (big DOMs with many
+     frameworks). `auto` remembers the real size once measured. The intrinsic
+     size estimate is set inline per snippet (computed from line counts) so each
+     off-screen block reserves an accurate height. The sticky title lives inside
+     and keeps working. */
+  .snippet-cv {
+    content-visibility: auto;
+  }
+</style>

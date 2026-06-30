@@ -1,4 +1,4 @@
-import { Page, expect } from "@playwright/test";
+import { type Page, expect } from "@playwright/test";
 
 export class TestHelpers {
   constructor(private page: Page) {}
@@ -31,19 +31,38 @@ export class TestHelpers {
   async selectFramework(frameworkId: string) {
     const button = this.page.getByTestId(`framework-button-${frameworkId}`);
     await expect(button).toBeVisible();
-    await button.click();
+    // Use dispatchEvent to fire the click without blocking on SvelteKit's goto() call.
+    // After the click, wait for Svelte to update the DOM attribute before proceeding.
+    await button.dispatchEvent("click");
+    await this.page.waitForFunction(
+      (id) => {
+        const el = document.querySelector("[data-framework-id-selected-list]");
+        return el?.getAttribute("data-framework-id-selected-list")?.includes(id) ?? false;
+      },
+      frameworkId,
+      { timeout: 5_000 },
+    );
   }
 
   async deselectFramework(frameworkId: string) {
     const button = this.page.getByTestId(`framework-button-${frameworkId}`);
     await expect(button).toBeVisible();
-    await button.click();
+    await button.dispatchEvent("click");
+    await this.page.waitForFunction(
+      (id) => {
+        const el = document.querySelector("[data-framework-id-selected-list]");
+        const selected = el?.getAttribute("data-framework-id-selected-list") ?? "";
+        return !selected.split(",").filter(Boolean).includes(id);
+      },
+      frameworkId,
+      { timeout: 5_000 },
+    );
   }
 
   async toggleFramework(frameworkId: string) {
     const button = this.page.getByTestId(`framework-button-${frameworkId}`);
     await expect(button).toBeVisible();
-    await button.click();
+    await button.dispatchEvent("click");
   }
 
   async selectFrameworks(frameworkIds: string[]) {
@@ -75,8 +94,9 @@ export class TestHelpers {
     return this.page.getByTestId(/snippet-/);
   }
 
-  async mockFrameworkLoadingFailure() {
-    await this.page.route("**/framework/*.js", (route) => {
+  async mockFrameworkLoadingFailure(frameworkId: string) {
+    // Built snippet chunks are emitted as /assets/<frameworkId>-<hash>.js.
+    await this.page.route(`**/${frameworkId}-*.js`, (route) => {
       route.abort("failed");
     });
   }

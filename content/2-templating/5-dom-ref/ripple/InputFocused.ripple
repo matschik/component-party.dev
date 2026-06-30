@@ -1,7 +1,0 @@
-export component InputFocused() {
-  function autofocus(element) {
-    element.focus();
-  }
-
-  <input {ref autofocus} />
-}

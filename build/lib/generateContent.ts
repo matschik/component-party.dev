@@ -1,17 +1,11 @@
 import fs from "node:fs/promises";
 import { packageDirectory } from "package-directory";
 import path from "node:path";
-import { frameworks } from "../../frameworks.ts";
+import { frameworkVersions } from "../../frameworks.ts";
 import playgroundUrlByFramework from "./playgroundUrlByFramework.ts";
 import prettier from "prettier";
-import {
-  highlightAngularComponent,
-  mustUseAngularHighlighter,
-} from "./angularHighlighter.ts";
-import {
-  codeToHighlightCodeHtml,
-  markdownToHighlightedHtml,
-} from "./highlighter.ts";
+import { mustUseAngularHighlighter } from "./angularHighlighter.ts";
+import { codeToHighlightCodeHtml, markdownToHighlightedHtml } from "./highlighter.ts";
 import kebabCase from "just-kebab-case";
 
 interface File {
@@ -19,6 +13,7 @@ interface File {
   ext: string;
   content?: string;
   contentHtml: string;
+  lineCount: number;
 }
 
 interface FrameworkFile {
@@ -113,9 +108,7 @@ async function shouldRegenerateFiles(
   return false;
 }
 
-export default async function generateContent(
-  options: { noCache?: boolean } = {},
-): Promise<void> {
+export default async function generateContent(options: { noCache?: boolean } = {}): Promise<void> {
   const rootDir = await packageDirectory();
   if (!rootDir) {
     throw new Error("Could not find package directory");
@@ -173,10 +166,17 @@ export default async function generateContent(
       });
 
       const frameworksDirPath = path.join(snippetsDirPath, snippetDirName);
-      const frameworkIds = frameworks.map(({ id }) => id);
+      const frameworkIds = frameworkVersions.map(({ id }) => id);
 
       await Promise.all(
         frameworkIds.map(async (frameworkId: string) => {
+          // Initialize unconditionally so the early-return path below can push
+          // regardless of which snippet is processed first (otherwise the build
+          // only works by chance of processing order).
+          if (!byFrameworkId[frameworkId]) {
+            byFrameworkId[frameworkId] = [];
+          }
+
           const frameworkSnippet: FrameworkSnippet = {
             frameworkId,
             snippetId,
@@ -203,6 +203,9 @@ export default async function generateContent(
               ext,
               content,
               contentHtml: "",
+              // Lines never wrap in the rendered snippet (overflow-auto / white-space: pre),
+              // so the source line count fully determines the editor body height.
+              lineCount: content.replace(/\n+$/, "").split("\n").length,
             };
 
             if (ext === "md") {
@@ -210,7 +213,7 @@ export default async function generateContent(
               frameworkSnippet.markdownFiles.push(file);
             } else {
               file.contentHtml = mustUseAngularHighlighter(content)
-                ? await highlightAngularComponent(content, ext)
+                ? await codeToHighlightCodeHtml(content, "angular-ts")
                 : await codeToHighlightCodeHtml(content, ext);
 
               frameworkSnippet.files.push(file);
@@ -218,9 +221,7 @@ export default async function generateContent(
           }
 
           if (frameworkSnippet.files.length > 0) {
-            const frameworkConfig = frameworks.find(
-              (f) => f.id === frameworkId,
-            );
+            const frameworkConfig = frameworkVersions.find((f) => f.id === frameworkId);
             if (frameworkConfig) {
               frameworkSnippet.files = frameworkConfig.filesSorter(
                 frameworkSnippet.files as unknown as FrameworkFile[],
@@ -241,11 +242,8 @@ export default async function generateContent(
               fileName: file.fileName,
               ext: file.ext,
               contentHtml: file.contentHtml,
+              lineCount: file.lineCount,
             }));
-          }
-
-          if (!byFrameworkId[frameworkId]) {
-            byFrameworkId[frameworkId] = [];
           }
 
           byFrameworkId[frameworkId].push(frameworkSnippet);
@@ -302,10 +300,7 @@ export default async function generateContent(
 
   await Promise.all(
     Object.keys(byFrameworkId).map((frameworkId) => {
-      const frameworkFilePath = path.join(
-        frameworkDirPath,
-        `${frameworkId}.js`,
-      );
+      const frameworkFilePath = path.join(frameworkDirPath, `${frameworkId}.js`);
       return writeJsFile(
         frameworkFilePath,
         `
@@ -322,10 +317,7 @@ export default async function generateContent(
     ${commentDisclaimer}
     export default {
         ${Object.keys(byFrameworkId)
-          .map(
-            (frameworkId) =>
-              `${frameworkId}: () => import("./${frameworkId}.js")`,
-          )
+          .map((frameworkId) => `${frameworkId}: () => import("./${frameworkId}.js")`)
           .join(",\n")}
         
     };
@@ -343,9 +335,6 @@ export default async function generateContent(
     export default snippetsImporterByFrameworkId;
   `,
   );
-
-  // Generate _redirects file for Cloudflare Pages
-  await generateRedirectsFile(rootDir);
 }
 
 function dirNameToTitle(dirName: string): string {
@@ -378,7 +367,7 @@ async function generatePlaygroundURL(
     return;
   }
 
-  const frameworkConfig = frameworks.find((f) => f.id === frameworkId);
+  const frameworkConfig = frameworkVersions.find((f) => f.id === frameworkId);
   if (!frameworkConfig) {
     return;
   }
@@ -397,39 +386,4 @@ async function generatePlaygroundURL(
   const playgroundURL = await frameworkIdPlayground(contentByFilename, title);
 
   return playgroundURL;
-}
-
-async function generateRedirectsFile(rootDir: string): Promise<void> {
-  // Generate all possible framework combinations
-  const frameworkIds = frameworks.map((f) => f.id);
-  const redirects: string[] = [];
-
-  // Generate redirects for all framework pairs (both directions)
-  for (let i = 0; i < frameworkIds.length; i++) {
-    for (let j = 0; j < frameworkIds.length; j++) {
-      if (i !== j) {
-        const framework1 = frameworkIds[i];
-        const framework2 = frameworkIds[j];
-        const redirectPath = `/compare/${framework1}-vs-${framework2}`;
-        const targetUrl = `/?f=${framework1}-${framework2}`;
-        redirects.push(`${redirectPath} ${targetUrl} 301`);
-      }
-    }
-  }
-
-  // Note: Removed problematic dynamic redirects that were causing infinite loops
-  // The /?f=:frameworks rule was too broad and redirected legitimate framework URLs
-  // Specific compare patterns are handled by the individual framework comparison redirects above
-
-  const redirectsContent = `# File generated from "node scripts/generateContent.js", DO NOT EDIT/COMMIT
-${redirects.join("\n")}
-`;
-
-  const publicDir = path.join(rootDir, "public");
-  const redirectsFilePath = path.join(publicDir, "_redirects");
-
-  await fs.writeFile(redirectsFilePath, redirectsContent);
-  console.info(
-    `Generated _redirects file for Cloudflare Pages with ${redirects.length} redirects`,
-  );
 }
