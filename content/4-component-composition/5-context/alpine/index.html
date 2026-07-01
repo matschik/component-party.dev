@@ -1,0 +1,29 @@
+<!-- x-text must be called on or inside an x-data block. -->
+<!-- The two could have a shared parent with x-data, or each could individually have x-data like so: -->
+
+<h1 x-data>
+  Welcome back, <span x-text="$store.user.username">unknown user</span>
+</h1>
+
+<div x-data>
+  <h2>My Profile</h2>
+  <p>Username: <span x-text="$store.user.username"></span></p>
+  <p>Email: <span x-text="$store.user.email"></span></p>
+  <button @click="$store.user.updateUsername('Jane')">
+    Update username to Jane
+  </button>
+</div>
+
+<script>
+  document.addEventListener("alpine:init", () => {
+    Alpine.store("user", {
+      id: 1,
+      username: "unicorn42",
+      email: "unicorn42@example.com",
+
+      updateUsername(newUsername) {
+        this.username = newUsername;
+      },
+    });
+  });
+</script>
