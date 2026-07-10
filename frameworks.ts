@@ -282,6 +282,19 @@ export const frameworkVersions: FrameworkVersion[] = [
     mainPackageName: "ripple",
     releaseDate: "2023-01-01",
   },
+  {
+    id: "nojs",
+    title: "No.JS",
+    img: "framework/nojs.svg",
+    playgroundURL: "https://no-js.dev/",
+    documentationURL: "https://no-js.dev/",
+    filesSorter(files) {
+      return sortAllFilenames(files, ["index.html"]);
+    },
+    repositoryLink: "https://github.com/no-js-dev/nojs",
+    mainPackageName: "@no-js-dev/nojs",
+    releaseDate: "2024-01-01",
+  },
 ];
 
 export const frameworks: Framework[] = [
@@ -298,6 +311,7 @@ export const frameworks: Framework[] = [
   { id: "qwik", name: "Qwik", latestStable: "qwik" },
   { id: "marko", name: "Marko", latestStable: "marko" },
   { id: "ripple", name: "Ripple", latestStable: "ripple" },
+  { id: "nojs", name: "No.JS", latestStable: "nojs" },
 ];
 
 /**

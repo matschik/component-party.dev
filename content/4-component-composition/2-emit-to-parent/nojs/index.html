@@ -1,0 +1,10 @@
+<template id="answer-button">
+  <button trigger="yes">YES</button>
+  <button trigger="no">NO</button>
+</template>
+
+<div state="{ isHappy: true }" on:yes="isHappy = true" on:no="isHappy = false">
+  <p>Are you happy?</p>
+  <div use="answer-button"></div>
+  <p style="font-size: 50px" bind="isHappy ? '😀' : '😥'"></p>
+</div>

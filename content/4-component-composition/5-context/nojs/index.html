@@ -1,0 +1,15 @@
+<div
+  store="user"
+  value="{ id: 1, username: 'unicorn42', email: 'unicorn42@example.com' }"
+></div>
+
+<h1>Welcome back, <span bind="$store.user.username"></span></h1>
+
+<div>
+  <h2>My Profile</h2>
+  <p>Username: <span bind="$store.user.username"></span></p>
+  <p>Email: <span bind="$store.user.email"></span></p>
+  <button on:click="$store.user.username = 'Jane'">
+    Update username to Jane
+  </button>
+</div>
