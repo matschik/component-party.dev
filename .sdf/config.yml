@@ -1,0 +1,4 @@
+governance_mode: required
+automatic_execution_permitted: false
+front_door_release: "v0.1.0rc17"
+front_door_package: "sdf-cli 0.1.0rc17"

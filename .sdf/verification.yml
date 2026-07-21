@@ -1,0 +1,14 @@
+version: 1
+commands:
+  - name: build
+    command: pnpm run build
+    required: true
+  - name: check-ci
+    command: pnpm check:ci
+    required: true
+  - name: unit-tests
+    command: pnpm run test:unit
+    required: true
+  - name: e2e-tests
+    command: pnpm run test:e2e
+    required: true
