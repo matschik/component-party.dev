@@ -51,7 +51,7 @@
     "micache": "^2.4.1",
     "package-directory": "^8.2.0",
     "prettier": "^3.9.9",
-    "satori": "^0.26.0",
+    "satori": "^0.33.5",
     "shiki": "^4.4.3",
     "svelte": "5.57.1",
     "svelte-check": "^4.7.6",
