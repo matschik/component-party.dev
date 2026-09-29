@@ -13,8 +13,8 @@
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:ci": "vp fmt && svelte-kit sync && svelte-check --tsconfig ./tsconfig.json && vp lint",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-    "build:content": "vp node scripts/generateContent.ts --no-cache",
-    "build:progress": "vp node scripts/generateReadMeProgress.ts",
+    "build:content": "node scripts/generateContent.ts --no-cache",
+    "build:progress": "node scripts/generateReadMeProgress.ts",
     "prepare": "vp config --no-agent && svelte-kit sync || true",
     "test:unit": "vp test",
     "test:e2e": "playwright test",
@@ -59,9 +59,9 @@
     "tailwindcss": "^4.3.3",
     "tslib": "^2.8.1",
     "typescript": "^6.0.3",
-    "vite": "npm:@voidzero-dev/vite-plus-core@0.2.1",
-    "vite-plus": "0.2.1",
-    "vitest": "4.1.9"
+    "vite": "npm:@voidzero-dev/vite-plus-core@1.0.0",
+    "vite-plus": "1.0.0",
+    "vitest": "5.0.1"
   },
   "engines": {
     "node": ">=22.18.0"
@@ -73,8 +73,8 @@
       "@resvg/resvg-js"
     ],
     "overrides": {
-      "vite": "npm:@voidzero-dev/vite-plus-core@0.2.1",
-      "vitest": "4.1.9",
+      "vite": "npm:@voidzero-dev/vite-plus-core@1.0.0",
+      "vitest": "5.0.1",
       "yaml": ">=2.8.3"
     }
   }

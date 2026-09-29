@@ -31,7 +31,7 @@ export default defineConfig({
   },
   staged: {
     "*.{js,ts,svelte,html,md,css}": "vp fmt --write",
-    "content/**/*": "sh -c 'vp node scripts/generateReadMeProgress.ts && git add README.md'",
+    "content/**/*": "sh -c 'node scripts/generateReadMeProgress.ts && git add README.md'",
   },
   test: {
     include: [
