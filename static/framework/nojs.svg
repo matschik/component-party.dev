@@ -1,0 +1,17 @@
+<svg version="1.2"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" width="150" height="150">
+    <defs>
+        <mask id="bolt-border">
+            <rect x="0" y="0" width="150" height="150" fill="white"/>
+            <path d="m119.5 16h-54l-26 51h18l-27 67 73-67h-18z" fill="black" stroke="black" stroke-width="15" stroke-linejoin="miter"/>
+        </mask>
+    </defs>
+    <style>.a{fill:none;stroke:#fff;stroke-width:14}.b{fill:#3b82f6}</style>
+
+    <g mask="url(#bolt-border)">
+        <path fill-rule="evenodd" class="a" d="m45 40l-35 35 35 35"/>
+        <path fill-rule="evenodd" class="a" d="m105 40l35 35-35 35"/>
+    </g>
+
+    <path class="b" d="m119.5 16h-54l-26 51h18l-27 67 73-67h-18z"/>
+</svg>
