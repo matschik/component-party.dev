@@ -1,14 +1,43 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:recommended"],
+  "extends": ["config:recommended", ":semanticCommits", ":semanticCommitTypeAll(chore)"],
+  "schedule": ["* 0-5 1 * *"],
+  "minimumReleaseAge": "3 days",
+  "rangeStrategy": "bump",
+  "postUpdateOptions": ["pnpmDedupe"],
+  "prConcurrentLimit": 5,
+  "labels": ["dependencies"],
   "packageRules": [
     {
-      "matchPackagePatterns": ["*"],
-      "groupName": "all dependencies",
-      "groupSlug": "all-deps",
-      "rangeStrategy": "bump"
+      "description": "Group every non-major npm update in one PR and merge it when CI passes.",
+      "matchManagers": ["npm"],
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "groupName": "non-major dependencies",
+      "groupSlug": "non-major",
+      "automerge": true
+    },
+    {
+      "description": "Group GitHub Actions updates in one PR.",
+      "matchManagers": ["github-actions"],
+      "groupName": "GitHub Actions",
+      "groupSlug": "github-actions"
+    },
+    {
+      "description": "vite-plus pins an exact vitest and aliases vite; upgrade them together, never automerge.",
+      "matchPackageNames": ["vite-plus", "@voidzero-dev/vite-plus-core", "vitest"],
+      "groupName": "vite-plus toolchain",
+      "groupSlug": "vite-plus",
+      "automerge": false
+    },
+    {
+      "description": "The peer ranges of @sveltejs/kit and svelte-check stop at TypeScript 6.",
+      "matchPackageNames": ["typescript"],
+      "allowedVersions": "<7"
+    },
+    {
+      "description": "Keep Node types close to the Node 22.18 engines floor used in CI.",
+      "matchPackageNames": ["@types/node"],
+      "allowedVersions": "<25"
     }
-  ],
-  "prConcurrentLimit": 1,
-  "labels": ["dependencies"]
+  ]
 }
