@@ -20,8 +20,7 @@
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:install": "playwright install chromium",
-    "test": "vp test --run && playwright test",
-    "check:package-manager": "node scripts/check-package-manager.js"
+    "test": "vp test --run && playwright test"
   },
   "dependencies": {
     "@iconify-json/heroicons": "^1.2.3",
