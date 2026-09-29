@@ -31,6 +31,9 @@ jobs:
       - name: Check dependencies
         run: pnpm check:deps
 
+      - name: Check toolchain entry points
+        run: pnpm check:toolchain
+
       - name: Install Playwright Chromium
         run: pnpm run test:e2e:install
 

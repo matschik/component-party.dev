@@ -12,6 +12,7 @@
     "lint": "vp lint",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:ci": "vp fmt && svelte-kit sync && svelte-check --tsconfig ./tsconfig.json && vp lint",
+    "check:toolchain": "bash scripts/check-toolchain.sh",
     "check:deps": "knip --include dependencies,unlisted,unresolved,binaries",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "build:content": "node scripts/generateContent.ts --no-cache",
