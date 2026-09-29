@@ -49,7 +49,7 @@ How do we solve this ? Developers love having framework overview by examples. It
   - [x] Fetch data
 
 </details>
-    
+
 <details>
   <summary>
     <img width="18" height="18" src="static/framework/react.svg" />
@@ -87,7 +87,7 @@ How do we solve this ? Developers love having framework overview by examples. It
   - [x] Fetch data
 
 </details>
-    
+
 <details>
   <summary>
     <img width="18" height="18" src="static/framework/vue.svg" />
@@ -125,7 +125,7 @@ How do we solve this ? Developers love having framework overview by examples. It
   - [x] Fetch data
 
 </details>
-    
+
 <details>
   <summary>
     <img width="18" height="18" src="static/framework/angular-renaissance.svg" />
@@ -163,7 +163,7 @@ How do we solve this ? Developers love having framework overview by examples. It
   - [x] Fetch data
 
 </details>
-    
+
 <details>
   <summary>
     <img width="18" height="18" src="static/framework/angular.svg" />
@@ -201,7 +201,7 @@ How do we solve this ? Developers love having framework overview by examples. It
   - [x] Fetch data
 
 </details>
-    
+
 <details>
   <summary>
     <img width="18" height="18" src="static/framework/lit.svg" />
@@ -239,7 +239,7 @@ How do we solve this ? Developers love having framework overview by examples. It
   - [x] Fetch data
 
 </details>
-    
+
 <details>
   <summary>
     <img width="18" height="18" src="static/framework/ember.svg" />
@@ -277,7 +277,7 @@ How do we solve this ? Developers love having framework overview by examples. It
   - [x] Fetch data
 
 </details>
-    
+
 <details>
   <summary>
     <img width="18" height="18" src="static/framework/ember.svg" />
@@ -315,7 +315,7 @@ How do we solve this ? Developers love having framework overview by examples. It
   - [x] Fetch data
 
 </details>
-    
+
 <details>
   <summary>
     <img width="18" height="18" src="static/framework/solid.svg" />
@@ -353,7 +353,7 @@ How do we solve this ? Developers love having framework overview by examples. It
   - [x] Fetch data
 
 </details>
-    
+
 <details>
   <summary>
     <img width="18" height="18" src="static/framework/svelte.svg" />
@@ -391,7 +391,7 @@ How do we solve this ? Developers love having framework overview by examples. It
   - [x] Fetch data
 
 </details>
-    
+
 <details>
   <summary>
     <img width="18" height="18" src="static/framework/vue.svg" />
@@ -429,7 +429,7 @@ How do we solve this ? Developers love having framework overview by examples. It
   - [x] Fetch data
 
 </details>
-    
+
 <details>
   <summary>
     <img width="18" height="18" src="static/framework/alpine.svg" />
@@ -467,7 +467,7 @@ How do we solve this ? Developers love having framework overview by examples. It
   - [x] Fetch data
 
 </details>
-    
+
 <details>
   <summary>
     <img width="18" height="18" src="static/framework/mithril.svg" />
@@ -505,7 +505,7 @@ How do we solve this ? Developers love having framework overview by examples. It
   - [x] Fetch data
 
 </details>
-    
+
 <details>
   <summary>
     <img width="18" height="18" src="static/framework/aurelia.svg" />
@@ -543,7 +543,7 @@ How do we solve this ? Developers love having framework overview by examples. It
   - [x] Fetch data
 
 </details>
-    
+
 <details>
   <summary>
     <img width="18" height="18" src="static/framework/qwik.svg" />
@@ -581,7 +581,7 @@ How do we solve this ? Developers love having framework overview by examples. It
   - [x] Fetch data
 
 </details>
-    
+
 <details>
   <summary>
     <img width="18" height="18" src="static/framework/marko.svg" />
@@ -619,7 +619,7 @@ How do we solve this ? Developers love having framework overview by examples. It
   - [x] Fetch data
 
 </details>
-    
+
 <details>
   <summary>
     <img width="18" height="18" src="static/framework/aurelia.svg" />
@@ -657,7 +657,7 @@ How do we solve this ? Developers love having framework overview by examples. It
   - [x] Fetch data
 
 </details>
-    
+
 <details>
   <summary>
     <img width="18" height="18" src="static/framework/ripple.svg" />
