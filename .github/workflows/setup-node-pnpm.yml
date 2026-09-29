@@ -12,7 +12,7 @@ on:
         description: "pnpm version to use"
         required: false
         type: string
-        default: "10.14.0"
+        default: "12.8.1"
 
 jobs:
   setup:
