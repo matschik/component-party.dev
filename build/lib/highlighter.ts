@@ -4,7 +4,7 @@ import {
   type BundledLanguage,
   type BundledTheme,
 } from "shiki";
-import MarkdownIt from "markdown-it";
+import markdownit, { type MarkdownIt } from "markdown-it";
 import { fromHighlighter } from "@shikijs/markdown-it/core";
 import { componentPartyShikiTheme } from "./componentPartyShikiTheme.ts";
 
@@ -45,7 +45,7 @@ async function getHighlighter(): Promise<HighlighterGeneric<BundledLanguage, Bun
 
 async function getMarkdownIt(): Promise<MarkdownIt> {
   if (!md) {
-    md = MarkdownIt({
+    md = markdownit({
       html: true,
     });
 
