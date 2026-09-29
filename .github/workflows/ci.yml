@@ -28,6 +28,9 @@ jobs:
       - name: Run unit tests
         run: pnpm run test:unit
 
+      - name: Check dependencies
+        run: pnpm check:deps
+
       - name: Install Playwright Chromium
         run: pnpm run test:e2e:install
 
