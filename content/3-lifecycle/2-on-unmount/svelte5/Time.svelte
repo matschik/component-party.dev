@@ -1,7 +1,9 @@
 <script>
+  import { onDestroy } from "svelte";
+
   let time = $state(new Date().toLocaleTimeString());
 
-  $effect(() => {
+  onDestroy(() => {
     const timer = setInterval(() => {
       time = new Date().toLocaleTimeString();
     }, 1000);
