@@ -267,7 +267,8 @@ export const trailingSlash = "always";
 ```
 
 ```svelte
-<!-- src/routes/+page.svelte --><h1>Component Party — SvelteKit bootstrap OK</h1>
+<!-- src/routes/+page.svelte -->
+<h1>Component Party — SvelteKit bootstrap OK</h1>
 ```
 
 - [ ] **Step 11: Sync SvelteKit and verify type check**

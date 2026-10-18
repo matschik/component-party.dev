@@ -3,7 +3,6 @@ import adapter from "@sveltejs/adapter-static";
 import { sveltekit } from "@sveltejs/kit/vite";
 import tailwindcss from "@tailwindcss/vite";
 import pluginGenerateFrameworkContent from "./build/generateContentVitePlugin";
-import generateRedirectsVitePlugin from "./build/generateRedirectsVitePlugin";
 
 const BUILD_DATE = process.env.BUILD_DATE || new Date().toISOString().slice(0, 10);
 
@@ -17,7 +16,6 @@ export default defineConfig({
       adapter: adapter({ pages: "dist", assets: "dist", fallback: "404.html" }),
       prerender: { handleHttpError: "fail", handleMissingId: "fail" },
     }),
-    generateRedirectsVitePlugin(),
   ],
   define: { __BUILD_DATE__: JSON.stringify(BUILD_DATE) },
   build: {
