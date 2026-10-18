@@ -48,3 +48,6 @@ test-results
 
 # Superpowers
 .superpowers
+# Wrangler file that Void writes at deploy time
+.void-wrangler.jsonc
+.wrangler/
