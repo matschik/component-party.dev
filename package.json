@@ -27,7 +27,8 @@
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:install": "playwright install chromium",
-    "test": "vp test --run && playwright test"
+    "test": "vp test --run && playwright test",
+    "deploy:prod": "void deploy --platform cloudflare"
   },
   "dependencies": {
     "just-throttle": "^4.2.0",
