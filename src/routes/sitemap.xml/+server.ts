@@ -1,5 +1,5 @@
-import { BASE_URL, createComparisonPath } from "$lib/frameworkUrl";
-import { canonicalPairs } from "$lib/comparisonPairs";
+import { BASE_URL, createComparisonPath } from "#lib/frameworkUrl.ts";
+import { canonicalPairs } from "#lib/comparisonPairs.ts";
 
 export const prerender = true;
 

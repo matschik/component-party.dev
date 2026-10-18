@@ -1,19 +1,19 @@
 <script lang="ts">
   import { SvelteMap, SvelteSet } from "svelte/reactivity";
   import { untrack, onMount } from "svelte";
-  import { frameworkVersions, matchFrameworkId } from "@frameworks";
-  import FrameworkLabel from "$lib/components/FrameworkLabel.svelte";
-  import { sections, snippets } from "$generated/tree.js";
-  import snippetsImporterByFrameworkId from "$generated/framework/index.js";
-  import CodeEditor from "$lib/components/CodeEditor.svelte";
-  import createLocaleStorage from "$lib/createLocaleStorage";
+  import { frameworkVersions, matchFrameworkId } from "#frameworks";
+  import FrameworkLabel from "#lib/components/FrameworkLabel.svelte";
+  import { sections, snippets } from "#generated/tree.js";
+  import snippetsImporterByFrameworkId from "#generated/framework/index.js";
+  import CodeEditor from "#lib/components/CodeEditor.svelte";
+  import createLocaleStorage from "#lib/createLocaleStorage.ts";
   import { watch } from "runed";
-  import Aside from "$lib/components/Aside.svelte";
-  import { FRAMEWORK_IDS_FROM_URL_KEY, FRAMEWORK_SEPARATOR } from "$lib/constants";
+  import Aside from "#lib/components/Aside.svelte";
+  import { FRAMEWORK_IDS_FROM_URL_KEY, FRAMEWORK_SEPARATOR } from "#lib/constants.ts";
   import { page } from "$app/state";
   import { goto } from "$app/navigation";
-  import { browser } from "$app/environment";
-  import type { FrameworkSnippet } from "$lib/types";
+  import { browser } from "$app/env";
+  import type { FrameworkSnippet } from "#lib/types.ts";
 
   interface Props {
     initialFrameworkIds: string[];
@@ -126,7 +126,7 @@
 
   async function navigateWithFrameworkSelection() {
     if (!browser) return;
-    const url = new URL(page.url);
+    const url = new URL(page.url.href);
     if (frameworkIdsSelected.size === 0) {
       url.searchParams.delete(FRAMEWORK_IDS_FROM_URL_KEY);
     } else {
@@ -139,7 +139,7 @@
     // that occurs in the static adapter when goto() causes a hard page reload and
     // the watch re-fires with the same frameworkIdsFromSearchParam value.
     if (url.toString() === page.url.toString()) return;
-    await goto(url, { replaceState: true, keepFocus: true, noScroll: true });
+    await goto(url, { replace: true, reset: false });
   }
 
   // On client mount: reconcile URL/localStorage with initial selection — runs once, client-only
@@ -209,7 +209,7 @@
     }
 
     if (frameworkIdsSelected.size === 0 && browser) {
-      void goto("/", { replaceState: true, keepFocus: true, noScroll: true });
+      void goto("/", { replace: true, reset: false });
     }
   });
 

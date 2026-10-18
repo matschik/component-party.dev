@@ -1,8 +1,8 @@
 import { error } from "@sveltejs/kit";
-import { matchFrameworkId } from "@frameworks";
-import { parseComparison, createComparisonPath } from "$lib/frameworkUrl";
-import { canonicalPairs } from "$lib/comparisonPairs";
-import snippetsImporterByFrameworkId from "$generated/framework/index.js";
+import { matchFrameworkId } from "#frameworks";
+import { parseComparison, createComparisonPath } from "#lib/frameworkUrl.ts";
+import { canonicalPairs } from "#lib/comparisonPairs.ts";
+import snippetsImporterByFrameworkId from "#generated/framework/index.js";
 import type { EntryGenerator, PageLoad } from "./$types";
 
 export const prerender = true;

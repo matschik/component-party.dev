@@ -22,6 +22,9 @@ jobs:
       - name: Build application
         run: pnpm run build
 
+      - name: Check static output
+        run: test -s dist/_redirects && test -s dist/sitemap.xml && test -s dist/404.html
+
       - name: Run checks
         run: pnpm check:ci
 

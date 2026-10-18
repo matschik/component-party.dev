@@ -1,4 +1,4 @@
-import snippetsImporterByFrameworkId from "$generated/framework/index.js";
+import snippetsImporterByFrameworkId from "#generated/framework/index.js";
 import type { PageLoad } from "./$types";
 
 export const prerender = true;

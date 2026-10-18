@@ -1,4 +1,4 @@
-import { frameworkVersions } from "@frameworks";
+import { frameworkVersions } from "#frameworks";
 
 export function canonicalPairs(): [string, string][] {
   const ids = frameworkVersions.map((f) => f.id);

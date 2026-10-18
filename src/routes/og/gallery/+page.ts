@@ -1,7 +1,7 @@
-import { dev } from "$app/environment";
+import { dev } from "$app/env";
 import { error } from "@sveltejs/kit";
-import { matchFrameworkId } from "@frameworks";
-import { canonicalPairs } from "$lib/comparisonPairs";
+import { matchFrameworkId } from "#frameworks";
+import { canonicalPairs } from "#lib/comparisonPairs.ts";
 import type { PageLoad } from "./$types";
 
 // Dev-only preview page: never shipped to the static build, and 404s if somehow
