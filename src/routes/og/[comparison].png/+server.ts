@@ -1,7 +1,7 @@
 import { error } from "@sveltejs/kit";
-import { matchFrameworkId } from "@frameworks";
-import { parseComparison } from "$lib/frameworkUrl";
-import { canonicalPairs } from "$lib/comparisonPairs";
+import { matchFrameworkId } from "#frameworks";
+import { parseComparison } from "#lib/frameworkUrl.ts";
+import { canonicalPairs } from "#lib/comparisonPairs.ts";
 import { renderComparisonOgPng } from "../../../../build/og/renderOgImage";
 import type { EntryGenerator, RequestHandler } from "./$types";
 

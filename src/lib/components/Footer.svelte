@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { footerNavigation } from "$lib/footerNavigation";
+  import { footerNavigation } from "#lib/footerNavigation.ts";
 </script>
 
 <footer class="bg-gray-900">

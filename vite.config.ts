@@ -1,4 +1,5 @@
 import { defineConfig } from "vite-plus";
+import adapter from "@sveltejs/adapter-static";
 import { sveltekit } from "@sveltejs/kit/vite";
 import tailwindcss from "@tailwindcss/vite";
 import pluginGenerateFrameworkContent from "./build/generateContentVitePlugin";
@@ -10,7 +11,12 @@ export default defineConfig({
   plugins: [
     pluginGenerateFrameworkContent(),
     tailwindcss(),
-    sveltekit(),
+    sveltekit({
+      // fallback: "404.html" — Cloudflare Pages serves /404.html for unmatched
+      // URLs; SvelteKit hydrates it and renders src/routes/+error.svelte (the 404).
+      adapter: adapter({ pages: "dist", assets: "dist", fallback: "404.html" }),
+      prerender: { handleHttpError: "fail", handleMissingId: "fail" },
+    }),
     generateRedirectsVitePlugin(),
   ],
   define: { __BUILD_DATE__: JSON.stringify(BUILD_DATE) },

@@ -1,8 +1,8 @@
 <script lang="ts">
-  import Comparison from "$lib/components/Comparison.svelte";
-  import { BASE_URL, createComparisonPath } from "$lib/frameworkUrl";
-  import { techArticleJsonLd } from "$lib/seo";
-  import { BUILD_DATE } from "$lib/buildDate";
+  import Comparison from "#lib/components/Comparison.svelte";
+  import { BASE_URL, createComparisonPath } from "#lib/frameworkUrl.ts";
+  import { techArticleJsonLd } from "#lib/seo.ts";
+  import { BUILD_DATE } from "#lib/buildDate.ts";
   let { data } = $props();
   const canonical = $derived(
     `${BASE_URL}${createComparisonPath(data.frameworkIds[0], data.frameworkIds[1])}`,

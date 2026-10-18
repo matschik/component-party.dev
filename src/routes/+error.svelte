@@ -1,7 +1,7 @@
 <script lang="ts">
   import { page } from "$app/state";
-  import { createComparisonPath } from "$lib/frameworkUrl";
-  import { matchFrameworkId } from "@frameworks";
+  import { createComparisonPath } from "#lib/frameworkUrl.ts";
+  import { matchFrameworkId } from "#frameworks";
 
   const POPULAR: [string, string][] = [
     ["react", "vue3"],

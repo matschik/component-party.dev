@@ -1,4 +1,4 @@
-import { matchFrameworkId } from "@frameworks";
+import { matchFrameworkId } from "#frameworks";
 import { FRAMEWORK_SEPARATOR, FRAMEWORK_IDS_FROM_URL_KEY } from "./constants";
 
 export const BASE_URL = "https://component-party.dev";

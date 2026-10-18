@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { matchFrameworkId } from "@frameworks";
-  import type { FrameworkVersion } from "@frameworks";
+  import { matchFrameworkId } from "#frameworks";
+  import type { FrameworkVersion } from "#frameworks";
 
   interface Props {
     id: string;

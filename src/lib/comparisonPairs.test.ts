@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { frameworkVersions } from "@frameworks";
+import { frameworkVersions } from "#frameworks";
 import { canonicalPairs } from "./comparisonPairs";
 
 describe("canonicalPairs", () => {

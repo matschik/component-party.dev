@@ -1,8 +1,8 @@
 <script lang="ts">
-  import Comparison from "$lib/components/Comparison.svelte";
-  import { BASE_URL } from "$lib/frameworkUrl";
-  import { webApplicationJsonLd } from "$lib/seo";
-  import { BUILD_DATE } from "$lib/buildDate";
+  import Comparison from "#lib/components/Comparison.svelte";
+  import { BASE_URL } from "#lib/frameworkUrl.ts";
+  import { webApplicationJsonLd } from "#lib/seo.ts";
+  import { BUILD_DATE } from "#lib/buildDate.ts";
   let { data } = $props();
   const webAppLd = webApplicationJsonLd(BUILD_DATE);
 </script>

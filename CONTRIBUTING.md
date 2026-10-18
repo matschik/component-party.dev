@@ -19,4 +19,4 @@ pnpm i
 pnpm run dev
 ```
 
-This project requires Node.js to be `v22.18.0` or higher, because we use new JavaScript features in our code, such as optional chaining.
+This project requires Node.js to be `v26` or higher.

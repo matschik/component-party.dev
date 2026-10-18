@@ -30,14 +30,14 @@
       "automerge": false
     },
     {
-      "description": "The peer ranges of @sveltejs/kit and svelte-check stop at TypeScript 6.",
+      "description": "The peer ranges of @sveltejs/kit 3 and svelte-check stop at TypeScript 6.",
       "matchPackageNames": ["typescript"],
       "allowedVersions": "<7"
     },
     {
-      "description": "Keep Node types close to the Node 22.18 engines floor used in CI.",
+      "description": "Keep Node types on the Node 26 line used in CI, .node-version and engines.",
       "matchPackageNames": ["@types/node"],
-      "allowedVersions": "<25"
+      "allowedVersions": "<27"
     }
   ]
 }
