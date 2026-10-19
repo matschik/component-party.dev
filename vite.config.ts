@@ -11,8 +11,9 @@ export default defineConfig({
     pluginGenerateFrameworkContent(),
     tailwindcss(),
     sveltekit({
-      // fallback: "404.html" — Cloudflare Pages serves /404.html for unmatched
-      // URLs; SvelteKit hydrates it and renders src/routes/+error.svelte (the 404).
+      // fallback: "404.html" — the Workers assets service serves /404.html for
+      // unmatched URLs (void.config.ts); SvelteKit hydrates it and renders
+      // src/routes/+error.svelte (the 404).
       adapter: adapter({ pages: "dist", assets: "dist", fallback: "404.html" }),
       prerender: { handleHttpError: "fail", handleMissingId: "fail" },
     }),

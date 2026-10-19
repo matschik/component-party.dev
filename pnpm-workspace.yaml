@@ -1,4 +1,6 @@
 allowBuilds:
+  esbuild: true
+  workerd: true
   "@resvg/resvg-js": true
 
 overrides:
