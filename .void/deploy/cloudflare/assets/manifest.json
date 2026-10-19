@@ -1,0 +1,74 @@
+{
+  "name": "Component Party - JavaScript Framework Comparison",
+  "short_name": "Component Party",
+  "description": "Compare JavaScript frameworks side-by-side: React, Vue, Angular, Svelte, Solid.js, and more. See syntax differences, features, and code examples for web development frameworks.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#111827",
+  "theme_color": "#111827",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en-US",
+  "categories": ["developer", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/banner2.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Component Party Framework Comparison Interface"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "React vs Vue",
+      "short_name": "React vs Vue",
+      "description": "Compare React and Vue.js frameworks",
+      "url": "/?f=react,vue3",
+      "icons": [
+        {
+          "src": "/favicon.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "React vs Angular",
+      "short_name": "React vs Angular",
+      "description": "Compare React and Angular frameworks",
+      "url": "/?f=react,angularRenaissance",
+      "icons": [
+        {
+          "src": "/favicon.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Vue vs Svelte",
+      "short_name": "Vue vs Svelte",
+      "description": "Compare Vue.js and Svelte frameworks",
+      "url": "/?f=vue3,svelte5",
+      "icons": [
+        {
+          "src": "/favicon.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+# I, for one, welcome our new robotic overlords
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://component-party.dev/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1

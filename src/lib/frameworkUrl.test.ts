@@ -3,6 +3,7 @@ import {
   createComparisonPath,
   parseComparison,
   createSearchParamUrl,
+  canonicalComparisonPath,
   BASE_URL,
 } from "./frameworkUrl";
 
@@ -22,6 +23,13 @@ describe("frameworkUrl", () => {
   it("returns null when not exactly two parts", () => {
     expect(parseComparison("react")).toBeNull();
     expect(parseComparison("a-vs-b-vs-c")).toBeNull();
+  });
+  it("orders a pair the way the prerendered pages do", () => {
+    expect(canonicalComparisonPath("react", "svelte5")).toBe("/compare/svelte5-vs-react/");
+    expect(canonicalComparisonPath("svelte5", "react")).toBe("/compare/svelte5-vs-react/");
+  });
+  it("resolves family aliases before ordering", () => {
+    expect(canonicalComparisonPath("vue", "react")).toBe("/compare/react-vs-vue3/");
   });
   it("builds a search param URL from framework ids", () => {
     expect(createSearchParamUrl(["react", "vue3"])).toBe("/?f=react-vue3");
