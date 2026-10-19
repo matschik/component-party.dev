@@ -1,0 +1,5 @@
+# Workers Static Assets applies this file to the files it serves (void.config.ts).
+# Every file under /_app/immutable/ has a content hash in its name, so a year of
+# caching costs nothing: a new build names new files.
+/_app/immutable/*
+  Cache-Control: public, max-age=31536000, immutable
