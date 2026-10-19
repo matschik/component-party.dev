@@ -1,6 +1,6 @@
 <script lang="ts">
   import { SvelteMap, SvelteSet } from "svelte/reactivity";
-  import { untrack, onMount } from "svelte";
+  import { untrack, onMount, type Snippet } from "svelte";
   import { frameworkVersions, matchFrameworkId } from "#frameworks";
   import FrameworkLabel from "#lib/components/FrameworkLabel.svelte";
   import { sections, snippets } from "#generated/tree.js";
@@ -19,9 +19,13 @@
     initialFrameworkIds: string[];
     initialSnippets: Record<string, FrameworkSnippet[]>;
     persist?: boolean;
+    /** Rendered above the sections, e.g. the heading of a comparison page. */
+    intro?: Snippet;
+    /** Rendered below the sections, e.g. links to related comparisons. */
+    outro?: Snippet;
   }
 
-  let { initialFrameworkIds, initialSnippets, persist = true }: Props = $props();
+  let { initialFrameworkIds, initialSnippets, persist = true, intro, outro }: Props = $props();
 
   const MAX_FRAMEWORK_NOBONUS = 9;
   const FRAMEWORKS_BONUS = frameworkVersions.slice(MAX_FRAMEWORK_NOBONUS);
@@ -280,6 +284,7 @@
     </div>
 
     <main class="relative pt-6">
+      {@render intro?.()}
       <div>
         {#if frameworkIdsSelected.size === 0}
           <section
@@ -471,6 +476,7 @@
           </div>
         {/if}
       </div>
+      {@render outro?.()}
     </main>
   </div>
 </div>
