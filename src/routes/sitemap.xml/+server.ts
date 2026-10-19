@@ -1,5 +1,6 @@
 import { BASE_URL, createComparisonPath } from "#lib/frameworkUrl.ts";
 import { canonicalPairs } from "#lib/comparisonPairs.ts";
+import { BUILD_DATE } from "#lib/buildDate.ts";
 
 export const prerender = true;
 
@@ -10,7 +11,7 @@ export function GET() {
   ];
   const body = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls.map((loc) => `  <url><loc>${loc}</loc><changefreq>weekly</changefreq></url>`).join("\n")}
+${urls.map((loc) => `  <url><loc>${loc}</loc><lastmod>${BUILD_DATE}</lastmod><changefreq>weekly</changefreq></url>`).join("\n")}
 </urlset>`;
   return new Response(body, { headers: { "Content-Type": "application/xml" } });
 }
