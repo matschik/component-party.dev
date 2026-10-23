@@ -1,0 +1,13 @@
+<template id="user-profile" var="props">
+  <p bind="'My name is ' + props.name + '!'"></p>
+  <p bind="'My age is ' + props.age + '!'"></p>
+  <p
+    bind="'My favourite colors are ' + props.favouriteColors.join(', ') + '!'"
+  ></p>
+  <p bind="'I am ' + (props.isAvailable ? 'available' : 'not available')"></p>
+</template>
+
+<div
+  use="user-profile"
+  var-props="{ name: 'John', age: 20, favouriteColors: ['green', 'blue', 'red'], isAvailable: true }"
+></div>

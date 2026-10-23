@@ -90,6 +90,32 @@ const playgroundUrlByFramework: Record<string, PlaygroundFunction> = {
 
     return `${BASE_URL}${parameters}`;
   },
+  nojs: (contentByFilename: Record<string, string>) => {
+    const BASE_URL = "https://codesandbox.io/api/v1/sandboxes/define?embed=1&parameters=";
+    const BASE_PREFIX = `<!DOCTYPE html>\n<html lang="en">\n  <head>\n    <meta charset="UTF-8" />\n    <meta name="viewport" content="width=device-width, initial-scale=1.0" />\n    <title>No.JS Playground</title>\n    <script src="https://cdn.no-js.dev/"></script>\n  </head>\n  <body>\n\n`;
+    const BASE_SUFFIX = `\n  </body>\n</html>`;
+
+    const indexHtml = contentByFilename["index.html"] || "";
+    // The render-app example already ships a full HTML document, so avoid double-wrapping it.
+    const isFullDocument = /<html[\s>]/i.test(indexHtml);
+
+    const parameters = getParameters({
+      files: {
+        ...contentByFilename,
+        "package.json": {
+          content: { dependencies: {} },
+        },
+        "index.html": {
+          content: isFullDocument ? indexHtml : BASE_PREFIX + indexHtml + BASE_SUFFIX,
+        },
+        "sandbox.config.json": {
+          content: '{\n  "template": "static"\n}',
+        },
+      },
+    });
+
+    return `${BASE_URL}${parameters}`;
+  },
   solid: (contentByFilename: Record<string, string>) => {
     const BASE_URL = "https://playground.solidjs.com/#";
     const SOURCE_PREFIX = `import { render } from "solid-js/web";\n`;

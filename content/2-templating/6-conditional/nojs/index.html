@@ -1,0 +1,14 @@
+<div state="{ TRAFFIC_LIGHTS: ['red', 'orange', 'green'], lightIndex: 0 }">
+  <span computed="light" expr="TRAFFIC_LIGHTS[lightIndex]"></span>
+
+  <button on:click="lightIndex = (lightIndex + 1) % TRAFFIC_LIGHTS.length">
+    Next light
+  </button>
+  <p>Light is: <span bind="light"></span></p>
+  <p>
+    You must
+    <span if="light === 'red'">STOP</span>
+    <span else-if="light === 'orange'">SLOW DOWN</span>
+    <span else>GO</span>
+  </p>
+</div>

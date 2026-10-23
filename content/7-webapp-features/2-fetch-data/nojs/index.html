@@ -1,0 +1,16 @@
+<div
+  get="https://randomuser.me/api/?results=3"
+  as="response"
+  loading="loadingTpl"
+  error="errorTpl"
+>
+  <ul>
+    <li each="user in response.results" key="user.login.uuid">
+      <img bind-src="user.picture.thumbnail" alt="user" />
+      <p bind="user.name.first + ' ' + user.name.last"></p>
+    </li>
+  </ul>
+</div>
+
+<template id="loadingTpl"><p>Fetching users...</p></template>
+<template id="errorTpl"><p>An error occurred while fetching users</p></template>

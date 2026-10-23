@@ -1,0 +1,7 @@
+<p
+  state="{ time: new Date().toLocaleTimeString(), timer: null }"
+  on:mounted="timer = setInterval(() => time = new Date().toLocaleTimeString(), 1000)"
+  on:unmounted="clearInterval(timer)"
+>
+  Current time: <span bind="time"></span>
+</p>
