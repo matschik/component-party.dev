@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { frameworkVersions } from "#frameworks";
-import { canonicalPairs } from "./comparisonPairs";
+import { canonicalPairs, retiredComparisonSlugs } from "./comparisonPairs";
 
 describe("canonicalPairs", () => {
   const pairs = canonicalPairs();
@@ -15,5 +15,14 @@ describe("canonicalPairs", () => {
   it("has no duplicates", () => {
     const keys = new Set(pairs.map(([a, b]) => `${a}|${b}`));
     expect(keys.size).toBe(pairs.length);
+  });
+});
+
+describe("retiredComparisonSlugs", () => {
+  it("keeps the slugs published while Solid 1 was `solid`", () => {
+    const slugs = retiredComparisonSlugs();
+    expect(slugs).toContain("react-vs-solid");
+    expect(slugs).toContain("angularRenaissance-vs-solid");
+    expect(slugs.every((slug) => slug.split("-vs-").includes("solid"))).toBe(true);
   });
 });
