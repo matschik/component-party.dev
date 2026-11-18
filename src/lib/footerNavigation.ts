@@ -40,6 +40,7 @@ export const footerNavigation: { title: string; links: FooterLink[] }[] = [
     title: "Comparing Legacy version & Current Version",
     links: [
       pair("svelte4", "svelte5"),
+      pair("solid1", "solid2"),
       pair("vue2", "vue3"),
       pair("angularClassic", "angularRenaissance"),
       pair("aurelia1", "aurelia2"),

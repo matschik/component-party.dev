@@ -20,7 +20,9 @@ describe("buildRedirectLines", () => {
     ["/compare/aurelia1-vs-aurelia2", "/compare/aurelia2-vs-aurelia1/"], // inverse, no slash
     ["/compare/emberOctane-vs-emberPolaris", "/compare/emberPolaris-vs-emberOctane/"], // inverse, no slash
     ["/compare/react-vs-vue", "/compare/react-vs-vue3/"], // family alias, no slash
-    ["/compare/angular-vs-solid", "/compare/angularRenaissance-vs-solid/"], // family alias, no slash
+    ["/compare/angular-vs-solid", "/compare/angularRenaissance-vs-solid2/"], // family alias, no slash
+    ["/compare/angularRenaissance-vs-solid/", "/compare/angularRenaissance-vs-solid2/"], // old Solid canonical page
+    ["/compare/react-vs-solid", "/compare/react-vs-solid2/"], // old Solid canonical page, no slash
     ["/compare/react-vs-svelte", "/compare/svelte5-vs-react/"], // clean form of react-vs-svelte;
   ])("301s the legacy URL %s → %s", (source, target) => {
     expect(targetBySource.get(source)).toBe(target);

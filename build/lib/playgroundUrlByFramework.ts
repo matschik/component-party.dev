@@ -90,36 +90,10 @@ const playgroundUrlByFramework: Record<string, PlaygroundFunction> = {
 
     return `${BASE_URL}${parameters}`;
   },
-  solid: (contentByFilename: Record<string, string>) => {
-    const BASE_URL = "https://playground.solidjs.com/#";
-    const SOURCE_PREFIX = `import { render } from "solid-js/web";\n`;
-    const getSourceSuffix = (componentName: string) =>
-      `\n\nrender(() => <${componentName} />, document.getElementById("app"));\n`;
-
-    function generateURLFromData(data: unknown): string {
-      return `${BASE_URL}${LZString.compressToEncodedURIComponent(JSON.stringify(data))}`;
-    }
-
-    const data = Object.keys(contentByFilename).map((filename) => {
-      const content = contentByFilename[filename];
-      const parsedFilename = nodePath.parse(filename);
-      const ext = parsedFilename.ext.split(".").pop();
-
-      return {
-        name: parsedFilename.name,
-        type: ext === "jsx" ? "tsx" : ext,
-        source: content.replaceAll(".jsx", ".tsx"),
-      };
-    });
-
-    const mainFile = data[0];
-    const mainComponentName = mainFile.name;
-    mainFile.name = "main";
-    mainFile.type = "tsx";
-    mainFile.source = SOURCE_PREFIX + mainFile.source + getSourceSuffix(mainComponentName);
-
-    return generateURLFromData(data);
-  },
+  solid1: (contentByFilename: Record<string, string>) =>
+    generateSolidPlaygroundURL(contentByFilename, { version: "1.9.19", webModule: "solid-js/web" }),
+  solid2: (contentByFilename: Record<string, string>) =>
+    generateSolidPlaygroundURL(contentByFilename, { version: "2.0.0", webModule: "@solidjs/web" }),
   marko: async (contentByFilename: Record<string, string>) => {
     let firstFile = true;
     const data = Object.entries(contentByFilename).map(([path, content]) => ({
@@ -325,4 +299,49 @@ function generateRipplePlaygroundURL(
 
   url.hash = hashParams.toString();
   return url.toString();
+}
+
+/**
+ * The Solid playground runs its bundled Solid release (2.0 since November
+ * 2026) unless an `import_map.json` tab pins `solid-js` on esm.sh, so each
+ * snippet pins the major version it was written for.
+ */
+function generateSolidPlaygroundURL(
+  contentByFilename: Record<string, string>,
+  { version, webModule }: { version: string; webModule: string },
+): string {
+  const BASE_URL = "https://playground.solidjs.com/#";
+
+  const data = Object.keys(contentByFilename).map((filename) => {
+    const content = contentByFilename[filename];
+    const parsedFilename = nodePath.parse(filename);
+    const ext = parsedFilename.ext.split(".").pop();
+
+    return {
+      name: parsedFilename.name,
+      type: ext === "jsx" ? "tsx" : ext,
+      source: content.replaceAll(".jsx", ".tsx"),
+    };
+  });
+
+  const mainFile = data[0];
+  const mainComponentName = mainFile.name;
+  mainFile.name = "main";
+  mainFile.type = "tsx";
+  mainFile.source =
+    `import { render } from "${webModule}";\n` +
+    mainFile.source +
+    `\n\nrender(() => <${mainComponentName} />, document.getElementById("app"));\n`;
+
+  data.push({
+    name: "import_map.json",
+    type: "json",
+    source: JSON.stringify(
+      { imports: { "solid-js": `https://esm.sh/solid-js@${version}` }, pinned: [] },
+      null,
+      2,
+    ),
+  });
+
+  return `${BASE_URL}${LZString.compressToEncodedURIComponent(JSON.stringify(data))}`;
 }

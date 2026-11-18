@@ -153,16 +153,29 @@ export const frameworkVersions: FrameworkVersion[] = [
     releaseDate: "2019-12-01",
   },
   {
-    id: "solid",
-    title: "Solid.js",
+    id: "solid2",
+    title: "Solid 2",
     img: "framework/solid.svg",
     playgroundURL: "https://playground.solidjs.com/",
-    documentationURL: "https://www.solidjs.com/",
+    documentationURL: "https://docs.solidjs.com/",
     filesSorter(files) {
       return sortAllFilenames(files, ["index.html", "main.jsx", "App.jsx"]);
     },
     repositoryLink: "https://github.com/solidjs/solid",
     mainPackageName: "solid-js",
+    releaseDate: "2026-11-16",
+  },
+  {
+    id: "solid1",
+    title: "Solid 1",
+    img: "framework/solid.svg",
+    playgroundURL: "https://playground.solidjs.com/",
+    documentationURL: "https://v1.solidjs.com/",
+    filesSorter(files) {
+      return sortAllFilenames(files, ["index.html", "main.jsx", "App.jsx"]);
+    },
+    repositoryLink: "https://github.com/solidjs/solid",
+    mainPackageName: "solid-js@^1",
     releaseDate: "2021-06-28",
   },
   {
@@ -291,7 +304,7 @@ export const frameworks: Framework[] = [
   { id: "angular", name: "Angular", latestStable: "angularRenaissance" },
   { id: "lit", name: "Lit", latestStable: "lit" },
   { id: "ember", name: "Ember", latestStable: "emberPolaris" },
-  { id: "solid", name: "Solid", latestStable: "solid" },
+  { id: "solid", name: "Solid", latestStable: "solid2" },
   { id: "alpine", name: "Alpine", latestStable: "alpine" },
   { id: "mithril", name: "Mithril", latestStable: "mithril" },
   { id: "aurelia", name: "Aurelia", latestStable: "aurelia2" },
