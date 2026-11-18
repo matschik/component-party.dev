@@ -34,22 +34,35 @@ comparison page stays as it is.
    "Upgrade from Solid 1 to Solid 2". The intro says how many examples change
    ("8 of 22 examples change") and links the official migration guide, from a
    new optional `migrationGuideURL` on the newer version. The meta description
-   follows.
+   follows, and so does the JSON-LD headline (`src/lib/seo.ts`). The count only
+   covers examples that exist in both versions; an example missing on one side
+   keeps today's "Missing snippet" cell and gets no label.
 3. **Changed or unchanged, per example.** Each example shows a "Changed" or
    "Unchanged" label next to its title. An unchanged example shows its code
    once, full width, with "Same code in Solid 1 and Solid 2", instead of 2
-   identical columns. The side menu marks unchanged examples in a dimmer
-   color.
+   identical columns. Its header keeps both version labels, each with its own
+   playground link (the runtimes differ) and edit link. The reserved height of
+   off-screen examples (`snippetIntrinsicHeight`) counts 1 cell for a collapsed
+   example. The side menu marks unchanged examples in a dimmer color.
 4. **Line changes.** In a changed example, removed lines get a red tint in the
    left column and added lines a green tint in the right column, from a line
-   diff of the 2 files (files paired by name, else by position). Colors meet
-   WCAG AA contrast on the code background. No animation, no hover effect.
+   diff of the 2 versions. Files pair by exact name first, then by base name,
+   so Ember's `name.hbs` + `name.js` pair with `name.gjs` (the old files are
+   joined in `filesSorter` order before the diff). A file left without a pair
+   is fully removed or fully added (Angular's `app.module.ts`, Vue's
+   `useFetchUsers.js`). `CodeEditor.svelte` gets the line numbers as an
+   optional prop, so the shared Shiki HTML stays untouched and no tint appears
+   elsewhere. Colors meet WCAG AA contrast on the code background. No
+   animation, no hover effect.
 5. **Footer.** The "Comparing Legacy version & Current Version" group lists
    all 6 upgrade pairs in old-to-new order, Ember included (Polaris is the
    current stable, so the "Upcoming" group goes away).
 
 The home page comparison (`/?f=…`) keeps the order the reader chose and gets
-none of this.
+none of this. On an upgrade page, labels, collapse and tints apply only while
+the selection is exactly the pair in old-to-new order; if the reader adds or
+swaps a framework in the bar, the page shows the plain comparison, and the
+route title stays.
 
 ## Out of scope
 
@@ -60,7 +73,8 @@ none of this.
 ## Global Constraints
 
 - The diff and the labels come from the build (`generateContent`), never from
-  the client, so prerendered HTML already carries them.
+  the client, so prerendered HTML already carries them. The content cache
+  regenerates when the diff module is missing or `frameworks.ts` changes.
 - The footer stays below the first screen at 390x844 and 1440x900.
 - Every old URL keeps answering: a 301 for pages, a 200 for OG images.
 
@@ -70,6 +84,8 @@ none of this.
 
 - Files: `frameworks.ts`, `src/lib/frameworkUrl.ts`, `src/lib/comparisonPairs.ts`,
   `build/redirects.ts`, OG route, their tests.
+- Before the change, snapshot the list of every `/compare/*` page and
+  `/og/*.png` the current build emits; the test checks each one still answers.
 - Produces: `isUpgradePair(a, b)` and the old-to-new canonical order; 301s and
   OG images for the previous URLs.
 - Proves: each of the 6 previous URLs 301s to the old-to-new page; no canonical
@@ -77,16 +93,20 @@ none of this.
 
 ### Task 2: Build-time diff of upgrade pairs
 
-- Files: `build/lib/generateContent.ts`, a new generated module, its test.
+- Files: `build/lib/generateContent.ts`, `build/generateContentVitePlugin.ts`
+  (cache inputs), a new generated module, its test.
 - Produces: for each upgrade pair and example, `changed` and the removed and
   added line numbers per file.
 - Proves: Solid 1 to Solid 2 reports 8 changed of 22; `update-state` marks the
-  `setName` and `onSettled` lines.
+  `setName` and `onSettled` lines; an Ember `.hbs` + `.js` pair diffs against
+  its `.gjs`; Angular `app.module.ts` comes out fully removed.
 
 ### Task 3: Upgrade page layout
 
-- Files: `src/routes/compare/[comparison]/+page.*`, `Comparison.svelte`, the
-  menu component, `src/lib/footerNavigation.ts`.
+- Files: `src/routes/compare/[comparison]/+page.*`, `Comparison.svelte`,
+  `CodeEditor.svelte`, the menu component, `src/lib/footerNavigation.ts`,
+  `src/lib/seo.ts`.
 - Consumes: Task 1 order, Task 2 diff, `migrationGuideURL`.
 - Proves: captures at 390x844 and 1440x900 of a changed and an unchanged
-  example on the Solid and Svelte pages, read back; footer position measured.
+  example on the Solid, Svelte and Ember pages, read back; footer position
+  measured; after a swap in the framework bar, no label or tint remains.
