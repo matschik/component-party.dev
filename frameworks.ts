@@ -297,6 +297,13 @@ export const frameworkVersions: FrameworkVersion[] = [
   },
 ];
 
+/**
+ * Version ids that were renamed, mapped to the version their old URLs now
+ * show. `solid` was Solid 1 until Solid 2 shipped; the `solid` family id now
+ * resolves to Solid 2.
+ */
+export const retiredVersionIds: Record<string, string> = { solid: "solid2" };
+
 export const frameworks: Framework[] = [
   { id: "svelte", name: "Svelte", latestStable: "svelte5" },
   { id: "react", name: "React", latestStable: "react" },
