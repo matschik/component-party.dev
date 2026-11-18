@@ -312,7 +312,13 @@ function generateSolidPlaygroundURL(
 ): string {
   const BASE_URL = "https://playground.solidjs.com/#";
 
-  const data = Object.keys(contentByFilename).map((filename) => {
+  // A full-app snippet ships its own index.html and main.jsx entry: the
+  // playground provides the page, and main.jsx already calls render().
+  const filenames = Object.keys(contentByFilename).filter((name) => !name.endsWith(".html"));
+  const entryFilename = filenames.find((name) => nodePath.parse(name).name === "main");
+  if (entryFilename) filenames.unshift(...filenames.splice(filenames.indexOf(entryFilename), 1));
+
+  const data = filenames.map((filename) => {
     const content = contentByFilename[filename];
     const parsedFilename = nodePath.parse(filename);
     const ext = parsedFilename.ext.split(".").pop();
@@ -325,13 +331,15 @@ function generateSolidPlaygroundURL(
   });
 
   const mainFile = data[0];
-  const mainComponentName = mainFile.name;
-  mainFile.name = "main";
   mainFile.type = "tsx";
-  mainFile.source =
-    `import { render } from "${webModule}";\n` +
-    mainFile.source +
-    `\n\nrender(() => <${mainComponentName} />, document.getElementById("app"));\n`;
+  if (!entryFilename) {
+    const mainComponentName = mainFile.name;
+    mainFile.name = "main";
+    mainFile.source =
+      `import { render } from "${webModule}";\n` +
+      mainFile.source +
+      `\n\nrender(() => <${mainComponentName} />, document.getElementById("app"));\n`;
+  }
 
   data.push({
     name: "import_map.json",
