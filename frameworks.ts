@@ -15,6 +15,8 @@ function sortAllFilenames(files: File[], filenamesSorted: string[]): File[] {
  */
 export interface FrameworkVersion {
   id: string;
+  /** Id of the `Framework` family this version belongs to, e.g. "solid". */
+  family: string;
   title: string;
   img: string;
   playgroundURL: string;
@@ -40,6 +42,7 @@ export interface Framework {
 export const frameworkVersions: FrameworkVersion[] = [
   {
     id: "svelte5",
+    family: "svelte",
     title: "Svelte 5",
     img: "framework/svelte.svg",
     playgroundURL: "https://svelte.dev/playground",
@@ -53,6 +56,7 @@ export const frameworkVersions: FrameworkVersion[] = [
   },
   {
     id: "react",
+    family: "react",
     title: "React",
     img: "framework/react.svg",
     playgroundURL: "https://codesandbox.io/s/mystifying-goldberg-6wx04b",
@@ -66,6 +70,7 @@ export const frameworkVersions: FrameworkVersion[] = [
   },
   {
     id: "vue3",
+    family: "vue",
     title: "Vue 3",
     img: "framework/vue.svg",
     playgroundURL: "https://play.vuejs.org/",
@@ -79,6 +84,7 @@ export const frameworkVersions: FrameworkVersion[] = [
   },
   {
     id: "angularRenaissance",
+    family: "angular",
     title: "Angular Renaissance",
     img: "framework/angular-renaissance.svg",
     playgroundURL: "https://codesandbox.io/s/angular",
@@ -97,6 +103,7 @@ export const frameworkVersions: FrameworkVersion[] = [
   },
   {
     id: "angularClassic",
+    family: "angular",
     title: "Angular",
     img: "framework/angular.svg",
     playgroundURL: "https://codesandbox.io/s/angular",
@@ -115,6 +122,7 @@ export const frameworkVersions: FrameworkVersion[] = [
   },
   {
     id: "lit",
+    family: "lit",
     title: "Lit",
     img: "framework/lit.svg",
     playgroundURL: "https://lit.dev/playground",
@@ -128,6 +136,7 @@ export const frameworkVersions: FrameworkVersion[] = [
   },
   {
     id: "emberPolaris",
+    family: "ember",
     title: "Ember Polaris",
     img: "framework/ember.svg",
     playgroundURL: "http://new.emberjs.com",
@@ -141,6 +150,7 @@ export const frameworkVersions: FrameworkVersion[] = [
   },
   {
     id: "emberOctane",
+    family: "ember",
     title: "Ember Octane",
     img: "framework/ember.svg",
     playgroundURL: "https://ember-twiddle.com",
@@ -154,6 +164,7 @@ export const frameworkVersions: FrameworkVersion[] = [
   },
   {
     id: "solid2",
+    family: "solid",
     title: "Solid 2",
     img: "framework/solid.svg",
     playgroundURL: "https://playground.solidjs.com/",
@@ -167,6 +178,7 @@ export const frameworkVersions: FrameworkVersion[] = [
   },
   {
     id: "solid1",
+    family: "solid",
     title: "Solid 1",
     img: "framework/solid.svg",
     playgroundURL: "https://playground.solidjs.com/",
@@ -180,6 +192,7 @@ export const frameworkVersions: FrameworkVersion[] = [
   },
   {
     id: "svelte4",
+    family: "svelte",
     title: "Svelte 4",
     img: "framework/svelte.svg",
     playgroundURL: "https://svelte.dev/repl",
@@ -193,6 +206,7 @@ export const frameworkVersions: FrameworkVersion[] = [
   },
   {
     id: "vue2",
+    family: "vue",
     title: "Vue 2",
     img: "framework/vue.svg",
     playgroundURL: "",
@@ -206,6 +220,7 @@ export const frameworkVersions: FrameworkVersion[] = [
   },
   {
     id: "alpine",
+    family: "alpine",
     title: "Alpine",
     img: "framework/alpine.svg",
     playgroundURL: "https://codesandbox.io/s/7br3q8",
@@ -219,6 +234,7 @@ export const frameworkVersions: FrameworkVersion[] = [
   },
   {
     id: "mithril",
+    family: "mithril",
     title: "Mithril",
     img: "framework/mithril.svg",
     playgroundURL: "https://codesandbox.io/s/q99qzov66",
@@ -232,6 +248,7 @@ export const frameworkVersions: FrameworkVersion[] = [
   },
   {
     id: "aurelia2",
+    family: "aurelia",
     title: "Aurelia 2",
     img: "framework/aurelia.svg",
     playgroundURL: "https://stackblitz.com/edit/au2-conventions?file=src%2Fmy-app.html",
@@ -245,6 +262,7 @@ export const frameworkVersions: FrameworkVersion[] = [
   },
   {
     id: "qwik",
+    family: "qwik",
     title: "Qwik",
     img: "framework/qwik.svg",
     playgroundURL: "https://qwik.builder.io/playground",
@@ -258,6 +276,7 @@ export const frameworkVersions: FrameworkVersion[] = [
   },
   {
     id: "marko",
+    family: "marko",
     title: "Marko",
     img: "framework/marko.svg",
     playgroundURL: "https://markojs.com/playground/",
@@ -271,6 +290,7 @@ export const frameworkVersions: FrameworkVersion[] = [
   },
   {
     id: "aurelia1",
+    family: "aurelia",
     title: "Aurelia 1",
     img: "framework/aurelia.svg",
     playgroundURL: "https://codesandbox.io/s/ppmy26opw7",
@@ -284,6 +304,7 @@ export const frameworkVersions: FrameworkVersion[] = [
   },
   {
     id: "ripple",
+    family: "ripple",
     title: "Ripple",
     img: "framework/ripple.svg",
     playgroundURL: "https://www.ripple-ts.com/playground",
@@ -296,13 +317,6 @@ export const frameworkVersions: FrameworkVersion[] = [
     releaseDate: "2023-01-01",
   },
 ];
-
-/**
- * Version ids that were renamed, mapped to the version their old URLs now
- * show. `solid` was Solid 1 until Solid 2 shipped; the `solid` family id now
- * resolves to Solid 2.
- */
-export const retiredVersionIds: Record<string, string> = { solid: "solid2" };
 
 export const frameworks: Framework[] = [
   { id: "svelte", name: "Svelte", latestStable: "svelte5" },
@@ -325,7 +339,8 @@ export const frameworks: Framework[] = [
  * of silently resolving to the wrong version:
  *  - version ids are unique,
  *  - framework (family) ids are unique,
- *  - each family's `latestStable` references an existing version.
+ *  - each family's `latestStable` references an existing version,
+ *  - each version names an existing family.
  */
 function assertValidFrameworksConfig(versions: FrameworkVersion[], families: Framework[]): void {
   const errors: string[] = [];
@@ -340,10 +355,16 @@ function assertValidFrameworksConfig(versions: FrameworkVersion[], families: Fra
   for (const family of families) {
     if (familyIds.has(family.id)) errors.push(`duplicate framework id "${family.id}"`);
     familyIds.add(family.id);
-    if (!versionIds.has(family.latestStable)) {
+    if (versions.find((v) => v.id === family.latestStable)?.family !== family.id) {
       errors.push(
-        `framework "${family.id}".latestStable points to unknown version "${family.latestStable}"`,
+        `framework "${family.id}".latestStable points to "${family.latestStable}", not one of its versions`,
       );
+    }
+  }
+
+  for (const version of versions) {
+    if (!familyIds.has(version.family)) {
+      errors.push(`version "${version.id}".family points to unknown framework "${version.family}"`);
     }
   }
 
@@ -376,6 +397,29 @@ export function matchFrameworkId(id: string): FrameworkVersion | undefined {
 /**
  * Get the latest stable version of a framework family, e.g. "svelte" -> Svelte 5.
  */
+/**
+ * Two versions of the same framework, e.g. Solid 1 and Solid 2. Their page
+ * reads as an upgrade: older release on the left.
+ */
+export function isUpgradePair(idA: string, idB: string): boolean {
+  const a = frameworkVersions.find((v) => v.id === idA);
+  const b = frameworkVersions.find((v) => v.id === idB);
+  return !!a && !!b && a.id !== b.id && a.family === b.family;
+}
+
+/**
+ * The order a pair is shown in: an upgrade pair goes from the older release to
+ * the newer one; any other pair follows `frameworkVersions`.
+ */
+export function orderPair(idA: string, idB: string): [string, string] {
+  if (isUpgradePair(idA, idB)) {
+    const releaseDate = (id: string) => frameworkVersions.find((v) => v.id === id)!.releaseDate;
+    return releaseDate(idA) <= releaseDate(idB) ? [idA, idB] : [idB, idA];
+  }
+  const index = (id: string) => frameworkVersions.findIndex((v) => v.id === id);
+  return index(idA) <= index(idB) ? [idA, idB] : [idB, idA];
+}
+
 export function getLatestStableVersion(frameworkId: string): FrameworkVersion | undefined {
   const family = frameworks.find((f) => f.id === frameworkId);
   if (!family) return undefined;

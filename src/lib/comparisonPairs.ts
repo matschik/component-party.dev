@@ -1,28 +1,24 @@
-import { frameworkVersions, retiredVersionIds } from "#frameworks";
+import { frameworkVersions, orderPair } from "#frameworks";
+import { legacyOgSlugs } from "./legacyOgSlugs.ts";
 
 export function canonicalPairs(): [string, string][] {
   const ids = frameworkVersions.map((f) => f.id);
   const pairs: [string, string][] = [];
   for (let i = 0; i < ids.length; i++) {
     for (let j = i + 1; j < ids.length; j++) {
-      pairs.push([ids[i], ids[j]]);
+      pairs.push(orderPair(ids[i], ids[j]));
     }
   }
   return pairs;
 }
 
 /**
- * Comparison slugs published under a version id that was later renamed, e.g.
- * `react-vs-solid` before Solid 1 became `solid1`. Shared links still point at
- * their images, so the OG route keeps rendering them.
+ * OG image slugs that were published once and are no longer canonical: the
+ * former `solid` id (Solid 1 before Solid 2) and the newer-first order of
+ * upgrade pairs. Shared links still point at these images, so the OG route
+ * keeps rendering them.
  */
 export function retiredComparisonSlugs(): string[] {
-  const slugs: string[] = [];
-  for (const [a, b] of canonicalPairs()) {
-    for (const [retiredId, currentId] of Object.entries(retiredVersionIds)) {
-      if (a === currentId) slugs.push(`${retiredId}-vs-${b}`);
-      if (b === currentId) slugs.push(`${a}-vs-${retiredId}`);
-    }
-  }
-  return slugs;
+  const canonical = new Set(canonicalPairs().map(([a, b]) => `${a}-vs-${b}`));
+  return legacyOgSlugs.filter((slug) => !canonical.has(slug));
 }
