@@ -402,6 +402,20 @@
                               {#each [olderId, newerId] as versionId (versionId)}
                                 {@const version = matchFrameworkId(versionId)}
                                 {@const versionSnippet = findSnippet(versionId, snippet.snippetId)}
+                                {#if version && versionSnippet}
+                                  <a
+                                    href={versionSnippet.snippetEditHref}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    class="opacity-50 hover:opacity-100 bg-gray-800 hover:bg-gray-700 py-1 px-2 rounded transition-all flex items-center"
+                                    title={`Edit the ${version.title} code on GitHub`}
+                                    aria-label={`Edit the ${version.title} code on GitHub`}
+                                    data-testid={`edit-button-${versionId}-${snippet.snippetId}`}
+                                  >
+                                    <span class="iconify ph--pencil size-4" aria-hidden="true"
+                                    ></span>
+                                  </a>
+                                {/if}
                                 {#if version && versionSnippet?.playgroundURL}
                                   <a
                                     href={versionSnippet.playgroundURL}

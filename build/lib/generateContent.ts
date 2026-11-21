@@ -70,6 +70,7 @@ async function shouldRegenerateFiles(
   const frameworkIndexPath = path.join(frameworkDirPath, "index.js");
   const frameworkIndexDtsPath = path.join(frameworkDirPath, "index.d.ts");
   const upgradeDiffsPath = path.join(generatedContentDirPath, "upgradeDiffs.js");
+  const upgradeDiffsDtsPath = path.join(generatedContentDirPath, "upgradeDiffs.d.ts");
 
   const generatedFilesExist = await Promise.all([
     pathExists(treeFilePath),
@@ -77,6 +78,7 @@ async function shouldRegenerateFiles(
     pathExists(frameworkIndexPath),
     pathExists(frameworkIndexDtsPath),
     pathExists(upgradeDiffsPath),
+    pathExists(upgradeDiffsDtsPath),
   ]);
 
   // If any generated file is missing, regenerate
@@ -84,9 +86,15 @@ async function shouldRegenerateFiles(
     return true;
   }
 
-  // Get the modification time of the content directory
-  const contentStats = await fs.stat(contentPath);
-  const contentModTime = contentStats.mtime;
+  // Newest of the inputs: the content directory, and the sources that decide
+  // the upgrade pairs and their diffs.
+  const rootDir = path.dirname(contentPath);
+  const inputStats = await Promise.all(
+    [contentPath, "frameworks.ts", "build/lib/upgradeDiff.ts", "build/lib/generateContent.ts"].map(
+      (input) => fs.stat(path.resolve(rootDir, input)),
+    ),
+  );
+  const contentModTime = new Date(Math.max(...inputStats.map((stats) => stats.mtimeMs)));
 
   // Check if any generated file is older than the content directory
   const generatedFilePaths = [
@@ -95,6 +103,7 @@ async function shouldRegenerateFiles(
     frameworkIndexPath,
     frameworkIndexDtsPath,
     upgradeDiffsPath,
+    upgradeDiffsDtsPath,
   ];
 
   for (const filePath of generatedFilePaths) {
