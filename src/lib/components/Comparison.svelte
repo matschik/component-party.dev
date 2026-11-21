@@ -14,6 +14,7 @@
   import { goto } from "$app/navigation";
   import { browser } from "$app/env";
   import type { FrameworkSnippet } from "#lib/types.ts";
+  import type { UpgradeDiff } from "#generated/upgradeDiffs.js";
 
   interface Props {
     initialFrameworkIds: string[];
@@ -23,9 +24,22 @@
     intro?: Snippet;
     /** Rendered below the sections, e.g. links to related comparisons. */
     outro?: Snippet;
+    /**
+     * Upgrade pages (e.g. Solid 1 to Solid 2): what changed in each example,
+     * by snippet id. Applies only while the selection is exactly
+     * `initialFrameworkIds`, older version first.
+     */
+    upgradeDiffs?: Record<string, UpgradeDiff>;
   }
 
-  let { initialFrameworkIds, initialSnippets, persist = true, intro, outro }: Props = $props();
+  let {
+    initialFrameworkIds,
+    initialSnippets,
+    persist = true,
+    intro,
+    outro,
+    upgradeDiffs,
+  }: Props = $props();
 
   const MAX_FRAMEWORK_NOBONUS = 9;
   const FRAMEWORKS_BONUS = frameworkVersions.slice(MAX_FRAMEWORK_NOBONUS);
@@ -58,6 +72,24 @@
   );
 
   const frameworkIdsSelectedArr = $derived([...frameworkIdsSelected]);
+
+  // Upgrade treatment holds only for the pair the page is about, in its order.
+  const activeUpgradeDiffs = $derived(
+    upgradeDiffs &&
+      frameworkIdsSelectedArr.length === initialFrameworkIds.length &&
+      frameworkIdsSelectedArr.every((id, i) => id === initialFrameworkIds[i])
+      ? upgradeDiffs
+      : undefined,
+  );
+  const unchangedSnippetIds = $derived(
+    Object.entries(activeUpgradeDiffs ?? {})
+      .filter(([, diff]) => !diff.changed)
+      .map(([snippetId]) => snippetId),
+  );
+
+  function findSnippet(frameworkId: string, snippetId: string): FrameworkSnippet | undefined {
+    return snippetsByFrameworkId.get(frameworkId)?.find((s) => s.snippetId === snippetId);
+  }
   const frameworksSelected = $derived(
     frameworkIdsSelectedArr.map((id: string) => matchFrameworkId(id)),
   );
@@ -98,6 +130,10 @@
       snippetsByFrameworkId.get(fid)?.find((s) => s.snippetId === snippetId),
     );
     if (cells.every((c) => !c)) return FALLBACK_PX;
+    // An unchanged example of an upgrade page shows its code once.
+    if (unchangedSnippetIds.includes(snippetId)) {
+      return TITLE_PX + editorHeight(cells.at(-1)?.files) + ROW_GAP_PX;
+    }
     const rows = Math.ceil(cells.length / gridCols);
     const cellMax = Math.max(0, ...cells.map((c) => editorHeight(c?.files)));
     return TITLE_PX + rows * (cellMax + ROW_GAP_PX);
@@ -237,7 +273,7 @@
 </script>
 
 <div class="flex border-b border-gray-700">
-  <Aside />
+  <Aside {unchangedSnippetIds} />
   <div class="pb-8 w-10 grow">
     <div
       class="flex px-6 lg:px-20 py-2 sticky top-0 z-20 w-full backdrop-blur bg-gray-900/80 border-b border-gray-700 whitespace-nowrap overflow-x-auto"
@@ -323,6 +359,7 @@
                 <div class="space-y-8 mt-2">
                   {#each snippets.filter((s) => s.sectionId === section.sectionId) as snippet (snippet.snippetId)}
                     {@const snippetPathId = section.sectionId + "." + snippet.snippetId}
+                    {@const upgradeDiff = activeUpgradeDiffs?.[snippet.snippetId]}
                     <div
                       class="snippet-cv"
                       style={`contain-intrinsic-size: auto ${snippetIntrinsicHeight(snippet.snippetId)}px`}
@@ -335,139 +372,206 @@
                         data-testid={`snippet-title-${snippetPathId}`}
                       >
                         {snippet.title}
+                        {#if upgradeDiff}
+                          <span
+                            class={[
+                              "ml-2 align-middle rounded border px-2 py-0.5 text-xs font-medium",
+                              upgradeDiff.changed
+                                ? "border-amber-700 text-amber-300"
+                                : "border-gray-600 text-gray-400",
+                            ]}
+                            data-testid={`upgrade-label-${snippetPathId}`}
+                          >
+                            {upgradeDiff.changed ? "Changed" : "Unchanged"}
+                          </span>
+                        {/if}
                         <a href={"#" + snippetPathId} aria-hidden="true" tabindex="-1"> # </a>
                       </h3>
-                      <div class="grid grid-cols-1 xl:grid-cols-2 gap-y-4 xl:gap-y-8 gap-x-10 mt-2">
-                        {#each frameworkIdsSelectedArr as frameworkId (frameworkId)}
-                          {@const framework = matchFrameworkId(frameworkId)}
-                          {@const frameworkSnippet = snippetsByFrameworkId
-                            .get(frameworkId)
-                            ?.find((s: FrameworkSnippet) => s.snippetId === snippet.snippetId)}
-                          {@const frameworkSnippetIsLoading =
-                            snippetsByFrameworkIdLoading.has(frameworkId)}
-                          {@const frameworkSnippetIsError =
-                            snippetsByFrameworkIdError.has(frameworkId)}
-
-                          {#if framework}
-                            <div
-                              data-testid={`framework-snippet-${frameworkId}-${snippet.snippetId}`}
-                            >
-                              <div class="flex justify-between items-center space-x-3">
-                                <h4
-                                  class="m-0"
-                                  data-testid={`framework-title-${frameworkId}-${snippet.snippetId}`}
-                                >
-                                  <FrameworkLabel id={framework.id} />
-                                </h4>
-                                {#if frameworkSnippet}
-                                  <div class="flex items-center space-x-3">
-                                    {#if frameworkSnippet.playgroundURL}
-                                      <a
-                                        href={frameworkSnippet.playgroundURL}
-                                        target="_blank"
-                                        rel="noreferrer"
-                                        class="opacity-50 hover:opacity-100 bg-gray-800 hover:bg-gray-700 py-1 px-2 rounded transition-all flex items-center gap-x-2"
-                                        title={`Open playground for ${framework.title}`}
-                                        aria-label={`Open playground for ${framework.title}`}
-                                        data-testid={`playground-button-${frameworkId}-${snippet.snippetId}`}
-                                      >
-                                        <span class="iconify ph--play size-4" aria-hidden="true"
-                                        ></span>
-                                      </a>
-                                    {/if}
-                                  </div>
+                      {#if upgradeDiff && !upgradeDiff.changed}
+                        {@const [olderId, newerId] = frameworkIdsSelectedArr}
+                        {@const newerSnippet = findSnippet(newerId, snippet.snippetId)}
+                        <div class="mt-2" data-testid={`unchanged-snippet-${snippet.snippetId}`}>
+                          <div class="flex flex-wrap justify-between items-center gap-3">
+                            <p class="m-0 flex flex-wrap items-center gap-x-2">
+                              Same code in
+                              <FrameworkLabel id={olderId} />
+                              and
+                              <FrameworkLabel id={newerId} />
+                            </p>
+                            <div class="flex items-center gap-2">
+                              {#each [olderId, newerId] as versionId (versionId)}
+                                {@const version = matchFrameworkId(versionId)}
+                                {@const versionSnippet = findSnippet(versionId, snippet.snippetId)}
+                                {#if version && versionSnippet?.playgroundURL}
+                                  <a
+                                    href={versionSnippet.playgroundURL}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    class="opacity-50 hover:opacity-100 bg-gray-800 hover:bg-gray-700 py-1 px-2 rounded transition-all flex items-center gap-x-2 text-sm"
+                                    title={`Open playground for ${version.title}`}
+                                    aria-label={`Open playground for ${version.title}`}
+                                    data-testid={`playground-button-${versionId}-${snippet.snippetId}`}
+                                  >
+                                    <span class="iconify ph--play size-4" aria-hidden="true"></span>
+                                    {version.title}
+                                  </a>
                                 {/if}
-                              </div>
-                              <div class="mt-2">
-                                {#if frameworkSnippet}
-                                  {#if frameworkSnippet.files.length > 0}
-                                    <CodeEditor
-                                      files={frameworkSnippet.files}
-                                      snippetEditHref={frameworkSnippet.snippetEditHref}
-                                      data-testid={`code-editor-${frameworkId}-${snippet.snippetId}`}
-                                    />
-                                  {:else}
-                                    <div
-                                      class="bg-gray-800 text-white rounded-md mx-auto"
-                                      data-testid={`missing-snippet-${frameworkId}-${snippet.snippetId}`}
-                                    >
-                                      <div class="text-center py-8 px-4 sm:px-6">
-                                        <div>
-                                          <span
-                                            class="block text-2xl tracking-tight font-bold"
-                                            data-testid="missing-snippet-title"
-                                          >
-                                            Missing snippet
-                                          </span>
-                                          <span
-                                            class="block text-lg mt-1 font-semibold space-x-1"
-                                            data-testid="missing-snippet-message"
-                                          >
-                                            <span> Help us to improve Component Party </span>
-                                            <img
-                                              src="/popper.svg"
-                                              alt="logo"
-                                              class="size-5 m-0 inline-block"
-                                            />
-                                          </span>
-                                        </div>
-                                        <div class="mt-6 flex justify-center">
-                                          <div class="inline-flex rounded-md shadow">
-                                            <a
-                                              class="inline-flex space-x-2 items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-[#161b22] hover:bg-[#161b22]/80 no-underline"
-                                              href={frameworkSnippet.snippetEditHref}
-                                              data-testid={`contribute-link-${frameworkId}-${snippet.snippetId}`}
+                              {/each}
+                            </div>
+                          </div>
+                          {#if newerSnippet}
+                            <div class="mt-2">
+                              <CodeEditor
+                                files={newerSnippet.files}
+                                snippetEditHref={newerSnippet.snippetEditHref}
+                                data-testid={`code-editor-${newerId}-${snippet.snippetId}`}
+                              />
+                            </div>
+                          {/if}
+                        </div>
+                      {:else}
+                        <div
+                          class="grid grid-cols-1 xl:grid-cols-2 gap-y-4 xl:gap-y-8 gap-x-10 mt-2"
+                        >
+                          {#each frameworkIdsSelectedArr as frameworkId (frameworkId)}
+                            {@const framework = matchFrameworkId(frameworkId)}
+                            {@const frameworkSnippet = snippetsByFrameworkId
+                              .get(frameworkId)
+                              ?.find((s: FrameworkSnippet) => s.snippetId === snippet.snippetId)}
+                            {@const frameworkSnippetIsLoading =
+                              snippetsByFrameworkIdLoading.has(frameworkId)}
+                            {@const frameworkSnippetIsError =
+                              snippetsByFrameworkIdError.has(frameworkId)}
+
+                            {#if framework}
+                              <div
+                                data-testid={`framework-snippet-${frameworkId}-${snippet.snippetId}`}
+                              >
+                                <div class="flex justify-between items-center space-x-3">
+                                  <h4
+                                    class="m-0"
+                                    data-testid={`framework-title-${frameworkId}-${snippet.snippetId}`}
+                                  >
+                                    <FrameworkLabel id={framework.id} />
+                                  </h4>
+                                  {#if frameworkSnippet}
+                                    <div class="flex items-center space-x-3">
+                                      {#if frameworkSnippet.playgroundURL}
+                                        <a
+                                          href={frameworkSnippet.playgroundURL}
+                                          target="_blank"
+                                          rel="noreferrer"
+                                          class="opacity-50 hover:opacity-100 bg-gray-800 hover:bg-gray-700 py-1 px-2 rounded transition-all flex items-center gap-x-2"
+                                          title={`Open playground for ${framework.title}`}
+                                          aria-label={`Open playground for ${framework.title}`}
+                                          data-testid={`playground-button-${frameworkId}-${snippet.snippetId}`}
+                                        >
+                                          <span class="iconify ph--play size-4" aria-hidden="true"
+                                          ></span>
+                                        </a>
+                                      {/if}
+                                    </div>
+                                  {/if}
+                                </div>
+                                <div class="mt-2">
+                                  {#if frameworkSnippet}
+                                    {#if frameworkSnippet.files.length > 0}
+                                      <CodeEditor
+                                        files={frameworkSnippet.files}
+                                        snippetEditHref={frameworkSnippet.snippetEditHref}
+                                        removedLines={frameworkId === initialFrameworkIds[0]
+                                          ? upgradeDiff?.removedLines
+                                          : undefined}
+                                        addedLines={frameworkId === initialFrameworkIds[1]
+                                          ? upgradeDiff?.addedLines
+                                          : undefined}
+                                        data-testid={`code-editor-${frameworkId}-${snippet.snippetId}`}
+                                      />
+                                    {:else}
+                                      <div
+                                        class="bg-gray-800 text-white rounded-md mx-auto"
+                                        data-testid={`missing-snippet-${frameworkId}-${snippet.snippetId}`}
+                                      >
+                                        <div class="text-center py-8 px-4 sm:px-6">
+                                          <div>
+                                            <span
+                                              class="block text-2xl tracking-tight font-bold"
+                                              data-testid="missing-snippet-title"
                                             >
-                                              <span>Contribute on Github</span>
-                                              <span
-                                                class="iconify simple-icons--github size-5"
-                                                aria-hidden="true"
-                                              ></span>
-                                            </a>
+                                              Missing snippet
+                                            </span>
+                                            <span
+                                              class="block text-lg mt-1 font-semibold space-x-1"
+                                              data-testid="missing-snippet-message"
+                                            >
+                                              <span> Help us to improve Component Party </span>
+                                              <img
+                                                src="/popper.svg"
+                                                alt="logo"
+                                                class="size-5 m-0 inline-block"
+                                              />
+                                            </span>
+                                          </div>
+                                          <div class="mt-6 flex justify-center">
+                                            <div class="inline-flex rounded-md shadow">
+                                              <a
+                                                class="inline-flex space-x-2 items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-[#161b22] hover:bg-[#161b22]/80 no-underline"
+                                                href={frameworkSnippet.snippetEditHref}
+                                                data-testid={`contribute-link-${frameworkId}-${snippet.snippetId}`}
+                                              >
+                                                <span>Contribute on Github</span>
+                                                <span
+                                                  class="iconify simple-icons--github size-5"
+                                                  aria-hidden="true"
+                                                ></span>
+                                              </a>
+                                            </div>
                                           </div>
                                         </div>
                                       </div>
-                                    </div>
-                                  {/if}
-                                {:else if frameworkSnippetIsLoading}
-                                  <div
-                                    role="status"
-                                    data-testid={`loading-snippet-${frameworkId}-${snippet.snippetId}`}
-                                  >
-                                    <div class="w-75px h-23px bg-[#0d1117] py-3 px-4 rounded-t">
-                                      <div
-                                        class="h-2.5 rounded-full bg-gray-700 w-10 animate-pulse"
-                                      ></div>
-                                    </div>
-                                    <div class="w-full h-40 bg-[#0d1117] px-4 py-7">
-                                      <div class="max-w-sm animate-pulse">
-                                        <div class="h-3.5 rounded-full bg-gray-700 w-48 mb-4"></div>
+                                    {/if}
+                                  {:else if frameworkSnippetIsLoading}
+                                    <div
+                                      role="status"
+                                      data-testid={`loading-snippet-${frameworkId}-${snippet.snippetId}`}
+                                    >
+                                      <div class="w-75px h-23px bg-[#0d1117] py-3 px-4 rounded-t">
                                         <div
-                                          class="h-3.5 rounded-full bg-gray-700 max-w-[360px] mb-2.5"
+                                          class="h-2.5 rounded-full bg-gray-700 w-10 animate-pulse"
                                         ></div>
-                                        <div class="h-3.5 rounded-full bg-gray-700 mb-4"></div>
-                                        <div
-                                          class="h-3.5 rounded-full bg-gray-700 max-w-[330px] mb-2.5"
-                                        ></div>
-                                        <span class="sr-only" data-testid="loading-text"
-                                          >Loading...</span
-                                        >
+                                      </div>
+                                      <div class="w-full h-40 bg-[#0d1117] px-4 py-7">
+                                        <div class="max-w-sm animate-pulse">
+                                          <div
+                                            class="h-3.5 rounded-full bg-gray-700 w-48 mb-4"
+                                          ></div>
+                                          <div
+                                            class="h-3.5 rounded-full bg-gray-700 max-w-[360px] mb-2.5"
+                                          ></div>
+                                          <div class="h-3.5 rounded-full bg-gray-700 mb-4"></div>
+                                          <div
+                                            class="h-3.5 rounded-full bg-gray-700 max-w-[330px] mb-2.5"
+                                          ></div>
+                                          <span class="sr-only" data-testid="loading-text"
+                                            >Loading...</span
+                                          >
+                                        </div>
                                       </div>
                                     </div>
-                                  </div>
-                                {:else if frameworkSnippetIsError}
-                                  <p
-                                    class="text-orange-500"
-                                    data-testid={`error-snippet-${frameworkId}-${snippet.snippetId}`}
-                                  >
-                                    Error loading snippets. Please reload the page.
-                                  </p>
-                                {/if}
+                                  {:else if frameworkSnippetIsError}
+                                    <p
+                                      class="text-orange-500"
+                                      data-testid={`error-snippet-${frameworkId}-${snippet.snippetId}`}
+                                    >
+                                      Error loading snippets. Please reload the page.
+                                    </p>
+                                  {/if}
+                                </div>
                               </div>
-                            </div>
-                          {/if}
-                        {/each}
-                      </div>
+                            {/if}
+                          {/each}
+                        </div>
+                      {/if}
                     </div>
                   {/each}
                 </div>

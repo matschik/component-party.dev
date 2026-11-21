@@ -1,5 +1,6 @@
 import { error } from "@sveltejs/kit";
-import { matchFrameworkId } from "#frameworks";
+import { isUpgradePair, matchFrameworkId } from "#frameworks";
+import upgradeDiffs from "#generated/upgradeDiffs.js";
 import { parseComparison, createComparisonPath } from "#lib/frameworkUrl.ts";
 import { canonicalPairs } from "#lib/comparisonPairs.ts";
 import snippetsImporterByFrameworkId from "#generated/framework/index.js";
@@ -27,5 +28,9 @@ export const load: PageLoad = async ({ params }) => {
     titleA: fa.title,
     titleB: fb.title,
     initialSnippets: Object.fromEntries(pairs),
+    // 2 versions of one framework, older first: the page reads as an upgrade.
+    upgrade: isUpgradePair(a, b)
+      ? { diffs: upgradeDiffs[`${a}-vs-${b}`], migrationGuideURL: fb.migrationGuideURL }
+      : undefined,
   };
 };

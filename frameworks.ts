@@ -25,6 +25,8 @@ export interface FrameworkVersion {
   repositoryLink: string;
   mainPackageName: string;
   releaseDate: string;
+  /** Official guide to upgrade from the previous version of the same framework. */
+  migrationGuideURL?: string;
 }
 
 /**
@@ -53,6 +55,7 @@ export const frameworkVersions: FrameworkVersion[] = [
     repositoryLink: "https://github.com/sveltejs/svelte",
     mainPackageName: "svelte",
     releaseDate: "2024-10-01",
+    migrationGuideURL: "https://svelte.dev/docs/svelte/v5-migration-guide",
   },
   {
     id: "react",
@@ -81,6 +84,7 @@ export const frameworkVersions: FrameworkVersion[] = [
     repositoryLink: "https://github.com/vuejs/core",
     mainPackageName: "vue",
     releaseDate: "2020-09-18",
+    migrationGuideURL: "https://v3-migration.vuejs.org/",
   },
   {
     id: "angularRenaissance",
@@ -175,6 +179,7 @@ export const frameworkVersions: FrameworkVersion[] = [
     repositoryLink: "https://github.com/solidjs/solid",
     mainPackageName: "solid-js",
     releaseDate: "2026-11-16",
+    migrationGuideURL: "https://docs.solidjs.com/migration/from-solid-1",
   },
   {
     id: "solid1",
@@ -259,6 +264,7 @@ export const frameworkVersions: FrameworkVersion[] = [
     repositoryLink: "https://github.com/aurelia/aurelia",
     mainPackageName: "aurelia",
     releaseDate: "2021-01-19",
+    migrationGuideURL: "https://docs.aurelia.io/migrating-to-aurelia-2/migrating-to-aurelia-2",
   },
   {
     id: "qwik",

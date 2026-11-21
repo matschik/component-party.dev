@@ -3,6 +3,13 @@
   import { onMount } from "svelte";
   import throttle from "just-throttle";
 
+  interface Props {
+    /** Upgrade pages: examples whose code is the same in both versions. */
+    unchangedSnippetIds?: string[];
+  }
+
+  const { unchangedSnippetIds = [] }: Props = $props();
+
   let largestVisibleSnippetId: string = $state("");
 
   function getLargestElement(elements: NodeListOf<Element>): Element | null {
@@ -113,7 +120,9 @@
                     "inline-block w-full py-1.5 px-4 text-white font-medium hover:bg-gray-800 rounded hover:opacity-100 transition-opacity text-left",
                     snippetPathId === largestVisibleSnippetId
                       ? "bg-gray-800 opacity-70"
-                      : "opacity-50",
+                      : unchangedSnippetIds.includes(snippet.snippetId)
+                        ? "opacity-30"
+                        : "opacity-50",
                   ]}
                   onclick={() => scrollToElement(snippetPathId)}
                 >
