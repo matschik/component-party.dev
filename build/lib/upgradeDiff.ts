@@ -61,7 +61,8 @@ function diffLines(a: string[], b: string[]): { removed: number[]; added: number
   return { removed, added };
 }
 
-const baseName = (fileName: string) => fileName.replace(/\.[^.]+$/, "");
+// Case-insensitive, so Ember's `app.hbs` + `app.js` pair with `App.gjs`.
+const baseName = (fileName: string) => fileName.replace(/\.[^.]+$/, "").toLowerCase();
 
 /** Groups of old and new files that diff against each other, in input order. */
 function pairFiles(oldFiles: SourceFile[], newFiles: SourceFile[]): [SourceFile[], SourceFile[]][] {

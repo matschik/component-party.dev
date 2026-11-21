@@ -68,4 +68,12 @@ describe("diffUpgrade", () => {
     );
     expect(diff).toEqual({ changed: true, removedLines: {}, addedLines: {} });
   });
+
+  it("pairs base names whatever their case", () => {
+    const diff = diffUpgrade(
+      [{ fileName: "app.js", content: "same\n" }],
+      [{ fileName: "App.gjs", content: "same\n" }],
+    );
+    expect(diff).toEqual({ changed: true, removedLines: {}, addedLines: {} });
+  });
 });

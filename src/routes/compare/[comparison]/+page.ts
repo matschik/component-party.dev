@@ -1,7 +1,7 @@
 import { error } from "@sveltejs/kit";
 import { isUpgradePair, matchFrameworkId } from "#frameworks";
 import upgradeDiffs from "#generated/upgradeDiffs.js";
-import { parseComparison, createComparisonPath } from "#lib/frameworkUrl.ts";
+import { parseComparison, canonicalComparisonPath } from "#lib/frameworkUrl.ts";
 import { canonicalPairs } from "#lib/comparisonPairs.ts";
 import snippetsImporterByFrameworkId from "#generated/framework/index.js";
 import type { EntryGenerator, PageLoad } from "./$types";
@@ -16,7 +16,7 @@ export const load: PageLoad = async ({ params }) => {
   if (!ids) error(404, "Unknown framework comparison");
   const [a, b] = ids;
   // canonical-order guard: reject the inverse form (handled by _redirects in Task 5)
-  if (`/compare/${params.comparison}/` !== createComparisonPath(a, b))
+  if (`/compare/${params.comparison}/` !== canonicalComparisonPath(a, b))
     error(404, "Non-canonical comparison");
   const fa = matchFrameworkId(a)!;
   const fb = matchFrameworkId(b)!;
