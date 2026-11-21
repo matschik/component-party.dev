@@ -1,4 +1,4 @@
-import { frameworkVersions, matchFrameworkId } from "#frameworks";
+import { matchFrameworkId, orderPair } from "#frameworks";
 import { FRAMEWORK_SEPARATOR, FRAMEWORK_IDS_FROM_URL_KEY } from "./constants";
 
 export const BASE_URL = "https://component-party.dev";
@@ -19,17 +19,17 @@ export function createComparisonPath(idA: string, idB: string): string {
 
 /**
  * The prerendered page of a pair: ids resolved to concrete versions, then
- * ordered as in `frameworkVersions`, like `canonicalPairs()`. Links must use
+ * ordered by `orderPair`, like `canonicalPairs()`. Links must use
  * this form; any other order or alias only reaches the page through a 301.
  */
 export function canonicalComparisonPath(idA: string, idB: string): string {
-  const order = (id: string) => {
+  const resolve = (id: string) => {
     const version = matchFrameworkId(id);
     if (!version) throw new Error(`Unknown framework id: ${id}`);
-    return { id: version.id, index: frameworkVersions.indexOf(version) };
+    return version.id;
   };
-  const [a, b] = [order(idA), order(idB)].sort((x, y) => x.index - y.index);
-  return createComparisonPath(a.id, b.id);
+  const [a, b] = orderPair(resolve(idA), resolve(idB));
+  return createComparisonPath(a, b);
 }
 
 export function createSearchParamUrl(ids: string[]): string {

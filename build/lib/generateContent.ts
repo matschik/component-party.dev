@@ -1,7 +1,8 @@
 import fs from "node:fs/promises";
 import { packageDirectory } from "package-directory";
 import path from "node:path";
-import { frameworkVersions } from "../../frameworks.ts";
+import { frameworkVersions, isUpgradePair, orderPair } from "../../frameworks.ts";
+import { diffUpgrade, type SourceFile, type UpgradeDiff } from "./upgradeDiff.ts";
 import playgroundUrlByFramework from "./playgroundUrlByFramework.ts";
 import prettier from "prettier";
 import { mustUseAngularHighlighter } from "./angularHighlighter.ts";
@@ -68,12 +69,16 @@ async function shouldRegenerateFiles(
   const treeDtsFilePath = path.join(generatedContentDirPath, "tree.d.ts");
   const frameworkIndexPath = path.join(frameworkDirPath, "index.js");
   const frameworkIndexDtsPath = path.join(frameworkDirPath, "index.d.ts");
+  const upgradeDiffsPath = path.join(generatedContentDirPath, "upgradeDiffs.js");
+  const upgradeDiffsDtsPath = path.join(generatedContentDirPath, "upgradeDiffs.d.ts");
 
   const generatedFilesExist = await Promise.all([
     pathExists(treeFilePath),
     pathExists(treeDtsFilePath),
     pathExists(frameworkIndexPath),
     pathExists(frameworkIndexDtsPath),
+    pathExists(upgradeDiffsPath),
+    pathExists(upgradeDiffsDtsPath),
   ]);
 
   // If any generated file is missing, regenerate
@@ -81,9 +86,15 @@ async function shouldRegenerateFiles(
     return true;
   }
 
-  // Get the modification time of the content directory
-  const contentStats = await fs.stat(contentPath);
-  const contentModTime = contentStats.mtime;
+  // Newest of the inputs: the content directory, and the sources that decide
+  // the upgrade pairs and their diffs.
+  const rootDir = path.dirname(contentPath);
+  const inputStats = await Promise.all(
+    [contentPath, "frameworks.ts", "build/lib/upgradeDiff.ts", "build/lib/generateContent.ts"].map(
+      (input) => fs.stat(path.resolve(rootDir, input)),
+    ),
+  );
+  const contentModTime = new Date(Math.max(...inputStats.map((stats) => stats.mtimeMs)));
 
   // Check if any generated file is older than the content directory
   const generatedFilePaths = [
@@ -91,6 +102,8 @@ async function shouldRegenerateFiles(
     treeDtsFilePath,
     frameworkIndexPath,
     frameworkIndexDtsPath,
+    upgradeDiffsPath,
+    upgradeDiffsDtsPath,
   ];
 
   for (const filePath of generatedFilePaths) {
@@ -139,6 +152,8 @@ export default async function generateContent(options: { noCache?: boolean } = {
   };
 
   const byFrameworkId: Record<string, FrameworkSnippet[]> = {};
+  // Source of each example's code files, kept for the upgrade diffs.
+  const sourcesByFrameworkId: Record<string, Record<string, SourceFile[]>> = {};
 
   for (const sectionDirName of sectionDirNames) {
     const sectionTitle = dirNameToTitle(sectionDirName);
@@ -237,6 +252,10 @@ export default async function generateContent(options: { noCache?: boolean } = {
               frameworkSnippet.playgroundURL = playgroundURL;
             }
 
+            (sourcesByFrameworkId[frameworkId] ??= {})[snippetId] = frameworkSnippet.files.map(
+              (file) => ({ fileName: file.fileName, content: file.content ?? "" }),
+            );
+
             // Remove content key, not used anymore
             frameworkSnippet.files = frameworkSnippet.files.map((file) => ({
               fileName: file.fileName,
@@ -324,6 +343,31 @@ export default async function generateContent(options: { noCache?: boolean } = {
     `,
   );
 
+  await writeJsFile(
+    path.join(generatedContentDirPath, "upgradeDiffs.js"),
+    `
+    ${commentDisclaimer}
+    export default ${JSON.stringify(buildUpgradeDiffs(sourcesByFrameworkId), null, 2)};
+    `,
+  );
+
+  await writeDtsFile(
+    path.join(generatedContentDirPath, "upgradeDiffs.d.ts"),
+    `
+    ${commentDisclaimer}
+    export interface UpgradeDiff {
+      changed: boolean;
+      /** 1-based line numbers, keyed by file name. */
+      removedLines: Record<string, number[]>;
+      addedLines: Record<string, number[]>;
+    }
+
+    /** Keyed by canonical slug ("solid1-vs-solid2"), then by snippet id. */
+    declare const upgradeDiffs: Record<string, Record<string, UpgradeDiff>>;
+    export default upgradeDiffs;
+  `,
+  );
+
   await writeDtsFile(
     frameworkIndexDtsPath,
     `
@@ -335,6 +379,30 @@ export default async function generateContent(options: { noCache?: boolean } = {
     export default snippetsImporterByFrameworkId;
   `,
   );
+}
+
+/**
+ * For each upgrade pair (2 versions of one framework, older first) and each
+ * example both versions have, which lines changed.
+ */
+function buildUpgradeDiffs(
+  sourcesByFrameworkId: Record<string, Record<string, SourceFile[]>>,
+): Record<string, Record<string, UpgradeDiff>> {
+  const result: Record<string, Record<string, UpgradeDiff>> = {};
+  const ids = frameworkVersions.map(({ id }) => id);
+  for (const [i, idA] of ids.entries()) {
+    for (const idB of ids.slice(i + 1)) {
+      if (!isUpgradePair(idA, idB)) continue;
+      const [older, newer] = orderPair(idA, idB);
+      const diffs: Record<string, UpgradeDiff> = {};
+      for (const [snippetId, oldFiles] of Object.entries(sourcesByFrameworkId[older] ?? {})) {
+        const newFiles = sourcesByFrameworkId[newer]?.[snippetId];
+        if (newFiles) diffs[snippetId] = diffUpgrade(oldFiles, newFiles);
+      }
+      result[`${older}-vs-${newer}`] = diffs;
+    }
+  }
+  return result;
 }
 
 function dirNameToTitle(dirName: string): string {

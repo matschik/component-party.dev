@@ -30,6 +30,8 @@ export function webApplicationJsonLd(buildDate: string) {
 export function techArticleJsonLd(opts: {
   titleA: string;
   titleB: string;
+  /** Overrides the default "A vs B" headline, e.g. on upgrade pages. */
+  headline?: string;
   description: string;
   url: string;
   image: string;
@@ -38,7 +40,7 @@ export function techArticleJsonLd(opts: {
   return {
     "@context": "https://schema.org",
     "@type": "TechArticle",
-    headline: `${opts.titleA} vs ${opts.titleB} - side-by-side code comparison`,
+    headline: opts.headline ?? `${opts.titleA} vs ${opts.titleB} - side-by-side code comparison`,
     description: opts.description,
     url: opts.url,
     image: opts.image,

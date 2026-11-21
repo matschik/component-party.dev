@@ -44,10 +44,7 @@ export const footerNavigation: { title: string; links: FooterLink[] }[] = [
       pair("vue2", "vue3"),
       pair("angularClassic", "angularRenaissance"),
       pair("aurelia1", "aurelia2"),
+      pair("emberOctane", "emberPolaris"),
     ],
-  },
-  {
-    title: "Comparing Current Version & Upcoming Version",
-    links: [pair("emberOctane", "emberPolaris")],
   },
 ];

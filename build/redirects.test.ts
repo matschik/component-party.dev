@@ -16,9 +16,17 @@ describe("buildRedirectLines", () => {
   // The exact URLs Google Search Console reported as 404 (Introuvable).
   it.each([
     ["/compare/react-vs-svelte5", "/compare/svelte5-vs-react/"], // inverse, no slash
-    ["/compare/svelte4-vs-svelte5", "/compare/svelte5-vs-svelte4/"], // inverse, no slash
-    ["/compare/aurelia1-vs-aurelia2", "/compare/aurelia2-vs-aurelia1/"], // inverse, no slash
-    ["/compare/emberOctane-vs-emberPolaris", "/compare/emberPolaris-vs-emberOctane/"], // inverse, no slash
+    // Upgrade pairs read old to new; their former newer-first pages 301.
+    ["/compare/svelte5-vs-svelte4/", "/compare/svelte4-vs-svelte5/"],
+    ["/compare/vue3-vs-vue2/", "/compare/vue2-vs-vue3/"],
+    [
+      "/compare/angularRenaissance-vs-angularClassic/",
+      "/compare/angularClassic-vs-angularRenaissance/",
+    ],
+    ["/compare/emberPolaris-vs-emberOctane", "/compare/emberOctane-vs-emberPolaris/"],
+    ["/compare/solid2-vs-solid1/", "/compare/solid1-vs-solid2/"],
+    ["/compare/aurelia2-vs-aurelia1", "/compare/aurelia1-vs-aurelia2/"],
+    ["/compare/svelte-vs-svelte4/", "/compare/svelte4-vs-svelte5/"], // family alias
     ["/compare/react-vs-vue", "/compare/react-vs-vue3/"], // family alias, no slash
     ["/compare/angular-vs-solid", "/compare/angularRenaissance-vs-solid2/"], // family alias, no slash
     ["/compare/angularRenaissance-vs-solid/", "/compare/angularRenaissance-vs-solid2/"], // old Solid canonical page

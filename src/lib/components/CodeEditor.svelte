@@ -1,5 +1,6 @@
 <script lang="ts">
   import copyToClipboard from "#lib/copyToClipboard.ts";
+  import { markLines } from "#lib/markLines.ts";
 
   interface File {
     fileName: string;
@@ -10,10 +11,20 @@
   interface Props {
     files: File[];
     snippetEditHref?: string;
+    /** Upgrade pages: 1-based lines the newer version removed, by file name. */
+    removedLines?: Record<string, number[]>;
+    /** Upgrade pages: 1-based lines the newer version added, by file name. */
+    addedLines?: Record<string, number[]>;
     "data-testid"?: string;
   }
 
-  const { files = [], snippetEditHref, "data-testid": dataTestId }: Props = $props();
+  const {
+    files = [],
+    snippetEditHref,
+    removedLines,
+    addedLines,
+    "data-testid": dataTestId,
+  }: Props = $props();
 
   // Snippet lines never wrap (overflow-auto / white-space: pre), so the source
   // line count fully determines the body height. Reserve the tallest file's
@@ -36,6 +47,16 @@
 
   const snippet: File | undefined = $derived(
     filenameSelected ? files.find((s) => s.fileName === filenameSelected) : undefined,
+  );
+
+  const snippetHtml = $derived(
+    snippet
+      ? markLines(
+          markLines(snippet.contentHtml, removedLines?.[snippet.fileName], "line-removed"),
+          addedLines?.[snippet.fileName],
+          "line-added",
+        )
+      : "",
   );
 
   function copySnippet(): void {
@@ -69,7 +90,7 @@
   >
     {#if snippet}
       <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-      {@html snippet.contentHtml}
+      {@html snippetHtml}
     {/if}
   </div>
   <div
@@ -96,3 +117,24 @@
     </div>
   </div>
 </div>
+
+<style>
+  /* Upgrade pages: tint a whole line, with an edge mark so color is not the
+     only cue. */
+  /* The edge mark sits in the left padding, so the code keeps its column. */
+  :global(.line-removed),
+  :global(.line-added) {
+    display: inline-block;
+    min-width: calc(100% + 0.75rem);
+    margin-left: -0.75rem;
+    padding-left: 0.75rem;
+  }
+  :global(.line-removed) {
+    background-color: rgb(248 81 73 / 0.15);
+    box-shadow: inset 3px 0 0 rgb(248 81 73 / 0.8);
+  }
+  :global(.line-added) {
+    background-color: rgb(63 185 80 / 0.15);
+    box-shadow: inset 3px 0 0 rgb(63 185 80 / 0.8);
+  }
+</style>
