@@ -60,4 +60,12 @@ describe("diffUpgrade", () => {
     expect(diff.removedLines).toEqual({ "app.module.ts": [1, 2] });
     expect(diff.addedLines).toEqual({});
   });
+
+  it("counts a blank-line-only change as changed, without tinting it", () => {
+    const diff = diffUpgrade(
+      [{ fileName: "a.js", content: "x\ny\n" }],
+      [{ fileName: "a.js", content: "x\n\ny\n" }],
+    );
+    expect(diff).toEqual({ changed: true, removedLines: {}, addedLines: {} });
+  });
 });

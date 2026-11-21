@@ -112,11 +112,12 @@ export function diffUpgrade(oldFiles: SourceFile[], newFiles: SourceFile[]): Upg
     for (const j of added) if (newLines[j].text.trim()) push(addedLines, newLines[j]);
   }
 
-  const sameNames =
-    oldFiles.length === newFiles.length &&
-    oldFiles.every((f) => newFiles.some((n) => n.fileName === f.fileName));
+  // "Unchanged" means byte for byte: the page then shows the code once.
   const changed =
-    !sameNames || Object.keys(removedLines).length > 0 || Object.keys(addedLines).length > 0;
+    oldFiles.length !== newFiles.length ||
+    oldFiles.some(
+      (file) => newFiles.find((n) => n.fileName === file.fileName)?.content !== file.content,
+    );
 
   return { changed, removedLines, addedLines };
 }
