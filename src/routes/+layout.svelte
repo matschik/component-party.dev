@@ -5,6 +5,10 @@
   let { children } = $props();
 </script>
 
-<Header />
-{@render children()}
+<div class="grid min-h-dvh grid-rows-[auto_1fr]">
+  <Header />
+  <div>
+    {@render children()}
+  </div>
+</div>
 <Footer />
