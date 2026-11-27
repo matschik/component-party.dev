@@ -1,8 +1,8 @@
 import generateContent from "./lib/generateContent";
 import { createFsCache } from "micache";
-import { hashElement } from "folder-hash";
 import chokidar, { type FSWatcher } from "chokidar";
 import { disposeHighlighter } from "./lib/highlighter.ts";
+import { hashPaths } from "./lib/hashPaths.ts";
 
 const contentDirFsCache = await createFsCache("pluginGenerateFrameworkContent");
 
@@ -21,10 +21,7 @@ export default function pluginGenerateFrameworkContent() {
     }
     buildIsRunning = true;
     logInfo("Generating framework content files...");
-    const contentDirHash =
-      (await hashElement("content")).hash +
-      (await hashElement("build")).hash +
-      (await hashElement("frameworks.ts")).hash;
+    const contentDirHash = await hashPaths(["content", "build", "frameworks.ts"]);
 
     const contentDirLastHash = await contentDirFsCache.get("contentDirHash");
     if (contentDirHash !== contentDirLastHash) {
