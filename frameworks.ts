@@ -322,6 +322,20 @@ export const frameworkVersions: FrameworkVersion[] = [
     mainPackageName: "ripple",
     releaseDate: "2023-01-01",
   },
+  {
+    id: "effectUi",
+    family: "effectUi",
+    title: "Effect UI",
+    img: "framework/effect-ui.svg",
+    playgroundURL: "https://ui.effect.website",
+    documentationURL: "https://ui.effect.website",
+    filesSorter(files) {
+      return sortAllFilenames(files, ["index.html", "main.ts", "App.ts"]);
+    },
+    repositoryLink: "https://github.com/Effect-TS/ui",
+    mainPackageName: "@effect/ui",
+    releaseDate: "2026-11-15",
+  },
 ];
 
 export const frameworks: Framework[] = [
@@ -338,6 +352,7 @@ export const frameworks: Framework[] = [
   { id: "qwik", name: "Qwik", latestStable: "qwik" },
   { id: "marko", name: "Marko", latestStable: "marko" },
   { id: "ripple", name: "Ripple", latestStable: "ripple" },
+  { id: "effectUi", name: "Effect UI", latestStable: "effectUi" },
 ];
 
 /**
